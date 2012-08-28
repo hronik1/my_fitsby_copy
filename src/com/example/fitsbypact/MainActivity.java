@@ -98,18 +98,36 @@ public class MainActivity extends Activity {
     	buttonLogin = (Button)findViewById(R.id.login_button);
     	buttonLogin.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
-    			//TODO login user
+    			login();
     		}
     	});
     	
     	buttonRegister = (Button)findViewById(R.id.register_button);
     	buttonRegister.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
-    			//TODO register user
+    			register();
     		}
     	});
     }	
     	
+    /**
+     * pulls information from editTexts and then logs in user
+     */
+    private void login() {
+    		String password = passwordET.getText().toString();
+    		String email = emailET.getText().toString();
+    		//TODO actually login
+    }
+    
+    /**
+     * pulls information from editTexts and then registers user
+     */
+    private void register() {
+    		String password = passwordET.getText().toString();
+    		String email = emailET.getText().toString();
+    		//TODO actually register user
+    }
+    
     /** 
      * helper function which initializes the EditTexts
      */
