@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">FitsbyPact</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="login_email_string">email</string>
+    <string name="login_password_string">password</string>
+    <string name="login_button">login</string>
+    <string name="register_button">register</string>
+    <string />
+
+</resources>
