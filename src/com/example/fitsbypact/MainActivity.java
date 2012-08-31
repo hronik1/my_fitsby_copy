@@ -128,8 +128,14 @@ public class MainActivity extends Activity {
      * pulls information from editTexts and then registers user
      */
     private void register() {
-    		String password = passwordET.getText().toString();
-    		String email = emailET.getText().toString();
+    		String password = "";
+    		String email = "";
+    		
+    		if (passwordET.getText() != null)
+    			password = passwordET.getText().toString();
+       		if (emailET.getText() != null)
+    			email = emailET.getText().toString();
+       		
     		String validity = RegisterClientSideValidation.validate(email, password);
     		if (validity != "") {
     			Toast.makeText(MainActivity.this, validity, Toast.LENGTH_LONG).show();
