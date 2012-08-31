@@ -72,7 +72,7 @@ public class ServerCommunication {
 	 */
 	public boolean isInternetConnected() {
 	    ConnectivityManager connec = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-	    boolean isMobileNetworkConnected = connec.getNetworkInfo (ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+	    boolean isMobileNetworkConnected = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
 	    boolean isWiFiNetworkConnected = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 	    return (isMobileNetworkConnected || isWiFiNetworkConnected);
 	}

@@ -131,9 +131,9 @@ public class MainActivity extends Activity {
     		String password = "";
     		String email = "";
     		
-    		if (passwordET.getText() != null)
+    		if (passwordET != null && passwordET.getText() != null)
     			password = passwordET.getText().toString();
-       		if (emailET.getText() != null)
+       		if (emailET != null && emailET.getText() != null)
     			email = emailET.getText().toString();
        		
     		String validity = RegisterClientSideValidation.validate(email, password);
@@ -141,10 +141,10 @@ public class MainActivity extends Activity {
     			Toast.makeText(MainActivity.this, validity, Toast.LENGTH_LONG).show();
     		}
     		
-    		if (!comm.isInternetConnected()) {
-    			Toast.makeText(MainActivity.this, "Sorry no internet, please try again",
-    						Toast.LENGTH_LONG).show();
-    		}
+//    		if (!comm.isInternetConnected()) {
+//    			Toast.makeText(MainActivity.this, "Sorry no internet, please try again",
+//    						Toast.LENGTH_LONG).show();
+//    		}
     		//TODO actually register user
     }
     
