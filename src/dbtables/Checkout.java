@@ -1,4 +1,4 @@
-package DbTables;
+package dbtables;
 
 import java.sql.Timestamp;
 
