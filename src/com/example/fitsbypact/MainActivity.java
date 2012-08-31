@@ -1,6 +1,8 @@
 package com.example.fitsbypact;
 
 
+import registration.RegisterClientSideValidation;
+import servercommunication.ServerCommunication;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -20,6 +23,7 @@ public class MainActivity extends Activity {
 	private EditText emailET;
 	private EditText passwordET;
 	
+	private ServerCommunication comm;
 	/**
 	 * called when activity is created
 	 */
@@ -32,6 +36,7 @@ public class MainActivity extends Activity {
         initializeButtons();
         initializeEditTexts();
         
+        comm = new ServerCommunication(this);
     }
     
     /**
@@ -125,6 +130,15 @@ public class MainActivity extends Activity {
     private void register() {
     		String password = passwordET.getText().toString();
     		String email = emailET.getText().toString();
+    		String validity = RegisterClientSideValidation.validate(email, password);
+    		if (validity != "") {
+    			Toast.makeText(MainActivity.this, validity, Toast.LENGTH_LONG).show();
+    		}
+    		
+    		if (!comm.isInternetConnected()) {
+    			Toast.makeText(MainActivity.this, "Sorry no internet, please try again",
+    						Toast.LENGTH_LONG).show();
+    		}
     		//TODO actually register user
     }
     

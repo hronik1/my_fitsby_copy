@@ -13,11 +13,23 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 
 public class ServerCommunication {
 
+	private Context ctx;
+	
+	/**
+	 * ServerCommunication which stores the context of the app
+	 * @param ctx
+	 */
+	public ServerCommunication(Context ctx) {
+		this.ctx = ctx;
+	}
+	
 	/**
 	 * queries the given URL in string format
 	 * returns the response in a string
@@ -52,5 +64,16 @@ public class ServerCommunication {
 		}
 
 		return builder.toString();
+	}
+	
+	/**
+	 * checks the status of the internet connectivity
+	 * @return true if connected to the internet, false otherwise
+	 */
+	public boolean isInternetConnected() {
+	    ConnectivityManager connec = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    boolean isMobileNetworkConnected = connec.getNetworkInfo (ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+	    boolean isWiFiNetworkConnected = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+	    return (isMobileNetworkConnected || isWiFiNetworkConnected);
 	}
 }
