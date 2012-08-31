@@ -3,8 +3,8 @@ package com.example.fitsbypact;
 
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
