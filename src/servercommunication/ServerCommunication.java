@@ -15,11 +15,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 
 public class ServerCommunication {
 
+	private final String TAG = "ServerCommunication";
 	private Context ctx;
 	
 	/**
@@ -71,9 +73,32 @@ public class ServerCommunication {
 	 * @return true if connected to the internet, false otherwise
 	 */
 	public boolean isInternetConnected() {
+		NetworkInfo mobileNetworkInfo, wifiNetworkInfo;
+		boolean isMobileNetworkConnected, isWifiNetworkConnected;
+		
 	    ConnectivityManager connec = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-	    boolean isMobileNetworkConnected = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
-	    boolean isWiFiNetworkConnected = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
-	    return (isMobileNetworkConnected || isWiFiNetworkConnected);
+	    if (connec == null) {
+	    	Log.d(TAG, "connec null");
+	    	return false;
+	    }
+	    
+	    mobileNetworkInfo = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+	    if (mobileNetworkInfo != null) {
+	    	isMobileNetworkConnected = mobileNetworkInfo.isConnectedOrConnecting();
+	    }
+	    else {
+	    	Log.d(TAG, "mobileNetworkInfo null");
+	    	return false;
+	    }
+	    
+	    wifiNetworkInfo = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+	    if (wifiNetworkInfo != null) {
+	    	isWifiNetworkConnected = wifiNetworkInfo.isConnectedOrConnecting();
+	    } else {
+	    	Log.d(TAG, "wifiNetwork null");
+	    	return false;
+	    }
+	    
+	    return (isMobileNetworkConnected || isWifiNetworkConnected);
 	}
 }

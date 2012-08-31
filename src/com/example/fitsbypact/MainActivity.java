@@ -141,10 +141,10 @@ public class MainActivity extends Activity {
     			Toast.makeText(MainActivity.this, validity, Toast.LENGTH_LONG).show();
     		}
     		
-//    		if (!comm.isInternetConnected()) {
-//    			Toast.makeText(MainActivity.this, "Sorry no internet, please try again",
-//    						Toast.LENGTH_LONG).show();
-//    		}
+    		if (!comm.isInternetConnected()) {
+    			Toast.makeText(MainActivity.this, "Sorry no internet, please try again",
+    						Toast.LENGTH_LONG).show();
+    		}
     		//TODO actually register user
     }
     
