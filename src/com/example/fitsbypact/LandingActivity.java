@@ -2,11 +2,13 @@ package com.example.fitsbypact;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class LandingActivity extends Activity {
 
@@ -120,7 +122,18 @@ public class LandingActivity extends Activity {
      * Changes to the Registration Activity
      */
     private void goToRegisterPage() {
-    	//TODO switch to register activity 
+    	try {
+    		Intent intent = new Intent(this, RegisterActivity.class);
+    		startActivity(intent);
+    	}
+    	// catches any exceptions and prints it to a toast message for debugging
+    	// purposes
+    	catch (Exception e) {
+    		String stackTrace = android.util.Log.getStackTraceString(e);
+    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    				Toast.LENGTH_LONG);
+    		toast.show();
+    	
+    	} 
     }
-    
 }
