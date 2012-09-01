@@ -3,10 +3,15 @@
     <string name="app_name">FitsbyPact</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="login_email_string">email</string>
-    <string name="login_password_string">password</string>
-    <string name="login_button">login</string>
-    <string name="register_button">register</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="register_email_hint">email</string>
+    <string name="register_password_hint">password</string>
+    <string name="register_button_register">register</string>
+    <string name="title_activity_example">ExampleActivity</string>
+    <string name="title_activity_landing">LandingActivity</string>
+    <string name="landing_login">Login</string>
+    <string name="landing_start">Start</string>
+    <string name="register_first_name_hint">first name</string>
+    <string name="register_last_name_hint">last name</string>
 
 </resources>
