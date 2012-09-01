@@ -13,5 +13,9 @@
     <string name="landing_start">Start</string>
     <string name="register_first_name_hint">first name</string>
     <string name="register_last_name_hint">last name</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="login_email_hint">email</string>
+    <string name="login_password_hint">password</string>
+    <string name="login_button_login">login</string>
 
 </resources>

@@ -115,7 +115,16 @@ public class LandingActivity extends Activity {
      * Changes to the LoginActivity
      */
     private void goToLoginPage() {
-    	//TODO switch to login activity
+    	try {
+    		Intent intent = new Intent(this, LoginActivity.class);
+    		startActivity(intent);
+    	} catch (Exception e) {
+    		//remove in deployment
+    		String stackTrace = android.util.Log.getStackTraceString(e);
+    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    				Toast.LENGTH_LONG);
+    		toast.show();
+    	} 
     }
     
     /**
@@ -125,15 +134,12 @@ public class LandingActivity extends Activity {
     	try {
     		Intent intent = new Intent(this, RegisterActivity.class);
     		startActivity(intent);
-    	}
-    	// catches any exceptions and prints it to a toast message for debugging
-    	// purposes
-    	catch (Exception e) {
+    	} catch (Exception e) {
+    		//remove in deployment
     		String stackTrace = android.util.Log.getStackTraceString(e);
     		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
     				Toast.LENGTH_LONG);
     		toast.show();
-    	
     	} 
     }
 }
