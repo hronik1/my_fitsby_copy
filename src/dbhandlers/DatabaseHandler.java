@@ -35,7 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_FIRST_NAME + " TEXT,"
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_FIRST_NAME + " TEXT,"
                 + KEY_LAST_NAME + " TEXT," + KEY_EMAIL + " TEXT," 
                 + KEY_PASSWORD + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
@@ -99,7 +99,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	 */
 	public List<User> getAllUsers() {
 	    List<User> usersList = new ArrayList<User>();
-	    String selectQuery = "SELECT  * FROM " + TABLE_USERS;
+	    String selectQuery = "SELECT * FROM " + TABLE_USERS;
 	 
 	    SQLiteDatabase db = this.getReadableDatabase();
 	    Cursor cursor = db.rawQuery(selectQuery, null);
@@ -128,13 +128,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	 * @return
 	 */
 	public int getUsersCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_USERS;
+        String countQuery = "SELECT * FROM " + TABLE_USERS;
+        int count;
+        
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        
+        count = cursor.getCount();
         cursor.close();
         db.close();
         
-        return cursor.getCount();
+        return count;
 	}
 	
 	/**
@@ -164,5 +168,41 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	    db.delete(TABLE_USERS, KEY_ID + " = ?",
 	            new String[] { String.valueOf(user.getID()) });
 	    db.close();
+	}
+	
+	/**
+	 * Checks if email is unique within table
+	 * @param email
+	 * @return
+	 */
+	public boolean isEmailUnique(String email) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String query = "SELECT * FROM " + TABLE_USERS +
+					" WHERE " + KEY_EMAIL + " = " + email;
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if (cursor.getCount() == 0) {
+			cursor.close();
+			return true;
+		} else {
+			cursor.close();
+			return false;
+		}
+	}
+	
+	public boolean isEmailPasswordComboValid(String email, String password) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		String query = "SELECT * FROM " + TABLE_USERS +
+					" WHERE " + KEY_EMAIL + " = " + email +
+					" AND " + KEY_PASSWORD + " = " + password;
+		Cursor cursor = db.rawQuery(query, null);
+		
+		if (cursor.getCount() == 0) {
+			cursor.close();
+			return false;
+		} else {
+			cursor.close();
+			return true;
+		}
 	}
 }

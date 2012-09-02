@@ -1,6 +1,8 @@
 package com.example.fitsbypact;
 
 
+import dbhandlers.DatabaseHandler;
+import dbtables.User;
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
 import android.app.Activity;
@@ -123,7 +125,8 @@ public class RegisterActivity extends Activity {
     	String lastName = "";
     	String password = "";
     	String email = "";
-
+    	DatabaseHandler dbHandler = new DatabaseHandler(this);
+    	
     	if (firstNameET != null && firstNameET.getText() != null)
     		firstName = firstNameET.getText().toString();
     	if (lastNameET != null && lastNameET.getText() != null)
@@ -139,13 +142,22 @@ public class RegisterActivity extends Activity {
     	
     	if (validity != "") {
     		Toast.makeText(RegisterActivity.this, validity, Toast.LENGTH_LONG).show();
+    		return;
     	}
 
     	if (!comm.isInternetConnected()) {
     		Toast.makeText(RegisterActivity.this, "Sorry no internet, please try again",
     				Toast.LENGTH_LONG).show();
     	}
-    	//TODO actually register user
+    	
+    	if (dbHandler.isEmailUnique(email)) {
+    		Toast.makeText(RegisterActivity.this, "Sorry email already exists", Toast.LENGTH_LONG).show();
+    	} else {
+    		//TODO password salting maybe?
+    		User user = new User(firstName, lastName, email, password);
+    		dbHandler.addUser(user);
+    	}
+    	
     }
     
     /** 
