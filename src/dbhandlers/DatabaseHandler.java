@@ -200,14 +200,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_EMAIL+"=?",
 					new String[] {email}, null, null, null);
-		db.close();
+		
 		if (cursor == null || cursor.getCount() == 0) {
+			db.close();
 			cursor.close();
 			return false;
 		} else if (cursor.getString(0).equals(password)){
+			db.close();
 			cursor.close();
 			return true;
 		} else {
+			db.close();
 			cursor.close();
 			return false;
 		}

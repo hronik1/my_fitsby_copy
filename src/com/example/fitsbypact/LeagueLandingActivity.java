@@ -2,19 +2,122 @@ package com.example.fitsbypact;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class LeagueLandingActivity extends Activity {
 
+	private final static String TAG = "LeagueLandingActivity";
+	
+	private Button buttonJoin;
+	private Button buttonCreate;
+	
+	/**
+	 * called when activity is created
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_league_landing);
+        Log.i(TAG, "onCreate");
+        
+        initializeButtons();
     }
 
+    /**
+     * called when menu is created for the first time
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_league_landing, menu);
+        Log.i(TAG, "onCreateOptionsMenu");
         return true;
+    }
+    
+    /**
+     * called when activity is restarted
+     */
+    @Override
+    public void onRestart() {
+        super.onRestart();
+
+        Log.i(TAG, "onRestart");
+    }
+
+    /**
+     * called when activity is starting
+     */
+    @Override
+    public void onStart() {
+        super.onStart();
+        
+        Log.i(TAG, "onStart");
+    }
+    
+    /**
+     * called when activity resumes
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        
+        Log.i(TAG, "onResume");
+    }
+    
+    /**
+     * called when activity is paused
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+       
+        Log.i(TAG, "onPause" + (isFinishing() ? " Finishing" : " Not Finishing"));
+    }
+    
+    /**
+     * called when activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+    	super.onDestroy();
+    	
+    	Log.i(TAG, "onDestroy");
+    	
+    }
+    
+    /**
+     * initializes the buttons 
+     */
+    private void initializeButtons() {
+    	buttonJoin = (Button)findViewById(R.id.league_landing_button_join);
+    	buttonJoin.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			join();
+    		}
+    	});
+    	
+     	buttonCreate = (Button)findViewById(R.id.league_landing_button_create);
+    	buttonCreate.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			create();
+    		}
+    	});
+    }
+    
+    /**
+     * 
+     */
+    private void join() {
+    	//TODO launches join game activity
+    }
+    
+    /**
+     * 
+     */
+    private void create() {
+    	//TODO launches create game activity
     }
 }
