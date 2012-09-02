@@ -16,12 +16,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
 	private static final String TAG = "DatabaseHandler";
 	
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "fitsby";
     private static final String TABLE_USERS = "users";
 
     //Users Table Columns names
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "_id";
     private static final String KEY_FIRST_NAME = "first_name";
     private static final String KEY_LAST_NAME = "last_name";
     private static final String KEY_EMAIL = "email";
@@ -38,9 +38,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_FIRST_NAME + " TEXT,"
-                + KEY_LAST_NAME + " TEXT," + KEY_EMAIL + " TEXT," 
-                + KEY_PASSWORD + " TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_FIRST_NAME + " TEXT NOT NULL,"
+                + KEY_LAST_NAME + " TEXT NOT NULL," + KEY_EMAIL + " TEXT UNIQUE NOT NULL," 
+                + KEY_PASSWORD + " TEXT NOT NULL" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
 	}
 
@@ -198,17 +198,18 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	
 	public boolean isEmailPasswordComboValid(String email, String password) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		String query = "SELECT * FROM " + TABLE_USERS +
-					" WHERE " + KEY_EMAIL + " = " + email +
-					" AND " + KEY_PASSWORD + " = " + password;
-		Cursor cursor = db.rawQuery(query, null);
-		
-		if (cursor.getCount() == 0) {
+		Cursor cursor = db.query(TABLE_USERS, new String[] {KEY_PASSWORD}, KEY_EMAIL+"=?",
+					new String[] {email}, null, null, null);
+		db.close();
+		if (cursor == null || cursor.getCount() == 0) {
 			cursor.close();
 			return false;
-		} else {
+		} else if (cursor.getString(0).equals(password)){
 			cursor.close();
 			return true;
+		} else {
+			cursor.close();
+			return false;
 		}
 	}
 }

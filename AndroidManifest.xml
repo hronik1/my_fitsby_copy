@@ -35,6 +35,10 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name=".LeagueLandingActivity"
+            android:label="@string/title_activity_league_landing" >
+        </activity>
     </application>
 
 </manifest>

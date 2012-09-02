@@ -1,5 +1,5 @@
 <resources>
-
+    
     <string name="app_name">FitsbyPact</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
@@ -17,5 +17,8 @@
     <string name="login_email_hint">email</string>
     <string name="login_password_hint">password</string>
     <string name="login_button_login">login</string>
+    <string name="title_activity_league_landing">LeagueLandingActivity</string>
+    <string name="league_landing_create_text">create</string>
+    <string name="league_landing_join_text">join</string>
 
 </resources>
