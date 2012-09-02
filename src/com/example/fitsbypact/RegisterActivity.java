@@ -150,7 +150,7 @@ public class RegisterActivity extends Activity {
     				Toast.LENGTH_LONG).show();
     	}
     	
-    	if (dbHandler.isEmailUnique(email)) {
+    	if (!dbHandler.isEmailUnique(email)) {
     		Toast.makeText(RegisterActivity.this, "Sorry email already exists", Toast.LENGTH_LONG).show();
     	} else {
     		//TODO password salting maybe?

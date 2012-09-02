@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE_USERS = "users";
 
     //Users Table Columns names
-    private static final String KEY_ID = "_id";
+    private static final String KEY_ID = "id";
     private static final String KEY_FIRST_NAME = "first_name";
     private static final String KEY_LAST_NAME = "last_name";
     private static final String KEY_EMAIL = "email";
