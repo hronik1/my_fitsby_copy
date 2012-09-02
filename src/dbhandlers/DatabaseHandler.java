@@ -18,7 +18,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String TABLE_USERS = "users";
 
     //Users Table Columns names
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "_id";
     private static final String KEY_FIRST_NAME = "first_name";
     private static final String KEY_LAST_NAME = "last_name";
     private static final String KEY_EMAIL = "email";
@@ -165,7 +165,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	 */
 	public void deleteUser(User user) {
 	    SQLiteDatabase db = this.getWritableDatabase();
-	    db.delete(TABLE_USERS, KEY_ID + " = ?",
+	    db.delete(TABLE_USERS, KEY_ID + "=?",
 	            new String[] { String.valueOf(user.getID()) });
 	    db.close();
 	}
@@ -177,9 +177,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	 */
 	public boolean isEmailUnique(String email) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		String query = "SELECT * FROM " + TABLE_USERS +
-					" WHERE " + KEY_EMAIL + " = " + email;
-		Cursor cursor = db.rawQuery(query, null);
+		/*String query = "SELECT * FROM " + TABLE_USERS +
+					" WHERE " + KEY_EMAIL + " = " + email;*/
+		String[] columns = new String[] {KEY_ID, KEY_FIRST_NAME, KEY_LAST_NAME,
+					KEY_EMAIL, KEY_PASSWORD};
+		Cursor cursor = db.query(TABLE_USERS, columns, KEY_EMAIL+"=?",
+					new String[] {email}, null, null, null);
 		
 		if (cursor.getCount() == 0) {
 			cursor.close();
