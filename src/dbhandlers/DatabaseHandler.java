@@ -10,9 +10,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper{
 
+	private static final String TAG = "DatabaseHandler";
+	
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "fitsby";
     private static final String TABLE_USERS = "users";
@@ -183,7 +186,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 					KEY_EMAIL, KEY_PASSWORD};
 		Cursor cursor = db.query(TABLE_USERS, columns, KEY_EMAIL+"=?",
 					new String[] {email}, null, null, null);
-		
+		Log.d(TAG, ((Integer)cursor.getCount()).toString());
 		if (cursor.getCount() == 0) {
 			cursor.close();
 			return true;
