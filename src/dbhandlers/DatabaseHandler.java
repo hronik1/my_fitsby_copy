@@ -205,14 +205,15 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			db.close();
 			cursor.close();
 			return false;
-		} else if (cursor.getString(0).equals(password)){
-			db.close();
-			cursor.close();
-			return true;
 		} else {
+			cursor.moveToFirst();
+			String returnedPassword = cursor.getString(0);
 			db.close();
 			cursor.close();
-			return false;
+			if (returnedPassword.equals(password))
+				return true;
+			else
+				return false;
 		}
 	}
 }
