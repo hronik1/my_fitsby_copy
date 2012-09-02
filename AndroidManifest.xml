@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="11"
         android:targetSdkVersion="15" />
 
     <application
@@ -25,11 +25,7 @@
         <activity
             android:name=".LandingActivity"
             android:label="@string/title_activity_landing" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -38,6 +34,15 @@
         <activity
             android:name=".LeagueLandingActivity"
             android:label="@string/title_activity_league_landing" >
+        </activity>
+        <activity
+            android:name=".LeagueCreateActivity"
+            android:label="@string/title_activity_league_create" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
