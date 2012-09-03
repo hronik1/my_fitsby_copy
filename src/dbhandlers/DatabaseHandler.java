@@ -74,28 +74,59 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	 * @return
 	 */
 	public User getUser(int id) {
-	      SQLiteDatabase db = this.getReadableDatabase();
-	      
-	       Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
-	    		   KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
-	    		   new String[] { String.valueOf(id) }, null, null, null, null);
-	       if (cursor != null) {
-	    	   cursor.moveToFirst();
-	       } else {
-	    	   db.close();
-	    	   return null;
-	       }
-	       
-	       User user = new User(Integer.parseInt(cursor.getString(0)),
-	    		   cursor.getString(1), cursor.getString(2),
-	    		   cursor.getString(3), cursor.getString(4));
-	       
-	       cursor.close();
-	       db.close();
-	       
-	       return user;
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
+				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
+						new String[] { String.valueOf(id) }, null, null, null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+		} else {
+			db.close();
+			return null;
+		}
+
+		User user = new User(Integer.parseInt(cursor.getString(0)),
+				cursor.getString(1), cursor.getString(2),
+				cursor.getString(3), cursor.getString(4));
+
+		cursor.close();
+		db.close();
+
+		return user;
 	}
 	 
+	/**
+	 * returns User with the corresponding id
+	 * @param id
+	 * @return
+	 */
+	public User getUser(String email) {
+		if (email == null)
+			return null;
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
+				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
+						new String[] { email }, null, null, null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+		} else {
+			db.close();
+			return null;
+		}
+
+		User user = new User(Integer.parseInt(cursor.getString(0)),
+				cursor.getString(1), cursor.getString(2),
+				cursor.getString(3), cursor.getString(4));
+
+		cursor.close();
+		db.close();
+
+		return user;
+	}
+	
 	/**
 	 * returns all users stored in TABLE_USERS
 	 * @return

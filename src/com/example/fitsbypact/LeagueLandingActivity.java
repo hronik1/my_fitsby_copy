@@ -2,11 +2,13 @@ package com.example.fitsbypact;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class LeagueLandingActivity extends Activity {
 
@@ -102,7 +104,7 @@ public class LeagueLandingActivity extends Activity {
      	buttonCreate = (Button)findViewById(R.id.league_landing_button_create);
     	buttonCreate.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
-    			create();
+    			goToLeagueCreatePage();
     		}
     	});
     }
@@ -117,7 +119,17 @@ public class LeagueLandingActivity extends Activity {
     /**
      * 
      */
-    private void create() {
+    private void goToLeagueCreatePage() {
     	//TODO launches create game activity
+    	try {
+    		Intent intent = new Intent(this, LeagueCreateActivity.class);
+    		startActivity(intent);
+    	} catch (Exception e) {
+    		//remove in deployment
+    		String stackTrace = android.util.Log.getStackTraceString(e);
+    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    				Toast.LENGTH_LONG);
+    		toast.show();
+    	} 
     }
 }

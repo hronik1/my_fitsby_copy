@@ -6,6 +6,7 @@ import dbtables.User;
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -156,6 +157,22 @@ public class RegisterActivity extends Activity {
     		//TODO password salting maybe?
     		User user = new User(firstName, lastName, email, password);
     		dbHandler.addUser(user);
+    		user = dbHandler.getUser(email);
+    		if (user != null) {
+    	    	try {
+    	    		Intent intent = new Intent(this, LeagueLandingActivity.class);
+    	    		intent.putExtra(User.ID_BUNDLE_KEY, user.getID());
+    	    		startActivity(intent);
+    	    	} catch (Exception e) {
+    	    		//remove in deployment
+    	    		String stackTrace = android.util.Log.getStackTraceString(e);
+    	    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    	    				Toast.LENGTH_LONG);
+    	    		toast.show();
+    	    	} 
+    		} else {
+    			Toast.makeText(this, "sorry error occured", Toast.LENGTH_LONG).show();
+    		}
     	}
     	
     }

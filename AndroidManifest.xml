@@ -25,7 +25,11 @@
         <activity
             android:name=".LandingActivity"
             android:label="@string/title_activity_landing" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -38,11 +42,7 @@
         <activity
             android:name=".LeagueCreateActivity"
             android:label="@string/title_activity_league_create" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
