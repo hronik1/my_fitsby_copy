@@ -20,7 +20,6 @@ public class RegisterActivity extends Activity {
 
 	private final static String TAG = "MainActivity";
 	
-	private Button buttonLogin;
 	private Button buttonRegister;
 	
 	private EditText firstNameET;
@@ -36,7 +35,7 @@ public class RegisterActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
         Log.i(TAG, "onCreate");
         
         initializeButtons();
@@ -51,7 +50,7 @@ public class RegisterActivity extends Activity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
+        getMenuInflater().inflate(R.menu.activity_register, menu);
         return true;
     }
     
@@ -110,7 +109,7 @@ public class RegisterActivity extends Activity {
      * helper function which initializes the buttons
      */
     private void initializeButtons() {
-    	buttonRegister = (Button)findViewById(R.id.register_button);
+    	buttonRegister = (Button)findViewById(R.id.register_button_register);
     	buttonRegister.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
     			register();
