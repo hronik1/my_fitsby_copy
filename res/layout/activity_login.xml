@@ -19,7 +19,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/login_email_id"
         android:ems="10"
-        android:hint="@string/login_password_hint" />
+        android:hint="@string/login_password_hint"
+        android:inputType="textPassword" />
     
     <Button
         android:id="@+id/login_button_login"
