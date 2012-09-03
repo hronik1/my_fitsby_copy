@@ -79,7 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
 				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
 						new String[] { String.valueOf(id) }, null, null, null, null);
-		if (cursor != null) {
+		if (cursor != null && cursor.getCount() != 0) {
 			cursor.moveToFirst();
 		} else {
 			db.close();
@@ -110,7 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		Cursor cursor = db.query(TABLE_USERS, new String[] { KEY_ID,
 				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
 						new String[] { email }, null, null, null, null);
-		if (cursor != null) {
+		if (cursor != null && cursor.getCount() != 0) {
 			cursor.moveToFirst();
 		} else {
 			db.close();
