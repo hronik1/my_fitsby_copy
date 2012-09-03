@@ -16,8 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/league_create_tv_wager"
-        android:layout_parentLeft="true" />
+        android:layout_below="@+id/league_create_tv_wager"/>
 
     <TextView
         android:id="@+id/league_create_tv_days"
@@ -32,8 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/league_create_np_wager"
-        android:layout_parentRight="true" />
+        android:layout_alignTop="@+id/league_create_np_wager"/>
 
     <Button
         android:id="@+id/league_create_button_create"
