@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/friend_invite_button_invite"
+        android:layout_above="@+id/friend_invite_button_home"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/friend_invite_button_invite_text" />
+   
+    <Button
+        android:id="@+id/friend_invite_button_home"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/friend_invite_button_home_text" />
+    
+</RelativeLayout>

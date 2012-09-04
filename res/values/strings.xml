@@ -28,5 +28,11 @@
     <string name="credit_card_button_submit_text">Submit</string>
     <string name="credit_card_et_card_cvc_hint">cvc</string>
     <string name="credit_card_et_card_number_hint">number</string>
-
+    <string name="credit_card_et_expire_year_hint">exp yr</string>
+    <string name="credit_card_et_expire_month_hint">exp mth</string>
+    <string name="authorize_api_login_id">3C29upX37b</string>
+    <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
+    <string name="title_activity_friend_invite">FriendInviteActivity</string>
+    <string name="friend_invite_button_invite_text">invite</string>
+	<string name="friend_invite_button_home_text">home</string>
 </resources>
