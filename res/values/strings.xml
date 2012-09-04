@@ -21,7 +21,12 @@
     <string name="league_landing_create_text">create</string>
     <string name="league_landing_join_text">join</string>
     <string name="title_activity_league_create">LeagueCreateActivity</string>
-	<string name="league_create_create_text">create</string>
-	<string name="league_create_tv_wager_text">wager</string>
-	<string name="league_create_tv_days_text">goal days</string>
+    <string name="league_create_create_text">create</string>
+    <string name="league_create_tv_wager_text">wager</string>
+    <string name="league_create_tv_days_text">goal days</string>
+    <string name="title_activity_credit_card">CreditCardActivity</string>
+    <string name="credit_card_button_submit_text">Submit</string>
+    <string name="credit_card_et_card_cvc_hint">cvc</string>
+    <string name="credit_card_et_card_number_hint">number</string>
+
 </resources>

@@ -42,7 +42,15 @@
         <activity
             android:name=".LeagueCreateActivity"
             android:label="@string/title_activity_league_create" >
+        </activity>
+        <activity
+            android:name=".CreditCardActivity"
+            android:label="@string/title_activity_credit_card" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

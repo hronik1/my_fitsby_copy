@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText 
+        android:id="@+id/credit_card_et_card_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:hint="@string/credit_card_et_card_number_hint" />
+    
+    <DatePicker 
+        android:id="@+id/credit_card_dp_expire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/credit_card_et_card_number"
+        android:layout_alignParentLeft="true" />
+    
+    <EditText
+        android:id="@+id/credit_card_et_card_cvc"
+        android:layout_toRightOf="@+id/credit_card_dp_expire"
+        android:layout_below="@+id/credit_card_et_card_number"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/credit_card_dp_expire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/credit_card_et_card_cvc_hint" />
+    
+    <Button
+        android:id="@+id/credit_card_button_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_aligntParentRight="true"
+        android:text="@string/credit_card_button_submit_text" />
+    
+</RelativeLayout>
