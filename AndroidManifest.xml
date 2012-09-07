@@ -17,17 +17,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!-- ** Security Activities - REQUIRED ** -->
-        <activity
-            android:name="net.authorize.android.security.MobileMerchantAuthActivity"
-            android:configChanges="keyboardHidden|orientation" />
-        <activity
-            android:name="net.authorize.android.security.LoginBaseActivity"
-            android:configChanges="keyboardHidden|orientation" />
-        <!-- AIM Activity -->
-        <activity
-            android:name="net.authorize.android.aim.AuthCaptureActivity"
-            android:configChanges="keyboardHidden|orientation" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" >
