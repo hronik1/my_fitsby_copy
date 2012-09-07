@@ -42,9 +42,8 @@ public class CreditCardActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_credit_card, menu);
-        return true;
-        
         Log.i(TAG, "onCreateOptionsMenu");
+        return true;
     }
     
     /**
