@@ -18,6 +18,8 @@ public class LeagueLandingActivity extends Activity {
 	private Button buttonJoin;
 	private Button buttonCreate;
 	
+	private int userID;
+	
 	/**
 	 * called when activity is created
 	 */
@@ -29,8 +31,11 @@ public class LeagueLandingActivity extends Activity {
         
         initializeButtons();
         
-        int userID = savedInstanceState != null ? savedInstanceState.getInt(User.ID_KEY) : -1;
-        
+        Intent intent = getIntent();
+        if(intent == null || intent.getExtras() == null)
+        	userID = -1;
+        else
+        	userID = intent.getExtras().getInt(User.ID_KEY);
         Toast.makeText(this, "Hello user:" + userID, Toast.LENGTH_LONG).show();
     }
 
