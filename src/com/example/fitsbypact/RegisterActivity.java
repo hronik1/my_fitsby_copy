@@ -160,6 +160,7 @@ public class RegisterActivity extends Activity {
     		if (user != null) {
     	    	try {
     	    		Intent intent = new Intent(this, LeagueLandingActivity.class);
+    	    		intent.putExtra(User.ID_KEY, user.getID());
     	    		startActivity(intent);
     	    	} catch (Exception e) {
     	    		//remove in deployment

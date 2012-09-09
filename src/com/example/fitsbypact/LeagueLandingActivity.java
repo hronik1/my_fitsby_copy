@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import dbtables.User;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +28,10 @@ public class LeagueLandingActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         initializeButtons();
+        
+        int userID = savedInstanceState != null ? savedInstanceState.getInt(User.ID_KEY) : -1;
+        
+        Toast.makeText(this, "Hello user:" + userID, Toast.LENGTH_LONG).show();
     }
 
     /**

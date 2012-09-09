@@ -8,6 +8,7 @@ public class User {
 	private String _email;
 	private String _password;
 	
+	public final static String ID_KEY = "userID";
 	/**
 	 * default constructor, creates empty User
 	 */
