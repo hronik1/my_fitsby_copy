@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "fitsby";
     
     private SQLiteDatabase writableDB;
-    private UserTableHandler userTableHandler;
+	private UserTableHandler userTableHandler;
     private LeagueTableHandler leagueTableHandler;
     private LeagueMemberTableHandler leagueMemberTableHandler;
 
@@ -60,24 +60,24 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	}
 
     /**
-	 * @param userTableHandler the userTableHandler to set
+	 * @return the userTableHandler
 	 */
-	public void setUserTableHandler(UserTableHandler userTableHandler) {
-		this.userTableHandler = userTableHandler;
+	public UserTableHandler getUserTableHandler() {
+		return userTableHandler;
 	}
 
 	/**
-	 * @param leagueTableHandler the leagueTableHandler to set
+	 * @return the leagueTableHandler
 	 */
-	public void setLeagueTableHandler(LeagueTableHandler leagueTableHandler) {
-		this.leagueTableHandler = leagueTableHandler;
+	public LeagueTableHandler getLeagueTableHandler() {
+		return leagueTableHandler;
 	}
 
 	/**
-	 * @param leagueMemberTableHandler the leagueMemberTableHandler to set
+	 * @return the leagueMemberTableHandler
 	 */
-	public void setLeagueMemberTableHandler(
-			LeagueMemberTableHandler leagueMemberTableHandler) {
-		this.leagueMemberTableHandler = leagueMemberTableHandler;
+	public LeagueMemberTableHandler getLeagueMemberTableHandler() {
+		return leagueMemberTableHandler;
 	}
+	
 }

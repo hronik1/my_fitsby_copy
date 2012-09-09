@@ -131,7 +131,7 @@ public class LoginActivity extends Activity {
     				Toast.LENGTH_LONG).show();
     	}
     	
-    	if (dbHandler.isEmailPasswordComboValid(email, password)) {
+    	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
     		Toast.makeText(LoginActivity.this, "User exists", Toast.LENGTH_LONG).show();
     	} else {
     		//TODO password salting maybe?

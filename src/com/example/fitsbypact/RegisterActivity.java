@@ -150,13 +150,13 @@ public class RegisterActivity extends Activity {
     				Toast.LENGTH_LONG).show();
     	}
     	
-    	if (!dbHandler.isEmailUnique(email)) {
+    	if (!dbHandler.getUserTableHandler().isEmailUnique(email)) {
     		Toast.makeText(RegisterActivity.this, "Sorry email already exists", Toast.LENGTH_LONG).show();
     	} else {
     		//TODO password salting maybe?
     		User user = new User(firstName, lastName, email, password);
-    		dbHandler.addUser(user);
-    		user = dbHandler.getUser(email);
+    		dbHandler.getUserTableHandler().addUser(user);
+    		user = dbHandler.getUserTableHandler().getUser(email);
     		if (user != null) {
     	    	try {
     	    		Intent intent = new Intent(this, LeagueLandingActivity.class);
