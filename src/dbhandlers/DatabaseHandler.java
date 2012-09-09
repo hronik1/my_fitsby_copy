@@ -17,7 +17,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	//TODO migrate to table handler
 	private static final String TAG = "DatabaseHandler";
 	
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "fitsby";
     
     private SQLiteDatabase writableDB;
