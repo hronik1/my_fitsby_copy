@@ -11,53 +11,84 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int fitsby_logo=0x7f020000;
+        public static final int ic_action_search=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int landing_button_login=0x7f070001;
-        public static final int landing_button_start=0x7f070000;
-        public static final int league_create_button_create=0x7f070006;
-        public static final int league_create_np_days=0x7f070005;
-        public static final int league_create_np_wager=0x7f070003;
-        public static final int league_create_tv_days=0x7f070004;
-        public static final int league_create_tv_wager=0x7f070002;
-        public static final int league_landing_button_create=0x7f070007;
-        public static final int league_landing_button_join=0x7f070008;
-        public static final int login_button_login=0x7f07000b;
-        public static final int login_email_id=0x7f070009;
-        public static final int login_password_id=0x7f07000a;
-        public static final int menu_settings=0x7f070011;
-        public static final int register_button_register=0x7f070010;
-        public static final int register_email_id=0x7f07000e;
-        public static final int register_first_name_id=0x7f07000c;
-        public static final int register_last_name_id=0x7f07000d;
-        public static final int register_password_id=0x7f07000f;
+        public static final int credit_card_button_submit=0x7f070004;
+        public static final int credit_card_et_card_cvc=0x7f070003;
+        public static final int credit_card_et_card_number=0x7f070000;
+        public static final int credit_card_et_expire_month=0x7f070001;
+        public static final int credit_card_et_expire_year=0x7f070002;
+        public static final int friend_invite_button_home=0x7f070006;
+        public static final int friend_invite_button_invite=0x7f070005;
+        public static final int landing_button_login=0x7f070008;
+        public static final int landing_button_start=0x7f070007;
+        public static final int league_create_button_create=0x7f07000d;
+        public static final int league_create_np_days=0x7f07000c;
+        public static final int league_create_np_wager=0x7f07000a;
+        public static final int league_create_tv_days=0x7f07000b;
+        public static final int league_create_tv_wager=0x7f070009;
+        public static final int league_join_button_submit=0x7f070011;
+        public static final int league_join_et_first_name=0x7f07000e;
+        public static final int league_join_et_invite_code=0x7f070010;
+        public static final int league_join_et_last_name=0x7f07000f;
+        public static final int league_landing_button_create=0x7f070012;
+        public static final int league_landing_button_join=0x7f070013;
+        public static final int login_button_login=0x7f070016;
+        public static final int login_email_id=0x7f070014;
+        public static final int login_password_id=0x7f070015;
+        public static final int menu_settings=0x7f07001c;
+        public static final int register_button_register=0x7f07001b;
+        public static final int register_email_id=0x7f070019;
+        public static final int register_first_name_id=0x7f070017;
+        public static final int register_last_name_id=0x7f070018;
+        public static final int register_password_id=0x7f07001a;
     }
     public static final class layout {
-        public static final int activity_landing=0x7f030000;
-        public static final int activity_league_create=0x7f030001;
-        public static final int activity_league_landing=0x7f030002;
-        public static final int activity_login=0x7f030003;
-        public static final int activity_register=0x7f030004;
-        public static final int example=0x7f030005;
+        public static final int activity_credit_card=0x7f030000;
+        public static final int activity_friend_invite=0x7f030001;
+        public static final int activity_landing=0x7f030002;
+        public static final int activity_league_create=0x7f030003;
+        public static final int activity_league_join=0x7f030004;
+        public static final int activity_league_landing=0x7f030005;
+        public static final int activity_login=0x7f030006;
+        public static final int activity_register=0x7f030007;
+        public static final int example=0x7f030008;
     }
     public static final class menu {
-        public static final int activity_landing=0x7f060000;
-        public static final int activity_league_create=0x7f060001;
-        public static final int activity_league_landing=0x7f060002;
-        public static final int activity_login=0x7f060003;
-        public static final int activity_register=0x7f060004;
-        public static final int example=0x7f060005;
+        public static final int activity_credit_card=0x7f060000;
+        public static final int activity_friend_invite=0x7f060001;
+        public static final int activity_landing=0x7f060002;
+        public static final int activity_league_create=0x7f060003;
+        public static final int activity_league_join=0x7f060004;
+        public static final int activity_league_landing=0x7f060005;
+        public static final int activity_login=0x7f060006;
+        public static final int activity_register=0x7f060007;
+        public static final int example=0x7f060008;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int authorize_api_login_id=0x7f04001e;
+        public static final int authorize_api_transaction_key=0x7f04001f;
+        public static final int credit_card_button_submit_text=0x7f040019;
+        public static final int credit_card_et_card_cvc_hint=0x7f04001a;
+        public static final int credit_card_et_card_number_hint=0x7f04001b;
+        public static final int credit_card_et_expire_month_hint=0x7f04001d;
+        public static final int credit_card_et_expire_year_hint=0x7f04001c;
+        public static final int friend_invite_button_home_text=0x7f040022;
+        public static final int friend_invite_button_invite_text=0x7f040021;
         public static final int hello_world=0x7f040001;
         public static final int landing_login=0x7f040009;
         public static final int landing_start=0x7f04000a;
         public static final int league_create_create_text=0x7f040015;
         public static final int league_create_tv_days_text=0x7f040017;
         public static final int league_create_tv_wager_text=0x7f040016;
+        public static final int league_join_button_submit_text=0x7f040027;
+        public static final int league_join_et_first_name_hint=0x7f040024;
+        public static final int league_join_et_invite_code_hint=0x7f040026;
+        public static final int league_join_et_last_name_hint=0x7f040025;
         public static final int league_landing_create_text=0x7f040012;
         public static final int league_landing_join_text=0x7f040013;
         public static final int login_button_login=0x7f040010;
@@ -69,9 +100,12 @@ public final class R {
         public static final int register_first_name_hint=0x7f04000b;
         public static final int register_last_name_hint=0x7f04000c;
         public static final int register_password_hint=0x7f040005;
+        public static final int title_activity_credit_card=0x7f040018;
         public static final int title_activity_example=0x7f040007;
+        public static final int title_activity_friend_invite=0x7f040020;
         public static final int title_activity_landing=0x7f040008;
         public static final int title_activity_league_create=0x7f040014;
+        public static final int title_activity_league_join=0x7f040023;
         public static final int title_activity_league_landing=0x7f040011;
         public static final int title_activity_login=0x7f04000d;
         public static final int title_activity_register=0x7f040003;
