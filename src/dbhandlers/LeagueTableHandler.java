@@ -28,7 +28,7 @@ public class LeagueTableHandler {
 	public static final String TYPE_DURATION = "INTEGER NOT NULL";
 	public static final String TYPE_WAGER = "INTEGER NOT NULL";
 	public static final String FOREIGN_KEY_CONSTRAINT_CREATOR = "FOREIGN KEY(" + KEY_CREATOR_ID + 
-				") REFERENCES" +  UserTableHandler.TABLE + "(" + UserTableHandler.KEY_ID + ")";
+				") REFERENCES " +  UserTableHandler.TABLE + "(" + UserTableHandler.KEY_ID + ")";
 	
 	public static final String CREATE_SQL = "CREATE TABLE " + TABLE + "("
 				+ KEY_ID + " " + TYPE_ID + "," + KEY_CREATOR_ID + " " + TYPE_CREATOR_ID + ","
