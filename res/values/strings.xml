@@ -34,5 +34,11 @@
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
     <string name="title_activity_friend_invite">FriendInviteActivity</string>
     <string name="friend_invite_button_invite_text">invite</string>
-	<string name="friend_invite_button_home_text">home</string>
+    <string name="friend_invite_button_home_text">home</string>
+    <string name="title_activity_league_join">LeagueJoinActivity</string>
+    <string name="league_join_et_first_name_hint">first name</string>
+    <string name="league_join_et_last_name_hint">last name</string>
+    <string name="league_join_et_invite_code_hint">invite code</string>
+    <string name="league_join_button_submit_text">submit</string>
+
 </resources>

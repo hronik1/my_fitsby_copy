@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    
+    <EditText 
+        android:id="@+id/league_join_et_first_name"
+  		android:layout_alignParentTop="true"
+  		android:layout_alignParentLeft="true"
+  		android:layout_height="wrap_content"
+  		android:layout_width="wrap_content"
+        android:hint="@string/league_join_et_first_name_hint" />
+
+    <EditText
+        android:id="@+id/league_join_et_last_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/league_join_et_first_name"
+        android:layout_alignBottom="@+id/league_join_et_first_name"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:hint="@string/league_join_et_last_name_hint" />
+    
+    <EditText
+        android:id="@+id/league_join_et_invite_code"
+        android:layout_below="@+id/league_join_et_first_name"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="@string/league_join_et_invite_code_hint" />
+    
+    <Button
+        android:id="@+id/league_join_button_submit"
+        android:layout_below="@+id/league_join_et_invite_code"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/league_join_button_submit_text" />
+    
+</RelativeLayout>

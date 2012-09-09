@@ -8,8 +8,6 @@ public class User {
 	private String _email;
 	private String _password;
 	
-	public final static String ID_BUNDLE_KEY = "_id";
-	
 	/**
 	 * default constructor, creates empty User
 	 */
@@ -55,7 +53,7 @@ public class User {
 	 * @param _id the _id to set
 	 */
 	public void setID(int id) {
-		this._id = _id;
+		this._id = id;
 	}
 
 	/**
