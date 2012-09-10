@@ -133,6 +133,7 @@ public class LeagueLandingActivity extends Activity {
     	//TODO launches create game activity
     	try {
     		Intent intent = new Intent(this, LeagueCreateActivity.class);
+    		intent.putExtra(User.ID_KEY, userID);
     		startActivity(intent);
     	} catch (Exception e) {
     		//remove in deployment
