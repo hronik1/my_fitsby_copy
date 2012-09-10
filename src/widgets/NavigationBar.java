@@ -2,9 +2,8 @@ package widgets;
 
 import java.util.HashMap;
 
+
 import com.example.fitsbypact.R;
-
-
 import android.content.Context;
 
 import android.util.AttributeSet;
