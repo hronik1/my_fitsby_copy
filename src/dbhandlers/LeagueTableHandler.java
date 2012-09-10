@@ -70,7 +70,31 @@ public class LeagueTableHandler {
 	public League getLeague(int id) {
 
 		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_CREATOR_ID, KEY_IS_PRIVATE, KEY_DURATION, KEY_WAGER }, KEY_ID + "=?",
+				KEY_CREATOR_ID, KEY_IS_PRIVATE, KEY_WAGER, KEY_DURATION }, KEY_ID + "=?",
+						new String[] { String.valueOf(id) }, null, null, null, null);
+		if (cursor != null && cursor.getCount() != 0) {
+			cursor.moveToFirst();
+		} else {
+			return null;
+		}
+
+		League league= new League(Integer.parseInt(cursor.getString(0)),
+				Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
+				Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+
+		cursor.close();
+		return league;
+	}
+	
+	/**
+	 * returns League with corresponding id
+	 * @param id
+	 * @return
+	 */
+	public League getLeagueByCreatorID(int id) {
+
+		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+				KEY_CREATOR_ID, KEY_IS_PRIVATE, KEY_WAGER, KEY_DURATION }, KEY_CREATOR_ID + "=?",
 						new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null && cursor.getCount() != 0) {
 			cursor.moveToFirst();

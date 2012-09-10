@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/navigation_textview_game"
+        android:gravity="center"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawableTop="@drawable/ic_launcher"
+        android:text="@string/navigation_textview_game_text"/>
+
+    <TextView
+        android:id="@+id/navigation_textview_newsfeed"
+        android:gravity="center"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawableTop="@drawable/ic_launcher"
+        android:text="@string/navigation_textview_newsfeed_text"/>
+
+    <TextView
+        android:id="@+id/navigation_textview_checkin"
+        android:gravity="center"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawableTop="@drawable/ic_launcher"
+        android:text="@string/navigation_textview_checkin_text"/>
+
+    <TextView
+        android:id="@+id/navigation_textview_settings"
+        android:gravity="center"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawableTop="@drawable/ic_launcher"
+        android:text="@string/navigation_textview_settings_text"/>
+</LinearLayout>
