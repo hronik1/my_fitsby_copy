@@ -9,16 +9,13 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/hello_world"
-        tools:context=".GamesActivity" />
-
-
-
-	    <widgets.NavigationBar
-	        android:id="@+id/games_navigation_bar"
-		   	android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	    	android:layout_alignParentLeft="true"  />
-
+        tools:context=".NewsfeedActivity" />
+    
+    <widgets.NavigationBar
+        android:id="@+id/newsfeed_navigation_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

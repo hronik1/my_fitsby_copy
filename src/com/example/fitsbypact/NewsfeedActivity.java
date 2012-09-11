@@ -8,9 +8,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 
-public class GamesActivity extends Activity {
+public class NewsfeedActivity extends Activity {
 
-	private static final String TAG = "GamesActivity";
+	private static final String TAG = "NewsfeedActivity";
 	
 	private NavigationBar navigation;
 	private int userID;
@@ -21,7 +21,7 @@ public class GamesActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_games);
+        setContentView(R.layout.activity_newsfeed);
         
         Log.i(TAG, "onCreate");
         
@@ -35,12 +35,12 @@ public class GamesActivity extends Activity {
     }
 
     /**
-     * called when options bar is created
+     * called when optionsmenu is created
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_games, menu);
-        Log.i(TAG, "onCreate");
+        getMenuInflater().inflate(R.menu.activity_newsfeed, menu);
+        Log.i(TAG, "onCreateOptionsMenu");
         return true;
     }
     
@@ -96,13 +96,12 @@ public class GamesActivity extends Activity {
 	}
 	
 	/**
-	 * 
+	 * initialized NavigationBar for use
 	 */
 	public void initializeNavigationBar() {
 		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
 		navigation.setParentActivity(this);
 		navigation.setUserID(userID);
-		navigation.turnOffTV("games");
+		navigation.turnOffTV("newsfeed");
 	}
 }
-

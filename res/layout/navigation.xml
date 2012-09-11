@@ -37,7 +37,7 @@
         android:text="@string/navigation_textview_checkin_text"/>
 
     <TextView
-        android:id="@+id/navigation_textview_settings"
+        android:id="@+id/navigation_textview_me"
         android:gravity="center"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
@@ -45,5 +45,5 @@
         android:clickable="true"
         android:focusable="true"
         android:drawableTop="@drawable/ic_launcher"
-        android:text="@string/navigation_textview_settings_text"/>
+        android:text="@string/navigation_textview_me_text"/>
 </LinearLayout>

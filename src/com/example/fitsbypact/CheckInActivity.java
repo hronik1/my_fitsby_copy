@@ -8,21 +8,20 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 
-public class GamesActivity extends Activity {
+public class CheckInActivity extends Activity {
 
-	private static final String TAG = "GamesActivity";
+	private final static String TAG = "CheckInActivity";
 	
 	private NavigationBar navigation;
 	private int userID;
 	
 	/**
-	 * called when activity is created
+	 * called when Activity is created
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_games);
-        
+        setContentView(R.layout.activity_check_in);
         Log.i(TAG, "onCreate");
         
         Intent intent = getIntent();
@@ -35,12 +34,12 @@ public class GamesActivity extends Activity {
     }
 
     /**
-     * called when options bar is created
+     * called when options menu is created
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_games, menu);
-        Log.i(TAG, "onCreate");
+        getMenuInflater().inflate(R.menu.activity_check_in, menu);
+        Log.i(TAG, "onCreateOptionsMenu");
         return true;
     }
     
@@ -96,13 +95,12 @@ public class GamesActivity extends Activity {
 	}
 	
 	/**
-	 * 
+	 * initialized NavigationBar for use
 	 */
 	public void initializeNavigationBar() {
 		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
 		navigation.setParentActivity(this);
 		navigation.setUserID(userID);
-		navigation.turnOffTV("games");
+		navigation.turnOffTV("checkin");
 	}
 }
-

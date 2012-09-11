@@ -3,23 +3,33 @@ package widgets;
 import java.util.HashMap;
 
 
+import com.example.fitsbypact.GamesActivity;
+import com.example.fitsbypact.LeagueLandingActivity;
 import com.example.fitsbypact.R;
+
+import dbtables.User;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NavigationBar extends LinearLayout{
 
 	private TextView gamesTV;
 	private TextView newsfeedTV;
 	private TextView checkinTV;
-	private TextView settingsTV;
+	private TextView meTV;
 	
 	private HashMap<String, TextView> tvMap;
+	
+	private Activity parentActivity;
+	private int userID;
 	
 	public NavigationBar(Context context) {
 		super(context);
@@ -59,8 +69,8 @@ public class NavigationBar extends LinearLayout{
 			}
 		});
 		
-		settingsTV = (TextView)findViewById(R.id.navigation_textview_settings);
-		settingsTV.setOnClickListener(new OnClickListener() {
+		meTV = (TextView)findViewById(R.id.navigation_textview_me);
+		meTV.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				goToSettings();
 			}
@@ -72,11 +82,18 @@ public class NavigationBar extends LinearLayout{
 		tvMap.put("games", gamesTV);
 		tvMap.put("newsfeed", newsfeedTV);
 		tvMap.put("checkin", checkinTV);
-		tvMap.put("settings", settingsTV);
+		tvMap.put("me", meTV);
 	}
 	
 	public void goToGames() {
 		//TODO implement
+    	try {
+    		Intent intent = new Intent(this.getContext(), GamesActivity.class);
+    		intent.putExtra(User.ID_KEY, userID);
+    		parentActivity.startActivity(intent);
+    	} catch (Exception e) {
+    		
+    	}
 	}
 	
 	public void goToNewsfeed() {
@@ -109,4 +126,19 @@ public class NavigationBar extends LinearLayout{
 			
 	}
 
+	/**
+	 * 
+	 * @param parentActivity
+	 */
+	public void setParentActivity(Activity parentActivity) {
+		this.parentActivity = parentActivity;
+	}
+	
+	/**
+	 * 
+	 * @param userID
+	 */
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 }

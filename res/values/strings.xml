@@ -41,10 +41,13 @@
     <string name="league_join_et_invite_code_hint">invite code</string>
     <string name="league_join_button_submit_text">submit</string>
     <string name="league_create_checkbox_text">make league private</string>
-    <string name="navigation_textview_settings_text">settings</string>
+    <string name="navigation_textview_me_text">settings</string>
     <string name="navigation_textview_game_text">game</string>
     <string name="navigation_textview_newsfeed_text">newsfeed</string>
     <string name="navigation_textview_checkin_text">checkin</string>
     <string name="title_activity_games">GamesActivity</string>
+    <string name="title_activity_newsfeed">NewsfeedActivity</string>
+    <string name="title_activity_check_in">CheckInActivity</string>
+    <string name="title_activity_me">MeActivity</string>
 
 </resources>

@@ -60,11 +60,22 @@
         <activity
             android:name=".GamesActivity"
             android:label="@string/title_activity_games" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NewsfeedActivity"
+            android:label="@string/title_activity_newsfeed" >
+
+        </activity>
+        <activity
+            android:name=".CheckInActivity"
+            android:label="@string/title_activity_check_in" >
+
+        </activity>
+        <activity
+            android:name=".MeActivity"
+            android:label="@string/title_activity_me" >
+   
         </activity>
     </application>
 
