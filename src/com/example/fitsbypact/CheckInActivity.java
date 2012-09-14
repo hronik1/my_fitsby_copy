@@ -7,6 +7,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class CheckInActivity extends Activity {
 
@@ -14,6 +17,9 @@ public class CheckInActivity extends Activity {
 	
 	private NavigationBar navigation;
 	private int userID;
+	
+	private Button checkinButton;
+	private Button checkoutButton;
 	
 	/**
 	 * called when Activity is created
@@ -31,6 +37,7 @@ public class CheckInActivity extends Activity {
         	userID = intent.getExtras().getInt(User.ID_KEY);
         
         initializeNavigationBar();
+        initializeButtons();
     }
 
     /**
@@ -102,5 +109,38 @@ public class CheckInActivity extends Activity {
 		navigation.setParentActivity(this);
 		navigation.setUserID(userID);
 		navigation.turnOffTV("checkin");
+	}
+	
+	/**
+	 * initializes buttons on this activity
+	 */
+	public void initializeButton() {
+		checkinButton = (Button)findViewById(R.id.check_in_button_check_in);
+		checkinButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				checkin();
+			}
+		});
+		
+		checkoutButton = (Button)findViewById(R.id.check_in_button_check_out);
+		checkoutButton.setOnClickListener(new OnClickListener () {
+			public void onClick(View v) {
+				checkout();
+			}
+		});
+	}
+	
+	/**
+	 * checks in user
+	 */
+	public void checkin() {
+		//TODO actually do checkin
+	}
+	
+	/**
+	 * checks out user
+	 */
+	public void checkout() {
+		//TODO actually do checkout
 	}
 }

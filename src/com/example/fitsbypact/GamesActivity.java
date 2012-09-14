@@ -7,13 +7,28 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-public class GamesActivity extends Activity {
+public class GamesActivity extends Activity implements OnItemSelectedListener {
 
 	private static final String TAG = "GamesActivity";
 	
 	private NavigationBar navigation;
 	private int userID;
+	
+	private TextView playersTV;
+	private TextView wagerTV;
+	private TextView durationTV;
+	private ProgressBar progressBar;
+	private ListView leadersLV;
+	private Spinner gamesSpinner;
+	
 	
 	/**
 	 * called when activity is created
@@ -32,6 +47,9 @@ public class GamesActivity extends Activity {
         	userID = intent.getExtras().getInt(User.ID_KEY);
         
         initializeNavigationBar();
+        initializeTextViews();
+        initializeProgressBar();
+        initializeListView();
     }
 
     /**
@@ -96,7 +114,7 @@ public class GamesActivity extends Activity {
 	}
 	
 	/**
-	 * 
+	 * initializes the navigation bar
 	 */
 	public void initializeNavigationBar() {
 		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
@@ -104,5 +122,60 @@ public class GamesActivity extends Activity {
 		navigation.setUserID(userID);
 		navigation.turnOffTV("games");
 	}
+	
+	/**
+	 * initialize the text views
+	 */
+	private void initializeTextViews() {
+		playersTV = (TextView)findViewById(R.id.games_player_prompt);
+		wagerTV = (TextView)findViewById(R.id.games_wager_prompt);
+		durationTV = (TextView)findViewById(R.id.games_duration_prompt);
+	}
+	
+	/**
+	 * initializes the progress bar
+	 */
+	private void initializeProgressBar() {
+		progressBar = (ProgressBar)findViewById(R.id.games_progress_bar);
+	}
+	
+	/**
+	 * initializes the list view
+	 */
+	private void initializeListView() {
+		leadersLV = (ListView)findViewById(R.id.games_leader_list);
+		//TODO add Adapter, Manager, and Loader
+	}
+	
+	/**
+	 * initializes the spinner
+	 */
+	private void initializeSpinner() {
+		gamesSpinner = (Spinner)findViewById(R.id.games_spinner);
+		gamesSpinner.setOnItemSelectedListener(this);
+		//TODO add Adapter
+	}
+	
+	/**
+	 * callback to be implemented by onItemSelectedListener interface
+	 * called when item is selected
+	 */
+    public void onItemSelected(AdapterView<?> parent, View view, 
+            int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+    	
+    	//TODO do something with retrieved item
+    }
+
+    /**
+     * callback to be implemented by onItemSelectedListener interface
+     * called when nothing is selected
+     */
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    	
+    	//TODO verify that I should indeed do nothing
+    }
 }
 

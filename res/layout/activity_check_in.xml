@@ -11,4 +11,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />
+
+   <Button
+       android:id="@+id/check_in_button_check_out"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_above="@+id/check_in_navigation_bar"
+       android:layout_centerHorizontal="true"
+       android:text="@string/check_in_button_check_out_text" />
+
+   <Button
+       android:id="@+id/check_in_button_check_in"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true"
+       android:text="@string/check_in_button_check_in_text" />
+
 </RelativeLayout>

@@ -78,7 +78,7 @@ public class LeagueTableHandler {
 			return null;
 		}
 
-		League league= new League(Integer.parseInt(cursor.getString(0)),
+		League league = new League(Integer.parseInt(cursor.getString(0)),
 				Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
 				Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
 

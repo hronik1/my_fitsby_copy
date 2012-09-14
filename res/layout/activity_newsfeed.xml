@@ -3,13 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
+    <Spinner
+        android:id="@+id/newsfeed_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+    
+    <ListView
+        android:id="@+id/newsfeed_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newsfeed_spinner" 
+        android:layout_above="@+id/newsfeed_et_comment"/>
+    
+    <EditText 
+        android:id="@+id/newsfeed_et_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".NewsfeedActivity" />
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/newsfeed_navigation_bar"
+        android:hint="@string/newsfeed_et_comment_hint" />
+    
+    <Button
+        android:id="@+id/newsfeed_button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/newsfeed_et_comment"
+        android:layout_toRightOf="@+id/newsfeed_et_comment"
+        android:layout_above="@+id/newsfeed_navigation_bar"
+        android:layout_alignParentRight="true"
+        android:text="@string/newsfeed_button_submit_text" />
     
     <widgets.NavigationBar
         android:id="@+id/newsfeed_navigation_bar"

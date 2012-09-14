@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+    <TextView
+        android:id="@+id/public_leagues_league_id_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/public_leagues_league_id_header_text" />
+
+    <TextView
+        android:id="@+id/public_leagues_players_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/public_leagues_players_header_text" />
+
+    <TextView
+        android:id="@+id/public_leagues_wager_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/public_leagues_wager_header_text" />
+
+    <TextView
+        android:id="@+id/public_leagues_duration_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/public_leagues_duration_header_text" />
+
+    <TextView
+        android:id="@+id/public_leagues_pot_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/public_leagues_pot_header_text" />
+
+</LinearLayout>

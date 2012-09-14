@@ -3,22 +3,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <Spinner 
+        android:id="@+id/games_spinner"
+        android:layout_width="fill_parent"    
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+    
     <TextView
+        android:id="@+id/games_player_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/games_spinner"
+        android:text="@string/games_player_prompt_text" />
+
+    <TextView
+        android:id="@+id/games_wager_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/games_player_prompt"
+        android:text="@string/games_wager_prompt_text" />
+
+    <TextView
+        android:id="@+id/games_duration_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/games_wager_prompt"
+        android:text="@string/games_duration_prompt_text" />
+
+    <ProgressBar
+        android:id="@+id/games_progress_bar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/games_duration_prompt" />
+    
+    <TextView
+        android:id="@+id/games_leader_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/games_progress_bar"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".GamesActivity" />
+        android:text="@string/games_leader_prompt_text" />
+    
+    <ListView
+        android:id="@+id/games_leader_list"
+        android:layout_below="@+id/games_leader_prompt"
+        android:layout_above="@+id/games_navigation_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
+    <widgets.NavigationBar
+        android:id="@+id/games_navigation_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
 
-
-	    <widgets.NavigationBar
-	        android:id="@+id/games_navigation_bar"
-		   	android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	    	android:layout_alignParentLeft="true"  />
 
 
 </RelativeLayout>

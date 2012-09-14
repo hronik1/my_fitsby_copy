@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 public class LeagueJoinActivity extends Activity {
 
@@ -17,6 +18,7 @@ public class LeagueJoinActivity extends Activity {
 	private EditText etFirstName;
 	private EditText etLastName;
 	private EditText etInviteCode;
+	private ListView leagueLV;
 	
 	/**
 	 * called when activity is first created
@@ -30,6 +32,7 @@ public class LeagueJoinActivity extends Activity {
         
         initializeButtons();
         initializeEditTexts();
+        initializListView();
     }
 
 	/**
@@ -119,6 +122,15 @@ public class LeagueJoinActivity extends Activity {
     	etFirstName = (EditText)findViewById(R.id.league_join_et_first_name);
     	etLastName =(EditText)findViewById(R.id.league_join_et_last_name);
     	etInviteCode = (EditText)findViewById(R.id.league_join_et_invite_code);
+    }
+    
+    /**
+     * initialize the list view
+     */
+    private void initializeListView() {
+    	leagueLV = (ListView)findViewById(R.id.league_join_list);
+    	//TODO set Loader, Adapter, and manager
+    	//set onItemClickListener
     }
 }
 

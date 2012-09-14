@@ -7,14 +7,26 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Button;
 
-public class NewsfeedActivity extends Activity {
+public class NewsfeedActivity extends Activity implements OnItemSelectedListener{
 
 	private static final String TAG = "NewsfeedActivity";
 	
 	private NavigationBar navigation;
 	private int userID;
-	
+
+	private Spinner gamesSpinner;
+	private ListView newsfeedLV;
+	private EditText commentET;
+	private Button submitButton;
 	/**
 	 * called when activity is created
 	 */
@@ -104,4 +116,67 @@ public class NewsfeedActivity extends Activity {
 		navigation.setUserID(userID);
 		navigation.turnOffTV("newsfeed");
 	}
+	
+	/**
+	 * initialize the EditText
+	 */
+	private void initializeEditText() {
+		commentET = (EditText)findViewById(R.id.newsfeed_et_comment);
+	}
+	
+	/**
+	 * initializes the buttons
+	 */
+	private void initializeButtons() {
+		submitButton = (Button)findViewById(R.id.newsfeed_button_submit);
+		submitButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				submit();
+			}
+		});
+	}
+	
+	/**
+	 * method which gets the data from the edit text and submits that
+	 */
+	private void submit() {
+		//TODO submit comment to newsfeed
+	}
+	/**
+	 * initialize the listview
+	 */
+	private void initializeListView() {
+		newsfeedLV = (ListView)findViewById(R.id.newsfeed_list_view);
+		//TODO add manager, adapter and loader
+	}
+	
+	/**
+	 * initialize the spinner
+	 */
+	private void initializeSpinner() {
+		gamesSpinner = (Spinner)findViewById(R.id.newsfeed_spinner);
+		gamesSpinner.setOnItemSelectedListener(this);
+	}
+	
+	/**
+	 * callback to be implemented by onItemSelectedListener interface
+	 * called when item is selected
+	 */
+    public void onItemSelected(AdapterView<?> parent, View view, 
+            int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+    	
+    	//TODO do something with retrieved item
+    }
+
+    /**
+     * callback to be implemented by onItemSelectedListener interface
+     * called when nothing is selected
+     */
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    	
+    	//TODO verify that I should indeed do nothing
+    }
 }
