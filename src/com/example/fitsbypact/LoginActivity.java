@@ -119,7 +119,7 @@ public class LoginActivity extends Activity {
 
     	String password = "";
     	String email = "";
-    	DatabaseHandler dbHandler = new DatabaseHandler(this);
+    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
 
     	if (passwordET != null && passwordET.getText() != null)
     		password = passwordET.getText().toString();

@@ -1,10 +1,16 @@
 package com.example.fitsbypact;
 
+import loaders.GameLeaderCursorLoader;
+import dbhandlers.LeagueMemberTableHandler;
+import dbhandlers.UserTableHandler;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -12,10 +18,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class GamesActivity extends Activity implements OnItemSelectedListener {
+public class GamesActivity extends Activity
+	implements OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "GamesActivity";
 	
@@ -29,6 +37,9 @@ public class GamesActivity extends Activity implements OnItemSelectedListener {
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
 	
+	private SimpleCursorAdapter mAdapter;
+	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
+	private final static int[] toArgs = {R.id.list_item_game_leader_name_text, R.id.list_item_game_leader_last_name_text, R.id.list_item_game_leader_checkins_text};
 	
 	/**
 	 * called when activity is created
@@ -145,6 +156,8 @@ public class GamesActivity extends Activity implements OnItemSelectedListener {
 	private void initializeListView() {
 		leadersLV = (ListView)findViewById(R.id.games_leader_list);
 		//TODO add Adapter, Manager, and Loader
+		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_games_leader, null, fromArgs, toArgs, null);
+		leadersLV.setAdapter(mAdapter);
 	}
 	
 	/**
@@ -155,6 +168,8 @@ public class GamesActivity extends Activity implements OnItemSelectedListener {
 		gamesSpinner.setOnItemSelectedListener(this);
 		//TODO add Adapter
 	}
+	
+	/** OnItemSelected callbacks **/
 	
 	/**
 	 * callback to be implemented by onItemSelectedListener interface
@@ -177,5 +192,40 @@ public class GamesActivity extends Activity implements OnItemSelectedListener {
     	
     	//TODO verify that I should indeed do nothing
     }
+    
+    /** end OnItemSelected callbacks **/
+    
+    /** LoaderManager callBacks **/
+    
+    /**
+     * 
+     * @param id
+     * @param args
+     * @return
+     */
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    	//TODO initialize proper cursor and return that
+    	return new GameLeaderCursorLoader(this);
+    }
+    
+    /**
+     * callback for finishing of loader
+     * @param loader
+     * @param data
+     */
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    	mAdapter.swapCursor(data);
+    }
+    
+    /**
+     * callback for resetting of loader
+     * @param loader
+     */
+    public void onLoaderReset(Loader<Cursor> loader) {
+    	//TODO make sure that adapter is no longer using cursor
+    	mAdapter.swapCursor(null);
+    }
+    
+    /** end LoaderManager callbacks **/
 }
 

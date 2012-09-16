@@ -6,6 +6,9 @@ public class LeagueMember {
 	private int leagueId;
 	private int userId;
 	
+	private int checkins;
+	private int checkouts;
+	
 	/**
 	 * default LeagueMember constructor
 	 */
@@ -21,6 +24,8 @@ public class LeagueMember {
 	public LeagueMember(int leagueId, int userId) {
 		this.leagueId = leagueId;
 		this.userId = userId;
+		checkins = 0;
+		checkouts = 0;
 	}
 	
 	/**
@@ -32,6 +37,20 @@ public class LeagueMember {
 	public LeagueMember(int id, int leagueId, int userId) {
 		this(leagueId, userId);
 		this.id = id;
+	}
+	
+	/**
+	 * 5 argument constructor
+	 * @param id
+	 * @param leagueId
+	 * @param userId
+	 * @param checkins
+	 * @param checkouts
+	 */
+	public LeagueMember(int id, int leagueId, int userId, int checkins, int checkouts) {
+		this(id, leagueId, userId);
+		this.checkins = checkins;
+		this.checkouts = checkouts;
 	}
 	
 	/**
@@ -71,5 +90,32 @@ public class LeagueMember {
 		this.userId = userId;
 	}
 	
+	/**
+	 * @return the checkins
+	 */
+	public int getCheckins() {
+		return checkins;
+	}
+
+	/**
+	 * @param checkins the checkins to set
+	 */
+	public void setCheckins(int checkins) {
+		this.checkins = checkins;
+	}
+
+	/**
+	 * @return the checkouts
+	 */
+	public int getCheckouts() {
+		return checkouts;
+	}
+
+	/**
+	 * @param checkouts the checkouts to set
+	 */
+	public void setCheckouts(int checkouts) {
+		this.checkouts = checkouts;
+	}
 	
 }

@@ -2,15 +2,23 @@ package com.example.fitsbypact;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.app.LoaderManager;
+import android.content.Loader;
+import android.database.Cursor;
 
-public class LeagueJoinActivity extends Activity {
+public class LeagueJoinActivity extends ListActivity 
+	implements OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
 
 	private final static String TAG = "LeagueJoinActivity";
 	
@@ -32,7 +40,7 @@ public class LeagueJoinActivity extends Activity {
         
         initializeButtons();
         initializeEditTexts();
-        initializListView();
+        initializeListView();
     }
 
 	/**
@@ -131,6 +139,76 @@ public class LeagueJoinActivity extends Activity {
     	leagueLV = (ListView)findViewById(R.id.league_join_list);
     	//TODO set Loader, Adapter, and manager
     	//set onItemClickListener
+    	leagueLV.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				// TODO actually do something cool
+				
+			}
+    		
+    	});
     }
+    
+	/** OnItemSelected callbacks **/
+	
+	/**
+	 * callback to be implemented by onItemSelectedListener interface
+	 * called when item is selected
+	 */
+    public void onItemSelected(AdapterView<?> parent, View view, 
+            int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+    	
+    	//TODO do something with retrieved item
+    }
+
+    /**
+     * callback to be implemented by onItemSelectedListener interface
+     * called when nothing is selected
+     */
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    	
+    	//TODO verify that I should indeed do nothing
+    }
+    
+    /** end OnItemSelected callbacks **/
+    
+    /** LoaderManager callBacks **/
+    
+    /**
+     * 
+     * @param id
+     * @param args
+     * @return
+     */
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    	//TODO initialize proper cursor and return that
+    	return null;
+    }
+    
+    /**
+     * callback for finishing of loader
+     * @param loader
+     * @param data
+     */
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    	//TODO swap cursor in
+    	//TODO show list
+    }
+    
+    /**
+     * callback for resetting of loader
+     * @param loader
+     */
+    public void onLoaderReset(Loader<Cursor> loader) {
+    	//TODO make sure that adapter is no longer using cursor
+    }
+    
+    /** end LoaderManager callbacks **/
 }
 
