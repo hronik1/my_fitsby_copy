@@ -58,7 +58,7 @@ public class LeagueCreateActivity extends Activity {
         	userID = intent.getExtras().getInt(User.ID_KEY);
         Toast.makeText(this, "Hello user:" + userID, Toast.LENGTH_LONG).show();
         
-        dbHandler = new DatabaseHandler(this);
+        dbHandler = new DatabaseHandler.getInstance(this);
         leagueTableHandler = dbHandler.getLeagueTableHandler();
         
     }
