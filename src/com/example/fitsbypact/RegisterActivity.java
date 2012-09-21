@@ -125,7 +125,7 @@ public class RegisterActivity extends Activity {
     	String lastName = "";
     	String password = "";
     	String email = "";
-    	DatabaseHandler dbHandler = new DatabaseHandler(this);
+    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
     	
     	if (firstNameET != null && firstNameET.getText() != null)
     		firstName = firstNameET.getText().toString();

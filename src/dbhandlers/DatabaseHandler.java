@@ -20,22 +20,34 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "fitsby";
     
+    private static DatabaseHandler databaseHandler = null;;
     private SQLiteDatabase writableDB;
 	private UserTableHandler userTableHandler;
     private LeagueTableHandler leagueTableHandler;
     private LeagueMemberTableHandler leagueMemberTableHandler;
 
 	/**
-     * 
+     * this is a singleton class so constructor is private
      * @param context
      */
-    public DatabaseHandler(Context context) {
+    private DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         
         writableDB = this.getWritableDatabase();
         userTableHandler = new UserTableHandler(writableDB);
         leagueTableHandler = new LeagueTableHandler(writableDB);
         leagueMemberTableHandler = new LeagueMemberTableHandler(writableDB);
+    }
+    
+    /**
+     * 
+     * @param context
+     * @return
+     */
+    public static DatabaseHandler getInstance(Context context) {
+    	if (databaseHandler == null)
+    		databaseHandler = new DatabaseHandler(context);
+    	return databaseHandler;
     }
     
     /**

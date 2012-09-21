@@ -1,16 +1,26 @@
 package com.example.fitsbypact;
 
+import loaders.PublicLeaguesCursorLoader;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.app.LoaderManager;
+import android.content.Loader;
+import android.database.Cursor;
 
-public class LeagueJoinActivity extends Activity {
+public class LeagueJoinActivity extends ListActivity 
+	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private final static String TAG = "LeagueJoinActivity";
 	
@@ -20,6 +30,11 @@ public class LeagueJoinActivity extends Activity {
 	private EditText etInviteCode;
 	private ListView leagueLV;
 	
+	private SimpleCursorAdapter mAdapter;
+	private int[] toArgs = { R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
+			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_duration, R.id.list_item_public_leagues_pot };
+	
+
 	/**
 	 * called when activity is first created
 	 */
@@ -30,6 +45,7 @@ public class LeagueJoinActivity extends Activity {
         
         Log.i(TAG, "onCreate");
         
+        //TODO loadermanager stuffs
         initializeButtons();
         initializeEditTexts();
         initializeListView();
@@ -129,8 +145,51 @@ public class LeagueJoinActivity extends Activity {
      */
     private void initializeListView() {
     	leagueLV = (ListView)findViewById(R.id.league_join_list);
-    	//TODO set Loader, Adapter, and manager
-    	//set onItemClickListener
+    	leagueLV.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				// TODO actually do something cool
+				
+			}
+    		
+    	});
+    	
+    	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_public_leagues, null,
+    			PublicLeaguesCursorLoader.FROM_ARGS, toArgs, null);
+    	leagueLV.setAdapter(mAdapter);
     }
+    
+    /** LoaderManager callBacks **/
+    
+    /**
+     * 
+     * @param id
+     * @param args
+     * @return
+     */
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    	return new PublicLeaguesCursorLoader(this);
+    }
+    
+    /**
+     * callback for finishing of loader
+     * @param loader
+     * @param data
+     */
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    	mAdapter.swapCursor(data);
+    }
+    
+    /**
+     * callback for resetting of loader
+     * @param loader
+     */
+    public void onLoaderReset(Loader<Cursor> loader) {
+    	mAdapter.swapCursor(null);
+    }
+    
+    /** end LoaderManager callbacks **/
 }
 

@@ -60,22 +60,27 @@
         <activity
             android:name=".GamesActivity"
             android:label="@string/title_activity_games" >
-
         </activity>
         <activity
             android:name=".NewsfeedActivity"
             android:label="@string/title_activity_newsfeed" >
-
         </activity>
         <activity
             android:name=".CheckInActivity"
             android:label="@string/title_activity_check_in" >
-
         </activity>
         <activity
             android:name=".MeActivity"
             android:label="@string/title_activity_me" >
-   
+        </activity>
+        <activity
+            android:name=".LeagueJoinDetailActivity"
+            android:label="@string/title_activity_league_join_detail" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

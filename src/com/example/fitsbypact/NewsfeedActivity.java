@@ -4,7 +4,11 @@ import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -16,7 +20,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Button;
 
-public class NewsfeedActivity extends Activity implements OnItemSelectedListener{
+public class NewsfeedActivity extends ListActivity 
+	implements OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "NewsfeedActivity";
 	
@@ -43,6 +48,7 @@ public class NewsfeedActivity extends Activity implements OnItemSelectedListener
         else
         	userID = intent.getExtras().getInt(User.ID_KEY);
         
+        //TODO loadermanager stuffs
         initializeNavigationBar();
     }
 
@@ -158,6 +164,8 @@ public class NewsfeedActivity extends Activity implements OnItemSelectedListener
 		gamesSpinner.setOnItemSelectedListener(this);
 	}
 	
+	/** OnItemSelected callbacks **/
+	
 	/**
 	 * callback to be implemented by onItemSelectedListener interface
 	 * called when item is selected
@@ -179,4 +187,40 @@ public class NewsfeedActivity extends Activity implements OnItemSelectedListener
     	
     	//TODO verify that I should indeed do nothing
     }
+    
+    /** end OnItemSelected callbacks **/
+    
+    
+    /** LoaderManager callBacks **/
+    
+    /**
+     * 
+     * @param id
+     * @param args
+     * @return
+     */
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    	//TODO initialize proper cursor and return that
+    	return null;
+    }
+    
+    /**
+     * callback for finishing of loader
+     * @param loader
+     * @param data
+     */
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    	//TODO swap cursor in
+    	//TODO show list
+    }
+    
+    /**
+     * callback for resetting of loader
+     * @param loader
+     */
+    public void onLoaderReset(Loader<Cursor> loader) {
+    	//TODO make sure that adapter is no longer using cursor
+    }
+    
+    /** end LoaderManager callbacks **/
 }
