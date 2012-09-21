@@ -32,7 +32,7 @@ public class LeagueJoinActivity extends Activity {
         
         initializeButtons();
         initializeEditTexts();
-        initializListView();
+        initializeListView();
     }
 
 	/**
