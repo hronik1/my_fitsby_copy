@@ -48,6 +48,7 @@ public class NewsfeedActivity extends ListActivity
         else
         	userID = intent.getExtras().getInt(User.ID_KEY);
         
+        //TODO loadermanager stuffs
         initializeNavigationBar();
     }
 

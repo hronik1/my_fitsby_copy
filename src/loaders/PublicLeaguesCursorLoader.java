@@ -4,66 +4,53 @@ import java.util.List;
 
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.UserTableHandler;
-import dbtables.LeagueMember;
-import dbtables.User;
+import dbhandlers.LeagueTableHandler;
+import dbtables.League;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 
-public class GameLeaderCursorLoader extends AsyncTaskLoader<Cursor> {
+public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 
-	private int mLeagueId;
 	private DatabaseHandler mDBHandler;
+	private LeagueTableHandler mLeagueTableHandler;
 	private LeagueMemberTableHandler mLeagueMemberTableHandler;
-	private UserTableHandler mUserTableHandler;
 	
+	public final static String KEY_NUM_PLAYERS = "players";
+	public final static String KEY_POT = "pot";
+	
+	public final static String[] FROM_ARGS = { LeagueTableHandler.KEY_ID, KEY_NUM_PLAYERS,
+			LeagueTableHandler.KEY_WAGER, LeagueTableHandler.KEY_DURATION, KEY_POT };
 	private Cursor mCursor;
+	
 	/**
 	 * default GameLeaderCursorLoader class
 	 * @param context
 	 */
-	public GameLeaderCursorLoader(Context context) {
+	public PublicLeaguesCursorLoader(Context context) {
 		super(context);
 		mDBHandler = DatabaseHandler.getInstance(context);
+		mLeagueTableHandler = mDBHandler.getLeagueTableHandler();
 		mLeagueMemberTableHandler = mDBHandler.getLeagueMemberTableHandler();
-		mUserTableHandler = mDBHandler.getUserTableHandler();
 	}
 
-	/**
-	 * 2 argument GameLeaderCursorLoader constructor
-	 * @param context
-	 * @param leagueId
-	 */
-	public GameLeaderCursorLoader(Context context, int leagueId) {
-		this(context);
-		mLeagueId = leagueId;
-	}
-	
-	/**
-	 * sets leagueid
-	 * @param leagueId
-	 */
-	public void setLeagueId(int leagueId) {
-		mLeagueId = leagueId;
-	}
-
-	/** asynctaskloader overriden methods **/
+	/** start overridden AsyncTaskLoader methods **/
 	
 	@Override
 	public Cursor loadInBackground() {
-		List<LeagueMember> listLeagueMember =  mLeagueMemberTableHandler.getAllLeagueMembersByLeagueId(mLeagueId,
-					LeagueMemberTableHandler.KEY_CHECKINS + " DESC");
-		MatrixCursor cursor = new MatrixCursor(new String[] { UserTableHandler.KEY_FIRST_NAME,
-					UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS});
-		for(LeagueMember member: listLeagueMember) {
-			User user = mUserTableHandler.getUser(member.getUserId());
-			cursor.addRow(new Object[] {user.getFirstName(), user.getLastName(), member.getCheckins()});
+		List<League> publicLeaguesList = mLeagueTableHandler.getAllPublicLeagues();
+		MatrixCursor cursor = new MatrixCursor(FROM_ARGS);
+		for(League league: publicLeaguesList) {
+			int leagueId = league.getId();
+			int numPlayers = mLeagueMemberTableHandler.getLeagueMembersCountByLeagueId(leagueId);
+			int wager = league.getWager();
+			cursor.addRow(new Object[] {leagueId, numPlayers, wager, league.getDuration(), numPlayers*wager});
 		}
+		
 		return cursor;
 	}
-	
+		
     /* Runs on the UI thread */
     @Override
     public void deliverResult(Cursor cursor) {

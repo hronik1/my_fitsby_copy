@@ -145,7 +145,7 @@ public class LeagueTableHandler {
 	    List<League> leaguesList = new ArrayList<League>();
 		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
 					KEY_CREATOR_ID, KEY_IS_PRIVATE, KEY_DURATION, KEY_WAGER }, KEY_IS_PRIVATE + "=?",
-					new String[] { String.valueOf(1) }, null, null, null, null);
+					new String[] { String.valueOf(0) }, null, null, null, null);
 	 
 	    if (cursor.moveToFirst()) {
 	        do {

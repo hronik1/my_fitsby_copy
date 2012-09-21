@@ -39,7 +39,8 @@ public class GamesActivity extends Activity
 	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
-	private final static int[] toArgs = {R.id.list_item_game_leader_name_text, R.id.list_item_game_leader_last_name_text, R.id.list_item_game_leader_checkins_text};
+	private final static int[] toArgs = {R.id.list_item_game_leader_name_text, R.id.list_item_game_leader_last_name_text,
+			R.id.list_item_game_leader_checkins_text};
 	
 	/**
 	 * called when activity is created
@@ -57,6 +58,7 @@ public class GamesActivity extends Activity
         else
         	userID = intent.getExtras().getInt(User.ID_KEY);
         
+        //TODO loadermanager stuffs
         initializeNavigationBar();
         initializeTextViews();
         initializeProgressBar();
@@ -155,7 +157,6 @@ public class GamesActivity extends Activity
 	 */
 	private void initializeListView() {
 		leadersLV = (ListView)findViewById(R.id.games_leader_list);
-		//TODO add Adapter, Manager, and Loader
 		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_games_leader, null, fromArgs, toArgs, null);
 		leadersLV.setAdapter(mAdapter);
 	}

@@ -184,6 +184,22 @@ public class LeagueMemberTableHandler {
 	}
 	
 	/**
+	 * returns the the number of user in the league specified by leagueId
+	 * @param leagueId
+	 * @return
+	 */
+	public int getLeagueMembersCountByLeagueId(int leagueId) {
+        String countQuery = "SELECT * FROM " + TABLE + " WHERE " + KEY_LEAGUE_ID + " = " + "leagueId";
+        int count;
+        Cursor cursor = db.rawQuery(countQuery, null);
+        
+        count = cursor.getCount();
+        cursor.close();
+        
+        return count;
+	}
+	
+	/**
 	 * updates the LeagueMember leagueMember in the table
 	 * @param leagueMember
 	 * @return

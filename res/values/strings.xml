@@ -84,5 +84,11 @@
 	<string name="list_item_game_leader_name_text">First</string>
 	<string name="list_item_game_leader_last_name_text">Last</string>
 	<string name="list_item_game_leader_checkins_text">20</string>
+	<string name="list_item_public_leagues_id_text">1</string>
+	<string name="list_item_public_leagues_players_text">5</string>
+	<string name="list_item_public_leagues_wager_text">10</string>
+	<string name="list_item_public_leagues_duration_text">2</string>
+	<string name="list_item_public_leagues_pot_text">50</string>
+
 
 </resources>

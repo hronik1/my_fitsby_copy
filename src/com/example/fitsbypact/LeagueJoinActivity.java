@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import loaders.PublicLeaguesCursorLoader;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -13,12 +14,13 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.app.LoaderManager;
 import android.content.Loader;
 import android.database.Cursor;
 
 public class LeagueJoinActivity extends ListActivity 
-	implements OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
+	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private final static String TAG = "LeagueJoinActivity";
 	
@@ -28,6 +30,11 @@ public class LeagueJoinActivity extends ListActivity
 	private EditText etInviteCode;
 	private ListView leagueLV;
 	
+	private SimpleCursorAdapter mAdapter;
+	private int[] toArgs = { R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
+			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_duration, R.id.list_item_public_leagues_pot };
+	
+
 	/**
 	 * called when activity is first created
 	 */
@@ -38,6 +45,7 @@ public class LeagueJoinActivity extends ListActivity
         
         Log.i(TAG, "onCreate");
         
+        //TODO loadermanager stuffs
         initializeButtons();
         initializeEditTexts();
         initializeListView();
@@ -137,10 +145,7 @@ public class LeagueJoinActivity extends ListActivity
      */
     private void initializeListView() {
     	leagueLV = (ListView)findViewById(R.id.league_join_list);
-    	//TODO set Loader, Adapter, and manager
-    	//set onItemClickListener
     	leagueLV.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -150,33 +155,11 @@ public class LeagueJoinActivity extends ListActivity
 			}
     		
     	});
-    }
-    
-	/** OnItemSelected callbacks **/
-	
-	/**
-	 * callback to be implemented by onItemSelectedListener interface
-	 * called when item is selected
-	 */
-    public void onItemSelected(AdapterView<?> parent, View view, 
-            int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
     	
-    	//TODO do something with retrieved item
+    	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_public_leagues, null,
+    			PublicLeaguesCursorLoader.FROM_ARGS, toArgs, null);
+    	leagueLV.setAdapter(mAdapter);
     }
-
-    /**
-     * callback to be implemented by onItemSelectedListener interface
-     * called when nothing is selected
-     */
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    	
-    	//TODO verify that I should indeed do nothing
-    }
-    
-    /** end OnItemSelected callbacks **/
     
     /** LoaderManager callBacks **/
     
@@ -187,8 +170,7 @@ public class LeagueJoinActivity extends ListActivity
      * @return
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	//TODO initialize proper cursor and return that
-    	return null;
+    	return new PublicLeaguesCursorLoader(this);
     }
     
     /**
@@ -197,8 +179,7 @@ public class LeagueJoinActivity extends ListActivity
      * @param data
      */
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    	//TODO swap cursor in
-    	//TODO show list
+    	mAdapter.swapCursor(data);
     }
     
     /**
@@ -206,7 +187,7 @@ public class LeagueJoinActivity extends ListActivity
      * @param loader
      */
     public void onLoaderReset(Loader<Cursor> loader) {
-    	//TODO make sure that adapter is no longer using cursor
+    	mAdapter.swapCursor(null);
     }
     
     /** end LoaderManager callbacks **/
