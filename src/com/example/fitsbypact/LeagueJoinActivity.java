@@ -19,7 +19,7 @@ import android.app.LoaderManager;
 import android.content.Loader;
 import android.database.Cursor;
 
-public class LeagueJoinActivity extends ListActivity 
+public class LeagueJoinActivity extends Activity 
 	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private final static String TAG = "LeagueJoinActivity";

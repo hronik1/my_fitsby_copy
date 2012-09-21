@@ -25,6 +25,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	private UserTableHandler userTableHandler;
     private LeagueTableHandler leagueTableHandler;
     private LeagueMemberTableHandler leagueMemberTableHandler;
+    private CommentTableHandler commentTableHandler;
 
 	/**
      * this is a singleton class so constructor is private
@@ -37,6 +38,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         userTableHandler = new UserTableHandler(writableDB);
         leagueTableHandler = new LeagueTableHandler(writableDB);
         leagueMemberTableHandler = new LeagueMemberTableHandler(writableDB);
+        commentTableHandler = new CommentTableHandler(writableDB);
     }
     
     /**
@@ -92,4 +94,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		return leagueMemberTableHandler;
 	}
 	
+	/**
+	 * 
+	 * @return the commentTableHandler
+	 */
+	public CommentTableHandler getCommentTableHandler() {
+		return commentTableHandler;
+	}
 }

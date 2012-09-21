@@ -89,6 +89,8 @@
 	<string name="list_item_public_leagues_wager_text">10</string>
 	<string name="list_item_public_leagues_duration_text">2</string>
 	<string name="list_item_public_leagues_pot_text">50</string>
-
-
+	<string name="list_item_newsfeed_first_name_text">Brent</string>
+	<string name="list_item_newsfeed_last_name_text">Hronik</string>
+	<string name="list_item_newsfeed_timestamp_text">now</string>
+	<string name="list_item_newsfeed_message_text">This a comment</string>
 </resources>

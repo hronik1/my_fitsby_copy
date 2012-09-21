@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import loaders.NewsfeedCursorLoader;
+import loaders.PublicLeaguesCursorLoader;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
@@ -14,13 +16,15 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Button;
 
-public class NewsfeedActivity extends ListActivity 
+public class NewsfeedActivity extends Activity 
 	implements OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "NewsfeedActivity";
@@ -32,6 +36,11 @@ public class NewsfeedActivity extends ListActivity
 	private ListView newsfeedLV;
 	private EditText commentET;
 	private Button submitButton;
+	
+	private SimpleCursorAdapter mAdapter;
+	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
+			R.id.list_item_newsfeed_last_name, R.id.list_item_newsfeed_timestamp,
+			R.id.list_item_newsfeed_message };
 	/**
 	 * called when activity is created
 	 */
@@ -50,6 +59,8 @@ public class NewsfeedActivity extends ListActivity
         
         //TODO loadermanager stuffs
         initializeNavigationBar();
+        initializeButtons();
+        initializeListView();
     }
 
     /**
@@ -153,7 +164,18 @@ public class NewsfeedActivity extends ListActivity
 	 */
 	private void initializeListView() {
 		newsfeedLV = (ListView)findViewById(R.id.newsfeed_list_view);
+		newsfeedLV.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		//TODO add manager, adapter and loader
+    	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_newsfeed, null,
+    			NewsfeedCursorLoader.FROM_ARGS, toArgs, 0);
+    	newsfeedLV.setAdapter(mAdapter);
 	}
 	
 	/**
@@ -200,8 +222,7 @@ public class NewsfeedActivity extends ListActivity
      * @return
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	//TODO initialize proper cursor and return that
-    	return null;
+    	return new NewsfeedCursorLoader(this);
     }
     
     /**
@@ -210,8 +231,7 @@ public class NewsfeedActivity extends ListActivity
      * @param data
      */
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    	//TODO swap cursor in
-    	//TODO show list
+    	mAdapter.swapCursor(data);
     }
     
     /**
@@ -219,7 +239,7 @@ public class NewsfeedActivity extends ListActivity
      * @param loader
      */
     public void onLoaderReset(Loader<Cursor> loader) {
-    	//TODO make sure that adapter is no longer using cursor
+    	mAdapter.swapCursor(null);
     }
     
     /** end LoaderManager callbacks **/
