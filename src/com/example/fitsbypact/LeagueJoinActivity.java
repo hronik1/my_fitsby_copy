@@ -157,7 +157,7 @@ public class LeagueJoinActivity extends ListActivity
     	});
     	
     	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_public_leagues, null,
-    			PublicLeaguesCursorLoader.FROM_ARGS, toArgs, null);
+    			PublicLeaguesCursorLoader.FROM_ARGS, toArgs, 0);
     	leagueLV.setAdapter(mAdapter);
     }
     

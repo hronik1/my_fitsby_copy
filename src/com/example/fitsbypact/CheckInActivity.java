@@ -114,7 +114,7 @@ public class CheckInActivity extends Activity {
 	/**
 	 * initializes buttons on this activity
 	 */
-	public void initializeButton() {
+	public void initializeButtons() {
 		checkinButton = (Button)findViewById(R.id.check_in_button_check_in);
 		checkinButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

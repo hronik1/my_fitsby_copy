@@ -39,8 +39,8 @@ public class GamesActivity extends Activity
 	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
-	private final static int[] toArgs = {R.id.list_item_game_leader_name_text, R.id.list_item_game_leader_last_name_text,
-			R.id.list_item_game_leader_checkins_text};
+	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
+			R.id.list_item_game_leader_checkins};
 	
 	/**
 	 * called when activity is created
@@ -157,7 +157,7 @@ public class GamesActivity extends Activity
 	 */
 	private void initializeListView() {
 		leadersLV = (ListView)findViewById(R.id.games_leader_list);
-		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_games_leader, null, fromArgs, toArgs, null);
+		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
 		leadersLV.setAdapter(mAdapter);
 	}
 	

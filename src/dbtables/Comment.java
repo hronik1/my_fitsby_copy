@@ -7,7 +7,7 @@ public class Comment {
 
 	private int _id;
 	private int memberFromId;
-	private int memberToId;
+	private int leagueId;
 	private String message;
 	private Timestamp stamp;
 	
@@ -24,9 +24,9 @@ public class Comment {
 	 * @param memberToId
 	 * @param message
 	 */
-	public Comment(int memberFromId, int memberToId, String message) {
+	public Comment(int memberFromId, int leagueId, String message) {
 		this.memberFromId = memberFromId;
-		this.memberToId = memberToId;
+		this.leagueId = leagueId;
 		this.message = message;
 	}
 	
@@ -38,8 +38,8 @@ public class Comment {
 	 * @param message
 	 * @param stamp
 	 */
-	public Comment(int id, int memberFromId, int memberToId, String message, Timestamp stamp) {
-		this(memberFromId, memberToId, message);
+	public Comment(int id, int memberFromId, int leagueId, String message, Timestamp stamp) {
+		this(memberFromId, leagueId, message);
 		this._id = id;
 		this.stamp = stamp;
 	}
@@ -59,10 +59,10 @@ public class Comment {
 	}
 
 	/**
-	 * @return the memberToId
+	 * @return the leagueId
 	 */
-	public int getMemberToId() {
-		return memberToId;
+	public int getLeagueId() {
+		return leagueId;
 	}
 
 	/**

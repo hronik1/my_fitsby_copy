@@ -16,25 +16,25 @@ public class CommentTableHandler {
 	
 	public final static String KEY_ID = "_id";
 	public final static String KEY_MEMBER_FROM_ID = "from_id";
-	public final static String KEY_MEMBER_TO_ID = "to_id";
+	public final static String KEY_LEAGUE_ID = "to_id";
 	public final static String KEY_MESSAGE = "message";
 	public final static String KEY_TIMESTAMP = "stamp";
 	
 	public final static String TYPE_ID = "INTEGER PRIMARY KEY AUTOINCREMENT";
 	public final static String TYPE_MEMBER_FROM_ID = "INTEGER NOT NULL";
-	public final static String TYPE_MEMBER_TO_ID = "INTEGER NOT NULL";
+	public final static String TYPE_LEAGUE_ID = "INTEGER NOT NULL";
 	public final static String TYPE_MESSAGE = "TEXT NOT NULL";
 	public final static String TYPE_TIMESTAMP = "TIMESTAMP NOT NULL DEFAULT current_timestamp";
-	
+	public final static String FOREIGN_KEY_CONSTRAINT_LEAGUE =
+			"FOREIGN KEY(" + KEY_LEAGUE_ID + ") REFERENCES "+ LeagueTableHandler.TABLE + "(" + LeagueTableHandler.KEY_ID + ")";
 	public final static String FOREIGN_KEY_CONSTRAINT_FROM = "FOREIGN KEY(" + KEY_MEMBER_FROM_ID + 
 			") REFERENCES "+ LeagueMemberTableHandler.TABLE + "(" + LeagueMemberTableHandler.KEY_ID + ")";
-	public static final String FOREIGN_KEY_CONSTRAINT_TO =  "FOREIGN KEY(" + KEY_MEMBER_TO_ID +
-			") REFERENCES "+ LeagueMemberTableHandler.TABLE + "(" + LeagueMemberTableHandler.KEY_ID + ")";
+
 
 	public static final String CREATE_SQL = "CREATE TABLE " + TABLE + "("
 			+ KEY_ID + " " + TYPE_ID + "," + KEY_MEMBER_FROM_ID + " " + TYPE_MEMBER_FROM_ID+ ","
-			+ KEY_MEMBER_TO_ID + " " + TYPE_MEMBER_TO_ID + "," + KEY_MESSAGE + " " + TYPE_MESSAGE + "," 
-			+ KEY_TIMESTAMP + " " + TYPE_TIMESTAMP + "," + FOREIGN_KEY_CONSTRAINT_FROM + ", " + FOREIGN_KEY_CONSTRAINT_TO + ")";
+			+ KEY_LEAGUE_ID + " " + TYPE_LEAGUE_ID + "," + KEY_MESSAGE + " " + TYPE_MESSAGE + "," 
+			+ KEY_TIMESTAMP + " " + TYPE_TIMESTAMP + "," + FOREIGN_KEY_CONSTRAINT_FROM + ", " + FOREIGN_KEY_CONSTRAINT_FROM + ")";
 	public static final String DROP_SQL = "DROP TABLE IF EXISTS " + TABLE;
 	
     private SQLiteDatabase db;
@@ -55,7 +55,7 @@ public class CommentTableHandler {
 		//TODO possibly more validation on use
 	    ContentValues values = new ContentValues();
 	    values.put(KEY_MEMBER_FROM_ID, comment.getMemberFromId());
-	    values.put(KEY_MEMBER_TO_ID, comment.getMemberToId());
+	    values.put(KEY_LEAGUE_ID, comment.getLeagueId());
 	    values.put(KEY_MESSAGE, comment.getMessage());
 	    db.insert(TABLE, null, values);
 	}
@@ -68,7 +68,7 @@ public class CommentTableHandler {
 	public Comment getComment(int id) {
 
 		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_MEMBER_FROM_ID, KEY_MEMBER_TO_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_ID + "=?",
+				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_ID + "=?",
 						new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null && cursor.getCount() != 0) {
 			cursor.moveToFirst();
@@ -93,8 +93,8 @@ public class CommentTableHandler {
 		
 		List<Comment> commentList = new ArrayList<Comment>();
 		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_MEMBER_FROM_ID, KEY_MEMBER_TO_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_MEMBER_FROM_ID + "=?",
-						new String[] { String.valueOf(memberFromId) }, null, null, null, KEY_MEMBER_FROM_ID + " DESC");
+				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_MEMBER_FROM_ID + "=?",
+						new String[] { String.valueOf(memberFromId) }, null, null, null, KEY_TIMESTAMP + " DESC");
 
 		if (cursor.moveToFirst()) {
 			do {
@@ -111,15 +111,15 @@ public class CommentTableHandler {
 	}
 	
 	/**
-	 * returns all comments that are to memberToId
-	 * @param memberToId
+	 * returns all comments for the various league, sorted in descending time
+	 * @param leagueId
 	 * @return
 	 */
-	public List<Comment> getAllCommentByToId(int memberToId) {
+	public List<Comment> getAllCommentByLeagueId(int leagueId) {
 		List<Comment> commentList = new ArrayList<Comment>();
 		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_MEMBER_FROM_ID, KEY_MEMBER_TO_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_MEMBER_TO_ID + "=?",
-						new String[] { String.valueOf(memberToId) }, null, null, null, KEY_MEMBER_TO_ID + " DESC");
+				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_LEAGUE_ID + "=?",
+						new String[] { String.valueOf(leagueId) }, null, null, null, KEY_TIMESTAMP + " DESC");
 
 		if (cursor.moveToFirst()) {
 			do {
@@ -134,7 +134,6 @@ public class CommentTableHandler {
 		cursor.close();
 		return commentList;
 	}
-	
 	/**
 	 * returns the number of comments
 	 * @return
@@ -158,7 +157,7 @@ public class CommentTableHandler {
 	public int updateComment(Comment comment) {
 	    ContentValues values = new ContentValues();
 	    values.put(KEY_MEMBER_FROM_ID, comment.getMemberFromId());
-	    values.put(KEY_MEMBER_TO_ID, comment.getMemberToId());
+	    values.put(KEY_LEAGUE_ID, comment.getLeagueId());
 	    values.put(KEY_MESSAGE, comment.getMessage());
 	    values.put(KEY_TIMESTAMP,comment.getStamp().toString());
 
