@@ -20,7 +20,7 @@
         android:text="@string/list_item_newsfeed_last_name_text" />
     
     <TextView
-        android:id="list_item_newsfeed_timestamp"
+        android:id="@+id/list_item_newsfeed_timestamp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         android:text="@string/list_item_newsfeed_timestamp_text" />
 
     <TextView 
-        android:id="list_item_newsfeed_message"
+        android:id="@+id/list_item_newsfeed_message"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/list_item_newsfeed_first_name"
         android:layout_alignParentLeft="true"
