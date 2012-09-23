@@ -111,6 +111,36 @@ public class LeagueMemberTableHandler {
 	}
 	
 	/**
+	 * returns all LeagueMembers with the corresponding UserId
+	 * @param leagueId
+	 * @return
+	 */
+	public List<LeagueMember> getAllLeagueMembersByUserId(int userId) {
+		List<LeagueMember> leagueMembersList = new ArrayList<LeagueMember>();
+		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+					KEY_LEAGUE_ID, KEY_USER_ID, KEY_CHECKINS, KEY_CHECKOUTS }, KEY_USER_ID + "=?",
+					new String[] { String.valueOf(userId) }, null, null, null, null);
+		
+	    if (cursor.moveToFirst()) {
+	        do {
+	            LeagueMember leagueMember = new LeagueMember();
+	            leagueMember.setId(Integer.parseInt(cursor.getString(0)));
+	            leagueMember.setLeagueId(Integer.parseInt(cursor.getString(1)));
+	            leagueMember.setUserId(Integer.parseInt(cursor.getString(2)));
+	            leagueMember.setCheckins(Integer.parseInt(cursor.getString(3)));
+	            leagueMember.setCheckouts(Integer.parseInt(cursor.getString(4)));
+
+	            //TODO additional validation on cursor position
+	            leagueMembersList.add(leagueMember);
+	        } while (cursor.moveToNext());
+	    }
+	 
+	    cursor.close();
+	    
+	    return leagueMembersList;
+	}
+	
+	/**
 	 * returns all LeagueMembers with the corresponding LeagueId
 	 * @param leagueId
 	 * @return

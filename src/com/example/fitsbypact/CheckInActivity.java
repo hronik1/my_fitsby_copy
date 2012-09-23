@@ -1,5 +1,10 @@
 package com.example.fitsbypact;
 
+import java.util.List;
+
+import dbhandlers.DatabaseHandler;
+import dbhandlers.LeagueMemberTableHandler;
+import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
@@ -21,6 +26,10 @@ public class CheckInActivity extends Activity {
 	private Button checkinButton;
 	private Button checkoutButton;
 	
+	private DatabaseHandler mdbHandler;
+	private LeagueMemberTableHandler mLeagueMemberTableHandler;
+	private List<LeagueMember> mLeagueMemberList;
+	private int userId;
 	/**
 	 * called when Activity is created
 	 */
@@ -38,6 +47,10 @@ public class CheckInActivity extends Activity {
         
         initializeNavigationBar();
         initializeButtons();
+        
+        mdbHandler = DatabaseHandler.getInstance(this);
+        mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
+        mLeagueMemberList = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(userId);
     }
 
     /**
@@ -134,13 +147,23 @@ public class CheckInActivity extends Activity {
 	 * checks in user
 	 */
 	public void checkin() {
-		//TODO actually do checkin
+		for(LeagueMember member: mLeagueMemberList) {
+			if(member.getCheckins() == member.getCheckouts()) {
+				member.setCheckins(member.getCheckins() + 1);
+				mLeagueMemberTableHandler.updateLeagueMember(member);
+			}
+		}
 	}
 	
 	/**
 	 * checks out user
 	 */
 	public void checkout() {
-		//TODO actually do checkout
+		for(LeagueMember member: mLeagueMemberList) {
+			if(member.getCheckins() == member.getCheckouts() + 1) {
+				member.setCheckouts(member.getCheckins());
+				mLeagueMemberTableHandler.updateLeagueMember(member);
+			}
+		}
 	}
 }
