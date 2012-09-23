@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+import applicationsubclass.ApplicationUser;
 
 public class LeagueLandingActivity extends Activity {
 
@@ -29,14 +30,7 @@ public class LeagueLandingActivity extends Activity {
         setContentView(R.layout.activity_league_landing);
         Log.i(TAG, "onCreate");
         
-        initializeButtons();
-        
-        Intent intent = getIntent();
-        if(intent == null || intent.getExtras() == null)
-        	userID = -1;
-        else
-        	userID = intent.getExtras().getInt(User.ID_KEY);
-        Toast.makeText(this, "Hello user:" + userID, Toast.LENGTH_LONG).show();
+        initializeButtons(); 
     }
 
     /**
@@ -120,20 +114,24 @@ public class LeagueLandingActivity extends Activity {
     }
     
     /**
-     * 
+     * sends user to join page
      */
     private void join() {
-    	//TODO launches join game activity
+    	try {
+    		Intent intent = new Intent(this, LeagueJoinActivity.class);
+    		startActivity(intent);
+    	} catch (Exception e) {
+    		//TODO add some robustness
+    		Toast.makeText(LeagueLandingActivity.this, "Sorry can not perform at the moment", Toast.LENGTH_LONG).show();
+    	}
     }
     
     /**
-     * 
+     * sends user to league create page
      */
     private void goToLeagueCreatePage() {
-    	//TODO launches create game activity
     	try {
     		Intent intent = new Intent(this, LeagueCreateActivity.class);
-    		intent.putExtra(User.ID_KEY, userID);
     		startActivity(intent);
     	} catch (Exception e) {
     		//remove in deployment

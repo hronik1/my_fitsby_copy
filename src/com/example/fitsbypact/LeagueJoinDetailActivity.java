@@ -1,13 +1,22 @@
 package com.example.fitsbypact;
 
+import bundlekeys.CreditCardBundleKeys;
+import bundlekeys.LeagueDetailBundleKeys;
+import dbhandlers.DatabaseHandler;
+import dbhandlers.LeagueMemberTableHandler;
+import dbhandlers.LeagueTableHandler;
+import dbtables.LeagueMember;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import applicationsubclass.ApplicationUser;
 
 public class LeagueJoinDetailActivity extends Activity {
 
@@ -19,6 +28,18 @@ public class LeagueJoinDetailActivity extends Activity {
 	private TextView playersTV;
 	private Button joinButton;
 	
+	private ApplicationUser mApplicationUser;
+	private DatabaseHandler mdbHandler;
+	private LeagueMemberTableHandler mLeagueMemberTableHandler;
+	private LeagueTableHandler mLeagueTableHandler;
+	
+	private int leagueId;
+	private int pot;
+	private boolean isPrivate;
+	private int wager;
+	private int players;
+	private boolean isValid;
+	
 	/**
 	 * called when activtiy is created
 	 */
@@ -28,8 +49,15 @@ public class LeagueJoinDetailActivity extends Activity {
         setContentView(R.layout.activity_league_join_detail);
         Log.i(TAG, "onCreate");
         
+        parseBundle(getIntent());
+        
         initializeTextViews();
         initializeButtons();
+        
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
+        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
+        mLeagueTableHandler = mdbHandler.getLeagueTableHandler();
     }
 
     /**
@@ -93,14 +121,44 @@ public class LeagueJoinDetailActivity extends Activity {
  		
  	}
  	
+ 	public void parseBundle(Intent intent) {
+ 		//TODO robustly handle bad bundle
+ 		if (intent == null) {
+ 			isValid = false;
+ 			return;
+ 		}
+ 		
+ 		Bundle extras = intent.getExtras();
+ 		if (extras == null) {
+ 			isValid = false;
+ 			return;
+ 		}
+ 		
+ 		leagueId = extras.getInt(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
+ 		players = extras.getInt(LeagueDetailBundleKeys.KEY_PLAYERS);
+ 		wager = extras.getInt(LeagueDetailBundleKeys.KEY_WAGER);
+ 		pot = extras.getInt(LeagueDetailBundleKeys.KEY_POT);
+ 		if (extras.getInt(LeagueDetailBundleKeys.KEY_TYPE) == 0)
+ 			isPrivate = false;
+ 		else
+ 			isPrivate = true;
+ 		isValid = true;
+ 	}
  	/**
  	 * initializes the TextViews
  	 */
  	private void initializeTextViews() {
  		typeTV = (TextView)findViewById(R.id.league_join_detail_type);
+ 		typeTV.append(isPrivate ? "private" : "public");
+ 		
  		wagerTV = (TextView)findViewById(R.id.league_join_detail_wager);
+ 		wagerTV.append("" + wager);
+ 		
  		potTV = (TextView)findViewById(R.id.league_join_detail_pot);
+ 		potTV.append("" + pot);
+ 		
  		playersTV = (TextView)findViewById(R.id.league_join_detail_players);
+ 		playersTV.append("" + players);
  	}
  	
  	/**
@@ -122,5 +180,22 @@ public class LeagueJoinDetailActivity extends Activity {
  	 */
  	private void join() {
  		//TODO actually join this game
+ 		if(!isValid) {
+ 			//TODO really have to change this, not sure how to properly handle a bad bundle being passed though
+ 			Toast.makeText(getApplicationContext(), "sorry invalid bundle", Toast.LENGTH_LONG).show();
+ 			return;
+ 		}
+ 		
+ 		//TODO add checking that user is not already in league
+		LeagueMember member = new LeagueMember(leagueId, mApplicationUser.getUser().getID());
+		mLeagueMemberTableHandler.addLeagueMember(member);
+		try {
+			Intent intent = new Intent(this, CreditCardActivity.class);
+			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
+			startActivity(intent);
+		} catch(Exception e) {
+			//TODO handle failure more robustly
+			Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG).show();
+		}
  	}
 }

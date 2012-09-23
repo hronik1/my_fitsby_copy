@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import bundlekeys.CreditCardBundleKeys;
 import dbtables.User;
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreditCardActivity extends Activity {
@@ -21,6 +23,10 @@ public class CreditCardActivity extends Activity {
 	private EditText expMonthET;
 	private EditText expYearET;
 	private EditText cvcET;
+	private TextView wagerTV;
+	
+	private int wager;
+	private boolean isValid;
 	
 	/**
 	 * called when activity first created
@@ -32,8 +38,11 @@ public class CreditCardActivity extends Activity {
         
         Log.i(TAG, "onCreate");
         
+        parseBundle(getIntent());
+        
         initializeButtons();
         initializeEditTexts();
+        initializeTextViews();
     }
 
     /**
@@ -97,6 +106,22 @@ public class CreditCardActivity extends Activity {
     	
     }
 
+    private void parseBundle(Intent intent) {
+    	if(intent == null) {
+    		isValid = false;
+    		return;
+    	}
+    	
+    	Bundle extras = intent.getExtras();
+    	if(extras == null) {
+    		isValid = false;
+    		return;
+    	}
+    	
+    	wager = extras.getInt(CreditCardBundleKeys.KEY_WAGER);
+    	isValid = true;
+    }
+    
     /**
      * registers all the edittexts to their corresponding fields in the layout
      */
@@ -117,6 +142,15 @@ public class CreditCardActivity extends Activity {
     			submit();
     		}
     	});
+    }
+    
+    /**
+     * initializes the textviews
+     */
+    private void initializeTextViews() {
+    	wagerTV = (TextView)findViewById(R.id.credit_card_tv_wager);
+    	wagerTV.setText("" + wager);
+    	//TODO set wagerTV to be that passed in from bundle
     }
     
     /**

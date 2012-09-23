@@ -3,9 +3,11 @@ package com.example.fitsbypact;
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
 import dbhandlers.DatabaseHandler;
+import dbhandlers.UserTableHandler;
 import dbtables.User;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import applicationsubclass.ApplicationUser;
 
 public class LoginActivity extends Activity {
 
@@ -23,6 +26,10 @@ public class LoginActivity extends Activity {
 	private EditText passwordET;
 	
 	private ServerCommunication comm;
+	private DatabaseHandler mdbHandler;
+	private UserTableHandler mUserTableHandler;
+	private ApplicationUser mApplicationUser;
+	
 	/**
 	 * Called when activity is created
 	 */
@@ -35,6 +42,10 @@ public class LoginActivity extends Activity {
         comm = new ServerCommunication(this);
         initializeEditTexts();
         initializeButtons();
+        
+        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        mUserTableHandler = mdbHandler.getUserTableHandler();
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
     }
 
     /**
@@ -132,7 +143,15 @@ public class LoginActivity extends Activity {
     	}
     	
     	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
-    		Toast.makeText(LoginActivity.this, "User exists", Toast.LENGTH_LONG).show();
+    		User user = mUserTableHandler.getUser(email);
+    		mApplicationUser.setUser(user);
+    		try {
+    			Intent intent = new Intent(this, GamesActivity.class);
+    			startActivity(intent);
+    		} catch (Exception e) {
+    			//TODO something more robust possibly
+    			Toast.makeText(LoginActivity.this, "Sorry can not log in at the moment", Toast.LENGTH_LONG).show();
+    		}
     	} else {
     		//TODO password salting maybe?
     		Toast.makeText(LoginActivity.this, "Incorrect password or username", Toast.LENGTH_LONG).show();

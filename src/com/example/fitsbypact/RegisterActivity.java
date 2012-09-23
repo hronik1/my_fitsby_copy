@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import applicationsubclass.ApplicationUser;
 
 public class RegisterActivity extends Activity {
 
@@ -28,7 +29,7 @@ public class RegisterActivity extends Activity {
 	private EditText passwordET;
 	
 	private ServerCommunication comm;
-	
+	private ApplicationUser mApplicationUser;
 	/**
 	 * called when activity is created
 	 */
@@ -42,6 +43,9 @@ public class RegisterActivity extends Activity {
         initializeEditTexts();
         
         comm = new ServerCommunication(this);
+        
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
+        
     }
     
     /**
@@ -158,9 +162,9 @@ public class RegisterActivity extends Activity {
     		dbHandler.getUserTableHandler().addUser(user);
     		user = dbHandler.getUserTableHandler().getUser(email);
     		if (user != null) {
+    			mApplicationUser.setUser(user);
     	    	try {
     	    		Intent intent = new Intent(this, LeagueLandingActivity.class);
-    	    		intent.putExtra(User.ID_KEY, user.getID());
     	    		startActivity(intent);
     	    	} catch (Exception e) {
     	    		//remove in deployment

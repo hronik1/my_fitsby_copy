@@ -38,6 +38,13 @@
         android:layout_height="wrap_content"
         android:hint="@string/credit_card_et_card_cvc_hint" />
     
+    <TextView 
+        android:id="@+id/credit_card_tv_wager"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/credit_card_tv_wager_text" />
+    
     <Button
         android:id="@+id/credit_card_button_submit"
         android:layout_width="fill_parent"

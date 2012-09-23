@@ -16,7 +16,7 @@ public class CommentTableHandler {
 	
 	public final static String KEY_ID = "_id";
 	public final static String KEY_MEMBER_FROM_ID = "from_id";
-	public final static String KEY_LEAGUE_ID = "to_id";
+	public final static String KEY_LEAGUE_ID = "league_id";
 	public final static String KEY_MESSAGE = "message";
 	public final static String KEY_TIMESTAMP = "stamp";
 	

@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import bundlekeys.LeagueDetailBundleKeys;
+import dbhandlers.LeagueTableHandler;
 import loaders.PublicLeaguesCursorLoader;
 import android.os.Bundle;
 import android.app.Activity;
@@ -15,7 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 
@@ -147,11 +151,18 @@ public class LeagueJoinActivity extends Activity
     	leagueLV = (ListView)findViewById(R.id.league_join_list);
     	leagueLV.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+			public void onItemClick(AdapterView<?> adapterView, View view, int position,
+					long id) {
+				Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
+				int leagueId = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_ID));
+				int pot = cursor.getInt(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_POT));
+				int players = cursor.getInt(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_NUM_PLAYERS));
+				int wager = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_WAGER));
+				boolean isPrivate = false;
+				gotoLeagueDetails(leagueId, players, wager, pot, isPrivate);
 				// TODO Auto-generated method stub
 				// TODO actually do something cool
-				
+				//TODO go to league detail page
 			}
     		
     	});
@@ -159,6 +170,21 @@ public class LeagueJoinActivity extends Activity
     	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_public_leagues, null,
     			PublicLeaguesCursorLoader.FROM_ARGS, toArgs, 0);
     	leagueLV.setAdapter(mAdapter);
+    }
+    
+    private void gotoLeagueDetails(int leagueId, int players, int wager, int pot, boolean isPrivate) {
+    	try {
+    		Intent intent = new Intent(this, LeagueJoinDetailActivity.class);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, leagueId);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_PLAYERS, players);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_WAGER, wager);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_POT, pot);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_TYPE, isPrivate ? 1 : 0);
+    		startActivity(intent);
+    	} catch(Exception e) {
+    		//TODO add robustness, remove from production code.
+    		Toast.makeText(getApplicationContext(), "sorry cant perform operation", Toast.LENGTH_LONG).show();
+    	}
     }
     
     /** LoaderManager callBacks **/

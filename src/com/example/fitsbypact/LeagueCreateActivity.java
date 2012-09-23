@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import bundlekeys.CreditCardBundleKeys;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+import applicationsubclass.ApplicationUser;
 
 public class LeagueCreateActivity extends Activity {
 
@@ -38,6 +40,8 @@ public class LeagueCreateActivity extends Activity {
 	private LeagueTableHandler leagueTableHandler;
 	private LeagueMemberTableHandler leagueMemberTableHandler;
 	
+	private ApplicationUser mApplicationUser;
+	
 	/**
 	 * called when activity is first created
 	 */
@@ -49,17 +53,13 @@ public class LeagueCreateActivity extends Activity {
         
         initializeNumberPickers();
         initializeButtons();
-        initializeCheckBoxes();
-        
-        Intent intent = getIntent();
-        if(intent == null || intent.getExtras() == null)
-        	userID = -1;
-        else
-        	userID = intent.getExtras().getInt(User.ID_KEY);
-        Toast.makeText(this, "Hello user:" + userID, Toast.LENGTH_LONG).show();
+        initializeCheckBoxes();  
         
         dbHandler = DatabaseHandler.getInstance(this);
         leagueTableHandler = dbHandler.getLeagueTableHandler();
+        
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
+        userID = mApplicationUser.getUser().getID();
         
     }
 
@@ -173,6 +173,14 @@ public class LeagueCreateActivity extends Activity {
 		league = leagueTableHandler.getLeagueByCreatorID(userID);
 		LeagueMember member = new LeagueMember(league.getId(), userID);
 		leagueMemberTableHandler.addLeagueMember(member);
-		
+	
+		try {
+			Intent intent = new Intent(this, CreditCardActivity.class);
+			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
+			startActivity(intent);
+		} catch(Exception e) {
+			//TODO handle failure more robustly
+			Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG).show();
+		}
 	}
 }
