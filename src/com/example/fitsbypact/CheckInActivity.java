@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import applicationsubclass.ApplicationUser;
 
 public class CheckInActivity extends Activity {
 
@@ -29,7 +30,10 @@ public class CheckInActivity extends Activity {
 	private DatabaseHandler mdbHandler;
 	private LeagueMemberTableHandler mLeagueMemberTableHandler;
 	private List<LeagueMember> mLeagueMemberList;
-	private int userId;
+	
+	private ApplicationUser mApplicationUser;
+	private User mUser;
+
 	/**
 	 * called when Activity is created
 	 */
@@ -39,18 +43,15 @@ public class CheckInActivity extends Activity {
         setContentView(R.layout.activity_check_in);
         Log.i(TAG, "onCreate");
         
-        Intent intent = getIntent();
-        if(intent == null || intent.getExtras() == null)
-        	userID = -1;
-        else
-        	userID = intent.getExtras().getInt(User.ID_KEY);
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
+        mUser = mApplicationUser.getUser();
         
         initializeNavigationBar();
         initializeButtons();
         
         mdbHandler = DatabaseHandler.getInstance(this);
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
-        mLeagueMemberList = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(userId);
+        mLeagueMemberList = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(mUser.getID());
     }
 
     /**
@@ -120,7 +121,6 @@ public class CheckInActivity extends Activity {
 	public void initializeNavigationBar() {
 		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
 		navigation.setParentActivity(this);
-		navigation.setUserID(userID);
 		navigation.turnOffTV("checkin");
 	}
 	

@@ -2,11 +2,13 @@ package com.example.fitsbypact;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class FriendInviteActivity extends Activity {
 
@@ -119,6 +121,12 @@ public class FriendInviteActivity extends Activity {
      * go to your home page
      */
     private void home() {
-    	//TODO implement going to home page
+    	try {
+    		Intent intent = new Intent(this, GamesActivity.class);
+    		startActivity(intent);
+    	} catch(Exception e) {
+    		//TODO handle not starting intent better
+    		Toast.makeText(getApplicationContext(), "sorry can not start activity", Toast.LENGTH_LONG).show();
+    	}
     }
 }

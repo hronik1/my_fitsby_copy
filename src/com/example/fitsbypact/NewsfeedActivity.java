@@ -1,7 +1,15 @@
 package com.example.fitsbypact;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import loaders.NewsfeedCursorLoader;
 import loaders.PublicLeaguesCursorLoader;
+import dbhandlers.CommentTableHandler;
+import dbhandlers.DatabaseHandler;
+import dbhandlers.LeagueMemberTableHandler;
+import dbtables.Comment;
+import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
@@ -18,19 +26,22 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Button;
+import android.widget.Toast;
+import applicationsubclass.ApplicationUser;
 
 public class NewsfeedActivity extends Activity 
-	implements OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
+	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "NewsfeedActivity";
 	
 	private NavigationBar navigation;
-	private int userID;
+
 
 	private Spinner gamesSpinner;
 	private ListView newsfeedLV;
@@ -41,6 +52,15 @@ public class NewsfeedActivity extends Activity
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
 			R.id.list_item_newsfeed_last_name, R.id.list_item_newsfeed_timestamp,
 			R.id.list_item_newsfeed_message };
+	
+	private ApplicationUser mApplicationUser;
+	private DatabaseHandler mdbHandler;
+	private LeagueMemberTableHandler mLeagueMemberTableHandler;
+	private CommentTableHandler mCommentTableHandler;
+	
+	private List<LeagueMember> listLeagueMember;
+	private User user;
+	private int spinnerPosition;
 	/**
 	 * called when activity is created
 	 */
@@ -51,16 +71,19 @@ public class NewsfeedActivity extends Activity
         
         Log.i(TAG, "onCreate");
         
-        Intent intent = getIntent();
-        if(intent == null || intent.getExtras() == null)
-        	userID = -1;
-        else
-        	userID = intent.getExtras().getInt(User.ID_KEY);
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
+        user = mApplicationUser.getUser();
+        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
+        mCommentTableHandler = mdbHandler.getCommentTableHandler();
+        listLeagueMember = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(user.getID());
         
         //TODO loadermanager stuffs
         initializeNavigationBar();
         initializeButtons();
         initializeListView();
+        initializeEditText();
+        initializeSpinner();
     }
 
     /**
@@ -130,7 +153,6 @@ public class NewsfeedActivity extends Activity
 	public void initializeNavigationBar() {
 		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
 		navigation.setParentActivity(this);
-		navigation.setUserID(userID);
 		navigation.turnOffTV("newsfeed");
 	}
 	
@@ -157,8 +179,18 @@ public class NewsfeedActivity extends Activity
 	 * method which gets the data from the edit text and submits that
 	 */
 	private void submit() {
-		//TODO submit comment to newsfeed
+		if(listLeagueMember == null || listLeagueMember.size() == 0) {
+			//TODO maybe do something more robust
+			Toast.makeText(getApplicationContext(), "sorry no leagues", Toast.LENGTH_LONG).show();
+		}
+		else {
+			LeagueMember member = listLeagueMember.get(spinnerPosition);
+			Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
+			mCommentTableHandler.addComment(comment);
+		}
+		
 	}
+	
 	/**
 	 * initialize the listview
 	 */
@@ -183,35 +215,33 @@ public class NewsfeedActivity extends Activity
 	 */
 	private void initializeSpinner() {
 		gamesSpinner = (Spinner)findViewById(R.id.newsfeed_spinner);
-		gamesSpinner.setOnItemSelectedListener(this);
-	}
-	
-	/** OnItemSelected callbacks **/
-	
-	/**
-	 * callback to be implemented by onItemSelectedListener interface
-	 * called when item is selected
-	 */
-    public void onItemSelected(AdapterView<?> parent, View view, 
-            int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    	
-    	//TODO do something with retrieved item
-    }
+		List<String> list = new ArrayList<String>();
+		for(LeagueMember member: listLeagueMember) {
+			list.add("league " + member.getLeagueId());
+		}
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gamesSpinner.setAdapter(dataAdapter);
+		gamesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-    /**
-     * callback to be implemented by onItemSelectedListener interface
-     * called when nothing is selected
-     */
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    	
-    	//TODO verify that I should indeed do nothing
-    }
-    
-    /** end OnItemSelected callbacks **/
-    
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				//TODO show game states of element clicked on
+				//TODO change comments showing to be those of this league
+				spinnerPosition = position;
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				/** do nothing **/
+			}
+			
+		});
+		//TODO add Adapter
+	}
     
     /** LoaderManager callBacks **/
     

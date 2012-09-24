@@ -3,8 +3,11 @@ package widgets;
 import java.util.HashMap;
 
 
+import com.example.fitsbypact.CheckInActivity;
 import com.example.fitsbypact.GamesActivity;
 import com.example.fitsbypact.LeagueLandingActivity;
+import com.example.fitsbypact.MeActivity;
+import com.example.fitsbypact.NewsfeedActivity;
 import com.example.fitsbypact.R;
 
 import dbtables.User;
@@ -72,7 +75,7 @@ public class NavigationBar extends LinearLayout{
 		meTV = (TextView)findViewById(R.id.navigation_textview_me);
 		meTV.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				goToSettings();
+				goToMe();
 			}
 		});
 	}
@@ -89,7 +92,6 @@ public class NavigationBar extends LinearLayout{
 		//TODO implement
     	try {
     		Intent intent = new Intent(this.getContext(), GamesActivity.class);
-    		intent.putExtra(User.ID_KEY, userID);
     		parentActivity.startActivity(intent);
     	} catch (Exception e) {
     		
@@ -97,15 +99,18 @@ public class NavigationBar extends LinearLayout{
 	}
 	
 	public void goToNewsfeed() {
-		//TODO implement
+		Intent intent = new Intent(this.getContext(), NewsfeedActivity.class);
+		parentActivity.startActivity(intent);
 	}
 	
 	public void goToCheckin() {
-		//TODO implement
+		Intent intent = new Intent(this.getContext(), CheckInActivity.class);
+		parentActivity.startActivity(intent);
 	}
 	
-	public void goToSettings() {
-		//TODO implement
+	public void goToMe() {
+		Intent intent = new Intent(this.getContext(), MeActivity.class);
+		parentActivity.startActivity(intent);
 	}
 
 	/**
@@ -132,13 +137,5 @@ public class NavigationBar extends LinearLayout{
 	 */
 	public void setParentActivity(Activity parentActivity) {
 		this.parentActivity = parentActivity;
-	}
-	
-	/**
-	 * 
-	 * @param userID
-	 */
-	public void setUserID(int userID) {
-		this.userID = userID;
 	}
 }

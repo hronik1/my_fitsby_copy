@@ -1,8 +1,14 @@
 package com.example.fitsbypact;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import loaders.GameLeaderCursorLoader;
+import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
+import dbhandlers.LeagueTableHandler;
 import dbhandlers.UserTableHandler;
+import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
@@ -16,19 +22,20 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import applicationsubclass.ApplicationUser;
 
 public class GamesActivity extends Activity
-	implements OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
+	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "GamesActivity";
 	
 	private NavigationBar navigation;
-	private int userID;
 	
 	private TextView playersTV;
 	private TextView wagerTV;
@@ -42,6 +49,14 @@ public class GamesActivity extends Activity
 	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
 			R.id.list_item_game_leader_checkins};
 	
+	private ApplicationUser mApplicationUser;
+	private DatabaseHandler mdbHandler;
+	private LeagueMemberTableHandler mLeagueMemberTableHandler;
+	private LeagueTableHandler mLeagueTableHandler;
+	
+	private List<LeagueMember> listLeagueMember;
+	private User user;
+	
 	/**
 	 * called when activity is created
 	 */
@@ -52,13 +67,15 @@ public class GamesActivity extends Activity
         
         Log.i(TAG, "onCreate");
         
-        Intent intent = getIntent();
-        if(intent == null || intent.getExtras() == null)
-        	userID = -1;
-        else
-        	userID = intent.getExtras().getInt(User.ID_KEY);
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
+        user = mApplicationUser.getUser();
+        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
+        mLeagueTableHandler = mdbHandler.getLeagueTableHandler();
+        listLeagueMember = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(user.getID());
         
         //TODO loadermanager stuffs
+        initializeSpinner();
         initializeNavigationBar();
         initializeTextViews();
         initializeProgressBar();
@@ -132,7 +149,6 @@ public class GamesActivity extends Activity
 	public void initializeNavigationBar() {
 		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
 		navigation.setParentActivity(this);
-		navigation.setUserID(userID);
 		navigation.turnOffTV("games");
 	}
 	
@@ -166,35 +182,32 @@ public class GamesActivity extends Activity
 	 */
 	private void initializeSpinner() {
 		gamesSpinner = (Spinner)findViewById(R.id.games_spinner);
-		gamesSpinner.setOnItemSelectedListener(this);
+		List<String> list = new ArrayList<String>();
+		for(LeagueMember member: listLeagueMember) {
+			list.add("league " + member.getLeagueId());
+		}
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gamesSpinner.setAdapter(dataAdapter);
+		gamesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				//TODO show game states of element clicked on
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				/** do nothing **/
+			}
+			
+		});
 		//TODO add Adapter
 	}
-	
-	/** OnItemSelected callbacks **/
-	
-	/**
-	 * callback to be implemented by onItemSelectedListener interface
-	 * called when item is selected
-	 */
-    public void onItemSelected(AdapterView<?> parent, View view, 
-            int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    	
-    	//TODO do something with retrieved item
-    }
 
-    /**
-     * callback to be implemented by onItemSelectedListener interface
-     * called when nothing is selected
-     */
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    	
-    	//TODO verify that I should indeed do nothing
-    }
-    
-    /** end OnItemSelected callbacks **/
     
     /** LoaderManager callBacks **/
     

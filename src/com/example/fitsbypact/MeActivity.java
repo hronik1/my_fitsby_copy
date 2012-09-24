@@ -7,13 +7,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.TextView;
+import applicationsubclass.ApplicationUser;
 
 public class MeActivity extends Activity {
 
 	private final static String TAG = "MeActivity";
 	
+	private TextView nameTV;
+	private TextView joinTV;
+	private TextView earningsTV;
+	
 	private NavigationBar navigation;
-	private int userID;
+	
+	private ApplicationUser mApplicationUser;
+	private User mUser;
 	
 	/**
 	 * called when activity is created
@@ -25,13 +33,9 @@ public class MeActivity extends Activity {
         
         Log.i(TAG, "onCreate");
         
-        Intent intent = getIntent();
-        if(intent == null || intent.getExtras() == null)
-        	userID = -1;
-        else
-        	userID = intent.getExtras().getInt(User.ID_KEY);
-        
+        mApplicationUser = ((ApplicationUser)getApplicationContext());
         initializeNavigationBar();
+        initializeTextViews();
     }
 
     /**
@@ -92,7 +96,6 @@ public class MeActivity extends Activity {
 		super.onDestroy();
 		
 		Log.i(TAG, "onDestroy");
-		
 	}
 	
 	/**
@@ -101,7 +104,20 @@ public class MeActivity extends Activity {
 	public void initializeNavigationBar() {
 		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
 		navigation.setParentActivity(this);
-		navigation.setUserID(userID);
 		navigation.turnOffTV("me");
+	}
+	
+	/**
+	 * initialize the textviews
+	 */
+	public void initializeTextViews() {
+		nameTV = (TextView)findViewById(R.id.me_textview_name);
+		nameTV.setText(mUser.getFirstName() + " " + mUser.getLastName());
+		
+		joinTV = (TextView)findViewById(R.id.me_textview_join_date);
+		//TODO add join date
+		
+		earningsTV = (TextView)findViewById(R.id.me_textview_total_money_earned_money);
+		//add earnings for user
 	}
 }
