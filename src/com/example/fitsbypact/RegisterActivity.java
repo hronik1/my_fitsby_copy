@@ -130,7 +130,7 @@ public class RegisterActivity extends Activity {
     	String lastName = "";
     	String password = "";
     	String email = "";
-    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
+    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(getApplicationContext());
     	
     	if (firstNameET != null && firstNameET.getText() != null)
     		firstName = firstNameET.getText().toString();

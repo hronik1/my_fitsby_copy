@@ -50,7 +50,7 @@ public class CheckInActivity extends Activity {
         initializeNavigationBar();
         initializeButtons();
         
-        mdbHandler = DatabaseHandler.getInstance(this);
+        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
         mLeagueMemberList = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(mUser.getID());
     }
