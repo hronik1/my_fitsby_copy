@@ -78,8 +78,6 @@
         <activity
             android:name=".LeagueJoinDetailActivity"
             android:label="@string/title_activity_league_join_detail" >
-            <intent-filter>
-            </intent-filter>
         </activity>
     </application>
 
