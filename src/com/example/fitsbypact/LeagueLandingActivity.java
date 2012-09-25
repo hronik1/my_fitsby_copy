@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import dbtables.User;
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-import applicationsubclass.ApplicationUser;
 
 public class LeagueLandingActivity extends Activity {
 

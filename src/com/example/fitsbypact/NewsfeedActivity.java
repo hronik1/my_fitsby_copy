@@ -3,6 +3,8 @@ package com.example.fitsbypact;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import loaders.NewsfeedCursorLoader;
 import loaders.PublicLeaguesCursorLoader;
 import dbhandlers.CommentTableHandler;
@@ -33,7 +35,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Button;
 import android.widget.Toast;
-import applicationsubclass.ApplicationUser;
 
 public class NewsfeedActivity extends Activity 
 	implements LoaderManager.LoaderCallbacks<Cursor> {

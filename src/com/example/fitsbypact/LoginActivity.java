@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
 import dbhandlers.DatabaseHandler;
@@ -15,7 +17,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import applicationsubclass.ApplicationUser;
 
 public class LoginActivity extends Activity {
 

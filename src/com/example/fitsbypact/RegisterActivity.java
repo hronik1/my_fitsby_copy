@@ -1,6 +1,8 @@
 package com.example.fitsbypact;
 
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import dbhandlers.DatabaseHandler;
 import dbtables.User;
 import registration.RegisterClientSideValidation;
@@ -15,7 +17,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import applicationsubclass.ApplicationUser;
 
 public class RegisterActivity extends Activity {
 

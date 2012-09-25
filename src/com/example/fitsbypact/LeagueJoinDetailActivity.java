@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import bundlekeys.CreditCardBundleKeys;
 import bundlekeys.LeagueDetailBundleKeys;
 import dbhandlers.DatabaseHandler;
@@ -16,7 +18,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import applicationsubclass.ApplicationUser;
 
 public class LeagueJoinDetailActivity extends Activity {
 

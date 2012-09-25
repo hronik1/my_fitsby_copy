@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
-import applicationsubclass.ApplicationUser;
 
 public class MeActivity extends Activity {
 
