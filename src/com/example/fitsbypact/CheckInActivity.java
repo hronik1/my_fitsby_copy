@@ -2,6 +2,8 @@ package com.example.fitsbypact;
 
 import java.util.List;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbtables.LeagueMember;
@@ -15,7 +17,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import applicationsubclass.ApplicationUser;
 
 public class CheckInActivity extends Activity {
 

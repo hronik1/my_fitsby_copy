@@ -16,7 +16,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:name=".ApplicationUser" >
+        android:name=".applicationsubclass.ApplicationUser" >
         
         <activity
             android:name=".RegisterActivity"
@@ -79,9 +79,6 @@
             android:name=".LeagueJoinDetailActivity"
             android:label="@string/title_activity_league_join_detail" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

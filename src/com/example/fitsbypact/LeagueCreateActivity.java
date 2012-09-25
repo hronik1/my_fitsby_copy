@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import bundlekeys.CreditCardBundleKeys;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
@@ -18,7 +20,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
 import android.widget.Toast;
-import applicationsubclass.ApplicationUser;
 
 public class LeagueCreateActivity extends Activity {
 

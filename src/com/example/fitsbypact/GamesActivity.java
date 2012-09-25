@@ -3,6 +3,8 @@ package com.example.fitsbypact;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
 import loaders.GameLeaderCursorLoader;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
@@ -28,7 +30,6 @@ import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import applicationsubclass.ApplicationUser;
 
 public class GamesActivity extends Activity
 	implements LoaderManager.LoaderCallbacks<Cursor> {
