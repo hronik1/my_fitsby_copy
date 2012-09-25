@@ -118,13 +118,12 @@ public final class R {
         public static final int activity_me=0x7f03000a;
         public static final int activity_newsfeed=0x7f03000b;
         public static final int activity_register=0x7f03000c;
-        public static final int activity_splash=0x7f03000d;
-        public static final int example=0x7f03000e;
-        public static final int list_item_game_leader=0x7f03000f;
-        public static final int list_item_newsfeed=0x7f030010;
-        public static final int list_item_public_leagues=0x7f030011;
-        public static final int navigation=0x7f030012;
-        public static final int public_leagues=0x7f030013;
+        public static final int example=0x7f03000d;
+        public static final int list_item_game_leader=0x7f03000e;
+        public static final int list_item_newsfeed=0x7f03000f;
+        public static final int list_item_public_leagues=0x7f030010;
+        public static final int navigation=0x7f030011;
+        public static final int public_leagues=0x7f030012;
     }
     public static final class menu {
         public static final int activity_check_in=0x7f060000;
@@ -140,8 +139,7 @@ public final class R {
         public static final int activity_me=0x7f06000a;
         public static final int activity_newsfeed=0x7f06000b;
         public static final int activity_register=0x7f06000c;
-        public static final int activity_splash=0x7f06000d;
-        public static final int example=0x7f06000e;
+        public static final int example=0x7f06000d;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
