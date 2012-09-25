@@ -79,9 +79,6 @@
             android:name=".LeagueJoinDetailActivity"
             android:label="@string/title_activity_league_join_detail" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
