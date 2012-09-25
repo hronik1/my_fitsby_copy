@@ -15,24 +15,18 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
     
-        TimerTask task = new TimerTask()
-    	{
-    		
-    		@Override
-    		public void run() {
-    			finish();
-    			Intent mainIntent = new Intent().setClass(SplashActivity.this, LandingActivity.class);
-    			startActivity(mainIntent);
-    		}
-    	};
+    TimerTask task = new TimerTask()
+	{
+		
+		@Override
+		public void run() {
+			finish();
+			Intent mainIntent = new Intent().setClass(SplashActivity.this, LandingActivity.class);
+			startActivity(mainIntent);
+		}
+	};
     	
-    	Timer timer = new Timer();
-    	timer.schedule(task, SplashDelay);
-    	}
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_splash, menu);
-        return true;
-    }
+	Timer timer = new Timer();
+	timer.schedule(task, SplashDelay);
+	}
 }
