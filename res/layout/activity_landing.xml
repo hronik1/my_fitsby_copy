@@ -3,21 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/landing_button_start"
+    <TextView
+        style="@style/CustomLandingStyle"
+        android:id="@+id/or"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
-        android:text="@string/landing_start" />
+        android:layout_centerVertical="true"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+		android:gravity="center"
+        android:text="@string/or" />
 
     <Button
         android:id="@+id/landing_button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/landing_button_start"
-        android:layout_centerVertical="true"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/or"
+		android:textSize="23sp"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginLeft="30dp"
+		android:gravity="center"
         android:text="@string/landing_login" />
+
+    <Button
+        android:id="@+id/landing_button_start"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/or"
+        android:layout_alignParentLeft="true"
+        android:textSize="23sp"     
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginLeft="30dp"
+        android:gravity="center"
+        android:text="@string/landing_start" />
+
+
+    <TextView
+        android:id="@+id/motto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/landing_button_start"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/motto"
+        android:textSize="23sp" />
 
 </RelativeLayout>
