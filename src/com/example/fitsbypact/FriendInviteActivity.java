@@ -1,8 +1,11 @@
 package com.example.fitsbypact;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -27,7 +30,7 @@ public class FriendInviteActivity extends Activity {
         
         Log.i(TAG, "onCreate");
         
-        initializeButtons();
+        initializeButtons(); 
     }
 
     /**
@@ -115,8 +118,42 @@ public class FriendInviteActivity extends Activity {
      */
     private void invite() {
     	//TODO implement inviting functionality
+    	queryContacts();
     }
     
+    /**
+     * querys the contacts of the given user
+     */
+    private void queryContacts() {
+    	//TODO turn this shitty looking throw away code into something beautiful
+    	Toast.makeText(getApplicationContext(), "start", Toast.LENGTH_LONG).show();
+    	ContentResolver contentResolver = getContentResolver();
+    	Cursor contactsCursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
+    			null, null, null, null);
+        if (contactsCursor.getCount() > 0) {
+        	while (contactsCursor.moveToNext()) {
+        		String id = contactsCursor.getString(
+        				contactsCursor.getColumnIndex(ContactsContract.Contacts._ID));
+        		String name = contactsCursor.getString(
+        				contactsCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+        		if (Integer.parseInt(contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+        			if (Integer.parseInt(contactsCursor.getString(
+        					contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+        				Cursor phoneNumberCursor = contentResolver.query(
+        						ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, 
+        						ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?", 
+        								new String[]{id}, null);
+        				while (phoneNumberCursor.moveToNext()) {
+        					String phoneNumber = phoneNumberCursor.getString(phoneNumberCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
+        					Toast.makeText(getApplicationContext(), phoneNumber, Toast.LENGTH_LONG).show();
+        				} 
+        				phoneNumberCursor.close();
+        			}
+        		}
+        	}
+        	Toast.makeText(getApplicationContext(), "end", Toast.LENGTH_LONG).show();
+        }
+    }
     /**
      * go to your home page
      */

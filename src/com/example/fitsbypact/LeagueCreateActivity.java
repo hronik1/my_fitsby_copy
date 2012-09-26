@@ -56,7 +56,7 @@ public class LeagueCreateActivity extends Activity {
         initializeButtons();
         initializeCheckBoxes();  
         
-        dbHandler = DatabaseHandler.getInstance(this);
+        dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         leagueTableHandler = dbHandler.getLeagueTableHandler();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
