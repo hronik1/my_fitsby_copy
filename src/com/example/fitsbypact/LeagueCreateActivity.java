@@ -171,7 +171,7 @@ public class LeagueCreateActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				decrementWager;
+				decrementWager();
 			}	
 		});
 		
