@@ -9,7 +9,6 @@ import dbhandlers.LeagueTableHandler;
 import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
-import android.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
