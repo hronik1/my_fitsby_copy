@@ -16,11 +16,11 @@ public class RegisterClientSideValidation {
 		String ret = "";
 		
 		if (firstName == null || firstName.length() == 0) {
-			ret += "Must fill out first name\n";
+			ret += "First name is required.\n";
 			
 		}
 		if (lastName == null || lastName.length() == 0) {
-			ret += "Must fill out last name\n";
+			ret += "Last name is required.\n";
 		}
 		
 		return ret;
@@ -35,7 +35,7 @@ public class RegisterClientSideValidation {
 		String ret = "";
 		
 		if (email == null || email.length() < minLength) {
-			ret += "email too short\n";
+			ret += "Email must be least 6 characters.\n";
 			//TODO additional email verification
 		}
 		
@@ -51,7 +51,7 @@ public class RegisterClientSideValidation {
 		String ret = "";
 		
 		if (password == null || password.length() < minLength) {
-			ret += "password too short\n";
+			ret += "Password must be at least 6 characters.\n";
 		}
 		//TODO additional password verification
 		
