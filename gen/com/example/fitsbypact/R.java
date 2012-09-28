@@ -16,6 +16,7 @@ public final class R {
         public static final int button_gray=0x7f040005;
         public static final int gray=0x7f040004;
         public static final int red=0x7f040002;
+        public static final int tinted_white=0x7f040006;
         public static final int white=0x7f040003;
     }
     public static final class drawable {
@@ -27,9 +28,11 @@ public final class R {
         public static final int ic_action_search=0x7f020005;
         public static final int ic_launcher=0x7f020006;
         public static final int ic_launcher_textlogo=0x7f020007;
-        public static final int logo_text=0x7f020008;
-        public static final int me=0x7f020009;
-        public static final int newsfeed=0x7f02000a;
+        public static final int landing_getstarted_button=0x7f020008;
+        public static final int landing_login_button=0x7f020009;
+        public static final int logo_text=0x7f02000a;
+        public static final int me=0x7f02000b;
+        public static final int newsfeed=0x7f02000c;
     }
     public static final class id {
         public static final int check_in_button_check_in=0x7f080002;
@@ -41,8 +44,8 @@ public final class R {
         public static final int credit_card_et_expire_month=0x7f080004;
         public static final int credit_card_et_expire_year=0x7f080005;
         public static final int credit_card_tv_wager=0x7f080007;
-        public static final int friend_invite_button_home=0x7f08000a;
-        public static final int friend_invite_button_invite=0x7f080009;
+        public static final int friend_invite_button_home=0x7f080009;
+        public static final int friend_invite_button_invite=0x7f08000a;
         public static final int games_duration_prompt=0x7f08000e;
         public static final int games_leader_list=0x7f080011;
         public static final int games_leader_prompt=0x7f080010;

@@ -17,7 +17,7 @@
         android:textSize="14sp" />
 
     <Button
-		android:background="@drawable/custom_getstarted_button"
+		android:background="@drawable/landing_getstarted_button"
         android:textColor="@color/gray"
         android:id="@+id/landing_button_start"
         android:layout_width="fill_parent"
@@ -52,7 +52,7 @@
         android:src="@drawable/logo_text" />
 
     <Button
-		android:background="@drawable/custom_login_button"
+		android:background="@drawable/landing_login_button"
         android:id="@+id/landing_button_login"
         android:textColor="@color/white"
         android:layout_width="fill_parent"
