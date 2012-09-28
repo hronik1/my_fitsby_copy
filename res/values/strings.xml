@@ -99,4 +99,8 @@
     <string name="title_activity_splash">Fitsby Splash Page</string>
 	<string name="league_create_wager_text">0</string>
 	<string name="league_create_days_text">14</string>
+	<string name="league_create_ib_days_minus_text">decrement days</string>
+	<string name="league_create_ib_days_plus_text">increment days</string>
+	<string name="league_create_ib_wager_minus_text">decrement wager</string>
+	<string name="league_create_ib_wager_plus_text">increment days</string>
 </resources>
