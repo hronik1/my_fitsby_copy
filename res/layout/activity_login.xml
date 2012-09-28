@@ -1,14 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#333333" >
 
-   <EditText
+    <EditText
         android:id="@+id/login_email_id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"           
+        android:background="@drawable/custom_getstarted_button"
+        android:ems="10"
         android:hint="@string/login_email_hint"
         tools:context=".LoginActivity" />
 
@@ -17,16 +22,40 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"        
         android:layout_below="@+id/login_email_id"
+        android:background="@drawable/custom_getstarted_button"
         android:ems="10"
         android:hint="@string/login_password_hint"
         android:inputType="textPassword" />
-    
+
     <Button
         android:id="@+id/login_button_login"
-        android:layout_alignParentBottom="true"
+        style="@style/white_font"
         android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/login_password_id"       
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_login_button"
+        android:gravity="center"
+        android:text="@string/login_button_login"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/login_text"
+        style="@style/white_font"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_button_login" />
+        android:layout_alignBottom="@+id/login_email_id"
+        android:layout_alignLeft="@+id/login_email_id"
+        android:layout_marginBottom="50dp"
+        android:text="@string/login_text" />
 
 </RelativeLayout>

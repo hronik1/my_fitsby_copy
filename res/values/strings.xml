@@ -1,6 +1,6 @@
 <resources>
 
-	<string name="motto">Win money by going to the gym more than your friends!</string>
+	<string name="motto">Stay motivated to hit the gym.</string>
     <string name="or"> OR </string>
     <string name="app_name">Fitsby</string>
     <string name="hello_world">Hello world!</string>
@@ -11,6 +11,8 @@
     <string name="register_button_register">Register</string>
     <string name="title_activity_example">ExampleActivity</string>
     <string name="title_activity_landing">Fitsby</string>
+    <string name="login_text">"Login to your Fitsby account.</string>
+    <string name="register_text">By creating a Fitsby account, you are agreeing to the Terms of Service and Privacy Policy.</string>
     <string name="landing_login">Login</string>
     <string name="landing_start">Get Started</string>
     <string name="register_first_name_hint">First Name</string>
@@ -96,6 +98,5 @@
     <string name="list_item_newsfeed_timestamp_text">Now</string>
     <string name="list_item_newsfeed_message_text">This is a comment.</string>
     <string name="credit_card_tv_wager_text">Wager</string>
-    <string name="title_activity_splash">Fitsby</string>
 
 </resources>
