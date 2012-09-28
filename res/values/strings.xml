@@ -97,5 +97,6 @@
     <string name="list_item_newsfeed_message_text">This is a comment.</string>
     <string name="credit_card_tv_wager_text">Wager</string>
     <string name="title_activity_splash">Fitsby Splash Page</string>
-
+	<string name="league_create_wager_text">0</string>
+	<string name="league_create_days_text">14</string>
 </resources>
