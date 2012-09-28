@@ -11,7 +11,8 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
-        android:drawableTop="@drawable/ic_launcher"
+        android:drawableTop="@drawable/games"
+        android:drawablePadding="10dp"
         android:text="@string/navigation_textview_game_text"/>
 
     <TextView
@@ -22,7 +23,8 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
-        android:drawableTop="@drawable/ic_launcher"
+        android:drawableTop="@drawable/newsfeed"
+        android:drawablePadding="10dp"        
         android:text="@string/navigation_textview_newsfeed_text"/>
 
     <TextView
@@ -33,7 +35,8 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
-        android:drawableTop="@drawable/ic_launcher"
+        android:drawableTop="@drawable/checkin"
+        android:drawablePadding="10dp"
         android:text="@string/navigation_textview_checkin_text"/>
 
     <TextView
@@ -44,6 +47,7 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
-        android:drawableTop="@drawable/ic_launcher"
+        android:drawableTop="@drawable/me"
+        android:drawablePadding="10dp"        
         android:text="@string/navigation_textview_me_text"/>
 </LinearLayout>
