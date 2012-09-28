@@ -3,51 +3,61 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/navigation_textview_game"
-        android:gravity="center"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="true"
-        android:drawableTop="@drawable/games"
-        android:drawablePadding="10dp"
-        android:text="@string/navigation_textview_game_text"/>
 
     <TextView
-        android:id="@+id/navigation_textview_newsfeed"
-        android:gravity="center"
-        android:layout_width="wrap_content" 
+        android:id="@+id/navigation_textview_game"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".25"
+        android:background="@drawable/custom_navigation_tabs"
         android:clickable="true"
+        android:drawableTop="@drawable/game"
         android:focusable="true"
+        android:gravity="center"
+        android:text="@string/navigation_textview_game_text"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+    
+    <TextView
+        android:id="@+id/navigation_textview_newsfeed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        android:background="@drawable/custom_navigation_tabs"
+        android:clickable="true"
         android:drawableTop="@drawable/newsfeed"
-        android:drawablePadding="10dp"        
-        android:text="@string/navigation_textview_newsfeed_text"/>
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/navigation_textview_newsfeed_text"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/navigation_textview_checkin"
-        android:gravity="center"
-        android:layout_width="wrap_content" 
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".25"
+        android:background="@drawable/custom_navigation_tabs"
         android:clickable="true"
-        android:focusable="true"
         android:drawableTop="@drawable/checkin"
-        android:drawablePadding="10dp"
-        android:text="@string/navigation_textview_checkin_text"/>
-
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/navigation_textview_checkin_text"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+    
     <TextView
         android:id="@+id/navigation_textview_me"
-        android:gravity="center"
-        android:layout_width="wrap_content" 
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".25"
+        android:background="@drawable/custom_navigation_tabs"
         android:clickable="true"
-        android:focusable="true"
         android:drawableTop="@drawable/me"
-        android:drawablePadding="10dp"        
-        android:text="@string/navigation_textview_me_text"/>
+        android:focusable="true"
+        android:gravity="center"
+        android:text="@string/navigation_textview_me_text"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+    
 </LinearLayout>
