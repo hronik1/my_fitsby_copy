@@ -31,7 +31,6 @@ public class LeagueCreateActivity extends Activity {
 	private final static int DAYS_INCREMENT = 7;
 	private final static int MAX_DAYS = 28;
 	
-	//TODO completely refactor to remove numberPickers to support sdk version 8
 	private Button createButton;
 	private CheckBox createCheckBox;
 	private ImageButton wagerPlusIB;
@@ -160,7 +159,6 @@ public class LeagueCreateActivity extends Activity {
 		wagerPlusIB.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				incrementWager();
 			}
 		});
@@ -169,7 +167,6 @@ public class LeagueCreateActivity extends Activity {
 		wagerMinusIB.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				decrementWager();
 			}	
 		});
@@ -187,7 +184,6 @@ public class LeagueCreateActivity extends Activity {
 		daysMinusIB.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				decrementDays();
 			}
 		});
@@ -197,7 +193,6 @@ public class LeagueCreateActivity extends Activity {
 	 * initializes the text views
 	 */
 	private void initializeTextViews() {
-		//TODO this
 		wagerTV = (TextView)findViewById(R.id.league_create_wager);
 		daysTV = (TextView)findViewById(R.id.league_create_days);
 	}

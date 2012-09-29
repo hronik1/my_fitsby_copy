@@ -127,7 +127,7 @@ public class LeagueTableHandler {
 	            league.setPrivate(Integer.parseInt(cursor.getString(2)));
 	            league.setDuration(Integer.parseInt(cursor.getString(3)));
 	            league.setWager(Integer.parseInt(cursor.getString(4)));
-	            //TODO additional validation on cursor position
+
 	            leaguesList.add(league);
 	        } while (cursor.moveToNext());
 	    }
@@ -155,7 +155,7 @@ public class LeagueTableHandler {
 	            league.setPrivate(Integer.parseInt(cursor.getString(2)));
 	            league.setDuration(Integer.parseInt(cursor.getString(3)));
 	            league.setWager(Integer.parseInt(cursor.getString(4)));
-	            //TODO additional validation on cursor position
+
 	            leaguesList.add(league);
 	        } while (cursor.moveToNext());
 	    }

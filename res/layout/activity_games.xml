@@ -3,11 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <widgets.Header
+        android:id="@+id/games_header"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true" />
+    
     <Spinner 
         android:id="@+id/games_spinner"
         android:layout_width="fill_parent"    
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"/>
+        android:layout_below="@+id/games_header"/>
     
     <TextView
         android:id="@+id/games_player_prompt"

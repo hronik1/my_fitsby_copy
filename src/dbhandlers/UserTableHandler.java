@@ -128,7 +128,7 @@ public class UserTableHandler {
 	            user.setLastName(cursor.getString(2));
 	            user.setEmail(cursor.getString(3));
 	            user.setPassword(cursor.getString(4));
-	            //TODO additional validation on cursor position
+
 	            usersList.add(user);
 	        } while (cursor.moveToNext());
 	    }

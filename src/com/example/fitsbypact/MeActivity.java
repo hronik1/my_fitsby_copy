@@ -3,7 +3,9 @@ package com.example.fitsbypact;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbtables.User;
+import widgets.Header;
 import widgets.NavigationBar;
+import android.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +20,7 @@ public class MeActivity extends Activity {
 	private TextView nameTV;
 	private TextView joinTV;
 	private TextView earningsTV;
+	private Header header;
 	
 	private NavigationBar navigation;
 	
@@ -37,6 +40,8 @@ public class MeActivity extends Activity {
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         initializeNavigationBar();
         initializeTextViews();
+        initializeHeader();
+        
     }
 
     /**
@@ -120,5 +125,13 @@ public class MeActivity extends Activity {
 		
 		earningsTV = (TextView)findViewById(R.id.me_textview_total_money_earned_money);
 		//add earnings for user
+	}
+	
+	/**
+	 * initializes header
+	 */
+	public void initializeHeader() {
+		header = (Header)findViewById(R.id.me_header);
+		header.setParentActivity(this);
 	}
 }

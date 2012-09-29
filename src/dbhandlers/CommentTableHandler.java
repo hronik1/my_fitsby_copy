@@ -52,7 +52,6 @@ public class CommentTableHandler {
 	 * @param comment
 	 */
 	public void addComment(Comment comment) {
-		//TODO possibly more validation on use
 	    ContentValues values = new ContentValues();
 	    values.put(KEY_MEMBER_FROM_ID, comment.getMemberFromId());
 	    values.put(KEY_LEAGUE_ID, comment.getLeagueId());

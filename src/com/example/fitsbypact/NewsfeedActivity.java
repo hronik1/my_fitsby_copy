@@ -13,7 +13,9 @@ import dbhandlers.LeagueMemberTableHandler;
 import dbtables.Comment;
 import dbtables.LeagueMember;
 import dbtables.User;
+import widgets.Header;
 import widgets.NavigationBar;
+import android.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -48,6 +50,8 @@ public class NewsfeedActivity extends Activity
 	private ListView newsfeedLV;
 	private EditText commentET;
 	private Button submitButton;
+	private Header header;
+	
 	
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
@@ -85,6 +89,7 @@ public class NewsfeedActivity extends Activity
         initializeListView();
         initializeEditText();
         initializeSpinner();
+        initializeHeader();
     }
 
     /**
@@ -202,10 +207,9 @@ public class NewsfeedActivity extends Activity
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				// TODO add appropriate click functionality here
 			}
 		});
-		//TODO add manager, adapter and loader
     	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_newsfeed, null,
     			NewsfeedCursorLoader.FROM_ARGS, toArgs, 0);
     	newsfeedLV.setAdapter(mAdapter);
@@ -229,7 +233,6 @@ public class NewsfeedActivity extends Activity
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				//TODO show game states of element clicked on
 				//TODO change comments showing to be those of this league
 				spinnerPosition = position;
@@ -241,7 +244,14 @@ public class NewsfeedActivity extends Activity
 			}
 			
 		});
-		//TODO add Adapter
+	}
+	
+	/**
+	 * initializes the header
+	 */
+	private void initializeHeader() {
+		header = (Header)findViewById(R.id.newsfeed_header);
+		header.setParentActivity(this);
 	}
     
     /** LoaderManager callBacks **/
