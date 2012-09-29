@@ -5,7 +5,6 @@ import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 import dbtables.User;
 import widgets.Header;
 import widgets.NavigationBar;
-import android.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

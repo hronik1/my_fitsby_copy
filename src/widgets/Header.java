@@ -1,9 +1,9 @@
 package widgets;
 
 import com.example.fitsbypact.NewsfeedActivity;
+import com.example.fitsbypact.R;
 import com.example.fitsbypact.SettingsActivity;
 
-import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
