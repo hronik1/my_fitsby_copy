@@ -8,37 +8,46 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
-    
+
     <ListView
         android:id="@+id/newsfeed_list_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newsfeed_spinner" 
-        android:layout_above="@+id/newsfeed_et_comment"/>
-    
-    <EditText 
-        android:id="@+id/newsfeed_et_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/newsfeed_navigation_bar"
-        android:hint="@string/newsfeed_et_comment_hint" />
-    
+        android:layout_below="@+id/newsfeed_spinner" />
+
     <Button
         android:id="@+id/newsfeed_button_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/newsfeed_et_comment"
-        android:layout_toRightOf="@+id/newsfeed_et_comment"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_above="@+id/newsfeed_navigation_bar"
         android:layout_alignParentRight="true"
-        android:text="@string/newsfeed_button_submit_text" />
-    
+        android:background="@drawable/newsfeed_submit_button"
+        android:text="@string/newsfeed_button_submit_text"
+        android:textColor="@color/white" 
+        android:textSize="14sp"
+        android:layout_marginRight="10dp"/>
+
     <widgets.NavigationBar
         android:id="@+id/newsfeed_navigation_bar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/newsfeed_et_comment"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"        
+        android:layout_alignBaseline="@+id/newsfeed_button_submit"
+        android:layout_alignBottom="@+id/newsfeed_button_submit"
+        android:layout_toLeftOf="@+id/newsfeed_button_submit"
+        android:background="@drawable/post_status_here_box"
+        android:gravity="center"
+        android:hint="@string/newsfeed_et_comment_hint" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

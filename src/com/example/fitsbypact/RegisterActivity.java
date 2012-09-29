@@ -151,12 +151,12 @@ public class RegisterActivity extends Activity {
     	}
 
     	if (!comm.isInternetConnected()) {
-    		Toast.makeText(RegisterActivity.this, "Sorry no internet, please try again",
+    		Toast.makeText(RegisterActivity.this, "Sorry, no internet. Please try again",
     				Toast.LENGTH_LONG).show();
     	}
     	
     	if (!dbHandler.getUserTableHandler().isEmailUnique(email)) {
-    		Toast.makeText(RegisterActivity.this, "Sorry email already exists", Toast.LENGTH_LONG).show();
+    		Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG).show();
     	} else {
     		//TODO password salting maybe?
     		User user = new User(firstName, lastName, email, password);

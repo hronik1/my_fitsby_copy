@@ -3,54 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <ImageView
+        android:id="@+id/me_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/me_imageview_desc"
+        android:src="@drawable/ic_launcher" />
 
-   <ImageView
-       	android:id="@+id/me_imageview"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		android:layout_alignParentLeft="true"
-		android:src="@drawable/ic_launcher"
-		android:contentDescription="@string/me_imageview_desc" />
-   
-   <TextView
-       android:id="@+id/me_textview_name"
-       android:layout_toRightOf="@+id/me_imageview"
-       android:layout_alignParentTop="true"
-       android:layout_alignParentRight="true"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/me_textview_name_text" />
-   
-   <TextView
-       android:id="@+id/me_textview_join_date"
-       android:layout_toRightOf="@+id/me_imageview"
-       android:layout_below="@+id/me_textview_name"
-       android:layout_alignParentRight="true"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/me_textview_join_date_text" />
-   
-   <TextView
-       android:id="@+id/me_textview_total_money_earned_prompt"
-       android:layout_above="@+id/me_navigation_bar"
-       android:layout_alignParentLeft="true"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/me_textview_total_money_earned_prompt_text" />
-   
-   <TextView
-       android:id="@+id/me_textview_total_money_earned_money"
-       android:layout_above="@+id/me_navigation_bar"
-       android:layout_toRightOf="@+id/me_textview_total_money_earned_prompt"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/me_textview_total_money_earned_money_text" />
-   
-   <widgets.NavigationBar
+    <TextView
+        android:id="@+id/me_textview_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/me_imageview"
+        android:text="@string/me_textview_name_text" />
+
+    <TextView
+        android:id="@+id/me_textview_join_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/me_textview_name"
+        android:layout_toRightOf="@+id/me_imageview"
+        android:text="@string/me_textview_join_date_text" />
+
+    <widgets.NavigationBar
         android:id="@+id/me_navigation_bar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/me_textview_total_money_earned_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/me_imageview"
+        android:text="@string/me_textview_total_money_earned_prompt_text" />
+
+    <TextView
+        android:id="@+id/me_textview_total_money_earned_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/me_imageview"
+        android:layout_centerHorizontal="true"
+        android:text="@string/me_textview_total_money_earned_money_text" />
+
 </RelativeLayout>

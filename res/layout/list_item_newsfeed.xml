@@ -1,39 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-    
+    android:layout_height="wrap_content"
+   >
+
+    <FrameLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher" />
+    </FrameLayout>
+
     <TextView
         android:id="@+id/list_item_newsfeed_first_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/frameLayout1"
+        android:layout_toRightOf="@+id/frameLayout1"
+        android:textStyle="bold"
         android:text="@string/list_item_newsfeed_first_name_text" />
-    
+
     <TextView
         android:id="@+id/list_item_newsfeed_last_name"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_item_newsfeed_last_name_text" />
-    
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/list_item_newsfeed_first_name"
+        android:layout_alignBottom="@+id/list_item_newsfeed_first_name"
+        android:layout_toRightOf="@+id/list_item_newsfeed_first_name"
+        android:text="@string/list_item_newsfeed_last_name_text" 
+        android:layout_marginLeft="5dp"/>
+
     <TextView
         android:id="@+id/list_item_newsfeed_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/list_item_newsfeed_last_name"
+        android:layout_alignBottom="@+id/list_item_newsfeed_last_name"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:textSize="14sp"
+        android:textColor="@color/button_gray"
         android:text="@string/list_item_newsfeed_timestamp_text" />
-
-    <TextView 
+
+    <TextView
         android:id="@+id/list_item_newsfeed_message"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/list_item_newsfeed_first_name"
-        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_item_newsfeed_message_text"/>
-    
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/list_item_newsfeed_timestamp"
+        android:layout_below="@+id/list_item_newsfeed_first_name"
+        android:layout_toRightOf="@+id/frameLayout1"
+        android:text="@string/list_item_newsfeed_message_text"
+        android:textSize="14sp" />
+
 </RelativeLayout>

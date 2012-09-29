@@ -2,41 +2,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:layout_marginTop="10dp" >
     
     <TextView
         android:id="@+id/public_leagues_league_id_header"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".2"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:background="@drawable/public_leagues_top_words"
+        android:layout_marginLeft="5dp"
         android:text="@string/public_leagues_league_id_header_text" />
 
     <TextView
         android:id="@+id/public_leagues_players_header"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".2"
+        android:textColor="@color/white"        
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/public_leagues_top_words"        
+        android:textSize="14sp"
         android:text="@string/public_leagues_players_header_text" />
 
     <TextView
         android:id="@+id/public_leagues_wager_header"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".2"
+        android:textColor="@color/white"        
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="@drawable/public_leagues_top_words"        
         android:text="@string/public_leagues_wager_header_text" />
 
     <TextView
         android:id="@+id/public_leagues_duration_header"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".2"
+        android:textColor="@color/white"        
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:background="@drawable/public_leagues_top_words"        
+        android:gravity="center"
         android:text="@string/public_leagues_duration_header_text" />
 
     <TextView
         android:id="@+id/public_leagues_pot_header"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:textSize="14sp"
+        android:textColor="@color/white"        
+        android:layout_weight=".2"
+        android:layout_marginRight="5dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/public_leagues_top_words"
         android:text="@string/public_leagues_pot_header_text" />
 
 </LinearLayout>
