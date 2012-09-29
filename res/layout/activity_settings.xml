@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView 
+        android:id="@+id/settings_tv_change_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/settings_tv_change_email_text" />
+    
+    <EditText 
+        android:id="@+id/settings_et_change_email"
+        android:layout_below="@+id/settings_tv_change_email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/settings_et_change_email_hint" />
+    
+    <TextView
+        android:id="@+id/settings_tv_change_picture"
+        android:layout_below="@+id/settings_et_change_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_tv_change_picture_text" />
+    
+    <Button
+        android:id="@+id/settings_button_change_picture"
+        android:layout_below="@+id/settings_tv_change_picture"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_button_change_picture_text" />
+    
+    <TextView 
+        android:id="@+id/settings_tv_change_password"
+        android:layout_below="@+id/settings_button_change_picture"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_tv_change_password_text" />
+    
+    <EditText 
+        android:id="@+id/settings_et_old_password"
+        android:layout_below="@+id/settings_tv_change_password"
+        android:layout_alignParentLeft="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/settings_et_old_password_hint"/>
+    
+    <EditText
+        android:id="@+id/settings_et_new_password"
+        android:layout_below="@+id/settings_et_old_password"
+        android:layout_alignParentLeft="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/settings_et_new_password_hint" />
+    
+    <EditText
+        android:id="@+id/settings_et_new_password_confirm"
+        android:layout_below="@+id/settings_et_new_password"
+        android:layout_alignParentLeft="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/settings_et_new_password_confirm_hint" />
+    
+    <Button
+        android:id="@+id/settings_button_submit"
+        android:layout_below="@+id/settings_et_new_password_confirm"
+        android:layout_alignParentLeft="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_button_submit_text" />
+    
+    <Button
+        android:id="@+id/settings_button_invite_friends"
+        android:layout_below="@+id/settings_button_submit"
+        android:layout_alignParentLeft="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_button_invite_friends_text" />
+    
+    <Button 
+        android:id="@+id/settings_button_logout"
+        android:layout_below="@+id/settings_button_invite_friends"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_button_logout_text" />
+        
+</RelativeLayout>

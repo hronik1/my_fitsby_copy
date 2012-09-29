@@ -40,8 +40,6 @@ public class NavigationBar extends LinearLayout{
 	
 	public NavigationBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
-		
 		setOrientation(HORIZONTAL);
 		
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -89,28 +87,43 @@ public class NavigationBar extends LinearLayout{
 	}
 	
 	public void goToGames() {
-		//TODO implement
+		//TODO handle failure more robustly
     	try {
     		Intent intent = new Intent(this.getContext(), GamesActivity.class);
     		parentActivity.startActivity(intent);
     	} catch (Exception e) {
-    		
+    		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
     	}
 	}
 	
 	public void goToNewsfeed() {
-		Intent intent = new Intent(this.getContext(), NewsfeedActivity.class);
-		parentActivity.startActivity(intent);
+		//TODO handle failure more robustly
+		try {
+			Intent intent = new Intent(this.getContext(), NewsfeedActivity.class);
+			parentActivity.startActivity(intent);
+		} catch (Exception e) {
+    		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
+    	}
 	}
 	
 	public void goToCheckin() {
-		Intent intent = new Intent(this.getContext(), CheckInActivity.class);
-		parentActivity.startActivity(intent);
+		//TODO handler failure more robustly
+		try {
+			Intent intent = new Intent(this.getContext(), CheckInActivity.class);
+			parentActivity.startActivity(intent);
+		} catch (Exception e) {
+    		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
+    	}
 	}
 	
 	public void goToMe() {
-		Intent intent = new Intent(this.getContext(), MeActivity.class);
-		parentActivity.startActivity(intent);
+		//TODO handle failure more robustly
+		try {
+			Intent intent = new Intent(this.getContext(), MeActivity.class);
+			parentActivity.startActivity(intent);
+		} catch (Exception e) {
+    		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
+    	}
 	}
 
 	/**

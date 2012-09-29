@@ -130,7 +130,6 @@ public class LeagueMemberTableHandler {
 	            leagueMember.setCheckins(Integer.parseInt(cursor.getString(3)));
 	            leagueMember.setCheckouts(Integer.parseInt(cursor.getString(4)));
 
-	            //TODO additional validation on cursor position
 	            leagueMembersList.add(leagueMember);
 	        } while (cursor.moveToNext());
 	    }
@@ -160,7 +159,6 @@ public class LeagueMemberTableHandler {
 	            leagueMember.setCheckins(Integer.parseInt(cursor.getString(3)));
 	            leagueMember.setCheckouts(Integer.parseInt(cursor.getString(4)));
 
-	            //TODO additional validation on cursor position
 	            leagueMembersList.add(leagueMember);
 	        } while (cursor.moveToNext());
 	    }
@@ -188,7 +186,6 @@ public class LeagueMemberTableHandler {
 	            leagueMember.setCheckins(Integer.parseInt(cursor.getString(3)));
 	            leagueMember.setCheckouts(Integer.parseInt(cursor.getString(4)));
 	            
-	            //TODO additional validation on cursor position
 	            leagueMembersList.add(leagueMember);
 	        } while (cursor.moveToNext());
 	    }

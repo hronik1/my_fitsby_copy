@@ -18,22 +18,27 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LeagueCreateActivity extends Activity {
-
+	
 	private final static String TAG = "LeagueCreateActivity";
 	
-	private final static int MIN_WAGER = 5;
-	private final static int MAX_WAGER = Integer.MAX_VALUE;
-	private final static int MIN_DAYS = 3;
-	private final static int MAX_DAYS = 7;
+	private final static int WAGER_INCREMENT = 5;
+	private final static int DAYS_INCREMENT = 7;
+	private final static int MAX_DAYS = 28;
 	
-	private NumberPicker wagerNP;
-	private NumberPicker daysNP;
 	private Button createButton;
 	private CheckBox createCheckBox;
+	private ImageButton wagerPlusIB;
+	private ImageButton wagerMinusIB;
+	private ImageButton daysPlusIB;
+	private ImageButton daysMinusIB;
+	private TextView wagerTV;
+	private TextView daysTV;
 	
 	private int userID;
 	
@@ -52,9 +57,10 @@ public class LeagueCreateActivity extends Activity {
         setContentView(R.layout.activity_league_create);
         Log.i(TAG, "onCreate");
         
-        initializeNumberPickers();
         initializeButtons();
         initializeCheckBoxes();  
+        initializeImageButtons();
+        initializeTextViews();
         
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         leagueTableHandler = dbHandler.getLeagueTableHandler();
@@ -134,21 +140,6 @@ public class LeagueCreateActivity extends Activity {
 	}
 	
 	/**
-	 * initializes the days and wager number pickers
-	 */
-	private void initializeNumberPickers() {
-    	wagerNP = (NumberPicker)findViewById(R.id.league_create_np_wager);
-    	wagerNP.setMaxValue(MAX_WAGER);
-    	wagerNP.setMinValue(MIN_WAGER);
-    	wagerNP.setValue(MIN_WAGER);
-    	
-    	daysNP = (NumberPicker)findViewById(R.id.league_create_np_days);
-    	daysNP.setMaxValue(MAX_DAYS);
-    	daysNP.setMinValue(MIN_DAYS);
-    	daysNP.setValue(MIN_DAYS);
-	}
-	
-	/**
 	 * initializes create button
 	 */
 	private void initializeButtons() {
@@ -161,12 +152,100 @@ public class LeagueCreateActivity extends Activity {
 	}
 	
 	/**
+	 * initializes all of the imageButtons
+	 */
+	private void initializeImageButtons() {
+		wagerPlusIB = (ImageButton)findViewById(R.id.league_create_ib_wager_plus);
+		wagerPlusIB.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				incrementWager();
+			}
+		});
+		
+		wagerMinusIB = (ImageButton)findViewById(R.id.league_create_ib_wager_minus);
+		wagerMinusIB.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				decrementWager();
+			}	
+		});
+		
+		daysPlusIB = (ImageButton)findViewById(R.id.league_create_ib_days_plus);
+		daysPlusIB.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				incrementDays();
+			}
+		});
+		
+		daysMinusIB = (ImageButton)findViewById(R.id.league_create_ib_days_minus);
+		daysMinusIB.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				decrementDays();
+			}
+		});
+	}
+	
+	/**
+	 * initializes the text views
+	 */
+	private void initializeTextViews() {
+		wagerTV = (TextView)findViewById(R.id.league_create_wager);
+		daysTV = (TextView)findViewById(R.id.league_create_days);
+	}
+	
+	/**
+	 * increments the wager and resets it
+	 */
+	private void incrementWager() {
+		int wager = Integer.parseInt((String)wagerTV.getText());
+		wager += WAGER_INCREMENT;
+		wagerTV.setText(wager + "");
+	}
+	
+	/**
+	 * decrements the wager in the text view if valid, and resets it
+	 */
+	private void decrementWager() {
+		int wager = Integer.parseInt((String)wagerTV.getText());
+		if(wager > 0) {
+			wager -= WAGER_INCREMENT;
+			wagerTV.setText(wager + "");
+		}
+	}
+	
+	/**
+	 * increments the days in the text view if valid, and resets it
+	 */
+	private void incrementDays() {
+		int days = Integer.parseInt((String)daysTV.getText());
+		if (days < MAX_DAYS) {
+			days += DAYS_INCREMENT;
+			daysTV.setText(days + "");
+		}
+	}
+	
+	/**
+	 * decrements the days in the text view if valid, and resets it
+	 */
+	private void decrementDays() {
+		int days = Integer.parseInt((String)daysTV.getText());
+		if (days > DAYS_INCREMENT) {
+			days -= DAYS_INCREMENT;
+			daysTV.setText(days + "");
+		}
+	}
+	
+	/**
 	 * Creates the game specified by the wager and days
 	 */
 	private void create() {
 		int wager, duration, isPrivate;
-		wager = wagerNP.getValue();
-		duration = daysNP.getValue();
+		wager = Integer.parseInt((String) wagerTV.getText());
+		duration = Integer.parseInt((String) daysTV.getText());
 		isPrivate = createCheckBox.isChecked() ? 1 : 0;
 		League league = new League(userID, isPrivate, wager, duration);
 		leagueTableHandler.addLeague(league);

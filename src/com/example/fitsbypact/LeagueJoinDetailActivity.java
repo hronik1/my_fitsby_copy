@@ -180,7 +180,6 @@ public class LeagueJoinDetailActivity extends Activity {
  	 * join the game selected by user
  	 */
  	private void join() {
- 		//TODO actually join this game
  		if(!isValid) {
  			//TODO really have to change this, not sure how to properly handle a bad bundle being passed though
  			Toast.makeText(getApplicationContext(), "sorry invalid bundle", Toast.LENGTH_LONG).show();

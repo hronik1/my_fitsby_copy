@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper{
 
-	//TODO migrate to table handler
+
 	private static final String TAG = "DatabaseHandler";
 	
     public static final int DATABASE_VERSION = 3;

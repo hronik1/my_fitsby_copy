@@ -160,9 +160,6 @@ public class LeagueJoinActivity extends Activity
 				int wager = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_WAGER));
 				boolean isPrivate = false;
 				gotoLeagueDetails(leagueId, players, wager, pot, isPrivate);
-				// TODO Auto-generated method stub
-				// TODO actually do something cool
-				//TODO go to league detail page
 			}
     		
     	});

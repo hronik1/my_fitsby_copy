@@ -150,7 +150,7 @@ public class CreditCardActivity extends Activity {
     private void initializeTextViews() {
     	wagerTV = (TextView)findViewById(R.id.credit_card_tv_wager);
     	wagerTV.setText("" + wager);
-    	//TODO set wagerTV to be that passed in from bundle
+
     }
     
     /**

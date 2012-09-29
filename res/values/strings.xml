@@ -1,5 +1,5 @@
 <resources>
-
+    
 	<string name="motto">Stay motivated to hit the gym.</string>
     <string name="or"> OR </string>
     <string name="app_name">Fitsby</string>
@@ -79,10 +79,10 @@
     <string name="public_leagues_duration_header_text">Duration</string>
     <string name="public_leagues_pot_header_text">Pot</string>
     <string name="title_activity_league_join_detail">Join A Game</string>
-	<string name="league_join_detail_header_text">Game Details</string>
-	<string name="league_join_detail_type_text">Type: </string>
-	<string name="league_join_detail_wager_text">Wager: </string>
-	<string name="league_join_detail_pot_text">Pot: </string>
+    <string name="league_join_detail_header_text">Game Details</string>
+    <string name="league_join_detail_type_text">Type: </string>
+    <string name="league_join_detail_wager_text">Wager: </string>
+    <string name="league_join_detail_pot_text">Pot: </string>
     <string name="league_join_detail_players_text">Players: </string>
     <string name="league_join_detail_button_join_text">Join</string>
     <string name="list_item_game_leader_name_text">First Name</string>
@@ -98,5 +98,26 @@
     <string name="list_item_newsfeed_timestamp_text">Now</string>
     <string name="list_item_newsfeed_message_text">This is a comment.</string>
     <string name="credit_card_tv_wager_text">Wager</string>
+
+    <string name="league_create_wager_text">0</string>
+    <string name="league_create_days_text">14</string>
+    <string name="league_create_ib_days_minus_text">Decrement days</string>
+    <string name="league_create_ib_days_plus_text">Increment days</string>
+    <string name="league_create_ib_wager_minus_text">Decrement wager</string>
+    <string name="league_create_ib_wager_plus_text">Increment days</string>
+    <string name="header_title_text">Fitsby</string>
+    <string name="header_settings_text">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="settings_tv_change_email_text">Change Email: </string>
+    <string name="settings_et_change_email_hint">New email</string>
+    <string name="settings_tv_change_password_text">Change Password: </string>
+	<string name="settings_et_old_password_hint">Old password</string>
+	<string name="settings_et_new_password_hint">New password</string>
+	<string name="settings_et_new_password_confirm_hint">Confirm new password</string>
+	<string name="settings_button_submit_text">Submit</string>
+	<string name="settings_button_invite_friends_text">Invite Friends</string>
+	<string name="settings_button_logout_text">Logout</string>
+	<string name="settings_tv_change_picture_text">Change Picture: </string>
+	<string name="settings_button_change_picture_text">Change picture</string>
 
 </resources>

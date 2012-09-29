@@ -12,6 +12,7 @@ import dbhandlers.LeagueTableHandler;
 import dbhandlers.UserTableHandler;
 import dbtables.LeagueMember;
 import dbtables.User;
+import widgets.Header;
 import widgets.NavigationBar;
 import android.os.Bundle;
 import android.app.Activity;
@@ -44,6 +45,7 @@ public class GamesActivity extends Activity
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
+	private Header header;
 	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
@@ -81,6 +83,7 @@ public class GamesActivity extends Activity
         initializeTextViews();
         initializeProgressBar();
         initializeListView();
+        initializeHeader();
     }
 
     /**
@@ -196,7 +199,6 @@ public class GamesActivity extends Activity
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				//TODO show game states of element clicked on
 			}
 
@@ -206,9 +208,15 @@ public class GamesActivity extends Activity
 			}
 			
 		});
-		//TODO add Adapter
 	}
 
+	/**
+	 * initializes the header
+	 */
+	private void initializeHeader() {
+		header = (Header)findViewById(R.id.games_header);
+		header.setParentActivity(this);
+	}
     
     /** LoaderManager callBacks **/
     
@@ -219,7 +227,6 @@ public class GamesActivity extends Activity
      * @return
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	//TODO initialize proper cursor and return that
     	return new GameLeaderCursorLoader(this);
     }
     
@@ -237,7 +244,6 @@ public class GamesActivity extends Activity
      * @param loader
      */
     public void onLoaderReset(Loader<Cursor> loader) {
-    	//TODO make sure that adapter is no longer using cursor
     	mAdapter.swapCursor(null);
     }
     

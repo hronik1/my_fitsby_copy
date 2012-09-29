@@ -80,6 +80,10 @@
             android:name=".LeagueJoinDetailActivity"
             android:label="@string/title_activity_league_join_detail" >
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>        
     </application>
 
 </manifest>
