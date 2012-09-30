@@ -10,6 +10,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MeActivity extends Activity {
@@ -19,6 +23,15 @@ public class MeActivity extends Activity {
 	private TextView nameTV;
 	private TextView joinTV;
 	private TextView earningsTV;
+	
+	private Button logoutButton;
+	private Button changePictureButton;
+	private Button submitButton;
+	
+	private EditText emailET;
+	private EditText oldPasswordET;
+	private EditText newPasswordET;
+	private EditText newPasswordConfirmET;
 	
 	private NavigationBar navigation;
 	
@@ -37,7 +50,9 @@ public class MeActivity extends Activity {
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         initializeNavigationBar();
-        initializeTextViews();   
+        initializeTextViews();
+        initializeButtons();
+        initializeEditTexts();
     }
 
     /**
@@ -121,5 +136,66 @@ public class MeActivity extends Activity {
 		
 		earningsTV = (TextView)findViewById(R.id.me_textview_total_money_earned_money);
 		//add earnings for user
+	}
+	
+	/**
+	 * initializes the editTexts
+	 */
+	private void initializeEditTexts() {
+		emailET = (EditText)findViewById(R.id.me_settings_et_change_email);
+		oldPasswordET = (EditText)findViewById(R.id.me_settings_et_old_password);
+		newPasswordET = (EditText)findViewById(R.id.me_settings_et_new_password);
+		newPasswordConfirmET = (EditText)findViewById(R.id.me_settings_et_new_password_confirm);
+	}
+	
+	/**
+	 * initializes the buttons
+	 */
+	private void initializeButtons() {
+		logoutButton = (Button)findViewById(R.id.me_settings_button_logout);
+		logoutButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				logout();
+			}
+		});
+		
+		changePictureButton = (Button)findViewById(R.id.me_settings_button_change_picture);
+		changePictureButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				changePicture();
+			}
+		});
+		
+		submitButton = (Button)findViewById(R.id.me_settings_button_submit); 
+		submitButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				submit();
+			}
+		});
+		
+	}
+	
+	/**
+	 * logs the user out
+	 */
+	private void logout() {
+		//TODO implement
+	}
+	
+	/**
+	 * change picture
+	 */
+	private void changePicture() {
+		//TODO figure out how to do and then implement
+	}
+	
+	/**
+	 * submits user input info
+	 */
+	private void submit() {
+		//TODO figure out what need to be submit and then submit it
 	}
 }

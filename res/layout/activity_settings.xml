@@ -72,17 +72,9 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_button_submit_text" />
     
-    <Button
-        android:id="@+id/settings_button_invite_friends"
-        android:layout_below="@+id/settings_button_submit"
-        android:layout_alignParentLeft="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_button_invite_friends_text" />
-    
     <Button 
         android:id="@+id/settings_button_logout"
-        android:layout_below="@+id/settings_button_invite_friends"
+        android:layout_below="@+id/settings_button_submit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
