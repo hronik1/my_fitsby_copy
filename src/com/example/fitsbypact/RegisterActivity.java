@@ -28,6 +28,7 @@ public class RegisterActivity extends Activity {
 	private EditText lastNameET;
 	private EditText emailET;
 	private EditText passwordET;
+	private EditText confirmPasswordET;
 	
 	private ServerCommunication comm;
 	private ApplicationUser mApplicationUser;
@@ -129,6 +130,7 @@ public class RegisterActivity extends Activity {
     	String firstName = "";
     	String lastName = "";
     	String password = "";
+    	String confirmPassword = "";
     	String email = "";
     	DatabaseHandler dbHandler = DatabaseHandler.getInstance(getApplicationContext());
     	
@@ -138,12 +140,14 @@ public class RegisterActivity extends Activity {
         	lastName = lastNameET.getText().toString();
     	if (passwordET != null && passwordET.getText() != null)
     		password = passwordET.getText().toString();
+    	if (confirmPasswordET != null && confirmPasswordET.getText() != null)
+    		confirmPassword = confirmPasswordET.getText().toString();
     	if (emailET != null && emailET.getText() != null)
     		email = emailET.getText().toString();
 
     	String validity = RegisterClientSideValidation.validateName(firstName, lastName);
     	validity += RegisterClientSideValidation.validateEmail(email);
-    	validity += RegisterClientSideValidation.validatePassword(password);
+    	validity += RegisterClientSideValidation.validatePassword(password, confirmPassword);
     	
     	if (validity != "") {
     		Toast.makeText(RegisterActivity.this, validity, Toast.LENGTH_LONG).show();
@@ -189,6 +193,7 @@ public class RegisterActivity extends Activity {
     	lastNameET = (EditText)findViewById(R.id.register_last_name_id);
     	emailET = (EditText)findViewById(R.id.register_email_id);
     	passwordET = (EditText)findViewById(R.id.register_password_id);
+    	confirmPasswordET = (EditText)findViewById(R.id.register_confirm_password_id);
     }
 
 }

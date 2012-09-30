@@ -47,11 +47,19 @@ public class RegisterClientSideValidation {
 	 * @param password
 	 * @return empty string if fine, error message otherwise
 	 */
-	public static String validatePassword(String password) {
+	public static String validatePassword(String password, String confirmPassword) {
 		String ret = "";
 		
 		if (password == null || password.length() < minLength) {
 			ret += "Password must be at least 6 characters.\n";
+		}
+		
+		if (confirmPassword == null || password.length() < minLength) {
+			ret += "Confirmation password must be at least 6 characters.\n";
+		}
+		
+		if (!confirmPassword.equals(password)) {
+			ret += "Password doesn't match confirm password.\n";
 		}
 		//TODO additional password verification
 		
