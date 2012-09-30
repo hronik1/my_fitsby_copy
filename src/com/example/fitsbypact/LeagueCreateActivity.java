@@ -64,6 +64,7 @@ public class LeagueCreateActivity extends Activity {
         
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         leagueTableHandler = dbHandler.getLeagueTableHandler();
+        leagueMemberTableHandler = dbHandler.getLeagueMemberTableHandler();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         userID = mApplicationUser.getUser().getID();
