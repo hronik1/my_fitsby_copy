@@ -46,7 +46,7 @@
     <string name="league_join_button_submit_text">Submit</string>
     <string name="league_create_checkbox_text">Make game private</string>
     <string name="navigation_textview_me_text">Me</string>
-    <string name="navigation_textview_game_text">Game</string>
+    <string name="navigation_textview_game_text">Games</string>
     <string name="navigation_textview_newsfeed_text">Newsfeed</string>
     <string name="navigation_textview_checkin_text">Check In</string>
     <string name="check_in_button_check_in_text">Check In</string>
