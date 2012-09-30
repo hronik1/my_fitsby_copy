@@ -59,7 +59,7 @@ public class RegisterClientSideValidation {
 		}
 		
 		if (!confirmPassword.equals(password)) {
-			ret += "Password doesn't match confirm password.\n";
+			ret += "Password doesn't match Confirm Password.\n";
 		}
 		//TODO additional password verification
 		

@@ -121,8 +121,13 @@ public class RegisterActivity extends Activity {
     	
     }
     
+    /**
+     * called when dialog is created
+     */
     @Override
     public Dialog onCreateDialog(int id) {
+    	Log.i(TAG, "onCreateDialog" +  id);
+    	
     	AlertDialog alert;
     	switch(id) {
     	case DIALOG_CONFIRM_EMAIL_ID:
@@ -219,6 +224,7 @@ public class RegisterActivity extends Activity {
     	if (!mUserTableHandler.isEmailUnique(email)) {
     		Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG).show();
     	} else {
+    		Log.i(TAG, "showing dialog");
     		showDialog(DIALOG_CONFIRM_EMAIL_ID);
     	}
     	
