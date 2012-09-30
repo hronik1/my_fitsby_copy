@@ -8,7 +8,6 @@ import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbtables.LeagueMember;
 import dbtables.User;
-import widgets.Header;
 import widgets.NavigationBar;
 import android.os.Bundle;
 import android.app.Activity;

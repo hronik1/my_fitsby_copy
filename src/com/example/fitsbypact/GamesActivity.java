@@ -12,7 +12,6 @@ import dbhandlers.LeagueTableHandler;
 import dbhandlers.UserTableHandler;
 import dbtables.LeagueMember;
 import dbtables.User;
-import widgets.Header;
 import widgets.NavigationBar;
 import android.os.Bundle;
 import android.app.Activity;
