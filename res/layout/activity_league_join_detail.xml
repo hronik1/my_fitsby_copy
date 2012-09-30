@@ -7,47 +7,47 @@
         android:id="@+id/league_join_detail_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:text="@string/league_join_detail_header_text" />
-    
+
     <TextView
         android:id="@+id/league_join_detail_type"
-        android:layout_below="@+id/league_join_detail_header"
-        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/league_join_detail_header"
         android:text="@string/league_join_detail_type_text" />
+
+    <Button
+        android:id="@+id/league_join_detail_button_join"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/league_join_detail_button_join_text" />
 
     <TextView
         android:id="@+id/league_join_detail_wager"
-        android:layout_below="@+id/league_join_detail_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_below="@+id/league_join_detail_type"
         android:text="@string/league_join_detail_wager_text" />
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/league_join_detail_pot"
-        android:layout_centerHorizontal="true"
-        android:layout_alignTop="@+id/league_join_detail_wager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/league_join_detail_wager"
         android:text="@string/league_join_detail_pot_text" />
-    
+
     <TextView
         android:id="@+id/league_join_detail_players"
-        android:layout_below="@+id/league_join_detail_wager"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/league_join_detail_pot"
         android:text="@string/league_join_detail_players_text" />
-    
-    <Button
-        android:id="@+id/league_join_detail_button_join"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:text="@string/league_join_detail_button_join_text" />
-    
+
 </RelativeLayout>
