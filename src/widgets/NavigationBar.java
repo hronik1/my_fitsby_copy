@@ -89,7 +89,7 @@ public class NavigationBar extends LinearLayout{
 	public void goToGames() {
 		//TODO handle failure more robustly
     	try {
-    		Intent intent = new Intent(this.getContext(), GamesActivity.class);
+    		Intent intent = new Intent(parentActivity, GamesActivity.class);
     		parentActivity.startActivity(intent);
     	} catch (Exception e) {
     		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
@@ -99,7 +99,7 @@ public class NavigationBar extends LinearLayout{
 	public void goToNewsfeed() {
 		//TODO handle failure more robustly
 		try {
-			Intent intent = new Intent(this.getContext(), NewsfeedActivity.class);
+			Intent intent = new Intent(parentActivity, NewsfeedActivity.class);
 			parentActivity.startActivity(intent);
 		} catch (Exception e) {
     		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
@@ -109,7 +109,7 @@ public class NavigationBar extends LinearLayout{
 	public void goToCheckin() {
 		//TODO handler failure more robustly
 		try {
-			Intent intent = new Intent(this.getContext(), CheckInActivity.class);
+			Intent intent = new Intent(parentActivity, CheckInActivity.class);
 			parentActivity.startActivity(intent);
 		} catch (Exception e) {
     		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
@@ -119,7 +119,7 @@ public class NavigationBar extends LinearLayout{
 	public void goToMe() {
 		//TODO handle failure more robustly
 		try {
-			Intent intent = new Intent(this.getContext(), MeActivity.class);
+			Intent intent = new Intent(parentActivity, MeActivity.class);
 			parentActivity.startActivity(intent);
 		} catch (Exception e) {
     		Toast.makeText(parentActivity, e.toString(), Toast.LENGTH_LONG).show();
