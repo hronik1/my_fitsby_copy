@@ -2,127 +2,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-    <ImageView
-        android:id="@+id/me_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/me_imageview_desc"
-        android:src="@drawable/ic_launcher" />
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/me_textview_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/me_imageview"
-        android:text="@string/me_textview_name_text" />
+            <ImageView
+                android:id="@+id/me_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription="@string/me_imageview_desc"
+                android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/me_textview_join_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/me_textview_name"
-        android:layout_toRightOf="@+id/me_imageview"
-        android:text="@string/me_textview_join_date_text" />
+            <TextView
+                android:id="@+id/me_textview_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/me_imageview"
+                android:text="@string/me_textview_name_text" />
 
-    <TextView
-        android:id="@+id/me_textview_total_money_earned_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/me_imageview"
-        android:text="@string/me_textview_total_money_earned_prompt_text" />
+            <TextView
+                android:id="@+id/me_textview_join_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/me_textview_name"
+                android:layout_toRightOf="@+id/me_imageview"
+                android:text="@string/me_textview_join_date_text" />
 
-    <TextView
-        android:id="@+id/me_textview_total_money_earned_money"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/me_imageview"
-        android:layout_centerHorizontal="true"
-        android:text="@string/me_textview_total_money_earned_money_text" />
-    
-    <TextView 
-        android:id="@+id/me_settings_tv_change_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/me_textview_total_money_earned_money"
-        android:layout_alignParentLeft="true"
-        android:text="@string/me_settings_tv_change_email_text" />
-    
-    <EditText 
-        android:id="@+id/me_settings_et_change_email"
-        android:layout_below="@+id/me_settings_tv_change_email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/me_settings_et_change_email_hint" />
-    
-    <TextView
-        android:id="@+id/me_settings_tv_change_picture"
-        android:layout_below="@+id/me_settings_et_change_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/me_settings_tv_change_picture_text" />
-    
-    <Button
-        android:id="@+id/me_settings_button_change_picture"
-        android:layout_below="@+id/me_settings_tv_change_picture"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/me_settings_button_change_picture_text" />
-    
-    <TextView 
-        android:id="@+id/me_settings_tv_change_password"
-        android:layout_below="@+id/me_settings_button_change_picture"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/me_settings_tv_change_password_text" />
-    
-    <EditText 
-        android:id="@+id/me_settings_et_old_password"
-        android:layout_below="@+id/me_settings_tv_change_password"
-        android:layout_alignParentLeft="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/me_settings_et_old_password_hint"/>
-    
-    <EditText
-        android:id="@+id/me_settings_et_new_password"
-        android:layout_below="@+id/me_settings_et_old_password"
-        android:layout_alignParentLeft="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/me_settings_et_new_password_hint" />
-    
-    <EditText
-        android:id="@+id/me_settings_et_new_password_confirm"
-        android:layout_below="@+id/me_settings_et_new_password"
-        android:layout_alignParentLeft="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/me_settings_et_new_password_confirm_hint" />
-    
-    <Button
-        android:id="@+id/me_settings_button_submit"
-        android:layout_below="@+id/me_settings_et_new_password_confirm"
-        android:layout_alignParentLeft="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/me_settings_button_submit_text" />
-    
-    <Button 
-        android:id="@+id/me_settings_button_logout"
-        android:layout_below="@+id/me_settings_button_submit"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/me_navigation_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/me_settings_button_logout_text" />
+            <TextView
+                android:id="@+id/me_textview_total_money_earned_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_imageview"
+                android:text="@string/me_textview_total_money_earned_prompt_text" />
 
+            <TextView
+                android:id="@+id/me_textview_total_money_earned_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_imageview"
+                android:layout_centerHorizontal="true"
+                android:text="@string/me_textview_total_money_earned_money_text" />
+
+            <TextView
+                android:id="@+id/me_settings_tv_change_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/me_textview_total_money_earned_money"
+                android:text="@string/me_settings_tv_change_email_text" />
+
+            <EditText
+                android:id="@+id/me_settings_et_change_email"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_settings_tv_change_email"
+                android:hint="@string/me_settings_et_change_email_hint" />
+
+            <TextView
+                android:id="@+id/me_settings_tv_change_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_settings_et_change_email"
+                android:text="@string/me_settings_tv_change_picture_text" />
+
+            <Button
+                android:id="@+id/me_settings_button_change_picture"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_settings_tv_change_picture"
+                android:text="@string/me_settings_button_change_picture_text" />
+
+            <TextView
+                android:id="@+id/me_settings_tv_change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/me_settings_button_change_picture"
+                android:text="@string/me_settings_tv_change_password_text" />
+
+            <EditText
+                android:id="@+id/me_settings_et_old_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/me_settings_tv_change_password"
+                android:hint="@string/me_settings_et_old_password_hint" />
+
+            <EditText
+                android:id="@+id/me_settings_et_new_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/me_settings_et_old_password"
+                android:hint="@string/me_settings_et_new_password_hint" />
+
+            <EditText
+                android:id="@+id/me_settings_et_new_password_confirm"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/me_settings_et_new_password"
+                android:hint="@string/me_settings_et_new_password_confirm_hint" />
+
+            <Button
+                android:id="@+id/me_settings_button_submit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/me_settings_et_new_password_confirm"
+                android:text="@string/me_settings_button_submit_text" />
+
+            <Button
+                android:id="@+id/me_settings_button_logout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/me_navigation_bar"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/me_settings_button_submit"
+                android:text="@string/me_settings_button_logout_text" />
+        </RelativeLayout>
+
+	</ScrollView>
     <widgets.NavigationBar
         android:id="@+id/me_navigation_bar"
         android:layout_width="fill_parent"
