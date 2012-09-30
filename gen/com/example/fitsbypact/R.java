@@ -22,21 +22,21 @@ public final class R {
     }
     public static final class drawable {
         public static final int checkin=0x7f020000;
-        public static final int custom_getstarted_button=0x7f020001;
-        public static final int custom_login_button=0x7f020002;
-        public static final int custom_navigation_tabs=0x7f020003;
-        public static final int game=0x7f020004;
-        public static final int ic_action_search=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int ic_launcher_textlogo=0x7f020007;
-        public static final int landing_getstarted_button=0x7f020008;
-        public static final int landing_login_button=0x7f020009;
-        public static final int logo_text=0x7f02000a;
-        public static final int me=0x7f02000b;
-        public static final int newsfeed=0x7f02000c;
-        public static final int newsfeed_submit_button=0x7f02000d;
-        public static final int post_status_here_box=0x7f02000e;
-        public static final int public_leagues_top_words=0x7f02000f;
+        public static final int custom_login_button=0x7f020001;
+        public static final int custom_navigation_tabs=0x7f020002;
+        public static final int game=0x7f020003;
+        public static final int ic_action_search=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_launcher_textlogo=0x7f020006;
+        public static final int landing_getstarted_button=0x7f020007;
+        public static final int landing_login_button=0x7f020008;
+        public static final int logo_text=0x7f020009;
+        public static final int me=0x7f02000a;
+        public static final int newsfeed=0x7f02000b;
+        public static final int newsfeed_submit_button=0x7f02000c;
+        public static final int post_status_here_box=0x7f02000d;
+        public static final int public_leagues_top_words=0x7f02000e;
+        public static final int white_textbox=0x7f02000f;
     }
     public static final class id {
         public static final int check_in_button_check_in=0x7f080003;

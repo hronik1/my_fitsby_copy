@@ -28,7 +28,7 @@
         android:layout_below="@+id/register_email_id"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"        
-        android:background="@drawable/custom_getstarted_button"
+        android:background="@drawable/white_textbox"
         android:ems="10"
         android:hint="@string/register_password_hint" />
 
@@ -43,7 +43,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/custom_getstarted_button"
+        android:background="@drawable/white_textbox"
         android:ems="10"
         android:hint="@string/register_email_hint"
         tools:context=".RegisterActivity" />
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"      
         android:paddingTop="10dp"
-        android:background="@drawable/custom_getstarted_button"
+        android:background="@drawable/white_textbox"
         android:hint="@string/register_first_name_hint" >
         <requestFocus />
     </EditText>
@@ -81,7 +81,7 @@
         android:layout_alignBaseline="@+id/register_first_name_id"
         android:layout_alignBottom="@+id/register_first_name_id"
         android:layout_alignRight="@+id/register_email_id"
-        android:background="@drawable/custom_getstarted_button"
+        android:background="@drawable/white_textbox"
         android:hint="@string/register_last_name_hint"
         android:paddingTop="10dp" />
 

@@ -5,7 +5,7 @@
     <string name="app_name">Fitsby</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_register">Register</string>
+    <string name="title_activity_register">Create An Account</string>
     <string name="register_email_hint">Email</string>
     <string name="register_password_hint">Password (6 characters minimum)</string>
     <string name="register_button_register">Register</string>
