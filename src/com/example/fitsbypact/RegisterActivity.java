@@ -4,10 +4,14 @@ package com.example.fitsbypact;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbhandlers.DatabaseHandler;
+import dbhandlers.UserTableHandler;
 import dbtables.User;
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +25,7 @@ import android.widget.Toast;
 public class RegisterActivity extends Activity {
 
 	private final static String TAG = "MainActivity";
+	private final static int DIALOG_CONFIRM_EMAIL_ID = 0;
 	
 	private Button buttonRegister;
 	
@@ -32,6 +37,9 @@ public class RegisterActivity extends Activity {
 	
 	private ServerCommunication comm;
 	private ApplicationUser mApplicationUser;
+	private DatabaseHandler mdbHandler;
+	private UserTableHandler mUserTableHandler;
+	
 	/**
 	 * called when activity is created
 	 */
@@ -45,6 +53,8 @@ public class RegisterActivity extends Activity {
         initializeEditTexts();
         
         comm = new ServerCommunication(this);
+        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        mUserTableHandler = mdbHandler.getUserTableHandler();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         
@@ -111,6 +121,54 @@ public class RegisterActivity extends Activity {
     	
     }
     
+    @Override
+    public Dialog onCreateDialog(int id) {
+    	AlertDialog alert;
+    	switch(id) {
+    	case DIALOG_CONFIRM_EMAIL_ID:
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage("Are you sure " + emailET.getText().toString() +
+    				" is correct?")
+    		.setCancelable(false)
+    		.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				String firstName = firstNameET.getText().toString();
+    				String lastName = lastNameET.getText().toString();
+    				String email = emailET.getText().toString();
+    				String password = passwordET.getText().toString();
+    	    		//TODO password salting maybe?
+    	    		User user = new User(firstName, lastName, email, password);
+    	    		mdbHandler.getUserTableHandler().addUser(user);
+    	    		user = mUserTableHandler.getUser(email);
+    	    		if (user != null) {
+    	    			mApplicationUser.setUser(user);
+    	    	    	try {
+    	    	    		Intent intent = new Intent(RegisterActivity.this, LeagueLandingActivity.class);
+    	    	    		startActivity(intent);
+    	    	    	} catch (Exception e) {
+    	    	    		//remove in deployment
+    	    	    		String stackTrace = android.util.Log.getStackTraceString(e);
+    	    	    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    	    	    				Toast.LENGTH_LONG);
+    	    	    		toast.show();
+    	    	    	} 
+    	    		} else {
+    	    			Toast.makeText(RegisterActivity.this, "sorry error occured", Toast.LENGTH_LONG).show();
+    	    		}
+    			}
+    		})
+    		.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int id) {
+    				dialog.cancel();
+    			}
+    		});
+    		alert = builder.create();
+    	
+    	default:
+    		alert = null;
+    	}
+    	return alert;
+    }
     /**
      * helper function which initializes the buttons
      */
@@ -132,7 +190,6 @@ public class RegisterActivity extends Activity {
     	String password = "";
     	String confirmPassword = "";
     	String email = "";
-    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(getApplicationContext());
     	
     	if (firstNameET != null && firstNameET.getText() != null)
     		firstName = firstNameET.getText().toString();
@@ -159,28 +216,10 @@ public class RegisterActivity extends Activity {
     				Toast.LENGTH_LONG).show();
     	}
     	
-    	if (!dbHandler.getUserTableHandler().isEmailUnique(email)) {
+    	if (!mUserTableHandler.isEmailUnique(email)) {
     		Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG).show();
     	} else {
-    		//TODO password salting maybe?
-    		User user = new User(firstName, lastName, email, password);
-    		dbHandler.getUserTableHandler().addUser(user);
-    		user = dbHandler.getUserTableHandler().getUser(email);
-    		if (user != null) {
-    			mApplicationUser.setUser(user);
-    	    	try {
-    	    		Intent intent = new Intent(this, LeagueLandingActivity.class);
-    	    		startActivity(intent);
-    	    	} catch (Exception e) {
-    	    		//remove in deployment
-    	    		String stackTrace = android.util.Log.getStackTraceString(e);
-    	    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
-    	    				Toast.LENGTH_LONG);
-    	    		toast.show();
-    	    	} 
-    		} else {
-    			Toast.makeText(this, "sorry error occured", Toast.LENGTH_LONG).show();
-    		}
+    		showDialog(DIALOG_CONFIRM_EMAIL_ID);
     	}
     	
     }
