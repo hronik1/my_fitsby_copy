@@ -1,6 +1,8 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="AppTheme" parent="android:Theme.Light">
+      	<item name="android:typeface">sans</item>  
+    </style>
 
     <style name="FitsbyTheme" parent="android:Theme.Light" />
     
@@ -14,6 +16,10 @@
         <item name="android:typeface">sans</item>
     </style>
 
+    <style name="credit_card_boxes">
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+    
 </resources>
-
-
