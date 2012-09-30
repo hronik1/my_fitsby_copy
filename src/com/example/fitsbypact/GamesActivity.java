@@ -45,7 +45,6 @@ public class GamesActivity extends Activity
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
-	private Header header;
 	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
@@ -83,7 +82,6 @@ public class GamesActivity extends Activity
         initializeTextViews();
         initializeProgressBar();
         initializeListView();
-        initializeHeader();
     }
 
     /**
@@ -208,14 +206,6 @@ public class GamesActivity extends Activity
 			}
 			
 		});
-	}
-
-	/**
-	 * initializes the header
-	 */
-	private void initializeHeader() {
-		header = (Header)findViewById(R.id.games_header);
-		header.setParentActivity(this);
 	}
     
     /** LoaderManager callBacks **/

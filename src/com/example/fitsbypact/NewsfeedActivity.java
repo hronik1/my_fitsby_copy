@@ -49,8 +49,6 @@ public class NewsfeedActivity extends Activity
 	private ListView newsfeedLV;
 	private EditText commentET;
 	private Button submitButton;
-	private Header header;
-	
 	
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
@@ -88,7 +86,7 @@ public class NewsfeedActivity extends Activity
         initializeListView();
         initializeEditText();
         initializeSpinner();
-        initializeHeader();
+
     }
 
     /**
@@ -243,14 +241,6 @@ public class NewsfeedActivity extends Activity
 			}
 			
 		});
-	}
-	
-	/**
-	 * initializes the header
-	 */
-	private void initializeHeader() {
-		header = (Header)findViewById(R.id.newsfeed_header);
-		header.setParentActivity(this);
 	}
     
     /** LoaderManager callBacks **/

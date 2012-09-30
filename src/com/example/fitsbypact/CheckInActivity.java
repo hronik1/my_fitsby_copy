@@ -28,7 +28,6 @@ public class CheckInActivity extends Activity {
 	
 	private Button checkinButton;
 	private Button checkoutButton;
-	private Header header;
 	
 	private DatabaseHandler mdbHandler;
 	private LeagueMemberTableHandler mLeagueMemberTableHandler;
@@ -51,7 +50,6 @@ public class CheckInActivity extends Activity {
         
         initializeNavigationBar();
         initializeButtons();
-        initializeHeader();
         
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
@@ -117,14 +115,6 @@ public class CheckInActivity extends Activity {
 		
 		Log.i(TAG, "onDestroy");
 		
-	}
-	
-	/**
-	 * initializes the parent Activity
-	 */
-	private void initializeHeader() {
-		header = (Header)findViewById(R.id.check_in_header);
-		header.setParentActivity(this);
 	}
 	
 	/**
