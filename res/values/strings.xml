@@ -30,13 +30,13 @@
     <string name="league_create_tv_wager_text">Wager</string>
     <string name="league_create_tv_days_text">Goal Days</string>
     
-	<string name="credit_card_main_directions_text">"Last Step! Please enter your credit card information in order to start your game."</string>
-	<string name="credit_card_number_text">"Card Number:"</string>
-	<string name="credit_card_expiration_text">"Expiration Date:"</string>
-	<string name="credit_card_cvc_text">"Security Code:"</string>    
-	<string name="credit_card_wager_text">"WAGER:"</string>	
+	<string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game.</string>
+	<string name="credit_card_number_text">Card Number:</string>
+	<string name="credit_card_expiration_text">Expiration Date:</string>
+	<string name="credit_card_cvc_text">Security Code:</string>    
+	<string name="credit_card_wager_text">WAGER:</string>	
     
-    <string name="title_activity_credit_card">Enter Credit Card Information</string>
+    <string name="title_activity_credit_card">Enter Payment Information</string>
     <string name="credit_card_button_submit_text">Submit</string>
     <string name="credit_card_et_card_cvc_hint">XXX</string>
     <string name="credit_card_et_card_number_hint">XXXX-XXXX-XXXX-XXXX</string>
@@ -45,9 +45,13 @@
     
     <string name="authorize_api_login_id">3C29upX37b</string>
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
-    <string name="title_activity_friend_invite">Invite Friends</string>
-    <string name="friend_invite_button_invite_text">Invite Friend</string>
-    <string name="friend_invite_button_home_text">Home</string>
+    <string name="title_activity_friend_invite">Invite Your Friends</string>
+    <string name="friend_invite_button_invite_text">Invite Friends</string>
+    <string name="friend_invite_button_home_text">Start</string>
+  	<string name="or_invite_them_later_text">Or you can invite them later and...</string>
+	<string name="add_friend_button">Add Friend</string>
+  	<string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
+ 	
     <string name="title_activity_league_join">Join A Game</string>
     <string name="league_join_et_first_name_hint">First Name</string>
     <string name="league_join_et_last_name_hint">Last Name</string>
