@@ -18,6 +18,14 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/league_join_detail_header"
         android:text="@string/league_join_detail_type_text" />
+    
+    <TextView
+        android:id="@+id/league_join_detail_type_data"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@+id/league_join_detail_type"
+		android:layout_alignTop="@+id/league_join_detail_type"
+		android:text="@string/league_join_detail_type_data_text" />
 
     <Button
         android:id="@+id/league_join_detail_button_join"
@@ -33,6 +41,14 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/league_join_detail_type"
         android:text="@string/league_join_detail_wager_text" />
+    
+    <TextView
+        android:id="@+id/league_join_detail_wager_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/league_join_detail_wager"
+        android:layout_alignTop="@+id/league_join_detail_wager"
+        android:text="@string/league_join_detail_wager_data_text" />
 
     <TextView
         android:id="@+id/league_join_detail_pot"
@@ -41,6 +57,14 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/league_join_detail_wager"
         android:text="@string/league_join_detail_pot_text" />
+    
+    <TextView
+        android:id="@+id/league_join_detail_pot_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/league_join_detail_pot"
+        android:layout_alignTop="@+id/league_join_detail_pot"
+        android:text="@string/league_join_detail_pot_data_text" />
 
     <TextView
         android:id="@+id/league_join_detail_players"
@@ -49,5 +73,29 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/league_join_detail_pot"
         android:text="@string/league_join_detail_players_text" />
-
+    
+    <TextView
+        android:id="@+id/league_join_detail_players_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/league_join_detail_players"
+        android:layout_alignTop="@+id/league_join_detail_players"
+        android:text="@string/league_join_detail_players_data_text" />
+    
+    <TextView
+        android:id="@+id/league_join_detail_duration"
+        android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_below="@+id/league_join_detail_players" 
+		android:text="@string/league_join_duration_text"/>
+    
+    <TextView
+        android:id="@+id/league_join_detail_duration_data"
+        android:layout_alignTop="@+id/league_join_detail_duration"
+        android:layout_toRightOf="@+id/league_join_detail_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/league_join_duration_data_text" />
+   
 </RelativeLayout>

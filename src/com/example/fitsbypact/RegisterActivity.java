@@ -122,58 +122,51 @@ public class RegisterActivity extends Activity {
     }
     
     /**
-     * called when dialog is created
+     * shows AlertDialog
      */
-    @Override
-    public Dialog onCreateDialog(int id) {
-    	Log.i(TAG, "onCreateDialog" +  id);
-    	
-    	AlertDialog alert;
-    	switch(id) {
-    	case DIALOG_CONFIRM_EMAIL_ID:
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("Are you sure " + emailET.getText().toString() +
-    				" is correct?")
-    		.setCancelable(false)
-    		.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
-    			public void onClick(DialogInterface dialog, int id) {
-    				String firstName = firstNameET.getText().toString();
-    				String lastName = lastNameET.getText().toString();
-    				String email = emailET.getText().toString();
-    				String password = passwordET.getText().toString();
-    	    		//TODO password salting maybe?
-    	    		User user = new User(firstName, lastName, email, password);
-    	    		mdbHandler.getUserTableHandler().addUser(user);
-    	    		user = mUserTableHandler.getUser(email);
-    	    		if (user != null) {
-    	    			mApplicationUser.setUser(user);
-    	    	    	try {
-    	    	    		Intent intent = new Intent(RegisterActivity.this, LeagueLandingActivity.class);
-    	    	    		startActivity(intent);
-    	    	    	} catch (Exception e) {
-    	    	    		//remove in deployment
-    	    	    		String stackTrace = android.util.Log.getStackTraceString(e);
-    	    	    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
-    	    	    				Toast.LENGTH_LONG);
-    	    	    		toast.show();
-    	    	    	} 
-    	    		} else {
-    	    			Toast.makeText(RegisterActivity.this, "sorry error occured", Toast.LENGTH_LONG).show();
-    	    		}
-    			}
-    		})
-    		.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
-    			public void onClick(DialogInterface dialog, int id) {
-    				dialog.cancel();
-    			}
-    		});
-    		alert = builder.create();
-    	
-    	default:
-    		alert = null;
-    	}
-    	return alert;
+    public void showAlertDialog() {
+    	Log.i(TAG, "onCreateDialog");
+
+    	//TODO clean this up
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage("Are you sure " + emailET.getText().toString() +
+    			" is correct?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					String firstName = firstNameET.getText().toString();
+    					String lastName = lastNameET.getText().toString();
+    					String email = emailET.getText().toString();
+    					String password = passwordET.getText().toString();
+    					//TODO password salting maybe?
+    					User user = new User(firstName, lastName, email, password);
+    					mdbHandler.getUserTableHandler().addUser(user);
+    					user = mUserTableHandler.getUser(email);
+    					if (user != null) {
+    						mApplicationUser.setUser(user);
+    						try {
+    							Intent intent = new Intent(RegisterActivity.this, LeagueLandingActivity.class);
+    							startActivity(intent);
+    						} catch (Exception e) {
+    							//remove in deployment
+    							String stackTrace = android.util.Log.getStackTraceString(e);
+    							Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    									Toast.LENGTH_LONG);
+    							toast.show();
+    						} 
+    					} else {
+    						Toast.makeText(RegisterActivity.this, "sorry error occured", Toast.LENGTH_LONG).show();
+    					}
+    				}
+    			})
+    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    
     }
+    
     /**
      * helper function which initializes the buttons
      */
@@ -225,7 +218,7 @@ public class RegisterActivity extends Activity {
     		Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG).show();
     	} else {
     		Log.i(TAG, "showing dialog");
-    		showDialog(DIALOG_CONFIRM_EMAIL_ID);
+    		showAlertDialog();
     	}
     	
     }
