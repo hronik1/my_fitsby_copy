@@ -6,20 +6,28 @@
     
     <EditText 
         android:id="@+id/league_join_et_first_name"
-  		android:layout_alignParentTop="true"
+  		android:layout_below="@+id/find_private_game"
   		android:layout_alignParentLeft="true"
   		android:layout_height="wrap_content"
   		android:layout_width="wrap_content"
+  		android:background="@drawable/white_textbox"
+  		android:layout_marginTop="5dp"
+  		android:layout_marginLeft="10dp"
+  		android:layout_marginRight="5dp"
         android:hint="@string/league_join_et_first_name_hint" />
 
     <EditText
         android:id="@+id/league_join_et_last_name"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/league_join_et_first_name"
         android:layout_alignBottom="@+id/league_join_et_first_name"
+        android:layout_below="@+id/find_private_game"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+  		android:layout_marginTop="5dp"
+  		android:layout_marginLeft="5dp"
+  		android:layout_marginRight="10dp"        
+  		android:background="@drawable/white_textbox"        
         android:hint="@string/league_join_et_last_name_hint" />
     
     <EditText
@@ -27,6 +35,10 @@
         android:layout_below="@+id/league_join_et_first_name"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+  		android:layout_marginTop="5dp"
+  		android:layout_marginLeft="10dp"
+  		android:layout_marginRight="10dp"         
+  		android:background="@drawable/white_textbox"        
         android:hint="@string/league_join_et_invite_code_hint" />
     
     <Button
@@ -34,6 +46,11 @@
         android:layout_below="@+id/league_join_et_invite_code"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+  		android:layout_marginTop="10dp"
+  		android:layout_marginLeft="60dp"
+  		android:layout_marginRight="60dp"         
+        android:background="@drawable/custom_login_button"
+        android:textColor="@color/white"
         android:text="@string/league_join_button_submit_text" />
     
     <TextView
@@ -42,7 +59,11 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/league_join_public_header_text" />
+        android:text="@string/league_join_public_header_text"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold" />
     
     <LinearLayout
         android:id="@+id/league_join_list_header"
@@ -52,37 +73,64 @@
         
         <TextView
             android:id="@+id/league_join_league_id_header"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"
+	        android:textStyle="bold"
+	        android:gravity="center"
+	        android:textSize="14sp"
+	        android:textColor="@color/white"
+	        android:layout_marginLeft="5dp"
+	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_league_id_header_text"/>
         
         <TextView 
             android:id="@+id/league_join_players_header"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"
+	        android:textStyle="bold"
+	        android:gravity="center"
+	        android:textSize="14sp"
+	        android:textColor="@color/white"
+	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_players_header_text" />
         
         <TextView
             android:id="@+id/league_join_wager_header"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"
+	        android:textStyle="bold"
+	        android:gravity="center"
+	        android:textSize="14sp"
+	        android:textColor="@color/white"
+	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_wager_header_text" />
         
         <TextView
             android:id="@+id/league_join_duration_header"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"
+	        android:textStyle="bold"
+	        android:gravity="center"
+	        android:textSize="14sp"
+	        android:textColor="@color/white"
+	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_duration_header_text" />
         
         <TextView
             android:id="@+id/league_join_pot_header"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"
+	        android:textStyle="bold"
+	        android:gravity="center"
+	        android:textSize="14sp"
+	        android:textColor="@color/white"
+	        android:background="@drawable/public_leagues_top_words"
+	        android:layout_marginRight="5dp"
             android:text="@string/league_join_pot_header_text" />
        
     </LinearLayout>
@@ -92,5 +140,31 @@
         android:layout_below="@+id/league_join_list_header"
         android:layout_alignParentBottom="true" 
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"      />
+
+    <TextView
+        android:id="@+id/activity_league_join_directions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/league_join_et_first_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/activity_league_join_directions" />
+
+    <TextView
+        android:id="@+id/find_private_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_league_join_directions"
+        android:text="Find A Private Game"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

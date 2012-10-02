@@ -27,8 +27,12 @@
     <string name="league_landing_join_text">Join A Game</string>
     <string name="title_activity_league_create">Create A Game</string>
     <string name="league_create_create_text">Create Game</string>
-    <string name="league_create_tv_wager_text">Wager</string>
-    <string name="league_create_tv_days_text">Goal Days</string>
+    <string name="league_create_tv_wager_text">Set the wager amount:</string>
+    <string name="league_create_tv_days_text">Set the game duration (days):</string>
+    <string name="league_create_ib_wager_plus">+</string>
+    <string name="league_create_ib_wager_minus">-</string>
+    <string name="league_create_ib_days_minus">-</string>
+    <string name="league_create_ib_days_plus">+</string>
     
 	<string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game.</string>
 	<string name="credit_card_number_text">Card Number:</string>
@@ -52,6 +56,7 @@
 	<string name="add_friend_button">Add Friend</string>
   	<string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
  	
+  	<string name="activity_league_join_directions">Find private games by typing your friend\'s name, or browse through public games.</string>
     <string name="title_activity_league_join">Join A Game</string>
     <string name="league_join_et_first_name_hint">First Name</string>
     <string name="league_join_et_last_name_hint">Last Name</string>
@@ -89,7 +94,7 @@
 	<string name="forfeit_game_button">Forfeit Game</string>    
 	<string name="invite_friends_button">Invite Friends</string>    
 	
-    <string name="league_join_public_header_text">Public Games</string>
+    <string name="league_join_public_header_text">Browse Public Games</string>
     <string name="league_join_league_id_header_text">Game ID</string>
     <string name="league_join_players_header_text">Players</string>
     <string name="league_join_wager_header_text">Wager</string>
@@ -128,7 +133,7 @@
     <string name="list_item_newsfeed_message_text">This is a comment.</string>
     <string name="credit_card_tv_wager_text">$XX</string>
 
-    <string name="league_create_wager_text">0</string>
+    <string name="league_create_wager_text">$0</string>
     <string name="league_create_days_text">14</string>
     <string name="league_create_ib_days_minus_text">Decrement days</string>
     <string name="league_create_ib_days_plus_text">Increment days</string>
