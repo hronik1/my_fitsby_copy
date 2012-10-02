@@ -129,7 +129,7 @@ public final class R {
         public static final int list_item_newsfeed_message=0x7f08007b;
         public static final int list_item_newsfeed_timestamp=0x7f08007a;
         public static final int list_item_public_leagues_duration=0x7f08007f;
-        public static final int list_item_public_leagues_id=0x7f08007c;
+        public static final int list_item_public_leagues_id =0x7f08007c;
         public static final int list_item_public_leagues_players=0x7f08007d;
         public static final int list_item_public_leagues_pot=0x7f080080;
         public static final int list_item_public_leagues_wager=0x7f08007e;
