@@ -3,27 +3,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-   <widgets.NavigationBar
+    <widgets.NavigationBar
         android:id="@+id/check_in_navigation_bar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />
 
-   <Button
-       android:id="@+id/check_in_button_check_out"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:layout_above="@+id/check_in_navigation_bar"
-       android:layout_centerHorizontal="true"
-       android:text="@string/check_in_button_check_out_text" />
+    
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/check_in_button_check_in"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
+        android:text="00:00"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"         
+        android:textSize="50sp"
+        android:paddingBottom="80dp"
+        android:layout_centerVertical="true"/>
+    
+    <Button
+        android:id="@+id/check_in_button_check_out"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"        
+        android:layout_marginTop="-70dp"        
+        android:background="@drawable/newsfeed_submit_button"
+        android:text="@string/check_in_button_check_out_text"
+        android:textColor="@color/white" 
+        android:textStyle="bold" />
 
-   <Button
-       android:id="@+id/check_in_button_check_in"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentTop="true"
-       android:text="@string/check_in_button_check_in_text" />
+     <TextView
+        android:id="@+id/checkout_directions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/check_in_button_check_out"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"        
+        android:layout_marginRight="10dp"                                
+        android:text="@string/checkout_directions"
+        android:gravity="center" />
+
+     <Button
+         android:id="@+id/check_in_button_check_in_text"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/timer"
+         android:layout_centerHorizontal="true"
+         android:background="@drawable/checkin_button"         
+         android:text="@string/check_in_button_check_in_text"
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="10dp"        
+         android:textColor="@color/white"
+         android:textStyle="bold" />
+
+     <TextView
+         android:id="@+id/verified_gym"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/check_in_button_check_in_text"
+         android:layout_alignLeft="@+id/check_in_button_check_in_text"
+         android:layout_marginLeft="5dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="15dp"
+         android:text="@string/verified_gym"
+         android:textStyle="bold"
+         android:textSize="16sp" />
 
 </RelativeLayout>
