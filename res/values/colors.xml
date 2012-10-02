@@ -2,6 +2,7 @@
 <resources>
      <color name="black">#000</color>
      <color name="blue">#00f</color>
+     <color name="light_blue">#0066ff</color>
      <color name="red">#f00</color>
      <color name="green">#33ff33</color>
      <color name="fitsby_red">#e4231a</color>
