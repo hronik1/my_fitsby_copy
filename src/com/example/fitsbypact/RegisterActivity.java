@@ -25,7 +25,6 @@ import android.widget.Toast;
 public class RegisterActivity extends Activity {
 
 	private final static String TAG = "MainActivity";
-	private final static int DIALOG_CONFIRM_EMAIL_ID = 0;
 	
 	private Button buttonRegister;
 	
