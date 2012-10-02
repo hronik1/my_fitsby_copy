@@ -155,7 +155,7 @@ public class LoginActivity extends Activity {
     		}
     	} else {
     		//TODO password salting maybe?
-    		Toast.makeText(LoginActivity.this, "Incorrect password or username", Toast.LENGTH_LONG).show();
+    		Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_LONG).show();
     	}
     	
     }

@@ -92,6 +92,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"        
         android:textStyle="bold"
+        android:textSize="14sp"
         android:text="Started 9/10/2012 - 12 days left" />
     
     <ListView
@@ -129,7 +130,7 @@
         android:layout_alignRight="@+id/invite_friends_button"
         android:layout_below="@+id/games_wager_prompt"
         android:text="@string/forfeit_game_button"
-        android:layout_marginTop="10dp"        
+        android:layout_marginTop="5dp"        
         android:background="@drawable/newsfeed_submit_button"
         android:textColor="@color/white" />
 

@@ -66,7 +66,8 @@
     <string name="check_in_button_check_out_text">Check Out</string>
 	<string name="verified_gym">You are currently not at a verified gym</string>
 	<string name="checkout_directions">(You can check out only when you\'ve been at the gym for a minimum of 45 minutes)</string>
-    
+	<string name="colon">:</string>
+	
     <string name="title_activity_games">Games</string>
     <string name="title_activity_newsfeed">Newsfeed</string>
     <string name="title_activity_check_in">Check In</string>
