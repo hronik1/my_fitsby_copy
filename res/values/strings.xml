@@ -113,9 +113,10 @@
     <string name="league_join_duration_text">Duration: </string>
     <string name="league_join_duration_data_text">14</string>
     <string name="league_join_detail_button_join_text">Join</string>
+    
     <string name="list_item_game_leader_name_text">First Name</string>
     <string name="list_item_game_leader_last_name_text">Last Name</string>
-    <string name="list_item_game_leader_checkins_text">20</string>
+    <string name="list_item_game_leader_checkins_text">Checkins: </string>
     <string name="list_item_public_leagues_id_text">1</string>
     <string name="list_item_public_leagues_players_text">5</string>
     <string name="list_item_public_leagues_wager_text">10</string>

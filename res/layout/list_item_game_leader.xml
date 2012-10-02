@@ -2,29 +2,60 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="1." 
+   		android:layout_marginTop="14dp"
+   		android:layout_marginLeft="5dp"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    
+    <ImageView
+        android:id="@+id/me_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rank"
+        android:layout_alignTop="@+id/rank"    
+        android:layout_marginLeft="15dp"
+        android:contentDescription="@string/me_imageview_desc"
+        android:textSize="18sp"        
+        android:src="@drawable/ic_launcher" />
     
     <TextView
         android:id="@+id/list_item_game_leader_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_item_game_leader_name_text" />
-     
+        android:layout_alignTop="@+id/me_imageview"
+        android:layout_toRightOf="@+id/me_imageview"
+        android:text="@string/list_item_game_leader_name_text" 
+        android:textSize="16sp"        
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/list_item_game_leader_last_name"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/list_item_game_leader_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/list_item_game_leader_name"
+		android:layout_marginLeft="5dp"
+		android:textStyle="bold"        
+        android:textSize="16sp"		
+        android:layout_toRightOf="@+id/list_item_game_leader_name"
         android:text="@string/list_item_game_leader_last_name_text" />
-    
+
     <TextView
         android:id="@+id/list_item_game_leader_checkins"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_item_game_leader_checkins_text" />
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/list_item_game_leader_name"
+        android:layout_below="@+id/list_item_game_leader_name"
+        android:text="@string/list_item_game_leader_checkins_text"
+        android:textSize="16sp" />
 
 </RelativeLayout>
