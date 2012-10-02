@@ -106,17 +106,17 @@
     <string name="public_leagues_duration_header_text">Duration</string>
     <string name="public_leagues_pot_header_text">Pot</string>
     <string name="title_activity_league_join_detail">Join A Game</string>
-    <string name="league_join_detail_header_text">Game Details</string>
+    <string name="league_join_detail_header_text"><u>Game Details:</u></string>
     <string name="league_join_detail_type_text">Type: </string>
     <string name="league_join_detail_type_data_text">Private</string>
     <string name="league_join_detail_wager_text">Wager: </string>
-    <string name="league_join_detail_wager_data_text">10</string>
+    <string name="league_join_detail_wager_data_text">$10</string>
     <string name="league_join_detail_pot_text">Pot: </string>
-    <string name="league_join_detail_pot_data_text">20</string>
+    <string name="league_join_detail_pot_data_text">$20</string>
     <string name="league_join_detail_players_text">Players: </string>
     <string name="league_join_detail_players_data_text">2</string>
     <string name="league_join_duration_text">Duration: </string>
-    <string name="league_join_duration_data_text">14</string>
+    <string name="league_join_duration_data_text">14 days</string>
     <string name="league_join_detail_button_join_text">Join</string>
     
     <string name="list_item_game_leader_name_text">First Name</string>
