@@ -15,6 +15,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:contentDescription="@string/me_imageview_desc"
                 android:src="@drawable/ic_launcher" />
 
@@ -24,6 +26,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"     
+                android:textStyle="bold"
+                android:textSize="20sp"           
                 android:layout_toRightOf="@+id/me_imageview"
                 android:text="@string/me_textview_name_text" />
 
@@ -33,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/me_textview_name"
-                android:layout_toRightOf="@+id/me_imageview"
+                android:layout_alignLeft="@+id/me_textview_name"           
                 android:text="@string/me_textview_join_date_text" />
 
             <TextView
@@ -41,6 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_imageview"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="@string/me_textview_total_money_earned_prompt_text" />
 
             <TextView
@@ -48,7 +58,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_imageview"
-                android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@+id/me_textview_total_money_earned_prompt"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"                
                 android:text="@string/me_textview_total_money_earned_money_text" />
 
             <TextView
@@ -57,6 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/me_textview_total_money_earned_money"
+                android:layout_marginTop="20dp"                
+                android:layout_marginLeft="10dp"                
+                android:textSize="18sp"              
                 android:text="@string/me_settings_tv_change_email_text" />
 
             <EditText
@@ -64,20 +79,29 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_settings_tv_change_email"
+                android:background="@drawable/white_textbox"
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"
                 android:hint="@string/me_settings_et_change_email_hint" />
 
             <TextView
                 android:id="@+id/me_settings_tv_change_picture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"                
                 android:layout_below="@+id/me_settings_et_change_email"
                 android:text="@string/me_settings_tv_change_picture_text" />
 
             <Button
                 android:id="@+id/me_settings_button_change_picture"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_settings_tv_change_picture"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
                 android:text="@string/me_settings_button_change_picture_text" />
 
             <TextView
@@ -85,6 +109,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"     
+                android:textSize="18sp"           
                 android:layout_below="@+id/me_settings_button_change_picture"
                 android:text="@string/me_settings_tv_change_password_text" />
 
@@ -93,6 +120,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/white_textbox"
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"                
                 android:layout_below="@+id/me_settings_tv_change_password"
                 android:hint="@string/me_settings_et_old_password_hint" />
 
@@ -101,6 +131,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/white_textbox"       
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"                         
                 android:layout_below="@+id/me_settings_et_old_password"
                 android:hint="@string/me_settings_et_new_password_hint" />
 
@@ -109,6 +142,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/white_textbox"
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"                                
                 android:layout_below="@+id/me_settings_et_new_password"
                 android:hint="@string/me_settings_et_new_password_confirm_hint" />
 
@@ -117,6 +153,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/custom_login_button"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"                
+                android:layout_marginRight="60dp"                
+                android:layout_marginLeft="60dp"                  
                 android:layout_below="@+id/me_settings_et_new_password_confirm"
                 android:text="@string/me_settings_button_submit_text" />
 
@@ -126,6 +167,12 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/me_navigation_bar"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/newsfeed_submit_button"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"                
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"                  
                 android:layout_below="@+id/me_settings_button_submit"
                 android:text="@string/me_settings_button_logout_text" />
         </RelativeLayout>

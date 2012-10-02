@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    
     <EditText 
         android:id="@+id/league_join_et_first_name"
   		android:layout_below="@+id/find_private_game"
@@ -70,7 +69,7 @@
         android:layout_below="@+id/league_join_public_header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
-        
+            
         <TextView
             android:id="@+id/league_join_league_id_header"
 	        android:layout_width="0dp"
@@ -135,6 +134,7 @@
        
     </LinearLayout>
     
+    
     <ListView
         android:id="@+id/league_join_list"
         android:layout_below="@+id/league_join_list_header"
@@ -143,7 +143,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"      />
+        android:layout_marginLeft="10dp" />
+    
+
 
     <TextView
         android:id="@+id/activity_league_join_directions"
@@ -166,5 +168,6 @@
         android:text="Find A Private Game"
         android:textSize="18sp"
         android:textStyle="bold" />
+
 
 </RelativeLayout>
