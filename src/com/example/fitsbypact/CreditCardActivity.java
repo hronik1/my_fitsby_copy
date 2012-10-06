@@ -1,5 +1,8 @@
 package com.example.fitsbypact;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import bundlekeys.CreditCardBundleKeys;
 import dbtables.User;
 import android.os.Bundle;
@@ -14,6 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Token;
 
 public class CreditCardActivity extends Activity {
 
@@ -168,6 +174,8 @@ public class CreditCardActivity extends Activity {
     	//TODO submit credit card info
     	try {
     		Intent intent = new Intent(this, FriendInviteActivity.class);
+    		Token token = parseCreditCard();
+    		//TODO pass danny token
     		startActivity(intent);
     	} catch (Exception e) {
     		//remove in deployment
@@ -176,5 +184,17 @@ public class CreditCardActivity extends Activity {
     				Toast.LENGTH_LONG);
     		toast.show();
     	} 
+    }
+    
+    private Token parseCreditCard() throws StripeException {
+    	Stripe.apiKey = getString(R.string.stripe_test_secret_api_key); 
+    	Map<String, Object> tokenParams = new HashMap<String, Object>(); 
+    	Map<String, Object> cardParams = new HashMap<String, Object>(); 
+    	cardParams.put("number", numberET.getText().toString());
+    	cardParams.put("exp_year", expYearET.getText().toString()); 
+    	cardParams.put("cvc", cvcET.getText().toString()); 
+    	cardParams.put("exp_month", expMonthET.getText().toString()); 
+    	tokenParams.put("card", cardParams); 
+    	return Token.create(tokenParams);
     }
 }

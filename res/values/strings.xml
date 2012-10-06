@@ -154,4 +154,9 @@
 	<string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
 	<string name="me_settings_button_change_picture_text">Choose picture</string>
 
+	<string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
+	<string name="stripe_live_secret_api_key">sk_0G8Utv86sXeIUY4EO6fif1hAypeDE</string>
+	<string name="stripe_live_publishable_api_key">pk_0G8Uw4pPr4NBHkdtCw0m2PJBVdAES</string>
+	<string name="stripe_test_secret_api_key">sk_0G8UQEXsgKNmNNdy7QRwKr7VIgjxl</string>
+	<string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
 </resources>

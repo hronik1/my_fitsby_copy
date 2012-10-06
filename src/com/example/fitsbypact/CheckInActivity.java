@@ -1,7 +1,21 @@
 package com.example.fitsbypact;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.net.Uri;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbhandlers.DatabaseHandler;
@@ -9,7 +23,9 @@ import dbhandlers.LeagueMemberTableHandler;
 import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
+import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +48,7 @@ public class CheckInActivity extends Activity {
 	private final static int MESSAGE_UPDATE_TIMER = 1;
 	private final static int MESSAGE_STOP_TIMER = 2;
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
+	private final static int DEFAULT_PLACES_RADIUS = 100;
 	
 	private final static String TAG = "CheckInActivity";
 	
@@ -222,15 +239,27 @@ public class CheckInActivity extends Activity {
 		  .isProviderEnabled(LocationManager.GPS_PROVIDER);
 		
 		if (!gpsEnabled) {
-			//TODO make alert dialog to prompt user to turn on GPS 
+			showAlertDialog(); 
 		} else {
-			mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
-			for(LeagueMember member: mLeagueMemberList) {
-				if(member.getCheckins() == member.getCheckouts()) {
-					member.setCheckins(member.getCheckins() + 1);
-					mLeagueMemberTableHandler.updateLeagueMember(member);
-				}
+			Location location = service.getLastKnownLocation(LOCATION_SERVICE);
+			double latitude = location.getLatitude();
+			double longitude = location.getLongitude();
+			String uri = buildPlacesUri(latitude, longitude, DEFAULT_PLACES_RADIUS, true);
+			JSONObject jsonObject = jsonFromStringUri(uri);
+			boolean success = checkinSuccesful(jsonObject);
+			if (success) {
+				mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
+				Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG).show();
+				//TODO increase checkins
+			} else {
+				Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG).show();
 			}
+//			for(LeagueMember member: mLeagueMemberList) {
+//				if(member.getCheckins() == member.getCheckouts()) {
+//					member.setCheckins(member.getCheckins() + 1);
+//					mLeagueMemberTableHandler.updateLeagueMember(member);
+//				}
+//			}
 		}
 	}
 	
@@ -266,13 +295,110 @@ public class CheckInActivity extends Activity {
 	 * checks out user
 	 */
 	public void checkout() {
+		//TODO redo checkout
 		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
-		for(LeagueMember member: mLeagueMemberList) {
-			if(member.getCheckins() == member.getCheckouts() + 1) {
-				member.setCheckouts(member.getCheckins());
-				mLeagueMemberTableHandler.updateLeagueMember(member);
-			}
-		}
+		//TODO increase checkouts by 1
+//		for(LeagueMember member: mLeagueMemberList) {
+//			if(member.getCheckins() == member.getCheckouts() + 1) {
+//				member.setCheckouts(member.getCheckins());
+//				mLeagueMemberTableHandler.updateLeagueMember(member);
+//			}
+//		}
 		
 	}
+	
+	/**
+	 * Builds a properly formatted to send the places api
+	 * @param latitude
+	 * @param longitude
+	 * @param radius
+	 * @param sensorUsed
+	 * @return
+	 */
+	private String buildPlacesUri(double latitude, double longitude, int radius, boolean sensorUsed) {
+		Uri.Builder builder = new Uri.Builder();
+		builder.scheme("https").authority("google.com").path("/maps/api/place/search/json")
+		    .appendQueryParameter("key", getString(R.string.places_api_key))
+		    .appendQueryParameter("location", latitude + "," + longitude)
+		    .appendQueryParameter("radius", radius + "")
+		    .appendQueryParameter("sensor", Boolean.toString(sensorUsed))
+		    .appendQueryParameter("types", "gym");
+		Uri uri = builder.build();
+		String uriString = uri.toString();
+		Log.d(TAG, uriString);
+		return uriString;
+	}
+	
+	/**
+	 * 
+	 * @param uriString
+	 * @return
+	 */
+	private JSONObject jsonFromStringUri(String uriString) {
+		InputStream inputStream = null;
+		String json = "";
+		JSONObject jsonObject = null;
+
+		// Making HTTP request
+		try {
+			// defaultHttpClient
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(uriString);
+
+			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpEntity httpEntity = httpResponse.getEntity();
+			inputStream = httpEntity.getContent();          
+
+		} catch (UnsupportedEncodingException e) {
+			//TODO, handle gracefully
+		} catch (ClientProtocolException e) {
+			//TODO, handle gracefully
+		} catch (IOException e) {
+			//TODO, handle gracefully
+		}
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					inputStream, "iso-8859-1"), 8);
+			StringBuilder stringBuilder = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				stringBuilder.append(line + "n");
+			}
+			inputStream.close();
+			json = stringBuilder.toString();
+		} catch (Exception e) {
+			Log.e("Buffer Error", "Error converting result " + e.toString());
+		}
+
+		// try parse the string to a JSON object
+		try {
+			jsonObject = new JSONObject(json);
+		} catch (JSONException e) {
+			Log.e("JSON Parser", "Error parsing data " + e.toString());
+		}
+
+		// return JSON String
+		return jsonObject;
+
+	}
+	
+	private boolean checkinSuccesful(JSONObject jsonObject) {
+		String status = "";
+		try {
+			status = jsonObject.getString("status");
+			Log.d(TAG, "status");
+			
+		} catch (JSONException e) {
+			Log.d(TAG, "json parsing failed");
+			return false;
+		}
+		
+		if ("OK".equals(status))
+			return true;
+		else
+			return false;
+	}
 }
+	
+
