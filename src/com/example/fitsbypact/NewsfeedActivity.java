@@ -35,6 +35,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Button;
 import android.widget.Toast;
+import com.flurry.android.FlurryAgent;
 
 public class NewsfeedActivity extends Activity 
 	implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -114,8 +115,15 @@ public class NewsfeedActivity extends Activity
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
 	    Log.i(TAG, "onStart");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();		
+		FlurryAgent.onEndSession(this);
 	}
 	
 	/**

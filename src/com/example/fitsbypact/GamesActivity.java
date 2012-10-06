@@ -30,6 +30,7 @@ import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import com.flurry.android.FlurryAgent;
 
 public class GamesActivity extends Activity
 	implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -109,8 +110,15 @@ public class GamesActivity extends Activity
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
 	    Log.i(TAG, "onStart");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();		
+		FlurryAgent.onEndSession(this);
 	}
 	
 	/**

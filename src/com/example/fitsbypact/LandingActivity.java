@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
+import com.crittercism.app.Crittercism;
+import com.flurry.android.FlurryAgent;
 
 public class LandingActivity extends Activity {
 
@@ -62,9 +64,17 @@ public class LandingActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+        Crittercism.init(getApplicationContext(), "506f841701ed850f8f000003");
         Log.i(TAG, "onStart");
     }
+    
+	@Override
+	protected void onStop()
+	{
+		super.onStop();		
+		FlurryAgent.onEndSession(this);
+	}
     
     /**
      * called when activity resumes

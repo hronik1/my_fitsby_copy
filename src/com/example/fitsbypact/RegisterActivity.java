@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.flurry.android.FlurryAgent;
 
 public class RegisterActivity extends Activity {
 
@@ -85,9 +86,16 @@ public class RegisterActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
         Log.i(TAG, "onStart");
     }
+    
+	@Override
+	protected void onStop()
+	{
+		super.onStop();		
+		FlurryAgent.onEndSession(this);
+	}
     
     /**
      * called when activity resumes

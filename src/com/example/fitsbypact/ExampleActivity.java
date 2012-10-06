@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import com.flurry.android.FlurryAgent;
+
 
 public class ExampleActivity extends Activity {
 
@@ -49,9 +51,16 @@ public class ExampleActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
         Log.i(TAG, "onStart");
     }
+    
+	@Override
+	protected void onStop()
+	{
+		super.onStop();		
+		FlurryAgent.onEndSession(this);
+	}
     
     /**
      * called when activity resumes

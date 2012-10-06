@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.flurry.android.FlurryAgent;
 
 public class LeagueCreateActivity extends Activity {
 	
@@ -98,8 +99,15 @@ public class LeagueCreateActivity extends Activity {
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
 	    Log.i(TAG, "onStart");
+	}
+	
+	@Override
+	protected void onStop()
+	{
+		super.onStop();		
+		FlurryAgent.onEndSession(this);
 	}
 	
 	/**

@@ -22,6 +22,7 @@ import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import com.flurry.android.FlurryAgent;
 
 public class LeagueJoinActivity extends Activity 
 	implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -81,10 +82,17 @@ public class LeagueJoinActivity extends Activity
     @Override
     public void onStart() {
         super.onStart();
-        
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
         Log.i(TAG, "onStart");
     }
     
+	@Override
+	protected void onStop()
+	{
+		super.onStop();		
+		FlurryAgent.onEndSession(this);
+	}
+	
     /**
      * called when activity resumes
      */
