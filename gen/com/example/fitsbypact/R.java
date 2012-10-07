@@ -342,6 +342,7 @@ public final class R {
         public static final int newsfeed_et_comment_hint=0x7f05004e;
         public static final int or=0x7f050001;
         public static final int or_invite_them_later_text=0x7f050031;
+        public static final int places_api_key=0x7f050090;
         public static final int public_leagues_duration_header_text=0x7f050060;
         public static final int public_leagues_league_id_header_text=0x7f05005d;
         public static final int public_leagues_players_header_text=0x7f05005e;
@@ -354,6 +355,10 @@ public final class R {
         public static final int register_last_name_hint=0x7f050011;
         public static final int register_password_hint=0x7f050007;
         public static final int register_text=0x7f05000d;
+        public static final int stripe_live_publishable_api_key=0x7f050092;
+        public static final int stripe_live_secret_api_key=0x7f050091;
+        public static final int stripe_test_publishable_api_key=0x7f050094;
+        public static final int stripe_test_secret_api_key=0x7f050093;
         public static final int title_activity_check_in=0x7f050046;
         public static final int title_activity_credit_card=0x7f050026;
         public static final int title_activity_example=0x7f05000a;
