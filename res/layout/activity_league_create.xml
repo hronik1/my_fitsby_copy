@@ -12,7 +12,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Choose the details of the game you want to create." />
+        android:text="@string/league_create_header_text" />
 
     <TextView
         android:id="@+id/league_create_wager"

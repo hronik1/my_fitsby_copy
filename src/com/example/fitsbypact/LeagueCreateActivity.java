@@ -18,8 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
@@ -34,10 +32,10 @@ public class LeagueCreateActivity extends Activity {
 	
 	private Button createButton;
 	private CheckBox createCheckBox;
-	private ImageButton wagerPlusIB;
-	private ImageButton wagerMinusIB;
-	private ImageButton daysPlusIB;
-	private ImageButton daysMinusIB;
+	private Button wagerPlusButton;
+	private Button wagerMinusButton;
+	private Button daysPlusButton;
+	private Button daysMinusButton;
 	private TextView wagerTV;
 	private TextView daysTV;
 	
@@ -60,7 +58,6 @@ public class LeagueCreateActivity extends Activity {
         
         initializeButtons();
         initializeCheckBoxes();  
-        initializeImageButtons();
         initializeTextViews();
         
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
@@ -158,30 +155,25 @@ public class LeagueCreateActivity extends Activity {
     			create();
     		}
     	});
-	}
-	
-	/**
-	 * initializes all of the imageButtons
-	 */
-	private void initializeImageButtons() {
-		wagerPlusIB = (ImageButton)findViewById(R.id.league_create_ib_wager_plus);
-		wagerPlusIB.setOnClickListener(new OnClickListener() {
+	   	
+		wagerPlusButton = (Button)findViewById(R.id.league_create_ib_wager_plus);
+		wagerPlusButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				incrementWager();
 			}
 		});
 		
-		wagerMinusIB = (ImageButton)findViewById(R.id.league_create_ib_wager_minus);
-		wagerMinusIB.setOnClickListener(new OnClickListener() {
+		wagerMinusButton = (Button)findViewById(R.id.league_create_ib_wager_minus);
+		wagerMinusButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				decrementWager();
 			}	
 		});
 		
-		daysPlusIB = (ImageButton)findViewById(R.id.league_create_ib_days_plus);
-		daysPlusIB.setOnClickListener(new OnClickListener() {
+		daysPlusButton = (Button)findViewById(R.id.league_create_ib_days_plus);
+		daysPlusButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -189,8 +181,8 @@ public class LeagueCreateActivity extends Activity {
 			}
 		});
 		
-		daysMinusIB = (ImageButton)findViewById(R.id.league_create_ib_days_minus);
-		daysMinusIB.setOnClickListener(new OnClickListener() {
+		daysMinusButton = (Button)findViewById(R.id.league_create_ib_days_minus);
+		daysMinusButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				decrementDays();
