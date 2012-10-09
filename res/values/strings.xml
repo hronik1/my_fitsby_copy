@@ -27,8 +27,8 @@
     <string name="league_landing_join_text">Join A Game</string>
     <string name="title_activity_league_create">Create A Game</string>
     <string name="league_create_create_text">Create Game</string>
-    <string name="league_create_tv_wager_text">Set the game's wager amount:</string>
-    <string name="league_create_tv_days_text">Set the game's duration (days):</string>
+    <string name="league_create_tv_wager_text">Set the game\'s wager amount:</string>
+    <string name="league_create_tv_days_text">Set the game\'s duration (days):</string>
     <string name="league_create_ib_wager_plus">+</string>
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
@@ -56,7 +56,7 @@
 	<string name="add_friend_button">Add Friend</string>
   	<string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
  	
-  	<string name="activity_league_join_directions">Search for a private game by entering in the game host's information, or join a public game.</string>
+  	<string name="activity_league_join_directions">Search for a private game by entering in the game host\'s information, or join a public game.</string>
     <string name="title_activity_league_join">Join A Game</string>
     <string name="league_join_et_first_name_hint">First Name</string>
     <string name="league_join_et_last_name_hint">Last Name</string>
