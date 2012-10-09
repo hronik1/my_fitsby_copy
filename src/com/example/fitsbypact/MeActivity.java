@@ -49,6 +49,7 @@ public class MeActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
+        mUser = mApplicationUser.getUser();
         initializeNavigationBar();
         initializeTextViews();
         initializeButtons();
