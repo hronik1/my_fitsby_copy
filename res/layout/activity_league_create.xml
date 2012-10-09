@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/league_create_ib_wager_minus"
         android:layout_alignLeft="@+id/league_create_ib_wager_minus"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:textStyle="bold"
         android:text="@string/league_create_tv_wager_text" />
 
