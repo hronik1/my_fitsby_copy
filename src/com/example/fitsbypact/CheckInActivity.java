@@ -118,6 +118,7 @@ public class CheckInActivity extends Activity {
 	public void onStart() {
 	    super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Check In");
 	    Log.i(TAG, "onStart");
 	}

@@ -83,6 +83,7 @@ public class LeagueJoinActivity extends Activity
     public void onStart() {
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Game Create Activity");
         Log.i(TAG, "onStart");
     }

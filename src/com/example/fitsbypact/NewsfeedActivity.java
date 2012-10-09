@@ -115,7 +115,8 @@ public class NewsfeedActivity extends Activity
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");	    
+	    FlurryAgent.onPageView();	    
 	    FlurryAgent.logEvent("Newsfeed Activity");
 	    Log.i(TAG, "onStart");
 	}

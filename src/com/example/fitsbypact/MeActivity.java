@@ -82,6 +82,7 @@ public class MeActivity extends Activity {
 	public void onStart() {
 	    super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Me Activity");
 	    Log.i(TAG, "onStart");
 	}
@@ -92,7 +93,7 @@ public class MeActivity extends Activity {
 		super.onStop();		
 		FlurryAgent.onEndSession(this);
 	}
-	
+    
 	/**
 	 * called when activity resumes
 	 */

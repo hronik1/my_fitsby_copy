@@ -65,6 +65,7 @@ public class LandingActivity extends Activity {
     public void onStart() {
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Landing Activity");
         Crittercism.init(getApplicationContext(), "506f841701ed850f8f000003");
         Log.i(TAG, "onStart");

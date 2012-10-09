@@ -61,6 +61,7 @@ public class FriendInviteActivity extends Activity {
     public void onStart() {
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Invite Friends");
         Log.i(TAG, "onStart");
     }
