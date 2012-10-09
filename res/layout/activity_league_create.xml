@@ -15,6 +15,17 @@
         android:text="@string/league_create_header_text" />
 
     <TextView
+        android:id="@+id/league_create_wager_dollarsign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/league_create_wager"
+        android:layout_alignTop="@+id/league_create_wager"
+        android:layout_toLeftOf="@+id/league_create_wager"
+        android:paddingBottom="150dp"
+        android:text="@string/league_create_wager_dollarsign_text"
+        android:textSize="40sp" />
+    
+    <TextView
         android:id="@+id/league_create_wager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/league_create_wager"
         android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@+id/league_create_wager"
+        android:layout_toLeftOf="@+id/league_create_wager_dollarsign"
         android:contentDescription="@string/league_create_ib_wager_minus_text"
         android:text="@string/league_create_ib_wager_minus" />
 
@@ -83,6 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/league_create_ib_days_minus"
         android:layout_toRightOf="@+id/league_create_ib_days_minus"
+        android:layout_alignRight="@+id/league_create_wager"
         android:text="@string/league_create_days_text"
         android:textSize="40sp" />
 

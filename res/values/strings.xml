@@ -136,7 +136,8 @@
     <string name="list_item_newsfeed_description">profile picture</string>
     <string name="credit_card_tv_wager_text">$XX</string>
 
-    <string name="league_create_wager_text">$0</string>
+    <string name="league_create_wager_text">0</string>
+    <string name="league_create_wager_dollarsign_text">$</string>
     <string name="league_create_days_text">14</string>
     <string name="league_create_ib_days_minus_text">Decrement days</string>
     <string name="league_create_ib_days_plus_text">Increment days</string>
