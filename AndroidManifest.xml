@@ -31,7 +31,8 @@
         
         <activity
             android:name=".LandingActivity"
-            android:label="@string/title_activity_landing" >
+            android:label="@string/title_activity_landing" 
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,55 +40,68 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LeagueLandingActivity"
-            android:label="@string/title_activity_league_landing" >
+            android:label="@string/title_activity_league_landing" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LeagueCreateActivity"
-            android:label="@string/title_activity_league_create" >
+            android:label="@string/title_activity_league_create" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".CreditCardActivity"
-            android:label="@string/title_activity_credit_card" >
+            android:label="@string/title_activity_credit_card" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".FriendInviteActivity"
-            android:label="@string/title_activity_friend_invite" >
+            android:label="@string/title_activity_friend_invite"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LeagueJoinActivity"
-            android:label="@string/title_activity_league_join" >
+            android:label="@string/title_activity_league_join"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".GamesActivity"
-            android:label="@string/title_activity_games" >
+            android:label="@string/title_activity_games" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".NewsfeedActivity"
-            android:label="@string/title_activity_newsfeed" >
+            android:label="@string/title_activity_newsfeed" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".CheckInActivity"
-            android:label="@string/title_activity_check_in" >
+            android:label="@string/title_activity_check_in" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MeActivity"
-            android:label="@string/title_activity_me" >
+            android:label="@string/title_activity_me"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LeagueJoinDetailActivity"
-            android:label="@string/title_activity_league_join_detail" >
+            android:label="@string/title_activity_league_join_detail" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings" 
+            android:screenOrientation="portrait" >
         </activity>        
     </application>
 
