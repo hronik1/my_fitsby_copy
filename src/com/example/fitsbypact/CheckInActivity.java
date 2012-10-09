@@ -24,6 +24,7 @@ import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -243,6 +244,17 @@ public class CheckInActivity extends Activity {
 		if (!gpsEnabled) {
 			showAlertDialog(); 
 		} else {
+			LocationListener listener = new LocationListener() {
+				public void onLocationChanged(Location location) {}
+
+				public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+				public void onProviderEnabled(String provider) {}
+
+				public void onProviderDisabled(String provider) {}
+			};
+			
+			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
 			Location location = service.getLastKnownLocation(LOCATION_SERVICE);
 			double latitude = location.getLatitude();
 			double longitude = location.getLongitude();
