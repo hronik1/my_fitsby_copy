@@ -10,4 +10,5 @@
      <color name="gray">#333333</color>
      <color name="button_gray">#5a595a</color>
      <color name="tinted_white">#e6e6e6</color>
+     <color name="light_white">#f2f2f2</color>
 </resources>

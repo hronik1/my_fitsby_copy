@@ -27,8 +27,8 @@
     <string name="league_landing_join_text">Join A Game</string>
     <string name="title_activity_league_create">Create A Game</string>
     <string name="league_create_create_text">Create Game</string>
-    <string name="league_create_tv_wager_text">Set the wager amount:</string>
-    <string name="league_create_tv_days_text">Set the game duration (days):</string>
+    <string name="league_create_tv_wager_text">Set the game's wager amount:</string>
+    <string name="league_create_tv_days_text">Set the game's duration (days):</string>
     <string name="league_create_ib_wager_plus">+</string>
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
@@ -56,12 +56,12 @@
 	<string name="add_friend_button">Add Friend</string>
   	<string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
  	
-  	<string name="activity_league_join_directions">Find private games by typing your friend\'s name, or browse through public games.</string>
+  	<string name="activity_league_join_directions">Search for a private game by entering in the game host's information, or join a public game.</string>
     <string name="title_activity_league_join">Join A Game</string>
     <string name="league_join_et_first_name_hint">First Name</string>
     <string name="league_join_et_last_name_hint">Last Name</string>
     <string name="league_join_et_invite_code_hint">Invitation Code</string>
-    <string name="league_join_button_submit_text">Submit</string>
+    <string name="league_join_button_submit_text">Submit Search</string>
     <string name="league_create_checkbox_text">Make game private</string>
     <string name="navigation_textview_me_text">Me</string>
     <string name="navigation_textview_game_text">Games</string>
@@ -90,7 +90,7 @@
     <string name="games_duration_prompt_text">Duration: </string>
     <string name="games_wager_prompt_text">Wager: </string>
     <string name="games_player_prompt_text">Players: </string>
-    <string name="games_pot_prompt_text">Pot: </string>
+    <string name="games_pot_prompt_text">Stakes: </string>
     <string name="games_leader_prompt_text">Leaderboard</string>
     <string name="list_item_game_leader_name">Name</string>
 	<string name="forfeit_game_button">Forfeit Game</string>    
@@ -101,19 +101,19 @@
     <string name="league_join_players_header_text">Players</string>
     <string name="league_join_wager_header_text">Wager</string>
     <string name="league_join_duration_header_text">Duration</string>
-    <string name="league_join_pot_header_text">Pot</string>
+    <string name="league_join_pot_header_text">Stakes</string>
     <string name="public_leagues_league_id_header_text">Game ID</string>
     <string name="public_leagues_players_header_text">Players</string>
     <string name="public_leagues_wager_header_text">Wager</string>
     <string name="public_leagues_duration_header_text">Duration</string>
-    <string name="public_leagues_pot_header_text">Pot</string>
+    <string name="public_leagues_pot_header_text">Stakes</string>
     <string name="title_activity_league_join_detail">Join A Game</string>
     <string name="league_join_detail_header_text"><u>Game Details:</u></string>
     <string name="league_join_detail_type_text">Type: </string>
     <string name="league_join_detail_type_data_text">Private</string>
     <string name="league_join_detail_wager_text">Wager: </string>
     <string name="league_join_detail_wager_data_text">$10</string>
-    <string name="league_join_detail_pot_text">Pot: </string>
+    <string name="league_join_detail_pot_text">Stakes: </string>
     <string name="league_join_detail_pot_data_text">$20</string>
     <string name="league_join_detail_players_text">Players: </string>
     <string name="league_join_detail_players_data_text">2</string>

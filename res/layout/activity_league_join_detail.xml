@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"        
         android:text="@string/league_join_detail_header_text" />
 
@@ -121,8 +121,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/league_join_detail_duration"
         android:background="@drawable/custom_login_button"
