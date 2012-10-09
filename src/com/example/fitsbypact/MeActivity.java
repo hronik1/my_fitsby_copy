@@ -82,6 +82,7 @@ public class MeActivity extends Activity {
 	public void onStart() {
 	    super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.logEvent("Me Activity");
 	    Log.i(TAG, "onStart");
 	}
 	

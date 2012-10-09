@@ -79,6 +79,7 @@ public class CreditCardActivity extends Activity {
     public void onStart() {
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.logEvent("Enter Credit Card Info");
         Log.i(TAG, "onStart");
     }
     

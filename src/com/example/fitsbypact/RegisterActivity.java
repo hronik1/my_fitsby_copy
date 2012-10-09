@@ -87,6 +87,7 @@ public class RegisterActivity extends Activity {
     public void onStart() {
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.logEvent("Register Activity");
         Log.i(TAG, "onStart");
     }
     
