@@ -128,7 +128,7 @@ public class MeActivity extends Activity {
 	 * initialized NavigationBar for use
 	 */
 	public void initializeNavigationBar() {
-		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
+		navigation = (NavigationBar)findViewById(R.id.me_navigation_bar);
 		navigation.setParentActivity(this);
 		navigation.turnOffTV("me");
 	}
