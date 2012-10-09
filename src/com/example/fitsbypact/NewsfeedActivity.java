@@ -163,7 +163,7 @@ public class NewsfeedActivity extends Activity
 	 * initialized NavigationBar for use
 	 */
 	public void initializeNavigationBar() {
-		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
+		navigation = (NavigationBar)findViewById(R.id.newsfeed_navigation_bar);
 		navigation.setParentActivity(this);
 		navigation.turnOffTV("newsfeed");
 	}

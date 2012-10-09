@@ -208,7 +208,7 @@ public class CheckInActivity extends Activity {
 	 * initialized NavigationBar for use
 	 */
 	public void initializeNavigationBar() {
-		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
+		navigation = (NavigationBar)findViewById(R.id.check_in_navigation_bar);
 		navigation.setParentActivity(this);
 		navigation.turnOffTV("checkin");
 	}
