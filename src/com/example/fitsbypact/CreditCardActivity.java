@@ -176,7 +176,7 @@ public class CreditCardActivity extends Activity {
     	//TODO submit credit card info
     	try {
     		Intent intent = new Intent(this, FriendInviteActivity.class);
-    		Token token = parseCreditCard();
+    		parseCreditCard();
     		//TODO pass danny token
     		startActivity(intent);
     	} catch (Exception e) {
@@ -188,7 +188,7 @@ public class CreditCardActivity extends Activity {
     	} 
     }
     
-    private Token parseCreditCard() throws StripeException {
+    private void parseCreditCard() throws StripeException {
     	Stripe.apiKey = getString(R.string.stripe_test_secret_api_key); 
     	Map<String, Object> tokenParams = new HashMap<String, Object>(); 
     	Map<String, Object> cardParams = new HashMap<String, Object>(); 
@@ -197,6 +197,10 @@ public class CreditCardActivity extends Activity {
     	cardParams.put("cvc", cvcET.getText().toString()); 
     	cardParams.put("exp_month", expMonthET.getText().toString()); 
     	tokenParams.put("card", cardParams); 
-    	return Token.create(tokenParams);
+    	try {
+    		Token.create(tokenParams);
+    	} catch(ExceptionInInitializerError e) {
+    		Log.d(TAG, e.getMessage());
+    	}
     }
 }
