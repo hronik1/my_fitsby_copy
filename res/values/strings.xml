@@ -22,6 +22,12 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
+    
+  	<string name="fitsby_description">Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
+  									  Everyone sets a wager at the beginning, and the top 3 gym-goers are rewarded the stakes at the end of the game. \n \n
+  									  To get started, either create or join a game.
+	</string>
+    
     <string name="title_activity_league_landing">Games</string>
     <string name="league_landing_create_text">Create A Game</string>
     <string name="league_landing_join_text">Join A Game</string>
@@ -164,4 +170,9 @@
 	<string name="stripe_live_publishable_api_key">pk_0G8Uw4pPr4NBHkdtCw0m2PJBVdAES</string>
 	<string name="stripe_test_secret_api_key">sk_0G8UQEXsgKNmNNdy7QRwKr7VIgjxl</string>
 	<string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
+	
+	
+	<!-- FAQ -->
+	
+	<!-- end FAQ -->
 </resources>

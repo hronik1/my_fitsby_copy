@@ -139,8 +139,8 @@ public class RegisterActivity extends Activity {
 
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("Are you sure " + emailET.getText().toString() +
-    			" is correct?")
+    	builder.setMessage("Please confirm that " + emailET.getText().toString() +
+    			" is your email.")
     			.setCancelable(false)
     			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
