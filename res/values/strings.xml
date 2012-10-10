@@ -171,7 +171,7 @@
 	<string name="stripe_test_secret_api_key">sk_0G8UQEXsgKNmNNdy7QRwKr7VIgjxl</string>
 	<string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
 	
-	
+	<string name="faq_button">Read the FAQ</string>
 	<!-- FAQ -->
 	
 	<!-- end FAQ -->

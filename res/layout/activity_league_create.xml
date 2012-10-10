@@ -126,12 +126,14 @@
         android:text="@string/league_create_checkbox_text" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/faq_button"
+        android:layout_above="@+id/league_create_button_create"        
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_above="@+id/league_create_button_create"
-        android:layout_alignLeft="@+id/league_create_button_create"
-        android:text="Read the FAQ" />
+        android:layout_height="21dp"
+        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true"
+	    android:background="@drawable/faq_button_background"
+        android:textColor="@drawable/faq_button_text"
+        android:text="@string/faq_button" />
 
 </RelativeLayout>
