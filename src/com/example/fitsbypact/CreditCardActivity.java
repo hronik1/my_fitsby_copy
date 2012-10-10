@@ -200,6 +200,7 @@ public class CreditCardActivity extends Activity {
     	try {
     		Token.create(tokenParams);
     	} catch(ExceptionInInitializerError e) {
+    		//TODO inform user of bad token
     		Log.d(TAG, e.getMessage());
     	}
     }
