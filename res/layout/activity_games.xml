@@ -63,7 +63,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/games_pot_prompt"
+        android:layout_below="@+id/games_button_newgame"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp" />
@@ -120,7 +120,7 @@
         android:background="@drawable/custom_login_button"
         android:text="@string/invite_friends_button"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/input_players"
@@ -158,9 +158,14 @@
         android:id="@+id/games_button_newgame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/games_progress_bar"
-        android:layout_alignRight="@+id/invite_friends_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/invite_friends_button"
+        android:layout_below="@+id/invite_friends_button"
+        android:background="@drawable/checkin_button"
         android:text="@string/games_button_newgame_text"
-        android:textSize="10sp" />
+        android:textSize="12sp" 
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:layout_marginRight="10dp" />
 
 </RelativeLayout>
