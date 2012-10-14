@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -154,8 +155,10 @@ public class LoginActivity extends Activity {
     		email = emailET.getText().toString();
 
     	if (!comm.isInternetConnected()) {
-    		Toast.makeText(LoginActivity.this, "Sorry no internet, please try again",
-    				Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(LoginActivity.this, "Sorry no internet, please try again",
+    				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     	
     	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
@@ -166,11 +169,15 @@ public class LoginActivity extends Activity {
     			startActivity(intent);
     		} catch (Exception e) {
     			//TODO something more robust possibly
-    			Toast.makeText(LoginActivity.this, "Sorry can not log in at the moment", Toast.LENGTH_LONG).show();
+    			Toast toast = Toast.makeText(LoginActivity.this, "Sorry can not log in at the moment", Toast.LENGTH_LONG);
+    			toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
     		}
     	} else {
     		//TODO password salting maybe?
-    		Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     	
     }
