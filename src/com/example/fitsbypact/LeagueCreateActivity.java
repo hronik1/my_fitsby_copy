@@ -9,6 +9,7 @@ import dbhandlers.LeagueTableHandler;
 import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -256,7 +257,9 @@ public class LeagueCreateActivity extends Activity {
 	 * opens up browser to faq page
 	 */
 	private void showFaqBrowser() {
-		//TODO opens up faq browser
+ 		//TODO change url to point to faq url
+ 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+ 		startActivity(browserIntent);
 	}
 	
 	/**

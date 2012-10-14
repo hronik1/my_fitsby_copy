@@ -8,6 +8,7 @@ import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbtables.LeagueMember;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -226,6 +227,8 @@ public class LeagueJoinDetailActivity extends Activity {
  	 * opens up the faq browser
  	 */
  	private void showFaqBrowser() {
- 		
+ 		//TODO change url to point to faq url
+ 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+ 		startActivity(browserIntent);
  	}
 }
