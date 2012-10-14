@@ -22,9 +22,11 @@ import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
@@ -45,6 +47,8 @@ public class GamesActivity extends Activity
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
+	private Button inviteButton;
+	private Button newGamesButton;
 	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
@@ -82,6 +86,7 @@ public class GamesActivity extends Activity
         initializeTextViews();
         initializeProgressBar();
         initializeListView();
+        initializeButtons();
     }
 
     /**
@@ -217,6 +222,28 @@ public class GamesActivity extends Activity
 		});
 	}
     
+	/**
+	 * initializes Buttons
+	 */
+	private void initializeButtons() {
+		inviteButton = (Button)findViewById(R.id.invite_friends_button);
+		inviteButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		newGamesButton = (Button)findViewById(R.id.games_button_newgame);
+		newGamesButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
     /** LoaderManager callBacks **/
     
     /**
