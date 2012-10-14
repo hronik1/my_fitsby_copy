@@ -214,10 +214,24 @@ public class LoginActivity extends Activity {
     	alert.setView(input);
 
     	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-    	public void onClick(DialogInterface dialog, int whichButton) {
-    	  String value = input.getText().toString();
-    	  // Do something with value!
-    	  }
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			String value = input.getText().toString();
+    			// TODO request if value is valid email!
+    			boolean isValid = false;
+    			if (isValid) {
+    				Toast toast = Toast.makeText(getApplicationContext(),
+    						"Reset password link has been sent to your email",
+    						Toast.LENGTH_LONG);
+    				toast.setGravity(Gravity.CENTER, 0, 0);
+    				toast.show();
+    			} else {
+    				Toast toast = Toast.makeText(getApplicationContext(),
+    						"Sorry, but that email address isn't familiar to us",
+    						Toast.LENGTH_LONG);
+    				toast.setGravity(Gravity.CENTER, 0, 0);
+    				toast.show();
+    			}
+    		}  
     	});
 
     	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
