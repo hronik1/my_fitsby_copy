@@ -16,6 +16,8 @@ import android.util.Log;
 public class MyHttpClient {
 	
 	private final static String TAG = "MyHttpClient";
+	public final static String SERVER_URL = "";
+	
 	static HttpClient httpClient = new DefaultHttpClient();
 	
 	public ServerResponse createPostRequest(String urlString, ArrayList<NameValuePair> nameValuePairs) {

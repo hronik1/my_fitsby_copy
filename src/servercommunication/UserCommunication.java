@@ -36,7 +36,7 @@ public class UserCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(getString(R.string.server_url), nameValuePairs);
+		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
 		//TODO do something with serverResonse
 //        HttpResponse response = httpclient.execute(httppost);
 //        HttpEntity entity = response.getEntity();
@@ -52,7 +52,7 @@ public class UserCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(getString(R.string.server_url), nameValuePairs);
+		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
 		//TODO do something with serverResonse
 //        HttpResponse response = httpclient.execute(httppost);
 //        HttpEntity entity = response.getEntity();
