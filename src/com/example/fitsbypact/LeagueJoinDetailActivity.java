@@ -228,7 +228,7 @@ public class LeagueJoinDetailActivity extends Activity {
  	 */
  	private void showFaqBrowser() {
  		//TODO change url to point to faq url
- 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+ 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fitsby.com/faq.html"));
  		startActivity(browserIntent);
  	}
 }
