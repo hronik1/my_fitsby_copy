@@ -67,7 +67,7 @@ public class CheckInActivity extends Activity {
 	private ApplicationUser mApplicationUser;
 	private User mUser;
 	
-	private Handler mHandler;
+	private static Handler mHandler;
 	private int timeSeconds;
 	private int timeMinutes;
 

@@ -64,6 +64,16 @@
          android:textColor="@color/white"
          android:textStyle="bold" />
 
+     <ImageView
+         android:id="@+id/check_in_iv"
+         android:src="@drawable/red_x_mark"
+         android:layout_toLeftOf="@+id/verified_gym" 
+         android:layout_alignBottom="@+id/verified_gym" 
+         android:layout_alignTop="@+id/verified_gym" 
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:contentDescription="@string/hello_world" />
+     
      <TextView
          android:id="@+id/verified_gym"
          android:layout_width="wrap_content"

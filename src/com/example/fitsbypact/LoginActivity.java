@@ -206,8 +206,7 @@ public class LoginActivity extends Activity {
     private void showAlertInput() {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-    	alert.setTitle("Title");
-    	alert.setMessage("Message");
+    	alert.setMessage("Enter email to recieve a reset password link");
 
     	// Set an EditText view to get user input 
     	final EditText input = new EditText(this);
