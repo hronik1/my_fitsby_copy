@@ -57,5 +57,14 @@
         android:layout_alignLeft="@+id/login_email_id"
         android:layout_marginBottom="50dp"
         android:text="@string/login_text" />
-
+    
+	<TextView
+	    android:id="@+id/login_forgot_password"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/login_button_login"
+	    android:layout_alignLeft="@+id/login_button_login"
+	    android:clickable="true"
+	    android:text="@string/login_forgot_password_text" />
+	
 </RelativeLayout>
