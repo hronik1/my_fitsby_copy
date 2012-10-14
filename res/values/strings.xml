@@ -1,6 +1,6 @@
 <resources>
-    
-	<string name="motto">Stay motivated to hit the gym.</string>
+
+    <string name="motto">Stay motivated to hit the gym.</string>
     <string name="or"> OR </string>
     <string name="app_name">Fitsby</string>
     <string name="hello_world">Hello world!</string>
@@ -23,12 +23,9 @@
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
     <string name="login_forgot_password_text">forgot password?</string>
-    
-  	<string name="fitsby_description">Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
+    <string name="fitsby_description">Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
   									  Everyone sets a wager at the beginning, and the top 3 gym-goers are rewarded the stakes at the end of the game. \n \n
-  									  To get started, either create or join a game.
-	</string>
-    
+  									  To get started, either create or join a game.</string>
     <string name="title_activity_league_landing">Games</string>
     <string name="league_landing_create_text">Create A Game</string>
     <string name="league_landing_join_text">Join A Game</string>
@@ -40,30 +37,26 @@
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
     <string name="league_create_ib_days_plus">+</string>
-    
-	<string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game.</string>
-	<string name="credit_card_number_text">Card Number:</string>
-	<string name="credit_card_expiration_text">Expiration Date:</string>
-	<string name="credit_card_cvc_text">Security Code:</string>    
-	<string name="credit_card_wager_text">WAGER:</string>	
-    
+    <string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game.</string>
+    <string name="credit_card_number_text">Card Number:</string>
+    <string name="credit_card_expiration_text">Expiration Date:</string>
+    <string name="credit_card_cvc_text">Security Code:</string>
+    <string name="credit_card_wager_text">WAGER:</string>
     <string name="title_activity_credit_card">Enter Payment Information</string>
     <string name="credit_card_button_submit_text">Submit</string>
     <string name="credit_card_et_card_cvc_hint">XXX</string>
     <string name="credit_card_et_card_number_hint">XXXX-XXXX-XXXX-XXXX</string>
     <string name="credit_card_et_expire_year_hint">YYYY</string>
     <string name="credit_card_et_expire_month_hint">MM</string>
-    
     <string name="authorize_api_login_id">3C29upX37b</string>
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
     <string name="title_activity_friend_invite">Invite Your Friends</string>
     <string name="friend_invite_button_invite_text">Invite Friends</string>
     <string name="friend_invite_button_home_text">Start</string>
-  	<string name="or_invite_them_later_text">Or you can invite them later and...</string>
-	<string name="add_friend_button">Add Friend</string>
-  	<string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
- 	
-  	<string name="activity_league_join_directions">Search for a private game by entering in the game host\'s information, or join a public game.</string>
+    <string name="or_invite_them_later_text">Or you can invite them later and...</string>
+    <string name="add_friend_button">Add Friend</string>
+    <string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
+    <string name="activity_league_join_directions">Search for a private game by entering in the game host\'s information, or join a public game.</string>
     <string name="title_activity_league_join">Join A Game</string>
     <string name="league_join_et_first_name_hint">First Name</string>
     <string name="league_join_et_last_name_hint">Last Name</string>
@@ -76,12 +69,11 @@
     <string name="navigation_textview_checkin_text">Check In</string>
     <string name="check_in_button_check_in_text">Check In</string>
     <string name="check_in_button_check_out_text">Check Out</string>
-	<string name="verified_gym">You are currently not at a verified gym</string>
-	<string name="checkout_directions">(You can check out only when you\'ve been at the gym for a minimum of 45 minutes)</string>
-	<string name="colon">:</string>
-	<string name="seconds">00</string>
-	<string name="minutes">00</string>
-	
+    <string name="verified_gym">You are currently not at a verified gym</string>
+    <string name="checkout_directions">(You can check out only when you\'ve been at the gym for a minimum of 45 minutes)</string>
+    <string name="colon">:</string>
+    <string name="seconds">00</string>
+    <string name="minutes">00</string>
     <string name="title_activity_games">Games</string>
     <string name="title_activity_newsfeed">Newsfeed</string>
     <string name="title_activity_check_in">Check In</string>
@@ -93,16 +85,14 @@
     <string name="me_textview_total_money_earned_prompt_text">Total Money Earned: </string>
     <string name="newsfeed_button_submit_text">Submit</string>
     <string name="newsfeed_et_comment_hint">Post a status here</string>
-    
     <string name="games_duration_prompt_text">Duration: </string>
     <string name="games_wager_prompt_text">Wager: </string>
     <string name="games_player_prompt_text">Players: </string>
     <string name="games_pot_prompt_text">Stakes: </string>
     <string name="games_leader_prompt_text">Leaderboard</string>
     <string name="list_item_game_leader_name">Name</string>
-	<string name="forfeit_game_button">Forfeit Game</string>    
-	<string name="invite_friends_button">Invite Friends</string>    
-	
+    <string name="forfeit_game_button">Forfeit Game</string>
+    <string name="invite_friends_button">Invite Friends</string>
     <string name="league_join_public_header_text">Browse Public Games</string>
     <string name="league_join_league_id_header_text">Game ID</string>
     <string name="league_join_players_header_text">Players</string>
@@ -127,7 +117,6 @@
     <string name="league_join_duration_text">Duration: </string>
     <string name="league_join_duration_data_text">14 days</string>
     <string name="league_join_detail_button_join_text">Join</string>
-    
     <string name="list_item_game_leader_name_text">First Name</string>
     <string name="list_item_game_leader_last_name_text">Last Name</string>
     <string name="list_item_game_leader_checkins_text">Checkins: </string>
@@ -142,7 +131,6 @@
     <string name="list_item_newsfeed_message_text">This is a comment.</string>
     <string name="list_item_newsfeed_description">profile picture</string>
     <string name="credit_card_tv_wager_text">$XX</string>
-
     <string name="league_create_wager_text">0</string>
     <string name="league_create_wager_dollarsign_text">$</string>
     <string name="league_create_days_text">14</string>
@@ -157,24 +145,25 @@
     <string name="me_settings_tv_change_email_text">Change Email: </string>
     <string name="me_settings_et_change_email_hint">[current email]</string>
     <string name="me_settings_tv_change_password_text">Change Password: </string>
-	<string name="me_settings_et_old_password_hint">Current Password</string>
-	<string name="me_settings_et_new_password_hint">New Password</string>
-	<string name="me_settings_et_new_password_confirm_hint">Confirm New password</string>
-	<string name="me_settings_button_submit_text">Submit Changes</string>
-	<string name="me_settings_button_invite_friends_text">Invite Friends</string>
-	<string name="me_settings_button_logout_text">Logout</string>
-	<string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
-	<string name="me_settings_button_change_picture_text">Choose picture</string>
-	<string name="server_url">place server url here</string>
+    <string name="me_settings_et_old_password_hint">Current Password</string>
+    <string name="me_settings_et_new_password_hint">New Password</string>
+    <string name="me_settings_et_new_password_confirm_hint">Confirm New password</string>
+    <string name="me_settings_button_submit_text">Submit Changes</string>
+    <string name="me_settings_button_invite_friends_text">Invite Friends</string>
+    <string name="me_settings_button_logout_text">Logout</string>
+    <string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
+    <string name="me_settings_button_change_picture_text">Choose picture</string>
+    <string name="server_url">place server url here</string>
+    <string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
+    <string name="stripe_live_secret_api_key">sk_0G8Utv86sXeIUY4EO6fif1hAypeDE</string>
+    <string name="stripe_live_publishable_api_key">pk_0G8Uw4pPr4NBHkdtCw0m2PJBVdAES</string>
+    <string name="stripe_test_secret_api_key">sk_0G8UQEXsgKNmNNdy7QRwKr7VIgjxl</string>
+    <string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
+    <string name="faq_button">Read the FAQ</string>
+    <!-- FAQ -->
 
-	<string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
-	<string name="stripe_live_secret_api_key">sk_0G8Utv86sXeIUY4EO6fif1hAypeDE</string>
-	<string name="stripe_live_publishable_api_key">pk_0G8Uw4pPr4NBHkdtCw0m2PJBVdAES</string>
-	<string name="stripe_test_secret_api_key">sk_0G8UQEXsgKNmNNdy7QRwKr7VIgjxl</string>
-	<string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
-	
-	<string name="faq_button">Read the FAQ</string>
-	<!-- FAQ -->
-	
-	<!-- end FAQ -->
+
+    <!-- end FAQ -->
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+
 </resources>

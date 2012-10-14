@@ -7,34 +7,34 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="android.permission.READ_CONTACTS" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
-    
-    <application
-        android:icon="@drawable/ic_launcher"
-        android:name=".applicationsubclass.ApplicationUser" 
-        android:label="@string/app_name" 
-        android:theme="@style/AppTheme">
 
-		<!-- Start of Crittercism.com Code -->
-		<activity android:name="com.crittercism.NotificationActivity"/>
-		<!-- End of Crittercism.com Code -->            
-        
+    <application
+        android:name=".applicationsubclass.ApplicationUser"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- Start of Crittercism.com Code -->
+        <activity android:name="com.crittercism.NotificationActivity" />
+        <!-- End of Crittercism.com Code -->
+
         <activity
             android:name=".ExampleActivity"
             android:label="@string/title_activity_example" >
         </activity>
-        
         <activity
             android:name=".LandingActivity"
-            android:label="@string/title_activity_landing" 
+            android:label="@string/title_activity_landing"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -50,17 +50,17 @@
         </activity>
         <activity
             android:name=".LeagueLandingActivity"
-            android:label="@string/title_activity_league_landing" 
+            android:label="@string/title_activity_league_landing"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LeagueCreateActivity"
-            android:label="@string/title_activity_league_create" 
+            android:label="@string/title_activity_league_create"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".CreditCardActivity"
-            android:label="@string/title_activity_credit_card" 
+            android:label="@string/title_activity_credit_card"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -75,17 +75,17 @@
         </activity>
         <activity
             android:name=".GamesActivity"
-            android:label="@string/title_activity_games" 
+            android:label="@string/title_activity_games"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".NewsfeedActivity"
-            android:label="@string/title_activity_newsfeed" 
+            android:label="@string/title_activity_newsfeed"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".CheckInActivity"
-            android:label="@string/title_activity_check_in" 
+            android:label="@string/title_activity_check_in"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -95,14 +95,14 @@
         </activity>
         <activity
             android:name=".LeagueJoinDetailActivity"
-            android:label="@string/title_activity_league_join_detail" 
+            android:label="@string/title_activity_league_join_detail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" 
+            android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" >
-        </activity>        
+        </activity>
     </application>
 
 </manifest>

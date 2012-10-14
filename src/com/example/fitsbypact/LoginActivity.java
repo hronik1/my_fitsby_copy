@@ -9,6 +9,8 @@ import dbhandlers.UserTableHandler;
 import dbtables.User;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
@@ -26,6 +29,7 @@ public class LoginActivity extends Activity {
 	private Button buttonLogin;
 	private EditText emailET;
 	private EditText passwordET;
+	private TextView forgotPasswordTV;
 	
 	private ServerCommunication comm;
 	private DatabaseHandler mdbHandler;
@@ -44,6 +48,7 @@ public class LoginActivity extends Activity {
         comm = new ServerCommunication(this);
         initializeEditTexts();
         initializeButtons();
+        initializeTextViews();
         
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mUserTableHandler = mdbHandler.getUserTableHandler();
@@ -176,5 +181,44 @@ public class LoginActivity extends Activity {
     private void initializeEditTexts() {
     	emailET = (EditText)findViewById(R.id.login_email_id);
     	passwordET = (EditText)findViewById(R.id.login_password_id);
+    }
+    
+    /**
+     * initializes the textview
+     */
+    private void initializeTextViews() {
+    	forgotPasswordTV = (TextView)findViewById(R.id.login_forgot_password);
+    	forgotPasswordTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showAlertInput();
+			}
+    	});
+    }
+    
+    private void showAlertInput() {
+    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+    	alert.setTitle("Title");
+    	alert.setMessage("Message");
+
+    	// Set an EditText view to get user input 
+    	final EditText input = new EditText(this);
+    	alert.setView(input);
+
+    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    	public void onClick(DialogInterface dialog, int whichButton) {
+    	  String value = input.getText().toString();
+    	  // Do something with value!
+    	  }
+    	});
+
+    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    	  public void onClick(DialogInterface dialog, int whichButton) {
+    	    // Canceled.
+    	  }
+    	});
+
+    	alert.show();
     }
 }
