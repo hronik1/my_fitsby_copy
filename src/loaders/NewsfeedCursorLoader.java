@@ -2,6 +2,8 @@ package loaders;
 
 import java.util.List;
 
+import servercommunication.NewsfeedCommunication;
+
 import dbhandlers.CommentTableHandler;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
@@ -11,11 +13,13 @@ import dbtables.Comment;
 import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
+import android.annotation.SuppressLint;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 
+@SuppressLint("NewApi")
 public class NewsfeedCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	private DatabaseHandler mDBHandler;
@@ -29,33 +33,25 @@ public class NewsfeedCursorLoader extends AsyncTaskLoader<Cursor> {
 			CommentTableHandler.KEY_MESSAGE };
 	
 	private Cursor mCursor;
-	private int leagueId;
+	private int mLeagueId;
 	/**
 	 * constructor
 	 * @param context
 	 */
-	public NewsfeedCursorLoader(Context context) {
+	public NewsfeedCursorLoader(Context context, int leagueId) {
 		super(context);
 		mDBHandler = DatabaseHandler.getInstance(context);
 		mLeagueTableHandler = mDBHandler.getLeagueTableHandler();
 		mLeagueMemberTableHandler = mDBHandler.getLeagueMemberTableHandler();
 		mCommentTableHandler = mDBHandler.getCommentTableHandler();
+		mLeagueId = leagueId;
 	}
 
 /** start overridden AsyncTaskLoader methods **/
 	
 	@Override
 	public Cursor loadInBackground() {
-		List<Comment> commentList = mCommentTableHandler.getAllCommentByLeagueId(leagueId);
-		MatrixCursor cursor = new MatrixCursor(FROM_ARGS);
-		for(Comment comment: commentList) {
-			LeagueMember member = mLeagueMemberTableHandler.getLeagueMemberByID(comment.getMemberFromId());
-			User user = mUserTableHandler.getUser(member.getUserId());
-			cursor.addRow(new Object[] { user.getFirstName(), user.getLastName(),
-					comment.getStamp(), comment.getMessage() });
-		}
-		
-		return cursor;
+		return NewsfeedCommunication.getNewsfeed(mLeagueId);
 	}
 	
     /* Runs on the UI thread */

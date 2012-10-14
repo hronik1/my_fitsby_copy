@@ -2,6 +2,9 @@ package loaders;
 
 import java.util.List;
 
+
+import servercommunication.GamesLeaderCommunication;
+
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.UserTableHandler;
@@ -53,15 +56,7 @@ public class GameLeaderCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	@Override
 	public Cursor loadInBackground() {
-		List<LeagueMember> listLeagueMember =  mLeagueMemberTableHandler.getAllLeagueMembersByLeagueId(mLeagueId,
-					LeagueMemberTableHandler.KEY_CHECKINS + " DESC");
-		MatrixCursor cursor = new MatrixCursor(new String[] { UserTableHandler.KEY_FIRST_NAME,
-					UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS});
-		for(LeagueMember member: listLeagueMember) {
-			User user = mUserTableHandler.getUser(member.getUserId());
-			cursor.addRow(new Object[] {user.getFirstName(), user.getLastName(), member.getCheckins()});
-		}
-		return cursor;
+		return GamesLeaderCommunication.getGamesLeader(mLeagueId);
 	}
 	
     /* Runs on the UI thread */

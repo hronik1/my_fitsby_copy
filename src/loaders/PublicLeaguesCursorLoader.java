@@ -2,6 +2,8 @@ package loaders;
 
 import java.util.List;
 
+import servercommunication.LeagueCommunication;
+
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
@@ -39,16 +41,7 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	@Override
 	public Cursor loadInBackground() {
-		List<League> publicLeaguesList = mLeagueTableHandler.getAllPublicLeagues();
-		MatrixCursor cursor = new MatrixCursor(FROM_ARGS);
-		for(League league: publicLeaguesList) {
-			int leagueId = league.getId();
-			int numPlayers = mLeagueMemberTableHandler.getLeagueMembersCountByLeagueId(leagueId);
-			int wager = league.getWager();
-			cursor.addRow(new Object[] {leagueId, numPlayers, wager, league.getDuration(), numPlayers*wager});
-		}
-		
-		return cursor;
+		return LeagueCommunication.getPublicLeagues();
 	}
 		
     /* Runs on the UI thread */
