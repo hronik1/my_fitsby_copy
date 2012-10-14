@@ -7,20 +7,20 @@
         android:id="@+id/newsfeed_spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/newsfeed_button_submit" />
 
     <ListView
         android:id="@+id/newsfeed_list_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newsfeed_spinner"
-        android:layout_above="@+id/newsfeed_button_submit" />
+        android:layout_below="@+id/newsfeed_spinner" />
 
     <Button
         android:id="@+id/newsfeed_button_submit"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_above="@+id/newsfeed_navigation_bar"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/newsfeed_navigation_bar"
         android:layout_alignParentRight="true"
         android:background="@drawable/newsfeed_submit_button"
         android:text="@string/newsfeed_button_submit_text"
@@ -32,9 +32,8 @@
         android:id="@+id/newsfeed_navigation_bar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="5dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
 
     <EditText
         android:id="@+id/newsfeed_et_comment"

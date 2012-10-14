@@ -4,7 +4,8 @@
     android:layout_height="match_parent" >
     <ScrollView 
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent" 
+        android:layout_below="@+id/me_navigation_bar">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -182,6 +183,6 @@
         android:id="@+id/me_navigation_bar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" />
 </RelativeLayout>
