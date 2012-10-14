@@ -10,7 +10,6 @@
         android:layout_weight=".25"
         android:background="@drawable/custom_navigation_tabs"
         android:clickable="true"
-        android:drawableTop="@drawable/game"
         android:focusable="true"
         android:gravity="center"
         android:text="@string/navigation_textview_game_text"
@@ -24,7 +23,6 @@
         android:layout_weight=".25"
         android:background="@drawable/custom_navigation_tabs"
         android:clickable="true"
-        android:drawableTop="@drawable/newsfeed"
         android:focusable="true"
         android:gravity="center"
         android:text="@string/navigation_textview_newsfeed_text"
@@ -38,7 +36,6 @@
         android:layout_weight=".25"
         android:background="@drawable/custom_navigation_tabs"
         android:clickable="true"
-        android:drawableTop="@drawable/checkin"
         android:focusable="true"
         android:gravity="center"
         android:text="@string/navigation_textview_checkin_text"
@@ -52,11 +49,16 @@
         android:layout_weight=".25"
         android:background="@drawable/custom_navigation_tabs"
         android:clickable="true"
-        android:drawableTop="@drawable/me"
         android:focusable="true"
         android:gravity="center"
         android:text="@string/navigation_textview_me_text"
         android:textColor="@color/white"
         android:textSize="13sp" />
+	
+    	<!-- Took out icons: -->
+    	<!--  android:drawableTop="@drawable/game"-->
+        <!--  android:drawableTop="@drawable/newsfeed"-->
+        <!--  android:drawableTop="@drawable/checkin"-->
+		<!--  android:drawableTop="@drawable/me"-->
     
 </LinearLayout>

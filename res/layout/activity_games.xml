@@ -7,7 +7,7 @@
         android:id="@+id/games_spinner"
         android:layout_width="fill_parent"    
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/games_navigation_bar"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -66,7 +66,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/forfeit_game_button" />
+        android:layout_below="@+id/games_pot_prompt" />
     
     <TextView
         android:id="@+id/games_leader_prompt"
@@ -108,7 +108,7 @@
         android:id="@+id/games_navigation_bar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" />
 
     <Button
@@ -121,18 +121,6 @@
         android:text="@string/invite_friends_button"
         android:background="@drawable/custom_login_button"
         android:textColor="@color/white"
-        android:textSize="14sp" />
-
-    <Button
-        android:id="@+id/forfeit_game_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/invite_friends_button"
-        android:layout_below="@+id/games_wager_prompt"
-        android:text="@string/forfeit_game_button"
-        android:layout_marginTop="10dp"        
-        android:background="@drawable/newsfeed_submit_button"
-        android:textColor="@color/white" 
         android:textSize="14sp" />
 
     <TextView
