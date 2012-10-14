@@ -14,6 +14,7 @@ import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 
+@SuppressLint("NewApi")
 public class GamesActivity extends Activity
 	implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -261,7 +263,8 @@ public class GamesActivity extends Activity
      * @param loader
      * @param data
      */
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    @SuppressLint("NewApi")
+	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
     }
     
