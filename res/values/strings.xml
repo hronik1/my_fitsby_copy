@@ -93,7 +93,7 @@
     <string name="games_button_newgame_text">Add New Game</string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>
-    <string name="invite_friends_button">Invite Friends</string>
+    <string name="invite_friends_button">Invite Friends \n to Current Game</string>
     <string name="league_join_public_header_text">Browse Public Games</string>
     <string name="league_join_league_id_header_text">Game ID</string>
     <string name="league_join_players_header_text">Players</string>
