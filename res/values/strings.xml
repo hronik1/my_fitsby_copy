@@ -26,7 +26,7 @@
     <string name="fitsby_description">Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
   									  Everyone sets a wager at the beginning, and the top 3 gym-goers are rewarded the stakes at the end of the game. \n \n
   									  To get started, either create or join a game.</string>
-    <string name="title_activity_league_landing">Games</string>
+    <string name="title_activity_league_landing">Start A Game</string>
     <string name="league_landing_create_text">Create A Game</string>
     <string name="league_landing_join_text">Join A Game</string>
     <string name="title_activity_league_create">Create A Game</string>
