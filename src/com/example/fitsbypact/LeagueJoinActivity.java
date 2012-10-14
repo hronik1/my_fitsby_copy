@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -190,7 +191,9 @@ public class LeagueJoinActivity extends Activity
     		startActivity(intent);
     	} catch(Exception e) {
     		//TODO add robustness, remove from production code.
-    		Toast.makeText(getApplicationContext(), "sorry cant perform operation", Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(getApplicationContext(), "sorry cant perform operation", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     }
     

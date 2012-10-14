@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -162,10 +163,13 @@ public class RegisterActivity extends Activity {
     							String stackTrace = android.util.Log.getStackTraceString(e);
     							Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
     									Toast.LENGTH_LONG);
+    							toast.setGravity(Gravity.CENTER, 0, 0);
     							toast.show();
     						} 
     					} else {
-    						Toast.makeText(RegisterActivity.this, "sorry error occured", Toast.LENGTH_LONG).show();
+    						Toast toast = Toast.makeText(RegisterActivity.this, "sorry error occured", Toast.LENGTH_LONG);
+    						toast.setGravity(Gravity.CENTER, 0, 0);
+    						toast.show();
     					}
     				}
     			})
@@ -215,17 +219,23 @@ public class RegisterActivity extends Activity {
     	validity += RegisterClientSideValidation.validatePassword(password, confirmPassword);
     	
     	if (validity != "") {
-    		Toast.makeText(RegisterActivity.this, validity, Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(RegisterActivity.this, validity, Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     		return;
     	}
 
     	if (!comm.isInternetConnected()) {
-    		Toast.makeText(RegisterActivity.this, "Sorry, no internet. Please try again",
-    				Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(RegisterActivity.this, "Sorry, no internet. Please try again",
+    				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     	
     	if (!mUserTableHandler.isEmailUnique(email)) {
-    		Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	} else {
     		Log.i(TAG, "showing dialog");
     		showAlertDialog();

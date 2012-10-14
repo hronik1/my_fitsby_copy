@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -193,7 +194,9 @@ public class NewsfeedActivity extends Activity
 	private void submit() {
 		if(listLeagueMember == null || listLeagueMember.size() == 0) {
 			//TODO maybe do something more robust
-			Toast.makeText(getApplicationContext(), "sorry no leagues", Toast.LENGTH_LONG).show();
+			Toast toast = Toast.makeText(getApplicationContext(), "sorry no leagues", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
 		}
 		else {
 			LeagueMember member = listLeagueMember.get(spinnerPosition);

@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -136,7 +137,9 @@ public class FriendInviteActivity extends Activity {
      */
     private void queryContacts() {
     	//TODO turn this shitty looking throw away code into something beautiful
-    	Toast.makeText(getApplicationContext(), "start", Toast.LENGTH_LONG).show();
+    	Toast toast = Toast.makeText(getApplicationContext(), "start", Toast.LENGTH_LONG);
+    	toast.setGravity(Gravity.CENTER, 0, 0);
+    	toast.show();
     	ContentResolver contentResolver = getContentResolver();
     	Cursor contactsCursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
     			null, null, null, null);
@@ -161,7 +164,9 @@ public class FriendInviteActivity extends Activity {
         			}
         		}
         	}
-        	Toast.makeText(getApplicationContext(), "end", Toast.LENGTH_LONG).show();
+        	toast = Toast.makeText(getApplicationContext(), "end", Toast.LENGTH_LONG);
+        	toast.setGravity(Gravity.CENTER, 0, 0);
+        	toast.show();
         }
     }
     /**
@@ -173,7 +178,9 @@ public class FriendInviteActivity extends Activity {
     		startActivity(intent);
     	} catch(Exception e) {
     		//TODO handle not starting intent better
-    		Toast.makeText(getApplicationContext(), "sorry can not start activity", Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(getApplicationContext(), "sorry can not start activity", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     }
 }

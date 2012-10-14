@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -263,7 +264,9 @@ public class LeagueCreateActivity extends Activity {
 			startActivity(intent);
 		} catch(Exception e) {
 			//TODO handle failure more robustly
-			Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG).show();
+			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
 		}
 	}
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -133,7 +134,9 @@ public class LeagueLandingActivity extends Activity {
     		startActivity(intent);
     	} catch (Exception e) {
     		//TODO add some robustness
-    		Toast.makeText(LeagueLandingActivity.this, "Sorry can not perform at the moment", Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(LeagueLandingActivity.this, "Sorry can not perform at the moment", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     }
     
@@ -149,6 +152,7 @@ public class LeagueLandingActivity extends Activity {
     		String stackTrace = android.util.Log.getStackTraceString(e);
     		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
     				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	} 
     }

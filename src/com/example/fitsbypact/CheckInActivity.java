@@ -36,6 +36,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -263,10 +264,14 @@ public class CheckInActivity extends Activity {
 			boolean success = checkinSuccesful(jsonObject);
 			if (success) {
 				mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
-				Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG).show();
+				Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
 				//TODO increase checkins
 			} else {
-				Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG).show();
+				Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
 			}
 //			for(LeagueMember member: mLeagueMemberList) {
 //				if(member.getCheckins() == member.getCheckouts()) {
