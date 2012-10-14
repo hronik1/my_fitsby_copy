@@ -264,7 +264,7 @@ public class NewsfeedActivity extends Activity
      * @return
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	return new NewsfeedCursorLoader(this);
+    	return new NewsfeedCursorLoader(this, id);
     }
     
     /**
