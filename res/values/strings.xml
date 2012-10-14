@@ -90,7 +90,7 @@
     <string name="games_player_prompt_text">Players: </string>
     <string name="games_pot_prompt_text">Stakes: </string>
     <string name="games_leader_prompt_text">Leaderboard</string>
-    <string name="games_button_newgame_text">new</string>
+    <string name="games_button_newgame_text">Add New Game</string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>
     <string name="invite_friends_button">Invite Friends</string>
