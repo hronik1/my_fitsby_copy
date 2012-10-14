@@ -155,7 +155,7 @@ public class LoginActivity extends Activity {
     		email = emailET.getText().toString();
 
     	if (!comm.isInternetConnected()) {
-    		Toast toast = Toast.makeText(LoginActivity.this, "Sorry no internet, please try again",
+    		Toast toast = Toast.makeText(LoginActivity.this, "You are not connected to the internet. Please try again later.",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
@@ -169,13 +169,13 @@ public class LoginActivity extends Activity {
     			startActivity(intent);
     		} catch (Exception e) {
     			//TODO something more robust possibly
-    			Toast toast = Toast.makeText(LoginActivity.this, "Sorry can not log in at the moment", Toast.LENGTH_LONG);
+    			Toast toast = Toast.makeText(LoginActivity.this, "Sorry, we cannot log you in at the moment.", Toast.LENGTH_LONG);
     			toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
     		}
     	} else {
     		//TODO password salting maybe?
-    		Toast toast = Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_LONG);
+    		Toast toast = Toast.makeText(LoginActivity.this, "Incorrect Email or Password.", Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	}
@@ -219,7 +219,7 @@ public class LoginActivity extends Activity {
     			boolean isValid = false;
     			if (isValid) {
     				Toast toast = Toast.makeText(getApplicationContext(),
-    						"Reset password link has been sent to your email",
+    						"A Reset Password link has been sent to your email",
     						Toast.LENGTH_LONG);
     				toast.setGravity(Gravity.CENTER, 0, 0);
     				toast.show();

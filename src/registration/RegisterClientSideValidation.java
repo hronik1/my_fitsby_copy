@@ -16,11 +16,11 @@ public class RegisterClientSideValidation {
 		String ret = "";
 		
 		if (firstName == null || firstName.length() == 0) {
-			ret += "First name is required.\n";
+			ret += "First Name is required.\n";
 			
 		}
 		if (lastName == null || lastName.length() == 0) {
-			ret += "Last name is required.\n";
+			ret += "Last Name is required.\n";
 		}
 		
 		return ret;
@@ -55,7 +55,7 @@ public class RegisterClientSideValidation {
 		}
 		
 		if (confirmPassword == null || password.length() < minLength) {
-			ret += "Confirmation password must be at least 6 characters.\n";
+			ret += "Confirmation Password must be at least 6 characters.\n";
 		}
 		
 		if (!confirmPassword.equals(password)) {
