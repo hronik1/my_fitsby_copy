@@ -158,6 +158,7 @@
 	<string name="me_settings_button_logout_text">Logout</string>
 	<string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
 	<string name="me_settings_button_change_picture_text">Choose picture</string>
+	<string name="server_url">place server url here</string>
 
 	<string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
 	<string name="stripe_live_secret_api_key">sk_0G8Utv86sXeIUY4EO6fif1hAypeDE</string>

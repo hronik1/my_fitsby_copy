@@ -1,38 +1,16 @@
 package servercommunication;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 
-public class UserCommunication {
+public class CommentCommunication {
 
-	private final static String TAG = "UserCommunication";
-	
-	/**
-	 * default UserCommunication constructor
-	 */
-	public UserCommunication() {
+	public CommentCommunication() {
 		
 	}
 	
-	/**
-	 * 
-	 * @param email
-	 * @param password
-	 */
-	public void registerUser(String email, String password) {
+	public void getLeagueComments(int leagueId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
@@ -43,12 +21,7 @@ public class UserCommunication {
 //        return EntityUtils.toString(entity);
 	}
 	
-	/**
-	 * 
-	 * @param email
-	 * @param password
-	 */
-	public void loginUser(String email, String password) {
+	public void addComment(int leagueId, String comment) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
@@ -58,5 +31,6 @@ public class UserCommunication {
 //        HttpEntity entity = response.getEntity();
 //        return EntityUtils.toString(entity);
 	}
-
+	
+	
 }

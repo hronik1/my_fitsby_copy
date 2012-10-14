@@ -29,6 +29,7 @@ public class MyHttpClient {
 		Exception exception = null;
 
 		HttpPost httpPost = new HttpPost(urlString);
+		//httpPost.setHeader("Content-type", "application/json"); might need this
 		        
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
