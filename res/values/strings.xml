@@ -22,7 +22,7 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
-    <string name="login_forgot_password_text">forgot password?</string>
+    <string name="login_forgot_password_text">Forgot your password? Tap here.</string>
     <string name="fitsby_description">Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
   									  Everyone sets a wager at the beginning, and the top 3 gym-goers are rewarded the stakes at the end of the game. \n \n
   									  To get started, either create or join a game.</string>
