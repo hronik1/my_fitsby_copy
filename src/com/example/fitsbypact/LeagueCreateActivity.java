@@ -9,6 +9,7 @@ import dbhandlers.LeagueTableHandler;
 import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class LeagueCreateActivity extends Activity {
 	private Button daysMinusButton;
 	private TextView wagerTV;
 	private TextView daysTV;
+	private Button faqButton;
 	
 	private int userID;
 	
@@ -149,6 +151,14 @@ public class LeagueCreateActivity extends Activity {
 	}
 	
 	/**
+	 * initializes the text views
+	 */
+	private void initializeTextViews() {
+		wagerTV = (TextView)findViewById(R.id.league_create_wager);
+		daysTV = (TextView)findViewById(R.id.league_create_days);
+	}
+	
+	/**
 	 * initializes create button
 	 */
 	private void initializeButtons() {
@@ -191,14 +201,14 @@ public class LeagueCreateActivity extends Activity {
 				decrementDays();
 			}
 		});
-	}
-	
-	/**
-	 * initializes the text views
-	 */
-	private void initializeTextViews() {
-		wagerTV = (TextView)findViewById(R.id.league_create_wager);
-		daysTV = (TextView)findViewById(R.id.league_create_days);
+		
+		faqButton = (Button)findViewById(R.id.league_create_faq_button);
+		faqButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showFaqBrowser();
+			}
+		});
 	}
 	
 	/**
@@ -241,6 +251,15 @@ public class LeagueCreateActivity extends Activity {
 			days -= DAYS_INCREMENT;
 			daysTV.setText(days + "");
 		}
+	}
+	
+	/**
+	 * opens up browser to faq page
+	 */
+	private void showFaqBrowser() {
+ 		//TODO change url to point to faq url
+ 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+ 		startActivity(browserIntent);
 	}
 	
 	/**

@@ -14,24 +14,31 @@ import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.flurry.android.FlurryAgent;
 
+@SuppressLint("NewApi")
 public class GamesActivity extends Activity
 	implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -45,6 +52,8 @@ public class GamesActivity extends Activity
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
+	private Button inviteButton;
+	private Button newGamesButton;
 	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
@@ -82,6 +91,7 @@ public class GamesActivity extends Activity
         initializeTextViews();
         initializeProgressBar();
         initializeListView();
+        initializeButtons();
     }
 
     /**
@@ -217,6 +227,44 @@ public class GamesActivity extends Activity
 		});
 	}
     
+	/**
+	 * initializes Buttons
+	 */
+	private void initializeButtons() {
+		inviteButton = (Button)findViewById(R.id.invite_friends_button);
+		inviteButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		newGamesButton = (Button)findViewById(R.id.games_button_newgame);
+		newGamesButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				gotoLeagueLandingActivity();
+			}
+		});
+	}
+	
+	/**
+	 * opens up the LeagueLandingActivity
+	 */
+	private void gotoLeagueLandingActivity() {
+		try {
+			Intent intent = new Intent(this, LeagueLandingActivity.class);
+			startActivity(intent);
+		} catch (Exception e) {
+			//remove in deployment
+			String stackTrace = android.util.Log.getStackTraceString(e);
+			Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+					Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+		} 
+	}
     /** LoaderManager callBacks **/
     
     /**
@@ -234,7 +282,8 @@ public class GamesActivity extends Activity
      * @param loader
      * @param data
      */
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    @SuppressLint("NewApi")
+	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
     }
     

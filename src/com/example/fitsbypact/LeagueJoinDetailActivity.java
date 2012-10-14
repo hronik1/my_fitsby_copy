@@ -8,6 +8,7 @@ import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbtables.LeagueMember;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -30,6 +31,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	private TextView potTV;
 	private TextView playersTV;
 	private Button joinButton;
+	private Button faqButton;
 	
 	private ApplicationUser mApplicationUser;
 	private DatabaseHandler mdbHandler;
@@ -180,10 +182,17 @@ public class LeagueJoinDetailActivity extends Activity {
  		joinButton = (Button)findViewById(R.id.league_join_detail_button_join);
  		joinButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				join();
 			}
  			
+ 		});
+ 		
+ 		faqButton = (Button)findViewById(R.id.league_join_detail_button_faq);
+ 		faqButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showFaqBrowser();
+			}
  		});
  	}
  	
@@ -212,5 +221,14 @@ public class LeagueJoinDetailActivity extends Activity {
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		}
+ 	}
+ 	
+ 	/**
+ 	 * opens up the faq browser
+ 	 */
+ 	private void showFaqBrowser() {
+ 		//TODO change url to point to faq url
+ 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+ 		startActivity(browserIntent);
  	}
 }
