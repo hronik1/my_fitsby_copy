@@ -120,9 +120,20 @@
         android:id="@+id/league_create_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@+id/league_create_ib_days_minus"
         android:layout_below="@+id/league_create_ib_days_minus"
         android:text="@string/league_create_checkbox_text" />
+
+    <Button
+        android:id="@+id/faq_button"
+        android:layout_above="@+id/league_create_button_create"        
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true"
+	    android:background="@drawable/faq_button_background"
+        android:textColor="@drawable/faq_button_text"
+        android:text="@string/faq_button" />
 
 </RelativeLayout>

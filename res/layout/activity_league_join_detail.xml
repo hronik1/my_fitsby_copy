@@ -117,17 +117,28 @@
         android:text="@string/league_join_duration_data_text" />
 
     <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"        
+        android:layout_below="@+id/league_join_detail_duration"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+	    android:background="@drawable/faq_button_background"
+        android:textColor="@drawable/faq_button_text"
+        android:text="@string/faq_button" />
+
+    <Button
         android:id="@+id/league_join_detail_button_join"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/league_join_detail_duration"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
         android:background="@drawable/custom_login_button"
+        android:text="@string/league_join_detail_button_join_text"
         android:textColor="@color/white"
-        android:textSize="30sp"        
-        android:text="@string/league_join_detail_button_join_text" />
+        android:textSize="30sp" />
    
 </RelativeLayout>
