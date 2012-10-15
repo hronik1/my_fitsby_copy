@@ -103,7 +103,10 @@
                 android:layout_below="@+id/me_settings_tv_change_picture"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
-                android:text="@string/me_settings_button_change_picture_text" />
+                android:text="@string/me_settings_button_change_picture_text">
+                
+                <requestFocus/>
+            </Button>
 
             <TextView
                 android:id="@+id/me_settings_tv_change_password"

@@ -55,7 +55,9 @@
         android:background="@drawable/custom_login_button"
         android:textColor="@color/white"
         android:textSize="16sp"        
-        android:text="@string/league_join_button_submit_text" />
+        android:text="@string/league_join_button_submit_text">
+        <requestFocus/>
+   </Button>
     
     <TextView
         android:id="@+id/league_join_public_header"
