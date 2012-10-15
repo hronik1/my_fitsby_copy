@@ -36,6 +36,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -218,14 +219,15 @@ public class CheckInActivity extends Activity {
 	 * initializes the ImageViews
 	 */
 	private void initializeImageViews() {
-		//TODO initialize the image views
+		checkedInIv = (ImageView)findViewById(R.id.check_in_iv);
+		
 	}
 	
 	/**
 	 * initializes the TextViews
 	 */
 	private void initializeTextViews() {
-		//TODO initialize the TextViews
+		checkinLocationTV = (TextView)findViewById(R.id.verified_gym);
 	}
 	
 	/**
@@ -286,13 +288,12 @@ public class CheckInActivity extends Activity {
 			boolean success = checkinSuccesful(jsonObject);
 			if (success) {
 				mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
-				
 				Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
-				
 				String gym = parseGym(jsonObject);
-				
+				checkinLocationTV.setText("Checked in at " + gym);
+				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
 				
 				//TODO increase checkins
 			} else {
@@ -350,6 +351,8 @@ public class CheckInActivity extends Activity {
 //				mLeagueMemberTableHandler.updateLeagueMember(member);
 //			}
 //		}
+		checkinLocationTV.setText("You are not currently checked into a gym");
+		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 		
 	}
 	
