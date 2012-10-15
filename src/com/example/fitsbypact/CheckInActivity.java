@@ -12,6 +12,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,12 +36,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
@@ -57,6 +61,8 @@ public class CheckInActivity extends Activity {
 	private NavigationBar navigation;
 	private int userID;
 	
+	private TextView checkinLocationTV;
+	private ImageView checkedInIv;
 	private Button checkinButton;
 	private Button checkoutButton;
 	
@@ -83,10 +89,13 @@ public class CheckInActivity extends Activity {
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         mUser = mApplicationUser.getUser();
         
+        initializeTextViews();
+        initializeImageViews();
         initializeHandler();
         initializeTime();        
         initializeNavigationBar();
         initializeButtons();
+        
         
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
@@ -207,6 +216,21 @@ public class CheckInActivity extends Activity {
 	}
 	
 	/**
+	 * initializes the ImageViews
+	 */
+	private void initializeImageViews() {
+		checkedInIv = (ImageView)findViewById(R.id.check_in_iv);
+		
+	}
+	
+	/**
+	 * initializes the TextViews
+	 */
+	private void initializeTextViews() {
+		checkinLocationTV = (TextView)findViewById(R.id.verified_gym);
+	}
+	
+	/**
 	 * initialized NavigationBar for use
 	 */
 	public void initializeNavigationBar() {
@@ -267,6 +291,10 @@ public class CheckInActivity extends Activity {
 				Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
+				String gym = parseGym(jsonObject);
+				checkinLocationTV.setText("Checked in at " + gym);
+				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
+				
 				//TODO increase checkins
 			} else {
 				Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG);
@@ -323,6 +351,8 @@ public class CheckInActivity extends Activity {
 //				mLeagueMemberTableHandler.updateLeagueMember(member);
 //			}
 //		}
+		checkinLocationTV.setText("You are not currently checked into a gym");
+		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 		
 	}
 	
@@ -417,6 +447,17 @@ public class CheckInActivity extends Activity {
 			return true;
 		else
 			return false;
+	}
+	
+	private String parseGym(JSONObject jsonObject) {
+		JSONArray jsonArray;
+		try {
+			jsonArray = jsonObject.getJSONArray("results");
+			return jsonArray.getJSONObject(0).getString("name");
+		} catch (JSONException e) {
+			//TODO gracefully handle error checkin
+			return "";
+		}
 	}
 }
 	
