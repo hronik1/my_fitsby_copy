@@ -31,7 +31,6 @@
         android:background="@drawable/white_textbox"
         android:inputType="textPassword"
         android:textSize="14sp"
-        android:fontFamily="sans"
         android:hint="@string/register_password_hint" />
     
     <EditText
@@ -46,8 +45,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"   
-        android:textSize="14sp"	
-        android:fontFamily="sans"        
+        android:textSize="14sp"    
 		android:hint="@string/register_confirm_password_hint" />
     
     <EditText

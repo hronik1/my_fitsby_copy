@@ -19,7 +19,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:contentDescription="@string/me_imageview_desc"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/profile_picture_placeholder" />
 
             <TextView
                 android:id="@+id/me_textview_name"

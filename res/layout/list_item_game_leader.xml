@@ -24,7 +24,7 @@
         android:layout_marginLeft="15dp"
         android:contentDescription="@string/me_imageview_desc"
         android:textSize="18sp"        
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/profile_picture_placeholder" />
     
     <TextView
         android:id="@+id/list_item_game_leader_name"

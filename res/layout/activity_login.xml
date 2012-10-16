@@ -29,7 +29,6 @@
         android:layout_below="@+id/login_email_id"
         android:background="@drawable/white_textbox"
         android:ems="10"
-        android:fontFamily="sans"
         android:hint="@string/login_password_hint"
         android:inputType="textPassword" />
 
