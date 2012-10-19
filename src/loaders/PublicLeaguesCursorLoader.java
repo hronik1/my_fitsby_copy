@@ -8,7 +8,7 @@ import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbtables.League;
-import android.content.AsyncTaskLoader;
+import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;

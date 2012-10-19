@@ -13,13 +13,12 @@ import dbtables.Comment;
 import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
-import android.annotation.SuppressLint;
-import android.content.AsyncTaskLoader;
+import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 
-@SuppressLint("NewApi")
+
 public class NewsfeedCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	private DatabaseHandler mDBHandler;

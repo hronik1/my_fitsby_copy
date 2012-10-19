@@ -16,9 +16,9 @@ import widgets.NavigationBar;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.LoaderManager;
+import android.support.v4.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
+import android.support.v4.content.Loader;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.Gravity;
@@ -281,6 +281,7 @@ public class GamesActivity extends Activity
      * @param loader
      * @param data
      */
+    @SuppressLint("NewApi")
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
     }
