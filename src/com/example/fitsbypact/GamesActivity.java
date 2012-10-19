@@ -38,7 +38,6 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-@SuppressLint("NewApi")
 public class GamesActivity extends Activity
 	implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -282,7 +281,6 @@ public class GamesActivity extends Activity
      * @param loader
      * @param data
      */
-    @SuppressLint("NewApi")
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
     }
