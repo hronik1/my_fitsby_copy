@@ -14,7 +14,6 @@ import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.Bundle;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.v4.app.LoaderManager;
 import android.content.Intent;
@@ -281,7 +280,6 @@ public class GamesActivity extends Activity
      * @param loader
      * @param data
      */
-    @SuppressLint("NewApi")
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
     }

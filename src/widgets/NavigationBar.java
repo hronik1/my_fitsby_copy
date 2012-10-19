@@ -139,7 +139,7 @@ public class NavigationBar extends LinearLayout{
 		} else {
 			tv.setClickable(false);
 			tv.setFocusable(false);
-			tv.setHovered(true);
+//			tv.setHovered(true); 
 			//TODO alter backgroundcolor
 		}
 			
