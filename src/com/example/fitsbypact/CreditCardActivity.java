@@ -199,11 +199,6 @@ public class CreditCardActivity extends Activity {
     	cardParams.put("cvc", cvcET.getText().toString()); 
     	cardParams.put("exp_month", expMonthET.getText().toString()); 
     	tokenParams.put("card", cardParams); 
-    	try {
-    		Token.create(tokenParams);
-    	} catch(ExceptionInInitializerError e) {
-    		//TODO inform user of bad token
-    		Log.d(TAG, e.getMessage());
-    	}
+    	Token.create(tokenParams);
     }
 }
