@@ -160,6 +160,7 @@ public class LoginActivity extends Activity {
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
+    		return;
     	}
     	
     	String string = new UserCommunication().loginUser(email, password);
