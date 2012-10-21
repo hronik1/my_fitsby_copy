@@ -16,7 +16,7 @@ import android.util.Log;
 public class MyHttpClient {
 	
 	private final static String TAG = "MyHttpClient";
-	public final static String SERVER_URL = "http://www.f-app.herokuapp.com/";
+	public final static String SERVER_URL = "http://f-app.herokuapp.com/";
 	
 	static HttpClient httpClient = new DefaultHttpClient();
 	
