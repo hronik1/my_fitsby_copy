@@ -32,13 +32,16 @@ public class UserCommunication {
 	 * @param email
 	 * @param password
 	 */
-	public void registerUser(String email, String password) {
+	public String registerUser(String email, String password, String confirmPassword) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
+		nameValuePairs.add(new BasicNameValuePair("email", email));
+		nameValuePairs.add(new BasicNameValuePair("password", password));
+		nameValuePairs.add(new BasicNameValuePair("confirm_password", confirmPassword));
+		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "register", nameValuePairs);
 		//TODO do something with serverResonse
-//        HttpResponse response = httpclient.execute(httppost);
+		return serverResponse.response.getEntity().toString();
 //        HttpEntity entity = response.getEntity();
 //        return EntityUtils.toString(entity);
 	}
@@ -48,11 +51,14 @@ public class UserCommunication {
 	 * @param email
 	 * @param password
 	 */
-	public void loginUser(String email, String password) {
+	public String loginUser(String email, String password) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
+		nameValuePairs.add(new BasicNameValuePair("email", email));
+		nameValuePairs.add(new BasicNameValuePair("password", password));
+		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login", nameValuePairs);
+		return serverResponse.response.getEntity().toString();
 		//TODO do something with serverResonse
 //        HttpResponse response = httpclient.execute(httppost);
 //        HttpEntity entity = response.getEntity();

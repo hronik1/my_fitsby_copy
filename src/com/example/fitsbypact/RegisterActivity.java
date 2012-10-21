@@ -8,6 +8,7 @@ import dbhandlers.UserTableHandler;
 import dbtables.User;
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
+import servercommunication.UserCommunication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -231,15 +232,17 @@ public class RegisterActivity extends Activity {
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	}
-    	
-    	if (!mUserTableHandler.isEmailUnique(email)) {
-    		Toast toast = Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG);
-    		toast.setGravity(Gravity.CENTER, 0, 0);
-    		toast.show();
-    	} else {
-    		Log.i(TAG, "showing dialog");
-    		showAlertDialog();
-    	}
+    
+    	String string = new UserCommunication().registerUser(email, password, confirmPassword);
+    	Toast.makeText(this, string, Toast.LENGTH_LONG).show();
+//    	if (!mUserTableHandler.isEmailUnique(email)) {
+//    		Toast toast = Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG);
+//    		toast.setGravity(Gravity.CENTER, 0, 0);
+//    		toast.show();
+//    	} else {
+//    		Log.i(TAG, "showing dialog");
+//    		showAlertDialog();
+//    	}
     	
     }
     

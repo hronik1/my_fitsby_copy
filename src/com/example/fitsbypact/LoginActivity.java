@@ -4,6 +4,7 @@ import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import registration.RegisterClientSideValidation;
 import servercommunication.ServerCommunication;
+import servercommunication.UserCommunication;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.UserTableHandler;
 import dbtables.User;
@@ -161,24 +162,26 @@ public class LoginActivity extends Activity {
     		toast.show();
     	}
     	
-    	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
-    		User user = mUserTableHandler.getUser(email);
-    		mApplicationUser.setUser(user);
-    		try {
-    			Intent intent = new Intent(this, GamesActivity.class);
-    			startActivity(intent);
-    		} catch (Exception e) {
-    			//TODO something more robust possibly
-    			Toast toast = Toast.makeText(LoginActivity.this, "Sorry, we cannot log you in at the moment.", Toast.LENGTH_LONG);
-    			toast.setGravity(Gravity.CENTER, 0, 0);
-    			toast.show();
-    		}
-    	} else {
-    		//TODO password salting maybe?
-    		Toast toast = Toast.makeText(LoginActivity.this, "Incorrect Email or Password.", Toast.LENGTH_LONG);
-    		toast.setGravity(Gravity.CENTER, 0, 0);
-    		toast.show();
-    	}
+    	String string = new UserCommunication().loginUser(email, password);
+    	Toast.makeText(this, string, Toast.LENGTH_LONG).show();
+//    	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
+//    		User user = mUserTableHandler.getUser(email);
+//    		mApplicationUser.setUser(user);
+//    		try {
+//    			Intent intent = new Intent(this, GamesActivity.class);
+//    			startActivity(intent);
+//    		} catch (Exception e) {
+//    			//TODO something more robust possibly
+//    			Toast toast = Toast.makeText(LoginActivity.this, "Sorry, we cannot log you in at the moment.", Toast.LENGTH_LONG);
+//    			toast.setGravity(Gravity.CENTER, 0, 0);
+//    			toast.show();
+//    		}
+//    	} else {
+//    		//TODO password salting maybe?
+//    		Toast toast = Toast.makeText(LoginActivity.this, "Incorrect Email or Password.", Toast.LENGTH_LONG);
+//    		toast.setGravity(Gravity.CENTER, 0, 0);
+//    		toast.show();
+//    	}
     	
     }
     
