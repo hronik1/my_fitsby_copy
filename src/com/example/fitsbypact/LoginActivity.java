@@ -164,7 +164,7 @@ public class LoginActivity extends Activity {
     		return;
     	}
     	
-    	 new DownloadFilesTask().execute(email, password);
+    	 new LoginAsyncTask().execute(email, password);
 //    	String string = new UserCommunication().loginUser(email, password);
 //    	Toast.makeText(this, string, Toast.LENGTH_LONG).show();
 //    	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
@@ -209,6 +209,9 @@ public class LoginActivity extends Activity {
     	});
     }
     
+    /**
+     * shows dialog to reset their password
+     */
     private void showAlertInput() {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
@@ -248,7 +251,12 @@ public class LoginActivity extends Activity {
     	alert.show();
     }
     
-    private class DownloadFilesTask extends AsyncTask<String, Void, String> {
+    /**
+     * AsyncTask class to login the user
+     * @author brent
+     *
+     */
+    private class LoginAsyncTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... params) {
         	String string = new UserCommunication().loginUser(params[0], params[1]);
         	return string;

@@ -14,6 +14,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -234,8 +235,7 @@ public class RegisterActivity extends Activity {
     		return;
     	}
     
-    	String string = new UserCommunication().registerUser(email, password, confirmPassword);
-    	Toast.makeText(this, string, Toast.LENGTH_LONG).show();
+    	new RegisterAsyncTask().execute(email, password, confirmPassword);
 //    	if (!mUserTableHandler.isEmailUnique(email)) {
 //    		Toast toast = Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG);
 //    		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -258,4 +258,19 @@ public class RegisterActivity extends Activity {
     	confirmPasswordET = (EditText)findViewById(R.id.register_confirm_password_id);
     }
 
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class RegisterAsyncTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... params) {
+        	String string = new UserCommunication().registerUser(params[0], params[1], params[2]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
 }
