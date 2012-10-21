@@ -71,7 +71,7 @@ public class UserCommunication {
 		HttpResponse response = serverResponse.response;
 		Exception exception = serverResponse.exception;
 		if (exception != null)
-			return exception.toString();
+			return exception.toString() + " exception in MyHttpClient";
 		if (response == null)
 			return "response null";
 		if (response.getEntity() == null)
