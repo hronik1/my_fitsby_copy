@@ -73,7 +73,7 @@ public class UserCommunication {
 		if (response.getEntity().toString() == null)
 			return "string null";
 		return serverResponse.response.getEntity().toString();
-		return serverResponse.response.getEntity().toString();
+
 		//TODO do something with serverResonse
 //        HttpResponse response = httpclient.execute(httppost);
 //        HttpEntity entity = response.getEntity();
