@@ -70,10 +70,12 @@ public class UserCommunication {
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login", nameValuePairs);
 		HttpResponse response = serverResponse.response;
 		Exception exception = serverResponse.exception;
-		if (exception != null)
-			return exception.toString() + " exception in MyHttpClient";
 		if (response == null)
 			return "response null";
+		if (response.getStatusLine() != null)
+			return response.getStatusLine().getStatusCode() + "";
+		if (exception != null)
+			return exception.toString() + " exception in MyHttpClient";
 		if (response.getEntity() == null)
 			return "entity null";
 		if (response.getEntity().toString() == null)
