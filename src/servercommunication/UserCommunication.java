@@ -42,6 +42,9 @@ public class UserCommunication {
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "register", nameValuePairs);
 		//TODO do something with serverResonse
 		HttpResponse response = serverResponse.response;
+		Exception exception = serverResponse.exception;
+		if (exception != null)
+			return exception.toString();
 		if (response == null)
 			return "response null";
 		if (response.getEntity() == null)
@@ -66,6 +69,9 @@ public class UserCommunication {
 		nameValuePairs.add(new BasicNameValuePair("password", password));
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login", nameValuePairs);
 		HttpResponse response = serverResponse.response;
+		Exception exception = serverResponse.exception;
+		if (exception != null)
+			return exception.toString();
 		if (response == null)
 			return "response null";
 		if (response.getEntity() == null)
