@@ -8,6 +8,7 @@ import servercommunication.UserCommunication;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.UserTableHandler;
 import dbtables.User;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -163,8 +164,9 @@ public class LoginActivity extends Activity {
     		return;
     	}
     	
-    	String string = new UserCommunication().loginUser(email, password);
-    	Toast.makeText(this, string, Toast.LENGTH_LONG).show();
+    	 new DownloadFilesTask().execute(email, password);
+//    	String string = new UserCommunication().loginUser(email, password);
+//    	Toast.makeText(this, string, Toast.LENGTH_LONG).show();
 //    	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
 //    		User user = mUserTableHandler.getUser(email);
 //    		mApplicationUser.setUser(user);
@@ -244,5 +246,16 @@ public class LoginActivity extends Activity {
     	});
 
     	alert.show();
+    }
+    
+    private class DownloadFilesTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... params) {
+        	String string = new UserCommunication().loginUser(params[0], params[1]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
     }
 }
