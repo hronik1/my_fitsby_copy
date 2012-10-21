@@ -41,6 +41,13 @@ public class UserCommunication {
 		nameValuePairs.add(new BasicNameValuePair("confirm_password", confirmPassword));
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "register", nameValuePairs);
 		//TODO do something with serverResonse
+		HttpResponse response = serverResponse.response;
+		if (response == null)
+			return "response null";
+		if (response.getEntity() == null)
+			return "entity null";
+		if (response.getEntity().toString() == null)
+			return "string null";
 		return serverResponse.response.getEntity().toString();
 //        HttpEntity entity = response.getEntity();
 //        return EntityUtils.toString(entity);
@@ -58,6 +65,14 @@ public class UserCommunication {
 		nameValuePairs.add(new BasicNameValuePair("email", email));
 		nameValuePairs.add(new BasicNameValuePair("password", password));
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login", nameValuePairs);
+		HttpResponse response = serverResponse.response;
+		if (response == null)
+			return "response null";
+		if (response.getEntity() == null)
+			return "entity null";
+		if (response.getEntity().toString() == null)
+			return "string null";
+		return serverResponse.response.getEntity().toString();
 		return serverResponse.response.getEntity().toString();
 		//TODO do something with serverResonse
 //        HttpResponse response = httpclient.execute(httppost);
