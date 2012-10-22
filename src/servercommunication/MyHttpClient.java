@@ -10,7 +10,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-
+import org.apache.http.HttpResponse;
 import android.util.Log;
 
 public class MyHttpClient {
@@ -54,5 +54,21 @@ public class MyHttpClient {
 		serverResponseObject.exception = exception;
 		        
 		return serverResponseObject;
+	}
+	
+	public static String parseResponse(ServerResponse serverResponse) {
+		HttpResponse response = serverResponse.response;
+		Exception exception = serverResponse.exception;
+		if (response == null)
+			return "response null";
+		if (response.getStatusLine() != null)
+			return response.getStatusLine().getStatusCode() + "";
+		if (exception != null)
+			return exception.toString() + " exception in MyHttpClient";
+		if (response.getEntity() == null)
+			return "entity null";
+		if (response.getEntity().toString() == null)
+			return "string null";
+		return serverResponse.response.getEntity().toString();
 	}
 }

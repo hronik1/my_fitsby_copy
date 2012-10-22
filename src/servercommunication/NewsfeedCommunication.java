@@ -46,13 +46,14 @@ public class NewsfeedCommunication {
 		}
 	}
 	
-	public void addComment(int leagueMemberId, String comment) {
+	public String addComment(int leagueMemberId, String comment) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("from_id", leagueMemberId + ""));
 		nameValuePairs.add(new BasicNameValuePair("message", comment));
 		//TODO add something to nameValuePairs
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
+		return MyHttpClient.parseResponse(serverResponse);
 		//TODO do something with serverResonse
 //        HttpResponse response = httpclient.execute(httppost);
 //        HttpEntity entity = response.getEntity();

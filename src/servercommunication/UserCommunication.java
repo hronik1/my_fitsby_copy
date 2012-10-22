@@ -43,17 +43,7 @@ public class UserCommunication {
 		nameValuePairs.add(new BasicNameValuePair("last_name", lastName));
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "register", nameValuePairs);
 		//TODO do something with serverResonse
-		HttpResponse response = serverResponse.response;
-		Exception exception = serverResponse.exception;
-		if (exception != null)
-			return exception.toString() + " exception in MyHttpClient";
-		if (response == null)
-			return "response null";
-		if (response.getEntity() == null)
-			return "entity null";
-		if (response.getEntity().toString() == null)
-			return "string null";
-		return serverResponse.response.getEntity().toString();
+		return MyHttpClient.parseResponse(serverResponse);
 //        HttpEntity entity = response.getEntity();
 //        return EntityUtils.toString(entity);
 	}
@@ -70,19 +60,7 @@ public class UserCommunication {
 		nameValuePairs.add(new BasicNameValuePair("email", email));
 		nameValuePairs.add(new BasicNameValuePair("password", password));
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login", nameValuePairs);
-		HttpResponse response = serverResponse.response;
-		Exception exception = serverResponse.exception;
-		if (response == null)
-			return "response null";
-		if (response.getStatusLine() != null)
-			return response.getStatusLine().getStatusCode() + "";
-		if (exception != null)
-			return exception.toString() + " exception in MyHttpClient";
-		if (response.getEntity() == null)
-			return "entity null";
-		if (response.getEntity().toString() == null)
-			return "string null";
-		return serverResponse.response.getEntity().toString();
+		return MyHttpClient.parseResponse(serverResponse);
 
 		//TODO do something with serverResonse
 //        HttpResponse response = httpclient.execute(httppost);

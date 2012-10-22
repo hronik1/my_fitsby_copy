@@ -55,11 +55,12 @@ public class LeagueCommunication {
 		return cursor;
 	}
 	
-	public static void createLeague(int creatorId) {
+	public static String createLeague(int creatorId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
 		//TODO add something to nameValuePairs
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
+		return MyHttpClient.parseResponse(serverResponse);
 	}
 }
