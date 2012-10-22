@@ -10,6 +10,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import dbhandlers.LeagueMemberTableHandler;
@@ -45,9 +46,11 @@ public class NewsfeedCommunication {
 		}
 	}
 	
-	public void addComment(int leagueId, String comment) {
+	public void addComment(int leagueMemberId, String comment) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("from_id", leagueMemberId + ""));
+		nameValuePairs.add(new BasicNameValuePair("message", comment));
 		//TODO add something to nameValuePairs
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
 		//TODO do something with serverResonse

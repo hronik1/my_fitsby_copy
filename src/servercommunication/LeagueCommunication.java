@@ -7,6 +7,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import dbtables.League;
@@ -54,4 +55,11 @@ public class LeagueCommunication {
 		return cursor;
 	}
 	
+	public static void createLeague(int creatorId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
+		//TODO add something to nameValuePairs
+		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
+	}
 }
