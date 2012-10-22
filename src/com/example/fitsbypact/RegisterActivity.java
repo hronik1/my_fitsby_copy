@@ -235,7 +235,7 @@ public class RegisterActivity extends Activity {
     		return;
     	}
     
-    	new RegisterAsyncTask().execute(email, password, confirmPassword);
+    	new RegisterAsyncTask().execute(email, password, confirmPassword, firstName, lastName);
 //    	if (!mUserTableHandler.isEmailUnique(email)) {
 //    		Toast toast = Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG);
 //    		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -265,7 +265,7 @@ public class RegisterActivity extends Activity {
      */
     private class RegisterAsyncTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... params) {
-        	String string = new UserCommunication().registerUser(params[0], params[1], params[2]);
+        	String string = new UserCommunication().registerUser(params[0], params[1], params[2], params[3], params[4]);
         	return string;
         }
 

@@ -32,13 +32,15 @@ public class UserCommunication {
 	 * @param email
 	 * @param password
 	 */
-	public String registerUser(String email, String password, String confirmPassword) {
+	public String registerUser(String email, String password, String confirmPassword, String firstName, String lastName) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
 		nameValuePairs.add(new BasicNameValuePair("email", email));
 		nameValuePairs.add(new BasicNameValuePair("password", password));
 		nameValuePairs.add(new BasicNameValuePair("confirm_password", confirmPassword));
+		nameValuePairs.add(new BasicNameValuePair("first_name", firstName));
+		nameValuePairs.add(new BasicNameValuePair("last_name", lastName));
 		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "register", nameValuePairs);
 		//TODO do something with serverResonse
 		HttpResponse response = serverResponse.response;
