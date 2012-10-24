@@ -40,16 +40,22 @@ public class UserCommunication {
 	public String registerUser(String email, String password, String confirmPassword, String firstName, String lastName) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
 			json.put("email", email);
 			json.put("password", password);
 			json.put("confirm_password", confirmPassword);
 			json.put("first_name", firstName);
 			json.put("last_name", lastName);
+			params.add(new BasicNameValuePair("email", email));
+			params.add(new BasicNameValuePair("password", password));
+			params.add(new BasicNameValuePair("confirm_password", confirmPassword));
+			params.add(new BasicNameValuePair("first_name", firstName));
+			params.add(new BasicNameValuePair("last_name", lastName));
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
 			//TODO add something to nameValuePairs
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "users/new", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "users/new", params);
 			return MyHttpClient.parseResponse(serverResponse);
 		} catch (JSONException e) {
 			return e.toString();
