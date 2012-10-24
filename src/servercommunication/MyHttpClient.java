@@ -69,7 +69,7 @@ public class MyHttpClient {
 		Exception exception = null;
 	    String paramString = URLEncodedUtils.format(params, "utf-8");
 
-		HttpGet httpGet = new HttpGet(urlString + paramString);
+		HttpGet httpGet = new HttpGet(urlString + "?" + paramString);
 		httpGet.setHeader("Content-type", "application/json");
 		        
 		try {
