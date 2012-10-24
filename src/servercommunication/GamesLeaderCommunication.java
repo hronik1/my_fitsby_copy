@@ -20,23 +20,23 @@ public class GamesLeaderCommunication {
 	private final static String TAG = "GamesLeaderCommunication";
 	
 	private static String getGamesLeaderHelper(int gameId) {
-		MyHttpClient myHttpClient = new MyHttpClient();
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
-		//TODO do something with serverResonse
-		HttpResponse response = serverResponse.response;
-        HttpEntity entity = response.getEntity();
-        try {
-			return EntityUtils.toString(entity);
-		} catch (ParseException e) {
-			Log.d(TAG, e.toString());
-			return null;
-		} catch (IOException e) {
-			Log.d(TAG, e.toString());
-			return null;
-		}
-
+//		MyHttpClient myHttpClient = new MyHttpClient();
+//		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//		//TODO add something to nameValuePairs
+//		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
+//		//TODO do something with serverResonse
+//		HttpResponse response = serverResponse.response;
+//        HttpEntity entity = response.getEntity();
+//        try {
+//			return EntityUtils.toString(entity);
+//		} catch (ParseException e) {
+//			Log.d(TAG, e.toString());
+//			return null;
+//		} catch (IOException e) {
+//			Log.d(TAG, e.toString());
+//			return null;
+//		}
+		return null;
 	}
 	
 	public static Cursor getGamesLeader(int gameId) {

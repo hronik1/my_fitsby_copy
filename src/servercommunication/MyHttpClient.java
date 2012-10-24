@@ -9,6 +9,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpResponse;
 import android.util.Log;
@@ -20,7 +21,7 @@ public class MyHttpClient {
 	
 	static HttpClient httpClient = new DefaultHttpClient();
 	
-	public ServerResponse createPostRequest(String urlString, ArrayList<NameValuePair> nameValuePairs) {
+	public ServerResponse createPostRequest(String urlString, StringEntity stringEntity) {
 
 		if(httpClient == null) {
 			httpClient = new DefaultHttpClient();
@@ -31,10 +32,10 @@ public class MyHttpClient {
 		Exception exception = null;
 
 		HttpPost httpPost = new HttpPost(urlString);
-		httpPost.setHeader("Content-type", "application/json");
+		//httpPost.setHeader("Content-type", "application/json");
 		        
 		try {
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			httpPost.setEntity(stringEntity);
 		    response = httpClient.execute(httpPost);
 		} catch (ClientProtocolException e) {
 		    Log.v("in HttpClient -> in createPostRequest(String urlString) -> in catch", "ClientProtocolException" + e);

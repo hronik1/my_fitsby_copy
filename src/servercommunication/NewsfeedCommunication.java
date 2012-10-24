@@ -1,6 +1,7 @@
 package servercommunication;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,11 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.UserTableHandler;
@@ -31,33 +35,38 @@ public class NewsfeedCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
-		//TODO do something with serverResonse
-        HttpResponse response = serverResponse.response;
-        HttpEntity entity = response.getEntity();
-        try {
-			return EntityUtils.toString(entity);
-		} catch (ParseException e) {
-			Log.d(TAG, e.toString());
-			return null;
-		} catch (IOException e) {
-			Log.d(TAG, e.toString());
-			return null;
-		}
+		
+//		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
+//		//TODO do something with serverResonse
+//        HttpResponse response = serverResponse.response;
+//        HttpEntity entity = response.getEntity();
+//        try {
+//			return EntityUtils.toString(entity);
+//		} catch (ParseException e) {
+//			Log.d(TAG, e.toString());
+//			return null;
+//		} catch (IOException e) {
+//			Log.d(TAG, e.toString());
+//			return null;
+//		}
+		return null;
 	}
 	
 	public String addComment(int leagueMemberId, String comment) {
 		MyHttpClient myHttpClient = new MyHttpClient();
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		nameValuePairs.add(new BasicNameValuePair("from_id", leagueMemberId + ""));
-		nameValuePairs.add(new BasicNameValuePair("message", comment));
-		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
-		return MyHttpClient.parseResponse(serverResponse);
-		//TODO do something with serverResonse
-//        HttpResponse response = httpclient.execute(httppost);
-//        HttpEntity entity = response.getEntity();
-//        return EntityUtils.toString(entity);
+		JSONObject json = new JSONObject();
+        try {
+			json.put("from_id", leagueMemberId);
+			json.put("message", comment);
+	        StringEntity stringEntity = new StringEntity(json.toString());  
+	        //TODO add route
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (JSONException e) {
+			return e.toString();
+		} catch (UnsupportedEncodingException e) {
+			return e.toString();
+		}
 	}
 	
 	public static Cursor getNewsfeed(int leagueId) {

@@ -1,14 +1,18 @@
 package servercommunication;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import dbtables.League;
 import loaders.PublicLeaguesCursorLoader;
@@ -24,18 +28,15 @@ public class LeagueCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
-		//TODO do something with serverResonse
-        HttpResponse response = serverResponse.response;
-        HttpEntity entity = response.getEntity();
+		JSONObject json = new JSONObject();
         try {
-			return EntityUtils.toString(entity);
-		} catch (ParseException e) {
-			Log.d(TAG, e.toString());
-			return null;
-		} catch (IOException e) {
-			Log.d(TAG, e.toString());
-			return null;
+	        StringEntity stringEntity = new StringEntity(json.toString());  
+			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
+			//TODO add something to nameValuePairs
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (UnsupportedEncodingException e) {
+			return e.toString();
 		}
 	}
 	
@@ -58,9 +59,18 @@ public class LeagueCommunication {
 	public static String createLeague(int creatorId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
-		//TODO add something to nameValuePairs
-		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
-		return MyHttpClient.parseResponse(serverResponse);
+		JSONObject json = new JSONObject();
+        try {
+			json.put("creator_id", creatorId);
+	        StringEntity stringEntity = new StringEntity(json.toString());  
+			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
+			//TODO add something to nameValuePairs
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (JSONException e) {
+			return e.toString();
+		} catch (UnsupportedEncodingException e) {
+			return e.toString();
+		}
 	}
 }
