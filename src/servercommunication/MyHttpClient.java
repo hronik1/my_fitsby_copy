@@ -35,7 +35,8 @@ public class MyHttpClient {
 		Exception exception = null;
 
 		HttpPost httpPost = new HttpPost(urlString);
-		        
+		httpPost.setHeader("Content-type", "application/json");
+		
 		try {
 			httpPost.setEntity(stringEntity);
 		    response = httpClient.execute(httpPost);
