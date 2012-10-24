@@ -2,13 +2,16 @@ package servercommunication;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpResponse;
@@ -32,7 +35,6 @@ public class MyHttpClient {
 		Exception exception = null;
 
 		HttpPost httpPost = new HttpPost(urlString);
-		//httpPost.setHeader("Content-type", "application/json");
 		        
 		try {
 			httpPost.setEntity(stringEntity);
@@ -57,6 +59,41 @@ public class MyHttpClient {
 		return serverResponseObject;
 	}
 	
+	public ServerResponse createGetRequest(String urlString, List<NameValuePair> params) {
+		if(httpClient == null) {
+			httpClient = new DefaultHttpClient();
+		}
+
+		ServerResponse serverResponseObject = new ServerResponse();
+		HttpResponse response = null;
+		Exception exception = null;
+	    String paramString = URLEncodedUtils.format(params, "utf-8");
+
+		HttpGet httpGet = new HttpGet(urlString + paramString);
+		httpGet.setHeader("Content-type", "application/json");
+		        
+		try {
+		    response = httpClient.execute(httpGet);
+		} catch (ClientProtocolException e) {
+		    Log.v("in HttpClient -> in createGet -> in catch", "ClientProtocolException" + e);
+		    response = null;
+		    exception = e;
+		} catch (IOException e) {
+		     Log.v(TAG, "Get request: IOException" + e);
+		     response = null;
+		     exception = e;
+		} catch (Exception e) {
+			Log.v(TAG, "Get request: Exception" + e);
+			response = null;
+			exception = e;
+		}
+		        
+		serverResponseObject.response = response;
+		serverResponseObject.exception = exception;
+		        
+		return serverResponseObject;
+	}
+
 	public static String parseResponse(ServerResponse serverResponse) {
 		HttpResponse response = serverResponse.response;
 		Exception exception = serverResponse.exception;

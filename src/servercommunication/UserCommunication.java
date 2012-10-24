@@ -3,6 +3,7 @@ package servercommunication;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -66,13 +67,16 @@ public class UserCommunication {
 	public String loginUser(String email, String password) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
 			json.put("email", email);
 			json.put("password", password);
+			params.add(new BasicNameValuePair("email", email));
+			params.add(new BasicNameValuePair("password", password));
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
 			//TODO add something to nameValuePairs
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login", params);
 			return MyHttpClient.parseResponse(serverResponse);
 		} catch (JSONException e) {
 			return e.toString();
