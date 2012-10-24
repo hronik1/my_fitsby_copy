@@ -99,8 +99,8 @@ public class MyHttpClient {
 		Exception exception = serverResponse.exception;
 		if (response == null)
 			return "response null";
-		if (response.getStatusLine() != null)
-			return response.getStatusLine().getStatusCode() + "";
+//		if (response.getStatusLine() != null)
+//			return response.getStatusLine().getStatusCode() + "";
 		if (exception != null)
 			return exception.toString() + " exception in MyHttpClient";
 		if (response.getEntity() == null)
