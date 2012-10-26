@@ -280,7 +280,8 @@ public class NewsfeedActivity extends Activity
      * @param loader
      * @param data
      */
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    @SuppressLint("NewApi")
+	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
     }
     
@@ -288,7 +289,8 @@ public class NewsfeedActivity extends Activity
      * callback for resetting of loader
      * @param loader
      */
-    public void onLoaderReset(Loader<Cursor> loader) {
+    @SuppressLint("NewApi")
+	public void onLoaderReset(Loader<Cursor> loader) {
     	mAdapter.swapCursor(null);
     }
     

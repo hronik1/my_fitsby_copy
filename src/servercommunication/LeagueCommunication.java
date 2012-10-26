@@ -73,4 +73,27 @@ public class LeagueCommunication {
 			return e.toString();
 		}
 	}
+	
+	/**
+	 * sends the request to the server to join a game
+	 * @param userId
+	 * @param gameId
+	 * @return
+	 */
+	public static String joinLeague(int userId, int gameId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		JSONObject json = new JSONObject();
+        try {
+			json.put("user_id", userId);
+			json.put("message", gameId);
+	        StringEntity stringEntity = new StringEntity(json.toString());  
+	        //TODO add route
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (JSONException e) {
+			return e.toString();
+		} catch (UnsupportedEncodingException e) {
+			return e.toString();
+		}
+	}
 }

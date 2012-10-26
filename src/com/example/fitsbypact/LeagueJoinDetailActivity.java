@@ -1,5 +1,8 @@
 package com.example.fitsbypact;
 
+import servercommunication.LeagueCommunication;
+import servercommunication.NewsfeedCommunication;
+
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import bundlekeys.CreditCardBundleKeys;
@@ -9,6 +12,7 @@ import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbtables.LeagueMember;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -209,8 +213,11 @@ public class LeagueJoinDetailActivity extends Activity {
  		}
  		
  		//TODO add checking that user is not already in league
-		LeagueMember member = new LeagueMember(leagueId, mApplicationUser.getUser().getID());
-		mLeagueMemberTableHandler.addLeagueMember(member);
+ 		
+//		LeagueMember member = new LeagueMember(leagueId, mApplicationUser.getUser().getID());
+//		mLeagueMemberTableHandler.addLeagueMember(member);
+ 		new JoinLeagueAsyncTask().execute(mApplicationUser.getUser().getID(), leagueId);
+ 		
 		try {
 			Intent intent = new Intent(this, CreditCardActivity.class);
 			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
@@ -231,4 +238,20 @@ public class LeagueJoinDetailActivity extends Activity {
  		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fitsby.com/faq.html"));
  		startActivity(browserIntent);
  	}
+ 	
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, String> {
+        protected String doInBackground(Integer... params) {
+        	String string = LeagueCommunication.joinLeague(params[0], params[1]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
 }
