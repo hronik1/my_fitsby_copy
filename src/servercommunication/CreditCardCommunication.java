@@ -23,7 +23,7 @@ public class CreditCardCommunication {
 	 * @param cvc
 	 * @return
 	 */
-	public static String sendCreditCardInformation(int userId, int cardNumber, int expMonth, int expYear, int cvc) {
+	public static String sendCreditCardInformation(String userId, String cardNumber, String expMonth, String expYear, String cvc) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {

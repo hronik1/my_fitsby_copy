@@ -3,8 +3,12 @@ package com.example.fitsbypact;
 import java.util.HashMap;
 import java.util.Map;
 
+import servercommunication.CreditCardCommunication;
+import servercommunication.UserCommunication;
+
 import bundlekeys.CreditCardBundleKeys;
 import dbtables.User;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +25,7 @@ import com.flurry.android.FlurryAgent;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Token;
+import com.example.fitsbypact.applicationsubclass.*;
 
 public class CreditCardActivity extends Activity {
 
@@ -35,6 +40,8 @@ public class CreditCardActivity extends Activity {
 	
 	private int wager;
 	private boolean isValid;
+	
+	private User mUser;
 	
 	/**
 	 * called when activity first created
@@ -51,6 +58,8 @@ public class CreditCardActivity extends Activity {
         initializeButtons();
         initializeEditTexts();
         initializeTextViews();
+        
+        mUser = ((ApplicationUser)getApplicationContext()).getUser();
     }
 
     /**
@@ -177,7 +186,7 @@ public class CreditCardActivity extends Activity {
     	//TODO submit credit card info
     	try {
     		Intent intent = new Intent(this, FriendInviteActivity.class);
-    		parseCreditCard();
+    		sendCreditCard();
     		//TODO pass danny token
     		startActivity(intent);
     	} catch (Exception e) {
@@ -190,15 +199,33 @@ public class CreditCardActivity extends Activity {
     	} 
     }
     
-    private void parseCreditCard() throws StripeException {
-    	Stripe.apiKey = getString(R.string.stripe_test_secret_api_key); 
-    	Map<String, Object> tokenParams = new HashMap<String, Object>(); 
-    	Map<String, Object> cardParams = new HashMap<String, Object>(); 
-    	cardParams.put("number", numberET.getText().toString());
-    	cardParams.put("exp_year", expYearET.getText().toString()); 
-    	cardParams.put("cvc", cvcET.getText().toString()); 
-    	cardParams.put("exp_month", expMonthET.getText().toString()); 
-    	tokenParams.put("card", cardParams); 
-    	Token.create(tokenParams);
+    /**
+     * sends credit card info to server
+     */
+    private void sendCreditCard() {
+    	String number = numberET.getText().toString();
+    	String expYear = expYearET.getText().toString(); 
+    	String cvc = cvcET.getText().toString();
+    	String expMonth = expMonthET.getText().toString(); 
+    	new SendCreditCardAsyncTask().execute(mUser.getID()+"", number, expMonth, expYear, cvc);
+    	
     }
+    
+    /**
+     * AsyncTask class to send info to server
+     * @author brent
+     *
+     */
+    private class SendCreditCardAsyncTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... params) {
+        	String string = CreditCardCommunication.sendCreditCardInformation(params[0], params[1],
+        			params[2], params[3], params[4]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
+    
 }

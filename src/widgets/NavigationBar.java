@@ -14,6 +14,7 @@ import dbtables.User;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -139,7 +140,8 @@ public class NavigationBar extends LinearLayout{
 		} else {
 			tv.setClickable(false);
 			tv.setFocusable(false);
-//			tv.setHovered(true); 
+			tv.setEnabled(false);
+			tv.setTextColor(Color.RED);
 			//TODO alter backgroundcolor
 		}
 			
