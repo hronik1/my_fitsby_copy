@@ -3,6 +3,8 @@ package servercommunication;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -98,6 +100,41 @@ public class LeagueCommunication {
 		} catch (JSONException e) {
 			return e.toString();
 		} catch (UnsupportedEncodingException e) {
+			return e.toString();
+		}
+	}
+	
+	/**
+	 * method to get pot size
+	 * @param gameId
+	 * @return
+	 */
+	public static String getPotSize(int gameId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+        try {
+			params.add(new BasicNameValuePair("game_id", gameId + ""));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "pot_size", params);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (Exception e) {
+			return e.toString();
+		}
+	}
+	
+	
+	/**
+	 * method to get Number of Players for a league
+	 * @param gameId
+	 * @return
+	 */
+	public static String getNumberPlayers(int gameId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+        try {
+			params.add(new BasicNameValuePair("league_id", gameId + ""));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "number_of_players", params);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (Exception e) {
 			return e.toString();
 		}
 	}
