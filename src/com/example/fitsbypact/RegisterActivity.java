@@ -265,7 +265,7 @@ public class RegisterActivity extends Activity {
      */
     private class RegisterAsyncTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... params) {
-        	String string = new UserCommunication().registerUser(params[0], params[1], params[2], params[3], params[4]);
+        	String string = UserCommunication.registerUser(params[0], params[1], params[2], params[3], params[4]);
         	return string;
         }
 

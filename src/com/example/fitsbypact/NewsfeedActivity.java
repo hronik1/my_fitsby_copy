@@ -3,6 +3,9 @@ package com.example.fitsbypact;
 import java.util.ArrayList;
 import java.util.List;
 
+import servercommunication.NewsfeedCommunication;
+import servercommunication.UserCommunication;
+
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import loaders.NewsfeedCursorLoader;
@@ -14,7 +17,9 @@ import dbtables.Comment;
 import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.support.v4.app.LoaderManager;
@@ -202,7 +207,8 @@ public class NewsfeedActivity extends Activity
 		else {
 			LeagueMember member = listLeagueMember.get(spinnerPosition);
 			Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
-			mCommentTableHandler.addComment(comment);
+			//mCommentTableHandler.addComment(comment);
+			new AddCommentAsyncTask().execute(member.getId()+"", comment.getMessage());
 		}
 		
 	}
@@ -210,6 +216,7 @@ public class NewsfeedActivity extends Activity
 	/**
 	 * initialize the listview
 	 */
+	@SuppressLint("NewApi")
 	private void initializeListView() {
 		newsfeedLV = (ListView)findViewById(R.id.newsfeed_list_view);
 		newsfeedLV.setOnItemClickListener(new OnItemClickListener() {
@@ -286,4 +293,20 @@ public class NewsfeedActivity extends Activity
     }
     
     /** end LoaderManager callbacks **/
+    
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class AddCommentAsyncTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... params) {
+        	String string = NewsfeedCommunication.addComment(Integer.parseInt(params[0]), params[1]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
 }

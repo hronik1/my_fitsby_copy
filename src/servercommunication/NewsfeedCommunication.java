@@ -52,7 +52,13 @@ public class NewsfeedCommunication {
 		return null;
 	}
 	
-	public String addComment(int leagueMemberId, String comment) {
+	/**
+	 * sends add comment request to server
+	 * @param leagueMemberId
+	 * @param comment
+	 * @return
+	 */
+	public static String addComment(int leagueMemberId, String comment) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {

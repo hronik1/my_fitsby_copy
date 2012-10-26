@@ -16,6 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import servercommunication.CheckinCommunication;
+import servercommunication.UserCommunication;
+
 import android.net.Uri;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
@@ -28,6 +31,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -292,6 +296,7 @@ public class CheckInActivity extends Activity {
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 				String gym = parseGym(jsonObject);
+				new CheckinAsyncTask().execute(mUser.getID());
 				checkinLocationTV.setText("Checked in at " + gym);
 				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
 				
@@ -351,6 +356,7 @@ public class CheckInActivity extends Activity {
 //				mLeagueMemberTableHandler.updateLeagueMember(member);
 //			}
 //		}
+		new CheckoutAsyncTask().execute(mUser.getID());
 		checkinLocationTV.setText("You are not currently checked into a gym");
 		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 		
@@ -459,6 +465,38 @@ public class CheckInActivity extends Activity {
 			return "";
 		}
 	}
+	
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class CheckinAsyncTask extends AsyncTask<Integer, Void, String> {
+        protected String doInBackground(Integer... params) {
+        	String string = CheckinCommunication.checkin(params[0]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
+    
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class CheckoutAsyncTask extends AsyncTask<Integer, Void, String> {
+        protected String doInBackground(Integer... params) {
+        	String string = CheckinCommunication.checkout(params[0]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
 }
 	
 

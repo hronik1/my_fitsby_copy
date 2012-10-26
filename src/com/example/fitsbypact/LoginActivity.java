@@ -258,7 +258,7 @@ public class LoginActivity extends Activity {
      */
     private class LoginAsyncTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... params) {
-        	String string = new UserCommunication().loginUser(params[0], params[1]);
+        	String string = UserCommunication.loginUser(params[0], params[1]);
         	return string;
         }
 

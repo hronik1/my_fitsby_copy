@@ -33,11 +33,11 @@ public class UserCommunication {
 	}
 	
 	/**
-	 * 
+	 * sends registration of user to server
 	 * @param email
 	 * @param password
 	 */
-	public String registerUser(String email, String password, String confirmPassword, String firstName, String lastName) {
+	public static String registerUser(String email, String password, String confirmPassword, String firstName, String lastName) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
@@ -66,11 +66,11 @@ public class UserCommunication {
 	}
 	
 	/**
-	 * 
+	 * send logging in of user to server
 	 * @param email
 	 * @param password
 	 */
-	public String loginUser(String email, String password) {
+	public static String loginUser(String email, String password) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
