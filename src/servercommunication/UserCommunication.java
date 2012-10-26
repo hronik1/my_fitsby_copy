@@ -82,5 +82,22 @@ public class UserCommunication {
 			return e.toString();
 		}
 	}
+	
+	/**
+	 * gets the userStats
+	 * @param userId
+	 * @return
+	 */
+	public static String getStats(int userId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+        try {
+			params.add(new BasicNameValuePair("user_id", userId+""));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "user_stats", params);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (Exception e) {
+			return e.toString();
+		}
+	}
 
 }

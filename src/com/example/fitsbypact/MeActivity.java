@@ -1,9 +1,13 @@
 package com.example.fitsbypact;
 
+import servercommunication.LeagueCommunication;
+import servercommunication.UserCommunication;
+
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbtables.User;
 import widgets.NavigationBar;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +18,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.flurry.android.FlurryAgent;
 
 public class MeActivity extends Activity {
@@ -54,6 +60,8 @@ public class MeActivity extends Activity {
         initializeTextViews();
         initializeButtons();
         initializeEditTexts();
+        
+        new StatsAsyncTask().execute(mUser.getID());
     }
 
     /**
@@ -208,4 +216,20 @@ public class MeActivity extends Activity {
 	private void submit() {
 		//TODO figure out what need to be submit and then submit it
 	}
+	
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class StatsAsyncTask extends AsyncTask<Integer, Void, String> {
+        protected String doInBackground(Integer... params) {
+        	String string = UserCommunication.getStats(params[0]);
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
 }
