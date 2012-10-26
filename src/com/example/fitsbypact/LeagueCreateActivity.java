@@ -1,5 +1,7 @@
 package com.example.fitsbypact;
 
+import servercommunication.LeagueCommunication;
+
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import bundlekeys.CreditCardBundleKeys;
@@ -10,6 +12,7 @@ import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -270,12 +273,13 @@ public class LeagueCreateActivity extends Activity {
 		wager = Integer.parseInt((String) wagerTV.getText());
 		duration = Integer.parseInt((String) daysTV.getText());
 		isPrivate = createCheckBox.isChecked() ? 1 : 0;
-		League league = new League(userID, isPrivate, wager, duration);
-		leagueTableHandler.addLeague(league);
+		new CreateLeagueAsyncTask().execute(userID+"", duration+"", isPrivate+"", wager+"");
+//		League league = new League(userID, isPrivate, wager, duration);
+//		leagueTableHandler.addLeague(league);
 		
-		league = leagueTableHandler.getLeagueByCreatorID(userID);
-		LeagueMember member = new LeagueMember(league.getId(), userID);
-		leagueMemberTableHandler.addLeagueMember(member);
+//		league = leagueTableHandler.getLeagueByCreatorID(userID);
+//		LeagueMember member = new LeagueMember(league.getId(), userID);
+//		leagueMemberTableHandler.addLeagueMember(member);
 	
 		try {
 			Intent intent = new Intent(this, CreditCardActivity.class);
@@ -288,4 +292,21 @@ public class LeagueCreateActivity extends Activity {
 			toast.show();
 		}
 	}
+	
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... params) {
+        	String string = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
+        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]));
+        	return string;
+        }
+
+        protected void onPostExecute(String string) {
+        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        }
+    }
 }

@@ -56,15 +56,20 @@ public class LeagueCommunication {
 		return cursor;
 	}
 	
-	public static String createLeague(int creatorId) {
+	/**
+	 * sends the request to create a league
+	 * @param creatorId
+	 * @return
+	 */
+	public static String createLeague(int creatorId, int duration, boolean isPrivate, int wager) {
 		MyHttpClient myHttpClient = new MyHttpClient();
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		JSONObject json = new JSONObject();
         try {
 			json.put("creator_id", creatorId);
+			json.put("duration", duration);
+			json.put("is_private", isPrivate);
+			json.put("wager", wager);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
-			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
-			//TODO add something to nameValuePairs
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
 			return MyHttpClient.parseResponse(serverResponse);
 		} catch (JSONException e) {
