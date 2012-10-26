@@ -72,21 +72,13 @@ public class UserCommunication {
 	 */
 	public static String loginUser(String email, String password) {
 		MyHttpClient myHttpClient = new MyHttpClient();
-		JSONObject json = new JSONObject();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
-			json.put("email", email);
-			json.put("password", password);
 			params.add(new BasicNameValuePair("email", email));
 			params.add(new BasicNameValuePair("password", password));
-	        StringEntity stringEntity = new StringEntity(json.toString());  
-			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
-			//TODO add something to nameValuePairs
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login", params);
 			return MyHttpClient.parseResponse(serverResponse);
-		} catch (JSONException e) {
-			return e.toString();
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 			return e.toString();
 		}
 	}

@@ -70,7 +70,7 @@ public class LeagueCommunication {
 			json.put("is_private", isPrivate);
 			json.put("wager", wager);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "create_game", stringEntity);
 			return MyHttpClient.parseResponse(serverResponse);
 		} catch (JSONException e) {
 			return e.toString();
@@ -93,7 +93,7 @@ public class LeagueCommunication {
 			json.put("message", gameId);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "join_game", stringEntity);
 			return MyHttpClient.parseResponse(serverResponse);
 		} catch (JSONException e) {
 			return e.toString();

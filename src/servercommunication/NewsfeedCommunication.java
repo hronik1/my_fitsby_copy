@@ -3,6 +3,7 @@ package servercommunication;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import loaders.NewsfeedCursorLoader;
@@ -31,25 +32,21 @@ public class NewsfeedCommunication {
 
 	private static final String TAG = "NewsfeedCommunication";
 	
+	/**
+	 * helper function to get newsfeed
+	 * @param leagueId
+	 * @return
+	 */
 	private static String getCommentsHelper(int leagueId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		//TODO add something to nameValuePairs
-		
-//		ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, nameValuePairs);
-//		//TODO do something with serverResonse
-//        HttpResponse response = serverResponse.response;
-//        HttpEntity entity = response.getEntity();
-//        try {
-//			return EntityUtils.toString(entity);
-//		} catch (ParseException e) {
-//			Log.d(TAG, e.toString());
-//			return null;
-//		} catch (IOException e) {
-//			Log.d(TAG, e.toString());
-//			return null;
-//		}
-		return null;
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+        try {
+			params.add(new BasicNameValuePair("game_id", leagueId + ""));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "leaderboard", params);
+			return MyHttpClient.parseResponse(serverResponse);
+		} catch (Exception e) {
+			return e.toString();
+		}
 	}
 	
 	/**
@@ -66,7 +63,7 @@ public class NewsfeedCommunication {
 			json.put("message", comment);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "comment_new", stringEntity);
 			return MyHttpClient.parseResponse(serverResponse);
 		} catch (JSONException e) {
 			return e.toString();
@@ -75,6 +72,11 @@ public class NewsfeedCommunication {
 		}
 	}
 	
+	/**
+	 * gets the newsfeed and turns into a cursor
+	 * @param leagueId
+	 * @return
+	 */
 	public static Cursor getNewsfeed(int leagueId) {
 		String jsonResponse = getCommentsHelper(leagueId);
 		MatrixCursor cursor = new MatrixCursor(NewsfeedCursorLoader.FROM_ARGS);
