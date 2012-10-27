@@ -22,6 +22,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.HttpResponse;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.util.Log;
 
 public class MyHttpClient {
@@ -135,11 +138,15 @@ public class MyHttpClient {
 			} finally {
 				reader.close();
 			}
-			return buffer.toString();
+			//TODO make this line more elegant, if it works
+			return new JSONObject(buffer.toString()).names().join(",");
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
