@@ -142,15 +142,15 @@ public class MyHttpClient {
 			return new JSONObject(buffer.toString()).names().join(",");
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return e.toString();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return e.toString();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return e.toString();
 		}
-		return "";
+		
 	}
 	
 	public static String getContentCharSet(final HttpEntity entity) throws ParseException {
