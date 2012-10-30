@@ -147,10 +147,10 @@ public class MyHttpClient {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return e.toString();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			return e.toString();
-		}
+		}//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			return e.toString();
+//		}
 		
 	}
 	
