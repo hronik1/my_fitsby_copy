@@ -139,7 +139,7 @@ public class MyHttpClient {
 				reader.close();
 			}
 			//TODO make this line more elegant, if it works
-			return new JSONObject(buffer.toString()).length()+"";
+			return new JSONObject(buffer.toString()).toString();
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			return e.toString();
