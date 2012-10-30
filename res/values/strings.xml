@@ -166,5 +166,8 @@
 
     <!-- end FAQ -->
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
-
+    <string name="title_activity_help">HelpActivity</string>
+	<string name="help_button_text">Next</string>
+	<string name="help_textview_text">help</string>
+	
 </resources>
