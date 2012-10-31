@@ -45,7 +45,7 @@ public class MyHttpClient {
 		Exception exception = null;
 
 		HttpPost httpPost = new HttpPost(urlString);
-		httpPost.setHeader("Content-type", "application/json");
+		httpPost.addHeader("Content-type", "application/json");
 		
 		try {
 			httpPost.setEntity(stringEntity);
@@ -81,7 +81,7 @@ public class MyHttpClient {
 	    String paramString = URLEncodedUtils.format(params, "utf-8");
 
 		HttpGet httpGet = new HttpGet(urlString + "?" + paramString);
-		httpGet.setHeader("Content-type", "application/json");
+		httpGet.addHeader("Content-type", "application/json");
 		        
 		try {
 		    response = httpClient.execute(httpGet);
