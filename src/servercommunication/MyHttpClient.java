@@ -116,7 +116,7 @@ public class MyHttpClient {
 			return exception.toString() + " exception in MyHttpClient";
 		if (response.getEntity() == null)
 			return "entity null";
-		return getJson(serverResponse.response.getEntity()) + "parsed Json";
+		return getJson(serverResponse.response.getEntity());
 	}
 	
 	public static String getJson(HttpEntity entity) {
