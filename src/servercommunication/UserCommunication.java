@@ -21,6 +21,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.UserResponse;
+
+import android.util.Log;
+
 public class UserCommunication {
 
 	private final static String TAG = "UserCommunication";
@@ -37,7 +41,7 @@ public class UserCommunication {
 	 * @param email
 	 * @param password
 	 */
-	public static String registerUser(String email, String password, String confirmPassword, String firstName, String lastName) {
+	public static UserResponse registerUser(String email, String password, String confirmPassword, String firstName, String lastName) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
@@ -56,11 +60,13 @@ public class UserCommunication {
 			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
 			//TODO add something to nameValuePairs
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "users.json", stringEntity);
-			return MyHttpClient.parseResponse(serverResponse);
+			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
-			return e.toString();
+			Log.d(TAG, e.toString());
+			return null;
 		} catch (UnsupportedEncodingException e) {
-			return e.toString();
+			Log.d(TAG, e.toString());
+			return null;
 		}
 
 	}
@@ -70,16 +76,17 @@ public class UserCommunication {
 	 * @param email
 	 * @param password
 	 */
-	public static String loginUser(String email, String password) {
+	public static UserResponse loginUser(String email, String password) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
 			params.add(new BasicNameValuePair("email", email));
 			params.add(new BasicNameValuePair("password", password));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login", params);
-			return MyHttpClient.parseResponse(serverResponse);
+			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
-			return e.toString();
+			Log.d(TAG, e.toString());
+			return null;
 		}
 	}
 	
@@ -100,4 +107,15 @@ public class UserCommunication {
 		}
 	}
 
+	public static UserResponse jsonToUserResponse(JSONObject json) {
+		try {
+			return new UserResponse(json.get("status").toString(), Integer.parseInt(json.get("id").toString()));
+		} catch (NumberFormatException e) {
+			Log.d(TAG, e.toString());
+			return new UserResponse("fail", -1);
+		} catch (JSONException e) {
+			Log.d(TAG, e.toString());
+			return new UserResponse("fail", -1);
+		}
+	}
 }

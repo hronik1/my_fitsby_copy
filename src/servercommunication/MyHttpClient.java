@@ -105,21 +105,25 @@ public class MyHttpClient {
 		return serverResponseObject;
 	}
 
-	public static String parseResponse(ServerResponse serverResponse) {
+	public static JSONObject parseResponse(ServerResponse serverResponse) {
 		HttpResponse response = serverResponse.response;
 		Exception exception = serverResponse.exception;
-		if (response == null)
-			return "response null";
-//		if (response.getStatusLine() != null)
-//			return response.getStatusLine().getStatusCode() + "";
-		if (exception != null)
-			return exception.toString() + " exception in MyHttpClient";
-		if (response.getEntity() == null)
-			return "entity null";
+		if (response == null) {
+			Log.d(TAG, "response null");
+			return null;
+		}
+		if (exception != null) {
+			Log.d(TAG, exception.toString());
+			return null;
+		}
+		if (response.getEntity() == null) {
+			Log.d(TAG, "entity null");
+			return null;
+		}
 		return getJson(serverResponse.response.getEntity());
 	}
 	
-	public static String getJson(HttpEntity entity) {
+	public static JSONObject getJson(HttpEntity entity) {
 		try {
 			InputStream instream = entity.getContent();
 			String charset = getContentCharSet(entity);
@@ -139,16 +143,16 @@ public class MyHttpClient {
 				reader.close();
 			}
 			//TODO make this line more elegant, if it works
-			return new JSONObject(buffer.toString()).toString();
+			return new JSONObject(buffer.toString());
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			return e.toString();
+			Log.d(TAG, e.toString());
+			return null;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			return e.toString();
+			Log.d(TAG, e.toString());
+			return null;
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			return e.toString();
+			Log.d(TAG, e.toString());
+			return null;
 		}
 		
 	}
