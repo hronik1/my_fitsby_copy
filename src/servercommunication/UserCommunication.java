@@ -55,7 +55,7 @@ public class UserCommunication {
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
 			//TODO add something to nameValuePairs
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "users", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "users/create", stringEntity);
 			return MyHttpClient.parseResponse(serverResponse);
 		} catch (JSONException e) {
 			return e.toString();
