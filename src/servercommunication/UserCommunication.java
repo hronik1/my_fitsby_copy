@@ -44,7 +44,7 @@ public class UserCommunication {
         try {
 			json.put("email", email);
 			json.put("password", password);
-			json.put("confirm_password", confirmPassword);
+			json.put("password_confirmation", confirmPassword);
 			json.put("first_name", firstName);
 			json.put("last_name", lastName);
 			params.add(new BasicNameValuePair("email", email));
