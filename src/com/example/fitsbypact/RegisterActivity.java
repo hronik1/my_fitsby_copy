@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
+import responses.UserResponse;
 
 public class RegisterActivity extends Activity {
 
@@ -152,9 +153,9 @@ public class RegisterActivity extends Activity {
     					String email = emailET.getText().toString();
     					String password = passwordET.getText().toString();
     					//TODO password salting maybe?
-    					User user = new User(firstName, lastName, email, password);
-    					mdbHandler.getUserTableHandler().addUser(user);
-    					user = mUserTableHandler.getUser(email);
+    					User user = new User(firstName, lastName, email);
+//    					mdbHandler.getUserTableHandler().addUser(user);
+//    					user = mUserTableHandler.getUser(email);
     					if (user != null) {
     						mApplicationUser.setUser(user);
     						try {
@@ -263,14 +264,22 @@ public class RegisterActivity extends Activity {
      * @author brent
      *
      */
-    private class RegisterAsyncTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... params) {
-        	String string = UserCommunication.registerUser(params[0], params[1], params[2], params[3], params[4]);
-        	return string;
+    private class RegisterAsyncTask extends AsyncTask<String, Void, UserResponse> {
+        protected UserResponse doInBackground(String... params) {
+        	UserResponse response = UserCommunication.registerUser(params[0], params[1], params[2], params[3], params[4]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(UserResponse response) {
+        	if (response.wasSuccessful()) {
+        		
+        		//TODO switch to next page
+        		mApplicationUser.setUser(response.getUser());
+				Intent intent = new Intent(RegisterActivity.this, LeagueLandingActivity.class);
+				startActivity(intent);
+        	} else {
+        		Toast.makeText(getApplicationContext(), "Sorry registration failed", Toast.LENGTH_LONG).show();
+        	}
         }
     }
 }

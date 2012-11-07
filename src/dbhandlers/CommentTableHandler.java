@@ -54,85 +54,86 @@ public class CommentTableHandler {
 	public void addComment(Comment comment) {
 	    ContentValues values = new ContentValues();
 	    values.put(KEY_MEMBER_FROM_ID, comment.getMemberFromId());
-	    values.put(KEY_LEAGUE_ID, comment.getLeagueId());
+//	    values.put(KEY_LEAGUE_ID, comment.getLeagueId());
 	    values.put(KEY_MESSAGE, comment.getMessage());
 	    db.insert(TABLE, null, values);
 	}
 	
+	//TODO fix up all comments
 	/**
 	 * returns comment with corresponding id
 	 * @param id
 	 * @return
 	 */
-	public Comment getComment(int id) {
-
-		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_ID + "=?",
-						new String[] { String.valueOf(id) }, null, null, null, null);
-		if (cursor != null && cursor.getCount() != 0) {
-			cursor.moveToFirst();
-		} else {
-			return null;
-		}
-
-		Comment comment = new Comment(Integer.parseInt(cursor.getString(0)),
-				Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
-				cursor.getString(3), Timestamp.valueOf(cursor.getString(4)));
-
-		cursor.close();
-		return comment;
-	}
+//	public Comment getComment(int id) {
+//
+//		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+//				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_ID + "=?",
+//						new String[] { String.valueOf(id) }, null, null, null, null);
+//		if (cursor != null && cursor.getCount() != 0) {
+//			cursor.moveToFirst();
+//		} else {
+//			return null;
+//		}
+////
+////		Comment comment = new Comment(Integer.parseInt(cursor.getString(0)),
+////				Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
+////				cursor.getString(3), Timestamp.valueOf(cursor.getString(4)));
+//
+//		cursor.close();
+//		return comment;
+//	}
 	
-	/**
-	 * returns all comments withfromId
-	 * @param memberFromId
-	 * @return
-	 */
-	public List<Comment> getAllCommentByFromId(int memberFromId) {
-		
-		List<Comment> commentList = new ArrayList<Comment>();
-		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_MEMBER_FROM_ID + "=?",
-						new String[] { String.valueOf(memberFromId) }, null, null, null, KEY_TIMESTAMP + " DESC");
-
-		if (cursor.moveToFirst()) {
-			do {
-				Comment comment = new Comment(Integer.parseInt(cursor.getString(0)),
-						Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
-						cursor.getString(3), Timestamp.valueOf(cursor.getString(4)));
-				
-				commentList.add(comment);
-			} while (cursor.moveToNext());
-		}
-
-		cursor.close();
-		return commentList;
-	}
-	
-	/**
-	 * returns all comments for the various league, sorted in descending time
-	 * @param leagueId
-	 * @return
-	 */
-	public List<Comment> getAllCommentByLeagueId(int leagueId) {
-		List<Comment> commentList = new ArrayList<Comment>();
-		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_LEAGUE_ID + "=?",
-						new String[] { String.valueOf(leagueId) }, null, null, null, KEY_TIMESTAMP + " DESC");
-
-		if (cursor.moveToFirst()) {
-			do {
-				Comment comment = new Comment(Integer.parseInt(cursor.getString(0)),
-						Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
-						cursor.getString(3), Timestamp.valueOf(cursor.getString(4)));
-				
-				commentList.add(comment);
-			} while (cursor.moveToNext());
-		}
-
-		cursor.close();
-		return commentList;
-	}
+//	/**
+//	 * returns all comments withfromId
+//	 * @param memberFromId
+//	 * @return
+//	 */
+//	public List<Comment> getAllCommentByFromId(int memberFromId) {
+//		
+//		List<Comment> commentList = new ArrayList<Comment>();
+//		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+//				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_MEMBER_FROM_ID + "=?",
+//						new String[] { String.valueOf(memberFromId) }, null, null, null, KEY_TIMESTAMP + " DESC");
+//
+//		if (cursor.moveToFirst()) {
+//			do {
+//				Comment comment = new Comment(Integer.parseInt(cursor.getString(0)),
+//						Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
+//						cursor.getString(3), Timestamp.valueOf(cursor.getString(4)));
+//				
+//				commentList.add(comment);
+//			} while (cursor.moveToNext());
+//		}
+//
+//		cursor.close();
+//		return commentList;
+//	}
+//	
+//	/**
+//	 * returns all comments for the various league, sorted in descending time
+//	 * @param leagueId
+//	 * @return
+//	 */
+//	public List<Comment> getAllCommentByLeagueId(int leagueId) {
+//		List<Comment> commentList = new ArrayList<Comment>();
+//		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+//				KEY_MEMBER_FROM_ID, KEY_LEAGUE_ID, KEY_MESSAGE, KEY_TIMESTAMP }, KEY_LEAGUE_ID + "=?",
+//						new String[] { String.valueOf(leagueId) }, null, null, null, KEY_TIMESTAMP + " DESC");
+//
+//		if (cursor.moveToFirst()) {
+//			do {
+//				Comment comment = new Comment(Integer.parseInt(cursor.getString(0)),
+//						Integer.parseInt(cursor.getString(1)), Integer.parseInt(cursor.getString(2)),
+//						cursor.getString(3), Timestamp.valueOf(cursor.getString(4)));
+//				
+//				commentList.add(comment);
+//			} while (cursor.moveToNext());
+//		}
+//
+//		cursor.close();
+//		return commentList;
+//	}
 	/**
 	 * returns the number of comments
 	 * @return
@@ -153,23 +154,23 @@ public class CommentTableHandler {
 	 * @param comment
 	 * @return
 	 */
-	public int updateComment(Comment comment) {
-	    ContentValues values = new ContentValues();
-	    values.put(KEY_MEMBER_FROM_ID, comment.getMemberFromId());
-	    values.put(KEY_LEAGUE_ID, comment.getLeagueId());
-	    values.put(KEY_MESSAGE, comment.getMessage());
-	    values.put(KEY_TIMESTAMP,comment.getStamp().toString());
-
-	    return db.update(TABLE, values, KEY_ID + " = ?",
-	            new String[] { String.valueOf(comment.get_id()) });
-	}
+//	public int updateComment(Comment comment) {
+//	    ContentValues values = new ContentValues();
+//	    values.put(KEY_MEMBER_FROM_ID, comment.getMemberFromId());
+//	    values.put(KEY_LEAGUE_ID, comment.getLeagueId());
+//	    values.put(KEY_MESSAGE, comment.getMessage());
+//	    values.put(KEY_TIMESTAMP,comment.getStamp().toString());
+//
+//	    return db.update(TABLE, values, KEY_ID + " = ?",
+//	            new String[] { String.valueOf(comment.get_id()) });
+//	}
 	
 	/**
 	 * deletes the Comment comment from the table
 	 * @param comment
 	 */
-	public void deleteComment(Comment comment) {
-	    db.delete(TABLE, KEY_ID + "=?",
-	            new String[] { String.valueOf(comment.get_id()) });
-	}
+//	public void deleteComment(Comment comment) {
+//	    db.delete(TABLE, KEY_ID + "=?",
+//	            new String[] { String.valueOf(comment.get_id()) });
+//	}
 }

@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,6 +17,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.PublicLeaguesResponse;
+import responses.StakesResponse;
+import responses.StatusResponse;
+
 import dbtables.League;
 import loaders.PublicLeaguesCursorLoader;
 import android.database.Cursor;
@@ -26,7 +31,7 @@ public class LeagueCommunication {
 
 	private final static String TAG = "LeagueCommunication";
 	
-	private static String getPublicLeaguesHelper() {
+	private static PublicLeaguesResponse getPublicLeaguesHelper() {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
@@ -36,23 +41,25 @@ public class LeagueCommunication {
 			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
 			//TODO add something to nameValuePairs
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
-			return MyHttpClient.parseResponse(serverResponse);
+			return PublicLeaguesResponse.jsonToPublicLeagueResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (UnsupportedEncodingException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new PublicLeaguesResponse(e.toString(), null);
 		}
 	}
 	
 	public static Cursor getPublicLeagues() {
 		MatrixCursor cursor = new MatrixCursor(PublicLeaguesCursorLoader.FROM_ARGS);
-		String jsonResponse = getPublicLeaguesHelper();
-		if (jsonResponse == null)
+		PublicLeaguesResponse publicLeaguesResponse = getPublicLeaguesHelper();
+		if (publicLeaguesResponse == null || !publicLeaguesResponse.wasSuccessful())
 			return cursor;
-//		for(League league: publicLeaguesList) {
-//			int leagueId = league.getId();
-//			int numPlayers = mLeagueMemberTableHandler.getLeagueMembersCountByLeagueId(leagueId);
-//			int wager = league.getWager();
-//			cursor.addRow(new Object[] {leagueId, numPlayers, wager, league.getDuration(), numPlayers*wager});
-//		}
+		Vector<League> leagues = publicLeaguesResponse.getLeagues();
+		for(League league: leagues) {
+			int leagueId = league.getId();
+			int numPlayers = league.getPlayers();
+			int wager = league.getWager();
+			cursor.addRow(new Object[] {leagueId, numPlayers, wager, league.getDuration(), league.getStakes()});
+		}
 		
 		//TODO parse json into cursor
 		return cursor;
@@ -63,7 +70,7 @@ public class LeagueCommunication {
 	 * @param creatorId
 	 * @return
 	 */
-	public static String createLeague(int creatorId, int duration, boolean isPrivate, int wager) {
+	public static StatusResponse createLeague(int creatorId, int duration, boolean isPrivate, int wager, String creatorFirstName) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
@@ -71,13 +78,16 @@ public class LeagueCommunication {
 			json.put("duration", duration);
 			json.put("is_private", isPrivate);
 			json.put("wager", wager);
+			json.put("creator_first_name", creatorFirstName);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "create_game", stringEntity);
-			return MyHttpClient.parseResponse(serverResponse);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "games", stringEntity);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		} catch (UnsupportedEncodingException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		}
 	}
 	
@@ -87,7 +97,7 @@ public class LeagueCommunication {
 	 * @param gameId
 	 * @return
 	 */
-	public static String joinLeague(int userId, int gameId) {
+	public static StatusResponse joinLeague(int userId, int gameId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
@@ -96,11 +106,13 @@ public class LeagueCommunication {
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "join_game", stringEntity);
-			return MyHttpClient.parseResponse(serverResponse);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		} catch (UnsupportedEncodingException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		}
 	}
 	
@@ -109,33 +121,34 @@ public class LeagueCommunication {
 	 * @param gameId
 	 * @return
 	 */
-	public static String getPotSize(int gameId) {
+	public static StakesResponse getPotSize(int gameId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
 			params.add(new BasicNameValuePair("game_id", gameId + ""));
-			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "pot_size", params);
-			return MyHttpClient.parseResponse(serverResponse);
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "stakes", params);
+			return StakesResponse.jsonToStakesResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StakesResponse(e.toString(), null);
 		}
 	}
 	
 	
-	/**
-	 * method to get Number of Players for a league
-	 * @param gameId
-	 * @return
-	 */
-	public static String getNumberPlayers(int gameId) {
-		MyHttpClient myHttpClient = new MyHttpClient();
-		List<NameValuePair> params = new LinkedList<NameValuePair>();
-        try {
-			params.add(new BasicNameValuePair("league_id", gameId + ""));
-			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "number_of_players", params);
-			return MyHttpClient.parseResponse(serverResponse);
-		} catch (Exception e) {
-			return e.toString();
-		}
-	}
+//	/**
+//	 * method to get Number of Players for a league
+//	 * @param gameId
+//	 * @return
+//	 */
+//	public static String getNumberPlayers(int gameId) {
+//		MyHttpClient myHttpClient = new MyHttpClient();
+//		List<NameValuePair> params = new LinkedList<NameValuePair>();
+//        try {
+//			params.add(new BasicNameValuePair("league_id", gameId + ""));
+//			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "number_of_players", params);
+//			return MyHttpClient.parseResponse(serverResponse);
+//		} catch (Exception e) {
+//			return e.toString();
+//		}
+//	}
 }

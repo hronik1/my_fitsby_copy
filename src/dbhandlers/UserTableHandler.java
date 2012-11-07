@@ -45,99 +45,99 @@ public class UserTableHandler {
     public UserTableHandler(SQLiteDatabase db) {
         this.db = db;
     }
-    
+  //TODO fix up comments  
 	/**
 	 * adds user to TABLE_USERS
 	 * @param user
 	 */
-	public void addUser(User user) {
-		//TODO possibly more validation on use
-	    
-	    ContentValues values = new ContentValues();
-	    values.put(KEY_FIRST_NAME, user.getFirstName());
-	    values.put(KEY_LAST_NAME, user.getLastName());
-	    values.put(KEY_EMAIL, user.getEmail());
-	    values.put(KEY_PASSWORD, user.getPassword());
-	 
-	    db.insert(TABLE, null, values);
-	}
+//	public void addUser(User user) {
+//		//TODO possibly more validation on use
+//	    
+//	    ContentValues values = new ContentValues();
+//	    values.put(KEY_FIRST_NAME, user.getFirstName());
+//	    values.put(KEY_LAST_NAME, user.getLastName());
+//	    values.put(KEY_EMAIL, user.getEmail());
+//	    values.put(KEY_PASSWORD, user.getPassword());
+//	 
+//	    db.insert(TABLE, null, values);
+//	}
 	
 	/**
 	 * returns User with the corresponding id
 	 * @param id
 	 * @return
 	 */
-	public User getUser(int id) {
-
-		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
-						new String[] { String.valueOf(id) }, null, null, null, null);
-		if (cursor != null && cursor.getCount() != 0) {
-			cursor.moveToFirst();
-		} else {
-			return null;
-		}
-
-		User user = new User(Integer.parseInt(cursor.getString(0)),
-				cursor.getString(1), cursor.getString(2),
-				cursor.getString(3), cursor.getString(4));
-
-		cursor.close();
-		return user;
-	}
+//	public User getUser(int id) {
+//
+//		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+//				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
+//						new String[] { String.valueOf(id) }, null, null, null, null);
+//		if (cursor != null && cursor.getCount() != 0) {
+//			cursor.moveToFirst();
+//		} else {
+//			return null;
+//		}
+//
+//		User user = new User(Integer.parseInt(cursor.getString(0)),
+//				cursor.getString(1), cursor.getString(2),
+//				cursor.getString(3), cursor.getString(4));
+//
+//		cursor.close();
+//		return user;
+//	}
 	
 	/**
 	 * returns User with the corresponding id
 	 * @param id
 	 * @return
 	 */
-	public User getUser(String email) {
-		if (email == null)
-			return null;
-		
-		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_EMAIL + "=?",
-						new String[] { email }, null, null, null, null);
-		if (cursor != null && cursor.getCount() != 0)
-			cursor.moveToFirst();
-		else
-			return null;
-
-		User user = new User(Integer.parseInt(cursor.getString(0)),
-				cursor.getString(1), cursor.getString(2),
-				cursor.getString(3), cursor.getString(4));
-
-		cursor.close();
-		return user;
-	}
+//	public User getUser(String email) {
+//		if (email == null)
+//			return null;
+//		
+//		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+//				KEY_FIRST_NAME, KEY_LAST_NAME, KEY_EMAIL, KEY_PASSWORD }, KEY_EMAIL + "=?",
+//						new String[] { email }, null, null, null, null);
+//		if (cursor != null && cursor.getCount() != 0)
+//			cursor.moveToFirst();
+//		else
+//			return null;
+//
+//		User user = new User(Integer.parseInt(cursor.getString(0)),
+//				cursor.getString(1), cursor.getString(2),
+//				cursor.getString(3), cursor.getString(4));
+//
+//		cursor.close();
+//		return user;
+//	}
 	
 	/**
 	 * returns all users stored in TABLE_USERS
 	 * @return
 	 */
-	public List<User> getAllUsers() {
-	    List<User> usersList = new ArrayList<User>();
-	    String selectQuery = "SELECT * FROM " + TABLE;
-	    Cursor cursor = db.rawQuery(selectQuery, null);
-	 
-	    if (cursor.moveToFirst()) {
-	        do {
-	            User user = new User();
-	            user.setID(Integer.parseInt(cursor.getString(0)));
-	            user.setFirstName(cursor.getString(1));
-	            user.setLastName(cursor.getString(2));
-	            user.setEmail(cursor.getString(3));
-	            user.setPassword(cursor.getString(4));
-
-	            usersList.add(user);
-	        } while (cursor.moveToNext());
-	    }
-	 
-	    cursor.close();
-	    
-	    return usersList;
-	}
-	
+//	public List<User> getAllUsers() {
+//	    List<User> usersList = new ArrayList<User>();
+//	    String selectQuery = "SELECT * FROM " + TABLE;
+//	    Cursor cursor = db.rawQuery(selectQuery, null);
+//	 
+//	    if (cursor.moveToFirst()) {
+//	        do {
+//	            User user = new User();
+//	            user.setID(Integer.parseInt(cursor.getString(0)));
+//	            user.setFirstName(cursor.getString(1));
+//	            user.setLastName(cursor.getString(2));
+//	            user.setEmail(cursor.getString(3));
+//	            user.setPassword(cursor.getString(4));
+//
+//	            usersList.add(user);
+//	        } while (cursor.moveToNext());
+//	    }
+//	 
+//	    cursor.close();
+//	    
+//	    return usersList;
+//	}
+//	
 	/**
 	 * returns the number of Users stored in TABLE_USERS
 	 * @return
@@ -158,16 +158,16 @@ public class UserTableHandler {
 	 * @param user
 	 * @return
 	 */
-	public int updateUser(User user) {
-	    ContentValues values = new ContentValues();
-	    values.put(KEY_FIRST_NAME, user.getFirstName());
-	    values.put(KEY_LAST_NAME, user.getLastName());
-	    values.put(KEY_EMAIL, user.getEmail());
-	    values.put(KEY_PASSWORD, user.getPassword());
-
-	    return db.update(TABLE, values, KEY_ID + " = ?",
-	            new String[] { String.valueOf(user.getID()) });
-	}
+//	public int updateUser(User user) {
+//	    ContentValues values = new ContentValues();
+//	    values.put(KEY_FIRST_NAME, user.getFirstName());
+//	    values.put(KEY_LAST_NAME, user.getLastName());
+//	    values.put(KEY_EMAIL, user.getEmail());
+//	    values.put(KEY_PASSWORD, user.getPassword());
+//
+//	    return db.update(TABLE, values, KEY_ID + " = ?",
+//	            new String[] { String.valueOf(user.getID()) });
+//	}
 	
 	/**
 	 * deletes the User user from TABLE_USERS

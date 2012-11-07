@@ -5,9 +5,10 @@ import java.sql.Timestamp;
 public class Comment {
 
 
-	private int _id;
+
 	private int memberFromId;
-	private int leagueId;
+	private String firstName;
+	private String lastName;
 	private String message;
 	private Timestamp stamp;
 	
@@ -17,18 +18,7 @@ public class Comment {
 	public Comment() {
 		
 	}
-	
-	/**
-	 * 3 argument Comment constructor
-	 * @param memberFromId
-	 * @param memberToId
-	 * @param message
-	 */
-	public Comment(int memberFromId, int leagueId, String message) {
-		this.memberFromId = memberFromId;
-		this.leagueId = leagueId;
-		this.message = message;
-	}
+
 	
 	/**
 	 * 5 argument Comment constructor
@@ -38,17 +28,12 @@ public class Comment {
 	 * @param message
 	 * @param stamp
 	 */
-	public Comment(int id, int memberFromId, int leagueId, String message, Timestamp stamp) {
-		this(memberFromId, leagueId, message);
-		this._id = id;
+	public Comment(int memberFromId, String firstName, String lastName, String message, Timestamp stamp) {
+		this.memberFromId = memberFromId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.message = message;
 		this.stamp = stamp;
-	}
-	
-	/**
-	 * @return the _id
-	 */
-	public int get_id() {
-		return _id;
 	}
 
 	/**
@@ -56,13 +41,6 @@ public class Comment {
 	 */
 	public int getMemberFromId() {
 		return memberFromId;
-	}
-
-	/**
-	 * @return the leagueId
-	 */
-	public int getLeagueId() {
-		return leagueId;
 	}
 
 	/**
@@ -78,4 +56,12 @@ public class Comment {
 	public Timestamp getStamp() {
 		return stamp;
 	}	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
 }

@@ -3,6 +3,7 @@ package com.example.fitsbypact;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import registration.RegisterClientSideValidation;
+import responses.UserResponse;
 import servercommunication.ServerCommunication;
 import servercommunication.UserCommunication;
 import dbhandlers.DatabaseHandler;
@@ -256,14 +257,22 @@ public class LoginActivity extends Activity {
      * @author brent
      *
      */
-    private class LoginAsyncTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... params) {
-        	String string = UserCommunication.loginUser(params[0], params[1]);
-        	return string;
+    private class LoginAsyncTask extends AsyncTask<String, Void, UserResponse> {
+        protected UserResponse doInBackground(String... params) {
+        	UserResponse response = UserCommunication.loginUser(params[0], params[1]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(UserResponse response) {
+        	if (response.wasSuccessful()) {
+        		
+        		//TODO switch to next page
+        		mApplicationUser.setUser(response.getUser());
+    			Intent intent = new Intent(LoginActivity.this, GamesActivity.class);
+    			startActivity(intent);
+        	} else {
+        		Toast.makeText(getApplicationContext(), "Sorry login failed", Toast.LENGTH_LONG).show();
+        	}
         }
     }
 }

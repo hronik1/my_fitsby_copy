@@ -11,8 +11,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
+import responses.StatusResponse;
+import responses.UserResponse;
+
 public class CheckinCommunication {
 
+	private static final String TAG = "CheckinCommunication";
+	
 	public CheckinCommunication() {
 		
 	}
@@ -22,18 +29,20 @@ public class CheckinCommunication {
 	 * @param id
 	 * @return
 	 */
-	public static String checkin(int id) {
+	public static StatusResponse checkin(int id) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", id);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_in_request", stringEntity);
-			return MyHttpClient.parseResponse(serverResponse);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		} catch (UnsupportedEncodingException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		}
 	}
 	
@@ -42,18 +51,23 @@ public class CheckinCommunication {
 	 * @param id
 	 * @return
 	 */
-	public static String checkout(int id) {
+	public static StatusResponse checkout(int id) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", id);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_out_request", stringEntity);
-			return MyHttpClient.parseResponse(serverResponse);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		} catch (UnsupportedEncodingException e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		}
 	}
+	
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
 import servercommunication.NewsfeedCommunication;
 
@@ -217,17 +218,7 @@ public class LeagueJoinDetailActivity extends Activity {
 //		LeagueMember member = new LeagueMember(leagueId, mApplicationUser.getUser().getID());
 //		mLeagueMemberTableHandler.addLeagueMember(member);
  		new JoinLeagueAsyncTask().execute(mApplicationUser.getUser().getID(), leagueId);
- 		
-		try {
-			Intent intent = new Intent(this, CreditCardActivity.class);
-			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
-			startActivity(intent);
-		} catch(Exception e) {
-			//TODO handle failure more robustly
-			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.CENTER, 0, 0);
-			toast.show();
-		}
+ 	
  	}
  	
  	/**
@@ -244,14 +235,28 @@ public class LeagueJoinDetailActivity extends Activity {
      * @author brent
      *
      */
-    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, String> {
-        protected String doInBackground(Integer... params) {
-        	String string = LeagueCommunication.joinLeague(params[0], params[1]);
-        	return string;
+    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+        protected StatusResponse doInBackground(Integer... params) {
+        	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(StatusResponse response) {
+        	if (response.wasSuccessful()) {
+        		Toast.makeText(getApplicationContext(), "join successfull", Toast.LENGTH_LONG).show();
+        		try {
+        			Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
+        			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
+        			startActivity(intent);
+        		} catch(Exception e) {
+        			//TODO handle failure more robustly
+        			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
+        			toast.setGravity(Gravity.CENTER, 0, 0);
+        			toast.show();
+        		}
+        	} else {
+        		Toast.makeText(getApplicationContext(), "join fail", Toast.LENGTH_LONG).show();
+        	}
         }
     }
 }

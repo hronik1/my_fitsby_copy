@@ -21,6 +21,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import dbtables.User;
+
+import responses.StatsResponse;
 import responses.UserResponse;
 
 import android.util.Log;
@@ -95,27 +98,34 @@ public class UserCommunication {
 	 * @param userId
 	 * @return
 	 */
-	public static String getStats(int userId) {
+	public static StatsResponse getStats(int userId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
 			params.add(new BasicNameValuePair("user_id", userId+""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "user_stats", params);
-			return MyHttpClient.parseResponse(serverResponse);
+			return StatsResponse.jsonToStatsResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatsResponse(e.toString(), null);
 		}
 	}
 
 	public static UserResponse jsonToUserResponse(JSONObject json) {
 		try {
-			return new UserResponse(json.get("status").toString(), Integer.parseInt(json.get("id").toString()));
+			String firstName = json.getString("first_name");
+			String lastName = json.getString("last_name");
+			String email = json.getString("email");
+			int id = Integer.parseInt(json.get("id").toString());
+			User user = new User(id, firstName, lastName, email);
+			//TODO actually make sure danny returns user info
+			return new UserResponse(json.get("status").toString(), user);
 		} catch (NumberFormatException e) {
 			Log.d(TAG, e.toString());
-			return new UserResponse("fail", -1);
+			return new UserResponse("fail", null);
 		} catch (JSONException e) {
 			Log.d(TAG, e.toString());
-			return new UserResponse("fail", -1);
+			return new UserResponse("fail", null);
 		}
 	}
 }

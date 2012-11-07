@@ -6,7 +6,6 @@ public class User {
 	private String _firstName;
 	private String _lastName;
 	private String _email;
-	private String _password;
 	
 	public final static String ID_KEY = "userID";
 	/**
@@ -23,11 +22,10 @@ public class User {
 	 * @param email
 	 * @param password
 	 */
-	public User(String firstName, String lastName, String email, String password) {
+	public User(String firstName, String lastName, String email) {
 		this._firstName = firstName;
 		this._lastName = lastName;
 		this._email = email;
-		this._password = password;
 	}
 	
 	/**
@@ -38,8 +36,8 @@ public class User {
 	 * @param email
 	 * @param password
 	 */
-	public User(int id, String firstName, String lastName, String email, String password) {
-		this(firstName, lastName, email, password);
+	public User(int id, String firstName, String lastName, String email) {
+		this(firstName, lastName, email);
 		this._id = id;
 	}
 	
@@ -99,19 +97,6 @@ public class User {
 		this._email = email;
 	}
 
-	/**
-	 * @return the _password
-	 */
-	public String getPassword() {
-		return _password;
-	}
-
-	/**
-	 * @param _password the _password to set
-	 */
-	public void setPassword(String password) {
-		this._password = password;
-	}
 
 }
 

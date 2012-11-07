@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
@@ -273,7 +274,8 @@ public class LeagueCreateActivity extends Activity {
 		wager = Integer.parseInt((String) wagerTV.getText());
 		duration = Integer.parseInt((String) daysTV.getText());
 		isPrivate = createCheckBox.isChecked() ? 1 : 0;
-		new CreateLeagueAsyncTask().execute(userID+"", duration+"", isPrivate+"", wager+"");
+		new CreateLeagueAsyncTask().execute(userID+"", duration+"", isPrivate+"", wager+"",
+				mApplicationUser.getUser().getFirstName());
 //		League league = new League(userID, isPrivate, wager, duration);
 //		leagueTableHandler.addLeague(league);
 		
@@ -281,16 +283,6 @@ public class LeagueCreateActivity extends Activity {
 //		LeagueMember member = new LeagueMember(league.getId(), userID);
 //		leagueMemberTableHandler.addLeagueMember(member);
 	
-		try {
-			Intent intent = new Intent(this, CreditCardActivity.class);
-			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
-			startActivity(intent);
-		} catch(Exception e) {
-			//TODO handle failure more robustly
-			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.CENTER, 0, 0);
-			toast.show();
-		}
 	}
 	
     /**
@@ -298,15 +290,32 @@ public class LeagueCreateActivity extends Activity {
      * @author brent
      *
      */
-    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... params) {
-        	String string = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
-        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]));
-        	return string;
+    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
+        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), params[4]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(StatusResponse response) {
+        	if (response.wasSuccessful()) {
+        		Toast.makeText(getApplicationContext(), "creation success", Toast.LENGTH_LONG).show();
+        		try {
+        			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
+        			//TODO think of a better way to get this!
+        			int wager = Integer.parseInt((String)wagerTV.getText());
+        			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
+        			startActivity(intent);
+        		} catch(Exception e) {
+        			//TODO handle failure more robustly
+        			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
+        			toast.setGravity(Gravity.CENTER, 0, 0);
+        			toast.show();
+        		}
+        	} else {
+        		Toast.makeText(getApplicationContext(), "creation fail", Toast.LENGTH_LONG).show();
+        	}
+        	
         }
     }
 }

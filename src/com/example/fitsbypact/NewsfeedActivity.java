@@ -3,6 +3,7 @@ package com.example.fitsbypact;
 import java.util.ArrayList;
 import java.util.List;
 
+import responses.StatusResponse;
 import servercommunication.NewsfeedCommunication;
 import servercommunication.UserCommunication;
 
@@ -206,9 +207,9 @@ public class NewsfeedActivity extends Activity
 		}
 		else {
 			LeagueMember member = listLeagueMember.get(spinnerPosition);
-			Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
+			//Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
 			//mCommentTableHandler.addComment(comment);
-			new AddCommentAsyncTask().execute(member.getId()+"", comment.getMessage());
+			new AddCommentAsyncTask().execute(member.getId()+"", commentET.getText().toString());
 		}
 		
 	}
@@ -301,14 +302,19 @@ public class NewsfeedActivity extends Activity
      * @author brent
      *
      */
-    private class AddCommentAsyncTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... params) {
-        	String string = NewsfeedCommunication.addComment(Integer.parseInt(params[0]), params[1]);
-        	return string;
+    private class AddCommentAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = NewsfeedCommunication.addComment(Integer.parseInt(params[0]), params[1]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(StatusResponse response) {
+        	if (response.wasSuccessful()) {
+        		Toast.makeText(getApplicationContext(), "comment successful", Toast.LENGTH_LONG).show();
+        	} else {
+        		Toast.makeText(getApplicationContext(), "comment fail", Toast.LENGTH_LONG).show();
+        	}
+        	
         }
     }
 }

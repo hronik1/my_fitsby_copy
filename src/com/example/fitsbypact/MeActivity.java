@@ -1,10 +1,12 @@
 package com.example.fitsbypact;
 
+import responses.StatsResponse;
 import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
+import dbtables.Stats;
 import dbtables.User;
 import widgets.NavigationBar;
 import android.os.AsyncTask;
@@ -222,14 +224,20 @@ public class MeActivity extends Activity {
      * @author brent
      *
      */
-    private class StatsAsyncTask extends AsyncTask<Integer, Void, String> {
-        protected String doInBackground(Integer... params) {
-        	String string = UserCommunication.getStats(params[0]);
-        	return string;
+    private class StatsAsyncTask extends AsyncTask<Integer, Void, StatsResponse> {
+        protected StatsResponse doInBackground(Integer... params) {
+        	StatsResponse response = UserCommunication.getStats(params[0]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(StatsResponse response) {
+        	if (response.wasSuccessful()) {
+        		Stats stats = response.getStats();
+        		earningsTV.setText(stats.getMoneyEarned());
+        	} else {
+        		Toast.makeText(getApplicationContext(), "stats failed", Toast.LENGTH_LONG).show();
+        	}
+        	
         }
     }
 }

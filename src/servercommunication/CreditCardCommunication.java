@@ -34,7 +34,9 @@ public class CreditCardCommunication {
 			json.put("cvc", cvc+"");
 			StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "credit_card", stringEntity);
-			return MyHttpClient.parseResponse(serverResponse);
+			//TODO uncomment and correctly parse credit card
+			return null;
+//			return MyHttpClient.parseResponse(serverResponse);
 		} catch (Exception e) {
 			return e.toString();
 		}

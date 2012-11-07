@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.StatusResponse;
 import servercommunication.CheckinCommunication;
 import servercommunication.UserCommunication;
 
@@ -471,14 +472,19 @@ public class CheckInActivity extends Activity {
      * @author brent
      *
      */
-    private class CheckinAsyncTask extends AsyncTask<Integer, Void, String> {
-        protected String doInBackground(Integer... params) {
-        	String string = CheckinCommunication.checkin(params[0]);
-        	return string;
+    private class CheckinAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+        protected StatusResponse doInBackground(Integer... params) {
+        	StatusResponse response = CheckinCommunication.checkin(params[0]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(StatusResponse response) {
+        	if (response.wasSuccessful()) {
+        		Toast.makeText(getApplicationContext(), "checkin success", Toast.LENGTH_LONG).show();
+        	} else {
+        		Toast.makeText(getApplicationContext(), "checkin failed", Toast.LENGTH_LONG).show();
+        	}
+        	
         }
     }
     
@@ -487,14 +493,19 @@ public class CheckInActivity extends Activity {
      * @author brent
      *
      */
-    private class CheckoutAsyncTask extends AsyncTask<Integer, Void, String> {
-        protected String doInBackground(Integer... params) {
-        	String string = CheckinCommunication.checkout(params[0]);
-        	return string;
+    private class CheckoutAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+        protected StatusResponse doInBackground(Integer... params) {
+        	StatusResponse response = CheckinCommunication.checkout(params[0]);
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(StatusResponse response) {
+        	if (response.wasSuccessful()) {
+        		Toast.makeText(getApplicationContext(), "checkout success", Toast.LENGTH_LONG).show();
+        	} else {
+        		Toast.makeText(getApplicationContext(), "checkout failed", Toast.LENGTH_LONG).show();
+        	}
+        	
         }
     }
 }

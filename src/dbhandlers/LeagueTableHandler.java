@@ -50,17 +50,17 @@ public class LeagueTableHandler {
 	 * adds league to the table
 	 * @param league
 	 */
-	public void addLeague(League league) {
-		//TODO possibly more validation on use
-	    
-	    ContentValues values = new ContentValues();
-	    values.put(KEY_CREATOR_ID, league.getCreatorId());
-	    values.put(KEY_IS_PRIVATE, league.isPrivate());
-	    values.put(KEY_DURATION, league.getDuration());
-	    values.put(KEY_WAGER, league.getWager());
-	 
-	    db.insert(TABLE, null, values);
-	}
+//	public void addLeague(League league) {
+//		//TODO possibly more validation on use
+//	    
+//	    ContentValues values = new ContentValues();
+//	    values.put(KEY_CREATOR_ID, league.getCreatorId());
+//	    values.put(KEY_IS_PRIVATE, league.isPrivate());
+//	    values.put(KEY_DURATION, league.getDuration());
+//	    values.put(KEY_WAGER, league.getWager());
+//	 
+//	    db.insert(TABLE, null, values);
+//	}
 	
 	/**
 	 * returns League with corresponding id
@@ -114,56 +114,56 @@ public class LeagueTableHandler {
 	 * returns all leagues store in leagues table
 	 * @return
 	 */
-	public List<League> getAllLeagues() {
-	    List<League> leaguesList = new ArrayList<League>();
-	    String selectQuery = "SELECT * FROM " + TABLE;
-	    Cursor cursor = db.rawQuery(selectQuery, null);
-	 
-	    if (cursor.moveToFirst()) {
-	        do {
-	            League league = new League();
-	            league.setId(Integer.parseInt(cursor.getString(0)));
-	            league.setCreatorId(Integer.parseInt(cursor.getString(1)));
-	            league.setPrivate(Integer.parseInt(cursor.getString(2)));
-	            league.setDuration(Integer.parseInt(cursor.getString(3)));
-	            league.setWager(Integer.parseInt(cursor.getString(4)));
-
-	            leaguesList.add(league);
-	        } while (cursor.moveToNext());
-	    }
-	 
-	    cursor.close();
-	    
-	    return leaguesList;
-	}
+//	public List<League> getAllLeagues() {
+//	    List<League> leaguesList = new ArrayList<League>();
+//	    String selectQuery = "SELECT * FROM " + TABLE;
+//	    Cursor cursor = db.rawQuery(selectQuery, null);
+//	 
+//	    if (cursor.moveToFirst()) {
+//	        do {
+//	            League league = new League();
+//	            league.setId(Integer.parseInt(cursor.getString(0)));
+//	            league.setCreatorId(Integer.parseInt(cursor.getString(1)));
+//	            league.setPrivate(Integer.parseInt(cursor.getString(2)));
+//	            league.setDuration(Integer.parseInt(cursor.getString(3)));
+//	            league.setWager(Integer.parseInt(cursor.getString(4)));
+//
+//	            leaguesList.add(league);
+//	        } while (cursor.moveToNext());
+//	    }
+//	 
+//	    cursor.close();
+//	    
+//	    return leaguesList;
+//	}
 	
 	/**
 	 * returns all public leagues stored in leagues table
 	 * @return
 	 */
-	public List<League> getAllPublicLeagues() {
-	    List<League> leaguesList = new ArrayList<League>();
-		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-					KEY_CREATOR_ID, KEY_IS_PRIVATE, KEY_DURATION, KEY_WAGER }, KEY_IS_PRIVATE + "=?",
-					new String[] { String.valueOf(0) }, null, null, null, null);
-	 
-	    if (cursor.moveToFirst()) {
-	        do {
-	            League league = new League();
-	            league.setId(Integer.parseInt(cursor.getString(0)));
-	            league.setCreatorId(Integer.parseInt(cursor.getString(1)));
-	            league.setPrivate(Integer.parseInt(cursor.getString(2)));
-	            league.setDuration(Integer.parseInt(cursor.getString(3)));
-	            league.setWager(Integer.parseInt(cursor.getString(4)));
-
-	            leaguesList.add(league);
-	        } while (cursor.moveToNext());
-	    }
-	 
-	    cursor.close();
-	    
-	    return leaguesList;
-	}
+//	public List<League> getAllPublicLeagues() {
+//	    List<League> leaguesList = new ArrayList<League>();
+//		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
+//					KEY_CREATOR_ID, KEY_IS_PRIVATE, KEY_DURATION, KEY_WAGER }, KEY_IS_PRIVATE + "=?",
+//					new String[] { String.valueOf(0) }, null, null, null, null);
+//	 
+//	    if (cursor.moveToFirst()) {
+//	        do {
+//	            League league = new League();
+//	            league.setId(Integer.parseInt(cursor.getString(0)));
+//	            league.setCreatorId(Integer.parseInt(cursor.getString(1)));
+//	            league.setPrivate(Integer.parseInt(cursor.getString(2)));
+//	            league.setDuration(Integer.parseInt(cursor.getString(3)));
+//	            league.setWager(Integer.parseInt(cursor.getString(4)));
+//
+//	            leaguesList.add(league);
+//	        } while (cursor.moveToNext());
+//	    }
+//	 
+//	    cursor.close();
+//	    
+//	    return leaguesList;
+//	}
 	
 	/**
 	 * returns the number of leagues
@@ -185,16 +185,16 @@ public class LeagueTableHandler {
 	 * @param league
 	 * @return
 	 */
-	public int updateLeague(League league) {
-	    ContentValues values = new ContentValues();
-	    values.put(KEY_CREATOR_ID, league.getCreatorId());
-	    values.put(KEY_IS_PRIVATE, league.isPrivate());
-	    values.put(KEY_DURATION, league.getDuration());
-	    values.put(KEY_WAGER, league.getWager());
-
-	    return db.update(TABLE, values, KEY_ID + " = ?",
-	            new String[] { String.valueOf(league.getId()) });
-	}
+//	public int updateLeague(League league) {
+//	    ContentValues values = new ContentValues();
+//	    values.put(KEY_CREATOR_ID, league.getCreatorId());
+//	    values.put(KEY_IS_PRIVATE, league.isPrivate());
+//	    values.put(KEY_DURATION, league.getDuration());
+//	    values.put(KEY_WAGER, league.getWager());
+//
+//	    return db.update(TABLE, values, KEY_ID + " = ?",
+//	            new String[] { String.valueOf(league.getId()) });
+//	}
 	
 	/**
 	 * deletes the League league from the table
