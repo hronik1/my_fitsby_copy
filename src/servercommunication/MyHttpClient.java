@@ -65,6 +65,7 @@ public class MyHttpClient {
 		}
 		        
 		serverResponseObject.response = response;
+		
 		serverResponseObject.exception = exception;
 		        
 		return serverResponseObject;
@@ -120,6 +121,7 @@ public class MyHttpClient {
 			Log.d(TAG, "entity null");
 			return null;
 		}
+		
 		return getJson(serverResponse.response.getEntity());
 	}
 	
@@ -143,7 +145,9 @@ public class MyHttpClient {
 				reader.close();
 			}
 			//TODO make this line more elegant, if it works
-			return new JSONObject(buffer.toString());
+			JSONObject json = new JSONObject(buffer.toString());
+			Log.d(TAG, json.toString());
+			return json;
 		} catch (IllegalStateException e) {
 			Log.d(TAG, e.toString());
 			return null;
