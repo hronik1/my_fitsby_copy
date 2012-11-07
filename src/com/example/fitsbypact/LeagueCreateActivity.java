@@ -302,7 +302,7 @@ public class LeagueCreateActivity extends Activity {
         	if (response == null ) {
         		Toast.makeText(getApplicationContext(), "Sorry no response from server", Toast.LENGTH_LONG).show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), "Sorry creation failed", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG).show();
         	} else {
         		Toast.makeText(getApplicationContext(), "creation success", Toast.LENGTH_LONG).show();
         		try {

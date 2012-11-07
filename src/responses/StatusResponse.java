@@ -21,6 +21,10 @@ public class StatusResponse {
 		return status.equals(RESPONSE_SUCCESS);
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+	
 	public static StatusResponse jsonToStatusResponse(JSONObject json) {
 		try {
 			return new StatusResponse(json.get("status").toString());
