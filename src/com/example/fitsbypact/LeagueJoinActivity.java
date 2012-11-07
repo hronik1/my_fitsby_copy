@@ -57,7 +57,7 @@ public class LeagueJoinActivity extends Activity
         initializeEditTexts();
         initializeListView();
         
-        getLoaderManager().initLoader(0, null, (LoaderCallbacks<Cursor>) this);
+        //getLoaderManager().initLoader(0, null, (LoaderCallbacks<Cursor>) this);
     }
 
 	/**

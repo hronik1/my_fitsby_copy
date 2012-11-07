@@ -83,9 +83,15 @@ public class UserCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
+        	JSONObject json = new JSONObject();
+			json.put("email", email);
+			json.put("password", password);
+			
 			params.add(new BasicNameValuePair("email", email));
 			params.add(new BasicNameValuePair("password", password));
-			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login.json", params);
+			//ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login.json", params);
+			StringEntity stringEntity = new StringEntity(json.toString()); 
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login.json", stringEntity);
 			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
