@@ -122,10 +122,13 @@ public class UserCommunication {
 			return new UserResponse(json.get("status").toString(), user);
 		} catch (NumberFormatException e) {
 			Log.d(TAG, e.toString());
-			return new UserResponse("fail", null);
+			return new UserResponse(e.toString(), null);
 		} catch (JSONException e) {
 			Log.d(TAG, e.toString());
-			return new UserResponse("fail", null);
+			return new UserResponse(e.toString(), null);
+		} catch (Exception e) {
+			Log.d(TAG, e.toString());
+			return new UserResponse(e.toString(), null);
 		}
 	}
 }
