@@ -113,13 +113,16 @@ public class UserCommunication {
 
 	public static UserResponse jsonToUserResponse(JSONObject json) {
 		try {
-			String firstName = json.getString("first_name");
-			String lastName = json.getString("last_name");
-			String email = json.getString("email");
-			int id = Integer.parseInt(json.get("id").toString());
-			User user = new User(id, firstName, lastName, email);
-			//TODO actually make sure danny returns user info
-			return new UserResponse(json.get("status").toString(), user);
+			if (json.get("status").toString().equals("okay")) {
+				String firstName = json.getString("first_name");
+				String lastName = json.getString("last_name");
+				String email = json.getString("email");
+				int id = Integer.parseInt(json.get("id").toString());
+				User user = new User(id, firstName, lastName, email);
+				return new UserResponse(json.get("status").toString(), user);
+			} else {
+				return new UserResponse(json.get("status").toString(), null);
+			}
 		} catch (NumberFormatException e) {
 			Log.d(TAG, e.toString());
 			return new UserResponse(e.toString(), null);
