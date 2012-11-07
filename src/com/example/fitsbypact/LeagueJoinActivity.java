@@ -6,6 +6,7 @@ import loaders.PublicLeaguesCursorLoader;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -55,6 +56,8 @@ public class LeagueJoinActivity extends Activity
         initializeButtons();
         initializeEditTexts();
         initializeListView();
+        
+        getLoaderManager().initLoader(0, null, (LoaderCallbacks<Cursor>) this);
     }
 
 	/**
@@ -206,6 +209,7 @@ public class LeagueJoinActivity extends Activity
      * @return
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    	Log.d(TAG, "inited loader");
     	return new PublicLeaguesCursorLoader(this);
     }
     
