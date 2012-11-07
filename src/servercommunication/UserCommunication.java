@@ -91,7 +91,7 @@ public class UserCommunication {
 			params.add(new BasicNameValuePair("password", password));
 			//ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login.json", params);
 			StringEntity stringEntity = new StringEntity(json.toString()); 
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login.json", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "log_in.json", stringEntity);
 			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
@@ -125,19 +125,19 @@ public class UserCommunication {
 				String email = json.getString("email");
 				int id = Integer.parseInt(json.get("id").toString());
 				User user = new User(id, firstName, lastName, email);
-				return new UserResponse(json.get("status").toString(), user);
+				return new UserResponse(json.get("status").toString(), user, null);
 			} else {
-				return new UserResponse(json.get("status").toString(), null);
+				return new UserResponse(json.get("status").toString(), null, json.getString("errors"));
 			}
 		} catch (NumberFormatException e) {
 			Log.d(TAG, e.toString());
-			return new UserResponse(e.toString(), null);
+			return new UserResponse(e.toString(), null, e.toString());
 		} catch (JSONException e) {
 			Log.d(TAG, e.toString());
-			return new UserResponse(e.toString(), null);
+			return new UserResponse(e.toString(), null, e.toString());
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
-			return new UserResponse(e.toString(), null);
+			return new UserResponse(e.toString(), null, e.toString());
 		}
 	}
 }
