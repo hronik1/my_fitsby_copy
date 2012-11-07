@@ -20,14 +20,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.content.Intent;
 import android.support.v4.content.Loader;
 import android.database.Cursor;
 import com.flurry.android.FlurryAgent;
 
-public class LeagueJoinActivity extends Activity 
-	implements LoaderManager.LoaderCallbacks<Cursor> {
+public class LeagueJoinActivity extends FragmentActivity 
+	implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 	private final static String TAG = "LeagueJoinActivity";
 	
@@ -57,7 +58,7 @@ public class LeagueJoinActivity extends Activity
         initializeEditTexts();
         initializeListView();
         
-        //getLoaderManager().initLoader(0, null, (LoaderCallbacks<Cursor>) this);
+        getSupportLoaderManager().initLoader(0, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>) this);
     }
 
 	/**
