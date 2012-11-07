@@ -23,9 +23,12 @@
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
     <string name="login_forgot_password_text">Forgot your password? Tap here.</string>
-    <string name="fitsby_description">Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
+    <string name="fitsby_description">Earn money by going to the gym, paid by people who didn\'t go. \n \n
+        							  Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
   									  Everyone sets a wager at the beginning, and the top 3 gym-goers are rewarded the stakes at the end of the game. \n \n
-  									  To get started, either create or join a game.</string>
+  									  Users are never charged their wager amount unless they lose a game.</string>
+	<string name="title_activity_help">Get Started</string>
+	<string name="help_button_text">Next</string>  									  
     <string name="title_activity_league_landing">Start A Game</string>
     <string name="league_landing_create_text">Create A Game</string>
     <string name="league_landing_join_text">Join A Game</string>
@@ -161,13 +164,6 @@
     <string name="stripe_test_secret_api_key">sk_0G8UQEXsgKNmNNdy7QRwKr7VIgjxl</string>
     <string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
     <string name="faq_button">Read the FAQ</string>
-    <!-- FAQ -->
-
-
-    <!-- end FAQ -->
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
-    <string name="title_activity_help">HelpActivity</string>
-	<string name="help_button_text">Next</string>
-	<string name="help_textview_text">help</string>
 	
 </resources>
