@@ -85,7 +85,7 @@ public class UserCommunication {
         try {
 			params.add(new BasicNameValuePair("email", email));
 			params.add(new BasicNameValuePair("password", password));
-			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login", params);
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login.json", params);
 			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
