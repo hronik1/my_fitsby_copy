@@ -298,7 +298,11 @@ public class LeagueCreateActivity extends Activity {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	if (response.wasSuccessful()) {
+        	if (response == null ) {
+        		Toast.makeText(getApplicationContext(), "Sorry no response from server", Toast.LENGTH_LONG).show();
+        	} else if (!response.wasSuccessful()){
+        		Toast.makeText(getApplicationContext(), "Sorry creation failed", Toast.LENGTH_LONG).show();
+        	} else {
         		Toast.makeText(getApplicationContext(), "creation success", Toast.LENGTH_LONG).show();
         		try {
         			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
@@ -312,10 +316,8 @@ public class LeagueCreateActivity extends Activity {
         			toast.setGravity(Gravity.CENTER, 0, 0);
         			toast.show();
         		}
-        	} else {
-        		Toast.makeText(getApplicationContext(), "creation fail", Toast.LENGTH_LONG).show();
         	}
-        	
+
         }
     }
 }

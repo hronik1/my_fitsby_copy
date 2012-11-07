@@ -264,8 +264,10 @@ public class LoginActivity extends Activity {
         }
 
         protected void onPostExecute(UserResponse response) {
-        	if (response == null || !response.wasSuccessful()) {
-        		Toast.makeText(getApplicationContext(), "Sorry login failed", Toast.LENGTH_LONG).show();		
+        	if (response == null ) {
+        		Toast.makeText(getApplicationContext(), "Sorry no response from server", Toast.LENGTH_LONG).show();
+        	} else if (!response.wasSuccessful()){
+        		Toast.makeText(getApplicationContext(), "Sorry login failed", Toast.LENGTH_LONG).show();
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
