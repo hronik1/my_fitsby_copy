@@ -264,14 +264,13 @@ public class LoginActivity extends Activity {
         }
 
         protected void onPostExecute(UserResponse response) {
-        	if (response.wasSuccessful()) {
-        		
+        	if (response == null || !response.wasSuccessful()) {
+        		Toast.makeText(getApplicationContext(), "Sorry login failed", Toast.LENGTH_LONG).show();		
+        	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
     			Intent intent = new Intent(LoginActivity.this, GamesActivity.class);
     			startActivity(intent);
-        	} else {
-        		Toast.makeText(getApplicationContext(), "Sorry login failed", Toast.LENGTH_LONG).show();
         	}
         }
     }
