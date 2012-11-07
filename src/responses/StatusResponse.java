@@ -26,7 +26,10 @@ public class StatusResponse {
 			return new StatusResponse(json.get("status").toString());
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
-			return new StatusResponse("fail");
+			return new StatusResponse(e.toString());
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
 		}
 	}
 	
