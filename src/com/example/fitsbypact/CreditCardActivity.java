@@ -176,7 +176,7 @@ public class CreditCardActivity extends Activity {
      */
     private void initializeTextViews() {
     	wagerTV = (TextView)findViewById(R.id.credit_card_tv_wager);
-    	wagerTV.setText("" + wager);
+    	wagerTV.setText("$" + wager);
 
     }
     
