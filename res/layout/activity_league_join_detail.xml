@@ -146,9 +146,28 @@
         android:text="@string/game_start_date"
         android:textSize="16sp"
         android:layout_marginTop="10dp"
-        
         android:textStyle="bold" />
-
+   
+    <TextView
+        android:id="@+id/game_start_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/game_start_date"
+        android:layout_alignBottom="@+id/game_start_date"
+        android:layout_toRightOf="@+id/game_start_date"
+        android:text="@string/game_start_date_value"
+        android:textSize="16sp" />
+   
+    <Button
+        android:id="@+id/league_create_faq_button"
+        android:layout_above="@+id/league_join_detail_button_join"        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+	    android:background="@drawable/faq_button_background"
+        android:textColor="@drawable/faq_button_text"
+        android:text="@string/faq_button" />
+    
     <Button
         android:id="@+id/league_join_detail_button_join"
         android:layout_width="fill_parent"
@@ -163,14 +182,4 @@
         android:textColor="@color/white"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/game_start_date_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/game_start_date"
-        android:layout_alignBottom="@+id/game_start_date"
-        android:layout_toRightOf="@+id/game_start_date"
-        android:text="@string/game_start_date_value"
-        android:textSize="16sp" />
-   
 </RelativeLayout>

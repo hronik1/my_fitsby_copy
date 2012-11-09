@@ -76,7 +76,7 @@ public final class R {
         public static final int friend_invite_button_home=0x7f080019;
         public static final int friend_invite_button_invite=0x7f080017;
         public static final int game_start_date=0x7f080058;
-        public static final int game_start_date_value=0x7f08005a;
+        public static final int game_start_date_value=0x7f080059;
         public static final int games_button_newgame=0x7f080021;
         public static final int games_duration_prompt=0x7f08001e;
         public static final int games_leader_list=0x7f080024;
@@ -110,7 +110,7 @@ public final class R {
         public static final int league_create_wager=0x7f080033;
         public static final int league_create_wager_dollarsign=0x7f080032;
         public static final int league_join_button_submit=0x7f080041;
-        public static final int league_join_detail_button_join=0x7f080059;
+        public static final int league_join_detail_button_join=0x7f08005a;
         public static final int league_join_detail_duration=0x7f080056;
         public static final int league_join_detail_duration_data=0x7f080057;
         public static final int league_join_detail_header=0x7f08004b;
