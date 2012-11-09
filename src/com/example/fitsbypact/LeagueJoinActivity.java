@@ -173,8 +173,9 @@ public class LeagueJoinActivity extends FragmentActivity
 				int pot = cursor.getInt(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_POT));
 				int players = cursor.getInt(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_NUM_PLAYERS));
 				int wager = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_WAGER));
+				int duration = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_DURATION));
 				boolean isPrivate = false;
-				gotoLeagueDetails(leagueId, players, wager, pot, isPrivate);
+				gotoLeagueDetails(leagueId, players, wager, pot, isPrivate, duration);
 			}
     		
     	});
@@ -184,7 +185,7 @@ public class LeagueJoinActivity extends FragmentActivity
     	leagueLV.setAdapter(mAdapter);
     }
     
-    private void gotoLeagueDetails(int leagueId, int players, int wager, int pot, boolean isPrivate) {
+    private void gotoLeagueDetails(int leagueId, int players, int wager, int pot, boolean isPrivate, int duration) {
     	try {
     		Intent intent = new Intent(this, LeagueJoinDetailActivity.class);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, leagueId);
@@ -192,6 +193,7 @@ public class LeagueJoinActivity extends FragmentActivity
     		intent.putExtra(LeagueDetailBundleKeys.KEY_WAGER, wager);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_POT, pot);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_TYPE, isPrivate ? 1 : 0);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_DURATION, duration);
     		startActivity(intent);
     	} catch(Exception e) {
     		//TODO add robustness, remove from production code.
