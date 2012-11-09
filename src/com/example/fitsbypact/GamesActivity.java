@@ -20,6 +20,7 @@ import dbtables.User;
 import widgets.NavigationBar;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.v4.app.LoaderManager;
 import android.content.Intent;
@@ -201,6 +202,7 @@ public class GamesActivity extends Activity
 	/**
 	 * initializes the list view
 	 */
+	@SuppressLint("NewApi")
 	private void initializeListView() {
 		leadersLV = (ListView)findViewById(R.id.games_leader_list);
 		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
@@ -294,6 +296,7 @@ public class GamesActivity extends Activity
      * @param loader
      * @param data
      */
+	@SuppressLint("NewApi")
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
     }
@@ -302,14 +305,15 @@ public class GamesActivity extends Activity
      * callback for resetting of loader
      * @param loader
      */
-    public void onLoaderReset(Loader<Cursor> loader) {
+    @SuppressLint("NewApi")
+	public void onLoaderReset(Loader<Cursor> loader) {
     	mAdapter.swapCursor(null);
     }
     
     /** end LoaderManager callbacks **/
     
     /**
-     * AsyncTask to Register user
+     * AsyncTask to find users games
      * @author brent
      *
      */

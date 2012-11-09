@@ -242,7 +242,7 @@ public class NewsfeedActivity extends Activity
 	 * initialize the spinner
 	 */
 	private void initializeSpinner() {
-		gamesSpinner = (Spinner)findViewById(R.id.games_spinner);
+		gamesSpinner = (Spinner)findViewById(R.id.newsfeed_spinner);
 		spinnerData =  new ArrayList<String>();
 
 		spinnerDataAdapter = new ArrayAdapter<String>(this,
