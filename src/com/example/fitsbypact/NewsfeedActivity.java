@@ -72,7 +72,6 @@ public class NewsfeedActivity extends Activity
 	private LeagueMemberTableHandler mLeagueMemberTableHandler;
 	private CommentTableHandler mCommentTableHandler;
 	
-	private List<LeagueMember> listLeagueMember;
 	private User user;
 	private int spinnerPosition;
 	/**
@@ -90,7 +89,7 @@ public class NewsfeedActivity extends Activity
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
         mCommentTableHandler = mdbHandler.getCommentTableHandler();
-        listLeagueMember = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(user.getID());
+       // listLeagueMember = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(user.getID());
         
         //TODO loadermanager stuffs
         initializeNavigationBar();
@@ -204,17 +203,17 @@ public class NewsfeedActivity extends Activity
 	 * method which gets the data from the edit text and submits that
 	 */
 	private void submit() {
-		if(listLeagueMember == null || listLeagueMember.size() == 0) {
+		if(spinnerData == null || spinnerData.size() == 0) {
 			//TODO maybe do something more robust
 			Toast toast = Toast.makeText(getApplicationContext(), "sorry no leagues", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		}
 		else {
-			LeagueMember member = listLeagueMember.get(spinnerPosition);
+			String id = spinnerData.get(spinnerPosition);
 			//Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
 			//mCommentTableHandler.addComment(comment);
-			new AddCommentAsyncTask().execute(member.getId()+"", commentET.getText().toString());
+			new AddCommentAsyncTask().execute(id, commentET.getText().toString());
 		}
 		
 	}
