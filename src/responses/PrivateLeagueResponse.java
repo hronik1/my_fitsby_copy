@@ -33,7 +33,7 @@ public class PrivateLeagueResponse {
 		try {
 			Log.d(TAG, json.toString());
 			String success = json.get("status").toString();
-			int id = Integer.parseInt(json.getString("id"));
+			int id = Integer.parseInt(json.getString("game_id"));
 			int players = Integer.parseInt(json.getString("players"));
 			int duration = Integer.parseInt(json.getString("duration"));
 			int wager = Integer.parseInt(json.getString("wager"));
