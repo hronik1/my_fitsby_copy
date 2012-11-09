@@ -184,6 +184,15 @@ public class CreditCardActivity extends Activity {
      * submit to database and/or charge customer
      */
     private void submit() {
+
+    	String number = numberET.getText().toString();
+    	String expMonth = expMonthET.getText().toString();
+    	String expYear = expYearET.getText().toString();
+    	String cvc = cvcET.getText().toString();
+    	
+    	if (number.equals("") || expMonth.equals("") || expYear.equals("") || cvc.equals(""))
+    		Toast.makeText(this, "Sorry, you must fill in all fields", Toast.LENGTH_LONG).show();
+    	else
     		sendCreditCard();
     }
     
@@ -216,7 +225,7 @@ public class CreditCardActivity extends Activity {
         		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
         		startActivity(intent);
         	} else {
-        		Toast.makeText(CreditCardActivity.this, response.getStatus(), Toast.LENGTH_LONG).show();
+        		Toast.makeText(CreditCardActivity.this, "Sorry, somthing appears wrong with your credentials", Toast.LENGTH_LONG).show();
         	}
         }
     }

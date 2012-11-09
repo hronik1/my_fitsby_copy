@@ -233,7 +233,7 @@ public class GamesActivity extends Activity
 		inviteButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				gotoInviteActivity();
 				
 			}
 		});
@@ -245,6 +245,11 @@ public class GamesActivity extends Activity
 				gotoLeagueLandingActivity();
 			}
 		});
+	}
+	
+	private void gotoInviteActivity() {
+		Intent intent = new Intent(this, FriendInviteActivity.class);
+		startActivity(intent);
 	}
 	
 	/**
