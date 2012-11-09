@@ -103,7 +103,7 @@ public class LeagueCommunication {
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", userId);
-			json.put("message", gameId);
+			json.put("game_id", gameId);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "join_game", stringEntity);
