@@ -191,7 +191,7 @@ public class CreditCardActivity extends Activity {
     	String cvc = cvcET.getText().toString();
     	
     	if (number.equals("") || expMonth.equals("") || expYear.equals("") || cvc.equals(""))
-    		Toast.makeText(this, "Sorry, you must fill in all fields", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
     	else
     		sendCreditCard();
     }
@@ -225,7 +225,7 @@ public class CreditCardActivity extends Activity {
         		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
         		startActivity(intent);
         	} else {
-        		Toast.makeText(CreditCardActivity.this, "Sorry, somthing appears wrong with your credentials", Toast.LENGTH_LONG).show();
+        		Toast.makeText(CreditCardActivity.this, "Sorry, your card could not be processed. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG).show();
         	}
         }
     }
