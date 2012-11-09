@@ -234,6 +234,7 @@ public class MeActivity extends Activity {
         	if (response.wasSuccessful()) {
         		Stats stats = response.getStats();
         		earningsTV.setText(stats.getMoneyEarned());
+        		Toast.makeText(MeActivity.this, "stats success", Toast.LENGTH_LONG).show();
         	} else {
         		Toast.makeText(getApplicationContext(), "stats failed", Toast.LENGTH_LONG).show();
         	}
