@@ -17,6 +17,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.PrivateLeagueResponse;
 import responses.PublicLeaguesResponse;
 import responses.StakesResponse;
 import responses.StatusResponse;
@@ -46,6 +47,20 @@ public class LeagueCommunication {
 		} catch (UnsupportedEncodingException e) {
 			Log.e(TAG, e.toString());
 			return new PublicLeaguesResponse(e.toString(), null);
+		}
+	}
+	
+	public static PrivateLeagueResponse getPrivateLeague(String id, String firstName) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        try {  
+	        nameValuePairs.add(new BasicNameValuePair("game_id", id));
+			nameValuePairs.add(new BasicNameValuePair("first_name_of_creator", firstName));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "get_private_game_info", nameValuePairs);
+			return PrivateLeagueResponse.jsonToPrivateLeagueResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new PrivateLeagueResponse(e.toString(), null);
 		}
 	}
 	

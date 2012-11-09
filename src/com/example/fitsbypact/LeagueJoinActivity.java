@@ -1,8 +1,14 @@
 package com.example.fitsbypact;
 
+import responses.PrivateLeagueResponse;
+import responses.UserResponse;
+import servercommunication.LeagueCommunication;
+import servercommunication.UserCommunication;
 import bundlekeys.LeagueDetailBundleKeys;
 import dbhandlers.LeagueTableHandler;
+import dbtables.League;
 import loaders.PublicLeaguesCursorLoader;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -147,7 +153,13 @@ public class LeagueJoinActivity extends FragmentActivity
      * submits data entered by user
      */
     private void submit() {
-    	//TODO submit form to database
+    	String firstName = etFirstName.getText().toString();
+    	String id = etInviteCode.getText().toString();
+    	
+    	if(etFirstName.equals("") || id.equals(""))
+    		Toast.makeText(this, "Sorry, but email and invitation code must be filled in", Toast.LENGTH_LONG).show();
+    	else
+    		new FindGamesAsyncTask().execute(id, firstName);
     }
     
     /**
@@ -234,5 +246,30 @@ public class LeagueJoinActivity extends FragmentActivity
     }
     
     /** end LoaderManager callbacks **/
+    
+    /**
+     * AsyncTask class to login the user
+     * @author brent
+     *
+     */
+    private class FindGamesAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
+        protected PrivateLeagueResponse doInBackground(String... params) {
+        	PrivateLeagueResponse response = LeagueCommunication.getPrivateLeague(params[0], params[1]);
+        	return response;
+        }
+
+        protected void onPostExecute(PrivateLeagueResponse response) {
+        	if (response == null ) {
+        		Toast.makeText(getApplicationContext(), "Sorry, you don't have a connection to the internet", Toast.LENGTH_LONG).show();
+        	} else if (!response.wasSuccessful()){
+        		Toast.makeText(getApplicationContext(), "Sorry, but no games with those credentials exist", Toast.LENGTH_LONG).show();
+        	} else {
+        		League league = response.getLeague();
+        		boolean isPrivate = (league.isPrivate() == 0 ? false : true);
+        		gotoLeagueDetails(league.getId(), league.getPlayers(), league.getWager(),
+        				league.getStakes(), isPrivate, league.getDuration());
+        	}
+        }
+    }
 }
 

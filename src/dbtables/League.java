@@ -4,7 +4,7 @@ public class League {
 
 	private int id;
 	//private int creatorId;
-	//private int isPrivate;
+	private int isPrivate;
 	private int players;
 	private int wager;
 	private int duration;
@@ -46,6 +46,7 @@ public class League {
 		this.players = players;
 		this.duration = duration;
 		this.stakes = stakes;
+		isPrivate = 0;
 	}
 	
 	/**
@@ -128,5 +129,13 @@ public class League {
 
 	public int getPlayers() {
 		return this.players;
+	}
+	
+	public int isPrivate() {
+		return isPrivate;
+	}
+	
+	public void setPrivate(int isPrivate) {
+		this.isPrivate = isPrivate;
 	}
 }

@@ -266,7 +266,7 @@ public class LeagueJoinDetailActivity extends Activity {
         			toast.show();
         		}
         	} else {
-        		Toast.makeText(getApplicationContext(), "join fail", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getApplicationContext(), "Sorry, but you are already in this game", Toast.LENGTH_LONG).show();
         	}
         }
     }
