@@ -21,6 +21,7 @@ import responses.PrivateLeagueResponse;
 import responses.PublicLeaguesResponse;
 import responses.StakesResponse;
 import responses.StatusResponse;
+import responses.UsersGamesResponse;
 
 import dbtables.League;
 import loaders.PublicLeaguesCursorLoader;
@@ -132,6 +133,19 @@ public class LeagueCommunication {
 		}
 	}
 	
+	public static UsersGamesResponse getUsersLeagues(int userId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		
+        try {
+	        nameValuePairs.add(new BasicNameValuePair("user_id", userId +"")); 
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "games_user_is_in", nameValuePairs);
+			return UsersGamesResponse.jsonToGamesResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new UsersGamesResponse(e.toString(), null);
+		}
+	}
 	/**
 	 * method to get pot size
 	 * @param gameId

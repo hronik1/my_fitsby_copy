@@ -3,6 +3,11 @@ package com.example.fitsbypact;
 import java.util.ArrayList;
 import java.util.List;
 
+import responses.UserResponse;
+import responses.UsersGamesResponse;
+import servercommunication.LeagueCommunication;
+import servercommunication.UserCommunication;
+
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import loaders.GameLeaderCursorLoader;
@@ -13,6 +18,7 @@ import dbhandlers.UserTableHandler;
 import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.app.LoaderManager;
@@ -53,6 +59,9 @@ public class GamesActivity extends Activity
 	private Button inviteButton;
 	private Button newGamesButton;
 	
+	private ArrayAdapter<String> spinnerDataAdapter;
+	private List<String> spinnerData;
+	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
 	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
@@ -90,6 +99,8 @@ public class GamesActivity extends Activity
         initializeProgressBar();
         initializeListView();
         initializeButtons();
+        
+        new SpinnerDataAsyncTask().execute();
     }
 
     /**
@@ -201,14 +212,12 @@ public class GamesActivity extends Activity
 	 */
 	private void initializeSpinner() {
 		gamesSpinner = (Spinner)findViewById(R.id.games_spinner);
-		List<String> list = new ArrayList<String>();
-		for(LeagueMember member: listLeagueMember) {
-			list.add("league " + member.getLeagueId());
-		}
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, list);
-		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		gamesSpinner.setAdapter(dataAdapter);
+		spinnerData =  new ArrayList<String>();
+
+		spinnerDataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, spinnerData);
+		spinnerDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gamesSpinner.setAdapter(spinnerDataAdapter);
 		gamesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -298,5 +307,29 @@ public class GamesActivity extends Activity
     }
     
     /** end LoaderManager callbacks **/
+    
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
+        protected UsersGamesResponse doInBackground(String... params) {
+        	UsersGamesResponse response = LeagueCommunication.getUsersLeagues(user.getID());
+        	return response;
+        }
+
+        protected void onPostExecute(UsersGamesResponse response) {
+        	if (response == null ) {
+        		Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG).show();
+        	} else if (!response.wasSuccessful()){
+        		Toast.makeText(getApplicationContext(), "Sorry, but could not get game data", Toast.LENGTH_LONG).show();
+        	} else {
+        		//TODO switch to next page
+        		spinnerData.addAll(response.getGames());
+        		spinnerDataAdapter.notifyDataSetChanged();
+        	}
+        }
+    }
 }
 
