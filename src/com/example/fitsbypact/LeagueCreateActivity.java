@@ -304,7 +304,6 @@ public class LeagueCreateActivity extends Activity {
         	} else if (!response.wasSuccessful()){
         		Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG).show();
         	} else {
-        		Toast.makeText(getApplicationContext(), "creation success", Toast.LENGTH_LONG).show();
         		try {
         			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
         			//TODO think of a better way to get this!

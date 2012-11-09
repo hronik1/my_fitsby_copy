@@ -267,7 +267,7 @@ public class LoginActivity extends Activity {
         	if (response == null ) {
         		Toast.makeText(getApplicationContext(), "Sorry no response from server", Toast.LENGTH_LONG).show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG).show();
+        		Toast.makeText(getApplicationContext(), "Sorry invalid email/password combo", Toast.LENGTH_LONG).show();
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
