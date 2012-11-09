@@ -272,9 +272,9 @@ public class RegisterActivity extends Activity {
 
         protected void onPostExecute(UserResponse response) {
         	if (response == null ) {
-        		Toast.makeText(getApplicationContext(), "Sorry no response from server", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG).show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), "Sorry email already taken", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getApplicationContext(), "Sorry, that email is either invalid or already taken", Toast.LENGTH_LONG).show();
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
