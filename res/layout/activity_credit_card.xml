@@ -94,7 +94,7 @@
 
     <EditText
         android:id="@+id/credit_card_et_card_cvc"
-        android:layout_width="fill_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/credit_card_et_expire_year"
         android:layout_alignBottom="@+id/credit_card_et_expire_year"

@@ -23,10 +23,10 @@
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
     <string name="login_forgot_password_text">Forgot your password? Tap here.</string>
-    <string name="fitsby_description">Earn money by going to the gym, paid by people who didn\'t go. \n \n
-        							  Fitsby is a game where you compete with friends on the amount of times you go to the gym for 2 weeks. \n \n
-  									  Everyone sets a wager at the beginning, and the top 3 gym-goers are rewarded the stakes at the end of the game. \n \n
-  									  Users are never charged their wager amount unless they lose a game.</string>
+    <string name="fitsby_description">Earn money by going to the gym, paid for by people who didn\'t go. \n \n
+        							  Fitsby is a game where you compete with friends or strangers on the amount of times you check in at the gym. \n \n
+  									  Everyone places an agreed-upon wager amount, and the top 3 gym-goers are rewarded the stakes at the end of the game. \n \n
+  									  You will never be charged money unless you lose a game.</string>
 	<string name="title_activity_help">Get Started</string>
 	<string name="help_button_text">Next</string>  									  
     <string name="title_activity_league_landing">Start A Game</string>
@@ -59,12 +59,13 @@
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
     <string name="add_friend_button">Add Friend</string>
     <string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
-    <string name="activity_league_join_directions">Search for a private game by entering in the game host\'s information, or join a public game.</string>
+    <string name="activity_league_join_directions">Find a game to join by either searching by a game host\'s first name and game ID, or by browsing the public games list. Private games can only be found through search.</string>
     <string name="title_activity_league_join">Join A Game</string>
     <string name="league_join_et_first_name_hint">First Name</string>
     <string name="league_join_et_last_name_hint">Last Name</string>
-    <string name="league_join_et_invite_code_hint">Invitation Code</string>
+    <string name="league_join_et_invite_code_hint">Game ID</string>
     <string name="league_join_button_submit_text">Submit Search</string>
+    <string name="search_for_a_game">Find A Specific Game</string>
     <string name="league_create_checkbox_text">Make game private</string>
     <string name="navigation_textview_me_text">Me</string>
     <string name="navigation_textview_game_text">Games</string>
@@ -120,7 +121,7 @@
     <string name="league_join_detail_players_data_text">2</string>
     <string name="league_join_duration_text">Duration: </string>
     <string name="league_join_duration_data_text">14 days</string>
-    <string name="league_join_detail_button_join_text">Join</string>
+    <string name="league_join_detail_button_join_text">Join Game</string>
     <string name="league_join_detail_id_text">Game ID: </string>
     <string name="league_join_detail_id_data_text">111</string>
     <string name="list_item_game_leader_name_text">First Name</string>
@@ -157,7 +158,7 @@
     <string name="me_settings_button_submit_text">Submit Changes</string>
     <string name="me_settings_button_invite_friends_text">Invite Friends</string>
     <string name="me_settings_button_logout_text">Logout</string>
-    <string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
+    <string name="me_settings_tv_change_picture_text">Change Profile Picture (coming soon): </string>
     <string name="me_settings_button_change_picture_text">Choose picture</string>
     <string name="server_url">place server url here</string>
     <string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
@@ -167,5 +168,9 @@
     <string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
     <string name="faq_button">Read the FAQ</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    
+    <string name="game_start_date">Start Date: </string>
+    <string name="game_start_date_value">10/12/2012</string>
+    
 	
 </resources>
