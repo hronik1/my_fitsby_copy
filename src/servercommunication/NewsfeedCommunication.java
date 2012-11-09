@@ -60,15 +60,16 @@ public class NewsfeedCommunication {
 	 * @param comment
 	 * @return
 	 */
-	public static StatusResponse addComment(int leagueMemberId, String comment) {
+	public static StatusResponse addComment(String userId, String gameId, String comment) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
-			json.put("from_id", leagueMemberId);
+			json.put("user_id", userId);
+			json.put("game_id", gameId);
 			json.put("message", comment);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "comment_new", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "post_comment", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());

@@ -210,10 +210,10 @@ public class NewsfeedActivity extends Activity
 			toast.show();
 		}
 		else {
-			String id = spinnerData.get(spinnerPosition);
+			String gameId = spinnerData.get(spinnerPosition);
 			//Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
 			//mCommentTableHandler.addComment(comment);
-			new AddCommentAsyncTask().execute(id, commentET.getText().toString());
+			new AddCommentAsyncTask().execute(user.getID()+"", gameId, commentET.getText().toString());
 		}
 		
 	}
@@ -306,7 +306,7 @@ public class NewsfeedActivity extends Activity
      */
     private class AddCommentAsyncTask extends AsyncTask<String, Void, StatusResponse> {
         protected StatusResponse doInBackground(String... params) {
-        	StatusResponse response = NewsfeedCommunication.addComment(Integer.parseInt(params[0]), params[1]);
+        	StatusResponse response = NewsfeedCommunication.addComment(params[0], params[1], params[2]);
         	return response;
         }
 
