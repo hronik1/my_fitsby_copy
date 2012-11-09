@@ -51,6 +51,7 @@ public class HelpActivity extends Activity {
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
 	    FlurryAgent.onPageView();
+	    FlurryAgent.logEvent("Help Activity");	    
         Log.i(TAG, "onStart");
     }
     
