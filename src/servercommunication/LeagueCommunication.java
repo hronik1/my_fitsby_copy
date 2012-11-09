@@ -38,9 +38,10 @@ public class LeagueCommunication {
 		JSONObject json = new JSONObject();
         try {
 	        StringEntity stringEntity = new StringEntity(json.toString());  
-			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
+			
 			//TODO add something to nameValuePairs
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL, stringEntity);
+			//ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "public_games", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "public_games", nameValuePairs);
 			return PublicLeaguesResponse.jsonToPublicLeagueResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (UnsupportedEncodingException e) {
 			Log.e(TAG, e.toString());
