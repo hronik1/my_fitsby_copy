@@ -40,11 +40,11 @@
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
     <string name="league_create_ib_days_plus">+</string>
-    <string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game.</string>
+    <string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game. You will never be charged the wager amount unless you lose a game.</string>
     <string name="credit_card_number_text">Card Number:</string>
     <string name="credit_card_expiration_text">Expiration Date:</string>
-    <string name="credit_card_cvc_text">Security Code:</string>
-    <string name="credit_card_wager_text">WAGER:</string>
+    <string name="credit_card_cvc_text">CVC:</string>
+    <string name="credit_card_wager_text">Wager:</string>
     <string name="title_activity_credit_card">Enter Payment Information</string>
     <string name="credit_card_button_submit_text">Submit</string>
     <string name="credit_card_et_card_cvc_hint">XXX</string>
