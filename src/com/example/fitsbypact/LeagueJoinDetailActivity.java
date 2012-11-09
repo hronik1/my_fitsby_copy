@@ -255,7 +255,6 @@ public class LeagueJoinDetailActivity extends Activity {
 
         protected void onPostExecute(StatusResponse response) {
         	if (response.wasSuccessful()) {
-        		Toast.makeText(getApplicationContext(), "join successfull", Toast.LENGTH_LONG).show();
         		try {
         			Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
         			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
