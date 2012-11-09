@@ -3,6 +3,7 @@ package com.example.fitsbypact;
 import java.util.HashMap;
 import java.util.Map;
 
+import responses.StatusResponse;
 import servercommunication.CreditCardCommunication;
 import servercommunication.UserCommunication;
 
@@ -183,20 +184,7 @@ public class CreditCardActivity extends Activity {
      * submit to database and/or charge customer
      */
     private void submit() {
-    	//TODO submit credit card info
-    	try {
-    		Intent intent = new Intent(this, FriendInviteActivity.class);
     		sendCreditCard();
-    		//TODO pass danny token
-    		startActivity(intent);
-    	} catch (Exception e) {
-    		//remove in deployment
-    		String stackTrace = android.util.Log.getStackTraceString(e);
-    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
-    				Toast.LENGTH_LONG);
-    		toast.setGravity(Gravity.CENTER, 0, 0);
-    		toast.show();
-    	} 
     }
     
     /**
@@ -216,15 +204,20 @@ public class CreditCardActivity extends Activity {
      * @author brent
      *
      */
-    private class SendCreditCardAsyncTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... params) {
-        	String string = CreditCardCommunication.sendCreditCardInformation(params[0], params[1],
+    private class SendCreditCardAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = CreditCardCommunication.sendCreditCardInformation(params[0], params[1],
         			params[2], params[3], params[4]);
-        	return string;
+        	return response;
         }
 
-        protected void onPostExecute(String string) {
-        	Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(StatusResponse response) {
+        	if (response.wasSuccessful()) {
+        		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
+        		startActivity(intent);
+        	} else {
+        		Toast.makeText(CreditCardActivity.this, response.getStatus(), Toast.LENGTH_LONG).show();
+        	}
         }
     }
     

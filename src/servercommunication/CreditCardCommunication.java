@@ -8,8 +8,14 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import android.util.Log;
+
+import responses.StatusResponse;
+
 public class CreditCardCommunication {
 
+	private final static String TAG = "CreditCardCommunication";
+	
 	public CreditCardCommunication() {
 		
 	}
@@ -23,22 +29,22 @@ public class CreditCardCommunication {
 	 * @param cvc
 	 * @return
 	 */
-	public static String sendCreditCardInformation(String userId, String cardNumber, String expMonth, String expYear, String cvc) {
+	public static StatusResponse sendCreditCardInformation(String userId, String cardNumber, String expMonth, String expYear, String cvc) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", userId+"");
-			json.put("card_number", cardNumber+"");
-			json.put("exp_month", expMonth+"");
-			json.put("exp_year", expYear+"");
-			json.put("cvc", cvc+"");
+			json.put("credit_card_number", cardNumber+"");
+			json.put("credit_card_exp_month", expMonth+"");
+			json.put("credit_card_exp_year", expYear+"");
+			json.put("credit_card_cvc", cvc+"");
 			StringEntity stringEntity = new StringEntity(json.toString());  
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "credit_card", stringEntity);
-			//TODO uncomment and correctly parse credit card
-			return null;
-//			return MyHttpClient.parseResponse(serverResponse);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "get_and_save_stripe_info", stringEntity);
+
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
-			return e.toString();
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
 		}
 	}
 	
