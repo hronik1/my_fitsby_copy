@@ -95,7 +95,7 @@ public class LeagueJoinActivity extends FragmentActivity
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
 	    FlurryAgent.onPageView();
-	    FlurryAgent.logEvent("Game Create Activity");
+	    FlurryAgent.logEvent("Game Join Activity");
         Log.i(TAG, "onStart");
     }
     
