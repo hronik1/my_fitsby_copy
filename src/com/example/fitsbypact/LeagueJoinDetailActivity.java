@@ -36,6 +36,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	private TextView potTV;
 	private TextView playersTV;
 	private TextView durationTV;
+	private TextView leagueIdTV;
 	
 	private Button joinButton;
 	private Button faqButton;
@@ -166,27 +167,31 @@ public class LeagueJoinDetailActivity extends Activity {
  			isPrivate = true;
  		isValid = true;
  		duration = extras.getInt(LeagueDetailBundleKeys.KEY_DURATION);
+
  	}
  	/**
  	 * initializes the TextViews
  	 */
  	private void initializeTextViews() {
  		typeTV = (TextView)findViewById(R.id.league_join_detail_type_data);
- 		typeTV.setText(isPrivate ? "private" : "public");
+ 		typeTV.setText(isPrivate ? " Private" : " Public");
  		
  		wagerTV = (TextView)findViewById(R.id.league_join_detail_wager_data);
- 		wagerTV.setText("$" + wager);
+ 		wagerTV.setText(" $" + wager);
  		
  		potTV = (TextView)findViewById(R.id.league_join_detail_pot_data);
- 		potTV.setText("$" + pot);
+ 		potTV.setText(" $" + pot);
  		
  		playersTV = (TextView)findViewById(R.id.league_join_detail_players_data);
- 		playersTV.setText("" + players);
+ 		playersTV.setText(" " + players);
  		
  		durationTV = (TextView)findViewById(R.id.league_join_detail_duration_data);
- 		durationTV.setText(duration + "days");
+ 		durationTV.setText(" " + duration + " days");
+ 		
+ 		leagueIdTV = (TextView)findViewById(R.id.league_join_detail_id_data);
+ 		leagueIdTV.setText(" " + leagueId);
  	}
- 	
+
  	/**
  	 * initializes buttons
  	 */

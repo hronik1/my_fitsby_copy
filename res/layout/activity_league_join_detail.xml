@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    
     <TextView
         android:id="@+id/league_join_detail_header"
         android:layout_width="wrap_content"
@@ -15,13 +16,33 @@
         android:textSize="20sp"
         android:textStyle="bold"        
         android:text="@string/league_join_detail_header_text" />
+    
+    <TextView
+        android:id="@+id/league_join_detail_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/league_join_detail_header"
+        android:layout_below="@+id/league_join_detail_header"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:text="@string/league_join_detail_id_text" />
+    
+    <TextView
+        android:id="@+id/league_join_detail_id_data"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@+id/league_join_detail_id"
+		android:layout_alignTop="@+id/league_join_detail_id"
+        android:textSize="30sp"		
+		android:text="@string/league_join_detail_id_data_text" />
 
     <TextView
         android:id="@+id/league_join_detail_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/league_join_detail_header"
-        android:layout_below="@+id/league_join_detail_header"
+        android:layout_below="@+id/league_join_detail_id"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:textSize="30sp"
