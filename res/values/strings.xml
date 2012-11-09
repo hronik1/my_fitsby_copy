@@ -121,7 +121,7 @@
     <string name="league_join_duration_text">Duration: </string>
     <string name="league_join_duration_data_text">14 days</string>
     <string name="league_join_detail_button_join_text">Join</string>
-    <string name="league_join_detail_id_text">Game_ID: </string>
+    <string name="league_join_detail_id_text">Game ID: </string>
     <string name="league_join_detail_id_data_text">111</string>
     <string name="list_item_game_leader_name_text">First Name</string>
     <string name="list_item_game_leader_last_name_text">Last Name</string>
