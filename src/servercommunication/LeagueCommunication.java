@@ -81,7 +81,7 @@ public class LeagueCommunication {
 			json.put("wager", wager);
 			json.put("creator_first_name", creatorFirstName);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "games", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "create_game", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
