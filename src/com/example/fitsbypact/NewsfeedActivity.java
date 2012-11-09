@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import responses.StatusResponse;
+import responses.UsersGamesResponse;
+import servercommunication.LeagueCommunication;
 import servercommunication.NewsfeedCommunication;
 import servercommunication.UserCommunication;
 
@@ -57,6 +59,8 @@ public class NewsfeedActivity extends Activity
 	private ListView newsfeedLV;
 	private EditText commentET;
 	private Button submitButton;
+	private ArrayAdapter<String> spinnerDataAdapter;
+	private List<String> spinnerData;
 	
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
@@ -94,7 +98,8 @@ public class NewsfeedActivity extends Activity
         initializeListView();
         initializeEditText();
         initializeSpinner();
-
+        
+        new SpinnerDataAsyncTask().execute();
     }
 
     /**
@@ -237,16 +242,14 @@ public class NewsfeedActivity extends Activity
 	 * initialize the spinner
 	 */
 	private void initializeSpinner() {
-		gamesSpinner = (Spinner)findViewById(R.id.newsfeed_spinner);
-		List<String> list = new ArrayList<String>();
-		for(LeagueMember member: listLeagueMember) {
-			list.add("league " + member.getLeagueId());
-		}
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, list);
-		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		gamesSpinner.setAdapter(dataAdapter);
-		gamesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		gamesSpinner = (Spinner)findViewById(R.id.games_spinner);
+		spinnerData =  new ArrayList<String>();
+
+		spinnerDataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, spinnerData);
+		spinnerDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gamesSpinner.setAdapter(spinnerDataAdapter);
+		gamesSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){
 
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View view,
@@ -315,6 +318,30 @@ public class NewsfeedActivity extends Activity
         		Toast.makeText(getApplicationContext(), "comment fail", Toast.LENGTH_LONG).show();
         	}
         	
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
+        protected UsersGamesResponse doInBackground(String... params) {
+        	UsersGamesResponse response = LeagueCommunication.getUsersLeagues(user.getID());
+        	return response;
+        }
+
+        protected void onPostExecute(UsersGamesResponse response) {
+        	if (response == null ) {
+        		Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG).show();
+        	} else if (!response.wasSuccessful()){
+        		Toast.makeText(getApplicationContext(), "Sorry, but could not get game data", Toast.LENGTH_LONG).show();
+        	} else {
+        		//TODO switch to next page
+        		spinnerData.addAll(response.getGames());
+        		spinnerDataAdapter.notifyDataSetChanged();
+        	}
         }
     }
 }
