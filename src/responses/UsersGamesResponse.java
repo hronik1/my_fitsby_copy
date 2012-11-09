@@ -34,7 +34,7 @@ public class UsersGamesResponse {
 			List<String> games = new ArrayList<String>();
 			int length = jsonArray.length();
 			for (int i = 0; i < length; i++) {
-				games.add(((JSONObject)jsonArray.get(i)).toString());
+				games.add(jsonArray.get(i).toString());
 			}
 			return new UsersGamesResponse(status, games);
 		} catch (Exception e) {
