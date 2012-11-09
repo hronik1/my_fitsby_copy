@@ -37,6 +37,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/white_textbox"
         android:gravity="center"
+        android:maxLength="16"
         android:hint="@string/credit_card_et_card_number_hint" >
 
         <requestFocus />
@@ -63,6 +64,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/white_textbox"
+        android:maxLength="2"
         android:hint="@string/credit_card_et_expire_month_hint" />
 
     <EditText
@@ -74,6 +76,7 @@
         android:layout_toRightOf="@+id/credit_card_et_expire_month"
         android:background="@drawable/white_textbox"
         android:gravity="center"
+        android:maxLength="4"
         android:hint="@string/credit_card_et_expire_year_hint" />
 
     <TextView
@@ -87,6 +90,7 @@
         android:layout_toRightOf="@+id/credit_card_expiration_text"
         android:text="@string/credit_card_cvc_text"
         android:textColor="@color/white"
+        android:maxLength="3"
         android:textStyle="bold" />
 
     <EditText
