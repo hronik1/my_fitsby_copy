@@ -91,7 +91,7 @@ public class UserCommunication {
 			params.add(new BasicNameValuePair("password", password));
 			//ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login.json", params);
 			StringEntity stringEntity = new StringEntity(json.toString()); 
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "log_in", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login_android", stringEntity);
 			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
