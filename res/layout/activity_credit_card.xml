@@ -1,155 +1,161 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray" >
 
-    <TextView
-        android:id="@+id/credit_card_main_directions_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/credit_card_main_directions_text"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+    <RelativeLayout
+ 		android:layout_width="match_parent"
+ 		android:layout_height="wrap_content" >
+	    <TextView
+	        android:id="@+id/credit_card_main_directions_text"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="10dp"
+	        android:text="@string/credit_card_main_directions_text"
+	        android:textColor="@color/white"
+	        android:textSize="16sp" />
+	
+	    <TextView
+	        android:id="@+id/credit_card_number_text"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/credit_card_main_directions_text"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="15dp"
+	        android:text="@string/credit_card_number_text"
+	        android:textColor="@color/white"
+	        android:textStyle="bold" />
+	
+	    <EditText
+	        android:id="@+id/credit_card_et_card_number"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/credit_card_number_text"
+	        android:layout_below="@+id/credit_card_number_text"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="5dp"
+	        android:background="@drawable/white_textbox"
+	        android:gravity="center"
+	        android:hint="@string/credit_card_et_card_number_hint"
+	        android:maxLength="16" >
+	
+	        <requestFocus />
+	    </EditText>
+	
+	    <TextView
+	        android:id="@+id/credit_card_expiration_text"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignRight="@+id/credit_card_et_expire_year"
+	        android:layout_below="@+id/credit_card_et_card_number"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="10dp"
+	        android:text="@string/credit_card_expiration_text"
+	        android:textColor="@color/white"
+	        android:textStyle="bold" />
+	
+	    <EditText
+	        android:id="@+id/credit_card_et_expire_month"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/credit_card_expiration_text"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="5dp"
+	        android:background="@drawable/white_textbox"
+	        android:hint="@string/credit_card_et_expire_month_hint"
+	        android:maxLength="2" />
+	
+	    <EditText
+	        android:id="@+id/credit_card_et_expire_year"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignTop="@+id/credit_card_et_expire_month"
+	        android:layout_marginLeft="5dp"
+	        android:layout_toRightOf="@+id/credit_card_et_expire_month"
+	        android:background="@drawable/white_textbox"
+	        android:gravity="center"
+	        android:hint="@string/credit_card_et_expire_year_hint"
+	        android:maxLength="4" />
+	
+	    <TextView
+	        android:id="@+id/credit_card_cvc_text"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_above="@+id/credit_card_et_expire_year"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginBottom="5dp"
+	        android:layout_marginLeft="20dp"
+	        android:layout_toRightOf="@+id/credit_card_expiration_text"
+	        android:text="@string/credit_card_cvc_text"
+	        android:textColor="@color/white"
+	        android:textStyle="bold" />
+	
+	    <EditText
+	        android:id="@+id/credit_card_et_card_cvc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/credit_card_et_expire_year"
+	        android:layout_alignBottom="@+id/credit_card_et_expire_year"
+	        android:layout_alignLeft="@+id/credit_card_cvc_text"
+	        android:layout_marginRight="10dp"
+	        android:background="@drawable/white_textbox"
+	        android:gravity="center"
+	        android:hint="@string/credit_card_et_card_cvc_hint"
+	        android:maxLength="3" />
+	
+	    <Button
+	        android:id="@+id/credit_card_button_submit"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/credit_card_wager_text"
+	        android:layout_below="@+id/credit_card_wager_text"
+	        android:layout_marginTop="20dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/custom_login_button"
+	        android:text="@string/credit_card_button_submit_text"
+	        android:textColor="@color/white" />
+	
+	    <TextView
+	        android:id="@+id/credit_card_wager_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/credit_card_et_expire_month"
+	        android:layout_below="@+id/credit_card_et_expire_month"
+	        android:gravity="center"
+	        android:text="@string/credit_card_wager_text"
+	        android:textColor="@color/white"
+	        android:textSize="20sp"
+	        android:layout_marginTop="20dp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/credit_card_tv_wager"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/credit_card_wager_text"
+	        android:layout_alignBottom="@+id/credit_card_wager_text"
+	        android:layout_toRightOf="@+id/credit_card_wager_text"
+	        android:text="@string/credit_card_tv_wager_text"
+	        android:textColor="@color/white"
+	        android:layout_marginLeft="5dp"
+	        android:textSize="20sp" />
+	
+	    <ImageView
+	        android:id="@+id/secure_payment_logo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"	        
+   	        android:layout_marginRight="2dp"
+	        android:layout_below="@+id/credit_card_button_submit"
+	        android:layout_alignRight="@+id/credit_card_button_submit"
+	        android:src="@drawable/secure_payment_logo" />
 
-    <TextView
-        android:id="@+id/credit_card_number_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/credit_card_main_directions_text"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/credit_card_number_text"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/credit_card_et_card_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/credit_card_number_text"
-        android:layout_below="@+id/credit_card_number_text"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/white_textbox"
-        android:gravity="center"
-        android:hint="@string/credit_card_et_card_number_hint"
-        android:maxLength="16" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/credit_card_expiration_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/credit_card_et_expire_year"
-        android:layout_below="@+id/credit_card_et_card_number"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/credit_card_expiration_text"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/credit_card_et_expire_month"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/credit_card_expiration_text"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/white_textbox"
-        android:hint="@string/credit_card_et_expire_month_hint"
-        android:maxLength="2" />
-
-    <EditText
-        android:id="@+id/credit_card_et_expire_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/credit_card_et_expire_month"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/credit_card_et_expire_month"
-        android:background="@drawable/white_textbox"
-        android:gravity="center"
-        android:hint="@string/credit_card_et_expire_year_hint"
-        android:maxLength="4" />
-
-    <TextView
-        android:id="@+id/credit_card_cvc_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/credit_card_et_expire_year"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/credit_card_expiration_text"
-        android:text="@string/credit_card_cvc_text"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/credit_card_et_card_cvc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/credit_card_et_expire_year"
-        android:layout_alignBottom="@+id/credit_card_et_expire_year"
-        android:layout_alignLeft="@+id/credit_card_cvc_text"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/white_textbox"
-        android:gravity="center"
-        android:hint="@string/credit_card_et_card_cvc_hint"
-        android:maxLength="3" />
-
-    <Button
-        android:id="@+id/credit_card_button_submit"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/custom_login_button"
-        android:text="@string/credit_card_button_submit_text"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/credit_card_wager_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/credit_card_et_expire_month"
-        android:layout_below="@+id/credit_card_et_expire_month"
-        android:gravity="center"
-        android:text="@string/credit_card_wager_text"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/credit_card_tv_wager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/credit_card_wager_text"
-        android:layout_alignBottom="@+id/credit_card_wager_text"
-        android:layout_toRightOf="@+id/credit_card_wager_text"
-        android:text="@string/credit_card_tv_wager_text"
-        android:textColor="@color/white"
-        android:layout_marginLeft="5dp"
-        android:textSize="20sp" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"        
-        android:layout_alignTop="@+id/credit_card_tv_wager"
-        android:layout_toRightOf="@+id/credit_card_tv_wager"
-        android:src="@drawable/secure_payment_logo" />
-
-</RelativeLayout>
+	</RelativeLayout>
+</ScrollView>
