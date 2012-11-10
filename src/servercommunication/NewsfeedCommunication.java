@@ -46,7 +46,7 @@ public class NewsfeedCommunication {
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
         try {
 			params.add(new BasicNameValuePair("game_id", leagueId + ""));
-			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "leaderboard", params);
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "game_comments", params);
 			return CommentsResponse.jsonToCommentsResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
@@ -60,13 +60,14 @@ public class NewsfeedCommunication {
 	 * @param comment
 	 * @return
 	 */
-	public static StatusResponse addComment(String userId, String gameId, String comment) {
+	public static StatusResponse addComment(String userId, String gameId, String comment, String stamp) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", userId);
 			json.put("game_id", gameId);
 			json.put("message", comment);
+			json.put("stamp", stamp);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "post_comment", stringEntity);
@@ -87,13 +88,17 @@ public class NewsfeedCommunication {
 	 */
 	public static Cursor getNewsfeed(int leagueId) {
 		CommentsResponse commentsResponse = getCommentsHelper(leagueId);
+		
 		MatrixCursor cursor = new MatrixCursor(NewsfeedCursorLoader.FROM_ARGS);
-		if (commentsResponse == null || !commentsResponse.wasSuccessful())
+		if (commentsResponse == null || !commentsResponse.wasSuccessful()) {
+			Log.d(TAG, "unsuccess");
 			return cursor;
+		}
 		Vector<Comment> comments = commentsResponse.getComments();
+		Log.d(TAG, comments.size()+"");
 		for(Comment comment: comments) {
 			cursor.addRow(new Object[] { comment.getFirstName(), comment.getLastName(),
-					comment.getStamp(), comment.getMessage() });
+					comment.getStamp(), comment.getMessage(), comment.getId() });
 		}
 		return cursor;
 	}

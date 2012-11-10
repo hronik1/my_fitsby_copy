@@ -10,7 +10,8 @@ public class Comment {
 	private String firstName;
 	private String lastName;
 	private String message;
-	private Timestamp stamp;
+	private String stamp;
+	private String id;
 	
 	/**
 	 * default Comment constructor
@@ -28,12 +29,13 @@ public class Comment {
 	 * @param message
 	 * @param stamp
 	 */
-	public Comment(int memberFromId, String firstName, String lastName, String message, Timestamp stamp) {
+	public Comment(int memberFromId, String firstName, String lastName, String message, String stamp, String id) {
 		this.memberFromId = memberFromId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.message = message;
 		this.stamp = stamp;
+		this.id = id;
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class Comment {
 	/**
 	 * @return the stamp
 	 */
-	public Timestamp getStamp() {
+	public String getStamp() {
 		return stamp;
 	}	
 	
@@ -63,5 +65,9 @@ public class Comment {
 	
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public String getId() {
+		return id;
 	}
 }

@@ -48,7 +48,17 @@
         android:textSize="14sp"
         android:textColor="@color/button_gray"
         android:text="@string/list_item_newsfeed_timestamp_text" />
-
+
+    <TextView
+        android:id="@+id/list_item_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_newsfeed_timestamp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:textSize="14sp"
+        android:textColor="@color/button_gray"
+        android:text="@string/list_item_newsfeed_timestamp_text" />
     <TextView
         android:id="@+id/list_item_newsfeed_message"
         android:layout_width="wrap_content"
@@ -59,5 +69,7 @@
         android:layout_toRightOf="@+id/frameLayout1"
         android:text="@string/list_item_newsfeed_message_text"
         android:textSize="14sp" />
+    
+
 
 </RelativeLayout>

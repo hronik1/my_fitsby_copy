@@ -35,7 +35,7 @@ public class GamesLeaderCommunication {
 	
 	public static Cursor getGamesLeader(int gameId) {
 		MatrixCursor cursor = new MatrixCursor(new String[] { UserTableHandler.KEY_FIRST_NAME,
-				UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS});
+				UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id"});
 		
 		GamesLeaderResponse gamesLeaderResponse = getGamesLeaderHelper(gameId);
 		if (gamesLeaderResponse == null || !gamesLeaderResponse.wasSuccessful())
@@ -43,7 +43,7 @@ public class GamesLeaderCommunication {
 		Vector<Leader> leaders = gamesLeaderResponse.getLeaders();
 		for (Leader leader: leaders) {
 			cursor.addRow(new Object[] { leader.getFirstName(), leader.getLastName(),
-					leader.getCheckins()});
+					leader.getCheckins(), leader.getId()});
 		}
 		//TODO parse JSON, and fill cursor
 		

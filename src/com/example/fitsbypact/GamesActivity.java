@@ -5,7 +5,9 @@ import java.util.List;
 
 import responses.UserResponse;
 import responses.UsersGamesResponse;
+import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
+import servercommunication.NewsfeedCommunication;
 import servercommunication.UserCommunication;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
@@ -44,8 +46,8 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
-public class GamesActivity extends Activity
-	implements LoaderManager.LoaderCallbacks<Cursor> {
+public class GamesActivity extends Activity {
+//	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "GamesActivity";
 	
@@ -64,9 +66,10 @@ public class GamesActivity extends Activity
 	private List<String> spinnerData;
 	
 	private SimpleCursorAdapter mAdapter;
-	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS};
+	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id"};
 	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
-			R.id.list_item_game_leader_checkins};
+			R.id.list_item_game_leader_checkins, R.id.rank};
+	private int spinnerPosition;
 	
 	private ApplicationUser mApplicationUser;
 	private DatabaseHandler mdbHandler;
@@ -226,6 +229,8 @@ public class GamesActivity extends Activity
 			public void onItemSelected(AdapterView<?> parentView, View view,
 					int position, long id) {
 				//TODO show game states of element clicked on
+				spinnerPosition = position;
+				new CursorDataAsyncTask().execute();
 			}
 
 			@Override
@@ -287,28 +292,28 @@ public class GamesActivity extends Activity
      * @param args
      * @return
      */
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	return new GameLeaderCursorLoader(this);
-    }
-    
-    /**
-     * callback for finishing of loader
-     * @param loader
-     * @param data
-     */
-	@SuppressLint("NewApi")
-	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    	mAdapter.swapCursor(data);
-    }
-    
-    /**
-     * callback for resetting of loader
-     * @param loader
-     */
-    @SuppressLint("NewApi")
-	public void onLoaderReset(Loader<Cursor> loader) {
-    	mAdapter.swapCursor(null);
-    }
+//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+//    	return new GameLeaderCursorLoader(this);
+//    }
+//    
+//    /**
+//     * callback for finishing of loader
+//     * @param loader
+//     * @param data
+//     */
+//	@SuppressLint("NewApi")
+//	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+//    	mAdapter.swapCursor(data);
+//    }
+//    
+//    /**
+//     * callback for resetting of loader
+//     * @param loader
+//     */
+//    @SuppressLint("NewApi")
+//	public void onLoaderReset(Loader<Cursor> loader) {
+//    	mAdapter.swapCursor(null);
+//    }
     
     /** end LoaderManager callbacks **/
     
@@ -333,6 +338,26 @@ public class GamesActivity extends Activity
         		spinnerData.addAll(response.getGames());
         		spinnerDataAdapter.notifyDataSetChanged();
         	}
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
+    	
+        protected Cursor doInBackground(String... params) {
+        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(Integer.parseInt(spinnerData.get(spinnerPosition)));
+        	return cursor;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(Cursor cursor) {
+        	mAdapter.swapCursor(cursor);
+        	mAdapter.notifyDataSetChanged();
+
         }
     }
 }
