@@ -115,7 +115,7 @@
         android:text="@string/league_create_checkbox_text" />
 
     <Button
-        android:id="@+id/league_join_detail_button_faq"
+        android:id="@+id/league_create_faq_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/league_create_button_create"
