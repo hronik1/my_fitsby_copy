@@ -236,7 +236,7 @@ public class MeActivity extends Activity {
         		earningsTV.setText(" $" + stats.getMoneyEarned());
         		
         	} else {
-        		Toast.makeText(MeActivity.this, "Sorry, but the internet could not be reach at the moment, so stats may not be accurate", Toast.LENGTH_LONG).show();
+        		Toast.makeText(MeActivity.this, "Sorry, but the internet could not be reached at the moment, so stats may not be accurate", Toast.LENGTH_LONG).show();
         		earningsTV.setText(" $0");
         	}
         	
