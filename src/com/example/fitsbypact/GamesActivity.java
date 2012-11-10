@@ -412,10 +412,10 @@ public class GamesActivity extends Activity {
 		protected void onPostExecute(PrivateLeagueResponse response) {
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
-        		playersTV.setText(league.getPlayers());
-        		potTV.setText(league.getStakes());
-        		durationTV.setText(league.getDuration());
-        		wagerTV.setText(league.getWager());
+        		playersPromptTV.append(" " + league.getPlayers());
+        		potPromptTV.append(" $" + league.getStakes());
+        		durationPromptTV.append(" " + league.getDuration() + " days");
+        		wagerPromptTV.append(" $" + league.getWager());
         	}
         		
 

@@ -1,7 +1,14 @@
 package com.example.fitsbypact;
 
+import java.util.ArrayList;
+
+import responses.PrivateLeagueResponse;
+import servercommunication.LeagueCommunication;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -11,9 +18,18 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
+
 import com.flurry.android.FlurryAgent;
+
+import dbtables.League;
 
 public class FriendInviteActivity extends Activity {
 
@@ -21,6 +37,10 @@ public class FriendInviteActivity extends Activity {
 	
 	private Button homeButton;
 	private Button inviteButton;
+	
+	private ListView contactsListView;
+	private ArrayList<String> contacts;
+	private ArrayAdapter contactsAdapter;
 	
 	/**
 	 * called when activity is created
@@ -33,6 +53,7 @@ public class FriendInviteActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         initializeButtons(); 
+        initializeListView();
     }
 
     /**
@@ -124,6 +145,26 @@ public class FriendInviteActivity extends Activity {
     	});
     }
     
+    private void initializeListView() {
+		contactsListView = (ListView)findViewById(R.id.invite_friends_list);
+		contacts =  new ArrayList<String>();
+
+		contactsAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, contacts);
+		contactsListView.setAdapter(contactsAdapter);
+		
+		contactsListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parentView, View view, int position,
+					long id) {
+				Toast.makeText(FriendInviteActivity.this, contacts.get(position), Toast.LENGTH_SHORT).show();			
+			}
+			
+		});
+
+    }
+    
     /**
      * invite your friends selected from the content provider
      */
@@ -137,9 +178,7 @@ public class FriendInviteActivity extends Activity {
      */
     private void queryContacts() {
     	//TODO turn this shitty looking throw away code into something beautiful
-    	Toast toast = Toast.makeText(getApplicationContext(), "start", Toast.LENGTH_LONG);
-    	toast.setGravity(Gravity.CENTER, 0, 0);
-    	toast.show();
+    	
     	ContentResolver contentResolver = getContentResolver();
     	Cursor contactsCursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
     			null, null, null, null);
@@ -158,15 +197,13 @@ public class FriendInviteActivity extends Activity {
         								new String[]{id}, null);
         				while (phoneNumberCursor.moveToNext()) {
         					String phoneNumber = phoneNumberCursor.getString(phoneNumberCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
-        					Toast.makeText(getApplicationContext(), phoneNumber, Toast.LENGTH_LONG).show();
+        					contacts.add(phoneNumber);
+        					contactsAdapter.notifyDataSetChanged();
         				} 
         				phoneNumberCursor.close();
         			}
         		}
         	}
-        	toast = Toast.makeText(getApplicationContext(), "end", Toast.LENGTH_LONG);
-        	toast.setGravity(Gravity.CENTER, 0, 0);
-        	toast.show();
         }
     }
     /**
@@ -182,5 +219,23 @@ public class FriendInviteActivity extends Activity {
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	}
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class ContactsAsyncTask extends AsyncTask<String, Void, Void> {
+    	
+        protected Void doInBackground(String... params) {
+        	queryContacts();
+			return null;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute() {
+
+        }
     }
 }
