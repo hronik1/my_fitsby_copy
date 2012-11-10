@@ -31,8 +31,8 @@ public class StatsResponse {
 	public static StatsResponse jsonToStatsResponse(JSONObject json) {
 		try {
 			String status = json.getString("status");
-			String gamesWon = json.getString("game_won");
-			String gamesPlayed = json.getString("game_played");
+			String gamesWon = json.getString("games_won");
+			String gamesPlayed = json.getString("games_played");
 			String moneyEarned = json.getString("money_earned");
 			Stats stats = new Stats(gamesPlayed, gamesWon, moneyEarned);
 			return new StatsResponse(status, stats);

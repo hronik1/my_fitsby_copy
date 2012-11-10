@@ -39,8 +39,8 @@ public class GamesLeaderResponse {
 				JSONObject leader = jsonLeaders.getJSONObject(i);
 				String firstName  = leader.getString("first_name");
 				String lastName = leader.getString("last_name");
-				int checkins = Integer.parseInt(leader.getString("checkins"));
-				String id = leader.getString(i + "");
+				int checkins = Integer.parseInt(leader.getString("successful_checks"));
+				String id = i + "";
 				leaders.add(new Leader(firstName, lastName, checkins, id));
 			}
 			return new GamesLeaderResponse(success, leaders);

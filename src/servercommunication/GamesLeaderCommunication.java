@@ -28,7 +28,7 @@ public class GamesLeaderCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("game_id", gameId+""));
-		ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "leaderboard_stats", nameValuePairs);
+		ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "leaderboard", nameValuePairs);
 		return GamesLeaderResponse.jsonToGamesLeaderResponse(MyHttpClient.parseResponse(serverResponse));
 		
 	}
