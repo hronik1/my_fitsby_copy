@@ -95,7 +95,7 @@ public class LeagueJoinActivity extends FragmentActivity
         super.onStart();
 	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
 	    FlurryAgent.onPageView();
-	    FlurryAgent.logEvent("Game Create Activity");
+	    FlurryAgent.logEvent("Game Join Activity");
         Log.i(TAG, "onStart");
     }
     
@@ -167,7 +167,6 @@ public class LeagueJoinActivity extends FragmentActivity
      */
     private void initializeEditTexts() {
     	etFirstName = (EditText)findViewById(R.id.league_join_et_first_name);
-    	etLastName =(EditText)findViewById(R.id.league_join_et_last_name);
     	etInviteCode = (EditText)findViewById(R.id.league_join_et_invite_code);
     }
     

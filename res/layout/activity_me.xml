@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_settings_tv_change_picture"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="10dp"                
                 android:text="@string/me_settings_button_change_picture_text">
                 
                 <requestFocus/>
@@ -138,6 +138,7 @@
                 android:background="@drawable/white_textbox"       
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"                         
+                android:layout_marginTop="5dp"                         
                 android:layout_below="@+id/me_settings_et_old_password"
                 android:hint="@string/me_settings_et_new_password_hint" />
 
@@ -148,7 +149,8 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/white_textbox"
                 android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"                                
+                android:layout_marginLeft="10dp"               
+                android:layout_marginTop="5dp"                                                          
                 android:layout_below="@+id/me_settings_et_new_password"
                 android:hint="@string/me_settings_et_new_password_confirm_hint" />
 
@@ -160,8 +162,8 @@
                 android:background="@drawable/custom_login_button"
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"                
-                android:layout_marginRight="60dp"                
-                android:layout_marginLeft="60dp"                  
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"                  
                 android:layout_below="@+id/me_settings_et_new_password_confirm"
                 android:text="@string/me_settings_button_submit_text" />
 

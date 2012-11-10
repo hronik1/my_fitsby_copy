@@ -25,7 +25,7 @@
         android:layout_below="@+id/league_join_detail_header"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="16sp"
         android:text="@string/league_join_detail_id_text" />
     
     <TextView
@@ -34,7 +34,7 @@
 		android:layout_height="wrap_content"
 		android:layout_toRightOf="@+id/league_join_detail_id"
 		android:layout_alignTop="@+id/league_join_detail_id"
-        android:textSize="30sp"		
+        android:textSize="16sp"		
 		android:text="@string/league_join_detail_id_data_text" />
 
     <TextView
@@ -45,7 +45,7 @@
         android:layout_below="@+id/league_join_detail_id"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="16sp"
         android:text="@string/league_join_detail_type_text" />
     
     <TextView
@@ -54,7 +54,7 @@
 		android:layout_height="wrap_content"
 		android:layout_toRightOf="@+id/league_join_detail_type"
 		android:layout_alignTop="@+id/league_join_detail_type"
-        android:textSize="30sp"		
+        android:textSize="16sp"		
 		android:text="@string/league_join_detail_type_data_text" />
 
     <TextView
@@ -65,7 +65,7 @@
         android:layout_below="@+id/league_join_detail_type"
         android:layout_marginTop="10dp"
         android:textStyle="bold"        
-        android:textSize="30sp"        
+        android:textSize="16sp"        
         android:text="@string/league_join_detail_wager_text" />
     
     <TextView
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/league_join_detail_wager"
         android:layout_alignTop="@+id/league_join_detail_wager"
-        android:textSize="30sp"        
+        android:textSize="16sp"        
         android:text="@string/league_join_detail_wager_data_text" />
 
     <TextView
@@ -85,7 +85,7 @@
         android:layout_below="@+id/league_join_detail_wager"
         android:layout_marginTop="10dp"
         android:textStyle="bold"       
-        android:textSize="30sp"         
+        android:textSize="16sp"         
         android:text="@string/league_join_detail_pot_text" />
     
     <TextView
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/league_join_detail_pot"
         android:layout_alignTop="@+id/league_join_detail_pot"
-        android:textSize="30sp"        
+        android:textSize="16sp"        
         android:text="@string/league_join_detail_pot_data_text" />
 
     <TextView
@@ -105,7 +105,7 @@
         android:layout_below="@+id/league_join_detail_pot"
         android:layout_marginTop="10dp"
         android:textStyle="bold"       
-        android:textSize="30sp"         
+        android:textSize="16sp"         
         android:text="@string/league_join_detail_players_text" />
     
     <TextView
@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/league_join_detail_players"
         android:layout_alignTop="@+id/league_join_detail_players"
-        android:textSize="30sp"        
+        android:textSize="16sp"        
         android:text="@string/league_join_detail_players_data_text" />
     
     <TextView
@@ -125,7 +125,7 @@
 		android:layout_below="@+id/league_join_detail_players" 
         android:layout_marginTop="10dp"
         android:textStyle="bold"		
-        android:textSize="30sp"        
+        android:textSize="16sp"        
 		android:text="@string/league_join_duration_text"/>
     
     <TextView
@@ -134,32 +134,52 @@
         android:layout_toRightOf="@+id/league_join_detail_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"        
+        android:textSize="16sp"        
         android:text="@string/league_join_duration_data_text" />
-
-    <Button
-        android:id="@+id/league_join_detail_button_faq"
+    
+    <TextView
+        android:id="@+id/game_start_date"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/league_join_detail_duration"
         android:layout_below="@+id/league_join_detail_duration"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
+        android:text="@string/game_start_date"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold" />
+   
+    <TextView
+        android:id="@+id/game_start_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/game_start_date"
+        android:layout_alignBottom="@+id/game_start_date"
+        android:layout_toRightOf="@+id/game_start_date"
+        android:text="@string/game_start_date_value"
+        android:textSize="16sp" />
+   
+    <Button
+        android:id="@+id/league_create_faq_button"
+        android:layout_above="@+id/league_join_detail_button_join"        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
 	    android:background="@drawable/faq_button_background"
         android:textColor="@drawable/faq_button_text"
         android:text="@string/faq_button" />
-
+    
     <Button
         android:id="@+id/league_join_detail_button_join"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/league_join_detail_button_faq"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_login_button"
         android:text="@string/league_join_detail_button_join_text"
         android:textColor="@color/white"
-        android:textSize="30sp" />
-   
+        android:textSize="16sp" />
+
 </RelativeLayout>

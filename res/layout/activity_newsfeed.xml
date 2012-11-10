@@ -13,6 +13,7 @@
         android:id="@+id/newsfeed_list_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_below="@+id/newsfeed_spinner" />
 
     <Button
@@ -46,7 +47,6 @@
         android:layout_alignBottom="@+id/newsfeed_button_submit"
         android:layout_toLeftOf="@+id/newsfeed_button_submit"
         android:background="@drawable/post_status_here_box"
-        android:gravity="center"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:hint="@string/newsfeed_et_comment_hint" >
