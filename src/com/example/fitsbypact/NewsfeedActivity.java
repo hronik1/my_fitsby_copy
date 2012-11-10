@@ -1,6 +1,7 @@
 package com.example.fitsbypact;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import responses.StatusResponse;
@@ -47,8 +48,8 @@ import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
 
-public class NewsfeedActivity extends Activity 
-	implements LoaderManager.LoaderCallbacks<Cursor> {
+public class NewsfeedActivity extends Activity {
+//	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "NewsfeedActivity";
 	
@@ -62,10 +63,11 @@ public class NewsfeedActivity extends Activity
 	private ArrayAdapter<String> spinnerDataAdapter;
 	private List<String> spinnerData;
 	
+	private Cursor newsfeedCursor;
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
 			R.id.list_item_newsfeed_last_name, R.id.list_item_newsfeed_timestamp,
-			R.id.list_item_newsfeed_message };
+			R.id.list_item_newsfeed_message, R.id.list_item_id };
 	
 	private ApplicationUser mApplicationUser;
 	private DatabaseHandler mdbHandler;
@@ -232,7 +234,7 @@ public class NewsfeedActivity extends Activity
 				// TODO add appropriate click functionality here
 			}
 		});
-    	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_newsfeed, null,
+    	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_newsfeed, newsfeedCursor,
     			NewsfeedCursorLoader.FROM_ARGS, toArgs, 0);
     	newsfeedLV.setAdapter(mAdapter);
 	}
@@ -256,6 +258,7 @@ public class NewsfeedActivity extends Activity
 				//TODO show game states of element clicked on
 				//TODO change comments showing to be those of this league
 				spinnerPosition = position;
+				new CursorDataAsyncTask().execute();
 			}
 
 			@Override
@@ -267,35 +270,35 @@ public class NewsfeedActivity extends Activity
 	}
     
     /** LoaderManager callBacks **/
-    
-    /**
-     * 
-     * @param id
-     * @param args
-     * @return
-     */
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    	return new NewsfeedCursorLoader(this, id);
-    }
-    
-    /**
-     * callback for finishing of loader
-     * @param loader
-     * @param data
-     */
-    @SuppressLint("NewApi")
-	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    	mAdapter.swapCursor(data);
-    }
-    
-    /**
-     * callback for resetting of loader
-     * @param loader
-     */
-    @SuppressLint("NewApi")
-	public void onLoaderReset(Loader<Cursor> loader) {
-    	mAdapter.swapCursor(null);
-    }
+//    
+//    /**
+//     * 
+//     * @param id
+//     * @param args
+//     * @return
+//     */
+//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+//    	return new NewsfeedCursorLoader(this, id);
+//    }
+//    
+//    /**
+//     * callback for finishing of loader
+//     * @param loader
+//     * @param data
+//     */
+//    @SuppressLint("NewApi")
+//	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+//    	mAdapter.swapCursor(data);
+//    }
+//    
+//    /**
+//     * callback for resetting of loader
+//     * @param loader
+//     */
+//    @SuppressLint("NewApi")
+//	public void onLoaderReset(Loader<Cursor> loader) {
+//    	mAdapter.swapCursor(null);
+//    }
     
     /** end LoaderManager callbacks **/
     
@@ -306,13 +309,13 @@ public class NewsfeedActivity extends Activity
      */
     private class AddCommentAsyncTask extends AsyncTask<String, Void, StatusResponse> {
         protected StatusResponse doInBackground(String... params) {
-        	StatusResponse response = NewsfeedCommunication.addComment(params[0], params[1], params[2]);
+        	StatusResponse response = NewsfeedCommunication.addComment(params[0], params[1], params[2], Calendar.getInstance().getTime().toString());
         	return response;
         }
 
         protected void onPostExecute(StatusResponse response) {
         	if (response.wasSuccessful()) {
-        		Toast.makeText(getApplicationContext(), "comment successful", Toast.LENGTH_LONG).show();
+        		//Toast.makeText(getApplicationContext(), "comment successful", Toast.LENGTH_LONG).show();
         	} else {
         		Toast.makeText(getApplicationContext(), "comment fail", Toast.LENGTH_LONG).show();
         	}
@@ -340,7 +343,28 @@ public class NewsfeedActivity extends Activity
         		//TODO switch to next page
         		spinnerData.addAll(response.getGames());
         		spinnerDataAdapter.notifyDataSetChanged();
+        		new CursorDataAsyncTask().execute();
         	}
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
+    	
+        protected Cursor doInBackground(String... params) {
+        	Cursor cursor = NewsfeedCommunication.getNewsfeed(Integer.parseInt(spinnerData.get(spinnerPosition)));
+        	return cursor;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(Cursor cursor) {
+        	mAdapter.swapCursor(cursor);
+        	mAdapter.notifyDataSetChanged();
+
         }
     }
 }

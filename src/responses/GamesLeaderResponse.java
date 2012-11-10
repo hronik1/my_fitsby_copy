@@ -40,7 +40,8 @@ public class GamesLeaderResponse {
 				String firstName  = leader.getString("first_name");
 				String lastName = leader.getString("last_name");
 				int checkins = Integer.parseInt(leader.getString("checkins"));
-				leaders.add(new Leader(firstName, lastName, checkins));
+				String id = leader.getString(i + "");
+				leaders.add(new Leader(firstName, lastName, checkins, id));
 			}
 			return new GamesLeaderResponse(success, leaders);
 		} catch (JSONException e) {

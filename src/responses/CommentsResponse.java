@@ -42,8 +42,9 @@ public class CommentsResponse {
 				String lastName = jsonComment.getString("last_name");
 				int id = Integer.parseInt(jsonComment.getString("user_id"));
 				String message = jsonComment.getString("message");
-				Timestamp stamp = Timestamp.valueOf(jsonComment.getString("stamp"));
-				comments.add(new Comment(id, firstName, lastName, message, stamp));
+				String stamp = jsonComment.getString("stamp");
+				String _id = jsonComment.getString("_id");
+				comments.add(new Comment(id, firstName, lastName, message, stamp, _id));
 			}
 			return new CommentsResponse(success, comments);
 		} catch (IllegalArgumentException e) {
