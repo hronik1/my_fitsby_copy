@@ -65,6 +65,18 @@ public class LeagueCommunication {
 		}
 	}
 	
+	public static PrivateLeagueResponse getSingleGame(String id) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        try {  
+	        nameValuePairs.add(new BasicNameValuePair("game_id", id));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "single_game_info", nameValuePairs);
+			return PrivateLeagueResponse.jsonToPrivateLeagueResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new PrivateLeagueResponse(e.toString(), null);
+		}
+	}
 	public static Cursor getPublicLeagues() {
 		MatrixCursor cursor = new MatrixCursor(PublicLeaguesCursorLoader.FROM_ARGS);
 		PublicLeaguesResponse publicLeaguesResponse = getPublicLeaguesHelper();

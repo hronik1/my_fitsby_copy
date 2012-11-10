@@ -30,11 +30,13 @@ public class UsersGamesResponse {
 	public static UsersGamesResponse jsonToGamesResponse(JSONObject json) {
 		try {
 			String status = json.getString("status");
-			JSONArray jsonArray = json.getJSONArray("games_user_is_in");
 			List<String> games = new ArrayList<String>();
-			int length = jsonArray.length();
-			for (int i = 0; i < length; i++) {
-				games.add(jsonArray.get(i).toString());
+			if (status.equals("okay")) {
+				JSONArray jsonArray = json.getJSONArray("games_user_is_in");
+				int length = jsonArray.length();
+				for (int i = 0; i < length; i++) {
+					games.add(jsonArray.get(i).toString());
+				}
 			}
 			return new UsersGamesResponse(status, games);
 		} catch (Exception e) {

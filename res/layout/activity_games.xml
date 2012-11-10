@@ -57,6 +57,17 @@
         android:text="@string/games_pot_prompt_text"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/games_no_games_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/games_duration_prompt"
+        android:layout_below="@+id/games_pot_prompt"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/games_no_games_prompt_text"
+        android:textStyle="bold" />
+    
     <ProgressBar
         android:id="@+id/games_progress_bar"
         style="@android:style/Widget.ProgressBar.Horizontal"
@@ -90,7 +101,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="3dp"
-        android:text="Started 9/10/2012 - 12 days left"
+        android:text=""
         android:textSize="14sp"
         android:textStyle="bold" />
 
@@ -128,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_player_prompt"
         android:layout_toRightOf="@+id/games_wager_prompt"
-        android:text="10" />
+        android:text="" />
 
     <TextView
         android:id="@+id/input_wager"
@@ -136,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_wager_prompt"
         android:layout_toRightOf="@+id/games_wager_prompt"
-        android:text="$5" />
+        android:text="" />
 
     <TextView
         android:id="@+id/input_duration"
@@ -144,7 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_duration_prompt"
         android:layout_toRightOf="@+id/games_player_prompt"
-        android:text="2 weeks" />
+        android:text="" />
 
     <TextView
         android:id="@+id/input_pot"
@@ -152,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_pot_prompt"
         android:layout_toRightOf="@+id/games_pot_prompt"
-        android:text="$200" />
+        android:text="" />
 
     <Button
         android:id="@+id/games_button_newgame"

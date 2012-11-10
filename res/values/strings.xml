@@ -83,9 +83,9 @@
     <string name="title_activity_check_in">Check In</string>
     <string name="title_activity_me">Me</string>
     <string name="me_imageview_desc">me_imageview_desc</string>
-    <string name="me_textview_join_date_text">Date Joined: Aug. 8, 2012</string>
+    <string name="me_textview_join_date_text">Date Joined: </string>
     <string name="me_textview_name_text">Brent</string>
-    <string name="me_textview_total_money_earned_money_text">$160</string>
+    <string name="me_textview_total_money_earned_money_text"></string>
     <string name="me_textview_total_money_earned_prompt_text">Total Money Earned: </string>
     <string name="newsfeed_button_submit_text">Submit</string>
     <string name="newsfeed_et_comment_hint">Post a status here</string>
@@ -95,6 +95,7 @@
     <string name="games_pot_prompt_text">Stakes: </string>
     <string name="games_leader_prompt_text">Leaderboard</string>
     <string name="games_button_newgame_text">Add New Game</string>
+    <string name="games_no_games_prompt_text">Have fun, join a game!</string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>
     <string name="invite_friends_button">Invite Friends \n to Current Game</string>

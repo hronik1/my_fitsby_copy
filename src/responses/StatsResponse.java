@@ -34,7 +34,10 @@ public class StatsResponse {
 			String gamesWon = json.getString("games_won");
 			String gamesPlayed = json.getString("games_played");
 			String moneyEarned = json.getString("money_earned");
-			Stats stats = new Stats(gamesPlayed, gamesWon, moneyEarned);
+			String joinedMonth = json.getString("joined_month");
+			String joinedDay = json.getString("joined_day");
+			String joinedYear = json.getString("joined_year");
+			Stats stats = new Stats(gamesPlayed, gamesWon, moneyEarned, joinedMonth, joinedDay, joinedYear);
 			return new StatsResponse(status, stats);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

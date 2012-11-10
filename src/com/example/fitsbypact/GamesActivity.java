@@ -3,6 +3,7 @@ package com.example.fitsbypact;
 import java.util.ArrayList;
 import java.util.List;
 
+import responses.PrivateLeagueResponse;
 import responses.UserResponse;
 import responses.UsersGamesResponse;
 import servercommunication.GamesLeaderCommunication;
@@ -17,6 +18,7 @@ import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbhandlers.UserTableHandler;
+import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
 import widgets.NavigationBar;
@@ -53,9 +55,16 @@ public class GamesActivity extends Activity {
 	
 	private NavigationBar navigation;
 	
+	private TextView playersPromptTV;
+	private TextView durationPromptTV;
+	private TextView wagerPromptTV;
+	private TextView potPromptTV;
+	private TextView noGamesPromptTV;
+	
 	private TextView playersTV;
 	private TextView wagerTV;
 	private TextView durationTV;
+	private TextView potTV;
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
@@ -190,9 +199,16 @@ public class GamesActivity extends Activity {
 	 * initialize the text views
 	 */
 	private void initializeTextViews() {
-		playersTV = (TextView)findViewById(R.id.games_player_prompt);
-		wagerTV = (TextView)findViewById(R.id.games_wager_prompt);
-		durationTV = (TextView)findViewById(R.id.games_duration_prompt);
+		playersTV = (TextView)findViewById(R.id.input_players);
+		wagerTV = (TextView)findViewById(R.id.input_wager);
+		durationTV = (TextView)findViewById(R.id.input_duration);
+		potTV = (TextView)findViewById(R.id.input_pot);
+		
+		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
+		wagerPromptTV = (TextView)findViewById(R.id.games_wager_prompt);
+		durationPromptTV = (TextView)findViewById(R.id.games_duration_prompt);
+		potPromptTV = (TextView)findViewById(R.id.games_pot_prompt);
+		noGamesPromptTV = (TextView)findViewById(R.id.games_no_games_prompt);
 	}
 	
 	/**
@@ -231,6 +247,7 @@ public class GamesActivity extends Activity {
 				//TODO show game states of element clicked on
 				spinnerPosition = position;
 				new CursorDataAsyncTask().execute();
+				new GameInfoAsyncTask().execute();
 			}
 
 			@Override
@@ -284,6 +301,18 @@ public class GamesActivity extends Activity {
 			toast.show();
 		} 
 	}
+	
+	private void disableGamesPrompts() {
+		playersPromptTV.setText("");
+		wagerPromptTV.setText("");
+		durationPromptTV.setText("");
+		potPromptTV.setText("");
+	}
+	
+	private void disableNoGamesPrompts() {
+		noGamesPromptTV.setText("");
+	}
+	
     /** LoaderManager callBacks **/
     
     /**
@@ -333,10 +362,16 @@ public class GamesActivity extends Activity {
         		Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG).show();
         	} else if (!response.wasSuccessful()){
         		Toast.makeText(getApplicationContext(), "Sorry, but could not get game data", Toast.LENGTH_LONG).show();
+        		disableGamesPrompts();
         	} else {
         		//TODO switch to next page
-        		spinnerData.addAll(response.getGames());
+        		List<String> games = response.getGames();
+        		if (games == null || games.size() == 0) {
+        			disableGamesPrompts();
+        		}
+        		spinnerData.addAll(games);
         		spinnerDataAdapter.notifyDataSetChanged();
+        		disableNoGamesPrompts();
         	}
         }
     }
@@ -357,6 +392,32 @@ public class GamesActivity extends Activity {
 		protected void onPostExecute(Cursor cursor) {
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
+
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class GameInfoAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
+    	
+        protected PrivateLeagueResponse doInBackground(String... params) {
+        	PrivateLeagueResponse response = LeagueCommunication.getSingleGame(spinnerData.get(spinnerPosition));
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(PrivateLeagueResponse response) {
+        	if (response.wasSuccessful()) {
+        		League league = response.getLeague();
+        		playersTV.setText(league.getPlayers());
+        		potTV.setText(league.getStakes());
+        		durationTV.setText(league.getDuration());
+        		wagerTV.setText(league.getWager());
+        	}
+        		
 
         }
     }

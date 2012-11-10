@@ -234,6 +234,7 @@ public class MeActivity extends Activity {
         	if (response.wasSuccessful()) {
         		Stats stats = response.getStats();
         		earningsTV.setText(" $" + stats.getMoneyEarned());
+        		joinTV.append(" " + stats.getJoinedMonth() + ", " + stats.getJoinedDay() + ", " + stats.getJoinedYear());
         		
         	} else {
         		Toast.makeText(MeActivity.this, "Sorry, but the internet could not be reached at the moment, so stats may not be accurate", Toast.LENGTH_LONG).show();
