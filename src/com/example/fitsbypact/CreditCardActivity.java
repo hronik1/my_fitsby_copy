@@ -5,6 +5,7 @@ import java.util.Map;
 
 import responses.StatusResponse;
 import servercommunication.CreditCardCommunication;
+import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;
 
 import bundlekeys.CreditCardBundleKeys;
@@ -200,11 +201,13 @@ public class CreditCardActivity extends Activity {
      * sends credit card info to server
      */
     private void sendCreditCard() {
-    	String number = numberET.getText().toString();
-    	String expYear = expYearET.getText().toString(); 
-    	String cvc = cvcET.getText().toString();
-    	String expMonth = expMonthET.getText().toString(); 
-    	new SendCreditCardAsyncTask().execute(mUser.getID()+"", number, expMonth, expYear, cvc);
+    	ApplicationUser appData = (ApplicationUser)getApplicationContext();
+    	if (appData.getCreate()) {
+    		new CreateLeagueAsyncTask().execute(appData.getUserId()+"", appData.getDuration()+"",
+    				appData.getIsPrivate()+"", appData.getWager()+"", appData.getFirstName());
+    	} else if (appData.getJoin()) {
+    		new JoinLeagueAsyncTask().execute(appData.getUserId(), appData.getLeagueId());
+    	}
     	
     }
     
@@ -230,4 +233,55 @@ public class CreditCardActivity extends Activity {
         }
     }
     
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
+        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]),
+        			numberET.getText().toString(), expYearET.getText().toString(), expMonthET.getText().toString(),
+        			cvcET.getText().toString());
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	if (response == null ) {
+        		Log.e(TAG, "no response");
+        	} else if (!response.wasSuccessful()){
+        		Log.e(TAG, "response fail");
+        	} else {
+            	if (response.wasSuccessful()) {
+            		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
+            		startActivity(intent);
+            	} else {
+            		Toast.makeText(CreditCardActivity.this, "Sorry, your card could not be processed. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG).show();
+            	}
+        	}
+
+        }
+    }
+    
+    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+        protected StatusResponse doInBackground(Integer... params) {
+        	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1],
+        			numberET.getText().toString(), expYearET.getText().toString(), expMonthET.getText().toString(),
+        			cvcET.getText().toString());
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	if (response.wasSuccessful()) {
+        		try {
+            		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
+            		startActivity(intent);
+        		} catch(Exception e) {
+        		}
+        	} else {
+        		Toast.makeText(CreditCardActivity.this, "Sorry, your card could not be processed. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG).show();
+        	}
+        }
+    }
 }

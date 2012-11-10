@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.telephony.SmsManager;
 
 import com.flurry.android.FlurryAgent;
 
@@ -158,7 +159,9 @@ public class FriendInviteActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parentView, View view, int position,
 					long id) {
-				Toast.makeText(FriendInviteActivity.this, contacts.get(position), Toast.LENGTH_SHORT).show();			
+				
+			    SmsManager smsManager = SmsManager.getDefault();
+			    smsManager.sendTextMessage(contacts.get(position), null, "Hey, check out the awesome fitness app, Fitsby. It's legit!", null, null);
 			}
 			
 		});

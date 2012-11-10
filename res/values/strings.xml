@@ -96,6 +96,10 @@
     <string name="games_leader_prompt_text">Leaderboard</string>
     <string name="games_button_newgame_text">Add New Game</string>
     <string name="games_no_games_prompt_text">Have fun, join a game!</string>
+    <string name="input_pot"></string>
+    <string name="input_duration"></string>
+    <string name="input_players"></string>
+    <string name="input_wager"></string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>
     <string name="invite_friends_button">Invite Friends \n to Current Game</string>

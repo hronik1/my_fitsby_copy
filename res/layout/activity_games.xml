@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_player_prompt"
         android:layout_toRightOf="@+id/games_wager_prompt"
-        android:text="" />
+        android:text="@string/input_players" />
 
     <TextView
         android:id="@+id/input_wager"
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_wager_prompt"
         android:layout_toRightOf="@+id/games_wager_prompt"
-        android:text="" />
+        android:text="@string/input_wager" />
 
     <TextView
         android:id="@+id/input_duration"
@@ -155,7 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_duration_prompt"
         android:layout_toRightOf="@+id/games_player_prompt"
-        android:text="" />
+        android:text="@string/input_duration" />
 
     <TextView
         android:id="@+id/input_pot"
@@ -163,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_pot_prompt"
         android:layout_toRightOf="@+id/games_pot_prompt"
-        android:text="" />
+        android:text="@string/input_pot" />
 
     <Button
         android:id="@+id/games_button_newgame"

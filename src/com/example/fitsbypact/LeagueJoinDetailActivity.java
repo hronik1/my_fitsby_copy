@@ -229,8 +229,13 @@ public class LeagueJoinDetailActivity extends Activity {
  		
 //		LeagueMember member = new LeagueMember(leagueId, mApplicationUser.getUser().getID());
 //		mLeagueMemberTableHandler.addLeagueMember(member);
- 		new JoinLeagueAsyncTask().execute(mApplicationUser.getUser().getID(), leagueId);
- 	
+// 		new JoinLeagueAsyncTask().execute(mApplicationUser.getUser().getID(), leagueId);
+ 		ApplicationUser appData = (ApplicationUser)getApplicationContext();
+ 		appData.setJoin();
+ 		appData.setUserId(mApplicationUser.getUser().getID());
+ 		appData.setLeagueId(leagueId);
+ 		Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
+ 		startActivity(intent);
  	}
  	
  	/**
@@ -247,27 +252,27 @@ public class LeagueJoinDetailActivity extends Activity {
      * @author brent
      *
      */
-    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
-        protected StatusResponse doInBackground(Integer... params) {
-        	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1]);
-        	return response;
-        }
-
-        protected void onPostExecute(StatusResponse response) {
-        	if (response.wasSuccessful()) {
-        		try {
-        			Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
-        			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
-        			startActivity(intent);
-        		} catch(Exception e) {
-        			//TODO handle failure more robustly
-        			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
-        			toast.setGravity(Gravity.CENTER, 0, 0);
-        			toast.show();
-        		}
-        	} else {
-        		Toast.makeText(getApplicationContext(), "You are already in this game", Toast.LENGTH_LONG).show();
-        	}
-        }
-    }
+//    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+//        protected StatusResponse doInBackground(Integer... params) {
+//        	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1]);
+//        	return response;
+//        }
+//
+//        protected void onPostExecute(StatusResponse response) {
+//        	if (response.wasSuccessful()) {
+//        		try {
+//        			Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
+//        			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
+//        			startActivity(intent);
+//        		} catch(Exception e) {
+//        			//TODO handle failure more robustly
+//        			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
+//        			toast.setGravity(Gravity.CENTER, 0, 0);
+//        			toast.show();
+//        		}
+//        	} else {
+//        		Toast.makeText(getApplicationContext(), "You are already in this game", Toast.LENGTH_LONG).show();
+//        	}
+//        }
+//    }
 }

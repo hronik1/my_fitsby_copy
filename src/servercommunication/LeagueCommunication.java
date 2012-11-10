@@ -99,15 +99,19 @@ public class LeagueCommunication {
 	 * @param creatorId
 	 * @return
 	 */
-	public static StatusResponse createLeague(int creatorId, int duration, boolean isPrivate, int wager, String creatorFirstName) {
+	public static StatusResponse createLeague(int creatorId, int duration, boolean isPrivate, int wager, String cardNumber, String expYear, String expMonth, String cvc) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
-			json.put("creator_id", creatorId);
+			json.put("user_id", creatorId);
 			json.put("duration", duration);
 			json.put("is_private", isPrivate);
 			json.put("wager", wager);
-			json.put("creator_first_name", creatorFirstName);
+			//json.put("creator_first_name", creatorFirstName);
+			json.put("credit_card_number", cardNumber);
+			json.put("credit_card_exp_month", expMonth);
+			json.put("credit_card_exp_year", expYear);
+			json.put("credit_card_cvc", cvc);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "create_game", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
@@ -126,12 +130,16 @@ public class LeagueCommunication {
 	 * @param gameId
 	 * @return
 	 */
-	public static StatusResponse joinLeague(int userId, int gameId) {
+	public static StatusResponse joinLeague(int userId, int gameId, String cardNumber, String expYear, String expMonth, String cvc) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", userId);
 			json.put("game_id", gameId);
+			json.put("credit_card_number", cardNumber);
+			json.put("credit_card_exp_month", expMonth);
+			json.put("credit_card_exp_year", expYear);
+			json.put("credit_card_cvc", cvc);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "join_game", stringEntity);
