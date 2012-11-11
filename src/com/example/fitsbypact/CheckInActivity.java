@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -275,7 +276,9 @@ public class CheckInActivity extends Activity {
 			showAlertDialog(); 
 		} else {
 			LocationListener listener = new LocationListener() {
-				public void onLocationChanged(Location location) {}
+				public void onLocationChanged(Location location) {
+					Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_SHORT).show();
+				}
 
 				public void onStatusChanged(String provider, int status, Bundle extras) {}
 
@@ -283,11 +286,34 @@ public class CheckInActivity extends Activity {
 
 				public void onProviderDisabled(String provider) {}
 			};
-			
+			List<String> matchingProviders = service.getAllProviders();
+			Location bestResult = service.getLastKnownLocation(matchingProviders.get(0));
+			float bestAccuracy = Float.MAX_VALUE;
+			long bestTime = Long.MIN_VALUE;
+			long minTime = Long.MAX_VALUE;
+			for (String provider: matchingProviders) {
+			  Location location = service.getLastKnownLocation(provider);
+			  if (location != null) {
+			    float accuracy = location.getAccuracy();
+			    long time = location.getTime();
+			        
+			    if ((time > minTime && accuracy < bestAccuracy)) {
+			      bestResult = location;
+			      bestAccuracy = accuracy;
+			      bestTime = time;
+			    }
+			    else if (time < minTime && 
+			             bestAccuracy == Float.MAX_VALUE && time > bestTime){
+			      bestResult = location;
+			      bestTime = time;
+			    }
+			  }
+			}
+			Toast.makeText(getApplicationContext(), bestResult.toString(), Toast.LENGTH_LONG).show();
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
-			Location location = service.getLastKnownLocation(LOCATION_SERVICE);
-			double latitude = location.getLatitude();
-			double longitude = location.getLongitude();
+//			Location location = service.getLastKnownLocation(LOCATION_SERVICE);
+			double latitude = bestResult.getLatitude();
+			double longitude = bestResult.getLongitude();
 			String uri = buildPlacesUri(latitude, longitude, DEFAULT_PLACES_RADIUS, true);
 			JSONObject jsonObject = jsonFromStringUri(uri);
 			boolean success = checkinSuccesful(jsonObject);
@@ -399,9 +425,9 @@ public class CheckInActivity extends Activity {
 		try {
 			// defaultHttpClient
 			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpPost httpPost = new HttpPost(uriString);
+			HttpGet httpGet = new HttpGet(uriString);
 
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = httpClient.execute(httpGet);
 			HttpEntity httpEntity = httpResponse.getEntity();
 			inputStream = httpEntity.getContent();          
 
