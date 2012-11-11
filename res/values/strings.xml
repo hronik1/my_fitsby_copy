@@ -34,7 +34,7 @@
     <string name="league_landing_join_text">Join A Game</string>
     <string name="title_activity_league_create">Create A Game</string>
     <string name="league_create_create_text">Create Game</string>
-    <string name="league_create_tv_wager_text">Wager (how much you agree to risk):</string>
+    <string name="league_create_tv_wager_text">Wager (how much you agree to pay if you lose):</string>
     <string name="league_create_tv_days_text">Duration (in days):</string>
     <string name="league_create_ib_wager_plus">+</string>
     <string name="league_create_ib_wager_minus">-</string>
@@ -89,10 +89,11 @@
     <string name="me_textview_total_money_earned_prompt_text">Total Money Earned: </string>
     <string name="newsfeed_button_submit_text">Submit</string>
     <string name="newsfeed_et_comment_hint">Post a status here</string>
-    <string name="games_duration_prompt_text">Duration:</string>
+    <string name="games_duration_prompt_text">Duration: </string>
     <string name="games_wager_prompt_text">Wager:</string>
-    <string name="games_player_prompt_text">Players:</string>
+    <string name="games_player_prompt_text">Players: </string>
     <string name="games_pot_prompt_text">Stakes:</string>
+    <string name="games_start_date_prompt_text">Start Date: </string>
     <string name="games_leader_prompt_text">Leaderboard</string>
     <string name="games_button_newgame_text">Add New Game</string>
     <string name="games_no_games_prompt_text">Looks like you\'re currently not in any games! Tap the blue button on the right to start a new game.</string>
@@ -174,7 +175,7 @@
     <string name="faq_button">Read the FAQ</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     
-    <string name="game_start_date">Start Date: </string>
+    <string name="game_start_date">Start Date:  </string>
     <string name="game_start_date_value">10/12/2012</string>
     
 	

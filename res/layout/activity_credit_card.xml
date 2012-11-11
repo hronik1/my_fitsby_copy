@@ -111,7 +111,7 @@
 
         <TextView
             android:id="@+id/horizontal_div"
-            android:layout_below="@+id/credit_card_et_card_cvc"
+            android:layout_below="@+id/stripe_cards"
 			android:layout_width="fill_parent"
 			android:layout_marginTop="20dp"
 			android:layout_marginLeft="10dp"
@@ -131,7 +131,7 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
         
-                <Button
+        <Button
             android:id="@+id/credit_card_button_submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -167,7 +167,15 @@
             android:textSize="20sp"
             android:layout_marginRight="5dp"
             android:textStyle="bold" />
-        
+
+        <ImageView
+            android:id="@+id/stripe_cards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_alignLeft="@+id/credit_card_et_expire_month"
+            android:layout_below="@+id/credit_card_et_expire_month"
+            android:src="@drawable/stripe_cards" />
 
     </RelativeLayout>
 

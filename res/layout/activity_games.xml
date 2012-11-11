@@ -10,7 +10,7 @@
         android:layout_below="@+id/games_navigation_bar"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textStyle="bold" />
 
     <TextView
@@ -19,8 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/games_spinner"
         android:layout_below="@+id/games_spinner"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:text="@string/games_player_prompt_text"
         android:textStyle="bold" />
 
@@ -30,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/games_player_prompt"
         android:layout_below="@+id/games_player_prompt"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:text="@string/games_wager_prompt_text"
         android:textStyle="bold" />
@@ -41,7 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/games_wager_prompt"
         android:layout_below="@+id/games_wager_prompt"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:text="@string/games_pot_prompt_text"
         android:textStyle="bold" />    
@@ -52,9 +48,18 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/games_pot_prompt"
         android:layout_below="@+id/games_pot_prompt"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="5dp"  
         android:text="@string/games_duration_prompt_text"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/games_start_date_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/games_duration_prompt"
+        android:layout_below="@+id/games_duration_prompt"
+        android:layout_marginTop="5dp"
+        android:text="@string/games_start_date_prompt_text"
         android:textStyle="bold" />
     
     <ProgressBar
@@ -63,7 +68,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/games_button_newgame"
+        android:layout_below="@+id/games_start_date_prompt"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp" />
@@ -168,8 +173,8 @@
         android:layout_marginTop="5dp"
         android:textColor="@color/white"
         android:layout_marginRight="10dp" />
-    
-    <TextView
+    
+     <TextView
         android:id="@+id/games_no_games_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -179,6 +184,7 @@
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/invite_friends_button"
         android:text="@string/games_no_games_prompt_text"
-        android:textStyle="bold" />
+        android:textStyle="bold" />
+    
 
 </RelativeLayout>
