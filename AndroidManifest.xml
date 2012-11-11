@@ -62,7 +62,8 @@
         <activity
             android:name=".CreditCardActivity"
             android:label="@string/title_activity_credit_card"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".FriendInviteActivity"
@@ -72,7 +73,8 @@
         <activity
             android:name=".LeagueJoinActivity"
             android:label="@string/title_activity_league_join"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name=".GamesActivity"
@@ -82,7 +84,8 @@
         <activity
             android:name=".NewsfeedActivity"
             android:label="@string/title_activity_newsfeed"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".CheckInActivity"
@@ -92,7 +95,8 @@
         <activity
             android:name=".MeActivity"
             android:label="@string/title_activity_me"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".LeagueJoinDetailActivity"

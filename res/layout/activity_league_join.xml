@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="match_parent" >
     <EditText
         android:id="@+id/league_join_et_first_name"
         android:layout_width="wrap_content"
@@ -15,8 +14,7 @@
         android:layout_toLeftOf="@+id/league_join_et_invite_code"
         android:background="@drawable/white_textbox"
         android:hint="@string/league_join_et_first_name_hint"
-        android:textSize="14sp" />
-
+        android:textSize="14sp" />
     <EditText
         android:id="@+id/league_join_et_invite_code"
         android:layout_width="wrap_content"
@@ -43,7 +41,6 @@
         android:textColor="@color/white"
         android:textSize="14sp"        
         android:text="@string/league_join_button_submit_text">
-        <requestFocus/>
    </Button>
     
     <TextView
@@ -163,6 +160,5 @@
         android:text="@string/search_for_a_game"
         android:textSize="16sp"
         android:textStyle="bold" />
-
 
 </RelativeLayout>
