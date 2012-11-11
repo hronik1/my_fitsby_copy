@@ -28,7 +28,6 @@
         android:textColor="@color/white" 
         android:textSize="14sp"
         android:layout_marginRight="10dp" >
-        <requestFocus/>
     </Button>
 
     <widgets.NavigationBar

@@ -104,8 +104,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"                
                 android:text="@string/me_settings_button_change_picture_text">
-                
-                <requestFocus/>
             </Button>
 
             <TextView
@@ -178,7 +176,8 @@
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"                
                 android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"                  
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"                  
                 android:layout_below="@+id/me_settings_button_submit"
                 android:text="@string/me_settings_button_logout_text" />
         </RelativeLayout>

@@ -22,7 +22,8 @@
         android:layout_above="@+id/friend_invite_button_invite"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:id="@+id/friend_invite_button_home"
@@ -30,6 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"        
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_login_button"
         android:text="@string/friend_invite_button_home_text"
         android:textColor="@color/white" />
@@ -40,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/friend_invite_button_home"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="@string/or_invite_them_later_text" />
 
@@ -51,6 +55,8 @@
         android:layout_above="@+id/or_invite_them_later_text"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="14dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/custom_login_button"
         android:text="@string/friend_invite_button_invite_text"
         android:textColor="@color/white" />
