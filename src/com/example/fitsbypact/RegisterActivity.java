@@ -170,7 +170,7 @@ public class RegisterActivity extends Activity {
     							toast.show();
     						} 
     					} else {
-    						Toast toast = Toast.makeText(RegisterActivity.this, "sorry error occured", Toast.LENGTH_LONG);
+    						Toast toast = Toast.makeText(RegisterActivity.this, "Sorry, but an error occured", Toast.LENGTH_LONG);
     						toast.setGravity(Gravity.CENTER, 0, 0);
     						toast.show();
     					}
@@ -229,7 +229,7 @@ public class RegisterActivity extends Activity {
     	}
 
     	if (!comm.isInternetConnected()) {
-    		Toast toast = Toast.makeText(RegisterActivity.this, "Sorry, no internet. Please try again",
+    		Toast toast = Toast.makeText(RegisterActivity.this, "Sorry, there doesn't appear to be an internet connection. Please try again later",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();

@@ -359,7 +359,9 @@ public class CheckInActivity extends Activity {
     					  startActivity(intent);
     					} catch (Exception e) {
     						//TODO make a more better error message
-    						Toast.makeText(CheckInActivity.this, "Sorry could not change your GPS at the moment", Toast.LENGTH_LONG).show();
+    						Toast toast = Toast.makeText(CheckInActivity.this, "Sorry, but it seems we can't track your location at this moment", Toast.LENGTH_LONG);
+    						toast.setGravity(Gravity.CENTER, 0, 0);
+    						toast.show();
     					}
     				}
     			})
@@ -506,9 +508,13 @@ public class CheckInActivity extends Activity {
 
         protected void onPostExecute(StatusResponse response) {
         	if (response.wasSuccessful()) {
-        		Toast.makeText(getApplicationContext(), "checkin success", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Check-in successful!", Toast.LENGTH_LONG); //changed from 'checkin success'
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else {
-        		Toast.makeText(getApplicationContext(), "checkin failed", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Check-in failed!", Toast.LENGTH_LONG); // changed from 'checkin failed'
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	}
         	
         }
@@ -527,9 +533,13 @@ public class CheckInActivity extends Activity {
 
         protected void onPostExecute(StatusResponse response) {
         	if (response.wasSuccessful()) {
-        		Toast.makeText(getApplicationContext(), "checkout success", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Check-out successful!", Toast.LENGTH_LONG); // changed from 'checkout success'
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else {
-        		Toast.makeText(getApplicationContext(), "checkout failed", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Check-out failed!", Toast.LENGTH_LONG); // changed from 'checkout failed'
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	}
         	
         }

@@ -191,9 +191,11 @@ public class CreditCardActivity extends Activity {
     	String expYear = expYearET.getText().toString();
     	String cvc = cvcET.getText().toString();
     	
-    	if (number.equals("") || expMonth.equals("") || expYear.equals("") || cvc.equals(""))
-    		Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
-    	else
+    	if (number.equals("") || expMonth.equals("") || expYear.equals("") || cvc.equals("")) {
+    		Toast toast = Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+    	} else
     		sendCreditCard();
     }
     
@@ -228,7 +230,9 @@ public class CreditCardActivity extends Activity {
         		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
         		startActivity(intent);
         	} else {
-        		Toast.makeText(CreditCardActivity.this, "Sorry, your card could not be processed. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	}
         }
     }
@@ -257,7 +261,9 @@ public class CreditCardActivity extends Activity {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
             		startActivity(intent);
             	} else {
-            		Toast.makeText(CreditCardActivity.this, "Sorry, your card could not be processed. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG).show();
+            		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+            		toast.show();
             	}
         	}
 
@@ -280,7 +286,9 @@ public class CreditCardActivity extends Activity {
         		} catch(Exception e) {
         		}
         	} else {
-        		Toast.makeText(CreditCardActivity.this, "Sorry, your card could not be processed. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	}
         }
     }

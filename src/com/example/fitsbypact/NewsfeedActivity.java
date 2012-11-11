@@ -207,7 +207,7 @@ public class NewsfeedActivity extends Activity {
 	private void submit() {
 		if(spinnerData == null || spinnerData.size() == 0) {
 			//TODO maybe do something more robust
-			Toast toast = Toast.makeText(getApplicationContext(), "sorry no leagues", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there are no games", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		}
@@ -317,7 +317,9 @@ public class NewsfeedActivity extends Activity {
         	if (response.wasSuccessful()) {
         		//Toast.makeText(getApplicationContext(), "comment successful", Toast.LENGTH_LONG).show();
         	} else {
-        		Toast.makeText(getApplicationContext(), "comment fail", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Posting your comment failed", Toast.LENGTH_LONG); //changed from 'comment fail' as the toast
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	}
         	
         }
@@ -336,9 +338,13 @@ public class NewsfeedActivity extends Activity {
 
         protected void onPostExecute(UsersGamesResponse response) {
         	if (response == null ) {
-        		Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), "Sorry, but could not get game data", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we weren't able to grab the data for your game", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else {
         		//TODO switch to next page
         		spinnerData.addAll(response.getGames());
