@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -237,7 +238,9 @@ public class MeActivity extends Activity {
         		joinTV.append(" " + stats.getJoinedMonth() + ", " + stats.getJoinedDay() + ", " + stats.getJoinedYear());
         		
         	} else {
-        		Toast.makeText(MeActivity.this, "Sorry, but the internet could not be reached at the moment, so stats may not be accurate", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(MeActivity.this, "Sorry, but since there doesn't appear to be an internet connection at the moment, game statistics may be inaccurate.", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         		earningsTV.setText(" $0");
         	}
         	

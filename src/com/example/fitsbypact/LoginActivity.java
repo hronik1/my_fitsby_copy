@@ -265,9 +265,13 @@ public class LoginActivity extends Activity {
 
         protected void onPostExecute(UserResponse response) {
         	if (response == null ) {
-        		Toast.makeText(getApplicationContext(), "Sorry, you don't have a connection to the internet", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), "Sorry, either your email or password was invalid", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but either your email or password was invalid", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
