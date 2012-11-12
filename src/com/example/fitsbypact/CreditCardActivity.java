@@ -3,6 +3,7 @@ package com.example.fitsbypact;
 import java.util.HashMap;
 import java.util.Map;
 
+import responses.LeagueCreateResponse;
 import responses.StatusResponse;
 import responses.UsersGamesResponse;
 import servercommunication.CreditCardCommunication;
@@ -10,6 +11,7 @@ import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;
 
 import bundlekeys.CreditCardBundleKeys;
+import bundlekeys.LeagueDetailBundleKeys;
 import dbtables.User;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -246,22 +248,22 @@ public class CreditCardActivity extends Activity {
      * @author brent
      *
      */
-    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, LeagueCreateResponse> {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
                     "Submitting your card information for verification...");
 		}
 		
-        protected StatusResponse doInBackground(String... params) {
-        	StatusResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
+        protected LeagueCreateResponse doInBackground(String... params) {
+        	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
         			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]),
         			numberET.getText().toString(), expYearET.getText().toString(), expMonthET.getText().toString(),
         			cvcET.getText().toString());
         	return response;
         }
 
-        protected void onPostExecute(StatusResponse response) {
+        protected void onPostExecute(LeagueCreateResponse response) {
         	mProgressDialog.dismiss();
         	
 /*        	if (response == null ) {
@@ -277,6 +279,7 @@ public class CreditCardActivity extends Activity {
         	//} else {
             	if (response.wasSuccessful()) {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
+            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
             		startActivity(intent);
             	} else {
             		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);

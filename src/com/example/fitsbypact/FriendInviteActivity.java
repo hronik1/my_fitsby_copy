@@ -2,7 +2,9 @@ package com.example.fitsbypact;
 
 import java.util.ArrayList;
 
+import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
+import responses.UsersGamesResponse;
 import servercommunication.LeagueCommunication;
 
 import android.os.AsyncTask;
@@ -30,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.telephony.SmsManager;
+import bundlekeys.LeagueDetailBundleKeys;
 
 import com.flurry.android.FlurryAgent;
 
@@ -48,6 +51,8 @@ public class FriendInviteActivity extends Activity {
 	private ArrayAdapter<String> contactsAdapter;
 	
 	private ProgressDialog mProgressDialog;
+	private String leagueId;
+	private String creatorName;
 	
 	/**
 	 * called when activity is created
@@ -61,6 +66,9 @@ public class FriendInviteActivity extends Activity {
         
         initializeButtons(); 
         initializeListView();
+        parseBundle(getIntent());
+        
+        new CreatorAsyncTask().execute(leagueId);
     }
 
     /**
@@ -172,7 +180,8 @@ public class FriendInviteActivity extends Activity {
 		    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 		    				public void onClick(DialogInterface dialog, int id) {
 		    				    SmsManager smsManager = SmsManager.getDefault();
-		    				    smsManager.sendTextMessage(contacts.get(position), null, "Hey, check out the awesome fitness app, Fitsby. It's legit!", null, null);
+		    				    smsManager.sendTextMessage(contacts.get(position), null, "Hey, check out the awesome fitness app, Fitsby. It's legit!" +
+		    				    		"I just joined a game with id of " + leagueId + "and a creator of " + creatorName, null, null);
 		    				}
 		    			})
 		    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
@@ -186,6 +195,11 @@ public class FriendInviteActivity extends Activity {
 		
     }
     
+    private void parseBundle(Intent intent) {
+    	Bundle extras = intent.getExtras();
+    	
+    	leagueId = extras.getString(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
+    }
     /**
      * invite your friends selected from the content provider
      */
@@ -262,6 +276,30 @@ public class FriendInviteActivity extends Activity {
         @SuppressLint("NewApi")
 		protected void onPostExecute() {
         	mProgressDialog.dismiss();
+        	
+        }
+    }
+    
+    private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+                    "Gathering game data...");
+		}
+		
+        protected CreatorResponse doInBackground(String... params) {
+        	CreatorResponse response = LeagueCommunication.getCreator(leagueId);
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(CreatorResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response.wasSuccessful()) {
+            	creatorName = response.getCreatorFirstName();
+        	}
+        		
+
         }
     }
 }

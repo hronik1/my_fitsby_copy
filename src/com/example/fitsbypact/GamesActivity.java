@@ -13,6 +13,8 @@ import servercommunication.LeagueCommunication;
 import servercommunication.NewsfeedCommunication;
 import servercommunication.UserCommunication;
 
+import bundlekeys.CreditCardBundleKeys;
+
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import loaders.GameLeaderCursorLoader;
@@ -303,6 +305,8 @@ public class GamesActivity extends Activity {
 		}
 			
 		Intent intent = new Intent(GamesActivity.this, FriendInviteActivity.class);
+		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
+
 		startActivity(intent);
 
 	}
@@ -493,29 +497,7 @@ public class GamesActivity extends Activity {
         }
     }
     
-    private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
-		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
-                    "Gathering game data...");
-		}
-		
-        protected CreatorResponse doInBackground(String... params) {
-        	CreatorResponse response = LeagueCommunication.getCreator(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
-        	return response;
-        }
 
-        @SuppressLint("NewApi")
-		protected void onPostExecute(CreatorResponse response) {
-        	mProgressDialog.dismiss();
-        	
-        	if (response.wasSuccessful()) {
-            	
-
-        	}
-        		
-
-        }
-    }
 
 }
 

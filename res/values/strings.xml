@@ -102,7 +102,7 @@
     <string name="input_players"></string>
     <string name="input_wager"></string>
     <string name="input_date"></string>
-    <string name="days_left_prompt">Days left: </string>
+    <string name="days_left_prompt">Days left:</string>
     <string name="days_left"></string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>

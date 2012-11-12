@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import responses.CountdownResponse;
 import responses.CreatorResponse;
+import responses.LeagueCreateResponse;
 import responses.PrivateLeagueResponse;
 import responses.PublicLeaguesResponse;
 import responses.StakesResponse;
@@ -98,7 +99,7 @@ public class LeagueCommunication {
 	 * @param creatorId
 	 * @return
 	 */
-	public static StatusResponse createLeague(int creatorId, int duration, boolean isPrivate, int wager, String cardNumber, String expYear, String expMonth, String cvc) {
+	public static LeagueCreateResponse createLeague(int creatorId, int duration, boolean isPrivate, int wager, String cardNumber, String expYear, String expMonth, String cvc) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
@@ -113,13 +114,13 @@ public class LeagueCommunication {
 			json.put("credit_card_cvc", cvc);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "create_game", stringEntity);
-			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
+			return LeagueCreateResponse.jsonToLeagueCreateResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
-			return new StatusResponse("fail");
+			return new LeagueCreateResponse("fail", e.toString());
 		} catch (UnsupportedEncodingException e) {
 			Log.e(TAG, e.toString());
-			return new StatusResponse("fail");
+			return new LeagueCreateResponse("fail", e.toString());
 		}
 	}
 	
@@ -180,12 +181,12 @@ public class LeagueCommunication {
 		}
 	}
 	
-	public static CreatorResponse getCreator(int gameId) {
+	public static CreatorResponse getCreator(String leagueId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
         try {
-	        nameValuePairs.add(new BasicNameValuePair("game_id", gameId +"")); 
+	        nameValuePairs.add(new BasicNameValuePair("game_id", leagueId)); 
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "get_first_name", nameValuePairs);
 			return CreatorResponse.jsonToCreatorResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
