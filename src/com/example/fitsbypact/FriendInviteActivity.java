@@ -180,8 +180,8 @@ public class FriendInviteActivity extends Activity {
 		    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 		    				public void onClick(DialogInterface dialog, int id) {
 		    				    SmsManager smsManager = SmsManager.getDefault();
-		    				    smsManager.sendTextMessage(contacts.get(position), null, "Hey, check out the awesome fitness app, Fitsby. It's legit!" +
-		    				    		"I just joined a game with id of " + leagueId + "and a creator of " + creatorName, null, null);
+		    				    smsManager.sendTextMessage(contacts.get(position), null, "Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
+		    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId, null, null);
 		    				}
 		    			})
 		    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
