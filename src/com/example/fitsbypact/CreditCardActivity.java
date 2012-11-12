@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import responses.StatusResponse;
+import responses.UsersGamesResponse;
 import servercommunication.CreditCardCommunication;
 import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;

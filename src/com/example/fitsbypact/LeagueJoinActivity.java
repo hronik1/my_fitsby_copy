@@ -7,6 +7,7 @@ import servercommunication.UserCommunication;
 import bundlekeys.LeagueDetailBundleKeys;
 import dbhandlers.LeagueTableHandler;
 import dbtables.League;
+import dbtables.User;
 import loaders.PublicLeaguesCursorLoader;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ import android.support.v4.app.LoaderManager;
 import android.content.Intent;
 import android.support.v4.content.Loader;
 import android.database.Cursor;
+
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
 public class LeagueJoinActivity extends FragmentActivity 
@@ -43,7 +46,7 @@ public class LeagueJoinActivity extends FragmentActivity
 	private EditText etLastName;
 	private EditText etInviteCode;
 	private ListView leagueLV;
-	
+	private User mUser;
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
 			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_duration, R.id.list_item_public_leagues_pot };
@@ -63,6 +66,8 @@ public class LeagueJoinActivity extends FragmentActivity
         initializeButtons();
         initializeEditTexts();
         initializeListView();
+        
+        mUser = ((ApplicationUser)getApplicationContext()).getUser();
         
         getSupportLoaderManager().initLoader(0, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor>) this);
     }
@@ -226,7 +231,7 @@ public class LeagueJoinActivity extends FragmentActivity
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     	Log.d(TAG, "inited loader");
-    	return new PublicLeaguesCursorLoader(this, id);
+    	return new PublicLeaguesCursorLoader(this, mUser.getID());
     }
     
     /**

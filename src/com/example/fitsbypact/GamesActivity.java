@@ -3,6 +3,8 @@ package com.example.fitsbypact;
 import java.util.ArrayList;
 import java.util.List;
 
+import responses.CountdownResponse;
+import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
 import responses.UserResponse;
 import responses.UsersGamesResponse;
@@ -68,6 +70,7 @@ public class GamesActivity extends Activity {
 	private TextView durationTV;
 	private TextView potTV;
 	private TextView startTV;
+	private TextView daysLeftTV;
 	
 	private ProgressBar progressBar;
 	private ListView leadersLV;
@@ -93,6 +96,7 @@ public class GamesActivity extends Activity {
 	private User user;
 	
 	private ProgressDialog mProgressDialog;
+	private String creatorFirstName;
 	
 	/**
 	 * called when activity is created
@@ -118,7 +122,7 @@ public class GamesActivity extends Activity {
         initializeProgressBar();
         initializeListView();
         initializeButtons();
-        
+
         new SpinnerDataAsyncTask().execute();
     }
 
@@ -210,6 +214,7 @@ public class GamesActivity extends Activity {
 		durationTV = (TextView)findViewById(R.id.input_duration);
 		potTV = (TextView)findViewById(R.id.input_pot);
 		startTV = (TextView)findViewById(R.id.input_date);
+		daysLeftTV = (TextView)findViewById(R.id.days_left);
 		
 		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
 		wagerPromptTV = (TextView)findViewById(R.id.games_wager_prompt);
@@ -289,8 +294,17 @@ public class GamesActivity extends Activity {
 	}
 	
 	private void gotoInviteActivity() {
-		Intent intent = new Intent(this, FriendInviteActivity.class);
+		
+		if (spinnerData.isEmpty()) {
+	   		Toast toast = Toast.makeText(this, "Sorry, but you can't invite friends, since you aren't in any games", Toast.LENGTH_LONG);
+	   		toast.setGravity(Gravity.CENTER, 0, 0);
+	   		toast.show();
+	   		return;
+		}
+			
+		Intent intent = new Intent(GamesActivity.this, FriendInviteActivity.class);
 		startActivity(intent);
+
 	}
 	
 	/**
@@ -446,9 +460,62 @@ public class GamesActivity extends Activity {
         		wagerTV.setText(" $" + league.getWager());
         		startTV.setText(" " + league.getStartDate());
         	}
+        	new DaysRemainingAsyncTask().execute();	
+        	
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class DaysRemainingAsyncTask extends AsyncTask<String, Void, CountdownResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+                    "Gathering game data...");
+		}
+		
+        protected CountdownResponse doInBackground(String... params) {
+        	CountdownResponse response = LeagueCommunication.getCountdown(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(CountdownResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response.wasSuccessful()) {
+        		daysLeftTV.setText(response.getDaysLeft());
+        	}
+        		
+        }
+    }
+    
+    private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+                    "Gathering game data...");
+		}
+		
+        protected CreatorResponse doInBackground(String... params) {
+        	CreatorResponse response = LeagueCommunication.getCreator(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(CreatorResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response.wasSuccessful()) {
+            	
+
+        	}
         		
 
         }
     }
+
 }
 

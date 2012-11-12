@@ -17,6 +17,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.CountdownResponse;
+import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
 import responses.PublicLeaguesResponse;
 import responses.StakesResponse;
@@ -161,6 +163,34 @@ public class LeagueCommunication {
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 			return new UsersGamesResponse(e.toString(), null);
+		}
+	}
+	
+	public static CountdownResponse getCountdown(int gameId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		
+        try {
+	        nameValuePairs.add(new BasicNameValuePair("game_id", gameId +"")); 
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "countdown", nameValuePairs);
+			return CountdownResponse.jsonToCountdownResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new CountdownResponse(e.toString(), null);
+		}
+	}
+	
+	public static CreatorResponse getCreator(int gameId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		
+        try {
+	        nameValuePairs.add(new BasicNameValuePair("game_id", gameId +"")); 
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "get_first_name", nameValuePairs);
+			return CreatorResponse.jsonToCreatorResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new CreatorResponse(e.toString(), null);
 		}
 	}
 	/**

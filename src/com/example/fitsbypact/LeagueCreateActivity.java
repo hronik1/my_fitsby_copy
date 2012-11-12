@@ -284,7 +284,6 @@ public class LeagueCreateActivity extends Activity {
 		appData.setIsPrivate(isPrivate);
 		appData.setWager(wager);
 		Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
-		intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
 		startActivity(intent);
 //		League league = new League(userID, isPrivate, wager, duration);
 //		leagueTableHandler.addLeague(league);
