@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
@@ -32,6 +34,7 @@ import android.telephony.SmsManager;
 import com.flurry.android.FlurryAgent;
 
 import dbtables.League;
+import dbtables.User;
 
 public class FriendInviteActivity extends Activity {
 
@@ -160,15 +163,27 @@ public class FriendInviteActivity extends Activity {
 		contactsListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parentView, View view, int position,
+			public void onItemClick(AdapterView<?> parentView, View view, final int position,
 					long id) {
-				
-			    SmsManager smsManager = SmsManager.getDefault();
-			    smsManager.sendTextMessage(contacts.get(position), null, "Hey, check out the awesome fitness app, Fitsby. It's legit!", null, null);
+			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
+		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position) +
+		    			" is your email.")
+		    			.setCancelable(false)
+		    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+		    				public void onClick(DialogInterface dialog, int id) {
+		    				    SmsManager smsManager = SmsManager.getDefault();
+		    				    smsManager.sendTextMessage(contacts.get(position), null, "Hey, check out the awesome fitness app, Fitsby. It's legit!", null, null);
+		    				}
+		    			})
+		    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+		    				public void onClick(DialogInterface dialog, int id) {
+		    					dialog.cancel();
+		    				}
+		    			}).show();
 			}
 			
 		});
-
+		
     }
     
     /**
