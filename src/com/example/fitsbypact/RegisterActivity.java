@@ -12,6 +12,7 @@ import servercommunication.UserCommunication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -43,6 +44,8 @@ public class RegisterActivity extends Activity {
 	private ApplicationUser mApplicationUser;
 	private DatabaseHandler mdbHandler;
 	private UserTableHandler mUserTableHandler;
+	
+	private ProgressDialog mProgressDialog;
 	
 	/**
 	 * called when activity is created
@@ -265,12 +268,20 @@ public class RegisterActivity extends Activity {
      *
      */
     private class RegisterAsyncTask extends AsyncTask<String, Void, UserResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(RegisterActivity.this, "",
+                    "Registering you...");
+		}
+		
         protected UserResponse doInBackground(String... params) {
         	UserResponse response = UserCommunication.registerUser(params[0], params[1], params[2], params[3], params[4]);
         	return response;
         }
 
         protected void onPostExecute(UserResponse response) {
+        	mProgressDialog.dismiss();
+        	
         	if (response == null ) {
         		Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG).show();
         	} else if (!response.wasSuccessful()){

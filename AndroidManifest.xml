@@ -90,7 +90,8 @@
         <activity
             android:name=".CheckInActivity"
             android:label="@string/title_activity_check_in"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name=".MeActivity"

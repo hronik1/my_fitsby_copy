@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
@@ -39,6 +40,8 @@ public class LoginActivity extends Activity {
 	private DatabaseHandler mdbHandler;
 	private UserTableHandler mUserTableHandler;
 	private ApplicationUser mApplicationUser;
+	
+	private ProgressDialog mProgressDialog;
 	
 	/**
 	 * Called when activity is created
@@ -258,12 +261,20 @@ public class LoginActivity extends Activity {
      *
      */
     private class LoginAsyncTask extends AsyncTask<String, Void, UserResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
+                    "Logging you in...");
+		}
+		
         protected UserResponse doInBackground(String... params) {
         	UserResponse response = UserCommunication.loginUser(params[0], params[1]);
         	return response;
         }
 
         protected void onPostExecute(UserResponse response) {
+        	mProgressDialog.dismiss();
+        	
         	if (response == null ) {
         		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);

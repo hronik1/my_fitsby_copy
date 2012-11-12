@@ -13,6 +13,7 @@ import dbtables.User;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
@@ -44,6 +45,8 @@ public class CreditCardActivity extends Activity {
 	private boolean isValid;
 	
 	private User mUser;
+	
+	private ProgressDialog mProgressDialog;
 	
 	/**
 	 * called when activity first created
@@ -243,6 +246,12 @@ public class CreditCardActivity extends Activity {
      *
      */
     private class CreateLeagueAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
+                    "Submitting your card information for verification...");
+		}
+		
         protected StatusResponse doInBackground(String... params) {
         	StatusResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
         			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]),
@@ -252,6 +261,8 @@ public class CreditCardActivity extends Activity {
         }
 
         protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	
         	if (response == null ) {
         		Log.e(TAG, "no response");
         	} else if (!response.wasSuccessful()){
@@ -271,6 +282,12 @@ public class CreditCardActivity extends Activity {
     }
     
     private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
+                    "Submiting your card info for verification...");
+		}
+		
         protected StatusResponse doInBackground(Integer... params) {
         	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1],
         			numberET.getText().toString(), expYearET.getText().toString(), expMonthET.getText().toString(),
@@ -279,6 +296,7 @@ public class CreditCardActivity extends Activity {
         }
 
         protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
         		try {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);

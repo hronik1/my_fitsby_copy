@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -41,7 +42,9 @@ public class FriendInviteActivity extends Activity {
 	
 	private ListView contactsListView;
 	private ArrayList<String> contacts;
-	private ArrayAdapter contactsAdapter;
+	private ArrayAdapter<String> contactsAdapter;
+	
+	private ProgressDialog mProgressDialog;
 	
 	/**
 	 * called when activity is created
@@ -231,6 +234,11 @@ public class FriendInviteActivity extends Activity {
      */
     private class ContactsAsyncTask extends AsyncTask<String, Void, Void> {
     	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+                    "Gathering your contacts...");
+		}
+		
         protected Void doInBackground(String... params) {
         	queryContacts();
 			return null;
@@ -238,7 +246,7 @@ public class FriendInviteActivity extends Activity {
 
         @SuppressLint("NewApi")
 		protected void onPostExecute() {
-
+        	mProgressDialog.dismiss();
         }
     }
 }

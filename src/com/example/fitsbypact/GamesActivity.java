@@ -26,6 +26,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.support.v4.app.LoaderManager;
 import android.content.Intent;
 import android.support.v4.content.Loader;
@@ -87,6 +88,8 @@ public class GamesActivity extends Activity {
 	
 	private List<LeagueMember> listLeagueMember;
 	private User user;
+	
+	private ProgressDialog mProgressDialog;
 	
 	/**
 	 * called when activity is created
@@ -352,12 +355,20 @@ public class GamesActivity extends Activity {
      *
      */
     private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+                    "Finding your games...");
+		}
+		
         protected UsersGamesResponse doInBackground(String... params) {
         	UsersGamesResponse response = LeagueCommunication.getUsersLeagues(user.getID());
         	return response;
         }
 
         protected void onPostExecute(UsersGamesResponse response) {
+        	mProgressDialog.dismiss();
+        	
         	if (response == null ) {
         		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -407,6 +418,11 @@ public class GamesActivity extends Activity {
      */
     private class GameInfoAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
     	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+                    "Gathering game data...");
+		}
+		
         protected PrivateLeagueResponse doInBackground(String... params) {
         	PrivateLeagueResponse response = LeagueCommunication.getSingleGame(spinnerData.get(spinnerPosition));
         	return response;
@@ -414,6 +430,8 @@ public class GamesActivity extends Activity {
 
         @SuppressLint("NewApi")
 		protected void onPostExecute(PrivateLeagueResponse response) {
+        	mProgressDialog.dismiss();
+        	
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
         		playersTV.setText("   " + league.getPlayers());

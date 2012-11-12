@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.PlacesResponse;
 import responses.StatusResponse;
 import servercommunication.CheckinCommunication;
 import servercommunication.UserCommunication;
@@ -40,6 +41,7 @@ import android.os.Message;
 import android.provider.Settings;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -60,14 +62,18 @@ public class CheckInActivity extends Activity {
 	private final static int MESSAGE_UPDATE_TIMER = 1;
 	private final static int MESSAGE_STOP_TIMER = 2;
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
-	private final static int DEFAULT_PLACES_RADIUS = 100;
+	private final static int DEFAULT_PLACES_RADIUS = 5000;
 	
 	private final static String TAG = "CheckInActivity";
 	
 	private NavigationBar navigation;
 	private int userID;
+	private boolean checkedIn;
 	
 	private TextView checkinLocationTV;
+	private TextView minutesTV;
+	private TextView secondsTV;
+	
 	private ImageView checkedInIv;
 	private Button checkinButton;
 	private Button checkoutButton;
@@ -82,6 +88,9 @@ public class CheckInActivity extends Activity {
 	private static Handler mHandler;
 	private int timeSeconds;
 	private int timeMinutes;
+	
+	private String gym;
+	private ProgressDialog mProgressDialog;
 
 	/**
 	 * called when Activity is created
@@ -106,6 +115,8 @@ public class CheckInActivity extends Activity {
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
         mLeagueMemberList = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(mUser.getID());
+        
+        checkedIn = false;
     }
 
     /**
@@ -207,10 +218,18 @@ public class CheckInActivity extends Activity {
 	                	timeSeconds = 0;
 	                	timeMinutes++;
 	                }
-	                //TODO update TextView
+	                if (timeSeconds < 10)
+	                	secondsTV.setText("0" + timeSeconds);
+	                else 
+	                	secondsTV.setText(timeSeconds + "");
+	                if (timeMinutes < 10)
+	                	minutesTV.setText("0" + timeMinutes);
+	                else
+	                	minutesTV.setText(timeMinutes + "");
 	                break;
 	                
 	            case MESSAGE_STOP_TIMER:
+	            	Log.d(TAG, "stopTimer");
 	                mHandler.removeMessages(MESSAGE_UPDATE_TIMER);
 	                break;
 
@@ -234,6 +253,8 @@ public class CheckInActivity extends Activity {
 	 */
 	private void initializeTextViews() {
 		checkinLocationTV = (TextView)findViewById(R.id.verified_gym);
+		secondsTV = (TextView)findViewById(R.id.seconds);
+		minutesTV = (TextView)findViewById(R.id.minutes);
 	}
 	
 	/**
@@ -268,6 +289,13 @@ public class CheckInActivity extends Activity {
 	 * checks in user
 	 */
 	public void checkin() {
+		if (checkedIn) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Hey buddy, don't go getting greedy ;) you're already checked in", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+			return;
+		}
+		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		boolean gpsEnabled = service
 		  .isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -277,7 +305,7 @@ public class CheckInActivity extends Activity {
 		} else {
 			LocationListener listener = new LocationListener() {
 				public void onLocationChanged(Location location) {
-					Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_SHORT).show();
 				}
 
 				public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -309,30 +337,33 @@ public class CheckInActivity extends Activity {
 			    }
 			  }
 			}
-			Toast.makeText(getApplicationContext(), bestResult.toString(), Toast.LENGTH_LONG).show();
+//			Toast.makeText(getApplicationContext(), bestResult.toString(), Toast.LENGTH_LONG).show();
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
 //			Location location = service.getLastKnownLocation(LOCATION_SERVICE);
 			double latitude = bestResult.getLatitude();
 			double longitude = bestResult.getLongitude();
-			String uri = buildPlacesUri(latitude, longitude, DEFAULT_PLACES_RADIUS, true);
-			JSONObject jsonObject = jsonFromStringUri(uri);
-			boolean success = checkinSuccesful(jsonObject);
-			if (success) {
-				mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
-				Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG);
-				toast.setGravity(Gravity.CENTER, 0, 0);
-				toast.show();
-				String gym = parseGym(jsonObject);
-				new CheckinAsyncTask().execute(mUser.getID());
-				checkinLocationTV.setText("Checked in at " + gym);
-				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
-				
-				//TODO increase checkins
-			} else {
-				Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG);
-				toast.setGravity(Gravity.CENTER, 0, 0);
-				toast.show();
-			}
+//			String uri = buildPlacesUri(latitude, longitude, DEFAULT_PLACES_RADIUS, true);
+			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
+					longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
+//			JSONObject jsonObject = jsonFromStringUri(uri);
+//			boolean success = checkinSuccesful(jsonObject);
+//			if (success) {
+//				mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
+//				Toast toast = Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_LONG);
+//				toast.setGravity(Gravity.CENTER, 0, 0);
+//				toast.show();
+//				String gym = parseGym(jsonObject);
+//				new CheckinAsyncTask().execute(mUser.getID());
+//				checkinLocationTV.setText("Checked in at " + gym);
+//				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
+//				
+//				//TODO increase checkins
+//			} else {
+//				Toast toast = Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG);
+//				toast.setGravity(Gravity.CENTER, 0, 0);
+//				toast.show();
+//			}
+			
 //			for(LeagueMember member: mLeagueMemberList) {
 //				if(member.getCheckins() == member.getCheckouts()) {
 //					member.setCheckins(member.getCheckins() + 1);
@@ -350,7 +381,7 @@ public class CheckInActivity extends Activity {
 
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("GPS location is required to make sure you are at a gym(not like you would lie)./nWould you like to turn it on?")
+    	builder.setMessage("GPS location is required to make sure you are at a gym(not like you would lie).\nWould you like to turn it on?")
     			.setCancelable(false)
     			.setPositiveButton("Yup!", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -377,7 +408,21 @@ public class CheckInActivity extends Activity {
 	 */
 	public void checkout() {
 		//TODO redo checkout
-		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
+		if (!checkedIn) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Hey buddy, you can't check out, because you never checked in", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+			return;
+		} 
+		if (timeMinutes < 45) {
+			Toast toast = Toast.makeText(getApplicationContext(),
+					"Hey buddy, you have to be at the gym for at least 45 minutes before you can checkout",
+					Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+			return;
+		}
+		
 		//TODO increase checkouts by 1
 //		for(LeagueMember member: mLeagueMemberList) {
 //			if(member.getCheckins() == member.getCheckouts() + 1) {
@@ -385,10 +430,9 @@ public class CheckInActivity extends Activity {
 //				mLeagueMemberTableHandler.updateLeagueMember(member);
 //			}
 //		}
+//		new CheckoutAsyncTask().execute(mUser.getID());
+
 		new CheckoutAsyncTask().execute(mUser.getID());
-		checkinLocationTV.setText("You are not currently checked into a gym");
-		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
-		
 	}
 	
 	/**
@@ -495,24 +539,67 @@ public class CheckInActivity extends Activity {
 		}
 	}
 	
+	private class GooglePlacesAsyncTast extends AsyncTask<String, Void, PlacesResponse> {
+
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
+                    "Finding nearby gyms...");
+		}
+		
+        protected PlacesResponse doInBackground(String... params) {
+        	PlacesResponse response = CheckinCommunication.getNearbyGyms(params[0],
+        			params[1], params[2], params[3], params[4]);
+        	return response;
+        }
+
+        protected void onPostExecute(PlacesResponse response) {
+        	mProgressDialog.dismiss();
+        	if (response == null) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry could not connect to internet", Toast.LENGTH_LONG); 
+    			toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, google places Api appears to be down at the moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} else if (response.getGyms().isEmpty()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but it appears that you are not at the gym", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} else {
+        		gym = response.getGyms().get(0);
+				new CheckinAsyncTask().execute(mUser.getID());
+        	}
+        }
+	}
     /**
      * AsyncTask to Register user
      * @author brent
      *
      */
     private class CheckinAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
+                    "Checking you in to your games...");
+		}
+		
         protected StatusResponse doInBackground(Integer... params) {
         	StatusResponse response = CheckinCommunication.checkin(params[0]);
         	return response;
         }
 
         protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
         		Toast toast = Toast.makeText(getApplicationContext(), "Check-in successful!", Toast.LENGTH_LONG); //changed from 'checkin success'
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
+        		mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
+				checkinLocationTV.setText("Checked in at " + gym);
+				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
+				checkedIn = true;
         	} else {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Check-in failed!", Toast.LENGTH_LONG); // changed from 'checkin failed'
+        		Toast toast = Toast.makeText(getApplicationContext(), "Checkin failed!", Toast.LENGTH_LONG); // changed from 'checkin failed'
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}
@@ -526,16 +613,24 @@ public class CheckInActivity extends Activity {
      *
      */
     private class CheckoutAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
+                    "Checking you out of your games...");
+		}
+		
         protected StatusResponse doInBackground(Integer... params) {
         	StatusResponse response = CheckinCommunication.checkout(params[0]);
         	return response;
         }
 
         protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Check-out successful!", Toast.LENGTH_LONG); // changed from 'checkout success'
-        		toast.setGravity(Gravity.CENTER, 0, 0);
-    			toast.show();
+        		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
+        		checkinLocationTV.setText("You are not currently checked into a gym");
+        		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
+        		checkedIn = false;
         	} else {
         		Toast toast = Toast.makeText(getApplicationContext(), "Check-out failed!", Toast.LENGTH_LONG); // changed from 'checkout failed'
         		toast.setGravity(Gravity.CENTER, 0, 0);

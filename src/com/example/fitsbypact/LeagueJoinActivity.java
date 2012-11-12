@@ -226,7 +226,7 @@ public class LeagueJoinActivity extends FragmentActivity
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     	Log.d(TAG, "inited loader");
-    	return new PublicLeaguesCursorLoader(this);
+    	return new PublicLeaguesCursorLoader(this, id);
     }
     
     /**

@@ -9,6 +9,8 @@ public class League {
 	private int wager;
 	private int duration;
 	private int stakes;
+	private String startDate;
+
 	/* add time information */
 	
 	/**
@@ -138,4 +140,14 @@ public class League {
 	public void setPrivate(int isPrivate) {
 		this.isPrivate = isPrivate;
 	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+
 }

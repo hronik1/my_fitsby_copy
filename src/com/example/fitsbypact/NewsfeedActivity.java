@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.support.v4.app.LoaderManager;
 import android.content.Intent;
 import android.support.v4.content.Loader;
@@ -76,6 +77,9 @@ public class NewsfeedActivity extends Activity {
 	
 	private User user;
 	private int spinnerPosition;
+	
+	private ProgressDialog mProgressDialog;
+	
 	/**
 	 * called when activity is created
 	 */
@@ -308,12 +312,18 @@ public class NewsfeedActivity extends Activity {
      *
      */
     private class AddCommentAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(NewsfeedActivity.this, "",
+                    "Submitting your comment...");
+		}
+		
         protected StatusResponse doInBackground(String... params) {
         	StatusResponse response = NewsfeedCommunication.addComment(params[0], params[1], params[2], Calendar.getInstance().getTime().toString());
         	return response;
         }
 
         protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
         		//Toast.makeText(getApplicationContext(), "comment successful", Toast.LENGTH_LONG).show();
         	} else {
@@ -321,7 +331,7 @@ public class NewsfeedActivity extends Activity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}
-        	
+        	new CursorDataAsyncTask().execute();
         }
     }
     
@@ -331,12 +341,20 @@ public class NewsfeedActivity extends Activity {
      *
      */
     private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
+		
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(NewsfeedActivity.this, "",
+                    "Getting your games...");
+		}
+		
         protected UsersGamesResponse doInBackground(String... params) {
         	UsersGamesResponse response = LeagueCommunication.getUsersLeagues(user.getID());
         	return response;
         }
 
         protected void onPostExecute(UsersGamesResponse response) {
+        	mProgressDialog.dismiss();
+        	
         	if (response == null ) {
         		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -349,7 +367,7 @@ public class NewsfeedActivity extends Activity {
         		//TODO switch to next page
         		spinnerData.addAll(response.getGames());
         		spinnerDataAdapter.notifyDataSetChanged();
-        		new CursorDataAsyncTask().execute();
+        		//new CursorDataAsyncTask().execute();
         	}
         }
     }
@@ -361,6 +379,11 @@ public class NewsfeedActivity extends Activity {
      */
     private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
     	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(NewsfeedActivity.this, "",
+                    "Filling out your newsfeed...");
+		}
+		
         protected Cursor doInBackground(String... params) {
         	Cursor cursor = NewsfeedCommunication.getNewsfeed(Integer.parseInt(spinnerData.get(spinnerPosition)));
         	return cursor;
@@ -368,6 +391,7 @@ public class NewsfeedActivity extends Activity {
 
         @SuppressLint("NewApi")
 		protected void onPostExecute(Cursor cursor) {
+        	mProgressDialog.dismiss();
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
 

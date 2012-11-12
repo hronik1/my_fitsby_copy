@@ -26,12 +26,15 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 			LeagueTableHandler.KEY_WAGER, LeagueTableHandler.KEY_DURATION, KEY_POT };
 	private Cursor mCursor;
 	
+	private int userId;
+	
 	/**
 	 * default GameLeaderCursorLoader class
 	 * @param context
 	 */
-	public PublicLeaguesCursorLoader(Context context) {
+	public PublicLeaguesCursorLoader(Context context, int userId) {
 		super(context);
+		this.userId = userId;
 		mDBHandler = DatabaseHandler.getInstance(context);
 		mLeagueTableHandler = mDBHandler.getLeagueTableHandler();
 		mLeagueMemberTableHandler = mDBHandler.getLeagueMemberTableHandler();
@@ -41,7 +44,7 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	@Override
 	public Cursor loadInBackground() {
-		return LeagueCommunication.getPublicLeagues();
+		return LeagueCommunication.getPublicLeagues(userId);
 	}
 		
     /* Runs on the UI thread */

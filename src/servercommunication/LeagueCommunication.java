@@ -33,19 +33,15 @@ public class LeagueCommunication {
 
 	private final static String TAG = "LeagueCommunication";
 	
-	private static PublicLeaguesResponse getPublicLeaguesHelper() {
+	private static PublicLeaguesResponse getPublicLeaguesHelper(int userId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		//TODO add something to nameValuePairs
-		JSONObject json = new JSONObject();
         try {
-	        StringEntity stringEntity = new StringEntity(json.toString());  
-			
-			//TODO add something to nameValuePairs
-			//ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "public_games", stringEntity);
+			nameValuePairs.add(new BasicNameValuePair("user_id", userId+""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "public_games", nameValuePairs);
 			return PublicLeaguesResponse.jsonToPublicLeagueResponse(MyHttpClient.parseResponse(serverResponse));
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 			return new PublicLeaguesResponse(e.toString(), null);
 		}
@@ -77,9 +73,10 @@ public class LeagueCommunication {
 			return new PrivateLeagueResponse(e.toString(), null);
 		}
 	}
-	public static Cursor getPublicLeagues() {
+	
+	public static Cursor getPublicLeagues(int userId) {
 		MatrixCursor cursor = new MatrixCursor(PublicLeaguesCursorLoader.FROM_ARGS);
-		PublicLeaguesResponse publicLeaguesResponse = getPublicLeaguesHelper();
+		PublicLeaguesResponse publicLeaguesResponse = getPublicLeaguesHelper(userId);
 		if (publicLeaguesResponse == null || !publicLeaguesResponse.wasSuccessful())
 			return cursor;
 		Vector<League> leagues = publicLeaguesResponse.getLeagues();

@@ -11,8 +11,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.fitsbypact.R;
+
+import android.net.Uri;
 import android.util.Log;
 
+import responses.PlacesResponse;
+import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
 import responses.UserResponse;
 
@@ -68,6 +73,23 @@ public class CheckinCommunication {
 		}
 	}
 	
-
+	public static PlacesResponse getNearbyGyms(String key, String latitude, String longitude,
+			String radius, String sensorUsed) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        try {  
+	        nameValuePairs.add(new BasicNameValuePair("key", key));
+	        nameValuePairs.add(new BasicNameValuePair("location", latitude + "," + longitude));
+	        nameValuePairs.add(new BasicNameValuePair("radius", radius ));
+	        nameValuePairs.add(new BasicNameValuePair("sensor", sensorUsed));
+	        nameValuePairs.add(new BasicNameValuePair("types", "gym"));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(
+					"https://maps.googleapis.com/maps/api/place/nearbysearch/json", nameValuePairs);
+			return PlacesResponse.jsonToPlacesResponse(MyHttpClient.parseResponse(serverResponse));
+        } catch (Exception e) {
+        	Log.d(TAG, e.toString());
+        	return null;
+        }
+	}
 
 }
