@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
 import servercommunication.NewsfeedCommunication;
@@ -11,11 +12,14 @@ import bundlekeys.LeagueDetailBundleKeys;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
+import dbtables.League;
 import dbtables.LeagueMember;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,6 +41,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	private TextView playersTV;
 	private TextView durationTV;
 	private TextView leagueIdTV;
+	private TextView startDateTV;
 	
 	private Button joinButton;
 	private Button faqButton;
@@ -53,6 +58,8 @@ public class LeagueJoinDetailActivity extends Activity {
 	private int players;
 	private boolean isValid;
 	private int duration;
+	
+	private ProgressDialog mProgressDialog;
 	
 	/**
 	 * called when activtiy is created
@@ -72,6 +79,8 @@ public class LeagueJoinDetailActivity extends Activity {
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
         mLeagueTableHandler = mdbHandler.getLeagueTableHandler();
+        
+        new GameInfoAsyncTask().execute(leagueId);
     }
 
     /**
@@ -190,6 +199,8 @@ public class LeagueJoinDetailActivity extends Activity {
  		
  		leagueIdTV = (TextView)findViewById(R.id.league_join_detail_id_data);
  		leagueIdTV.setText(" " + leagueId);
+ 		
+ 		startDateTV = (TextView)findViewById(R.id.game_start_date_value);
  	}
 
  	/**
@@ -235,6 +246,7 @@ public class LeagueJoinDetailActivity extends Activity {
  		appData.setUserId(mApplicationUser.getUser().getID());
  		appData.setLeagueId(leagueId);
  		Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
+ 		intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
  		startActivity(intent);
  	}
  	
@@ -247,6 +259,36 @@ public class LeagueJoinDetailActivity extends Activity {
  		startActivity(browserIntent);
  	}
  	
+ 	
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class GameInfoAsyncTask extends AsyncTask<Integer, Void, PrivateLeagueResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+                    "Gathering game data...");
+		}
+		
+        protected PrivateLeagueResponse doInBackground(Integer... params) {
+        	PrivateLeagueResponse response = LeagueCommunication.getSingleGame(params[0] + "");
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(PrivateLeagueResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response.wasSuccessful()) {
+        		League league = response.getLeague();
+        		startDateTV.setText(" " + league.getStartDate());
+        	}
+        		
+
+        }
+    }
     /**
      * AsyncTask to Register user
      * @author brent

@@ -385,7 +385,7 @@ public class NewsfeedActivity extends Activity {
 		}
 		
         protected Cursor doInBackground(String... params) {
-        	Cursor cursor = NewsfeedCommunication.getNewsfeed(Integer.parseInt(spinnerData.get(spinnerPosition)));
+        	Cursor cursor = NewsfeedCommunication.getNewsfeed(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
         	return cursor;
         }
 

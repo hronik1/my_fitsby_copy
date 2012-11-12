@@ -165,7 +165,7 @@
         android:layout_toRightOf="@+id/games_start_date_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/games_pot_prompt" 
+        android:layout_alignBottom="@+id/games_start_date_prompt" 
         android:text="@string/input_date" />
     
     <Button

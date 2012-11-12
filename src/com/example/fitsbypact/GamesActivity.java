@@ -405,7 +405,7 @@ public class GamesActivity extends Activity {
     private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
     	
         protected Cursor doInBackground(String... params) {
-        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(Integer.parseInt(spinnerData.get(spinnerPosition)));
+        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
         	return cursor;
         }
 
@@ -430,7 +430,7 @@ public class GamesActivity extends Activity {
 		}
 		
         protected PrivateLeagueResponse doInBackground(String... params) {
-        	PrivateLeagueResponse response = LeagueCommunication.getSingleGame(spinnerData.get(spinnerPosition));
+        	PrivateLeagueResponse response = LeagueCommunication.getSingleGame(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)) + "");
         	return response;
         }
 

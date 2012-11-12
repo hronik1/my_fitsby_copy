@@ -35,7 +35,7 @@ public class UsersGamesResponse {
 				JSONArray jsonArray = json.getJSONArray("games_user_is_in");
 				int length = jsonArray.length();
 				for (int i = 0; i < length; i++) {
-					games.add(jsonArray.get(i).toString());
+					games.add("Game " + jsonArray.get(i).toString());
 				}
 			}
 			return new UsersGamesResponse(status, games);
@@ -43,5 +43,10 @@ public class UsersGamesResponse {
 			Log.d(TAG, e.toString());
 			return new UsersGamesResponse(e.toString(), null);
 		}
+	}
+	
+	public static int StripGameIdFromSpinner(String spinnerItem) {
+		String[] words = spinnerItem.split("\\s+");
+		return Integer.parseInt(words[1]);
 	}
 }

@@ -263,11 +263,17 @@ public class CreditCardActivity extends Activity {
         protected void onPostExecute(StatusResponse response) {
         	mProgressDialog.dismiss();
         	
-        	if (response == null ) {
+/*        	if (response == null ) {
         		Log.e(TAG, "no response");
+        		Toast toast = Toast.makeText(CreditCardActivity.this, "No Response", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else if (!response.wasSuccessful()){
         		Log.e(TAG, "response fail");
-        	} else {
+        		Toast toast = Toast.makeText(CreditCardActivity.this, "Failed", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();*/
+        	//} else {
             	if (response.wasSuccessful()) {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
             		startActivity(intent);
@@ -276,7 +282,7 @@ public class CreditCardActivity extends Activity {
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
             	}
-        	}
+        	//}
 
         }
     }

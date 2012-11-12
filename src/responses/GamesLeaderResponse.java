@@ -40,7 +40,7 @@ public class GamesLeaderResponse {
 				String firstName  = leader.getString("first_name");
 				String lastName = leader.getString("last_name");
 				int checkins = Integer.parseInt(leader.getString("successful_checks"));
-				String id = i + "";
+				String id = (i+1) + "";
 				leaders.add(new Leader(firstName, lastName, checkins, id));
 			}
 			return new GamesLeaderResponse(success, leaders);
