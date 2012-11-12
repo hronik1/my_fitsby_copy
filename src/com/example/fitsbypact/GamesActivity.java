@@ -60,12 +60,15 @@ public class GamesActivity extends Activity {
 	private TextView durationPromptTV;
 	private TextView wagerPromptTV;
 	private TextView potPromptTV;
+	private TextView startPromptTV;
 	private TextView noGamesPromptTV;
 	
 	private TextView playersTV;
 	private TextView wagerTV;
 	private TextView durationTV;
 	private TextView potTV;
+	private TextView startTV;
+	
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
@@ -206,12 +209,14 @@ public class GamesActivity extends Activity {
 		wagerTV = (TextView)findViewById(R.id.input_wager);
 		durationTV = (TextView)findViewById(R.id.input_duration);
 		potTV = (TextView)findViewById(R.id.input_pot);
+		startTV = (TextView)findViewById(R.id.input_date);
 		
 		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
 		wagerPromptTV = (TextView)findViewById(R.id.games_wager_prompt);
 		durationPromptTV = (TextView)findViewById(R.id.games_duration_prompt);
 		potPromptTV = (TextView)findViewById(R.id.games_pot_prompt);
 		noGamesPromptTV = (TextView)findViewById(R.id.games_no_games_prompt);
+		startPromptTV = (TextView)findViewById(R.id.games_start_date_prompt);
 	}
 	
 	/**
@@ -310,6 +315,7 @@ public class GamesActivity extends Activity {
 		wagerPromptTV.setText("");
 		durationPromptTV.setText("");
 		potPromptTV.setText("");
+		startPromptTV.setText("");
 	}
 	
 	private void disableNoGamesPrompts() {
@@ -438,6 +444,7 @@ public class GamesActivity extends Activity {
         		potTV.setText(" $" + league.getStakes());
         		durationTV.setText("   " + league.getDuration() + " days");
         		wagerTV.setText(" $" + league.getWager());
+        		startTV.setText(" " + league.getStartDate());
         	}
         		
 

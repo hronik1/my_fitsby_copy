@@ -160,6 +160,14 @@
         android:layout_toRightOf="@+id/games_pot_prompt"
         android:text="@string/input_pot" />
 
+    <TextView 
+        android:id="@+id/input_date"
+        android:layout_toRightOf="@+id/games_start_date_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/games_pot_prompt" 
+        android:text="@string/input_date" />
+    
     <Button
         android:id="@+id/games_button_newgame"
         android:layout_width="wrap_content"
