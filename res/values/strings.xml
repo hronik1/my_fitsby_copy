@@ -58,11 +58,10 @@
     <string name="friend_invite_button_home_text">Go To Game</string>
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
     <string name="add_friend_button">Add Friend</string>
-    <string name="invite_friends_directions">Search your contacts list to find friends to invite to your game (Invitations sent via SMS text messages).</string>
-    <string name="activity_league_join_directions">Find a game to join by either searching by a game host\'s first name and game ID, or by browsing the public games list. Private games can only be found through search.</string>
+    <string name="invite_friends_directions">Invite your friends via text message. Press the Invite Friends button to populate your contacts, then tap a phone number to automatically send them a text message that has your game details.</string>
+    <string name="activity_league_join_directions">Find a game to join by either searching by the game creator\'s first name and game ID, or by browsing the public games list. Private games can only be found through search.</string>
     <string name="title_activity_league_join">Join A Game</string>
-    <string name="league_join_et_first_name_hint">First Name</string>
-    <string name="league_join_et_last_name_hint">Last Name</string>
+    <string name="league_join_et_first_name_hint">Game Creator\'s First Name</string>
     <string name="league_join_et_invite_code_hint">Game ID</string>
     <string name="league_join_button_submit_text">Submit Search</string>
     <string name="search_for_a_game">Find A Specific Game</string>
@@ -73,7 +72,7 @@
     <string name="navigation_textview_checkin_text">Check In</string>
     <string name="check_in_button_check_in_text">Check In</string>
     <string name="check_in_button_check_out_text">Check Out</string>
-    <string name="verified_gym">You are currently not at a verified gym</string>
+    <string name="verified_gym">You are currently not checked in at a verified gym</string>
     <string name="checkout_directions">(You can check out only when you\'ve been at the gym for a minimum of 45 minutes)</string>
     <string name="colon">:</string>
     <string name="seconds">00</string>
