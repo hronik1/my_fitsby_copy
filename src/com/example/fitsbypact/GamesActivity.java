@@ -298,7 +298,7 @@ public class GamesActivity extends Activity {
 	private void gotoInviteActivity() {
 		
 		if (spinnerData.isEmpty()) {
-	   		Toast toast = Toast.makeText(this, "Sorry, but you can't invite friends, since you aren't in any games", Toast.LENGTH_LONG);
+	   		Toast toast = Toast.makeText(this, "Sorry, but you can't invite friends since you aren't in any games", Toast.LENGTH_LONG);
 	   		toast.setGravity(Gravity.CENTER, 0, 0);
 	   		toast.show();
 	   		return;

@@ -381,7 +381,7 @@ public class CheckInActivity extends Activity {
 
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("GPS location is required to make sure you are at a gym(not like you would lie).\nWould you like to turn it on?")
+    	builder.setMessage("GPS location is required to make sure you are at a gym.\nWould you like to turn it on?")
     			.setCancelable(false)
     			.setPositiveButton("Yup!", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -409,14 +409,14 @@ public class CheckInActivity extends Activity {
 	public void checkout() {
 		//TODO redo checkout
 		if (!checkedIn) {
-			Toast toast = Toast.makeText(getApplicationContext(), "Hey buddy, you can't check out, because you never checked in", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but you can't check out because you never checked in", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
 		} 
 		if (timeMinutes < 45) {
 			Toast toast = Toast.makeText(getApplicationContext(),
-					"Hey buddy, you have to be at the gym for at least 45 minutes before you can checkout",
+					"Sorry, but you have to be at the gym for at least 45 minutes before you can checkout",
 					Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
@@ -555,14 +555,14 @@ public class CheckInActivity extends Activity {
         protected void onPostExecute(PlacesResponse response) {
         	mProgressDialog.dismiss();
         	if (response == null) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry could not connect to internet", Toast.LENGTH_LONG); 
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, google places Api appears to be down at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but it appears that you are not at the gym", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but it appears that you are not at a verified gym", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {
@@ -591,7 +591,7 @@ public class CheckInActivity extends Activity {
         protected void onPostExecute(StatusResponse response) {
         	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Check-in successful!", Toast.LENGTH_LONG); //changed from 'checkin success'
+        		Toast toast = Toast.makeText(getApplicationContext(), "Check-in successful!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         		mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
@@ -599,7 +599,7 @@ public class CheckInActivity extends Activity {
 				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
 				checkedIn = true;
         	} else {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Checkin failed!", Toast.LENGTH_LONG); // changed from 'checkin failed'
+        		Toast toast = Toast.makeText(getApplicationContext(), "Check-in failed!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}
@@ -632,7 +632,7 @@ public class CheckInActivity extends Activity {
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
         		checkedIn = false;
         	} else {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Check-out failed!", Toast.LENGTH_LONG); // changed from 'checkout failed'
+        		Toast toast = Toast.makeText(getApplicationContext(), "Check-out failed!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}

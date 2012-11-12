@@ -162,7 +162,7 @@ public class LeagueJoinActivity extends FragmentActivity
     	String id = etInviteCode.getText().toString();
     	
     	if(firstName.equals("") || id.equals("")) {
-    		Toast toast = Toast.makeText(this, "Sorry, but you must fill out both fields of First Name and Game ID", Toast.LENGTH_LONG);
+    		Toast toast = Toast.makeText(this, "Sorry, but you must fill out both fields of Game Creator's First Name and Game ID", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		} else
