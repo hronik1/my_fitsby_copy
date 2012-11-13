@@ -32,6 +32,8 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 public class MeActivity extends Activity {
 
 	private final static String TAG = "MeActivity";
@@ -104,7 +106,7 @@ public class MeActivity extends Activity {
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Me Activity");
 	    Log.i(TAG, "onStart");

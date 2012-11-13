@@ -36,6 +36,8 @@ import android.database.Cursor;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 public class LeagueJoinActivity extends FragmentActivity 
 	implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -98,7 +100,7 @@ public class LeagueJoinActivity extends FragmentActivity
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Game Join Activity");
         Log.i(TAG, "onStart");

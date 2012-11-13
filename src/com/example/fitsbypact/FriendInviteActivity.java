@@ -39,6 +39,8 @@ import bundlekeys.LeagueDetailBundleKeys;
 
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 import dbtables.League;
 import dbtables.User;
 
@@ -100,7 +102,7 @@ public class FriendInviteActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Invite Friends");
         Log.i(TAG, "onStart");

@@ -33,6 +33,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Token;
 import com.example.fitsbypact.applicationsubclass.*;
 
+import constants.FlurryConstants;
+
 public class CreditCardActivity extends Activity {
 
 	private final static String TAG = "CreditCardActivity";
@@ -96,7 +98,7 @@ public class CreditCardActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Enter Credit Card Info");
         Log.i(TAG, "onStart");

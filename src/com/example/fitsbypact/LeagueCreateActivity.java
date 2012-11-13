@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 public class LeagueCreateActivity extends Activity {
 	
 	private final static String TAG = "LeagueCreateActivity";
@@ -103,7 +105,7 @@ public class LeagueCreateActivity extends Activity {
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Game Create Activity");
 	    Log.i(TAG, "onStart");

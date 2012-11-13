@@ -2,6 +2,8 @@ package com.example.fitsbypact;
 
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -49,7 +51,7 @@ public class HelpActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Help Activity");	    
         Log.i(TAG, "onStart");

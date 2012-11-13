@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.crittercism.app.Crittercism;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 public class LandingActivity extends Activity {
 
 	private final static String TAG = "LandingActivity";
@@ -65,7 +67,7 @@ public class LandingActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Landing Activity");
         Crittercism.init(getApplicationContext(), "506f841701ed850f8f000003");
