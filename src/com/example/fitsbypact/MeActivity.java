@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import responses.StatsResponse;
+import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;
 
@@ -16,6 +17,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,6 +53,7 @@ public class MeActivity extends Activity {
 	private EditText oldPasswordET;
 	private EditText newPasswordET;
 	private EditText newPasswordConfirmET;
+	private ProgressDialog mProgressDialog;
 	
 	private ImageView profileIV;
 	
@@ -268,6 +271,7 @@ public class MeActivity extends Activity {
 	 */
 	private void submit() {
 		//TODO figure out what need to be submit and then submit it
+		changeEmail();
 	}
 	
 	/**
@@ -302,7 +306,7 @@ public class MeActivity extends Activity {
     		toast.show();
 		}
 		
-		//TODO add in change email async call to server
+		new ChangeEmailAsyncTask().execute(email, mUser.getID()+"");
 	}
 	
     /**
@@ -329,6 +333,41 @@ public class MeActivity extends Activity {
         		earningsTV.setText(" $0");
         	}
         	
+        }
+    }
+    
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class ChangeEmailAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(MeActivity.this, "",
+                    "Changing your email..");
+		}
+		
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = UserCommunication.changeEmail(params[0], params[1]);
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response == null ) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Your email was changed", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	}
         }
     }
 }

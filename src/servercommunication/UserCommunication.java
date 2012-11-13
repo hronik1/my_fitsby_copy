@@ -136,6 +136,20 @@ public class UserCommunication {
 		}
 	}
 	
+	public static StatusResponse changeEmail(String email, String userId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+        try {
+			params.add(new BasicNameValuePair("email", email));
+			params.add(new BasicNameValuePair("user_id", userId));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "change_email", params);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
+		}
+	}
+	
 	public static UserResponse jsonToUserResponse(JSONObject json) {
 		try {
 			if (json.get("status").toString().equals("okay")) {
