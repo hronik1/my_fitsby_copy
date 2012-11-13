@@ -310,6 +310,7 @@ public class CreditCardActivity extends Activity {
         	if (response.wasSuccessful()) {
         		try {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
+            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, ((ApplicationUser)getApplicationContext()).getLeagueId());
             		startActivity(intent);
         		} catch(Exception e) {
         		}

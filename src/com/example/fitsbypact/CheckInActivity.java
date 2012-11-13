@@ -45,6 +45,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -231,6 +232,10 @@ public class CheckInActivity extends Activity {
 	            case MESSAGE_STOP_TIMER:
 	            	Log.d(TAG, "stopTimer");
 	                mHandler.removeMessages(MESSAGE_UPDATE_TIMER);
+	                timeSeconds = 0;
+	                timeMinutes = 0;
+	                secondsTV.setText("00");
+	                minutesTV.setText("00");
 	                break;
 
 	            default:
@@ -415,22 +420,24 @@ public class CheckInActivity extends Activity {
 			return;
 		} 
 		if (timeMinutes < 45) {
-			Toast toast = Toast.makeText(getApplicationContext(),
-					"Hey buddy, you have to be at the gym for at least 45 minutes before you can checkout",
-					Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.CENTER, 0, 0);
-			toast.show();
-			return;
+		  	AlertDialog.Builder builder = new AlertDialog.Builder(CheckInActivity.this);
+	    	builder.setMessage("Hey, you have to be here for 45 minutes for the checkin to count for your score, sure you want to?")
+	    			.setCancelable(false)
+	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+	    				public void onClick(DialogInterface dialog, int id) {
+	    	        		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
+	    	        		checkinLocationTV.setText("You are not currently checked into a gym");
+	    	        		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
+	    				}
+	    			})
+	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+	    				public void onClick(DialogInterface dialog, int id) {
+	    					dialog.cancel();
+	    				}
+	    			}).show();
+	    	return;
 		}
 		
-		//TODO increase checkouts by 1
-//		for(LeagueMember member: mLeagueMemberList) {
-//			if(member.getCheckins() == member.getCheckouts() + 1) {
-//				member.setCheckouts(member.getCheckins());
-//				mLeagueMemberTableHandler.updateLeagueMember(member);
-//			}
-//		}
-//		new CheckoutAsyncTask().execute(mUser.getID());
 
 		new CheckoutAsyncTask().execute(mUser.getID());
 	}
