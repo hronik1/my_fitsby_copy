@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 public class LeagueLandingActivity extends Activity {
 
 	private final static String TAG = "LeagueLandingActivity";
@@ -62,7 +64,7 @@ public class LeagueLandingActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Game Landing Activity");
         Log.i(TAG, "onStart");

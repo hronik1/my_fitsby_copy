@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
+
+import constants.FlurryConstants;
 import responses.UserResponse;
 
 public class RegisterActivity extends Activity {
@@ -93,7 +95,7 @@ public class RegisterActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Register Activity");
         Log.i(TAG, "onStart");

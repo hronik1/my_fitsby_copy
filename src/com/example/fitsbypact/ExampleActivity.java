@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Menu;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 
 public class ExampleActivity extends Activity {
 
@@ -51,7 +53,7 @@ public class ExampleActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
         Log.i(TAG, "onStart");
     }

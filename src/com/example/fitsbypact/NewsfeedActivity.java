@@ -48,6 +48,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 
 public class NewsfeedActivity extends Activity {
 //	implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -133,7 +135,7 @@ public class NewsfeedActivity extends Activity {
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");	    
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();	    
 	    FlurryAgent.logEvent("Newsfeed Activity");
 	    Log.i(TAG, "onStart");

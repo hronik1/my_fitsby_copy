@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 public class LoginActivity extends Activity {
 
 	private static final String TAG = "LoginActivity";
@@ -90,7 +92,7 @@ public class LoginActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Log In Activity");
         Log.i(TAG, "onStart");

@@ -57,6 +57,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
+import constants.FlurryConstants;
+
 public class CheckInActivity extends Activity {
 
 	private final static int MESSAGE_START_TIMER = 0;
@@ -146,7 +148,7 @@ public class CheckInActivity extends Activity {
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    FlurryAgent.onStartSession(this, "SPXCFGBJFSSSYQM6YD2X");
+	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
 	    FlurryAgent.logEvent("Check In");
 	    Log.i(TAG, "onStart");
