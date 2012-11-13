@@ -19,6 +19,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
+                android:maxHeight="80dp"
+                android:maxWidth="80dp"
                 android:contentDescription="@string/me_imageview_desc"
                 android:src="@drawable/profile_picture_placeholder" />
 

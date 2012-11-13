@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import dbtables.User;
 
 import responses.StatsResponse;
+import responses.StatusResponse;
 import responses.UserResponse;
 
 import android.util.Log;
@@ -117,6 +118,24 @@ public class UserCommunication {
 		}
 	}
 
+	/**
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public static StatusResponse resetPassword(String email) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+        try {
+			params.add(new BasicNameValuePair("email", email));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "reset_password", params);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
+		}
+	}
+	
 	public static UserResponse jsonToUserResponse(JSONObject json) {
 		try {
 			if (json.get("status").toString().equals("okay")) {

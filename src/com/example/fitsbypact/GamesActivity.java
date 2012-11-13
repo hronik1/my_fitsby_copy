@@ -216,7 +216,7 @@ public class GamesActivity extends Activity {
 		durationTV = (TextView)findViewById(R.id.input_duration);
 		potTV = (TextView)findViewById(R.id.input_pot);
 		startTV = (TextView)findViewById(R.id.input_date);
-		daysLeftTV = (TextView)findViewById(R.id.days_left);
+		daysLeftTV = (TextView)findViewById(R.id.days_left_prompt);
 		
 		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
 		wagerPromptTV = (TextView)findViewById(R.id.games_wager_prompt);
@@ -491,7 +491,7 @@ public class GamesActivity extends Activity {
         	mProgressDialog.dismiss();
         	
         	if (response.wasSuccessful()) {
-        		daysLeftTV.setText(response.getDaysLeft());
+        		daysLeftTV.setText("Days left: " + response.getDaysLeft());
         	}
         		
         }

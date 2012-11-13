@@ -1,5 +1,8 @@
 package com.example.fitsbypact;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import responses.StatsResponse;
 import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;
@@ -9,10 +12,13 @@ import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 import dbtables.Stats;
 import dbtables.User;
 import widgets.NavigationBar;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -20,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +35,7 @@ import com.flurry.android.FlurryAgent;
 public class MeActivity extends Activity {
 
 	private final static String TAG = "MeActivity";
+	private final static int PICK_PHOTO_REQUEST = 1;
 	
 	private TextView nameTV;
 	private TextView joinTV;
@@ -41,6 +49,8 @@ public class MeActivity extends Activity {
 	private EditText oldPasswordET;
 	private EditText newPasswordET;
 	private EditText newPasswordConfirmET;
+	
+	private ImageView profileIV;
 	
 	private NavigationBar navigation;
 	
@@ -63,6 +73,7 @@ public class MeActivity extends Activity {
         initializeTextViews();
         initializeButtons();
         initializeEditTexts();
+        initializeImageView();
         
         new StatsAsyncTask().execute(mUser.getID());
     }
@@ -136,6 +147,33 @@ public class MeActivity extends Activity {
 		Log.i(TAG, "onDestroy");
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == PICK_PHOTO_REQUEST) {
+
+	        if (resultCode == RESULT_OK) {
+	        	Uri selectedImage = data.getData();
+	        	try {
+					InputStream fileInputStream=this.getContentResolver().openInputStream(selectedImage);
+					Bitmap bitmap = BitmapFactory.decodeStream(fileInputStream);
+					//TODO set profile picture to proper size
+					//profileIV.setImageBitmap(bitmap);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        } else if (resultCode == RESULT_CANCELED) {
+	    		Toast toast = Toast.makeText(MeActivity.this, "Sorry, but you did not select a photo",
+	    				Toast.LENGTH_LONG);
+	    		toast.setGravity(Gravity.CENTER, 0, 0);
+	    		toast.show();
+	        }
+	        
+	        //TODO actually change picture
+	        
+	    }
+	}
+	
 	/**
 	 * initialized NavigationBar for use
 	 */
@@ -200,6 +238,13 @@ public class MeActivity extends Activity {
 	}
 	
 	/**
+	 * initializes the imageview
+	 */
+	private void initializeImageView() {
+		profileIV = (ImageView)findViewById(R.id.me_imageview);
+	}
+	
+	/**
 	 * logs the user out
 	 */
 	private void logout() {
@@ -211,6 +256,9 @@ public class MeActivity extends Activity {
 	 */
 	private void changePicture() {
 		//TODO figure out how to do and then implement
+		Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+		photoPickerIntent.setType("image/*");
+		startActivityForResult(photoPickerIntent, PICK_PHOTO_REQUEST);
 	}
 	
 	/**
@@ -218,6 +266,41 @@ public class MeActivity extends Activity {
 	 */
 	private void submit() {
 		//TODO figure out what need to be submit and then submit it
+	}
+	
+	/**
+	 * call to change a users email
+	 */
+	private void changePassword() {
+		//TODO implement 
+		String oldPassword = oldPasswordET.getText().toString();
+		String newPassword = newPasswordET.getText().toString();
+		String newPasswordConfirm = newPasswordConfirmET.getText().toString();
+		if (oldPassword.equals("") || newPassword.equals("") || newPasswordConfirm.equals("")) {
+    		Toast toast = Toast.makeText(MeActivity.this, "Sorry, but all " +
+    				"password related fields must be filled out in order to change your password.",
+    				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
+		}
+		
+		//TODO add in asynccall to server
+	}
+	
+	/**
+	 * call to change a user's email
+	 */
+	private void changeEmail() {
+		String email = emailET.getText().toString();
+		if (email.equals("")) {
+    		Toast toast = Toast.makeText(MeActivity.this, "Sorry, you must fill out your email," +
+    				"so we can send you the change email form",
+    				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
+		}
+		
+		//TODO add in change email async call to server
 	}
 	
     /**
