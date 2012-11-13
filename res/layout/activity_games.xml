@@ -135,6 +135,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/games_spinner"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/custom_login_button"
         android:text="@string/invite_friends_button"
         android:textColor="@color/white"
