@@ -328,7 +328,7 @@ public class MeActivity extends Activity {
         		joinTV.append(" " + stats.getJoinedMonth() + "/" + stats.getJoinedDay() + "/" + stats.getJoinedYear());
         		
         	} else {
-        		Toast toast = Toast.makeText(MeActivity.this, "Sorry, but since there doesn't appear to be an internet connection at the moment, game statistics may be inaccurate.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(MeActivity.this, "Sorry, but since there doesn't appear to be an internet connection at the moment, user statistics may be inaccurate.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         		earningsTV.setText(" $0");

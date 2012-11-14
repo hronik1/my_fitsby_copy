@@ -248,6 +248,7 @@ public class LeagueJoinDetailActivity extends Activity {
  		appData.setUserId(mApplicationUser.getUser().getID());
  		appData.setLeagueId(leagueId);
  		Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
+ 		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, leagueId);
  		intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
  		startActivity(intent);
  	}

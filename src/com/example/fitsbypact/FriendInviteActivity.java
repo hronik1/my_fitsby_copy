@@ -57,7 +57,7 @@ public class FriendInviteActivity extends Activity {
 	private ArrayAdapter<String> contactsAdapter;
 	
 	private ProgressDialog mProgressDialog;
-	private String leagueId;
+	private int leagueId;
 	private String creatorName;
 	
 	/**
@@ -74,7 +74,7 @@ public class FriendInviteActivity extends Activity {
        // initializeListView();
         parseBundle(getIntent());
         
-        new CreatorAsyncTask().execute(leagueId);
+        new CreatorAsyncTask().execute(leagueId+"");
     }
 
     /**
@@ -225,7 +225,7 @@ public class FriendInviteActivity extends Activity {
     		Toast.makeText(getApplicationContext(), "no bundle", Toast.LENGTH_LONG).show();
     	}
     		
-    	leagueId = extras.getString(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
+    	leagueId = extras.getInt(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
     }
     /**
      * invite your friends selected from the content provider
@@ -320,7 +320,7 @@ public class FriendInviteActivity extends Activity {
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
-        	CreatorResponse response = LeagueCommunication.getCreator(leagueId);
+        	CreatorResponse response = LeagueCommunication.getCreator(leagueId+"");
         	return response;
         }
 

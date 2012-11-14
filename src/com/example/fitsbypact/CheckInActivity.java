@@ -65,7 +65,7 @@ public class CheckInActivity extends Activity {
 	private final static int MESSAGE_UPDATE_TIMER = 1;
 	private final static int MESSAGE_STOP_TIMER = 2;
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
-	private final static int DEFAULT_PLACES_RADIUS = 1200; //200 meters
+	private final static int DEFAULT_PLACES_RADIUS = 200; //200 meters
 	
 	private final static String TAG = "CheckInActivity";
 	
@@ -95,6 +95,8 @@ public class CheckInActivity extends Activity {
 	private String gym;
 	private ProgressDialog mProgressDialog;
 
+	double longitude;
+	double latitude;
 	/**
 	 * called when Activity is created
 	 */
@@ -347,8 +349,8 @@ public class CheckInActivity extends Activity {
 //			Toast.makeText(getApplicationContext(), bestResult.toString(), Toast.LENGTH_LONG).show();
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
 //			Location location = service.getLastKnownLocation(LOCATION_SERVICE);
-			double latitude = bestResult.getLatitude();
-			double longitude = bestResult.getLongitude();
+			latitude = bestResult.getLatitude();
+			longitude = bestResult.getLongitude();
 //			String uri = buildPlacesUri(latitude, longitude, DEFAULT_PLACES_RADIUS, true);
 			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
 					longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
@@ -431,6 +433,7 @@ public class CheckInActivity extends Activity {
 	    	        		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
 	    	        		checkinLocationTV.setText("You are not currently checked into a gym");
 	    	        		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
+	    	        		checkedIn = false;
 	    				}
 	    			})
 	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
@@ -573,11 +576,47 @@ public class CheckInActivity extends Activity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but it appears that you are not at a verified gym", Toast.LENGTH_LONG);
+        		new GooglePlacesSearchAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
+				longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
+        	} else {
+        		gym = response.getGyms().get(0);
+				new CheckinAsyncTask().execute(mUser.getID());
+        	}
+        }
+	}
+	
+	private class GooglePlacesSearchAsyncTask extends AsyncTask<String, Void, PlacesResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
+                    "Finding nearby rec centers...");
+		}
+		
+        protected PlacesResponse doInBackground(String... params) {
+        	PlacesResponse response = CheckinCommunication.getNearbyRecCenter(params[0],
+        			params[1], params[2], params[3], params[4]);
+        	return response;
+        }
+
+        protected void onPostExecute(PlacesResponse response) {
+        	mProgressDialog.dismiss();
+        	if (response == null) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
+    			toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} else if (response.getGyms().isEmpty()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there appears to be no gym or rec centers near you", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {
         		gym = response.getGyms().get(0);
+        		for (String temp: response.getGyms()) {
+            		Toast toast = Toast.makeText(getApplicationContext(), temp, Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+        			toast.show();
+        		}
 				new CheckinAsyncTask().execute(mUser.getID());
         	}
         }
