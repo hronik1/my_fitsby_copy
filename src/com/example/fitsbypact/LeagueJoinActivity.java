@@ -168,7 +168,7 @@ public class LeagueJoinActivity extends FragmentActivity
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		} else
-    		new FindGamesAsyncTask().execute(id, firstName);
+    		new FindGamesAsyncTask().execute(id, firstName, mUser.getID() + "");
     }
     
     /**
@@ -262,7 +262,7 @@ public class LeagueJoinActivity extends FragmentActivity
      */
     private class FindGamesAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
         protected PrivateLeagueResponse doInBackground(String... params) {
-        	PrivateLeagueResponse response = LeagueCommunication.getPrivateLeague(params[0], params[1]);
+        	PrivateLeagueResponse response = LeagueCommunication.getPrivateLeague(params[0], params[1], params[2]);
         	return response;
         }
 

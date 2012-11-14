@@ -50,12 +50,13 @@ public class LeagueCommunication {
 		}
 	}
 	
-	public static PrivateLeagueResponse getPrivateLeague(String id, String firstName) {
+	public static PrivateLeagueResponse getPrivateLeague(String id, String firstName, String userId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         try {  
 	        nameValuePairs.add(new BasicNameValuePair("game_id", id));
 			nameValuePairs.add(new BasicNameValuePair("first_name_of_creator", firstName));
+			nameValuePairs.add(new BasicNameValuePair("user_id", userId));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "get_private_game_info", nameValuePairs);
 			return PrivateLeagueResponse.jsonToPrivateLeagueResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {

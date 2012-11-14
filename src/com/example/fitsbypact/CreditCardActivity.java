@@ -217,7 +217,7 @@ public class CreditCardActivity extends Activity {
     	ApplicationUser appData = (ApplicationUser)getApplicationContext();
     	if (appData.getCreate()) {
     		new CreateLeagueAsyncTask().execute(appData.getUserId()+"", appData.getDuration()+"",
-    				appData.getIsPrivate()+"", appData.getWager()+"", appData.getFirstName());
+    				appData.getIsPrivateString(), appData.getWager()+"", appData.getFirstName());
     	} else if (appData.getJoin()) {
     		new JoinLeagueAsyncTask().execute(appData.getUserId(), appData.getLeagueId());
     	}

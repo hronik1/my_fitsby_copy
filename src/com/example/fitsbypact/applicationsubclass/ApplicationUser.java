@@ -74,6 +74,13 @@ public class ApplicationUser extends Application {
 	public int getIsPrivate() {
 		return isPrivate;
 	}
+	
+	public String getIsPrivateString() {
+		if (isPrivate == 0)
+			return "false";
+		else
+			return "true";
+	}
 
 	public void setIsPrivate(int isPrivate) {
 		this.isPrivate = isPrivate;
