@@ -163,7 +163,7 @@
             android:layout_alignRight="@+id/credit_card_tv_wager"
             android:layout_below="@+id/credit_card_tv_wager"
             android:text="@string/thirty_cents_charge_text"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/white" />
         
                 <Button
