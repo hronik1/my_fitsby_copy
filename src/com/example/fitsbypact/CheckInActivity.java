@@ -65,7 +65,7 @@ public class CheckInActivity extends Activity {
 	private final static int MESSAGE_UPDATE_TIMER = 1;
 	private final static int MESSAGE_STOP_TIMER = 2;
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
-	private final static int DEFAULT_PLACES_RADIUS = 200; //200 meters
+	private final static int DEFAULT_PLACES_RADIUS = 50; //200 meters
 	
 	private final static String TAG = "CheckInActivity";
 	

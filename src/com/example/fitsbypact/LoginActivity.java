@@ -211,7 +211,7 @@ public class LoginActivity extends Activity {
     	forgotPasswordTV.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showAlertInput();
+				//showAlertInput();
 			}
     	});
     }

@@ -22,7 +22,7 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
-    <string name="login_forgot_password_text">Forgot your password? Tap here.</string>
+    <string name="login_forgot_password_text">Forgot your password? Resetting it is coming soon</string>
     <string name="fitsby_description">Earn money by going to the gym, paid for by people who didn\'t go. \n \n
         							  Fitsby is a game where you compete with friends or strangers on the amount of times you check in at the gym. \n \n
   									  Everyone places an agreed-upon wager amount, and the top 3 gym-goers are rewarded money from the losing players at the end of the game. \n \n
@@ -159,7 +159,7 @@
     <string name="header_settings_text">Settings</string>
     <string name="title_activity_settings">Settings</string>
     <string name="me_settings_tv_change_email_text">Change Email: </string>
-    <string name="me_settings_et_change_email_hint">[current email]</string>
+    <string name="me_settings_et_change_email_hint">Enter new email</string>
     <string name="me_settings_tv_change_password_text">Change Password (coming soon): </string>
     <string name="me_settings_et_old_password_hint">Current Password</string>
     <string name="me_settings_et_new_password_hint">New Password</string>
