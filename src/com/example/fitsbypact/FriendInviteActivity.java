@@ -30,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -192,14 +193,19 @@ public class FriendInviteActivity extends Activity {
 			public void onItemClick(AdapterView<?> parentView, View view, final int position,
 					long id) {
 			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
+		    	
+			  	final EditText input = new EditText(FriendInviteActivity.this);
+			  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
+		    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
+		    	builder.setView(input);
+		    	
 		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position) +
 		    			" is your email.")
 		    			.setCancelable(false)
 		    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 		    				public void onClick(DialogInterface dialog, int id) {
 		    				    SmsManager smsManager = SmsManager.getDefault();
-		    				    smsManager.sendTextMessage(contacts.get(position), null, "Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
-		    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId, null, null);
+		    				    smsManager.sendTextMessage(contacts.get(position), null, input.getText().toString(), null, null);
 		    				}
 		    			})
 		    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
@@ -357,14 +363,18 @@ public class FriendInviteActivity extends Activity {
         	mProgressDialog.dismiss();
         	
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
-	    	builder.setMessage("Please confirm that you want to send an invite to " + number +
-	    			" is your email.")
+		  	
+		  	final EditText input = new EditText(FriendInviteActivity.this);
+		  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
+	    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
+	    	builder.setView(input);
+	    	
+	    	builder.setMessage("Edit personal message to your friend")
 	    			.setCancelable(false)
 	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
 	    				    SmsManager smsManager = SmsManager.getDefault();
-	    				    smsManager.sendTextMessage(number, null, "Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
-	    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId, null, null);
+	    				    smsManager.sendTextMessage(number, null, input.getText().toString(), null, null);
 	    				}
 	    			})
 	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {

@@ -207,6 +207,7 @@ public class MeActivity extends Activity {
 	 */
 	private void initializeEditTexts() {
 		emailET = (EditText)findViewById(R.id.me_settings_et_change_email);
+		emailET.setText(mUser.getEmail());
 		oldPasswordET = (EditText)findViewById(R.id.me_settings_et_old_password);
 		newPasswordET = (EditText)findViewById(R.id.me_settings_et_new_password);
 		newPasswordConfirmET = (EditText)findViewById(R.id.me_settings_et_new_password_confirm);
