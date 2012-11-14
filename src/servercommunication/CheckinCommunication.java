@@ -101,7 +101,7 @@ public class CheckinCommunication {
 	        nameValuePairs.add(new BasicNameValuePair("location", latitude + "," + longitude));
 	        nameValuePairs.add(new BasicNameValuePair("radius", radius));
 	        nameValuePairs.add(new BasicNameValuePair("sensor", sensorUsed));
-	        nameValuePairs.add(new BasicNameValuePair("query", "rec+center"));
+	        nameValuePairs.add(new BasicNameValuePair("query", "recreation"));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(
 					"https://maps.googleapis.com/maps/api/place/nearbysearch/json", nameValuePairs);
 			return PlacesResponse.jsonToPlacesResponse(MyHttpClient.parseResponse(serverResponse));
