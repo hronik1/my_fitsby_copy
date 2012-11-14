@@ -3,6 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+            <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -17,8 +23,7 @@
         android:id="@+id/league_create_button_create"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_below="@+id/league_create_faq_button"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -118,7 +123,7 @@
         android:id="@+id/league_create_faq_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/league_create_button_create"
+        android:layout_below="@+id/league_create_checkbox"
         android:layout_centerHorizontal="true"
         android:background="@drawable/faq_button_background"
         android:text="@string/faq_button"
@@ -133,5 +138,8 @@
         android:layout_toRightOf="@+id/league_create_ib_days_minus"
         android:contentDescription="@string/league_create_ib_days_plus_text"
         android:text="@string/league_create_ib_days_plus" />
+    </RelativeLayout>
+    
+    </ScrollView>
     
 </RelativeLayout>
