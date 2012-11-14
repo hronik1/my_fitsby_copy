@@ -180,7 +180,6 @@ public class FriendInviteActivity extends Activity {
     }
     
     private void initializeListView() {
-		contactsListView = (ListView)findViewById(R.id.invite_friends_list);
 		contacts =  new ArrayList<String>();
 
 		contactsAdapter = new ArrayAdapter<String>(this,
