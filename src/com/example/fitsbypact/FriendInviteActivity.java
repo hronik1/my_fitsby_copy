@@ -216,7 +216,10 @@ public class FriendInviteActivity extends Activity {
     
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
-    	
+    	if (extras == null) {
+    		Toast.makeText(getApplicationContext(), "no bundle", Toast.LENGTH_LONG).show();
+    	}
+    		
     	leagueId = extras.getString(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
     }
     /**

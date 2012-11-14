@@ -493,7 +493,7 @@ public class GamesActivity extends Activity {
         	mProgressDialog.dismiss();
         	
         	if (response.wasSuccessful()) {
-        		daysLeftTV.setText("Days left: " + response.getDaysLeft());
+        		daysLeftTV.setText(response.getDaysLeft());
         	}
         		
         }
