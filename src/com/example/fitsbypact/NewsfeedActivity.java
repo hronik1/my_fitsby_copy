@@ -315,6 +315,7 @@ public class NewsfeedActivity extends Activity {
      */
     private class AddCommentAsyncTask extends AsyncTask<String, Void, StatusResponse> {
 		protected void onPreExecute() {
+			commentET.setText("");
             mProgressDialog = ProgressDialog.show(NewsfeedActivity.this, "",
                     "Submitting your comment...");
 		}
@@ -327,6 +328,7 @@ public class NewsfeedActivity extends Activity {
         protected void onPostExecute(StatusResponse response) {
         	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
+        		
         		//Toast.makeText(getApplicationContext(), "comment successful", Toast.LENGTH_LONG).show();
         	} else {
         		Toast toast = Toast.makeText(getApplicationContext(), "Posting your comment failed", Toast.LENGTH_LONG); //changed from 'comment fail' as the toast

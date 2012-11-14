@@ -70,7 +70,7 @@ public class FriendInviteActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         initializeButtons(); 
-        initializeListView();
+       // initializeListView();
         parseBundle(getIntent());
         
         new CreatorAsyncTask().execute(leagueId);

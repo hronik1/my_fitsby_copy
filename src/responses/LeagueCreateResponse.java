@@ -25,8 +25,9 @@ public class LeagueCreateResponse {
 	}
 	
 	public static LeagueCreateResponse jsonToLeagueCreateResponse(JSONObject json) {
-		Log.d(TAG, json.toString());
+
 		try {
+			Log.d(TAG, json.toString());
 			String status = json.getString("status");
 			String gameId = json.getString("game_id");
 			return new LeagueCreateResponse(status, gameId);
