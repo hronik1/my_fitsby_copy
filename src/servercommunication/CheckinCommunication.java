@@ -8,14 +8,18 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.fitsbypact.R;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
+import responses.AddPlaceResponse;
 import responses.PlacesResponse;
 import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
@@ -109,5 +113,42 @@ public class CheckinCommunication {
         	Log.d(TAG, e.toString());
         	return null;
         }
+	}
+	
+	/**
+	 * attempt to add a gym to the google places api
+	 * @param key
+	 * @param latitude
+	 * @param longitude
+	 * @param radius
+	 * @param sensorUsed
+	 * @param gymName
+	 * @return
+	 */
+	public static AddPlaceResponse addGym(String key, String latitude, String longitude,
+			String radius, String sensorUsed, String gymName) {
+		
+		MyHttpClient myHttpClient = new MyHttpClient();
+        try {  
+        	JSONObject json = new JSONObject();
+        	JSONObject location = new JSONObject();
+        	location.put("lat", Double.parseDouble(latitude));
+        	location.put("lng", Double.parseDouble(longitude));
+        	json.put("location", location);
+    		json.put("accuracy", Integer.parseInt(radius));
+    		json.put("name", gymName);
+    		JSONArray typeArray = new JSONArray();
+    		typeArray.put("gym");
+    		json.put("types", typeArray);
+    		Log.d(TAG, json.toString());
+            StringEntity stringEntity = new StringEntity(json.toString()); 
+			ServerResponse serverResponse = myHttpClient.createPostRequest(
+					"https://maps.googleapis.com/maps/api/place/add/json?sensor=" + sensorUsed + "&key=" + key, stringEntity);
+			return AddPlaceResponse.jsonToAddPlaceResponse(MyHttpClient.parseResponse(serverResponse));
+        } catch (Exception e) {
+        	Log.d(TAG, e.toString());
+        	return null;
+        }
+        
 	}
 }
