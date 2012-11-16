@@ -27,8 +27,8 @@
         							  Fitsby is a game where you compete with friends or strangers on the amount of times you check in at the gym. \n \n
   									  Everyone places an agreed-upon wager amount, and the top 3 gym-goers are rewarded money from the losing players at the end of the game. \n \n
   									  You will never be charged money unless you lose a game.</string>
-	<string name="title_activity_help">Get Started</string>
-	<string name="help_button_text">Next</string>  									  
+    <string name="title_activity_help">Get Started</string>
+    <string name="help_button_text">Next</string>
     <string name="title_activity_league_landing">Start A Game</string>
     <string name="league_landing_create_text">Create A Game</string>
     <string name="league_landing_join_text">Join A Game</string>
@@ -177,9 +177,8 @@
     <string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
     <string name="faq_button">Read the FAQ</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
-    
     <string name="game_start_date">Start Date:  </string>
     <string name="game_start_date_value">10/12/2012</string>
-    
-	
+    <string name="title_activity_loggedin">LoggedinActivity</string>
+
 </resources>

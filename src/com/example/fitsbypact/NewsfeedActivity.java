@@ -23,7 +23,6 @@ import dbtables.User;
 import widgets.NavigationBar;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -229,7 +228,6 @@ public class NewsfeedActivity extends Activity {
 	/**
 	 * initialize the listview
 	 */
-	@SuppressLint("NewApi")
 	private void initializeListView() {
 		newsfeedLV = (ListView)findViewById(R.id.newsfeed_list_view);
 		newsfeedLV.setOnItemClickListener(new OnItemClickListener() {
@@ -393,7 +391,6 @@ public class NewsfeedActivity extends Activity {
         	return cursor;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(Cursor cursor) {
         	mProgressDialog.dismiss();
         	mAdapter.swapCursor(cursor);

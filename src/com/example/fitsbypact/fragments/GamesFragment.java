@@ -27,7 +27,7 @@ import dbhandlers.UserTableHandler;
 import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -55,7 +55,7 @@ public class GamesFragment extends Fragment {
 
 	private static final String TAG = "GamesActivity";
 	
-	private NavigationBar navigation;
+	private Activity parent;
 	
 	private TextView playersPromptTV;
 	private TextView durationPromptTV;
@@ -103,9 +103,6 @@ public class GamesFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    View viewer = (View) inflater.inflate(R.layout.activity_check_in, container, false);
 	    Log.i(TAG, "onCreateView");
-
-	    mApplicationUser = ((ApplicationUser)getApplicationContext());
-	    user = mApplicationUser.getUser();
 	    
 	    initializeSpinner(viewer);
 	    initializeTextViews(viewer);
@@ -119,50 +116,61 @@ public class GamesFragment extends Fragment {
 	}
 	
 	/**
+	 * callback for when this fragment is attached to a view
+	 */
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		parent = activity;
+
+		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
+		user = mApplicationUser.getUser();
+	}
+	
+	/**
 	 * initialize the text views
 	 */
-	private void initializeTextViews() {
-		playersTV = (TextView)findViewById(R.id.input_players);
-		wagerTV = (TextView)findViewById(R.id.input_wager);
-		durationTV = (TextView)findViewById(R.id.input_duration);
-		potTV = (TextView)findViewById(R.id.input_pot);
-		startTV = (TextView)findViewById(R.id.input_date);
-		daysLeftTV = (TextView)findViewById(R.id.days_left_prompt);
+	private void initializeTextViews(View viewer) {
+		playersTV = (TextView)viewer.findViewById(R.id.input_players);
+		wagerTV = (TextView)viewer.findViewById(R.id.input_wager);
+		durationTV = (TextView)viewer.findViewById(R.id.input_duration);
+		potTV = (TextView)viewer.findViewById(R.id.input_pot);
+		startTV = (TextView)viewer.findViewById(R.id.input_date);
+		daysLeftTV = (TextView)viewer.findViewById(R.id.days_left_prompt);
 		
-		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
-		wagerPromptTV = (TextView)findViewById(R.id.games_wager_prompt);
-		durationPromptTV = (TextView)findViewById(R.id.games_duration_prompt);
-		potPromptTV = (TextView)findViewById(R.id.games_pot_prompt);
-		noGamesPromptTV = (TextView)findViewById(R.id.games_no_games_prompt);
+		playersPromptTV = (TextView)viewer.findViewById(R.id.games_player_prompt);
+		wagerPromptTV = (TextView)viewer.findViewById(R.id.games_wager_prompt);
+		durationPromptTV = (TextView)viewer.findViewById(R.id.games_duration_prompt);
+		potPromptTV = (TextView)viewer.findViewById(R.id.games_pot_prompt);
+		noGamesPromptTV = (TextView)viewer.findViewById(R.id.games_no_games_prompt);
 		noGamesPromptTV.setVisibility(View.INVISIBLE);
-		startPromptTV = (TextView)findViewById(R.id.games_start_date_prompt);
+		startPromptTV = (TextView)viewer.findViewById(R.id.games_start_date_prompt);
 	}
 	
 	/**
 	 * initializes the progress bar
 	 */
-	private void initializeProgressBar() {
-		progressBar = (ProgressBar)findViewById(R.id.games_progress_bar);
+	private void initializeProgressBar(View viewer) {
+		progressBar = (ProgressBar)viewer.findViewById(R.id.games_progress_bar);
 	}
 	
 	/**
 	 * initializes the list view
 	 */
-	@SuppressLint("NewApi")
-	private void initializeListView() {
-		leadersLV = (ListView)findViewById(R.id.games_leader_list);
-		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
+	private void initializeListView(View viewer) {
+		leadersLV = (ListView)viewer.findViewById(R.id.games_leader_list);
+		mAdapter = new SimpleCursorAdapter(parent, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
 		leadersLV.setAdapter(mAdapter);
 	}
 	
 	/**
 	 * initializes the spinner
 	 */
-	private void initializeSpinner() {
-		gamesSpinner = (Spinner)findViewById(R.id.games_spinner);
+	private void initializeSpinner(View viewer) {
+		gamesSpinner = (Spinner)viewer.findViewById(R.id.games_spinner);
 		spinnerData =  new ArrayList<String>();
 
-		spinnerDataAdapter = new ArrayAdapter<String>(this,
+		spinnerDataAdapter = new ArrayAdapter<String>(parent,
 				android.R.layout.simple_spinner_item, spinnerData);
 		spinnerDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		gamesSpinner.setAdapter(spinnerDataAdapter);
@@ -188,8 +196,8 @@ public class GamesFragment extends Fragment {
 	/**
 	 * initializes Buttons
 	 */
-	private void initializeButtons() {
-		inviteButton = (Button)findViewById(R.id.invite_friends_button);
+	private void initializeButtons(View viewer) {
+		inviteButton = (Button)viewer.findViewById(R.id.invite_friends_button);
 		inviteButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -198,7 +206,7 @@ public class GamesFragment extends Fragment {
 			}
 		});
 		
-		newGamesButton = (Button)findViewById(R.id.games_button_newgame);
+		newGamesButton = (Button)viewer.findViewById(R.id.games_button_newgame);
 		newGamesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -210,13 +218,13 @@ public class GamesFragment extends Fragment {
 	private void gotoInviteActivity() {
 		
 		if (spinnerData.isEmpty()) {
-	   		Toast toast = Toast.makeText(this, "Sorry, but you can't invite friends since you aren't in any games", Toast.LENGTH_LONG);
+	   		Toast toast = Toast.makeText(parent, "Sorry, but you can't invite friends since you aren't in any games", Toast.LENGTH_LONG);
 	   		toast.setGravity(Gravity.CENTER, 0, 0);
 	   		toast.show();
 	   		return;
 		}
 			
-		Intent intent = new Intent(GamesActivity.this, FriendInviteActivity.class);
+		Intent intent = new Intent(parent, FriendInviteActivity.class);
 		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
 
 		startActivity(intent);
@@ -228,12 +236,12 @@ public class GamesFragment extends Fragment {
 	 */
 	private void gotoLeagueLandingActivity() {
 		try {
-			Intent intent = new Intent(this, LeagueLandingActivity.class);
+			Intent intent = new Intent(parent, LeagueLandingActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
 			//remove in deployment
 			String stackTrace = android.util.Log.getStackTraceString(e);
-			Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+			Toast toast = Toast.makeText(parent, stackTrace,
 					Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
@@ -261,7 +269,7 @@ public class GamesFragment extends Fragment {
     private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+            mProgressDialog = ProgressDialog.show(parent, "",
                     "Finding your games...");
 		}
 		
@@ -274,11 +282,11 @@ public class GamesFragment extends Fragment {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we weren't able to grab the data for your game", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Sorry, but we weren't able to grab the data for your game", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         		disableGamesPrompts();
@@ -307,7 +315,6 @@ public class GamesFragment extends Fragment {
         	return cursor;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(Cursor cursor) {
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
@@ -323,7 +330,7 @@ public class GamesFragment extends Fragment {
     private class GameInfoAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+            mProgressDialog = ProgressDialog.show(parent, "",
                     "Gathering game data...");
 		}
 		
@@ -332,7 +339,6 @@ public class GamesFragment extends Fragment {
         	return response;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(PrivateLeagueResponse response) {
         	mProgressDialog.dismiss();
         	
@@ -357,7 +363,7 @@ public class GamesFragment extends Fragment {
     private class DaysRemainingAsyncTask extends AsyncTask<String, Void, CountdownResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+            mProgressDialog = ProgressDialog.show(parent, "",
                     "Gathering game data...");
 		}
 		
@@ -366,7 +372,6 @@ public class GamesFragment extends Fragment {
         	return response;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(CountdownResponse response) {
         	mProgressDialog.dismiss();
         	

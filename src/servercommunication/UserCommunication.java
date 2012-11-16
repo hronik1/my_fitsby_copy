@@ -152,6 +152,7 @@ public class UserCommunication {
 	
 	public static UserResponse jsonToUserResponse(JSONObject json) {
 		try {
+			Log.d(TAG, json.toString());
 			if (json.get("status").toString().equals("okay")) {
 				String firstName = json.getString("first_name");
 				String lastName = json.getString("last_name");

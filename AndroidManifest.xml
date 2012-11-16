@@ -73,8 +73,8 @@
         <activity
             android:name=".LeagueJoinActivity"
             android:label="@string/title_activity_league_join"
-            android:screenOrientation="portrait" 
-            android:windowSoftInputMode="stateHidden">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".GamesActivity"
@@ -84,14 +84,14 @@
         <activity
             android:name=".NewsfeedActivity"
             android:label="@string/title_activity_newsfeed"
-            android:screenOrientation="portrait" 
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".CheckInActivity"
             android:label="@string/title_activity_check_in"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance" >
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MeActivity"
@@ -112,6 +112,11 @@
         <activity
             android:name=".HelpActivity"
             android:label="@string/title_activity_help" >
+        </activity>
+        <activity
+            android:name=".LoggedinActivity"
+            android:label="@string/title_activity_loggedin" >
+
         </activity>
     </application>
 

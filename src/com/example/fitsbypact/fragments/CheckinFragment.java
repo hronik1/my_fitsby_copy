@@ -99,14 +99,17 @@ public class CheckinFragment extends Fragment{
         return viewer;
 	}
 	
-	   @Override
-	    public void onAttach(Activity activity) {
-	        super.onAttach(activity);
-	        parent = activity;
-	        
-	        mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
-	        mUser = mApplicationUser.getUser();
-	    }
+	/**
+	 * callback for when this fragment is attached to a view
+	 */
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		parent = activity;
+
+		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
+		mUser = mApplicationUser.getUser();
+	}
 	   
 	/**
 	 * 
