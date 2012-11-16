@@ -225,6 +225,7 @@ public class GamesActivity extends Activity {
 		durationPromptTV = (TextView)findViewById(R.id.games_duration_prompt);
 		potPromptTV = (TextView)findViewById(R.id.games_pot_prompt);
 		noGamesPromptTV = (TextView)findViewById(R.id.games_no_games_prompt);
+		noGamesPromptTV.setVisibility(View.INVISIBLE);
 		startPromptTV = (TextView)findViewById(R.id.games_start_date_prompt);
 	}
 	
@@ -331,15 +332,16 @@ public class GamesActivity extends Activity {
 	}
 	
 	private void disableGamesPrompts() {
-		playersPromptTV.setText("");
-		wagerPromptTV.setText("");
-		durationPromptTV.setText("");
-		potPromptTV.setText("");
-		startPromptTV.setText("");
+		playersPromptTV.setVisibility(View.INVISIBLE);
+		wagerPromptTV.setVisibility(View.INVISIBLE);
+		durationPromptTV.setVisibility(View.INVISIBLE);
+		potPromptTV.setVisibility(View.INVISIBLE);
+		startPromptTV.setVisibility(View.INVISIBLE);
+		noGamesPromptTV.setVisibility(View.VISIBLE);
 	}
 	
 	private void disableNoGamesPrompts() {
-		noGamesPromptTV.setText("");
+		//noGamesPromptTV.setText("");
 	}
 	
     /** LoaderManager callBacks **/
