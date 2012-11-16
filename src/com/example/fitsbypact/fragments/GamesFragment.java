@@ -1,0 +1,380 @@
+package com.example.fitsbypact.fragments;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import responses.CountdownResponse;
+import responses.PrivateLeagueResponse;
+import responses.UsersGamesResponse;
+import servercommunication.GamesLeaderCommunication;
+import servercommunication.LeagueCommunication;
+
+import widgets.NavigationBar;
+
+import bundlekeys.CreditCardBundleKeys;
+
+import com.example.fitsbypact.FriendInviteActivity;
+import com.example.fitsbypact.GamesActivity;
+import com.example.fitsbypact.LeagueLandingActivity;
+import com.example.fitsbypact.R;
+
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
+import dbhandlers.DatabaseHandler;
+import dbhandlers.LeagueMemberTableHandler;
+import dbhandlers.LeagueTableHandler;
+import dbhandlers.UserTableHandler;
+import dbtables.League;
+import dbtables.LeagueMember;
+import dbtables.User;
+import android.annotation.SuppressLint;
+import android.app.Fragment;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
+
+public class GamesFragment extends Fragment {
+
+	private static final String TAG = "GamesActivity";
+	
+	private NavigationBar navigation;
+	
+	private TextView playersPromptTV;
+	private TextView durationPromptTV;
+	private TextView wagerPromptTV;
+	private TextView potPromptTV;
+	private TextView startPromptTV;
+	private TextView noGamesPromptTV;
+	
+	private TextView playersTV;
+	private TextView wagerTV;
+	private TextView durationTV;
+	private TextView potTV;
+	private TextView startTV;
+	private TextView daysLeftTV;
+	
+	private ProgressBar progressBar;
+	private ListView leadersLV;
+	private Spinner gamesSpinner;
+	private Button inviteButton;
+	private Button newGamesButton;
+	
+	private ArrayAdapter<String> spinnerDataAdapter;
+	private List<String> spinnerData;
+	
+	private SimpleCursorAdapter mAdapter;
+	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id"};
+	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
+			R.id.list_item_game_leader_checkins, R.id.rank};
+	private int spinnerPosition;
+	
+	private ApplicationUser mApplicationUser;
+	private DatabaseHandler mdbHandler;
+	private LeagueMemberTableHandler mLeagueMemberTableHandler;
+	private LeagueTableHandler mLeagueTableHandler;
+	
+	private List<LeagueMember> listLeagueMember;
+	private User user;
+	
+	private ProgressDialog mProgressDialog;
+	private String creatorFirstName;
+	/**
+	 * callback to add in the stats fragment
+	 */
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	    View viewer = (View) inflater.inflate(R.layout.activity_check_in, container, false);
+	    Log.i(TAG, "onCreateView");
+
+	    mApplicationUser = ((ApplicationUser)getApplicationContext());
+	    user = mApplicationUser.getUser();
+	    
+	    initializeSpinner(viewer);
+	    initializeTextViews(viewer);
+	    initializeProgressBar(viewer);
+	    initializeListView(viewer);
+	    initializeButtons(viewer);
+	    
+	    new SpinnerDataAsyncTask().execute();
+	    
+	    return viewer;
+	}
+	
+	/**
+	 * initialize the text views
+	 */
+	private void initializeTextViews() {
+		playersTV = (TextView)findViewById(R.id.input_players);
+		wagerTV = (TextView)findViewById(R.id.input_wager);
+		durationTV = (TextView)findViewById(R.id.input_duration);
+		potTV = (TextView)findViewById(R.id.input_pot);
+		startTV = (TextView)findViewById(R.id.input_date);
+		daysLeftTV = (TextView)findViewById(R.id.days_left_prompt);
+		
+		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
+		wagerPromptTV = (TextView)findViewById(R.id.games_wager_prompt);
+		durationPromptTV = (TextView)findViewById(R.id.games_duration_prompt);
+		potPromptTV = (TextView)findViewById(R.id.games_pot_prompt);
+		noGamesPromptTV = (TextView)findViewById(R.id.games_no_games_prompt);
+		noGamesPromptTV.setVisibility(View.INVISIBLE);
+		startPromptTV = (TextView)findViewById(R.id.games_start_date_prompt);
+	}
+	
+	/**
+	 * initializes the progress bar
+	 */
+	private void initializeProgressBar() {
+		progressBar = (ProgressBar)findViewById(R.id.games_progress_bar);
+	}
+	
+	/**
+	 * initializes the list view
+	 */
+	@SuppressLint("NewApi")
+	private void initializeListView() {
+		leadersLV = (ListView)findViewById(R.id.games_leader_list);
+		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
+		leadersLV.setAdapter(mAdapter);
+	}
+	
+	/**
+	 * initializes the spinner
+	 */
+	private void initializeSpinner() {
+		gamesSpinner = (Spinner)findViewById(R.id.games_spinner);
+		spinnerData =  new ArrayList<String>();
+
+		spinnerDataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, spinnerData);
+		spinnerDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gamesSpinner.setAdapter(spinnerDataAdapter);
+		gamesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View view,
+					int position, long id) {
+				//TODO show game states of element clicked on
+				spinnerPosition = position;
+				new CursorDataAsyncTask().execute();
+				new GameInfoAsyncTask().execute();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				/** do nothing **/
+			}
+			
+		});
+	}
+    
+	/**
+	 * initializes Buttons
+	 */
+	private void initializeButtons() {
+		inviteButton = (Button)findViewById(R.id.invite_friends_button);
+		inviteButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				gotoInviteActivity();
+				
+			}
+		});
+		
+		newGamesButton = (Button)findViewById(R.id.games_button_newgame);
+		newGamesButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				gotoLeagueLandingActivity();
+			}
+		});
+	}
+	
+	private void gotoInviteActivity() {
+		
+		if (spinnerData.isEmpty()) {
+	   		Toast toast = Toast.makeText(this, "Sorry, but you can't invite friends since you aren't in any games", Toast.LENGTH_LONG);
+	   		toast.setGravity(Gravity.CENTER, 0, 0);
+	   		toast.show();
+	   		return;
+		}
+			
+		Intent intent = new Intent(GamesActivity.this, FriendInviteActivity.class);
+		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
+
+		startActivity(intent);
+
+	}
+	
+	/**
+	 * opens up the LeagueLandingActivity
+	 */
+	private void gotoLeagueLandingActivity() {
+		try {
+			Intent intent = new Intent(this, LeagueLandingActivity.class);
+			startActivity(intent);
+		} catch (Exception e) {
+			//remove in deployment
+			String stackTrace = android.util.Log.getStackTraceString(e);
+			Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+					Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+		} 
+	}
+	
+	private void disableGamesPrompts() {
+		playersPromptTV.setVisibility(View.INVISIBLE);
+		wagerPromptTV.setVisibility(View.INVISIBLE);
+		durationPromptTV.setVisibility(View.INVISIBLE);
+		potPromptTV.setVisibility(View.INVISIBLE);
+		startPromptTV.setVisibility(View.INVISIBLE);
+		noGamesPromptTV.setVisibility(View.VISIBLE);
+	}
+	
+	private void disableNoGamesPrompts() {
+		//noGamesPromptTV.setText("");
+	}
+	
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+                    "Finding your games...");
+		}
+		
+        protected UsersGamesResponse doInBackground(String... params) {
+        	UsersGamesResponse response = LeagueCommunication.getUsersLeagues(user.getID());
+        	return response;
+        }
+
+        protected void onPostExecute(UsersGamesResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response == null ) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we weren't able to grab the data for your game", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        		disableGamesPrompts();
+        	} else {
+        		//TODO switch to next page
+        		List<String> games = response.getGames();
+        		if (games == null || games.size() == 0) {
+        			disableGamesPrompts();
+        		}
+        		spinnerData.addAll(games);
+        		spinnerDataAdapter.notifyDataSetChanged();
+        		disableNoGamesPrompts();
+        	}
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
+    	
+        protected Cursor doInBackground(String... params) {
+        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
+        	return cursor;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(Cursor cursor) {
+        	mAdapter.swapCursor(cursor);
+        	mAdapter.notifyDataSetChanged();
+
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class GameInfoAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+                    "Gathering game data...");
+		}
+		
+        protected PrivateLeagueResponse doInBackground(String... params) {
+        	PrivateLeagueResponse response = LeagueCommunication.getSingleGame(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)) + "");
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(PrivateLeagueResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response.wasSuccessful()) {
+        		League league = response.getLeague();
+        		playersTV.setText("   " + league.getPlayers());
+        		potTV.setText(" $" + league.getStakes());
+        		durationTV.setText("   " + league.getDuration() + " days");
+        		wagerTV.setText(" $" + league.getWager());
+        		startTV.setText(" " + league.getStartDate());
+        	}
+        	new DaysRemainingAsyncTask().execute();	
+        	
+        }
+    }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class DaysRemainingAsyncTask extends AsyncTask<String, Void, CountdownResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(GamesActivity.this, "",
+                    "Gathering game data...");
+		}
+		
+        protected CountdownResponse doInBackground(String... params) {
+        	CountdownResponse response = LeagueCommunication.getCountdown(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(CountdownResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response.wasSuccessful()) {
+        		daysLeftTV.setText(response.getDaysLeft());
+        	}
+        		
+        }
+    }
+
+}
