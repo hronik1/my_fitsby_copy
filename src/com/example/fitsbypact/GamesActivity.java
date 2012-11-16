@@ -28,7 +28,6 @@ import dbtables.User;
 import widgets.NavigationBar;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.support.v4.app.LoaderManager;
@@ -243,7 +242,6 @@ public class GamesActivity extends Activity {
 	/**
 	 * initializes the list view
 	 */
-	@SuppressLint("NewApi")
 	private void initializeListView() {
 		leadersLV = (ListView)findViewById(R.id.games_leader_list);
 		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
@@ -435,7 +433,6 @@ public class GamesActivity extends Activity {
         	return cursor;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(Cursor cursor) {
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
@@ -460,7 +457,6 @@ public class GamesActivity extends Activity {
         	return response;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(PrivateLeagueResponse response) {
         	mProgressDialog.dismiss();
         	
@@ -496,7 +492,6 @@ public class GamesActivity extends Activity {
         	return response;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(CountdownResponse response) {
         	mProgressDialog.dismiss();
         	
