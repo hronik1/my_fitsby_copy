@@ -9,6 +9,7 @@ public class StatusResponse {
 	private final static String TAG = "StatusResponse";
 	
 	private final static String RESPONSE_SUCCESS = "okay";
+	private final static String RESPONSE_SUCCESS_GOOGLE_PLACES = "OK";
 	private final static String RESPONSE_FAIL = "fail";
 	
 	private String status;
@@ -18,7 +19,7 @@ public class StatusResponse {
 	}
 	
 	public boolean wasSuccessful() {
-		return status.equals(RESPONSE_SUCCESS);
+		return (status.equals(RESPONSE_SUCCESS) || status.equals(RESPONSE_SUCCESS_GOOGLE_PLACES));
 	}
 	
 	public String getStatus() {

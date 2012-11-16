@@ -45,8 +45,10 @@ public class CreditCardActivity extends Activity {
 	private EditText expYearET;
 	private EditText cvcET;
 	private TextView wagerTV;
+	private Bundle extras;
 	
 	private int wager;
+	private int leagueId;
 	private boolean isValid;
 	
 	private User mUser;
@@ -148,13 +150,14 @@ public class CreditCardActivity extends Activity {
     		return;
     	}
     	
-    	Bundle extras = intent.getExtras();
+    	extras = intent.getExtras();
     	if(extras == null) {
     		isValid = false;
     		return;
     	}
     	
     	wager = extras.getInt(CreditCardBundleKeys.KEY_WAGER);
+
     	isValid = true;
     }
     
@@ -214,7 +217,7 @@ public class CreditCardActivity extends Activity {
     	ApplicationUser appData = (ApplicationUser)getApplicationContext();
     	if (appData.getCreate()) {
     		new CreateLeagueAsyncTask().execute(appData.getUserId()+"", appData.getDuration()+"",
-    				appData.getIsPrivate()+"", appData.getWager()+"", appData.getFirstName());
+    				appData.getIsPrivateString(), appData.getWager()+"", appData.getFirstName());
     	} else if (appData.getJoin()) {
     		new JoinLeagueAsyncTask().execute(appData.getUserId(), appData.getLeagueId());
     	}
@@ -311,8 +314,9 @@ public class CreditCardActivity extends Activity {
         	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
         		try {
+        			ApplicationUser appData = (ApplicationUser)getApplicationContext();
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
-            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, ((ApplicationUser)getApplicationContext()).getLeagueId());
+            		Toast.makeText(getApplicationContext(), appData.getLeagueId() + "", Toast.LENGTH_LONG).show();
             		startActivity(intent);
         		} catch(Exception e) {
         		}

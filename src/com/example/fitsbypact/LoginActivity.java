@@ -3,6 +3,7 @@ package com.example.fitsbypact;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import registration.RegisterClientSideValidation;
+import responses.StatusResponse;
 import responses.UserResponse;
 import servercommunication.ServerCommunication;
 import servercommunication.UserCommunication;
@@ -210,7 +211,7 @@ public class LoginActivity extends Activity {
     	forgotPasswordTV.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showAlertInput();
+				//showAlertInput();
 			}
     	});
     }
@@ -230,21 +231,7 @@ public class LoginActivity extends Activity {
     	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
     		public void onClick(DialogInterface dialog, int whichButton) {
     			String value = input.getText().toString();
-    			// TODO request if value is valid email!
-    			boolean isValid = false;
-    			if (isValid) {
-    				Toast toast = Toast.makeText(getApplicationContext(),
-    						"A Reset Password link has been sent to your email",
-    						Toast.LENGTH_LONG);
-    				toast.setGravity(Gravity.CENTER, 0, 0);
-    				toast.show();
-    			} else {
-    				Toast toast = Toast.makeText(getApplicationContext(),
-    						"Sorry, but that email address isn't familiar to us",
-    						Toast.LENGTH_LONG);
-    				toast.setGravity(Gravity.CENTER, 0, 0);
-    				toast.show();
-    			}
+    			new PasswordResetAsyncTask().execute(value);
     		}  
     	});
 
@@ -290,6 +277,42 @@ public class LoginActivity extends Activity {
         		mApplicationUser.setUser(response.getUser());
     			Intent intent = new Intent(LoginActivity.this, GamesActivity.class);
     			startActivity(intent);
+        	}
+        }
+    }
+    
+    /**
+     * AsyncTask class to login the user
+     * @author brent
+     *
+     */
+    private class PasswordResetAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
+                    "Sending you a link...");
+		}
+		
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = UserCommunication.resetPassword(params[0]);
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response == null ) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else {
+        		Toast toast = Toast.makeText(getApplicationContext(), "A link to change your password has just been sent to you", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	}
         }
     }

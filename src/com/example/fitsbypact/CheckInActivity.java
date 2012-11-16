@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.AddPlaceResponse;
 import responses.PlacesResponse;
 import responses.StatusResponse;
 import servercommunication.CheckinCommunication;
@@ -52,6 +55,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +69,7 @@ public class CheckInActivity extends Activity {
 	private final static int MESSAGE_UPDATE_TIMER = 1;
 	private final static int MESSAGE_STOP_TIMER = 2;
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
-	private final static int DEFAULT_PLACES_RADIUS = 200; //200 meters
+	private final static int DEFAULT_PLACES_RADIUS = 50; //200 meters
 	
 	private final static String TAG = "CheckInActivity";
 	
@@ -95,6 +99,10 @@ public class CheckInActivity extends Activity {
 	private String gym;
 	private ProgressDialog mProgressDialog;
 
+	private Vector<String> gyms;
+	
+	double longitude;
+	double latitude;
 	/**
 	 * called when Activity is created
 	 */
@@ -119,6 +127,7 @@ public class CheckInActivity extends Activity {
         mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
         mLeagueMemberList = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(mUser.getID());
         
+        gyms = new Vector<String>();
         checkedIn = false;
     }
 
@@ -347,8 +356,8 @@ public class CheckInActivity extends Activity {
 //			Toast.makeText(getApplicationContext(), bestResult.toString(), Toast.LENGTH_LONG).show();
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
 //			Location location = service.getLastKnownLocation(LOCATION_SERVICE);
-			double latitude = bestResult.getLatitude();
-			double longitude = bestResult.getLongitude();
+			latitude = bestResult.getLatitude();
+			longitude = bestResult.getLongitude();
 //			String uri = buildPlacesUri(latitude, longitude, DEFAULT_PLACES_RADIUS, true);
 			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
 					longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
@@ -410,6 +419,39 @@ public class CheckInActivity extends Activity {
     			}).show();
     }
     
+    public void showAddGymDialog() {
+    	Log.i(TAG, "onCreateAddGymDialog");
+
+    	//TODO clean this up
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	
+	  	final EditText input = new EditText(CheckInActivity.this);
+	  	input.setText("Gym name here");
+    	builder.setView(input);
+    	
+    	builder.setMessage("If you are at your gym and it is not showing up please add it, but if you're lying beware... We will find you, and we will ban you")
+    			.setCancelable(false)
+    			.setPositiveButton("Added it", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					try {
+    						new GooglePlacesAddAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
+    								longitude+"", DEFAULT_PLACES_RADIUS+"", "true", input.getText().toString());
+
+    					} catch (Exception e) {
+    						//TODO make a more better error message
+    						Toast toast = Toast.makeText(CheckInActivity.this, e.toString(), Toast.LENGTH_LONG);
+    						toast.setGravity(Gravity.CENTER, 0, 0);
+    						toast.show();
+    					}
+    				}
+    			})
+    			.setNegativeButton("Nope, not really at a gym", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    }
+    
 	/**
 	 * checks out user
 	 */
@@ -431,6 +473,7 @@ public class CheckInActivity extends Activity {
 	    	        		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
 	    	        		checkinLocationTV.setText("You are not currently checked into a gym");
 	    	        		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
+	    	        		checkedIn = false;
 	    				}
 	    			})
 	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
@@ -553,6 +596,7 @@ public class CheckInActivity extends Activity {
 	private class GooglePlacesAsyncTast extends AsyncTask<String, Void, PlacesResponse> {
 
 		protected void onPreExecute() {
+			gyms.clear();
             mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
                     "Finding nearby gyms...");
 		}
@@ -573,15 +617,84 @@ public class CheckInActivity extends Activity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but it appears that you are not at a verified gym", Toast.LENGTH_LONG);
-        		toast.setGravity(Gravity.CENTER, 0, 0);
-    			toast.show();
+        		showAddGymDialog();
+//        		new GooglePlacesSearchAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
+//				longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
         	} else {
+        		gyms.addAll(response.getGyms());
         		gym = response.getGyms().get(0);
 				new CheckinAsyncTask().execute(mUser.getID());
         	}
         }
 	}
+	
+	private class GooglePlacesSearchAsyncTask extends AsyncTask<String, Void, PlacesResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
+                    "Finding nearby rec centers...");
+		}
+		
+        protected PlacesResponse doInBackground(String... params) {
+        	PlacesResponse response = CheckinCommunication.getNearbyRecCenter(params[0],
+        			params[1], params[2], params[3], params[4]);
+        	return response;
+        }
+
+        protected void onPostExecute(PlacesResponse response) {
+        	mProgressDialog.dismiss();
+        	if (response == null) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
+    			toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} else if (response.getGyms().isEmpty()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there appears to be no gym or rec centers near you", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} else {
+        		gym = response.getGyms().get(0);
+        		for (String temp: response.getGyms()) {
+            		Toast toast = Toast.makeText(getApplicationContext(), temp, Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+        			toast.show();
+        		}
+        		gyms.addAll(response.getGyms());
+				new CheckinAsyncTask().execute(mUser.getID());
+        	}
+        }
+	}
+	
+	private class GooglePlacesAddAsyncTask extends AsyncTask<String, Void, AddPlaceResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
+                    "Adding your gym...");
+		}
+		
+        protected AddPlaceResponse doInBackground(String... params) {
+        	AddPlaceResponse response = CheckinCommunication.addGym(params[0],
+        			params[1], params[2], params[3], params[4], params[5]);
+        	return response;
+        }
+
+        protected void onPostExecute(AddPlaceResponse response) {
+        	mProgressDialog.dismiss();
+        	if (response == null) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
+    			toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} else {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Successfully added your gym... like a boss", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	}
+        }
+	}
+	
     /**
      * AsyncTask to Register user
      * @author brent

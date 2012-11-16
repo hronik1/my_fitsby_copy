@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 import responses.CreatorResponse;
@@ -7,9 +8,11 @@ import responses.PrivateLeagueResponse;
 import responses.UsersGamesResponse;
 import servercommunication.LeagueCommunication;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -44,7 +48,7 @@ import dbtables.User;
 public class FriendInviteActivity extends Activity {
 
 	private final static String TAG = "FriendInviteActivity";
-	
+	private final static int PICK_CONTACT_REQUEST = 2;
 	private Button homeButton;
 	private Button inviteButton;
 	
@@ -53,7 +57,7 @@ public class FriendInviteActivity extends Activity {
 	private ArrayAdapter<String> contactsAdapter;
 	
 	private ProgressDialog mProgressDialog;
-	private String leagueId;
+	private int leagueId;
 	private String creatorName;
 	
 	/**
@@ -67,10 +71,10 @@ public class FriendInviteActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         initializeButtons(); 
-        initializeListView();
+       // initializeListView();
         parseBundle(getIntent());
         
-        new CreatorAsyncTask().execute(leagueId);
+        new CreatorAsyncTask().execute(leagueId+"");
     }
 
     /**
@@ -144,6 +148,20 @@ public class FriendInviteActivity extends Activity {
     }
     
     /**
+     * callback for recieving data from starting an activity for a result
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	if (requestCode == PICK_CONTACT_REQUEST) {
+    		if (resultCode == RESULT_OK) {
+    			Uri contactUri = data.getData();
+    			String[] projection = {Phone.NUMBER};
+    			new PhoneNumberAsyncTask(contactUri).execute(projection);
+    		}
+        }
+    }
+    
+    /**
      * registers the buttons from the layout and adds listeners to them
      */
     private void initializeButtons() {
@@ -163,7 +181,6 @@ public class FriendInviteActivity extends Activity {
     }
     
     private void initializeListView() {
-		contactsListView = (ListView)findViewById(R.id.invite_friends_list);
 		contacts =  new ArrayList<String>();
 
 		contactsAdapter = new ArrayAdapter<String>(this,
@@ -176,14 +193,19 @@ public class FriendInviteActivity extends Activity {
 			public void onItemClick(AdapterView<?> parentView, View view, final int position,
 					long id) {
 			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
+		    	
+			  	final EditText input = new EditText(FriendInviteActivity.this);
+			  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
+		    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
+		    	builder.setView(input);
+		    	
 		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position) +
 		    			" is your email.")
 		    			.setCancelable(false)
 		    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 		    				public void onClick(DialogInterface dialog, int id) {
 		    				    SmsManager smsManager = SmsManager.getDefault();
-		    				    smsManager.sendTextMessage(contacts.get(position), null, "Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
-		    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId, null, null);
+		    				    smsManager.sendTextMessage(contacts.get(position), null, input.getText().toString(), null, null);
 		    				}
 		    			})
 		    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
@@ -199,8 +221,11 @@ public class FriendInviteActivity extends Activity {
     
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
-    	
-    	leagueId = extras.getString(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
+    	if (extras == null) {
+    		Toast.makeText(getApplicationContext(), "no bundle", Toast.LENGTH_LONG).show();
+    	}
+    		
+    	leagueId = extras.getInt(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
     }
     /**
      * invite your friends selected from the content provider
@@ -216,32 +241,38 @@ public class FriendInviteActivity extends Activity {
     private void queryContacts() {
     	//TODO turn this shitty looking throw away code into something beautiful
     	
-    	ContentResolver contentResolver = getContentResolver();
-    	Cursor contactsCursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
-    			null, null, null, null);
-        if (contactsCursor.getCount() > 0) {
-        	while (contactsCursor.moveToNext()) {
-        		String id = contactsCursor.getString(
-        				contactsCursor.getColumnIndex(ContactsContract.Contacts._ID));
-        		String name = contactsCursor.getString(
-        				contactsCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-        		if (Integer.parseInt(contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-        			if (Integer.parseInt(contactsCursor.getString(
-        					contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-        				Cursor phoneNumberCursor = contentResolver.query(
-        						ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, 
-        						ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?", 
-        								new String[]{id}, null);
-        				while (phoneNumberCursor.moveToNext()) {
-        					String phoneNumber = phoneNumberCursor.getString(phoneNumberCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
-        					contacts.add(phoneNumber);
-        					contactsAdapter.notifyDataSetChanged();
-        				} 
-        				phoneNumberCursor.close();
-        			}
-        		}
-        	}
-        }
+//    	ContentResolver contentResolver = getContentResolver();
+//    	Cursor contactsCursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
+//    			null, null, null, null);
+//        if (contactsCursor.getCount() > 0) {
+//        	while (contactsCursor.moveToNext()) {
+//        		String id = contactsCursor.getString(
+//        				contactsCursor.getColumnIndex(ContactsContract.Contacts._ID));
+//        		String name = contactsCursor.getString(
+//        				contactsCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+//        		if (Integer.parseInt(contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+//        			if (Integer.parseInt(contactsCursor.getString(
+//        					contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+//        				Cursor phoneNumberCursor = contentResolver.query(
+//        						ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, 
+//        						ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?", 
+//        								new String[]{id}, null);
+//        				while (phoneNumberCursor.moveToNext()) {
+//        					String phoneNumber = phoneNumberCursor.getString(phoneNumberCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
+//        					contacts.add(phoneNumber);
+//        					contactsAdapter.notifyDataSetChanged();
+//        				} 
+//        				phoneNumberCursor.close();
+//        			}
+//        		}
+//        	}
+//        }
+    	
+
+    	Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
+    	pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
+    	startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+
     }
     /**
      * go to your home page
@@ -289,7 +320,7 @@ public class FriendInviteActivity extends Activity {
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
-        	CreatorResponse response = LeagueCommunication.getCreator(leagueId);
+        	CreatorResponse response = LeagueCommunication.getCreator(leagueId+"");
         	return response;
         }
 
@@ -300,6 +331,57 @@ public class FriendInviteActivity extends Activity {
         	if (response.wasSuccessful()) {
             	creatorName = response.getCreatorFirstName();
         	}
+        		
+
+        }
+    }
+    
+    private class PhoneNumberAsyncTask extends AsyncTask<String, Void, String> {
+    	
+    	private Uri uri;
+    	
+    	public PhoneNumberAsyncTask(Uri uri) {
+    		this.uri = uri;
+    	}
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+                    "Gathering contact info...");
+		}
+		
+        protected String doInBackground(String... params) {
+			Cursor cursor = getContentResolver()
+					.query(uri, params, null, null, null);
+			cursor.moveToFirst();
+			int column = cursor.getColumnIndex(Phone.NUMBER);
+			String number = cursor.getString(column);
+        	return number;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(final String number) {
+        	mProgressDialog.dismiss();
+        	
+		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
+		  	
+		  	final EditText input = new EditText(FriendInviteActivity.this);
+		  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
+	    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
+	    	builder.setView(input);
+	    	
+	    	builder.setMessage("Edit personal message to your friend")
+	    			.setCancelable(false)
+	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+	    				public void onClick(DialogInterface dialog, int id) {
+	    				    SmsManager smsManager = SmsManager.getDefault();
+	    				    smsManager.sendTextMessage(number, null, input.getText().toString(), null, null);
+	    				}
+	    			})
+	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+	    				public void onClick(DialogInterface dialog, int id) {
+	    					dialog.cancel();
+	    				}
+	    			}).show();
         		
 
         }

@@ -29,7 +29,7 @@ public class CountdownResponse {
 		Log.d(TAG, json.toString());
 		try {
 			String status = json.getString("status");
-			String daysRemaining = json.getString("days_remaining");
+			String daysRemaining = json.getString("string");
 			return new CountdownResponse(status, daysRemaining);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
