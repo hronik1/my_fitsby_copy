@@ -275,7 +275,7 @@ public class LoginActivity extends Activity {
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
-    			Intent intent = new Intent(LoginActivity.this, GamesActivity.class);
+    			Intent intent = new Intent(LoginActivity.this, LoggedinActivity.class);
     			startActivity(intent);
         	}
         }

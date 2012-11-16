@@ -13,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -306,7 +305,6 @@ public class FriendInviteActivity extends Activity {
 			return null;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute() {
         	mProgressDialog.dismiss();
         	
@@ -324,7 +322,6 @@ public class FriendInviteActivity extends Activity {
         	return response;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(CreatorResponse response) {
         	mProgressDialog.dismiss();
         	
@@ -358,7 +355,6 @@ public class FriendInviteActivity extends Activity {
         	return number;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(final String number) {
         	mProgressDialog.dismiss();
         	

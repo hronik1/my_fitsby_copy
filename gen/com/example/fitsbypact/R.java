@@ -234,16 +234,17 @@ public final class R {
         public static final int activity_league_join=0x7f030007;
         public static final int activity_league_join_detail=0x7f030008;
         public static final int activity_league_landing=0x7f030009;
-        public static final int activity_login=0x7f03000a;
-        public static final int activity_me=0x7f03000b;
-        public static final int activity_newsfeed=0x7f03000c;
-        public static final int activity_register=0x7f03000d;
-        public static final int example=0x7f03000e;
-        public static final int list_item_game_leader=0x7f03000f;
-        public static final int list_item_newsfeed=0x7f030010;
-        public static final int list_item_public_leagues=0x7f030011;
-        public static final int navigation=0x7f030012;
-        public static final int public_leagues=0x7f030013;
+        public static final int activity_loggedin=0x7f03000a;
+        public static final int activity_login=0x7f03000b;
+        public static final int activity_me=0x7f03000c;
+        public static final int activity_newsfeed=0x7f03000d;
+        public static final int activity_register=0x7f03000e;
+        public static final int example=0x7f03000f;
+        public static final int list_item_game_leader=0x7f030010;
+        public static final int list_item_newsfeed=0x7f030011;
+        public static final int list_item_public_leagues=0x7f030012;
+        public static final int navigation=0x7f030013;
+        public static final int public_leagues=0x7f030014;
     }
     public static final class menu {
         public static final int activity_check_in=0x7f070000;
@@ -256,13 +257,14 @@ public final class R {
         public static final int activity_league_join=0x7f070007;
         public static final int activity_league_join_detail=0x7f070008;
         public static final int activity_league_landing=0x7f070009;
-        public static final int activity_login=0x7f07000a;
-        public static final int activity_me=0x7f07000b;
-        public static final int activity_newsfeed=0x7f07000c;
-        public static final int activity_register=0x7f07000d;
-        public static final int activity_settings=0x7f07000e;
-        public static final int activity_splash=0x7f07000f;
-        public static final int example=0x7f070010;
+        public static final int activity_loggedin=0x7f07000a;
+        public static final int activity_login=0x7f07000b;
+        public static final int activity_me=0x7f07000c;
+        public static final int activity_newsfeed=0x7f07000d;
+        public static final int activity_register=0x7f07000e;
+        public static final int activity_settings=0x7f07000f;
+        public static final int activity_splash=0x7f070010;
+        public static final int example=0x7f070011;
     }
     public static final class string {
         public static final int activity_league_join_directions=0x7f050039;
@@ -444,6 +446,7 @@ public final class R {
         public static final int title_activity_league_join=0x7f05003a;
         public static final int title_activity_league_join_detail=0x7f050079;
         public static final int title_activity_league_landing=0x7f05001a;
+        public static final int title_activity_loggedin=0x7f0500b0;
         public static final int title_activity_login=0x7f050012;
         public static final int title_activity_me=0x7f05004e;
         public static final int title_activity_newsfeed=0x7f05004c;

@@ -18,7 +18,6 @@ import dbtables.LeagueMember;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -289,7 +288,6 @@ public class LeagueJoinDetailActivity extends Activity {
         	return response;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(PrivateLeagueResponse response) {
         	mProgressDialog.dismiss();
         	
