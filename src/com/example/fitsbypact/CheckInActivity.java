@@ -73,7 +73,7 @@ public class CheckInActivity extends Activity {
 	private final static int DEFAULT_PLACES_RADIUS = 50; //200 meters
 	
 	private final static String TAG = "CheckInActivity";
-	
+
 	private boolean checkedIn;
 	
 	private TextView checkinLocationTV;

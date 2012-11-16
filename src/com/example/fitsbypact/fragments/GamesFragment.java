@@ -55,7 +55,9 @@ public class GamesFragment extends Fragment {
 
 	private static final String TAG = "GamesActivity";
 	
+
 	private Activity parent;
+
 	
 	private TextView playersPromptTV;
 	private TextView durationPromptTV;
@@ -101,8 +103,10 @@ public class GamesFragment extends Fragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 	    View viewer = (View) inflater.inflate(R.layout.activity_games, container, false);
 	    Log.i(TAG, "onCreateView");
+
 	    
 	    initializeSpinner(viewer);
 	    initializeTextViews(viewer);
@@ -145,6 +149,7 @@ public class GamesFragment extends Fragment {
 		noGamesPromptTV = (TextView)viewer.findViewById(R.id.games_no_games_prompt);
 		noGamesPromptTV.setVisibility(View.INVISIBLE);
 		startPromptTV = (TextView)viewer.findViewById(R.id.games_start_date_prompt);
+
 	}
 	
 	/**
@@ -152,6 +157,7 @@ public class GamesFragment extends Fragment {
 	 */
 	private void initializeProgressBar(View viewer) {
 		progressBar = (ProgressBar)viewer.findViewById(R.id.games_progress_bar);
+
 	}
 	
 	/**
@@ -160,7 +166,7 @@ public class GamesFragment extends Fragment {
 	private void initializeListView(View viewer) {
 		leadersLV = (ListView)viewer.findViewById(R.id.games_leader_list);
 		mAdapter = new SimpleCursorAdapter(parent, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
-		leadersLV.setAdapter(mAdapter);
+
 	}
 	
 	/**
@@ -206,6 +212,7 @@ public class GamesFragment extends Fragment {
 			}
 		});
 		
+
 		newGamesButton = (Button)viewer.findViewById(R.id.games_button_newgame);
 		newGamesButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -224,6 +231,7 @@ public class GamesFragment extends Fragment {
 	   		return;
 		}
 			
+
 		Intent intent = new Intent(parent, FriendInviteActivity.class);
 		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
 
@@ -269,6 +277,7 @@ public class GamesFragment extends Fragment {
     private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
     	
 		protected void onPreExecute() {
+
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Finding your games...");
 		}
