@@ -106,7 +106,6 @@ public class GamesFragment extends Fragment {
 
 	    View viewer = (View) inflater.inflate(R.layout.activity_games, container, false);
 	    Log.i(TAG, "onCreateView");
-
 	    
 	    initializeSpinner(viewer);
 	    initializeTextViews(viewer);
