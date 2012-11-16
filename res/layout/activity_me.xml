@@ -68,11 +68,53 @@
                 android:text="@string/me_textview_total_money_earned_money_text" />
 
             <TextView
+                android:id="@+id/me_textview_total_gym_time_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_textview_total_money_earned_prompt"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@string/me_textview_total_gym_time_prompt_text" />
+
+            <TextView
+                android:id="@+id/me_textview_total_gym_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_imageview"
+                android:layout_toRightOf="@+id/me_textview_total_gym_time_prompt"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"                
+                android:text="@string/me_textview_total_gym_time_text" />
+                        
+            <TextView
+                android:id="@+id/me_textview_total_checkins_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_textview_total_gym_time_prompt"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@string/me_textview_total_checkins_prompt_text" />
+
+            <TextView
+                android:id="@+id/me_textview_total_checkins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_textview_total_gym_time_prompt"
+                android:layout_toRightOf="@+id/me_textview_total_gym_time_prompt"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"                
+                android:text="@string/me_textview_total_checkins_text" />
+            
+            <TextView
                 android:id="@+id/me_settings_tv_change_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/me_textview_total_money_earned_money"
+                android:layout_below="@+id/me_textview_total_checkins"
                 android:layout_marginTop="20dp"                
                 android:layout_marginLeft="10dp"                
                 android:textSize="18sp"              

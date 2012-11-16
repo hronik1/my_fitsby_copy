@@ -38,6 +38,9 @@ public class StatsResponse {
 			String joinedMonth = json.getString("joined_month");
 			String joinedDay = json.getString("joined_day");
 			String joinedYear = json.getString("joined_year");
+			//TODO parse checkins and total gym time
+//			String totalCheckins = json.getString("total_checkins");
+//			String totalTime = json.getString("total_gym_time");
 			Stats stats = new Stats(gamesPlayed, gamesWon, moneyEarned, joinedMonth, joinedDay, joinedYear);
 			return new StatsResponse(status, stats);
 		} catch (JSONException e) {
