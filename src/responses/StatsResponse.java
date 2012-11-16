@@ -30,6 +30,7 @@ public class StatsResponse {
 	
 	public static StatsResponse jsonToStatsResponse(JSONObject json) {
 		try {
+			Log.d(TAG, json.toString());
 			String status = json.getString("status");
 			String gamesWon = json.getString("games_won");
 			String gamesPlayed = json.getString("games_played");
