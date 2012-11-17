@@ -51,7 +51,7 @@
     <string name="credit_card_et_card_number_hint">XXXX XXXX XXXX XXXX</string>
     <string name="credit_card_et_expire_year_hint">YYYY</string>
     <string name="credit_card_et_expire_month_hint">MM</string>
-    <string name="thirty_cents_charge_text">plus a 30&#162; processing fee</string>
+    <string name="thirty_cents_charge_text">plus a 50&#162; processing fee</string>
     <string name="authorize_api_login_id">3C29upX37b</string>
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
     <string name="title_activity_friend_invite">Invite Your Friends</string>
@@ -120,6 +120,9 @@
     <string name="public_leagues_pot_header_text">$ Comitted</string>
     <string name="title_activity_league_join_detail">Join A Game</string>
     <string name="league_join_detail_header_text"><u>Game Details:</u></string>
+    <string name="league_join_detail_name">Game Creator: </string>
+    <string name="league_join_detail_name_first">Brent</string>
+    <string name="league_join_detail_name_last">H.</string>    
     <string name="league_join_detail_type_text">Type: </string>
     <string name="league_join_detail_type_data_text">Private</string>
     <string name="league_join_detail_wager_text">Wager: </string>
