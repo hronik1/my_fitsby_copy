@@ -311,7 +311,6 @@ public class LeagueJoinDetailActivity extends Activity {
         	return response;
         }
 
-        @SuppressLint("NewApi")
 		protected void onPostExecute(CreatorResponse response) {
         	mProgressDialog.dismiss();
         	

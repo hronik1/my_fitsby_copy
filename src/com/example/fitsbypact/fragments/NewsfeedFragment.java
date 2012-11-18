@@ -84,7 +84,7 @@ public class NewsfeedFragment extends Fragment{
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	    View viewer = (View) inflater.inflate(R.layout.activity_me, container, false);
+	    View viewer = (View) inflater.inflate(R.layout.activity_newsfeed, container, false);
 	    Log.i(TAG, "onCreateView");
 
         initializeButtons(viewer);

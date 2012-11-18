@@ -6,6 +6,7 @@ import java.util.Vector;
 import responses.AddPlaceResponse;
 import responses.PlacesResponse;
 import responses.StatusResponse;
+import responses.ValidateGymResponse;
 import servercommunication.CheckinCommunication;
 
 
@@ -435,25 +436,25 @@ public class CheckinFragment extends Fragment{
         }
 	}
 	
-	private class GooglePlacesAddAsyncTask extends AsyncTask<String, Void, AddPlaceResponse> {
+	private class GooglePlacesAddAsyncTask extends AsyncTask<String, Void, ValidateGymResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Adding your gym...");
 		}
 		
-        protected AddPlaceResponse doInBackground(String... params) {
-        	AddPlaceResponse response = CheckinCommunication.addGym(params[0],
-        			params[1], params[2], params[3], params[4], params[5]);
+        protected ValidateGymResponse doInBackground(String... params) {
+        	ValidateGymResponse response = CheckinCommunication.addGym(params[0],
+        			params[1], params[2], params[3]);
         	return response;
         }
 
-        protected void onPostExecute(AddPlaceResponse response) {
+        protected void onPostExecute(ValidateGymResponse response) {
         	mProgressDialog.dismiss();
         	if (response == null) {
         		Toast toast = Toast.makeText(parent, "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, response.getStatus(), Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, response.getMessage(), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {

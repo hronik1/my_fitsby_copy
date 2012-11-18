@@ -59,8 +59,6 @@ public class MeActivity extends Activity {
 	
 	private ImageView profileIV;
 	
-	private NavigationBar navigation;
-	
 	private ApplicationUser mApplicationUser;
 	private User mUser;
 	
@@ -76,7 +74,6 @@ public class MeActivity extends Activity {
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         mUser = mApplicationUser.getUser();
-        initializeNavigationBar();
         initializeTextViews();
         initializeButtons();
         initializeEditTexts();
@@ -179,15 +176,6 @@ public class MeActivity extends Activity {
 	        //TODO actually change picture
 	        
 	    }
-	}
-	
-	/**
-	 * initialized NavigationBar for use
-	 */
-	public void initializeNavigationBar() {
-		navigation = (NavigationBar)findViewById(R.id.me_navigation_bar);
-		navigation.setParentActivity(this);
-		navigation.turnOffTV("me");
 	}
 	
 	/**
