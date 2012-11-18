@@ -120,7 +120,6 @@ public class GamesActivity extends Activity {
         
         //TODO loadermanager stuffs
         initializeSpinner();
-        initializeNavigationBar();
         initializeTextViews();
         initializeProgressBar();
         initializeListView();
@@ -197,15 +196,6 @@ public class GamesActivity extends Activity {
 		
 		Log.i(TAG, "onDestroy");
 		
-	}
-	
-	/**
-	 * initializes the navigation bar
-	 */
-	public void initializeNavigationBar() {
-		navigation = (NavigationBar)findViewById(R.id.games_navigation_bar);
-		navigation.setParentActivity(this);
-		navigation.turnOffTV("games");
 	}
 	
 	/**

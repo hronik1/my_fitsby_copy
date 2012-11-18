@@ -54,9 +54,6 @@ public class NewsfeedActivity extends Activity {
 //	implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "NewsfeedActivity";
-	
-	private NavigationBar navigation;
-
 
 	private Spinner gamesSpinner;
 	private ListView newsfeedLV;
@@ -99,7 +96,6 @@ public class NewsfeedActivity extends Activity {
        // listLeagueMember = mLeagueMemberTableHandler.getAllLeagueMembersByUserId(user.getID());
         
         //TODO loadermanager stuffs
-        initializeNavigationBar();
         initializeButtons();
         initializeListView();
         initializeEditText();
@@ -176,15 +172,6 @@ public class NewsfeedActivity extends Activity {
 		
 		Log.i(TAG, "onDestroy");
 		
-	}
-	
-	/**
-	 * initialized NavigationBar for use
-	 */
-	public void initializeNavigationBar() {
-		navigation = (NavigationBar)findViewById(R.id.newsfeed_navigation_bar);
-		navigation.setParentActivity(this);
-		navigation.turnOffTV("newsfeed");
 	}
 	
 	/**

@@ -101,7 +101,7 @@ public class GamesFragment extends Fragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	    View viewer = (View) inflater.inflate(R.layout.activity_check_in, container, false);
+	    View viewer = (View) inflater.inflate(R.layout.activity_games, container, false);
 	    Log.i(TAG, "onCreateView");
 	    
 	    initializeSpinner(viewer);
