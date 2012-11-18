@@ -44,6 +44,8 @@ public class MeActivity extends Activity {
 	private TextView nameTV;
 	private TextView joinTV;
 	private TextView earningsTV;
+	private TextView checkinsTV;
+	private TextView timeTV;
 	
 	private Button logoutButton;
 	private Button changePictureButton;
@@ -199,6 +201,8 @@ public class MeActivity extends Activity {
 		//TODO add join date
 		
 		earningsTV = (TextView)findViewById(R.id.me_textview_total_money_earned_money);
+		checkinsTV = (TextView)findViewById(R.id.me_textview_total_checkins);
+		timeTV = (TextView)findViewById(R.id.me_textview_total_gym_time);
 		//add earnings for user
 	}
 	
@@ -325,6 +329,9 @@ public class MeActivity extends Activity {
         	if (response.wasSuccessful()) {
         		Stats stats = response.getStats();
         		earningsTV.setText(" $" + stats.getMoneyEarned());
+        		checkinsTV.setText(" " + stats.getTotalCheckins());
+        		timeTV.setText(" " + stats.getTotalTime());
+
         		joinTV.append(" " + stats.getJoinedMonth() + "/" + stats.getJoinedDay() + "/" + stats.getJoinedYear());
         		
         	} else {

@@ -619,7 +619,7 @@ public class CheckInActivity extends Activity {
         	} else if (response.getGyms().isEmpty()){
         		showAddGymDialog();
 //        		new GooglePlacesSearchAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
-//				longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
+//				longitude+"", DEFAULT_PLnACES_RADIUS+"", "true");
         	} else {
         		gyms.addAll(response.getGyms());
         		gym = response.getGyms().get(0);
