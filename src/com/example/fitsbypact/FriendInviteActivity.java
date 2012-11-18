@@ -278,7 +278,7 @@ public class FriendInviteActivity extends Activity {
      */
     private void home() {
     	try {
-    		Intent intent = new Intent(this, GamesActivity.class);
+    		Intent intent = new Intent(this, LoggedinActivity.class);
     		startActivity(intent);
     	} catch(Exception e) {
     		//TODO handle not starting intent better

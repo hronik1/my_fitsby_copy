@@ -74,7 +74,6 @@ public class CheckInActivity extends Activity {
 	
 	private final static String TAG = "CheckInActivity";
 	
-	private NavigationBar navigation;
 	private boolean checkedIn;
 	
 	private TextView checkinLocationTV;
@@ -115,7 +114,6 @@ public class CheckInActivity extends Activity {
         initializeImageViews();
         initializeHandler();
         initializeTime();        
-        initializeNavigationBar();
         initializeButtons();
         
        
@@ -263,15 +261,6 @@ public class CheckInActivity extends Activity {
 		checkinLocationTV = (TextView)findViewById(R.id.verified_gym);
 		secondsTV = (TextView)findViewById(R.id.seconds);
 		minutesTV = (TextView)findViewById(R.id.minutes);
-	}
-	
-	/**
-	 * initialized NavigationBar for use
-	 */
-	public void initializeNavigationBar() {
-		navigation = (NavigationBar)findViewById(R.id.check_in_navigation_bar);
-		navigation.setParentActivity(this);
-		navigation.turnOffTV("checkin");
 	}
 	
 	/**
