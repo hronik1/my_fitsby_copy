@@ -441,7 +441,7 @@ public class CheckinFragment extends Fragment{
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Adding your gym...");
 		}
-		
+
         protected ValidateGymResponse doInBackground(String... params) {
         	ValidateGymResponse response = CheckinCommunication.addGym(params[0],
         			params[1], params[2], params[3]);
