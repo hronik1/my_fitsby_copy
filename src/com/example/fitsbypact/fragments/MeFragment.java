@@ -45,6 +45,8 @@ public class MeFragment extends Fragment{
 	private TextView nameTV;
 	private TextView joinTV;
 	private TextView earningsTV;
+	private TextView checkinsTV;
+	private TextView timeTV;
 	
 	private Button logoutButton;
 	private Button changePictureButton;
@@ -133,6 +135,8 @@ public class MeFragment extends Fragment{
 		//TODO add join date
 		
 		earningsTV = (TextView)viewer.findViewById(R.id.me_textview_total_money_earned_money);
+		checkinsTV = (TextView)viewer.findViewById(R.id.me_textview_total_checkins);
+		timeTV = (TextView)viewer.findViewById(R.id.me_textview_total_gym_time);
 		//add earnings for user
 	}
 	
@@ -259,6 +263,8 @@ public class MeFragment extends Fragment{
         	if (response.wasSuccessful()) {
         		Stats stats = response.getStats();
         		earningsTV.setText(" $" + stats.getMoneyEarned());
+        		checkinsTV.setText("" + stats.getTotalCheckins());
+        		timeTV.setText(" " + stats.getTotalTime() + " minutes");
         		joinTV.append(" " + stats.getJoinedMonth() + "/" + stats.getJoinedDay() + "/" + stats.getJoinedYear());
         		
         	} else {
