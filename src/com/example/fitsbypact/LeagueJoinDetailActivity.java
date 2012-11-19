@@ -209,9 +209,9 @@ public class LeagueJoinDetailActivity extends Activity {
  		startDateTV = (TextView)findViewById(R.id.game_start_date_value);
  		
  		firstNameTV = (TextView)findViewById(R.id.league_join_detail_name_first);
- 		firstNameTV.setText("");
+ 		firstNameTV.setText(" ");
  		lastNameTV = (TextView)findViewById(R.id.league_join_detail_name_last);
- 		lastNameTV.setText("");
+ 		lastNameTV.setText(" ");
  	}
 
  	/**

@@ -40,7 +40,7 @@
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
     <string name="league_create_ib_days_plus">+</string>
-    <string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game. You will never be charged the wager amount unless you lose a game.</string>
+    <string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game. You will never be charged any money unless you lose a game.</string>
     <string name="credit_card_number_text">Card Number:</string>
     <string name="credit_card_expiration_text">Expiration Date:</string>
     <string name="credit_card_cvc_text">CVC:</string>
@@ -126,7 +126,7 @@
     <string name="public_leagues_pot_header_text">$ Comitted</string>
     <string name="title_activity_league_join_detail">Join A Game</string>
     <string name="league_join_detail_header_text"><u>Game Details:</u></string>
-    <string name="league_join_detail_name">Game Creator: </string>
+    <string name="league_join_detail_name">Game Creator:  </string>
     <string name="league_join_detail_name_first">Brent</string>
     <string name="league_join_detail_name_last">H.</string>    
     <string name="league_join_detail_type_text">Type: </string>
