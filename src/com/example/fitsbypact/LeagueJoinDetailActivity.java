@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
@@ -44,6 +45,8 @@ public class LeagueJoinDetailActivity extends Activity {
 	private TextView durationTV;
 	private TextView leagueIdTV;
 	private TextView startDateTV;
+	private TextView firstNameTV;
+	private TextView lastNameTV;
 	
 	private Button joinButton;
 	private Button faqButton;
@@ -83,6 +86,7 @@ public class LeagueJoinDetailActivity extends Activity {
         mLeagueTableHandler = mdbHandler.getLeagueTableHandler();
         
         new GameInfoAsyncTask().execute(leagueId);
+        new CreatorAsyncTask().execute();
     }
 
     /**
@@ -203,6 +207,11 @@ public class LeagueJoinDetailActivity extends Activity {
  		leagueIdTV.setText(" " + leagueId);
  		
  		startDateTV = (TextView)findViewById(R.id.game_start_date_value);
+ 		
+ 		firstNameTV = (TextView)findViewById(R.id.league_join_detail_name_first);
+ 		firstNameTV.setText("");
+ 		lastNameTV = (TextView)findViewById(R.id.league_join_detail_name_last);
+ 		lastNameTV.setText("");
  	}
 
  	/**
@@ -289,6 +298,28 @@ public class LeagueJoinDetailActivity extends Activity {
         		startDateTV.setText(" " + league.getStartDate());
         	}
         		
+
+        }
+    }
+    
+    private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+                    "Gathering game data...");
+		}
+		
+        protected CreatorResponse doInBackground(String... params) {
+        	CreatorResponse response = LeagueCommunication.getCreator(leagueId+"");
+        	return response;
+        }
+
+        @SuppressLint("NewApi")
+		protected void onPostExecute(CreatorResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response.wasSuccessful()) {
+            	firstNameTV.setText(response.getCreatorFirstName());
+        	}	
 
         }
     }
