@@ -86,7 +86,7 @@ public class LeagueJoinDetailActivity extends Activity {
         mLeagueTableHandler = mdbHandler.getLeagueTableHandler();
         
         new GameInfoAsyncTask().execute(leagueId);
-        new CreatorAsyncTask().execute();
+        
     }
 
     /**
@@ -298,14 +298,14 @@ public class LeagueJoinDetailActivity extends Activity {
         		startDateTV.setText(" " + league.getStartDate());
         	}
         		
-
+        	new CreatorAsyncTask().execute();
         }
     }
     
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Gathering game data...");
+                    "Gathering creator data...");
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
