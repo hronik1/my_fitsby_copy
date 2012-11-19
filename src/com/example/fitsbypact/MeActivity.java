@@ -329,7 +329,7 @@ public class MeActivity extends Activity {
         	if (response.wasSuccessful()) {
         		Stats stats = response.getStats();
         		earningsTV.setText(" $" + stats.getMoneyEarned());
-        		checkinsTV.setText(" " + stats.getTotalCheckins());
+        		checkinsTV.setText("" + stats.getTotalCheckins());
         		timeTV.setText(" " + stats.getTotalTime() + " minutes");
 
         		joinTV.append(" " + stats.getJoinedMonth() + "/" + stats.getJoinedDay() + "/" + stats.getJoinedYear());
