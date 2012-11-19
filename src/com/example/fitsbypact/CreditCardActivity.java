@@ -317,7 +317,6 @@ public class CreditCardActivity extends Activity {
         			ApplicationUser appData = (ApplicationUser)getApplicationContext();
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
             		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, appData.getLeagueId());
-            		//Toast.makeText(getApplicationContext(), appData.getLeagueId() + "", Toast.LENGTH_LONG).show();
             		startActivity(intent);
         		} catch(Exception e) {
         		}
