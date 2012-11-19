@@ -62,6 +62,7 @@ public class GamesFragment extends Fragment {
 	private TextView wagerPromptTV;
 	private TextView potPromptTV;
 	private TextView startPromptTV;
+	private TextView endPromptTV;
 	private TextView noGamesPromptTV;
 	
 	private TextView playersTV;
@@ -69,6 +70,7 @@ public class GamesFragment extends Fragment {
 	private TextView durationTV;
 	private TextView potTV;
 	private TextView startTV;
+	private TextView endTV;
 	private TextView daysLeftTV;
 	
 	private ProgressBar progressBar;
@@ -136,6 +138,7 @@ public class GamesFragment extends Fragment {
 		durationTV = (TextView)viewer.findViewById(R.id.input_duration);
 		potTV = (TextView)viewer.findViewById(R.id.input_pot);
 		startTV = (TextView)viewer.findViewById(R.id.input_date);
+		endTV = (TextView)viewer.findViewById(R.id.input_end_date);
 		daysLeftTV = (TextView)viewer.findViewById(R.id.days_left_prompt);
 		
 		playersPromptTV = (TextView)viewer.findViewById(R.id.games_player_prompt);
@@ -144,6 +147,7 @@ public class GamesFragment extends Fragment {
 		potPromptTV = (TextView)viewer.findViewById(R.id.games_pot_prompt);
 		noGamesPromptTV = (TextView)viewer.findViewById(R.id.games_no_games_prompt);
 		noGamesPromptTV.setVisibility(View.INVISIBLE);
+		endPromptTV = (TextView)viewer.findViewById(R.id.games_end_date_prompt);
 		startPromptTV = (TextView)viewer.findViewById(R.id.games_start_date_prompt);
 	}
 	
@@ -349,6 +353,7 @@ public class GamesFragment extends Fragment {
         		durationTV.setText("   " + league.getDuration() + " days");
         		wagerTV.setText(" $" + league.getWager());
         		startTV.setText(" " + league.getStartDate());
+        		endTV.setText(" " + league.getEndDate());
         	}
         	new DaysRemainingAsyncTask().execute();	
         	
