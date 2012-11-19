@@ -88,7 +88,7 @@
     <string name="me_textview_total_money_earned_money_text"></string>
     <string name="me_textview_total_money_earned_prompt_text">Total Money Earned: </string>
     <string name="me_textview_total_checkins_text"></string>
-    <string name="me_textview_total_checkins_prompt_text">Total Checkins: </string>
+    <string name="me_textview_total_checkins_prompt_text">Total Checkins:</string>
     <string name="me_textview_total_gym_time_text"></string>
     <string name="me_textview_total_gym_time_prompt_text">Total Gym Time: </string>
     <string name="newsfeed_button_submit_text">Submit</string>
