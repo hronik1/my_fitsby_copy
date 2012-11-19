@@ -318,7 +318,7 @@ public class LeagueJoinDetailActivity extends Activity {
         	mProgressDialog.dismiss();
         	
         	if (response.wasSuccessful()) {
-            	firstNameTV.setText(response.getCreatorFirstName());
+            	firstNameTV.setText(" " + response.getCreatorFirstName());
         	}	
 
         }

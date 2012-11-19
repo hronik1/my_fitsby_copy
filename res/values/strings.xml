@@ -126,9 +126,9 @@
     <string name="public_leagues_pot_header_text">$ Comitted</string>
     <string name="title_activity_league_join_detail">Join A Game</string>
     <string name="league_join_detail_header_text"><u>Game Details:</u></string>
-    <string name="league_join_detail_name">Game Creator:  </string>
-    <string name="league_join_detail_name_first">Brent</string>
-    <string name="league_join_detail_name_last">H.</string>    
+    <string name="league_join_detail_name">Game Creator: </string>
+    <string name="league_join_detail_name_first"> </string>
+    <string name="league_join_detail_name_last"> </string>    
     <string name="league_join_detail_type_text">Type: </string>
     <string name="league_join_detail_type_data_text">Private</string>
     <string name="league_join_detail_wager_text">Wager: </string>
