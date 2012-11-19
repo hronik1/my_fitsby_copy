@@ -82,7 +82,7 @@
                 android:id="@+id/me_textview_total_gym_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/me_imageview"
+                android:layout_below="@+id/me_textview_total_money_earned_prompt"
                 android:layout_toRightOf="@+id/me_textview_total_gym_time_prompt"
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"                

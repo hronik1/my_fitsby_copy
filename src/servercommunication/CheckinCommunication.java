@@ -24,6 +24,7 @@ import responses.PlacesResponse;
 import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
 import responses.UserResponse;
+import responses.ValidateGymResponse;
 
 public class CheckinCommunication {
 
@@ -125,26 +126,21 @@ public class CheckinCommunication {
 	 * @param gymName
 	 * @return
 	 */
-	public static AddPlaceResponse addGym(String key, String latitude, String longitude,
-			String radius, String sensorUsed, String gymName) {
+	public static ValidateGymResponse addGym(String userId, String latitude, String longitude,
+			String gymName) {
 		
 		MyHttpClient myHttpClient = new MyHttpClient();
         try {  
         	JSONObject json = new JSONObject();
-        	JSONObject location = new JSONObject();
-        	location.put("lat", Double.parseDouble(latitude));
-        	location.put("lng", Double.parseDouble(longitude));
-        	json.put("location", location);
-    		json.put("accuracy", Integer.parseInt(radius));
-    		json.put("name", gymName);
-    		JSONArray typeArray = new JSONArray();
-    		typeArray.put("gym");
-    		json.put("types", typeArray);
+        	json.put("geo_lat", latitude);
+        	json.put("geo_long", longitude);
+    		json.put("gym_name", gymName);
+    		json.put("user_id", userId);
     		Log.d(TAG, json.toString());
             StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(
-					"https://maps.googleapis.com/maps/api/place/add/json?sensor=" + sensorUsed + "&key=" + key, stringEntity);
-			return AddPlaceResponse.jsonToAddPlaceResponse(MyHttpClient.parseResponse(serverResponse));
+					MyHttpClient.SERVER_URL + "validate_gym", stringEntity);
+			return ValidateGymResponse.jsonToValidateGymResponse(MyHttpClient.parseResponse(serverResponse));
         } catch (Exception e) {
         	Log.d(TAG, e.toString());
         	return null;

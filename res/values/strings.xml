@@ -98,6 +98,7 @@
     <string name="games_player_prompt_text">Players: </string>
     <string name="games_pot_prompt_text">$ Committed:</string>
     <string name="games_start_date_prompt_text">Start Date: </string>
+    <string name="games_end_date_prompt_text">End Date: </string>
     <string name="games_leader_prompt_text">Leaderboard</string>
     <string name="games_button_newgame_text">Add New Game</string>
     <string name="games_no_games_prompt_text">Looks like you\'re currently not in any games! Tap the blue button on the right to start a new game.</string>
@@ -106,6 +107,7 @@
     <string name="input_players"></string>
     <string name="input_wager"></string>
     <string name="input_date"></string>
+    <string name="input_end_date"></string>
     <string name="days_left_prompt">Days left:</string>
     <string name="days_left"></string>
     <string name="list_item_game_leader_name">Name</string>

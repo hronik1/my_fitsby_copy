@@ -39,9 +39,11 @@ public class StatsResponse {
 			String joinedDay = json.getString("joined_day");
 			String joinedYear = json.getString("joined_year");
 			//TODO parse checkins and total gym time
-//			String totalCheckins = json.getString("total_checkins");
-//			String totalTime = json.getString("total_gym_time");
+			String totalCheckins = json.getString("successful_checks");
+			String totalTime = json.getString("total_minutes_at_gym");
 			Stats stats = new Stats(gamesPlayed, gamesWon, moneyEarned, joinedMonth, joinedDay, joinedYear);
+			stats.setTotalCheckins(totalCheckins);
+			stats.setTotalTime(totalTime);
 			return new StatsResponse(status, stats);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

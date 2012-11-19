@@ -41,6 +41,12 @@ public class PrivateLeagueResponse {
 			String isPrivate = json.getString("is_private");
 			String startDate = json.getString("start_date");
 			League league = new League(id, wager, players, duration, stakes);
+			try {
+				String endDate = json.getString("end_date");
+				league.setEndDate(endDate);
+			} catch (Exception e) {
+				
+			}
 			league.setStartDate(startDate);
 			if (isPrivate.equals("true"))
 				league.setPrivate(1);

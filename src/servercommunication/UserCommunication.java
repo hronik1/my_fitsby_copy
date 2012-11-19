@@ -139,10 +139,12 @@ public class UserCommunication {
 	public static StatusResponse changeEmail(String email, String userId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
+		JSONObject json = new JSONObject();
         try {
-			params.add(new BasicNameValuePair("email", email));
-			params.add(new BasicNameValuePair("user_id", userId));
-			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "change_email", params);
+        	json.put("new_email", email);
+        	json.put("user_id", userId);
+        	StringEntity stringEntity = new StringEntity(json.toString()); 
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "change_email", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());

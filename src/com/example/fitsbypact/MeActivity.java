@@ -330,9 +330,10 @@ public class MeActivity extends Activity {
         		Stats stats = response.getStats();
         		earningsTV.setText(" $" + stats.getMoneyEarned());
         		checkinsTV.setText(" " + stats.getTotalCheckins());
-        		timeTV.setText(" " + stats.getTotalTime());
+        		timeTV.setText(" " + stats.getTotalTime() + " minutes");
 
         		joinTV.append(" " + stats.getJoinedMonth() + "/" + stats.getJoinedDay() + "/" + stats.getJoinedYear());
+
         		
         	} else {
         		Toast toast = Toast.makeText(MeActivity.this, "Sorry, but since there doesn't appear to be an internet connection at the moment, user statistics may be inaccurate.", Toast.LENGTH_LONG);

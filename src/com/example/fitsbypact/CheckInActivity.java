@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import responses.AddPlaceResponse;
 import responses.PlacesResponse;
 import responses.StatusResponse;
+import responses.ValidateGymResponse;
 import servercommunication.CheckinCommunication;
 import servercommunication.UserCommunication;
 
@@ -359,9 +360,22 @@ public class CheckInActivity extends Activity {
 			latitude = bestResult.getLatitude();
 			longitude = bestResult.getLongitude();
 //			String uri = buildPlacesUri(latitude, longitude, DEFAULT_PLACES_RADIUS, true);
+			
+			
+			
+			//TODO remove this coommment
+			
 			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
 					longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
+
+			
+			
 //			JSONObject jsonObject = jsonFromStringUri(uri);
+			
+			
+			
+			
+			
 //			boolean success = checkinSuccesful(jsonObject);
 //			if (success) {
 //				mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
@@ -434,8 +448,9 @@ public class CheckInActivity extends Activity {
     			.setPositiveButton("Added it", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					try {
-    						new GooglePlacesAddAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
-    								longitude+"", DEFAULT_PLACES_RADIUS+"", "true", input.getText().toString());
+    						gym = input.getText().toString();
+    						new GooglePlacesAddAsyncTask().execute(mUser.getID()+"", latitude+"",
+    								longitude+"", input.getText().toString());
 
     					} catch (Exception e) {
     						//TODO make a more better error message
@@ -666,31 +681,32 @@ public class CheckInActivity extends Activity {
         }
 	}
 	
-	private class GooglePlacesAddAsyncTask extends AsyncTask<String, Void, AddPlaceResponse> {
+	private class GooglePlacesAddAsyncTask extends AsyncTask<String, Void, ValidateGymResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(CheckInActivity.this, "",
                     "Adding your gym...");
 		}
 		
-        protected AddPlaceResponse doInBackground(String... params) {
-        	AddPlaceResponse response = CheckinCommunication.addGym(params[0],
-        			params[1], params[2], params[3], params[4], params[5]);
+        protected ValidateGymResponse doInBackground(String... params) {
+        	ValidateGymResponse response = CheckinCommunication.addGym(params[0],
+        			params[1], params[2], params[3]);
         	return response;
         }
 
-        protected void onPostExecute(AddPlaceResponse response) {
+        protected void onPostExecute(ValidateGymResponse response) {
         	mProgressDialog.dismiss();
         	if (response == null) {
         		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), response.getMessage(), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {
         		Toast toast = Toast.makeText(getApplicationContext(), "Successfully added your gym... like a boss", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
+        		new CheckinAsyncTask().execute(mUser.getID());
         	}
         }
 	}
@@ -763,6 +779,7 @@ public class CheckInActivity extends Activity {
         	
         }
     }
+
 }
 	
 

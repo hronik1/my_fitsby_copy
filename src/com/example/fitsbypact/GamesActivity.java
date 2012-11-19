@@ -67,6 +67,7 @@ public class GamesActivity extends Activity {
 	private TextView wagerPromptTV;
 	private TextView potPromptTV;
 	private TextView startPromptTV;
+	private TextView endPromptTV;
 	private TextView noGamesPromptTV;
 	
 	private TextView playersTV;
@@ -74,6 +75,7 @@ public class GamesActivity extends Activity {
 	private TextView durationTV;
 	private TextView potTV;
 	private TextView startTV;
+	private TextView endTV;
 	private TextView daysLeftTV;
 	
 	private ProgressBar progressBar;
@@ -218,6 +220,7 @@ public class GamesActivity extends Activity {
 		durationTV = (TextView)findViewById(R.id.input_duration);
 		potTV = (TextView)findViewById(R.id.input_pot);
 		startTV = (TextView)findViewById(R.id.input_date);
+		endTV = (TextView)findViewById(R.id.input_end_date);
 		daysLeftTV = (TextView)findViewById(R.id.days_left_prompt);
 		
 		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
@@ -226,6 +229,7 @@ public class GamesActivity extends Activity {
 		potPromptTV = (TextView)findViewById(R.id.games_pot_prompt);
 		noGamesPromptTV = (TextView)findViewById(R.id.games_no_games_prompt);
 		noGamesPromptTV.setVisibility(View.INVISIBLE);
+		endPromptTV = (TextView)findViewById(R.id.games_end_date_prompt);
 		startPromptTV = (TextView)findViewById(R.id.games_start_date_prompt);
 	}
 	
@@ -467,6 +471,8 @@ public class GamesActivity extends Activity {
         		durationTV.setText("   " + league.getDuration() + " days");
         		wagerTV.setText(" $" + league.getWager());
         		startTV.setText(" " + league.getStartDate());
+        		endTV.setText(" " + league.getEndDate());
+        		
         	}
         	new DaysRemainingAsyncTask().execute();	
         	

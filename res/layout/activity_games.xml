@@ -62,13 +62,23 @@
         android:text="@string/games_start_date_prompt_text"
         android:textStyle="bold" />
     
+    <TextView
+        android:id="@+id/games_end_date_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/games_duration_prompt"
+        android:layout_below="@+id/games_start_date_prompt"
+        android:layout_marginTop="5dp"
+        android:text="@string/games_end_date_prompt_text"
+        android:textStyle="bold" />
+    
     <ProgressBar
         android:id="@+id/games_progress_bar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/games_start_date_prompt"
+        android:layout_below="@+id/games_end_date_prompt"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp" />
@@ -181,6 +191,14 @@
         android:layout_alignBottom="@+id/games_start_date_prompt" 
         android:text="@string/input_date" />
     
+    <TextView 
+        android:id="@+id/input_end_date"
+        android:layout_toRightOf="@+id/games_end_date_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/games_end_date_prompt" 
+        android:text="@string/input_end_date" />
+        
     <Button
         android:id="@+id/games_button_newgame"
         android:layout_width="wrap_content"

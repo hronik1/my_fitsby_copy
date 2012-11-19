@@ -10,6 +10,7 @@ public class League {
 	private int duration;
 	private int stakes;
 	private String startDate;
+	private String endDate;
 
 	/* add time information */
 	
@@ -149,5 +150,12 @@ public class League {
 		this.startDate = startDate;
 	}
 
+	public String getEndDate() {
+		return endDate;
+	}
+	
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 
 }
