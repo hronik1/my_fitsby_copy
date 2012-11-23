@@ -11,21 +11,13 @@ import servercommunication.NewsfeedCommunication;
 
 import loaders.NewsfeedCursorLoader;
 
-import widgets.NavigationBar;
-
-import com.example.fitsbypact.NewsfeedActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.R;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
-
-import dbhandlers.CommentTableHandler;
-import dbhandlers.DatabaseHandler;
-import dbhandlers.LeagueMemberTableHandler;
 import dbtables.User;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -41,18 +33,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class NewsfeedFragment extends Fragment{
+public class NewsfeedFragment extends SherlockFragment {
 
 	private static final String TAG = "NewsfeedActivity";
-	
-	private NavigationBar navigation;
-
 
 	private Spinner gamesSpinner;
 	private ListView newsfeedLV;
@@ -68,9 +57,6 @@ public class NewsfeedFragment extends Fragment{
 			R.id.list_item_newsfeed_message, R.id.list_item_id };
 	
 	private ApplicationUser mApplicationUser;
-	private DatabaseHandler mdbHandler;
-	private LeagueMemberTableHandler mLeagueMemberTableHandler;
-	private CommentTableHandler mCommentTableHandler;
 	
 	private User user;
 	private int spinnerPosition;
@@ -92,6 +78,8 @@ public class NewsfeedFragment extends Fragment{
         initializeEditText(viewer);
         initializeSpinner(viewer);
 
+        new SpinnerDataAsyncTask().execute();
+        
 	    return viewer;
 	}
 	
@@ -101,12 +89,13 @@ public class NewsfeedFragment extends Fragment{
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		Log.i(TAG, "onAttach");
 		parent = activity;
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		user = mApplicationUser.getUser();
     
-		new SpinnerDataAsyncTask().execute();
+//		new SpinnerDataAsyncTask().execute();
 	}
 	
 	/**

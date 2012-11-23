@@ -13,6 +13,7 @@ import servercommunication.CheckinCommunication;
 
 
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.R;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
@@ -44,7 +45,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CheckinFragment extends Fragment{
+public class CheckinFragment extends SherlockFragment{
 
 	private final static String TAG = "CheckinFragment";
 	

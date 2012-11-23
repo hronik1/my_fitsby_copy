@@ -13,6 +13,7 @@ import widgets.NavigationBar;
 
 import bundlekeys.CreditCardBundleKeys;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.FriendInviteActivity;
 import com.example.fitsbypact.GamesActivity;
 import com.example.fitsbypact.LeagueLandingActivity;
@@ -45,13 +46,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SimpleCursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class GamesFragment extends Fragment {
+public class GamesFragment extends SherlockFragment {
 
 	private static final String TAG = "GamesActivity";
 	
@@ -123,6 +124,7 @@ public class GamesFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		Log.i(TAG, "onAttach");
 		parent = activity;
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
@@ -186,7 +188,7 @@ public class GamesFragment extends Fragment {
 				//TODO show game states of element clicked on
 				spinnerPosition = position;
 				new CursorDataAsyncTask().execute();
-				new GameInfoAsyncTask().execute();
+				
 			}
 
 			@Override
@@ -322,6 +324,7 @@ public class GamesFragment extends Fragment {
 		protected void onPostExecute(Cursor cursor) {
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
+        	new GameInfoAsyncTask().execute();
 
         }
     }

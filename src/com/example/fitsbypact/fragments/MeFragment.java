@@ -8,6 +8,7 @@ import responses.StatusResponse;
 import servercommunication.UserCommunication;
 import widgets.NavigationBar;
 
+import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.R;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
@@ -36,7 +37,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MeFragment extends Fragment{
+public class MeFragment extends SherlockFragment {
 
 
 	private final static String TAG = "MeFragment";
@@ -80,6 +81,8 @@ public class MeFragment extends Fragment{
 	    initializeEditTexts(viewer);
 	    initializeImageView(viewer);
 
+	    new StatsAsyncTask().execute(mUser.getID());
+	    
 	    return viewer;
 	}
 	
@@ -89,11 +92,12 @@ public class MeFragment extends Fragment{
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		Log.i(TAG, "onAttach");
 		parent = activity;
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
-        new StatsAsyncTask().execute(mUser.getID());
+//        new StatsAsyncTask().execute(mUser.getID());
 	}
 	
 	
