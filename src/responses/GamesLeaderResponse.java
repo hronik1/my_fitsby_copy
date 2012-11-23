@@ -31,7 +31,7 @@ public class GamesLeaderResponse {
 	
 	public static GamesLeaderResponse jsonToGamesLeaderResponse(JSONObject json) {
 		try {
-			String success = json.get("status").toString();
+			String success = json.getString("status");
 			Vector<Leader> leaders = new Vector<Leader>();
 			JSONArray jsonLeaders = json.getJSONArray("leaderboard");
 			int length = jsonLeaders.length();
@@ -45,6 +45,9 @@ public class GamesLeaderResponse {
 			}
 			return new GamesLeaderResponse(success, leaders);
 		} catch (JSONException e) {
+			Log.e(TAG, e.toString());
+			return new GamesLeaderResponse(e.toString(), null);
+		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 			return new GamesLeaderResponse(e.toString(), null);
 		}
