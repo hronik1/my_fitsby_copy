@@ -260,6 +260,7 @@ public class GamesFragment extends SherlockFragment {
 		durationPromptTV.setVisibility(View.INVISIBLE);
 		potPromptTV.setVisibility(View.INVISIBLE);
 		startPromptTV.setVisibility(View.INVISIBLE);
+		endPromptTV.setVisibility(View.INVISIBLE);
 		noGamesPromptTV.setVisibility(View.VISIBLE);
 	}
 	
