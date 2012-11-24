@@ -19,6 +19,7 @@ import android.util.Log;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.UserTableHandler;
 import dbtables.Leader;
+import formatters.LastNameFormatter;
 
 public class GamesLeaderCommunication {
 	
@@ -42,7 +43,7 @@ public class GamesLeaderCommunication {
 			return cursor;
 		Vector<Leader> leaders = gamesLeaderResponse.getLeaders();
 		for (Leader leader: leaders) {
-			cursor.addRow(new Object[] { leader.getFirstName(), leader.getLastName(),
+			cursor.addRow(new Object[] { leader.getFirstName(), LastNameFormatter.format(leader.getLastName()),
 					leader.getCheckins(), leader.getId()});
 		}
 		//TODO parse JSON, and fill cursor

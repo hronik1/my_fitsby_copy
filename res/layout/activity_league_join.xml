@@ -129,7 +129,7 @@
     <ListView
         android:id="@+id/league_join_list"
         android:layout_below="@+id/league_join_list_header"
-        android:layout_alignParentBottom="true" 
+        android:layout_above="@+id/league_join_button_create" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -159,5 +159,12 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/league_join_button_create"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:text="@string/league_join_button_create" />
+    
 </RelativeLayout>
 

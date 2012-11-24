@@ -65,6 +65,7 @@
     <string name="league_join_et_first_name_hint">Game Creator\'s First Name</string>
     <string name="league_join_et_invite_code_hint">Game ID</string>
     <string name="league_join_button_submit_text">Submit Search</string>
+    <string name="league_join_button_create">Create Game</string>
     <string name="search_for_a_game">Find A Specific Game</string>
     <string name="league_create_checkbox_text">Make game private</string>
     <string name="navigation_textview_me_text">Me</string>

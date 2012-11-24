@@ -27,6 +27,7 @@ import dbhandlers.UserTableHandler;
 import dbtables.Comment;
 import dbtables.LeagueMember;
 import dbtables.User;
+import formatters.LastNameFormatter;
 
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -97,7 +98,7 @@ public class NewsfeedCommunication {
 		Vector<Comment> comments = commentsResponse.getComments();
 		Log.d(TAG, comments.size()+"");
 		for(Comment comment: comments) {
-			cursor.addRow(new Object[] { comment.getFirstName(), comment.getLastName(),
+			cursor.addRow(new Object[] { comment.getFirstName(), LastNameFormatter.format(comment.getLastName()),
 					comment.getStamp(), comment.getMessage(), comment.getId() });
 		}
 		return cursor;

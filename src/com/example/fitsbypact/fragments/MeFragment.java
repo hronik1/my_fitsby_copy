@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import responses.StatsResponse;
 import responses.StatusResponse;
+import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 import widgets.NavigationBar;
 
@@ -16,6 +17,8 @@ import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbtables.Stats;
 import dbtables.User;
+import formatters.LastNameFormatter;
+import gravatar.Gravatar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -133,7 +136,7 @@ public class MeFragment extends SherlockFragment {
 	 */
 	public void initializeTextViews(View viewer) {
 		nameTV = (TextView)viewer.findViewById(R.id.me_textview_name);
-		nameTV.setText(mUser.getFirstName() + " " + mUser.getLastName());
+		nameTV.setText(mUser.getFirstName() + " " + LastNameFormatter.format(mUser.getLastName()));
 		
 		joinTV = (TextView)viewer.findViewById(R.id.me_textview_join_date);
 		//TODO add join date
@@ -270,6 +273,7 @@ public class MeFragment extends SherlockFragment {
         		checkinsTV.setText("" + stats.getTotalCheckins());
         		timeTV.setText(" " + stats.getTotalTime() + " minutes");
         		joinTV.append(" " + stats.getJoinedMonth() + "/" + stats.getJoinedDay() + "/" + stats.getJoinedYear());
+        		new GravatarAsyncTask().execute(mUser.getEmail());
         		
         	} else {
         		Toast toast = Toast.makeText(parent, "Sorry, but since there doesn't appear to be an internet connection at the moment, user statistics may be inaccurate.", Toast.LENGTH_LONG);
@@ -313,6 +317,23 @@ public class MeFragment extends SherlockFragment {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}
+        }
+    }
+    
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class GravatarAsyncTask extends AsyncTask<String, Void, Bitmap> {
+        protected Bitmap doInBackground(String... params) {
+        	String gravatarURL = Gravatar.getGravatar(params[0]);
+        	return MyHttpClient.getBitmapFromURL(gravatarURL);
+        }
+
+        protected void onPostExecute(Bitmap response) {
+        	if (response != null)
+        		profileIV.setImageBitmap(response);
         }
     }
 }

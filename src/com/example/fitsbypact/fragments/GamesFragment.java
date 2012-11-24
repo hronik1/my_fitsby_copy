@@ -16,6 +16,7 @@ import bundlekeys.CreditCardBundleKeys;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.FriendInviteActivity;
 import com.example.fitsbypact.GamesActivity;
+import com.example.fitsbypact.LeagueJoinActivity;
 import com.example.fitsbypact.LeagueLandingActivity;
 import com.example.fitsbypact.R;
 
@@ -222,7 +223,7 @@ public class GamesFragment extends SherlockFragment {
 		newGamesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				gotoLeagueLandingActivity();
+				gotoLeagueJoinActivity();
 			}
 		});
 	}
@@ -247,9 +248,9 @@ public class GamesFragment extends SherlockFragment {
 	/**
 	 * opens up the LeagueLandingActivity
 	 */
-	private void gotoLeagueLandingActivity() {
+	private void gotoLeagueJoinActivity() {
 		try {
-			Intent intent = new Intent(parent, LeagueLandingActivity.class);
+			Intent intent = new Intent(parent, LeagueJoinActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
 			//remove in deployment
