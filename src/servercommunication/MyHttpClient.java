@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,8 @@ import org.apache.http.HttpResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class MyHttpClient {
@@ -174,5 +178,28 @@ public class MyHttpClient {
 			}
 		}
 		return charset;
+	}
+	
+	/**
+	 * downloads a bitmap
+	 * @param src
+	 * @return
+	 */
+	public static Bitmap getBitmapFromURL(String src) {
+		try {
+			URL url = new URL(src);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setDoInput(true);
+			connection.connect();
+			InputStream input = connection.getInputStream();
+			Bitmap myBitmap = BitmapFactory.decodeStream(input);
+			return myBitmap;
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+			return null;
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			return null;
+		}
 	}
 }

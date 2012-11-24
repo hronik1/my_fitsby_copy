@@ -44,6 +44,8 @@ public class LeagueJoinActivity extends FragmentActivity
 	private final static String TAG = "LeagueJoinActivity";
 	
 	private Button buttonSubmit;
+	private Button buttonCreate;
+	
 	private EditText etFirstName;
 	private EditText etLastName;
 	private EditText etInviteCode;
@@ -154,6 +156,13 @@ public class LeagueJoinActivity extends FragmentActivity
     			submit();
     		}
     	});
+    	
+    	buttonCreate = (Button)findViewById(R.id.league_join_button_create);
+    	buttonCreate.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			create();
+    		}
+    	});
     }
     
     /**
@@ -169,6 +178,14 @@ public class LeagueJoinActivity extends FragmentActivity
 			toast.show();
 		} else
     		new FindGamesAsyncTask().execute(id, firstName, mUser.getID() + "");
+    }
+    
+    /**
+     * goes to create activity
+     */
+    private void create() {
+    	Intent intent = new Intent(this, LeagueCreateActivity.class);
+    	startActivity(intent);
     }
     
     /**

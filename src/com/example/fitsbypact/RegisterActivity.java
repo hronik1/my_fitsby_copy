@@ -291,7 +291,7 @@ public class RegisterActivity extends Activity {
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
-				Intent intent = new Intent(RegisterActivity.this, LeagueLandingActivity.class);
+				Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
 				startActivity(intent);
         	}
         }
