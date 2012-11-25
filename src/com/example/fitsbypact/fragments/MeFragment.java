@@ -10,6 +10,7 @@ import servercommunication.UserCommunication;
 import widgets.NavigationBar;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.example.fitsbypact.LandingActivity;
 import com.example.fitsbypact.R;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
@@ -199,7 +200,10 @@ public class MeFragment extends SherlockFragment {
 	 * logs the user out
 	 */
 	private void logout() {
-		//TODO implement
+		Intent intent = new Intent(parent, LandingActivity.class);
+		startActivity(intent);
+		mApplicationUser.setUser(null);
+		parent.finish();
 	}
 	
 	/**
