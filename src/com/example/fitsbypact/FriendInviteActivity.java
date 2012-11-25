@@ -280,6 +280,7 @@ public class FriendInviteActivity extends Activity {
     	try {
     		Intent intent = new Intent(this, LoggedinActivity.class);
     		startActivity(intent);
+    		this.finish();
     	} catch(Exception e) {
     		//TODO handle not starting intent better
     		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but this activity could not be started", Toast.LENGTH_LONG);
