@@ -201,9 +201,11 @@ public class MeFragment extends SherlockFragment {
 	 */
 	private void logout() {
 		Intent intent = new Intent(parent, LandingActivity.class);
-		startActivity(intent);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		mApplicationUser.setUser(null);
-		parent.finish();
+		startActivity(intent);
+//		
+//		parent.finish();
 	}
 	
 	/**

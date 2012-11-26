@@ -115,8 +115,7 @@
         </activity>
         <activity
             android:name=".LoggedinActivity"
-            android:label="@string/title_activity_loggedin" 
-            android:launchMode="singleInstance">
+            android:label="@string/title_activity_loggedin" >
 
         </activity>
     </application>
