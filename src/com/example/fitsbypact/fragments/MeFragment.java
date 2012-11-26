@@ -52,6 +52,7 @@ public class MeFragment extends SherlockFragment {
 	private TextView earningsTV;
 	private TextView checkinsTV;
 	private TextView timeTV;
+	private TextView gravatarLinkTV;
 	
 	private Button logoutButton;
 	private Button changePictureButton;
@@ -146,6 +147,14 @@ public class MeFragment extends SherlockFragment {
 		checkinsTV = (TextView)viewer.findViewById(R.id.me_textview_total_checkins);
 		timeTV = (TextView)viewer.findViewById(R.id.me_textview_total_gym_time);
 		//add earnings for user
+		gravatarLinkTV = (TextView)viewer.findViewById(R.id.me_settings_tv_change_picture_link);
+		gravatarLinkTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openGravatarSite();
+			}
+		});
+		
 	}
 	
 	/**
@@ -171,13 +180,13 @@ public class MeFragment extends SherlockFragment {
 			}
 		});
 		
-		changePictureButton = (Button)viewer.findViewById(R.id.me_settings_button_change_picture);
-		changePictureButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				changePicture();
-			}
-		});
+//		//changePictureButton = (Button)viewer.findViewById(R.id.me_settings_button_change_picture);
+//		changePictureButton.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				changePicture();
+//			}
+//		});
 		
 		submitButton = (Button)viewer.findViewById(R.id.me_settings_button_submit); 
 		submitButton.setOnClickListener(new OnClickListener() {
@@ -216,6 +225,15 @@ public class MeFragment extends SherlockFragment {
 		Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 		photoPickerIntent.setType("image/*");
 		startActivityForResult(photoPickerIntent, PICK_PHOTO_REQUEST);
+	}
+	
+	/**
+	 * opens up the gravatar url page
+	 */
+	private void openGravatarSite() {
+ 		//TODO change url to point to faq url
+ 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.gravatar.com"));
+ 		startActivity(browserIntent);
 	}
 	
 	/**

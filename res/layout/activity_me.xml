@@ -140,15 +140,18 @@
                 android:layout_below="@+id/me_settings_et_change_email"
                 android:text="@string/me_settings_tv_change_picture_text" />
 
-            <Button
-                android:id="@+id/me_settings_button_change_picture"
+            <TextView
+                android:id="@+id/me_settings_tv_change_picture_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:layout_below="@+id/me_settings_tv_change_picture"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"                
-                android:text="@string/me_settings_button_change_picture_text">
-            </Button>
+                android:layout_marginLeft="10dp"  
+                android:textSize="18sp"
+                android:textColor="@drawable/faq_button_text"            
+                android:text="@string/me_settings_tv_change_picture_link_text">
+            </TextView>
 
             <TextView
                 android:id="@+id/me_settings_tv_change_password"
@@ -158,7 +161,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"     
                 android:textSize="18sp"           
-                android:layout_below="@+id/me_settings_button_change_picture"
+                android:layout_below="@+id/me_settings_tv_change_picture_link"
                 android:text="@string/me_settings_tv_change_password_text" />
 
             <EditText
