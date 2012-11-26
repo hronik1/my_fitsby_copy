@@ -217,7 +217,7 @@ public class MeActivity extends Activity {
 			}
 		});
 		
-		changePictureButton = (Button)findViewById(R.id.me_settings_button_change_picture);
+		//changePictureButton = (Button)findViewById(R.id.me_settings_button_change_picture);
 		changePictureButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
