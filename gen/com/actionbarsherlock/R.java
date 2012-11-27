@@ -1142,9 +1142,9 @@ containing a value of this type.
         public static final int navigation_textview_game=0x7f0400d2;
         public static final int navigation_textview_me=0x7f0400d5;
         public static final int navigation_textview_newsfeed=0x7f0400d3;
-        public static final int newsfeed_button_submit=0x7f0400b6;
-        public static final int newsfeed_et_comment=0x7f0400b4;
-        public static final int newsfeed_list_view=0x7f0400b5;
+        public static final int newsfeed_button_submit=0x7f0400b5;
+        public static final int newsfeed_et_comment=0x7f0400b6;
+        public static final int newsfeed_list_view=0x7f0400b4;
         public static final int newsfeed_spinner=0x7f0400b3;
         public static final int normal=0x7f040001;
         public static final int or=0x7f040065;

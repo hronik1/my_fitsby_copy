@@ -13,6 +13,7 @@ public class StatusResponse {
 	private final static String RESPONSE_FAIL = "fail";
 	
 	private String status;
+	private String error;
 	
 	public StatusResponse(String status) {
 		this.status = status;
@@ -26,9 +27,23 @@ public class StatusResponse {
 		return status;
 	}
 	
+	public void setError(String error) {
+		this.error = error;
+	}
+	
+	public String getError() {
+		return this.error;
+	}
+	
 	public static StatusResponse jsonToStatusResponse(JSONObject json) {
 		try {
-			return new StatusResponse(json.get("status").toString());
+			StatusResponse statusResponse = new StatusResponse(json.get("status").toString());
+			try {
+				statusResponse.setError(json.getString("error"));
+			} catch (Exception e) {
+				
+			}	
+			return statusResponse;
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
 			return new StatusResponse(e.toString());

@@ -499,7 +499,10 @@ public class CheckinFragment extends SherlockFragment{
 				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
 				checkedIn = true;
         	} else {
-        		Toast toast = Toast.makeText(parent, "Check-in failed!", Toast.LENGTH_LONG);
+        		String error = response.getError();
+        		if (error == null)
+        			error = "Sorry server could not be reached at the moment";
+        		Toast toast = Toast.makeText(parent, error, Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}
