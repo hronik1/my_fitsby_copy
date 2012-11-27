@@ -118,6 +118,9 @@
             android:label="@string/title_activity_loggedin" >
 
         </activity>
+        
     </application>
 
 </manifest>
+
+
