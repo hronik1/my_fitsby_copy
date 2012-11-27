@@ -18,10 +18,13 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 public class LoggedinActivity extends SherlockFragmentActivity {
 
@@ -53,15 +56,32 @@ public class LoggedinActivity extends SherlockFragmentActivity {
 		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_checkin_text))
 				.setIndicator(getString(R.string.navigation_textview_checkin_text)),
 				CheckinFragment.class, null);
-		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_me_text))
-				.setIndicator(getString(R.string.navigation_textview_me_text)),
-				MeFragment.class, null);
+//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_me_text))
+//				.setIndicator(getString(R.string.navigation_textview_me_text)),
+//				MeFragment.class, null);
 
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
 		}
 	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("Settings").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+    	Intent intent = new Intent(this, SettingsActivity.class);
+    	startActivity(intent);
+  
+    	return true;
+    }
+    
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
