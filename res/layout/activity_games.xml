@@ -164,7 +164,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/games_duration_prompt"
-        android:layout_toRightOf="@+id/games_player_prompt"
+        android:layout_toRightOf="@+id/games_duration_prompt"
         android:text="@string/input_duration" />
 
     <TextView
@@ -216,6 +216,4 @@
         android:layout_toLeftOf="@+id/invite_friends_button"
         android:text="@string/games_no_games_prompt_text"
         android:textStyle="bold" />
-    
-
 </RelativeLayout>
