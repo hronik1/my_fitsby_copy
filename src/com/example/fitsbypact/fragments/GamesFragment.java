@@ -175,6 +175,7 @@ public class GamesFragment extends SherlockFragment {
 	private void initializeListView(View viewer) {
 		leadersLV = (ListView)viewer.findViewById(R.id.games_leader_list);
 		mAdapter = new SimpleCursorAdapter(parent, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
+		leadersLV.setAdapter(mAdapter);
 	}
 	
 	/**
