@@ -267,10 +267,14 @@ public class FriendInviteActivity extends Activity {
 //        	}
 //        }
     	
-
-    	Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
-    	pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
-    	startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+    	try {
+    		Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
+    		pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
+    		startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+    	} catch (Exception e) {
+    		Toast.makeText(this, "Sorry but it appears that either your device does not have contacts," +
+    				" or will not allow me to access them", Toast.LENGTH_LONG).show();
+    	}
 
     }
     /**
