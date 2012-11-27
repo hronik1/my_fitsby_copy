@@ -74,6 +74,8 @@ public class CheckInActivity extends Activity {
 	
 	private final static String TAG = "CheckInActivity";
 
+
+
 	private boolean checkedIn;
 	
 	private TextView checkinLocationTV;

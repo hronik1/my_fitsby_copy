@@ -60,6 +60,7 @@ public class GamesFragment extends SherlockFragment {
 
 	private Activity parent;
 
+
 	
 	private TextView playersPromptTV;
 	private TextView durationPromptTV;
@@ -107,6 +108,8 @@ public class GamesFragment extends SherlockFragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
 
 	    View viewer = (View) inflater.inflate(R.layout.activity_games, container, false);
 	    Log.i(TAG, "onCreateView");
@@ -172,7 +175,6 @@ public class GamesFragment extends SherlockFragment {
 	private void initializeListView(View viewer) {
 		leadersLV = (ListView)viewer.findViewById(R.id.games_leader_list);
 		mAdapter = new SimpleCursorAdapter(parent, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
-
 	}
 	
 	/**
@@ -218,7 +220,6 @@ public class GamesFragment extends SherlockFragment {
 			}
 		});
 		
-
 		newGamesButton = (Button)viewer.findViewById(R.id.games_button_newgame);
 		newGamesButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -236,8 +237,6 @@ public class GamesFragment extends SherlockFragment {
 	   		toast.show();
 	   		return;
 		}
-			
-
 		Intent intent = new Intent(parent, FriendInviteActivity.class);
 		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
 
@@ -284,7 +283,6 @@ public class GamesFragment extends SherlockFragment {
     private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
     	
 		protected void onPreExecute() {
-
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Finding your games...");
 		}
