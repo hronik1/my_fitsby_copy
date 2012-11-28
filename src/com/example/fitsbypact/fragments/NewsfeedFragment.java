@@ -131,7 +131,7 @@ public class NewsfeedFragment extends SherlockFragment {
 			String gameId = spinnerData.get(spinnerPosition);
 			//Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
 			//mCommentTableHandler.addComment(comment);
-			new AddCommentAsyncTask().execute(user.getID()+"", gameId, commentET.getText().toString());
+			new AddCommentAsyncTask().execute(user.getID()+"", UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition))+"", commentET.getText().toString());
 		}
 		
 	}
