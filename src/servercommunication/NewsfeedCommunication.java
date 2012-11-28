@@ -65,6 +65,7 @@ public class NewsfeedCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
+        	Log.d(TAG, "addComment: user_id " + userId + " game_id " + gameId + " message " + comment);
 			json.put("user_id", userId);
 			json.put("game_id", gameId);
 			json.put("message", comment);

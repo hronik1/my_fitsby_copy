@@ -309,8 +309,8 @@ public class CheckinFragment extends SherlockFragment{
     			.setPositiveButton("Added it", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					try {
-    						new GooglePlacesAddAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
-    								longitude+"", DEFAULT_PLACES_RADIUS+"", "true", input.getText().toString());
+    						new GooglePlacesAddAsyncTask().execute(mUser.getID()+"", latitude+"",
+    								longitude+"", input.getText().toString());
 
     					} catch (Exception e) {
     						//TODO make a more better error message
@@ -462,6 +462,7 @@ public class CheckinFragment extends SherlockFragment{
         		Toast toast = Toast.makeText(parent, "Successfully added your gym... like a boss", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
+        		new CheckinAsyncTask().execute(mUser.getID());
         	}
         }
 	}
@@ -495,7 +496,7 @@ public class CheckinFragment extends SherlockFragment{
 				checkedIn = true;
         	} else {
         		String error = response.getError();
-        		if (error == null)
+        		if (error == null || error.equals(""))
         			error = "Sorry server could not be reached at the moment";
         		Toast toast = Toast.makeText(parent, error, Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
