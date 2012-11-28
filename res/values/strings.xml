@@ -13,7 +13,7 @@
     <string name="title_activity_example">ExampleActivity</string>
     <string name="title_activity_landing">Fitsby</string>
     <string name="login_text">"Login to your Fitsby account.</string>
-    <string name="register_text">By creating a Fitsby account, you are agreeing to the Terms of Service and Privacy Policy.</string>
+    <string name="register_text">By creating a Fitsby account, you are agreeing to our Terms of Service and Privacy Policy.</string>
     <string name="landing_login">Login</string>
     <string name="landing_start">Get Started</string>
     <string name="register_first_name_hint">First Name</string>
