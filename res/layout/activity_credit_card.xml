@@ -19,12 +19,21 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
 
+        <ImageView
+            android:id="@+id/stripe_cards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_alignLeft="@+id/credit_card_main_directions_text"
+            android:layout_below="@+id/credit_card_main_directions_text"
+            android:src="@drawable/stripe_cards" />
+        
         <TextView
             android:id="@+id/credit_card_number_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/credit_card_main_directions_text"
+            android:layout_below="@+id/stripe_cards"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:text="@string/credit_card_number_text"
@@ -109,9 +118,10 @@
             android:hint="@string/credit_card_et_card_cvc_hint"
             android:maxLength="3" />
 
+
         <TextView
             android:id="@+id/horizontal_div"
-            android:layout_below="@+id/stripe_cards"
+            android:layout_below="@+id/credit_card_et_expire_month"
 			android:layout_width="fill_parent"
 			android:layout_marginTop="20dp"
 			android:layout_marginLeft="10dp"
@@ -147,14 +157,6 @@
             android:layout_marginRight="5dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/stripe_cards"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_alignLeft="@+id/credit_card_et_expire_month"
-            android:layout_below="@+id/credit_card_et_expire_month"
-            android:src="@drawable/stripe_cards" />
 
         <TextView
             android:id="@+id/thirty_cents_charge"
@@ -188,6 +190,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/secure_payment_logo" />
+        
         
 
     </RelativeLayout>

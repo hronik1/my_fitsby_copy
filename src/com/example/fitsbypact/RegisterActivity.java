@@ -285,9 +285,13 @@ public class RegisterActivity extends Activity {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), "Sorry, that email is either invalid or already taken", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, that email is either invalid or already taken. It is also possible that the internet quality may be inadequate.", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
