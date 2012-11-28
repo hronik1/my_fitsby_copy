@@ -67,7 +67,9 @@ public class LoggedinActivity extends SherlockFragmentActivity {
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("Settings").setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add("Settings")
+        	.setIcon(R.drawable.settings_icon_unselected)
+        	.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 
         return true;
