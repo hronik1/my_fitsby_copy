@@ -60,13 +60,13 @@
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
     <string name="add_friend_button">Add Friend</string>
     <string name="invite_friends_directions">Invite your friends via text message. Press the Invite Friends button to populate your contacts, then tap a phone number to automatically send them a text message that has your game details.</string>
-    <string name="activity_league_join_directions">Find a game to join by either searching by the game creator\'s first name and game ID, or by browsing the public games list. Private games can only be found through search.</string>
     <string name="title_activity_league_join">Join A Game</string>
     <string name="league_join_et_first_name_hint">Game Creator\'s First Name</string>
     <string name="league_join_et_invite_code_hint">Game ID</string>
     <string name="league_join_button_submit_text">Submit Search</string>
     <string name="league_join_button_create">Create Game</string>
-    <string name="search_for_a_game">Find A Specific Game</string>
+    <string name="search_for_a_game">Search For A Game</string>
+    <string name="create_new_game_directions">Start Your Own Game</string>
     <string name="league_create_checkbox_text">Make game private</string>
     <string name="navigation_textview_me_text">Me</string>
     <string name="navigation_textview_game_text">Games</string>

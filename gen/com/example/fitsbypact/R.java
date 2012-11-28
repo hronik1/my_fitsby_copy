@@ -952,9 +952,10 @@ containing a value of this type.
         public static final int secure_payment_logo=0x7f020083;
         public static final int settings_icon_selected=0x7f020084;
         public static final int settings_icon_unselected=0x7f020085;
-        public static final int stripe_cards=0x7f020086;
-        public static final int wager_box=0x7f020087;
-        public static final int white_textbox=0x7f020088;
+        public static final int sparkle=0x7f020086;
+        public static final int stripe_cards=0x7f020087;
+        public static final int wager_box=0x7f020088;
+        public static final int white_textbox=0x7f020089;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040022;
@@ -997,12 +998,12 @@ containing a value of this type.
         public static final int abs__title=0x7f04001b;
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
-        public static final int activity_league_join_directions=0x7f040084;
         public static final int check_in_button_check_in=0x7f040036;
         public static final int check_in_button_check_out=0x7f040034;
         public static final int check_in_iv=0x7f040037;
         public static final int checkout_directions=0x7f040035;
         public static final int colon=0x7f040033;
+        public static final int create_new_game_directions=0x7f040083;
         public static final int credit_card_button_submit=0x7f040048;
         public static final int credit_card_cvc_text=0x7f040042;
         public static final int credit_card_et_card_cvc=0x7f040043;
@@ -1018,7 +1019,7 @@ containing a value of this type.
         public static final int days_left_prompt=0x7f040057;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
-        public static final int find_private_game=0x7f040078;
+        public static final int find_private_game=0x7f04007f;
         public static final int fitsby_description_text=0x7f040064;
         public static final int frameLayout1=0x7f0400c4;
         public static final int friend_invite_button_home=0x7f04004d;
@@ -1063,8 +1064,8 @@ containing a value of this type.
         public static final int league_create_tv_wager=0x7f04006d;
         public static final int league_create_wager=0x7f04006f;
         public static final int league_create_wager_dollarsign=0x7f04006e;
-        public static final int league_join_button_create=0x7f040083;
-        public static final int league_join_button_submit=0x7f04007a;
+        public static final int league_join_button_create=0x7f040084;
+        public static final int league_join_button_submit=0x7f040081;
         public static final int league_join_detail_button_faq=0x7f040097;
         public static final int league_join_detail_button_join=0x7f040098;
         public static final int league_join_detail_duration=0x7f040093;
@@ -1083,16 +1084,16 @@ containing a value of this type.
         public static final int league_join_detail_type_data=0x7f04008c;
         public static final int league_join_detail_wager=0x7f04008d;
         public static final int league_join_detail_wager_data=0x7f04008f;
-        public static final int league_join_duration_header=0x7f040081;
-        public static final int league_join_et_first_name=0x7f040077;
-        public static final int league_join_et_invite_code=0x7f040079;
-        public static final int league_join_league_id_header=0x7f04007d;
-        public static final int league_join_list=0x7f040082;
-        public static final int league_join_list_header=0x7f04007c;
-        public static final int league_join_players_header=0x7f04007e;
-        public static final int league_join_pot_header=0x7f040080;
-        public static final int league_join_public_header=0x7f04007b;
-        public static final int league_join_wager_header=0x7f04007f;
+        public static final int league_join_duration_header=0x7f04007d;
+        public static final int league_join_et_first_name=0x7f040080;
+        public static final int league_join_et_invite_code=0x7f040082;
+        public static final int league_join_league_id_header=0x7f040079;
+        public static final int league_join_list=0x7f04007e;
+        public static final int league_join_list_header=0x7f040078;
+        public static final int league_join_players_header=0x7f04007a;
+        public static final int league_join_pot_header=0x7f04007c;
+        public static final int league_join_public_header=0x7f040077;
+        public static final int league_join_wager_header=0x7f04007b;
         public static final int league_landing_button_create=0x7f040099;
         public static final int league_landing_button_join=0x7f04009a;
         public static final int listMode=0x7f040002;
@@ -1298,7 +1299,6 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f090009;
-        public static final int activity_league_join_directions=0x7f090048;
         public static final int add_friend_button=0x7f090046;
         public static final int app_name=0x7f090011;
         public static final int authorize_api_login_id=0x7f090040;
@@ -1307,6 +1307,7 @@ containing a value of this type.
         public static final int check_in_button_check_out_text=0x7f090055;
         public static final int checkout_directions=0x7f090057;
         public static final int colon=0x7f090058;
+        public static final int create_new_game_directions=0x7f09004e;
         public static final int credit_card_button_submit_text=0x7f09003a;
         public static final int credit_card_cvc_text=0x7f090037;
         public static final int credit_card_et_card_cvc_hint=0x7f09003b;
@@ -1366,8 +1367,8 @@ containing a value of this type.
         public static final int league_create_tv_wager_text=0x7f09002e;
         public static final int league_create_wager_dollarsign_text=0x7f0900ab;
         public static final int league_create_wager_text=0x7f0900aa;
-        public static final int league_join_button_create=0x7f09004d;
-        public static final int league_join_button_submit_text=0x7f09004c;
+        public static final int league_join_button_create=0x7f09004c;
+        public static final int league_join_button_submit_text=0x7f09004b;
         public static final int league_join_detail_button_join_text=0x7f090099;
         public static final int league_join_detail_header_text=0x7f09008b;
         public static final int league_join_detail_id_data_text=0x7f09009b;
@@ -1386,8 +1387,8 @@ containing a value of this type.
         public static final int league_join_duration_data_text=0x7f090098;
         public static final int league_join_duration_header_text=0x7f090083;
         public static final int league_join_duration_text=0x7f090097;
-        public static final int league_join_et_first_name_hint=0x7f09004a;
-        public static final int league_join_et_invite_code_hint=0x7f09004b;
+        public static final int league_join_et_first_name_hint=0x7f090049;
+        public static final int league_join_et_invite_code_hint=0x7f09004a;
         public static final int league_join_league_id_header_text=0x7f090080;
         public static final int league_join_players_header_text=0x7f090081;
         public static final int league_join_pot_header_text=0x7f090084;
@@ -1459,7 +1460,7 @@ containing a value of this type.
         public static final int register_last_name_hint=0x7f090020;
         public static final int register_password_hint=0x7f090016;
         public static final int register_text=0x7f09001c;
-        public static final int search_for_a_game=0x7f09004e;
+        public static final int search_for_a_game=0x7f09004d;
         public static final int seconds=0x7f090059;
         public static final int server_url=0x7f0900c0;
         public static final int stripe_live_publishable_api_key=0x7f0900c3;
@@ -1476,7 +1477,7 @@ containing a value of this type.
         public static final int title_activity_help=0x7f090027;
         public static final int title_activity_landing=0x7f09001a;
         public static final int title_activity_league_create=0x7f09002c;
-        public static final int title_activity_league_join=0x7f090049;
+        public static final int title_activity_league_join=0x7f090048;
         public static final int title_activity_league_join_detail=0x7f09008a;
         public static final int title_activity_league_landing=0x7f090029;
         public static final int title_activity_loggedin=0x7f0900ca;
