@@ -289,7 +289,7 @@ public class RegisterActivity extends Activity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, that email is either invalid or already taken", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, that email is either invalid or already taken. It is also possible that the internet quality may be inadequate.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {
