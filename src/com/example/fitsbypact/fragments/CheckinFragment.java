@@ -495,7 +495,7 @@ public class CheckinFragment extends SherlockFragment{
 				checkedIn = true;
         	} else {
         		String error = response.getError();
-        		if (error == null)
+        		if (error == null || error.equals(""))
         			error = "Sorry server could not be reached at the moment";
         		Toast toast = Toast.makeText(parent, error, Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
