@@ -446,6 +446,7 @@ public class CheckinFragment extends SherlockFragment{
         protected ValidateGymResponse doInBackground(String... params) {
         	ValidateGymResponse response = CheckinCommunication.addGym(params[0],
         			params[1], params[2], params[3]);
+        	gym = params[3];
         	return response;
         }
 

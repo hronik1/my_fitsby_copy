@@ -58,7 +58,7 @@
         android:layout_marginTop="1dp"
         android:layout_alignLeft="@+id/list_item_game_leader_name"
         android:layout_below="@+id/list_item_game_leader_name"
-        android:text="Checkins: "
+        android:text="Check-ins: "
         android:textSize="12sp" />
     <TextView
         android:id="@+id/list_item_game_leader_checkins"
