@@ -360,12 +360,12 @@ public class GamesFragment extends SherlockFragment {
         	
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
-        		playersTV.setText("   " + league.getPlayers());
-        		potTV.setText(" $" + league.getStakes());
-        		durationTV.setText("    " + league.getDuration() + " days");
-        		wagerTV.setText(" $" + league.getWager());
-        		startTV.setText(" " + league.getStartDate());
-        		endTV.setText(" " + league.getEndDate());
+        		playersTV.setText("" + league.getPlayers());
+        		potTV.setText("$" + league.getStakes());
+        		durationTV.setText("" + league.getDuration() + " days");
+        		wagerTV.setText("$" + league.getWager());
+        		startTV.setText("" + league.getStartDate());
+        		endTV.setText("" + league.getEndDate());
         	}
         	new DaysRemainingAsyncTask().execute();	
         	

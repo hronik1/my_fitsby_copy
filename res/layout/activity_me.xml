@@ -5,7 +5,7 @@
     <ScrollView 
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
-        android:layout_marginBottom="10dp" >
+        android:layout_marginBottom="15dp" >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -115,8 +115,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/me_textview_total_checkins"
                 android:layout_marginTop="20dp"                
-                android:layout_marginLeft="10dp"                
-                android:textSize="16sp"              
+                android:layout_marginLeft="10dp" 
+                android:textStyle="bold"                               
+                android:textSize="14sp"              
                 android:text="@string/me_settings_tv_change_email_text" />
 
             <EditText
@@ -127,7 +128,7 @@
                 android:background="@drawable/white_textbox"
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"
-                android:textSize="16sp"              
+                android:textSize="14sp"                              
                 android:hint="@string/me_settings_et_change_email_hint" />
 
             <TextView
@@ -137,7 +138,8 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="16sp"                
+                android:textSize="14sp"
+                android:textStyle="bold"                                
                 android:layout_below="@+id/me_settings_et_change_email"
                 android:text="@string/me_settings_tv_change_picture_text" />
 
@@ -149,7 +151,7 @@
                 android:layout_below="@+id/me_settings_tv_change_picture"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"  
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@drawable/faq_button_text"            
                 android:text="@string/me_settings_tv_change_picture_link_text">
             </TextView>
@@ -161,7 +163,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"     
-                android:textSize="16sp"           
+                android:textSize="14sp"
+                android:textStyle="bold"                           
                 android:layout_below="@+id/me_settings_tv_change_picture_link"
                 android:text="@string/me_settings_tv_change_password_text" />
 
@@ -173,7 +176,7 @@
                 android:background="@drawable/white_textbox"
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"       
-                android:textSize="16sp"                                    
+                android:textSize="14sp"                                    
                 android:layout_below="@+id/me_settings_tv_change_password"
                 android:hint="@string/me_settings_et_old_password_hint" />
 
@@ -186,7 +189,7 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"                         
                 android:layout_marginTop="5dp"         
-                android:textSize="16sp"                                           
+                android:textSize="14sp"                                           
                 android:layout_below="@+id/me_settings_et_old_password"
                 android:hint="@string/me_settings_et_new_password_hint" />
 
@@ -199,7 +202,7 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"               
                 android:layout_marginTop="5dp"         
-                android:textSize="16sp"                                                                            
+                android:textSize="14sp"                                                                            
                 android:layout_below="@+id/me_settings_et_new_password"
                 android:hint="@string/me_settings_et_new_password_confirm_hint" />
 
@@ -213,8 +216,7 @@
                 android:layout_marginTop="10dp"                
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"       
-                android:textSize="18sp"     
-                android:textStyle="bold"                                                 
+                android:textSize="17sp"                                                  
                 android:layout_below="@+id/me_settings_et_new_password_confirm"
                 android:text="@string/me_settings_button_submit_text" />
 
@@ -228,9 +230,8 @@
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"                
                 android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="20dp"    
-                android:textSize="18sp"                                   
+                android:layout_marginLeft="10dp"    
+                android:textSize="17sp"                                   
                 android:layout_below="@+id/me_settings_button_submit"
                 android:text="@string/me_settings_button_logout_text" />
         </RelativeLayout>

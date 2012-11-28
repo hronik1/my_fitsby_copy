@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+	android:background="@color/light_white" >
 
     <Spinner
         android:id="@+id/games_spinner"
@@ -11,209 +12,283 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:textStyle="bold" />
-
+    
     <TextView
-        android:id="@+id/games_player_prompt"
+        android:id="@+id/games_no_games_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/games_spinner"
         android:layout_below="@+id/games_spinner"
-        android:text="@string/games_player_prompt_text"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/games_wager_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/games_player_prompt"
-        android:layout_below="@+id/games_player_prompt"
-        android:layout_marginTop="5dp"
-        android:text="@string/games_wager_prompt_text"
-        android:textStyle="bold" />
-
-	<TextView
-        android:id="@+id/games_pot_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/games_wager_prompt"
-        android:layout_below="@+id/games_wager_prompt"
-        android:layout_marginTop="5dp"
-        android:text="@string/games_pot_prompt_text"
-        android:textStyle="bold" />    
-    
-    <TextView
-        android:id="@+id/games_duration_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/games_pot_prompt"
-        android:layout_below="@+id/games_pot_prompt"
-        android:layout_marginTop="5dp"  
-        android:text="@string/games_duration_prompt_text"
-        android:textStyle="bold" />
-    
-    <TextView
-        android:id="@+id/games_start_date_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/games_duration_prompt"
-        android:layout_below="@+id/games_duration_prompt"
-        android:layout_marginTop="5dp"
-        android:text="@string/games_start_date_prompt_text"
-        android:textStyle="bold" />
-    
-    <TextView
-        android:id="@+id/games_end_date_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/games_duration_prompt"
-        android:layout_below="@+id/games_start_date_prompt"
-        android:layout_marginTop="5dp"
-        android:text="@string/games_end_date_prompt_text"
-        android:textStyle="bold" />
-    
-    <ProgressBar
-        android:id="@+id/games_progress_bar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/games_end_date_prompt"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp" />
-
-    <TextView
-        android:id="@+id/games_leader_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/days_left_prompt"
-        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/games_leader_prompt_text"
-        android:textSize="18sp"
+        android:text="@string/games_no_games_prompt_text"
         android:textStyle="bold" />
+    
+	<LinearLayout
+	    android:layout_marginTop="5dp"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/games_spinner"
+	    android:layout_alignRight="@+id/games_spinner"
+	    android:layout_below="@+id/games_spinner" >
+	    <TextView
+	        android:id="@+id/input_players"
+	        android:layout_width="0px"      
+	        android:layout_height="50dp"
+	        android:textSize="18sp"        
+	        android:textStyle="bold"
+	        android:text="@string/input_players"
+	        android:layout_weight=".2"  	        
+	        android:background="@drawable/games_tab_details"
+	        android:layout_marginRight="4dp"
+	        android:gravity="center" />
+	    <TextView
+	        android:id="@+id/input_wager"
+	        android:layout_width="0px"
+	        android:layout_weight=".2"        
+	        android:layout_height="50dp"
+	        android:textSize="18sp" 
+	        android:textStyle="bold"	               
+	        android:text="@string/input_wager"
+	        android:background="@drawable/games_tab_details" 
+	        android:layout_marginLeft="2dp"
+	        android:layout_marginRight="2dp"                       
+	        android:gravity="center" />
+	    <TextView
+	        android:id="@+id/input_pot"
+	        android:layout_width="0px"
+	        android:layout_weight=".2"        
+	        android:layout_height="50dp"
+	        android:textSize="18sp"
+	        android:textStyle="bold"	                
+	        android:text="@string/input_pot"
+	        android:background="@drawable/games_tab_details"
+	        android:layout_marginLeft="4dp"                
+	        android:gravity="center" />
+	</LinearLayout>
+    
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/games_spinner"
+	    android:layout_alignRight="@+id/games_spinner"
+	    android:layout_below="@+id/games_spinner" 
+	    android:layout_marginTop="50dp"	>
+	    <TextView
+	        android:id="@+id/games_player_prompt"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"
+	        android:text="@string/games_player_prompt_text"
+	        android:textSize="12sp"
+	        android:layout_marginRight="4dp"
+	        android:textColor="@color/white"
+	        android:background="@color/fitsby_red"
+	        android:gravity="center" />
+	     <TextView
+	        android:id="@+id/games_wager_prompt"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"        
+	        android:textSize="12sp"        
+	        android:text="@string/games_wager_prompt_text"
+	        android:layout_marginRight="2dp"
+	        android:layout_marginLeft="2dp"
+	        android:textColor="@color/white"
+	        android:background="@color/fitsby_red"
+	        android:gravity="center" />
+		<TextView
+	        android:id="@+id/games_pot_prompt"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"        
+	        android:text="@string/games_pot_prompt_text"
+	        android:textSize="12sp"
+	        android:layout_marginLeft="4dp"
+	        android:textColor="@color/white"
+	        android:background="@color/fitsby_red" 
+			android:gravity="center" />
+	</LinearLayout>   
+	
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/games_spinner"
+	    android:layout_alignRight="@+id/games_spinner"
+	    android:layout_below="@+id/games_spinner" 
+	    android:layout_marginTop="75dp"	>
+	    <TextView
+	        android:id="@+id/input_duration"
+	        android:layout_width="0px"
+	        android:layout_height="50dp"
+	        android:textSize="18sp"
+	        android:textStyle="bold"	        
+	        android:layout_weight=".2"  	        
+	        android:background="@drawable/games_tab_details"
+	        android:layout_marginRight="4dp"
+	        android:gravity="center"
+	        android:text="@string/input_duration" />
+	    <TextView 
+	        android:id="@+id/input_date"
+	        android:layout_width="0px"
+	        android:layout_height="50dp"
+	        android:textSize="18sp"
+	        android:textStyle="bold"	                
+	        android:layout_weight=".2"  	        
+	        android:background="@drawable/games_tab_details"
+	        android:layout_marginRight="2dp"
+	        android:layout_marginLeft="2dp"
+	        android:gravity="center"
+	        android:text="@string/input_date" />
+	    <TextView 
+	        android:id="@+id/input_end_date"
+	        android:layout_width="0px"
+	        android:layout_height="50dp"
+	        android:textSize="18sp"     
+	        android:textStyle="bold"	           
+	        android:layout_weight=".2"  	        
+	        android:background="@drawable/games_tab_details"
+	        android:layout_marginLeft="4dp"
+	        android:gravity="center"
+	        android:text="@string/input_end_date" />
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:id="@+id/last_linear_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/games_spinner"
+	    android:layout_alignRight="@+id/games_spinner"
+	    android:layout_below="@+id/games_spinner" 
+	    android:layout_marginTop="120dp">
+	    <TextView
+	        android:id="@+id/games_duration_prompt"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"
+	        android:background="@color/fitsby_red" 
+	        android:textColor="@color/white"		        
+	        android:text="@string/games_duration_prompt_text"
+	        android:layout_marginRight="4dp"
+	        android:textSize="12sp"
+	        android:gravity="center" />
+	    <TextView
+	        android:id="@+id/games_start_date_prompt"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"	        
+	        android:text="@string/games_start_date_prompt_text"
+	        android:textSize="12sp"
+	        android:background="@color/fitsby_red" 
+	        android:textColor="@color/white"	        	        
+	        android:layout_marginLeft="2dp"
+	        android:layout_marginRight="2dp"                       
+	        android:gravity="center" />
+	    <TextView
+	        android:id="@+id/games_end_date_prompt"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".2"	        
+	        android:textSize="12sp"        
+	        android:text="@string/games_end_date_prompt_text"
+	        android:background="@color/fitsby_red" 
+	        android:textColor="@color/white"	        
+	        android:layout_marginLeft="4dp"                      
+	        android:gravity="center" />
+	</LinearLayout>	
 
-    <TextView
-        android:id="@+id/days_left_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/games_progress_bar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="3dp"
-        android:text="@string/days_left_prompt"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-
-   <TextView
-        android:id="@+id/days_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/games_progress_bar"
-        android:layout_toRightOf="@+id/days_left_prompt"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="3dp"
-        android:text="@string/days_left"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-   
-    <ListView
-        android:id="@+id/games_leader_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/games_leader_prompt"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp" />
-
-    <Button
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/last_linear_layout"
+        android:layout_above="@+id/buttons"	    
+	    android:background="@color/light_white"
+	    android:layout_marginTop="10dp" >
+	    <ProgressBar
+	        android:id="@+id/games_progress_bar"
+	        style="@android:style/Widget.ProgressBar.Horizontal"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/games_spinner"
+	        android:layout_marginLeft="20dp"
+	        android:layout_marginRight="20dp" />
+	    <TextView
+	        android:id="@+id/games_leader_prompt"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/sparkle"
+	        android:layout_below="@+id/days_left_prompt"
+	        android:layout_alignParentLeft="true"
+	        android:layout_marginTop="5dp"
+	        android:textColor="@color/white"
+	        android:text="@string/games_leader_prompt_text"
+	        android:textSize="12sp"
+	        android:textStyle="bold" />
+	    <TextView
+	        android:id="@+id/days_left_prompt"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/games_progress_bar"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="3dp"
+	        android:text="@string/days_left_prompt"
+	        android:textSize="12sp"
+	        android:textStyle="bold" />
+	   <TextView
+	        android:id="@+id/days_left"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/games_progress_bar"
+	        android:layout_toRightOf="@+id/days_left_prompt"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="3dp"
+	        android:text="@string/days_left"
+	        android:textSize="14sp"
+	        android:textStyle="bold" />
+	    <ListView
+	        android:id="@+id/games_leader_list"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/games_leader_prompt"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="5dp" />
+	</RelativeLayout>
+<LinearLayout 
+     android:id="@+id/buttons"
+   	 android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"
+     android:background="@color/light_white">
+	  <Button
         android:id="@+id/invite_friends_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/games_spinner"
-        android:layout_marginRight="10dp"
+        android:layout_weight=".5"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/custom_login_button"
         android:text="@string/invite_friends_button"
         android:textColor="@color/white"
-        android:textSize="12sp" />
+        android:textSize="12sp"/>
 
-    <TextView
-        android:id="@+id/input_players"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/games_player_prompt"
-        android:layout_toRightOf="@+id/games_wager_prompt"
-        android:text="@string/input_players" />
-
-    <TextView
-        android:id="@+id/input_wager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/games_wager_prompt"
-        android:layout_toRightOf="@+id/games_wager_prompt"
-        android:text="@string/input_wager" />
-
-    <TextView
-        android:id="@+id/input_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/games_duration_prompt"
-        android:layout_toRightOf="@+id/games_duration_prompt"
-        android:text="@string/input_duration" />
-
-    <TextView
-        android:id="@+id/input_pot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/games_pot_prompt"
-        android:layout_toRightOf="@+id/games_pot_prompt"
-        android:text="@string/input_pot" />
-
-    <TextView 
-        android:id="@+id/input_date"
-        android:layout_toRightOf="@+id/games_start_date_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/games_start_date_prompt" 
-        android:text="@string/input_date" />
-    
-    <TextView 
-        android:id="@+id/input_end_date"
-        android:layout_toRightOf="@+id/games_end_date_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/games_end_date_prompt" 
-        android:text="@string/input_end_date" />
-        
     <Button
         android:id="@+id/games_button_newgame"
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignLeft="@+id/invite_friends_button"
-        android:layout_below="@+id/invite_friends_button"
-        android:background="@drawable/checkin_button"
+		android:layout_weight=".3"  
+        android:layout_marginTop="5dp"		      
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/custom_login_button"
         android:text="@string/games_button_newgame_text"
-        android:textSize="12sp" 
-        android:layout_marginTop="5dp"
         android:textColor="@color/white"
-        android:layout_marginRight="10dp" />
-    
-     <TextView
-        android:id="@+id/games_no_games_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/games_spinner"
-        android:layout_below="@+id/games_spinner"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/invite_friends_button"
-        android:text="@string/games_no_games_prompt_text"
-        android:textStyle="bold" />
+        android:textSize="12sp" />
+	</LinearLayout>
+	
 </RelativeLayout>

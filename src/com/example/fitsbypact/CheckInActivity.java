@@ -685,7 +685,7 @@ public class CheckInActivity extends Activity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Successfully added your gym...like a boss", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Verification request sent!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         		new CheckinAsyncTask().execute(mUser.getID());
