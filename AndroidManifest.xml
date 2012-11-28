@@ -111,12 +111,13 @@
         </activity>
         <activity
             android:name=".HelpActivity"
-            android:label="@string/title_activity_help" >
+            android:label="@string/title_activity_help"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".LoggedinActivity"
-            android:label="@string/title_activity_loggedin" >
-
+            android:label="@string/title_activity_loggedin"
+            android:screenOrientation="portrait" >
         </activity>
         
     </application>

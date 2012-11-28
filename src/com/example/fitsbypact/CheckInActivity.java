@@ -425,9 +425,9 @@ public class CheckInActivity extends Activity {
 	  	input.setText("Gym name here");
     	builder.setView(input);
     	
-    	builder.setMessage("If you are at your gym and it is not showing up please add it, but if you're lying beware... We will find you, and we will ban you")
+    	builder.setMessage("We can't seem to find any gyms nearby you. Please type in the gym name so that we may verify that it exists. Your check-in will still count.")
     			.setCancelable(false)
-    			.setPositiveButton("Added it", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					try {
     						gym = input.getText().toString();
@@ -442,7 +442,7 @@ public class CheckInActivity extends Activity {
     					}
     				}
     			})
-    			.setNegativeButton("Nope, not really at a gym", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
@@ -463,7 +463,7 @@ public class CheckInActivity extends Activity {
 		if (timeMinutes < 45) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(CheckInActivity.this);
-	    	builder.setMessage("Hey, you have to be here for 45 minutes for the checkin to count for your score, sure you want to?")
+	    	builder.setMessage("Hey, you have to be here for 45 minutes for the check-in to count for your score, sure you want to?")
 	    			.setCancelable(false)
 	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
@@ -685,7 +685,7 @@ public class CheckInActivity extends Activity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Successfully added your gym... like a boss", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Successfully added your gym...like a boss", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         		new CheckinAsyncTask().execute(mUser.getID());

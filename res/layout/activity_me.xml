@@ -50,9 +50,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_imageview"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:text="@string/me_textview_total_money_earned_prompt_text" />
 
@@ -62,8 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_imageview"
                 android:layout_toRightOf="@+id/me_textview_total_money_earned_prompt"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"                
+                android:layout_marginTop="5dp"
+                android:textSize="14sp"                
                 android:text="@string/me_textview_total_money_earned_money_text" />
 
             <TextView
@@ -71,9 +71,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_textview_total_money_earned_prompt"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:text="@string/me_textview_total_gym_time_prompt_text" />
 
@@ -83,8 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_textview_total_money_earned_prompt"
                 android:layout_toRightOf="@+id/me_textview_total_gym_time_prompt"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"                
+                android:layout_marginTop="5dp"
+                android:textSize="14sp"                
                 android:text="@string/me_textview_total_gym_time_text" />
                         
             <TextView
@@ -92,9 +92,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_textview_total_gym_time_prompt"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:text="@string/me_textview_total_checkins_prompt_text" />
 
@@ -104,8 +104,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_textview_total_gym_time_prompt"
                 android:layout_toRightOf="@+id/me_textview_total_gym_time_prompt"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"                
+                android:layout_marginTop="5dp"
+                android:textSize="14sp"                
                 android:text="@string/me_textview_total_checkins_text" />
             
             <TextView
@@ -116,7 +116,7 @@
                 android:layout_below="@+id/me_textview_total_checkins"
                 android:layout_marginTop="20dp"                
                 android:layout_marginLeft="10dp"                
-                android:textSize="18sp"              
+                android:textSize="16sp"              
                 android:text="@string/me_settings_tv_change_email_text" />
 
             <EditText
@@ -127,6 +127,7 @@
                 android:background="@drawable/white_textbox"
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"
+                android:textSize="16sp"              
                 android:hint="@string/me_settings_et_change_email_hint" />
 
             <TextView
@@ -136,7 +137,7 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="18sp"                
+                android:textSize="16sp"                
                 android:layout_below="@+id/me_settings_et_change_email"
                 android:text="@string/me_settings_tv_change_picture_text" />
 
@@ -148,7 +149,7 @@
                 android:layout_below="@+id/me_settings_tv_change_picture"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"  
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@drawable/faq_button_text"            
                 android:text="@string/me_settings_tv_change_picture_link_text">
             </TextView>
@@ -160,7 +161,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"     
-                android:textSize="18sp"           
+                android:textSize="16sp"           
                 android:layout_below="@+id/me_settings_tv_change_picture_link"
                 android:text="@string/me_settings_tv_change_password_text" />
 
@@ -171,7 +172,8 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/white_textbox"
                 android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"                
+                android:layout_marginLeft="10dp"       
+                android:textSize="16sp"                                    
                 android:layout_below="@+id/me_settings_tv_change_password"
                 android:hint="@string/me_settings_et_old_password_hint" />
 
@@ -183,7 +185,8 @@
                 android:background="@drawable/white_textbox"       
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"                         
-                android:layout_marginTop="5dp"                         
+                android:layout_marginTop="5dp"         
+                android:textSize="16sp"                                           
                 android:layout_below="@+id/me_settings_et_old_password"
                 android:hint="@string/me_settings_et_new_password_hint" />
 
@@ -195,7 +198,8 @@
                 android:background="@drawable/white_textbox"
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"               
-                android:layout_marginTop="5dp"                                                          
+                android:layout_marginTop="5dp"         
+                android:textSize="16sp"                                                                            
                 android:layout_below="@+id/me_settings_et_new_password"
                 android:hint="@string/me_settings_et_new_password_confirm_hint" />
 
@@ -208,7 +212,9 @@
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"                
                 android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"                  
+                android:layout_marginLeft="10dp"       
+                android:textSize="18sp"     
+                android:textStyle="bold"                                                 
                 android:layout_below="@+id/me_settings_et_new_password_confirm"
                 android:text="@string/me_settings_button_submit_text" />
 
@@ -223,7 +229,8 @@
                 android:layout_marginTop="20dp"                
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="20dp"                  
+                android:layout_marginBottom="20dp"    
+                android:textSize="18sp"                                   
                 android:layout_below="@+id/me_settings_button_submit"
                 android:text="@string/me_settings_button_logout_text" />
         </RelativeLayout>

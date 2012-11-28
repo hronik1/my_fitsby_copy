@@ -89,10 +89,10 @@
     <string name="me_textview_total_money_earned_money_text"></string>
     <string name="me_textview_total_money_earned_prompt_text">Total Money Earned: </string>
     <string name="me_textview_total_checkins_text"></string>
-    <string name="me_textview_total_checkins_prompt_text">Total Checkins:</string>
+    <string name="me_textview_total_checkins_prompt_text">Total Gym Check-ins:</string>
     <string name="me_textview_total_gym_time_text"></string>
     <string name="me_textview_total_gym_time_prompt_text">Total Gym Time: </string>
-    <string name="me_settings_tv_change_picture_link_text">Head to gravatar site</string>
+    <string name="me_settings_tv_change_picture_link_text">Go to Gravatar.com</string>
     <string name="newsfeed_button_submit_text">Submit</string>
     <string name="newsfeed_et_comment_hint">Post a status here</string>
     <string name="games_duration_prompt_text">Duration: </string>
@@ -178,7 +178,7 @@
     <string name="me_settings_button_submit_text">Submit Changes</string>
     <string name="me_settings_button_invite_friends_text">Invite Friends</string>
     <string name="me_settings_button_logout_text">Logout</string>
-    <string name="me_settings_tv_change_picture_text">Change Profile Picture (Your profile picture is determined with Gravatar): </string>
+    <string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
     <string name="me_settings_button_change_picture_text">Choose picture</string>
     <string name="server_url">place server url here</string>
     <string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
@@ -190,6 +190,6 @@
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     <string name="game_start_date">Start Date:  </string>
     <string name="game_start_date_value">10/12/2012</string>
-    <string name="title_activity_loggedin">LoggedinActivity</string>
+    <string name="title_activity_loggedin"></string>
 
 </resources>

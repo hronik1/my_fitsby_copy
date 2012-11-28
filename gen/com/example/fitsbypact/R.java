@@ -950,9 +950,11 @@ containing a value of this type.
         public static final int public_leagues_top_words=0x7f020081;
         public static final int red_x_mark=0x7f020082;
         public static final int secure_payment_logo=0x7f020083;
-        public static final int stripe_cards=0x7f020084;
-        public static final int wager_box=0x7f020085;
-        public static final int white_textbox=0x7f020086;
+        public static final int settings_icon_selected=0x7f020084;
+        public static final int settings_icon_unselected=0x7f020085;
+        public static final int stripe_cards=0x7f020086;
+        public static final int wager_box=0x7f020087;
+        public static final int white_textbox=0x7f020088;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040022;
