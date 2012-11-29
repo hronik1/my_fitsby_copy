@@ -168,7 +168,7 @@
     <string name="league_create_header_text">Create a game by selecting the wager, duration, and game privacy. All games start on the next day\'s midnight, once there are a minimum of 5 players.</string>
     <string name="header_title_text">Fitsby</string>
     <string name="header_settings_text">You</string>
-    <string name="title_activity_settings">You</string>
+    <string name="title_activity_settings"></string>
     <string name="me_settings_tv_change_email_text">Change Email: </string>
     <string name="me_settings_et_change_email_hint">Enter a new email</string>
     <string name="email_means_paypal">(This is the email we use to send you money via PayPal)</string>
