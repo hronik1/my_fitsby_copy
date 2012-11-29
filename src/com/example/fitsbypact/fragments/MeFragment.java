@@ -10,6 +10,7 @@ import servercommunication.UserCommunication;
 import widgets.NavigationBar;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.example.fitsbypact.CheckInActivity;
 import com.example.fitsbypact.LandingActivity;
 import com.example.fitsbypact.R;
 
@@ -21,14 +22,17 @@ import dbtables.User;
 import formatters.LastNameFormatter;
 import gravatar.Gravatar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -176,7 +180,7 @@ public class MeFragment extends SherlockFragment {
 		logoutButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				logout();
+				showLogoutAlertDialog();
 			}
 		});
 		
@@ -279,6 +283,28 @@ public class MeFragment extends SherlockFragment {
 		new ChangeEmailAsyncTask().execute(email, mUser.getID()+"");
 	}
 	
+	 /**
+     * shows AlertDialog
+     */
+    public void showLogoutAlertDialog() {
+    	Log.i(TAG, "onCreateDialog");
+
+    	//TODO clean this up
+    	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+    	builder.setMessage("Are you sure you want to logout?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					logout();
+    				}
+    			})
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    }
+    
     /**
      * AsyncTask to Register user
      * @author brent
