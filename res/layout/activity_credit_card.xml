@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray" >
+    android:background="@drawable/dark_gradient_background" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -97,11 +97,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/credit_card_et_expire_year"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/credit_card_expiration_text"
+            android:layout_alignRight="@+id/credit_card_et_card_cvc"
+            android:layout_alignLeft="@+id/credit_card_et_card_cvc"
             android:text="@string/credit_card_cvc_text"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -111,8 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/credit_card_et_expire_year"
             android:layout_alignBottom="@+id/credit_card_et_expire_year"
-            android:layout_alignLeft="@+id/credit_card_cvc_text"
-            android:layout_marginRight="10dp"
+            android:layout_alignRight="@+id/credit_card_et_card_number"
             android:background="@drawable/white_textbox"
             android:gravity="center"
             android:hint="@string/credit_card_et_card_cvc_hint"
@@ -141,9 +139,6 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
         
-
-
-
         <TextView
             android:id="@+id/credit_card_wager_text"
             android:layout_width="wrap_content"

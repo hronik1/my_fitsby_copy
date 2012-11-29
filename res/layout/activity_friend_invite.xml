@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/dark_gradient_background">
 
     <TextView
         android:id="@+id/invite_friends_directions"
@@ -12,6 +13,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:text="@string/invite_friends_directions" />
 
     <Button
@@ -33,7 +35,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/friend_invite_button_invite"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:text="@string/or_invite_them_later_text" />
 
     <Button

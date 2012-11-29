@@ -194,8 +194,8 @@ public class FriendInviteActivity extends Activity {
 			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		    	
 			  	final EditText input = new EditText(FriendInviteActivity.this);
-			  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
-		    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
+			  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins! " +
+			  			"First, download the free app at [private beta], then join my game (Game Creator is"  + creatorName + " & Game ID is " + leagueId);
 		    	builder.setView(input);
 		    	
 		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position) +
@@ -367,8 +367,8 @@ public class FriendInviteActivity extends Activity {
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		  	
 		  	final EditText input = new EditText(FriendInviteActivity.this);
-		  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
-	    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
+		  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins! " +
+	    				    		"First, download the free app at [private beta], then join my game (Game Creator is"  + creatorName + " & Game ID is " + leagueId);
 	    	builder.setView(input);
 	    	
 	    	builder.setMessage("Edit personal message to your friend")

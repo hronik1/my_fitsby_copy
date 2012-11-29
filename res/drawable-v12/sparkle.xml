@@ -10,9 +10,9 @@
                 android:angle="270" />
             <corners
   				android:bottomRightRadius="15dp"
-  				android:bottomLeftRadius="15dp" 
+  				android:bottomLeftRadius="0dp" 
   				android:topLeftRadius="0dp" 
-  				android:topRightRadius="0dp"/> 
+  				android:topRightRadius="15dp"/> 
             <padding
                 android:left="5dp"
                 android:top="5dp"
