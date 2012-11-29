@@ -41,7 +41,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Button;
 import android.widget.Toast;
@@ -207,7 +207,10 @@ public class NewsfeedActivity extends Activity {
 			String gameId = spinnerData.get(spinnerPosition);
 			//Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
 			//mCommentTableHandler.addComment(comment);
-			new AddCommentAsyncTask().execute(user.getID()+"", gameId, commentET.getText().toString());
+			String comment = commentET.getText().toString();
+			if (!comment.equals("")) {
+				new AddCommentAsyncTask().execute(user.getID()+"", gameId, comment);
+			} 			
 		}
 		
 	}

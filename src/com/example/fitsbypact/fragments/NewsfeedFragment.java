@@ -128,10 +128,15 @@ public class NewsfeedFragment extends SherlockFragment {
 			toast.show();
 		}
 		else {
-			String gameId = spinnerData.get(spinnerPosition);
-			//Comment comment = new Comment(member.getId(), member.getLeagueId(), commentET.getText().toString());
-			//mCommentTableHandler.addComment(comment);
-			new AddCommentAsyncTask().execute(user.getID()+"", UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition))+"", commentET.getText().toString());
+			String gameId = UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition))+"";
+			String comment = commentET.getText().toString();
+			if (!comment.equals("")) {
+				new AddCommentAsyncTask().execute(user.getID()+"", gameId, comment);
+			} else {
+				Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but you can't submit a blank comment", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
+			}
 		}
 		
 	}
