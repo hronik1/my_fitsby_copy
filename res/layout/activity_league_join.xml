@@ -14,7 +14,7 @@
         android:textColor="@color/white"
         android:background="@drawable/sparkle"
         android:layout_marginBottom="5dp"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
    	
    	<LinearLayout
@@ -63,7 +63,7 @@
             android:id="@+id/league_join_pot_header"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-	        android:layout_weight=".3"
+	        android:layout_weight=".2"
 	        android:textStyle="bold"
 	        android:gravity="center"
 	        android:textSize="14sp"
@@ -75,7 +75,7 @@
             android:id="@+id/league_join_duration_header"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-	        android:layout_weight=".2"
+	        android:layout_weight=".3"
 	        android:textStyle="bold"
 	        android:gravity="center"
 	        android:textSize="14sp"       
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/league_join_et_first_name"
         android:text="@string/search_for_a_game"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:background="@drawable/sparkle" />
@@ -155,7 +155,7 @@
         android:layout_above="@+id/league_join_button_create"
         android:text="@string/create_new_game_directions"
   		android:layout_marginTop="10dp"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="@color/white"
         android:background="@drawable/sparkle"        
         android:textStyle="bold" />

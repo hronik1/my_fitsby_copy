@@ -304,7 +304,7 @@ public class CheckinFragment extends SherlockFragment{
 	  	input.setText("Gym name here");
     	builder.setView(input);
     	
-    	builder.setMessage("We can't seem to find any gyms nearby you. Please type in the gym name so that we may verify that it exists. Your check-in will still count.")
+    	builder.setMessage("We can't seem to find any gyms nearby you. Please type in the gym name so that we may verify that it exists. Your check-in will still count for now.")
     			.setCancelable(false)
     			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -402,7 +402,7 @@ public class CheckinFragment extends SherlockFragment{
 	private class GooglePlacesSearchAsyncTask extends AsyncTask<String, Void, PlacesResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Finding nearby rec centers...");
+                    "Finding nearby gyms and rec centers...");
 		}
 		
         protected PlacesResponse doInBackground(String... params) {

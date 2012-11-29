@@ -63,11 +63,8 @@ public class GamesFragment extends SherlockFragment {
 
 	
 	private TextView playersPromptTV;
-	private TextView durationPromptTV;
 	private TextView wagerPromptTV;
 	private TextView potPromptTV;
-	private TextView startPromptTV;
-	private TextView endPromptTV;
 	private TextView noGamesPromptTV;
 	
 	private TextView playersTV;
@@ -152,12 +149,9 @@ public class GamesFragment extends SherlockFragment {
 		
 		playersPromptTV = (TextView)viewer.findViewById(R.id.games_player_prompt);
 		wagerPromptTV = (TextView)viewer.findViewById(R.id.games_wager_prompt);
-		durationPromptTV = (TextView)viewer.findViewById(R.id.games_duration_prompt);
 		potPromptTV = (TextView)viewer.findViewById(R.id.games_pot_prompt);
 		noGamesPromptTV = (TextView)viewer.findViewById(R.id.games_no_games_prompt);
 		noGamesPromptTV.setVisibility(View.INVISIBLE);
-		endPromptTV = (TextView)viewer.findViewById(R.id.games_end_date_prompt);
-		startPromptTV = (TextView)viewer.findViewById(R.id.games_start_date_prompt);
 
 	}
 	
@@ -265,10 +259,7 @@ public class GamesFragment extends SherlockFragment {
 	private void disableGamesPrompts() {
 		playersPromptTV.setVisibility(View.INVISIBLE);
 		wagerPromptTV.setVisibility(View.INVISIBLE);
-		durationPromptTV.setVisibility(View.INVISIBLE);
 		potPromptTV.setVisibility(View.INVISIBLE);
-		startPromptTV.setVisibility(View.INVISIBLE);
-		endPromptTV.setVisibility(View.INVISIBLE);
 		noGamesPromptTV.setVisibility(View.VISIBLE);
 	}
 	
@@ -364,8 +355,8 @@ public class GamesFragment extends SherlockFragment {
         		potTV.setText("$" + league.getStakes());
         		durationTV.setText("" + league.getDuration() + " days");
         		wagerTV.setText("$" + league.getWager());
-        		startTV.setText("" + league.getStartDate());
-        		endTV.setText("" + league.getEndDate());
+        		startTV.setText(" (" + league.getStartDate() + " -");
+        		endTV.setText(" " + league.getEndDate() + ")");
         	}
         	new DaysRemainingAsyncTask().execute();	
         	

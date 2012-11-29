@@ -62,11 +62,8 @@ public class GamesActivity extends Activity {
 	private NavigationBar navigation;
 	
 	private TextView playersPromptTV;
-	private TextView durationPromptTV;
 	private TextView wagerPromptTV;
 	private TextView potPromptTV;
-	private TextView startPromptTV;
-	private TextView endPromptTV;
 	private TextView noGamesPromptTV;
 	
 	private TextView playersTV;
@@ -214,12 +211,9 @@ public class GamesActivity extends Activity {
 		
 		playersPromptTV = (TextView)findViewById(R.id.games_player_prompt);
 		wagerPromptTV = (TextView)findViewById(R.id.games_wager_prompt);
-		durationPromptTV = (TextView)findViewById(R.id.games_duration_prompt);
 		potPromptTV = (TextView)findViewById(R.id.games_pot_prompt);
 		noGamesPromptTV = (TextView)findViewById(R.id.games_no_games_prompt);
 		noGamesPromptTV.setVisibility(View.INVISIBLE);
-		endPromptTV = (TextView)findViewById(R.id.games_end_date_prompt);
-		startPromptTV = (TextView)findViewById(R.id.games_start_date_prompt);
 	}
 	
 	/**
@@ -326,9 +320,7 @@ public class GamesActivity extends Activity {
 	private void disableGamesPrompts() {
 		playersPromptTV.setVisibility(View.INVISIBLE);
 		wagerPromptTV.setVisibility(View.INVISIBLE);
-		durationPromptTV.setVisibility(View.INVISIBLE);
 		potPromptTV.setVisibility(View.INVISIBLE);
-		startPromptTV.setVisibility(View.INVISIBLE);
 		noGamesPromptTV.setVisibility(View.VISIBLE);
 	}
 	
@@ -456,8 +448,8 @@ public class GamesActivity extends Activity {
         		potTV.setText("$" + league.getStakes());
         		durationTV.setText(league.getDuration() + " days");
         		wagerTV.setText("$" + league.getWager());
-        		startTV.setText(league.getStartDate());
-        		endTV.setText(league.getEndDate());
+        		startTV.setText(" (" + league.getStartDate() + " -");
+        		endTV.setText(" " + league.getEndDate() + ")");
         		
         	}
         	new DaysRemainingAsyncTask().execute();	
