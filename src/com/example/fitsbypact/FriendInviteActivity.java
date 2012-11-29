@@ -195,7 +195,7 @@ public class FriendInviteActivity extends Activity {
 		    	
 			  	final EditText input = new EditText(FriendInviteActivity.this);
 			  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins!" +
-		    				    		"Join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
+		    				    		"First, download the free app at [private beta], then join my game! Here's the game info: Game Creator's First Name = "  + creatorName + ", Game ID = " + leagueId);
 		    	builder.setView(input);
 		    	
 		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position) +

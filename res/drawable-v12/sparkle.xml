@@ -9,10 +9,10 @@
                 android:startColor="@color/fitsby_red"
                 android:angle="270" />
             <corners
-  				android:bottomRightRadius="15dp"
+  				android:bottomRightRadius="0dp"
   				android:bottomLeftRadius="15dp" 
   				android:topLeftRadius="0dp" 
-  				android:topRightRadius="0dp"/> 
+  				android:topRightRadius="15dp"/> 
             <padding
                 android:left="5dp"
                 android:top="5dp"

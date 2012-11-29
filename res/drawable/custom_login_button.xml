@@ -5,10 +5,10 @@
     <item android:state_pressed="true" >
         <shape>
             <gradient
-                android:startColor="@color/gray"
-                android:endColor="@color/gray"
+                android:startColor="@color/gray2"
+                android:endColor="@color/gray2"
                 android:angle="270"
-            	android:textColor="@color/gray" />
+            	android:textColor="@color/gray2" />
             <corners
                 android:radius="8dp" />
             <padding
@@ -39,8 +39,8 @@
         <shape>
             <gradient
                 android:endColor="@color/second_button_gray"
-                android:startColor="@color/button_gray"
-                android:angle="90" />
+                android:startColor="@color/gray2"
+                android:angle="270" />
             <corners
                 android:radius="8dp" />
             <padding

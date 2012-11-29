@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/white_gradient_background" >
     <ScrollView 
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
@@ -132,6 +133,17 @@
                 android:hint="@string/me_settings_et_change_email_hint" />
 
             <TextView
+                android:id="@+id/email_means_paypal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_marginTop="1dp"
+                android:layout_below="@+id/me_settings_et_change_email"
+                android:layout_alignLeft="@+id/me_settings_et_change_email"
+                android:layout_alignRight="@+id/me_settings_et_change_email"
+                android:text="@string/email_means_paypal" />
+                
+            <TextView
                 android:id="@+id/me_settings_tv_change_picture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,7 +152,7 @@
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:textStyle="bold"                                
-                android:layout_below="@+id/me_settings_et_change_email"
+                android:layout_below="@+id/email_means_paypal"
                 android:text="@string/me_settings_tv_change_picture_text" />
 
             <TextView

@@ -18,6 +18,7 @@
     <application
         android:name=".applicationsubclass.ApplicationUser"
         android:icon="@drawable/ic_launcher"
+        android:logo="@drawable/logo_text"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 

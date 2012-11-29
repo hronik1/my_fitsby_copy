@@ -5,14 +5,15 @@
     <item android:state_pressed="true" >
         <shape>
             <gradient
-                android:startColor="@color/white"
-                android:endColor="@color/tinted_white"
-                android:angle="270" />
-            <stroke
-                android:width="1dp"
-                android:color="@color/silver" />
+                android:startColor="@color/gray2"
+                android:endColor="@color/gray2"
+                android:angle="270"
+            	android:textColor="@color/gray2" />
             <corners
-                android:radius="1dp" />
+  				android:bottomRightRadius="8dp"
+  				android:bottomLeftRadius="8dp" 
+  				android:topLeftRadius="0dp" 
+  				android:topRightRadius="0dp"/> 
             <padding
                 android:left="10dp"
                 android:top="10dp"
@@ -24,14 +25,14 @@
     <item android:state_focused="true" >
         <shape>
             <gradient
-                android:endColor="@color/white"
-                android:startColor="@color/tinted_white"
+                android:endColor="@color/button_gray"
+                android:startColor="@color/second_button_gray"
                 android:angle="270" />
-            <stroke
-                android:width="1dp"
-                android:color="@color/silver" />
             <corners
-                android:radius="1dp" />
+  				android:bottomRightRadius="8dp"
+  				android:bottomLeftRadius="8dp" 
+  				android:topLeftRadius="0dp" 
+  				android:topRightRadius="0dp"/> 
             <padding
                 android:left="10dp"
                 android:top="10dp"
@@ -43,14 +44,14 @@
     <item>        
         <shape>
             <gradient
-                android:endColor="@color/white"
-                android:startColor="@color/tinted_white"
+                android:endColor="@color/second_button_gray"
+                android:startColor="@color/gray2"
                 android:angle="270" />
-            <stroke
-                android:width="1dp"
-                android:color="@color/silver" />
             <corners
-                android:radius="1dp" />
+  				android:bottomRightRadius="8dp"
+  				android:bottomLeftRadius="8dp" 
+  				android:topLeftRadius="0dp" 
+  				android:topRightRadius="0dp"/> 
             <padding
                 android:left="10dp"
                 android:top="10dp"
