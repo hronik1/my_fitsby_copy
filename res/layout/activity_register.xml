@@ -30,6 +30,7 @@
         android:layout_centerVertical="true"        
         android:background="@drawable/white_textbox"
         android:inputType="textPassword"
+        android:ems="10"
         android:textSize="14sp"
         android:hint="@string/register_password_hint" />
     
@@ -42,6 +43,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"    		
         android:background="@drawable/white_textbox"	
+        android:ems="10"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"   
