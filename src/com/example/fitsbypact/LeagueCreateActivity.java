@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
@@ -51,6 +52,8 @@ public class LeagueCreateActivity extends Activity {
 	private TextView wagerTV;
 	private TextView daysTV;
 	private Button faqButton;
+	private RadioButton top3RB;
+	private RadioButton takeAllRB;
 	
 	private User mUser;
 	private int userID;
@@ -73,6 +76,7 @@ public class LeagueCreateActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         initializeButtons();
+        initializeRadioButtons();
         initializeCheckBoxes();  
         initializeTextViews();
         
@@ -224,6 +228,16 @@ public class LeagueCreateActivity extends Activity {
 				showFaqBrowser();
 			}
 		});
+	}
+	
+	/**
+	 * initializes the radiobuttons
+	 */
+	private void initializeRadioButtons() {
+		top3RB = (RadioButton)findViewById(R.id.league_create_rb_top3);
+		top3RB.setChecked(true);
+		
+		takeAllRB = (RadioButton)findViewById(R.id.league_create_rb_takeall);
 	}
 	
 	/**
