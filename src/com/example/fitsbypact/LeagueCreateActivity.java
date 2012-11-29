@@ -34,7 +34,8 @@ public class LeagueCreateActivity extends Activity {
 	
 	private final static String TAG = "LeagueCreateActivity";
 	
-	private final static int WAGER_INCREMENT = 10;
+	private final static int WAGER_INCREMENT = 1;
+	private final static int MIN_WAGER = 0;
 	private final static int DAYS_INCREMENT = 7;
 	private final static int MAX_DAYS = 28;
 	
@@ -161,7 +162,7 @@ public class LeagueCreateActivity extends Activity {
 	 */
 	private void initializeTextViews() {
 		wagerTV = (TextView)findViewById(R.id.league_create_wager);
-		wagerTV.setText(WAGER_INCREMENT + "");
+		wagerTV.setText(MIN_WAGER + "");
 		daysTV = (TextView)findViewById(R.id.league_create_days);
 	}
 	
@@ -223,7 +224,8 @@ public class LeagueCreateActivity extends Activity {
 	 */
 	private void incrementWager() {
 		int wager = Integer.parseInt((String)wagerTV.getText());
-		wager += WAGER_INCREMENT;
+		if (wager < Integer.MAX_VALUE)
+			wager += WAGER_INCREMENT;
 		wagerTV.setText(wager + "");
 	}
 	
@@ -232,7 +234,7 @@ public class LeagueCreateActivity extends Activity {
 	 */
 	private void decrementWager() {
 		int wager = Integer.parseInt((String)wagerTV.getText());
-		if(wager > WAGER_INCREMENT) {
+		if(wager > MIN_WAGER) {
 			wager -= WAGER_INCREMENT;
 			wagerTV.setText(wager + "");
 		}
