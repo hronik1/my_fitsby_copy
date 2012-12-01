@@ -10,7 +10,6 @@ import servercommunication.UserCommunication;
 import widgets.NavigationBar;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.example.fitsbypact.CheckInActivity;
 import com.example.fitsbypact.LandingActivity;
 import com.example.fitsbypact.R;
 
