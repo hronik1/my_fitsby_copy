@@ -13,6 +13,8 @@ import servercommunication.CheckinCommunication;
 
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.example.fitsbypact.LoggedinActivity;
+import com.example.fitsbypact.MessengerService;
 import com.example.fitsbypact.R;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
@@ -21,8 +23,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -30,7 +35,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -48,37 +56,60 @@ public class CheckinFragment extends SherlockFragment{
 
 	private final static String TAG = "CheckinFragment";
 	
-	private final static int MESSAGE_START_TIMER = 0;
-	private final static int MESSAGE_UPDATE_TIMER = 1;
-	private final static int MESSAGE_STOP_TIMER = 2;
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
 	private final static int DEFAULT_PLACES_RADIUS = 50; //200 meters
-
-	private boolean checkedIn;
-	private Activity parent;
+	private final static int MIN_CHECKIN_TIME = 30;
+	private static Activity parent;
 	
-	private TextView checkinLocationTV;
-	private TextView minutesTV;
-	private TextView secondsTV;
+	private static TextView checkinLocationTV;
+	private static TextView minutesTV;
+	private static TextView secondsTV;
 	
-	private ImageView checkedInIv;
+	private static ImageView checkedInIv;
 	private Button checkinButton;
 	private Button checkoutButton;
 	
 	private ApplicationUser mApplicationUser;
 	private User mUser;
 	
-	private static Handler mHandler;
-	private int timeSeconds;
-	private int timeMinutes;
+	private static int timeSeconds;
+	private static int timeMinutes;
 	
-	private String gym;
+	private static String gym;
 	private ProgressDialog mProgressDialog;
 
 	private Vector<String> gyms;
 	
 	double longitude;
 	double latitude;
+	
+	private Messenger mService;
+	private boolean isBound;
+	final Messenger mMessenger = new Messenger(new IncomingHandler());
+	
+    /**
+     * Class for interacting with the main interface of the service.
+     */
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className,
+                IBinder service) {
+            mService = new Messenger(service);
+
+            try {
+                Message msg = Message.obtain(null,
+                        MessengerService.MSG_REGISTER_CLIENT);
+                msg.replyTo = mMessenger;
+                mService.send(msg);
+            } catch (RemoteException e) {
+            	Log.e(TAG, e.toString());
+            }
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            mService = null;
+
+        }
+    };
 	
 	/**
 	 * callback to add in the stats fragment
@@ -90,14 +121,14 @@ public class CheckinFragment extends SherlockFragment{
         
         initializeTextViews(viewer);
         initializeImageViews(viewer);
-        initializeHandler();
         initializeTime();        
         initializeButtons(viewer);
         
        
         gyms = new Vector<String>();
-        checkedIn = false;
-        
+        Intent intent = new Intent(parent, MessengerService.class);
+        parent.startService(intent);
+        doBindService();
         return viewer;
 	}
 	
@@ -121,51 +152,7 @@ public class CheckinFragment extends SherlockFragment{
 		timeMinutes = 0;
 	}
 	
-	/**
-	 * initializes handler
-	 */
-	public void initializeHandler() {
-		mHandler = new Handler() {
-	        @Override
-	        public void handleMessage(Message message) {
-	            super.handleMessage(message);
-	            switch (message.what) {
-	            case MESSAGE_START_TIMER:
-	                mHandler.sendEmptyMessageDelayed(MESSAGE_UPDATE_TIMER, UPDATE_TIME_MILLIS);
-	                break;
-
-	            case MESSAGE_UPDATE_TIMER:
-	                mHandler.sendEmptyMessageDelayed(MESSAGE_UPDATE_TIMER,UPDATE_TIME_MILLIS);
-	                //TODO hope jitter isn't a big problem
-	                if (++timeSeconds == 60){
-	                	timeSeconds = 0;
-	                	timeMinutes++;
-	                }
-	                if (timeSeconds < 10)
-	                	secondsTV.setText("0" + timeSeconds);
-	                else 
-	                	secondsTV.setText(timeSeconds + "");
-	                if (timeMinutes < 10)
-	                	minutesTV.setText("0" + timeMinutes);
-	                else
-	                	minutesTV.setText(timeMinutes + "");
-	                break;
-	                
-	            case MESSAGE_STOP_TIMER:
-	            	Log.d(TAG, "stopTimer");
-	                mHandler.removeMessages(MESSAGE_UPDATE_TIMER);
-	                timeSeconds = 0;
-	                timeMinutes = 0;
-	                secondsTV.setText("00");
-	                minutesTV.setText("00");
-	                break;
-
-	            default:
-	                break;
-	            }
-	        }
-		};
-	}
+	
 	
 	/**
 	 * initializes the ImageViews
@@ -208,14 +195,14 @@ public class CheckinFragment extends SherlockFragment{
 	 * checks in user
 	 */
 	public void checkin() {
-		if (checkedIn) {
+		if (timeSeconds > 0 || timeMinutes > 0) {
 			Toast toast = Toast.makeText(parent.getApplicationContext(), "Hey buddy, don't go getting greedy ;) you're already checked in", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
 		}
 		
-		LocationManager service = (LocationManager) parent.getSystemService(parent.LOCATION_SERVICE);
+		LocationManager service = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
 		boolean gpsEnabled = service
 		  .isProviderEnabled(LocationManager.GPS_PROVIDER);
 		
@@ -332,23 +319,29 @@ public class CheckinFragment extends SherlockFragment{
 	 */
 	public void checkout() {
 		//TODO redo checkout
-		if (!checkedIn) {
+		if (timeSeconds == 0 && timeMinutes == 0) {
 			Toast toast = Toast.makeText(parent, "Sorry, but you can't check out because you never checked in", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
 		} 
-		if (timeMinutes < 45) {
+		if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-	    	builder.setMessage("Hey, you have to be here for 45 minutes for the check-in to count for your score, sure you want to stop early?")
+	    	builder.setMessage("Hey, you have to be here for " + MIN_CHECKIN_TIME + " minutes for the check-in to count for your score, sure you want to stop early?")
 	    			.setCancelable(false)
 	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
-	    	        		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
-	    	        		checkinLocationTV.setText("You are not currently checked into a gym");
-	    	        		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
-	    	        		checkedIn = false;
+	    					Message msg = Message.obtain(null,
+	    							MessengerService.MSG_STOP_TIMER);
+	    					msg.replyTo = mMessenger;
+	    					try {
+	    						mService.send(msg);
+	    					} catch (RemoteException e) {
+	    						Log.e(TAG, e.toString());
+	    					}
+	    					checkinLocationTV.setText("You are not currently checked into a verified gym");
+	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 	    				}
 	    			})
 	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
@@ -491,10 +484,27 @@ public class CheckinFragment extends SherlockFragment{
         		Toast toast = Toast.makeText(parent, "Check-in successful!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
-        		mHandler.sendEmptyMessage(MESSAGE_START_TIMER);
+                Message msg = Message.obtain(null,
+                        MessengerService.MSG_START_TIMER);
+                msg.replyTo = mMessenger;
+                try {
+					mService.send(msg);
+				} catch (RemoteException e) {
+					Log.e(TAG, e.toString());
+				}
+                msg = Message.obtain(null,
+                        MessengerService.MSG_SET_GYM);
+                Bundle data = new Bundle();
+                data.putString(MessengerService.GYM_NAME_KEY, gym);
+                msg.setData(data);
+                try {
+					mService.send(msg);
+					Toast.makeText(parent, gym, Toast.LENGTH_LONG).show();
+				} catch (RemoteException e) {
+					Log.e(TAG, e.toString());
+				}
 				checkinLocationTV.setText("Checked in at " + gym);
 				checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.green_check_mark));
-				checkedIn = true;
         	} else {
         		String error = response.getError();
         		if (error == null || error.equals(""))
@@ -527,10 +537,16 @@ public class CheckinFragment extends SherlockFragment{
         protected void onPostExecute(StatusResponse response) {
         	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
-        		mHandler.sendEmptyMessage(MESSAGE_STOP_TIMER);
+                Message msg = Message.obtain(null,
+                        MessengerService.MSG_STOP_TIMER);
+                msg.replyTo = mMessenger;
+                try {
+					mService.send(msg);
+				} catch (RemoteException e) {
+					Log.e(TAG, e.toString());
+				}
         		checkinLocationTV.setText("You are not currently checked into a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
-        		checkedIn = false;
         	} else {
         		Toast toast = Toast.makeText(parent, "Check-out failed!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -539,5 +555,81 @@ public class CheckinFragment extends SherlockFragment{
         	
         }
     }
+    
+    /**
+     * Handler of incoming messages from service.
+     */
+    static class IncomingHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MessengerService.MSG_SET_VALUE:
+                	timeSeconds = msg.arg2;
+                	timeMinutes = msg.arg1;
+	                if (timeSeconds < 10)
+	                	secondsTV.setText("0" + timeSeconds);
+	                else 
+	                	secondsTV.setText(timeSeconds + "");
+	                if (timeMinutes < 10)
+	                	minutesTV.setText("0" + timeMinutes);
+	                else
+	                	minutesTV.setText(timeMinutes + "");
+	            break;
+                case MessengerService.MSG_SET_GYM:
+                	Log.d(TAG, "set gym");
+                	Bundle data = msg.getData();
+                	gym = data.getString(MessengerService.GYM_NAME_KEY);
+                	Log.d(TAG, "set gym name = " + gym);
+                	if (gym != null) {
+        				checkinLocationTV.setText("Checked in at " + gym);
+        				checkedInIv.setImageDrawable(parent.getResources().getDrawable(R.drawable.green_check_mark));
+                	}
+                break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    }
+    
+    void doBindService() {
+    	Log.d(TAG, "bindService");
+        parent.bindService(new Intent(parent, 
+                MessengerService.class), mConnection, Context.BIND_AUTO_CREATE);
+        isBound = true;
+        if (mService != null) {
+        	try {
+        		Message msg = Message.obtain(null,
+        				MessengerService.MSG_REGISTER_CLIENT);
+        		msg.replyTo = mMessenger;
+        		mService.send(msg);
+        	} catch (RemoteException e) {
+        		Log.e(TAG, e.toString());
+        	}
+        }
+          
+    }
+
+    void doUnbindService() {
+        if (isBound) {
+            // If we have received the service, and hence registered with
+            // it, then now is the time to unregister.
+            if (mService != null) {
+                try {
+                    Message msg = Message.obtain(null,
+                            MessengerService.MSG_UNREGISTER_CLIENT);
+                    msg.replyTo = mMessenger;
+                    mService.send(msg);
+                } catch (RemoteException e) {
+                    // There is nothing special we need to do if the service
+                    // has crashed.
+                }
+            }
+
+            // Detach our existing connection.
+            parent.unbindService(mConnection);
+            isBound = false;
+        }
+    }
+    
 }
 

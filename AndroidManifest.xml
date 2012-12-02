@@ -122,6 +122,9 @@
             android:screenOrientation="portrait" >
         </activity>
         
+		<service android:name=".MessengerService"
+        	android:process=":remote"
+        	android:exported="false" />
     </application>
 
 </manifest>
