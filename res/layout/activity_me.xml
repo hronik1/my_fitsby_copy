@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/white_gradient_background" >
+    android:background="@color/gray" >
     <ScrollView 
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
@@ -33,7 +33,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"     
                 android:textStyle="bold"
-                android:textSize="20sp"           
+                android:textSize="20sp"        
+                android:textColor="@color/white"   
                 android:layout_toRightOf="@+id/me_imageview"
                 android:text="@string/me_textview_name_text" />
 
@@ -43,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/me_textview_name"
+                android:textColor="@color/white"                   
                 android:layout_alignLeft="@+id/me_textview_name"           
                 android:text="@string/me_textview_join_date_text" />
 
@@ -54,6 +56,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="14sp"
+                android:textColor="@color/white"                   
                 android:textStyle="bold"
                 android:text="@string/me_textview_total_money_earned_prompt_text" />
 
@@ -64,6 +67,7 @@
                 android:layout_below="@+id/me_imageview"
                 android:layout_toRightOf="@+id/me_textview_total_money_earned_prompt"
                 android:layout_marginTop="5dp"
+                android:textColor="@color/white"                   
                 android:textSize="14sp"                
                 android:text="@string/me_textview_total_money_earned_money_text" />
 
@@ -74,6 +78,7 @@
                 android:layout_below="@+id/me_textview_total_money_earned_prompt"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
+                android:textColor="@color/white"                   
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:text="@string/me_textview_total_gym_time_prompt_text" />
@@ -85,6 +90,7 @@
                 android:layout_below="@+id/me_textview_total_money_earned_prompt"
                 android:layout_toRightOf="@+id/me_textview_total_gym_time_prompt"
                 android:layout_marginTop="5dp"
+                android:textColor="@color/white"                   
                 android:textSize="14sp"                
                 android:text="@string/me_textview_total_gym_time_text" />
                         
@@ -95,6 +101,7 @@
                 android:layout_below="@+id/me_textview_total_gym_time_prompt"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
+                android:textColor="@color/white"                   
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:text="@string/me_textview_total_checkins_prompt_text" />
@@ -107,6 +114,7 @@
                 android:layout_toRightOf="@+id/me_textview_total_checkins_prompt"
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"                
+                android:textColor="@color/white"                   
                 android:text="@string/me_textview_total_checkins_text" />
             
             <TextView
@@ -116,6 +124,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/me_textview_total_checkins"
                 android:layout_marginTop="20dp"                
+                android:textColor="@color/white"                   
                 android:layout_marginLeft="10dp" 
                 android:textStyle="bold"                               
                 android:textSize="14sp"              
@@ -137,6 +146,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
+                android:textColor="@color/white"                   
                 android:layout_marginTop="1dp"
                 android:layout_below="@+id/me_settings_et_change_email"
                 android:layout_alignLeft="@+id/me_settings_et_change_email"
@@ -149,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"
+                android:textColor="@color/white"                   
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:textStyle="bold"                                
@@ -164,7 +175,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"  
                 android:textSize="14sp"
-                android:textColor="@drawable/faq_button_text"            
+                android:textColor="@color/fitsby_red"                   
                 android:text="@string/me_settings_tv_change_picture_link_text">
             </TextView>
 
@@ -174,6 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
+                android:textColor="@color/white"                   
                 android:layout_marginTop="10dp"     
                 android:textSize="14sp"
                 android:textStyle="bold"                           
@@ -239,7 +251,6 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/newsfeed_submit_button"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_marginTop="20dp"                
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"    
