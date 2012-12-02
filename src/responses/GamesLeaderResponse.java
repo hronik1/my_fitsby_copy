@@ -31,6 +31,7 @@ public class GamesLeaderResponse {
 	
 	public static GamesLeaderResponse jsonToGamesLeaderResponse(JSONObject json) {
 		try {
+			Log.d(TAG, json.toString());
 			String success = json.getString("status");
 			Vector<Leader> leaders = new Vector<Leader>();
 			JSONArray jsonLeaders = json.getJSONArray("leaderboard");
