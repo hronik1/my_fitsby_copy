@@ -58,7 +58,7 @@ public class CheckinFragment extends SherlockFragment{
 	
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
 	private final static int DEFAULT_PLACES_RADIUS = 50; //200 meters
-
+	private final static int MIN_CHECKIN_TIME = 30;
 	private static Activity parent;
 	
 	private static TextView checkinLocationTV;
@@ -325,10 +325,10 @@ public class CheckinFragment extends SherlockFragment{
 			toast.show();
 			return;
 		} 
-		if (timeMinutes < 45) {
+		if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-	    	builder.setMessage("Hey, you have to be here for 45 minutes for the check-in to count for your score, sure you want to stop early?")
+	    	builder.setMessage("Hey, you have to be here for " + MIN_CHECKIN_TIME + " minutes for the check-in to count for your score, sure you want to stop early?")
 	    			.setCancelable(false)
 	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
