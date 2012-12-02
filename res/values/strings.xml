@@ -70,9 +70,9 @@
     <string name="create_new_game_directions">"  START YOUR OWN GAME  "</string>
     <string name="league_create_checkbox_text">Make game private</string>
     <string name="navigation_textview_me_text">Me</string>
-    <string name="navigation_textview_game_text">Games</string>
-    <string name="navigation_textview_newsfeed_text">Newsfeed</string>
-    <string name="navigation_textview_checkin_text">Check In</string>
+    <string name="navigation_textview_game_text">GAMES</string>
+    <string name="navigation_textview_newsfeed_text">NEWSFEED</string>
+    <string name="navigation_textview_checkin_text">CHECK IN</string>
     <string name="check_in_button_check_in_text">Check In</string>
     <string name="check_in_button_check_out_text">Check Out</string>
     <string name="verified_gym">You are currently not checked in at a verified gym</string>

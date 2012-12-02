@@ -9,8 +9,6 @@ import responses.UsersGamesResponse;
 import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
 
-import widgets.NavigationBar;
-
 import bundlekeys.CreditCardBundleKeys;
 
 import com.actionbarsherlock.app.SherlockFragment;

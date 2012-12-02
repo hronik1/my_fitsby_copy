@@ -7,7 +7,6 @@ import responses.StatsResponse;
 import responses.StatusResponse;
 import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
-import widgets.NavigationBar;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.LandingActivity;
@@ -68,8 +67,6 @@ public class MeFragment extends SherlockFragment {
 	private ProgressDialog mProgressDialog;
 	
 	private ImageView profileIV;
-	
-	private NavigationBar navigation;
 	
 	private ApplicationUser mApplicationUser;
 	private User mUser;

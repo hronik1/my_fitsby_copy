@@ -56,9 +56,7 @@ public class LoggedinActivity extends SherlockFragmentActivity {
 		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_checkin_text))
 				.setIndicator(getString(R.string.navigation_textview_checkin_text)),
 				CheckinFragment.class, null);
-//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_me_text))
-//				.setIndicator(getString(R.string.navigation_textview_me_text)),
-//				MeFragment.class, null);
+
 
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
@@ -110,6 +108,7 @@ public class LoggedinActivity extends SherlockFragmentActivity {
         super.onStart();
 	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
+	    FlurryAgent.logEvent("LoggedinActivity");
         Log.i(TAG, "onStart");
     }
     
