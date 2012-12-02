@@ -5,14 +5,9 @@
     <item>        
         <shape>
             <gradient
-                android:endColor="@color/red"
-                android:startColor="@color/fitsby_red"
-                android:angle="270" />
-            <corners
-  				android:bottomRightRadius="0dp"
-  				android:bottomLeftRadius="15dp" 
-  				android:topLeftRadius="0dp" 
-  				android:topRightRadius="15dp"/> 
+                android:endColor="@color/light_darker_white"
+                android:startColor="@color/light_white"
+                android:angle="90" />
             <padding
                 android:left="5dp"
                 android:top="5dp"

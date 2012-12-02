@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_white" >
+    android:background="@color/light_darker_white" >
 
     <Spinner
         android:id="@+id/games_spinner"
@@ -147,7 +147,8 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/last_linear_layout"
 	    android:layout_marginTop="10dp"
-	    android:background="@color/light_white" >
+	    android:background="@color/light_darker_white" 
+	    android:layout_above="@+id/buttons">
 
 	    <ProgressBar
 	        android:id="@+id/games_progress_bar"
@@ -165,11 +166,11 @@
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/days_left_prompt"
 	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="40dp"
 	        android:background="@drawable/sparkle"
 	        android:text="@string/games_leader_prompt_text"
-	        android:textColor="@color/white"
+	        android:gravity="center"
 	        android:textSize="12sp"
+	        android:paddingTop="15dp"
 	        android:textStyle="bold" />
 		<RelativeLayout 
 		    android:layout_width="fill_parent"
@@ -237,9 +238,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/games_leader_prompt"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_marginTop="5dp" />
+        	android:background="@color/light_white"/>
 
         <TextView
 	        android:id="@+id/games_no_games_prompt"
@@ -258,6 +257,7 @@
      android:id="@+id/buttons"
    	 android:layout_width="match_parent"
      android:layout_height="wrap_content"
+     android:layout_below="@+id/games_leader_list"
      android:layout_alignParentBottom="true"
      android:background="@color/light_white">
 	  <Button
@@ -271,7 +271,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/custom_login_button"
         android:text="@string/invite_friends_button"
-        android:textColor="@color/white"
+        android:textColor="@color/white"    
         android:textSize="12sp"/>
 
     <Button

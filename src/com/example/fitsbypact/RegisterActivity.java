@@ -164,7 +164,7 @@ public class RegisterActivity extends Activity {
     					if (user != null) {
     						mApplicationUser.setUser(user);
     						try {
-    							Intent intent = new Intent(RegisterActivity.this, LeagueLandingActivity.class);
+    							Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
     							startActivity(intent);
     						} catch (Exception e) {
     							//remove in deployment

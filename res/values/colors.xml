@@ -17,6 +17,7 @@
      <color name="white">#ffffff</color>
      <color name="tinted_white">#e6e6e6</color>
      <color name="light_white">#f2f2f2</color>
+	 <color name="light_darker_white">#e5e5e5</color>     
      <color name="darker_white">#e3e3e3</color>
      
      <color name="silver">#cecece</color>

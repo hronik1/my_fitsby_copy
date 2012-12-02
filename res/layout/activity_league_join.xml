@@ -11,10 +11,8 @@
         android:layout_height="wrap_content"
         android:text="@string/league_join_public_header_text"
         android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        android:background="@drawable/sparkle"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="40dp"
+		android:gravity="center"
         android:textSize="14sp"
         android:textStyle="bold" />
    	
@@ -25,13 +23,25 @@
         android:layout_height="wrap_content" >
             
         <TextView
+            android:id="@+id/league_join_creator_header"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight=".1"
+	        android:textStyle="bold"
+	        android:gravity="center"
+	        android:textSize="13sp"
+	        android:textColor="@color/white"
+	        android:background="@drawable/public_leagues_top_words"
+            android:text="@string/league_join_creator_header_text"/>
+
+        <TextView
             android:id="@+id/league_join_league_id_header"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight=".1"
 	        android:textStyle="bold"
 	        android:gravity="center"
-	        android:textSize="14sp"
+	        android:textSize="13sp"
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_league_id_header_text"/>
@@ -43,7 +53,7 @@
 	        android:layout_weight=".2"
 	        android:textStyle="bold"
 	        android:gravity="center"
-	        android:textSize="14sp"
+	        android:textSize="13sp"
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_players_header_text" />
@@ -55,7 +65,7 @@
 	        android:layout_weight=".2"
 	        android:textStyle="bold"
 	        android:gravity="center"
-	        android:textSize="14sp"
+	        android:textSize="13sp"
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_wager_header_text" />
@@ -67,7 +77,7 @@
 	        android:layout_weight=".2"
 	        android:textStyle="bold"
 	        android:gravity="center"
-	        android:textSize="14sp"
+	        android:textSize="13sp"
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_pot_header_text" />
@@ -76,10 +86,10 @@
             android:id="@+id/league_join_duration_header"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-	        android:layout_weight=".3"
+	        android:layout_weight=".2"
 	        android:textStyle="bold"
 	        android:gravity="center"
-	        android:textSize="14sp"       
+	        android:textSize="13sp"       
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_duration_header_text" />
@@ -104,9 +114,7 @@
         android:text="@string/search_for_a_game"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/sparkle" />
+        android:gravity="center" />
          
     <EditText
         android:id="@+id/league_join_et_first_name"
@@ -145,8 +153,8 @@
   		android:layout_marginLeft="10dp"
   		android:layout_centerHorizontal="true"       
         android:background="@drawable/custom_login_button"
-        android:textColor="@color/white"
         android:textSize="14sp"        
+        android:textColor="@color/white"
         android:text="@string/league_join_button_submit_text">
    </Button>
     
@@ -157,10 +165,8 @@
         android:layout_above="@+id/league_join_button_create"
         android:text="@string/create_new_game_directions"
   		android:layout_marginTop="10dp"
-  		android:layout_marginRight="40dp"
         android:textSize="14sp"
-        android:textColor="@color/white"
-        android:background="@drawable/sparkle"        
+        android:gravity="center"    
         android:textStyle="bold" />
 
    	<Button

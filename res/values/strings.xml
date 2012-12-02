@@ -33,7 +33,7 @@
     <string name="league_landing_create_text">Create A Game</string>
     <string name="league_landing_join_text">Join A Game</string>
     <string name="title_activity_league_create"></string>
-    <string name="league_create_create_text">Next Step</string>
+    <string name="league_create_create_text">Create Game</string>
     <string name="league_create_tv_wager_text">Wager:</string>
     <string name="league_create_tv_days_text">Duration (in days):</string>
     <string name="league_create_ib_wager_plus">+</string>
@@ -61,13 +61,13 @@
     <string name="add_friend_button">Add Friend</string>
     <string name="invite_friends_directions">Invite your friends to your current game via SMS. You can change what your message says before you send it.</string>
     <string name="title_activity_league_join"></string>
-    <string name="league_join_et_first_name_hint">Game Creator\'s First Name</string>
+    <string name="league_join_et_first_name_hint">Game Host\'s First Name</string>
     <string name="league_join_et_invite_code_hint">Game ID</string>
     <string name="league_join_button_submit_text">Submit Search</string>
     <string name="league_join_button_create">Create Game</string>
-    <string name="league_join_public_header_text">"  JOIN A GAME  "</string>
-    <string name="search_for_a_game">"  SEARCH FOR A GAME  "</string>
-    <string name="create_new_game_directions">"  START YOUR OWN GAME  "</string>
+    <string name="league_join_public_header_text">JOIN A GAME</string>
+    <string name="search_for_a_game">SEARCH FOR A GAME</string>
+    <string name="create_new_game_directions">START YOUR OWN GAME</string>
     <string name="league_create_checkbox_text">Make game private</string>
     <string name="navigation_textview_me_text">Me</string>
     <string name="navigation_textview_game_text">GAMES</string>
@@ -102,7 +102,7 @@
     <string name="games_pot_prompt_text">POT</string>
     <string name="games_start_date_prompt_text">START DATE</string>
     <string name="games_end_date_prompt_text">END DATE</string>
-    <string name="games_leader_prompt_text">"  LEADERBOARD  "</string>
+    <string name="games_leader_prompt_text">LEADERBOARD</string>
     <string name="games_button_newgame_text">Add New Game</string>
     <string name="games_no_games_prompt_text">Looks like you\'re not in any games! Tap the Add New Game button to start a game.</string>
     <string name="input_pot"></string>
@@ -117,9 +117,10 @@
     <string name="forfeit_game_button">Forfeit Game</string>
     <string name="invite_friends_button">Invite Friends to Current Game</string>
     <string name="league_join_league_id_header_text">ID</string>
+    <string name="league_join_creator_header_text">Host</string>
     <string name="league_join_players_header_text">Players</string>
     <string name="league_join_wager_header_text">Wager</string>
-    <string name="league_join_duration_header_text">Duration</string>
+    <string name="league_join_duration_header_text">Days</string>
     <string name="league_join_pot_header_text">Pot</string>
     <string name="public_leagues_league_id_header_text">Game ID</string>
     <string name="public_leagues_players_header_text">Players</string>
@@ -127,8 +128,8 @@
     <string name="public_leagues_duration_header_text">Duration</string>
     <string name="public_leagues_pot_header_text">$ Comitted</string>
     <string name="title_activity_league_join_detail"></string>
-    <string name="league_join_detail_header_text">"  GAME DETAILS  "</string>
-    <string name="league_join_detail_name">Game Creator: </string>
+    <string name="league_join_detail_header_text">"GAME DETAILS"</string>
+    <string name="league_join_detail_name">Host: </string>
     <string name="league_join_detail_name_first">First</string>
     <string name="league_join_detail_name_last">Last</string>    
     <string name="league_join_detail_type_text">Type: </string>
@@ -147,6 +148,7 @@
     <string name="list_item_game_leader_name_text">First Name</string>
     <string name="list_item_game_leader_last_name_text">Last Name</string>
     <string name="list_item_game_leader_checkins_text">Check-ins: </string>
+    <string name="list_item_public_leagues_creator_text">[PIC]</string>
     <string name="list_item_public_leagues_id_text">#1</string>
     <string name="list_item_public_leagues_players_text">5</string>
     <string name="list_item_public_leagues_wager_text">$10</string>
