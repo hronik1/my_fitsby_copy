@@ -376,7 +376,8 @@ public class FriendInviteActivity extends Activity {
 	    			.setPositiveButton("Send", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
 	    				    SmsManager smsManager = SmsManager.getDefault();
-	    				    smsManager.sendTextMessage(number, null, input.getText().toString(), null, null);
+	    				    ArrayList<String> texts = smsManager.divideMessage(input.getText().toString());
+	    				    smsManager.sendMultipartTextMessage(number, null, texts, null, null);
 	    				}
 	    			})
 	    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
