@@ -11,7 +11,7 @@
     <string name="register_confirm_password_hint">Confirm Password</string>
     <string name="register_button_register">Register</string>
     <string name="title_activity_example"></string>
-    <string name="title_activity_landing"></string>
+    <string name="title_activity_landing">Fitsby</string>
     <string name="login_text">"Login to your Fitsby account</string>
     <string name="register_text">By creating a Fitsby account, you are agreeing to our Terms of Service and Privacy Policy.</string>
     <string name="landing_login">Login</string>
