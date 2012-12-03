@@ -1,5 +1,7 @@
 package com.example.fitsbypact.fragments;
 
+import gravatar.Gravatar;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 import responses.StatusResponse;
 import responses.UsersGamesResponse;
 import servercommunication.LeagueCommunication;
+import servercommunication.MyHttpClient;
 import servercommunication.NewsfeedCommunication;
 
 import loaders.NewsfeedCursorLoader;
@@ -20,6 +23,7 @@ import dbtables.User;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +36,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -47,6 +52,7 @@ public class NewsfeedFragment extends SherlockFragment {
 	private ListView newsfeedLV;
 	private EditText commentET;
 	private Button submitButton;
+	private ImageView mImageView;
 	private ArrayAdapter<String> spinnerDataAdapter;
 	private List<String> spinnerData;
 	
@@ -77,6 +83,7 @@ public class NewsfeedFragment extends SherlockFragment {
         initializeListView(viewer);
         initializeEditText(viewer);
         initializeSpinner(viewer);
+        initializeImageView(viewer);
 
         new SpinnerDataAsyncTask().execute();
         
@@ -189,6 +196,10 @@ public class NewsfeedFragment extends SherlockFragment {
 		});
 	}
 	
+	private void initializeImageView(View viewer) {
+		mImageView = (ImageView)viewer.findViewById(R.id.imageView1);
+		
+	}
 	   /**
      * AsyncTask to Register user
      * @author brent
@@ -253,6 +264,7 @@ public class NewsfeedFragment extends SherlockFragment {
         		spinnerData.addAll(response.getGames());
         		spinnerDataAdapter.notifyDataSetChanged();
         		//new CursorDataAsyncTask().execute();
+        		new GravatarAsyncTask().execute(user.getEmail());
         	}
         }
     }
@@ -279,6 +291,23 @@ public class NewsfeedFragment extends SherlockFragment {
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
 
+        }
+    }
+    
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class GravatarAsyncTask extends AsyncTask<String, Void, Bitmap> {
+        protected Bitmap doInBackground(String... params) {
+        	String gravatarURL = Gravatar.getGravatar(params[0]);
+        	return MyHttpClient.getBitmapFromURL(gravatarURL);
+        }
+
+        protected void onPostExecute(Bitmap response) {
+        	if (response != null)
+        		mImageView.setImageBitmap(response);
         }
     }
 }
