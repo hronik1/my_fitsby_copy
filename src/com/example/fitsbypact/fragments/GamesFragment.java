@@ -14,7 +14,6 @@ import bundlekeys.CreditCardBundleKeys;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.FriendInviteActivity;
 import com.example.fitsbypact.LeagueJoinActivity;
-import com.example.fitsbypact.LeagueLandingActivity;
 import com.example.fitsbypact.R;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
