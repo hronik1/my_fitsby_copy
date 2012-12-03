@@ -131,7 +131,7 @@ public class NewsfeedFragment extends SherlockFragment {
 			String gameId = UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition))+"";
 			String comment = commentET.getText().toString();
 			if (!comment.equals("")) {
-				new AddCommentAsyncTask().execute(user.getID()+"", gameId, comment);
+				new AddCommentAsyncTask().execute(user.getID()+"", gameId, "\"" + comment + "\"");
 			} else {
 				Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but you can't submit a blank comment", Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
