@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_darker_white" >
+    android:background="@color/light_white" >
 
     <Spinner
         android:id="@+id/games_spinner"
@@ -23,19 +23,19 @@
 	    <ImageView
 		    android:id="@+id/players_icon"
 		    android:layout_width="0dp"
-		    android:layout_height="45dp"	
+		    android:layout_height="55dp"	
 	        android:layout_weight=".2"  	        		    	    
 		    android:src="@drawable/players" />
    		 <ImageView
 		    android:id="@+id/wager_icon"
 		    android:layout_width="0dp"
-		    android:layout_height="45dp"	
+		    android:layout_height="55dp"	
 	        android:layout_weight=".2"  
 		    android:src="@drawable/wager" />
  		<ImageView
 		    android:id="@+id/pot_icon"
 		    android:layout_width="0dp"
-		    android:layout_height="40dp"	
+		    android:layout_height="50dp"	
 	        android:layout_weight=".2"
 		    android:src="@drawable/pot" />
 	</LinearLayout>
@@ -55,13 +55,12 @@
 	        android:layout_width="0px"
 	     	android:layout_height="wrap_content"
 	     	android:gravity="center"
-		    android:background="@color/light_darker_white"
 		    android:layout_marginRight="4dp" >
 		    <TextView
 		        android:id="@+id/input_players"
 		        android:layout_width="wrap_content"      
 		        android:layout_height="wrap_content"
-		        android:textSize="12sp"
+		        android:textSize="13sp"
 		        android:text="@string/input_players"
 		        android:textColor="@color/fitsby_red"
 		        android:textStyle="bold" 	       		        
@@ -71,7 +70,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:text="@string/games_player_prompt_text"
-		        android:textSize="12sp"
+		        android:textSize="13sp"
 		        android:layout_toRightOf="@+id/input_players"
 		        android:gravity="center" />
 	    </RelativeLayout>
@@ -80,14 +79,13 @@
 	        android:layout_width="0px"
 	        android:layout_height="wrap_content"
 	        android:gravity="center"
-	        android:background="@color/light_darker_white"
 	        android:layout_marginLeft="2dp"
 	        android:layout_marginRight="2dp" >
 		    <TextView
 		        android:id="@+id/input_wager"
 		        android:layout_width="wrap_content"      
 		        android:layout_height="wrap_content"
-		        android:textSize="12sp"	               
+		        android:textSize="13sp"	               
 		        android:text="@string/input_wager"                   
 		        android:textColor="@color/fitsby_red"
 		        android:textStyle="bold" 			           
@@ -96,7 +94,7 @@
 		        android:id="@+id/games_wager_prompt"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:textSize="12sp"        
+		        android:textSize="13sp"        
 		        android:text="@string/games_wager_prompt_text"
 		        android:layout_toRightOf="@+id/input_wager"	                
 		        android:gravity="center" />
@@ -107,13 +105,12 @@
 	        android:layout_width="0px"
 	        android:layout_height="wrap_content"
 	        android:gravity="center"
-	        android:background="@color/light_darker_white"
 	        android:layout_marginLeft="4dp" >
 		   <TextView
 		        android:id="@+id/input_pot"
 		        android:layout_width="wrap_content"      
 		        android:layout_height="wrap_content"
-		        android:textSize="12sp"	                
+		        android:textSize="13sp"	                
 		        android:text="@string/input_pot"
 		        android:textColor="@color/fitsby_red"
 		        android:textStyle="bold" 		        		                        
@@ -123,7 +120,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:text="@string/games_pot_prompt_text"
-		        android:textSize="12sp"
+		        android:textSize="13sp"
 		        android:layout_toRightOf="@+id/input_pot"
 				android:gravity="center" />
 		</RelativeLayout>
@@ -136,7 +133,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/last_linear_layout"
 	    android:layout_marginTop="10dp"
-	    android:background="@color/light_darker_white" 
 	    android:layout_above="@+id/buttons">
 
 	    <ProgressBar
@@ -155,10 +151,9 @@
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/days_left_prompt"
 	        android:layout_marginTop="5dp"
-	        android:background="@drawable/sparkle"
 	        android:text="@string/games_leader_prompt_text"
 	        android:gravity="center"
-	        android:textSize="12sp"
+	        android:textSize="14sp"
 	        android:textStyle="bold" />
 		<RelativeLayout 
 		    android:layout_width="fill_parent"
@@ -195,6 +190,7 @@
 		        android:textSize="10sp"        	        
 		        android:textColor="@color/white"	        
 		        android:textStyle="bold" />
+
 	    </RelativeLayout>
 	    
 	    <TextView
@@ -220,7 +216,7 @@
 	        android:text="@string/days_left"
 	        android:textSize="10sp"
 	        android:textStyle="bold" />
-
+	   
 	    <ListView
 	        android:id="@+id/games_leader_list"
 	        android:layout_width="fill_parent"
@@ -270,7 +266,7 @@
         android:layout_marginTop="5dp"		      
         android:layout_marginRight="6dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/custom_login_button"
+        android:background="@drawable/newsfeed_submit_button"
         android:text="@string/games_button_newgame_text"
         android:textColor="@color/white"
         android:textSize="12sp" />

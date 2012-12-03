@@ -968,10 +968,11 @@ containing a value of this type.
         public static final int settings_icon_unselected=0x7f02008b;
         public static final int sparkle=0x7f02008c;
         public static final int stripe_cards=0x7f02008d;
-        public static final int wager=0x7f02008e;
-        public static final int wager_box=0x7f02008f;
-        public static final int white_gradient_background=0x7f020090;
-        public static final int white_textbox=0x7f020091;
+        public static final int time=0x7f02008e;
+        public static final int wager=0x7f02008f;
+        public static final int wager_box=0x7f020090;
+        public static final int white_gradient_background=0x7f020091;
+        public static final int white_textbox=0x7f020092;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040022;

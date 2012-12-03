@@ -368,18 +368,18 @@ public class FriendInviteActivity extends Activity {
 		  	
 		  	final EditText input = new EditText(FriendInviteActivity.this);
 		  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins! " +
-	    				    		"First, download the free app at [private beta], then join my game (Game Creator is"  + creatorName + " & Game ID is " + leagueId);
+	    				    		"Download the app at http://fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 	    	builder.setView(input);
 	    	
 	    	builder.setMessage("Edit personal message to your friend")
 	    			.setCancelable(false)
-	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+	    			.setPositiveButton("Send", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
 	    				    SmsManager smsManager = SmsManager.getDefault();
 	    				    smsManager.sendTextMessage(number, null, input.getText().toString(), null, null);
 	    				}
 	    			})
-	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+	    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
 	    					dialog.cancel();
 	    				}
