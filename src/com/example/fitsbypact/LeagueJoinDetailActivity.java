@@ -21,12 +21,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
@@ -50,6 +52,8 @@ public class LeagueJoinDetailActivity extends Activity {
 	private Button joinButton;
 	private Button faqButton;
 	
+	private ImageView mImageView;
+	
 	private ApplicationUser mApplicationUser;
 	private DatabaseHandler mdbHandler;
 	private LeagueMemberTableHandler mLeagueMemberTableHandler;
@@ -62,6 +66,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	private int players;
 	private boolean isValid;
 	private int duration;
+	private Bitmap bitmap;
 	
 	private ProgressDialog mProgressDialog;
 	
@@ -78,6 +83,7 @@ public class LeagueJoinDetailActivity extends Activity {
         
         initializeTextViews();
         initializeButtons();
+        initializeImageView();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
@@ -181,6 +187,7 @@ public class LeagueJoinDetailActivity extends Activity {
  			isPrivate = true;
  		isValid = true;
  		duration = extras.getInt(LeagueDetailBundleKeys.KEY_DURATION);
+ 		bitmap = extras.getParcelable(LeagueDetailBundleKeys.KEY_BITMAP);
 
  	}
  	/**
@@ -235,6 +242,14 @@ public class LeagueJoinDetailActivity extends Activity {
  	}
  	
  	/**
+ 	 * initialize the imageview
+ 	 */
+ 	private void initializeImageView() {
+ 		mImageView = (ImageView)findViewById(R.id.league_join_detail_imageview);
+ 		mImageView.setImageBitmap(bitmap);
+ 	}
+ 	
+  	/**
  	 * join the game selected by user
  	 */
  	private void join() {

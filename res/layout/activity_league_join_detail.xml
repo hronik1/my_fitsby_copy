@@ -20,6 +20,14 @@
         android:textStyle="bold"        
         android:text="@string/league_join_detail_header_text" />
     
+    <ImageView 
+        android:id="@+id/league_join_detail_imageview"
+        android:layout_alignTop="@+id/league_join_detail_header"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="image view"/>
+    
     <TextView
         android:id="@+id/league_join_detail_name"
         android:layout_width="wrap_content"
