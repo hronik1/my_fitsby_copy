@@ -1060,9 +1060,9 @@ containing a value of this type.
         public static final int input_date=0x7f04005e;
         public static final int input_duration=0x7f04005d;
         public static final int input_end_date=0x7f04005f;
-        public static final int input_players=0x7f04004f;
-        public static final int input_pot=0x7f040051;
-        public static final int input_wager=0x7f040050;
+        public static final int input_players=0x7f040053;
+        public static final int input_pot=0x7f040057;
+        public static final int input_wager=0x7f040055;
         public static final int invite_friends_button=0x7f040063;
         public static final int invite_friends_directions=0x7f04004a;
         public static final int landing_button_login=0x7f04006b;
@@ -1168,8 +1168,8 @@ containing a value of this type.
         public static final int normal=0x7f040001;
         public static final int or=0x7f040067;
         public static final int or_invite_them_later_text=0x7f04004c;
-        public static final int players_icon=0x7f040053;
-        public static final int pot_icon=0x7f040057;
+        public static final int players_icon=0x7f04004f;
+        public static final int pot_icon=0x7f040051;
         public static final int public_leagues_duration_header=0x7f0400dc;
         public static final int public_leagues_league_id_header=0x7f0400d9;
         public static final int public_leagues_players_header=0x7f0400da;
@@ -1196,7 +1196,7 @@ containing a value of this type.
         public static final int thirty_cents_charge=0x7f040047;
         public static final int useLogo=0x7f040004;
         public static final int verified_gym=0x7f040038;
-        public static final int wager_icon=0x7f040055;
+        public static final int wager_icon=0x7f040050;
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {

@@ -8,11 +8,6 @@
                 android:endColor="@color/red"
                 android:startColor="@color/fitsby_red"
                 android:angle="270" />
-            <corners
-  				android:bottomRightRadius="15dp"
-  				android:bottomLeftRadius="15dp" 
-  				android:topLeftRadius="0dp" 
-  				android:topRightRadius="0dp"/> 
             <padding
                 android:left="5dp"
                 android:top="5dp"

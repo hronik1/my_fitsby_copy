@@ -21,7 +21,6 @@
         android:layout_below="@+id/league_join_public_header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
-            
         <TextView
             android:id="@+id/league_join_creator_header"
 	        android:layout_width="0dp"
@@ -33,7 +32,6 @@
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_creator_header_text"/>
-
         <TextView
             android:id="@+id/league_join_league_id_header"
 	        android:layout_width="0dp"
@@ -45,7 +43,6 @@
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_league_id_header_text"/>
-        
         <TextView 
             android:id="@+id/league_join_players_header"
 	        android:layout_width="0dp"
@@ -57,7 +54,6 @@
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_players_header_text" />
-        
         <TextView
             android:id="@+id/league_join_wager_header"
 	        android:layout_width="0dp"
@@ -69,7 +65,6 @@
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_wager_header_text" />
-        
         <TextView
             android:id="@+id/league_join_pot_header"
 	        android:layout_width="0dp"
@@ -81,7 +76,6 @@
 	        android:textColor="@color/white"
 	        android:background="@drawable/public_leagues_top_words"
             android:text="@string/league_join_pot_header_text" />
-                
         <TextView
             android:id="@+id/league_join_duration_header"
 	        android:layout_width="0dp"
