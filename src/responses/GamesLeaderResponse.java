@@ -50,15 +50,16 @@ public class GamesLeaderResponse {
 				String lastName = leader.getString("last_name");
 				int checkins = Integer.parseInt(leader.getString("successful_checks"));
 				String id = (i+1) + "";
+				String email = leader.getString("email");
 				//TODO change to actually parse email
-				if (!imageMap.containsKey("hronik1@illinois.edu"))  {
+				if (!imageMap.containsKey(email))  {
 					Log.d(TAG, "getting image");
-					String src = Gravatar.getGravatar("hronik1@illinois.edu");
+					String src = Gravatar.getGravatar(email);
 					bitmap = MyHttpClient.getBitmapFromURL(src);
-					imageMap.put("hronik1@illinois.edu", bitmap);
+					imageMap.put(email, bitmap);
 				} else {
 					Log.d(TAG, "image exists");
-					bitmap = imageMap.get("hronik1@illinois.edu");
+					bitmap = imageMap.get(email);
 				}
 				
 				leaders.add(new Leader(firstName, lastName, checkins, id, bitmap));
