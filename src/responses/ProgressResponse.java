@@ -5,37 +5,36 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class StakesResponse {
+public class ProgressResponse {
+
 	private static final String TAG = "StakesResponse";
 	
 	private StatusResponse mStatusResponse;
-	private String stakes;
+	private double progress;
 	
-	public StakesResponse(String status, String stakes) {
+	public ProgressResponse(String status, double progress) {
 		mStatusResponse = new StatusResponse(status);
-		this.stakes = stakes;
+		this.progress = progress;
 	}
 	
-	public String getStakes() {
-		return stakes;
+	public double getProgress() {
+		return progress;
 	}
 	
 	public boolean wasSuccessful() {
 		return mStatusResponse.wasSuccessful();
 	}
 
-	public static StakesResponse jsonToStakesResponse(JSONObject json) {
+	public static ProgressResponse jsonToProgressResponse(JSONObject json) {
 		try {
 			Log.d(TAG, json.toString());
 			String status = json.getString("status");
-			String stakes = json.getString("stakes");
-			return new StakesResponse(status, stakes);
+			double progress = json.getDouble("percentage");
+			return new ProgressResponse(status, progress);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			Log.d(TAG, e.toString());
-			return new StakesResponse(e.toString(), null);
+			return new ProgressResponse(e.toString(), 0.0);
 		}
 	}
-	
-	
- }
+}

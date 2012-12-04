@@ -5,6 +5,7 @@ import java.util.List;
 
 import responses.CountdownResponse;
 import responses.PrivateLeagueResponse;
+import responses.ProgressResponse;
 import responses.UsersGamesResponse;
 import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
@@ -15,6 +16,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.FriendInviteActivity;
 import com.example.fitsbypact.LeagueJoinActivity;
 import com.example.fitsbypact.R;
+import com.example.fitsbypact.R.color;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
@@ -52,11 +54,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class GamesFragment extends SherlockFragment {
 
 	private static final String TAG = "GamesActivity";
-	
 
+	private final static int PROGRESS_MAX = 100;
 	private Activity parent;
-
-
 	
 	private TextView playersPromptTV;
 	private TextView wagerPromptTV;
@@ -156,7 +156,7 @@ public class GamesFragment extends SherlockFragment {
 	 */
 	private void initializeProgressBar(View viewer) {
 		progressBar = (ProgressBar)viewer.findViewById(R.id.games_progress_bar);
-
+		progressBar.setMax(PROGRESS_MAX);
 	}
 	
 	/**
@@ -382,8 +382,35 @@ public class GamesFragment extends SherlockFragment {
         	if (response.wasSuccessful()) {
         		daysLeftTV.setText(response.getDaysLeft());
         	}
-        		
+        	new ProgressAsyncTask().execute();
         }
     }
 
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class ProgressAsyncTask extends AsyncTask<String, Void, ProgressResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Gathering game progress...");
+		}
+		
+        protected ProgressResponse doInBackground(String... params) {
+        	 return LeagueCommunication.getProgress(UsersGamesResponse.StripGameIdFromSpinner(spinnerData.get(spinnerPosition)));
+			
+        	
+        }
+
+		protected void onPostExecute(ProgressResponse response) {
+        	mProgressDialog.dismiss();
+        	if (response.wasSuccessful())
+        		progressBar.setProgress((int) (response.getProgress() * PROGRESS_MAX));
+        	else
+        		progressBar.setProgress(0);
+       		
+        }
+    }
 }
