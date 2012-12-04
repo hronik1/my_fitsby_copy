@@ -76,8 +76,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/list_item_game_leader_checkins_prompt"
-	        android:layout_below="@+id/list_item_game_leader_name"
-	        android:text="5"        
+	        android:layout_below="@+id/list_item_game_leader_name"       
        		android:layout_marginTop="1dp"
 	        android:textColor="@color/fitsby_red"	        
 	        android:textSize="13sp" />

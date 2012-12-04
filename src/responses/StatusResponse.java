@@ -37,6 +37,7 @@ public class StatusResponse {
 	
 	public static StatusResponse jsonToStatusResponse(JSONObject json) {
 		try {
+			Log.d(TAG, json.toString());
 			StatusResponse statusResponse = new StatusResponse(json.get("status").toString());
 			try {
 				statusResponse.setError(json.getString("error"));
