@@ -21,6 +21,7 @@ import responses.CountdownResponse;
 import responses.CreatorResponse;
 import responses.LeagueCreateResponse;
 import responses.PrivateLeagueResponse;
+import responses.ProgressResponse;
 import responses.PublicLeaguesResponse;
 import responses.StakesResponse;
 import responses.StatusResponse;
@@ -230,4 +231,22 @@ public class LeagueCommunication {
 //			return e.toString();
 //		}
 //	}
+	
+	/**
+	 * gets the progress of a game
+	 * @param gameId
+	 * @return
+	 */
+	public static ProgressResponse getProgress(int gameId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		List<NameValuePair> params = new LinkedList<NameValuePair>();
+        try {
+			params.add(new BasicNameValuePair("game_id", gameId + ""));
+			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "percentage_of_game", params);
+			return ProgressResponse.jsonToProgressResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new ProgressResponse(e.toString(), 0.0);
+		}
+	}
 }
