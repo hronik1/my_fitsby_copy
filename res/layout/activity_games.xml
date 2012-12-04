@@ -139,6 +139,7 @@
 	        android:id="@+id/games_progress_bar"
 	        style="@android:style/Widget.ProgressBar.Horizontal"
 	        android:layout_width="fill_parent"
+	        android:progressDrawable="@drawable/progress_bar"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
 	        android:layout_marginLeft="10dp"

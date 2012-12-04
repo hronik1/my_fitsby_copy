@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape>
+        <gradient android:type="sweep" android:useLevel="false"
+            android:startColor="@color/fitsby_red" 
+            android:endColor="@color/fitsby_red_darker"
+            android:angle="270"
+             />
+    </shape>
+</rotate> 
