@@ -17,19 +17,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newsfeed_spinner"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
         android:src="@drawable/profile_picture_placeholder" />
     <EditText
         android:id="@+id/newsfeed_et_comment"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/imageView1"
+        android:layout_below="@+id/newsfeed_spinner"        
         android:layout_toRightOf="@+id/imageView1"
         android:background="@drawable/post_status_here_box"
         android:ems="10"
         android:hint="@string/newsfeed_et_comment_hint"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="-1dp"
         android:textSize="12sp" />
 
      <Button

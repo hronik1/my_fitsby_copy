@@ -147,7 +147,7 @@
     <string name="league_join_detail_id_data_text">111</string>
     <string name="list_item_game_leader_name_text">First Name</string>
     <string name="list_item_game_leader_last_name_text">Last Name</string>
-    <string name="list_item_game_leader_checkins_text">Check-ins: </string>
+    <string name="list_item_game_leader_checkins_text">"Check-ins: "</string>
     <string name="list_item_public_leagues_creator_text">[PIC]</string>
     <string name="list_item_public_leagues_id_text">#1</string>
     <string name="list_item_public_leagues_players_text">5</string>
