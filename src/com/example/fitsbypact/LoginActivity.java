@@ -17,18 +17,21 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
+import constants.RememberMeConstants;
 
 public class LoginActivity extends Activity {
 
@@ -38,6 +41,11 @@ public class LoginActivity extends Activity {
 	private EditText emailET;
 	private EditText passwordET;
 	private TextView forgotPasswordTV;
+	private CheckBox rememberMeCB;
+	
+	private SharedPreferences mSharedPreferences;
+	private String preferencesEmail;
+	private String preferencesPassword;
 	
 	private ServerCommunication comm;
 	private DatabaseHandler mdbHandler;
@@ -59,6 +67,8 @@ public class LoginActivity extends Activity {
         initializeEditTexts();
         initializeButtons();
         initializeTextViews();
+        initializeCheckBox();
+        initializeSharedPreferences();
         
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
         mUserTableHandler = mdbHandler.getUserTableHandler();
@@ -217,6 +227,26 @@ public class LoginActivity extends Activity {
     }
     
     /**
+     * initializes the checkbox
+     */
+    private void initializeCheckBox() {
+    	rememberMeCB = (CheckBox)findViewById(R.id.login_remember_me_checkbox);
+    }
+    
+    private void initializeSharedPreferences() {
+    	mSharedPreferences = getSharedPreferences(RememberMeConstants.PREFS_NAME,MODE_PRIVATE); 
+    	preferencesEmail = mSharedPreferences.getString(RememberMeConstants.PREF_EMAIL, null);
+    	preferencesPassword = mSharedPreferences.getString(RememberMeConstants.PREF_PASSWORD, null);
+    	
+    	if (preferencesEmail != null) {
+    		rememberMeCB.setChecked(true);
+    		emailET.setText(preferencesEmail);
+    		passwordET.setText(preferencesPassword);
+    	} else {
+    		rememberMeCB.setChecked(true);
+    	}
+    }
+    /**
      * shows dialog to reset their password
      */
     private void showAlertInput() {
@@ -244,6 +274,26 @@ public class LoginActivity extends Activity {
     	alert.show();
     }
     
+    /**
+     * helper function to update password
+     */
+    private void updateRememberMe() {
+    	String email = emailET.getText().toString();
+    	String password = passwordET.getText().toString();
+    	if (rememberMeCB.isChecked()) {
+    		//remember new user
+            mSharedPreferences.edit()
+            .putString(RememberMeConstants.PREF_EMAIL, email)
+            .putString(RememberMeConstants.PREF_PASSWORD, password)
+            .commit();
+    	} else if (!rememberMeCB.isChecked() && email.equals(preferencesEmail)) {
+    		//forget old user
+            mSharedPreferences.edit()
+            .putString(RememberMeConstants.PREF_EMAIL, null)
+            .putString(RememberMeConstants.PREF_PASSWORD, null)
+            .commit();
+    	}
+    }
     /**
      * AsyncTask class to login the user
      * @author brent
@@ -274,6 +324,7 @@ public class LoginActivity extends Activity {
         		toast.show();
         	} else {
         		//TODO switch to next page
+        		updateRememberMe();
         		mApplicationUser.setUser(response.getUser());
     			Intent intent = new Intent(LoginActivity.this, LoggedinActivity.class);
     			startActivity(intent);
