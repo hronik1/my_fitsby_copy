@@ -192,6 +192,6 @@
     <string name="game_start_date">Start Date:  </string>
     <string name="game_start_date_value">10/12/2012</string>
     <string name="title_activity_loggedin"></string>
-    <string name="login_remember_me_textview">Remember me(coming soon)</string>
+    <string name="login_remember_me_textview">Remember me</string>
 
 </resources>
