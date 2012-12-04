@@ -39,7 +39,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
         android:layout_below="@+id/newsfeed_et_comment"
-        android:background="@drawable/custom_login_button"
+        android:background="@drawable/newsfeed_submit_button"
         android:text="@string/newsfeed_button_submit_text"
         android:textColor="@color/white" 
         android:layout_marginTop="2dp"
