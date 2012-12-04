@@ -125,8 +125,8 @@
     <string name="public_leagues_league_id_header_text">Game ID</string>
     <string name="public_leagues_players_header_text">Players</string>
     <string name="public_leagues_wager_header_text">Wager</string>
-    <string name="public_leagues_duration_header_text">Duration</string>
-    <string name="public_leagues_pot_header_text">$ Comitted</string>
+    <string name="public_leagues_duration_header_text">Days</string>
+    <string name="public_leagues_pot_header_text">Pot</string>
     <string name="title_activity_league_join_detail"></string>
     <string name="league_join_detail_header_text">"GAME DETAILS"</string>
     <string name="league_join_detail_name">Host: </string>

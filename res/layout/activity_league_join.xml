@@ -95,7 +95,6 @@
         android:layout_above="@+id/find_private_game" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:divider="@android:color/transparent"
   		android:dividerHeight="5.0sp" />

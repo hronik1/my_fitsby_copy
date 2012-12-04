@@ -15,7 +15,7 @@
         android:text="1." 
    		android:layout_marginTop="5dp"
    		android:layout_marginLeft="10dp"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
     
     <ImageView
@@ -36,7 +36,7 @@
         android:layout_alignTop="@+id/me_imageview"
         android:layout_toRightOf="@+id/me_imageview"
         android:text="@string/list_item_game_leader_name_text" 
-        android:textSize="14sp"        
+        android:textSize="15sp"        
         android:layout_marginLeft="5dp"
         android:textStyle="bold" />
 
@@ -47,27 +47,40 @@
         android:layout_alignTop="@+id/list_item_game_leader_name"
 		android:layout_marginLeft="5dp"
 		android:textStyle="bold"        
-        android:textSize="14sp"		
+        android:textSize="15sp"		
         android:layout_toRightOf="@+id/list_item_game_leader_name"
         android:text="@string/list_item_game_leader_last_name_text" />
-
-   <TextView
-        android:id="@+id/list_item_game_leader_checkins_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+    
+    <ImageView
+        android:id="@+id/checkin_icon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="1dp"        
         android:layout_alignLeft="@+id/list_item_game_leader_name"
         android:layout_below="@+id/list_item_game_leader_name"
-        android:text="Check-ins: "
-        android:textSize="12sp" />
-    <TextView
-        android:id="@+id/list_item_game_leader_checkins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_toRightOf="@+id/list_item_game_leader_checkins_prompt"
-        android:layout_below="@+id/list_item_game_leader_name"
-        android:text="@string/list_item_game_leader_checkins_text"
-        android:textSize="12sp" />
+        android:layout_marginRight="2dp"        
+        android:src="@drawable/checkin_icon" />
+             
+	   <TextView
+	        android:id="@+id/list_item_game_leader_checkins_prompt"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+      	 	android:layout_marginTop="1dp"
+      	 	android:textColor="@color/gray"
+	        android:layout_toRightOf="@+id/checkin_icon"        
+	        android:layout_below="@+id/list_item_game_leader_name"                 	        
+	        android:text="@string/list_item_game_leader_checkins_text"
+	        android:textSize="13sp" />
+	    <TextView
+	        android:id="@+id/list_item_game_leader_checkins"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/list_item_game_leader_checkins_prompt"
+	        android:layout_below="@+id/list_item_game_leader_name"
+	        android:text="5"        
+       		android:layout_marginTop="1dp"
+	        android:textColor="@color/fitsby_red"	        
+	        android:textSize="13sp" />
+    
 
 </RelativeLayout>

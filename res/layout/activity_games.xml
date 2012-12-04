@@ -149,7 +149,7 @@
 		    android:id="@+id/horizontal_divider"
 		    android:layout_width="fill_parent"
 			android:layout_height="1dip"
-	        android:layout_marginTop="5dp"			
+	        android:layout_marginTop="10dp"			
 			android:background="#949294" />
 		
 	    <TextView
@@ -159,7 +159,7 @@
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/horizontal_divider"
 	        android:layout_marginLeft="5dp"
-	        android:layout_marginTop="5dp"				        
+	        android:layout_marginTop="10dp"				        
 	        android:text="@string/games_leader_prompt_text"
 	        android:textSize="14sp"
 	        android:gravity="center"
