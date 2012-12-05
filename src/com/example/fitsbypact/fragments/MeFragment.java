@@ -69,9 +69,6 @@ public class MeFragment extends SherlockFragment {
 	private Button submitButton;
 	
 	private EditText emailET;
-	private EditText oldPasswordET;
-	private EditText newPasswordET;
-	private EditText newPasswordConfirmET;
 	private ProgressDialog mProgressDialog;
 	
 	private ImageView profileIV;
@@ -198,9 +195,6 @@ public class MeFragment extends SherlockFragment {
 	private void initializeEditTexts(View viewer) {
 		emailET = (EditText)viewer.findViewById(R.id.me_settings_et_change_email);
 		emailET.setText(mUser.getEmail());
-		oldPasswordET = (EditText)viewer.findViewById(R.id.me_settings_et_old_password);
-		newPasswordET = (EditText)viewer.findViewById(R.id.me_settings_et_new_password);
-		newPasswordConfirmET = (EditText)viewer.findViewById(R.id.me_settings_et_new_password_confirm);
 	}
 	
 	/**
@@ -277,25 +271,6 @@ public class MeFragment extends SherlockFragment {
 	private void submit() {
 		//TODO figure out what need to be submit and then submit it
 		changeEmail();
-	}
-	
-	/**
-	 * call to change a users email
-	 */
-	private void changePassword() {
-		//TODO implement 
-		String oldPassword = oldPasswordET.getText().toString();
-		String newPassword = newPasswordET.getText().toString();
-		String newPasswordConfirm = newPasswordConfirmET.getText().toString();
-		if (oldPassword.equals("") || newPassword.equals("") || newPasswordConfirm.equals("")) {
-    		Toast toast = Toast.makeText(parent, "Sorry, but all " +
-    				"password related fields must be filled out in order to change your password.",
-    				Toast.LENGTH_LONG);
-    		toast.setGravity(Gravity.CENTER, 0, 0);
-    		toast.show();
-		}
-		
-		//TODO add in asynccall to server
 	}
 	
 	/**
