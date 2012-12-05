@@ -31,7 +31,7 @@ import responses.UsersGamesResponse;
 import dbtables.League;
 import loaders.PublicLeaguesCursorLoader;
 import android.database.Cursor;
-import android.database.MatrixCursor;
+import cursors.MatrixCursor;
 import android.graphics.Bitmap;
 import android.util.Log;
 
