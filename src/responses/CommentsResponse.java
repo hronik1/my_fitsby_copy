@@ -52,15 +52,16 @@ public class CommentsResponse {
 				String message = jsonComment.getString("message");
 				String stamp = jsonComment.getString("stamp");
 				String _id = jsonComment.getString("_id");
+				String email = jsonComment.getString("email");
 				//TODO change to actually parse email
-				if (!imageMap.containsKey("hronik1@illinois.edu"))  {
+				if (!imageMap.containsKey(email))  {
 					Log.d(TAG, "getting image");
-					String src = Gravatar.getGravatar("hronik1@illinois.edu");
+					String src = Gravatar.getGravatar(email);
 					bitmap = MyHttpClient.getBitmapFromURL(src);
-					imageMap.put("hronik1@illinois.edu", bitmap);
+					imageMap.put(email, bitmap);
 				} else {
 					Log.d(TAG, "image exists");
-					bitmap = imageMap.get("hronik1@illinois.edu");
+					bitmap = imageMap.get(email);
 				}
 				comments.add(new Comment(id, firstName, lastName, message, stamp, _id, bitmap));
 			}
