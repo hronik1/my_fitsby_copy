@@ -23,10 +23,10 @@
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
     <string name="login_forgot_password_text">Forgot your password? Resetting it is coming soon</string>
-    <string name="fitsby_description">Fitsby is a game where you compete with anyone, including friends, on who checks in at the gym the most. \n \n
-  									  Before the game begins, all players agree to pay a set wager amount if they lose. \n \n
-  									  The three players who check in at the gym the most are the winners at the end of the game and are rewarded the wagers from the losing players. \n \n
-									  To get started, press the Next button below!</string>
+    <string name="fitsby_description">Fitsby is a game where you compete with other people on who can check in at the gym the most. \n \n
+  									  You can play against anyone, including friends, and even wager money. \n \n
+  									  The top three gym goers at the end of a game are declared the winners and split the pot. \n \n
+									  Press Next to get started!</string>
     <string name="title_activity_help"></string>
     <string name="help_button_text">Next</string>
     <string name="title_activity_league_landing"></string>
