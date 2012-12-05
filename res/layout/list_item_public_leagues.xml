@@ -6,14 +6,15 @@
     android:background="@color/light_white"
     android:paddingBottom="5dp" >
     
-   <ImageView
+   <TextView
         android:id="@+id/list_item_public_leagues_creator "
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".1"
         android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:contentDescription="@string/list_item_public_leagues_creator_text" />
+        android:layout_marginTop="2dp"
+        android:textStyle="bold"
+        android:text="@string/list_item_public_leagues_creator_text" />
    
    <TextView
         android:id="@+id/list_item_public_leagues_id "
@@ -22,7 +23,7 @@
         android:layout_weight=".1"
         android:gravity="center"
         android:textSize="15sp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:text="@string/list_item_public_leagues_id_text" />
 
@@ -33,7 +34,7 @@
         android:layout_weight=".2"
         android:gravity="center" 
         android:textSize="15sp"
-        android:layout_marginTop="8dp"        
+        android:layout_marginTop="5dp"        
         android:text="@string/list_item_public_leagues_players_text" />
     
    <RelativeLayout 
@@ -46,7 +47,7 @@
             android:id="@+id/list_item_public_leagues_wager_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
         	android:textSize="15sp"            
             android:text="$" />
        <TextView
@@ -54,7 +55,7 @@
             android:layout_toRightOf="@+id/list_item_public_leagues_wager_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/list_item_public_leagues_wager_text"
             android:textSize="15sp" />
@@ -69,7 +70,7 @@
             android:id="@+id/list_item_public_leagues_pot_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="$"
             android:textSize="15sp" />
    	   
@@ -78,7 +79,7 @@
             android:layout_toRightOf="@+id/list_item_public_leagues_pot_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="@string/list_item_public_leagues_pot_text"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -92,7 +93,7 @@
             android:id="@+id/list_item_public_leagues_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text="@string/list_item_public_leagues_duration_text"
             android:textSize="15sp" />
 
@@ -101,7 +102,7 @@
             android:layout_toRightOf="@+id/list_item_public_leagues_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:text=""
             android:textSize="15sp" />
 
