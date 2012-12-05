@@ -221,7 +221,7 @@ public class LoginActivity extends Activity {
     	forgotPasswordTV.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//showAlertInput();
+				showAlertInput();
 			}
     	});
     }
@@ -261,13 +261,20 @@ public class LoginActivity extends Activity {
     	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
     		public void onClick(DialogInterface dialog, int whichButton) {
     			String value = input.getText().toString();
-    			new PasswordResetAsyncTask().execute(value);
+    			if (!"".equals(value)) {
+    				new PasswordResetAsyncTask().execute(value);
+    			}
+    			else {
+            		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but either your email cannot be empty.", Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+            		toast.show();
+    			}	
     		}  
     	});
 
     	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     	  public void onClick(DialogInterface dialog, int whichButton) {
-    	    // Canceled.
+    		  dialog.cancel();
     	  }
     	});
 
@@ -341,7 +348,7 @@ public class LoginActivity extends Activity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
-                    "Sending you a link...");
+                    "Sending you a link to reset your password...");
 		}
 		
         protected StatusResponse doInBackground(String... params) {

@@ -8,7 +8,7 @@ public class Gravatar {
 
 	private static final String TAG = "Gravatar";
 	
-	private static final int DEFAULT_SIZE = 80;
+	private static final int DEFAULT_SIZE = 120;
 	private static final String DEFAULT_RATING = "pg";
 	private static final String DEFAULT_IMAGE = "mm";
 	private static final String GRAVATAR_BASE_URL = "http://www.gravatar.com/avatar/";
