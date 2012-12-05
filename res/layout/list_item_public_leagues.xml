@@ -23,7 +23,7 @@
         android:layout_weight=".1"
         android:gravity="center"
         android:textSize="15sp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:textStyle="bold"
         android:text="@string/list_item_public_leagues_id_text" />
 
@@ -34,7 +34,7 @@
         android:layout_weight=".2"
         android:gravity="center" 
         android:textSize="15sp"
-        android:layout_marginTop="5dp"        
+        android:layout_marginTop="8dp"        
         android:text="@string/list_item_public_leagues_players_text" />
     
    <RelativeLayout 
@@ -47,7 +47,7 @@
             android:id="@+id/list_item_public_leagues_wager_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
         	android:textSize="15sp"            
             android:text="$" />
        <TextView
@@ -55,7 +55,7 @@
             android:layout_toRightOf="@+id/list_item_public_leagues_wager_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@string/list_item_public_leagues_wager_text"
             android:textSize="15sp" />
@@ -70,7 +70,7 @@
             android:id="@+id/list_item_public_leagues_pot_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:text="$"
             android:textSize="15sp" />
    	   
@@ -79,7 +79,7 @@
             android:layout_toRightOf="@+id/list_item_public_leagues_pot_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:text="@string/list_item_public_leagues_pot_text"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -93,7 +93,7 @@
             android:id="@+id/list_item_public_leagues_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:text="@string/list_item_public_leagues_duration_text"
             android:textSize="15sp" />
 
@@ -102,7 +102,7 @@
             android:layout_toRightOf="@+id/list_item_public_leagues_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:text=""
             android:textSize="15sp" />
 
