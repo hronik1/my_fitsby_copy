@@ -1,6 +1,8 @@
 package servercommunication;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -15,6 +17,7 @@ import responses.GamesLeaderResponse;
 
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.graphics.Bitmap;
 import android.util.Log;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.UserTableHandler;
@@ -36,15 +39,19 @@ public class GamesLeaderCommunication {
 	
 	public static Cursor getGamesLeader(int gameId) {
 		MatrixCursor cursor = new MatrixCursor(new String[] { UserTableHandler.KEY_FIRST_NAME,
-				UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id"});
+				UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP});
 		
 		GamesLeaderResponse gamesLeaderResponse = getGamesLeaderHelper(gameId);
 		if (gamesLeaderResponse == null || !gamesLeaderResponse.wasSuccessful())
 			return cursor;
 		Vector<Leader> leaders = gamesLeaderResponse.getLeaders();
 		for (Leader leader: leaders) {
+			Bitmap bitmap = leader.getBitmap();
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+			byte[] byteArray = stream.toByteArray();
 			cursor.addRow(new Object[] { leader.getFirstName(), LastNameFormatter.format(leader.getLastName()),
-					leader.getCheckins(), leader.getId()});
+					leader.getCheckins(), leader.getId(), byteArray});
 		}
 		//TODO parse JSON, and fill cursor
 		

@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +39,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -60,7 +62,7 @@ public class NewsfeedFragment extends SherlockFragment {
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
 			R.id.list_item_newsfeed_last_name, R.id.list_item_newsfeed_timestamp,
-			R.id.list_item_newsfeed_message, R.id.list_item_id };
+			R.id.list_item_newsfeed_message, R.id.list_item_id, R.id.list_item_newsfeed_imageview };
 	
 	private ApplicationUser mApplicationUser;
 	
@@ -163,6 +165,7 @@ public class NewsfeedFragment extends SherlockFragment {
 		});
     	mAdapter = new SimpleCursorAdapter(parent, R.layout.list_item_newsfeed, newsfeedCursor,
     			NewsfeedCursorLoader.FROM_ARGS, toArgs, 0);
+    	mAdapter.setViewBinder(new MyViewBinder());
     	newsfeedLV.setAdapter(mAdapter);
 	}
 	
@@ -294,6 +297,7 @@ public class NewsfeedFragment extends SherlockFragment {
         }
     }
     
+
     /**
      * AsyncTask to Register user
      * @author brent
@@ -308,6 +312,24 @@ public class NewsfeedFragment extends SherlockFragment {
         protected void onPostExecute(Bitmap response) {
         	if (response != null)
         		mImageView.setImageBitmap(response);
+        }
+    }
+    
+    private class MyViewBinder implements SimpleCursorAdapter.ViewBinder {
+
+        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+            int viewId = view.getId();
+            if(viewId == R.id.list_item_newsfeed_imageview) {
+            	ImageView profilePic = (ImageView) view;
+            	byte[] bytes = cursor.getBlob(columnIndex);
+            	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+
+            } else {
+            	TextView name = (TextView) view;
+            	name.setText(cursor.getString(columnIndex));
+            }
+            
+            return true;
         }
     }
 }

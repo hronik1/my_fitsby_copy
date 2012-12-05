@@ -29,7 +29,7 @@ public class NewsfeedCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	public final static String[] FROM_ARGS = { UserTableHandler.KEY_FIRST_NAME,
 			UserTableHandler.KEY_LAST_NAME, CommentTableHandler.KEY_TIMESTAMP,
-			CommentTableHandler.KEY_MESSAGE, "_id" };
+			CommentTableHandler.KEY_MESSAGE, "_id", Comment.KEY_BITMAP };
 	
 	private Cursor mCursor;
 	private int mLeagueId;

@@ -1,5 +1,7 @@
 package dbtables;
 
+import android.graphics.Bitmap;
+
 public class League {
 
 	private int id;
@@ -11,6 +13,7 @@ public class League {
 	private int stakes;
 	private String startDate;
 	private String endDate;
+	private Bitmap bitmap;
 
 	/* add time information */
 	
@@ -50,6 +53,25 @@ public class League {
 		this.duration = duration;
 		this.stakes = stakes;
 		isPrivate = 0;
+	}
+	
+	/**
+	 * 6 argument league constructor
+	 * @param id
+	 * @param creatorId
+	 * @param isPrivate
+	 * @param wager
+	 * @param duration
+	 * @param bitmap
+	 */
+	public League(int id, int wager, int players, int duration, int stakes, Bitmap bitmap) {
+		this.id = id;
+		this.wager = wager; 
+		this.players = players;
+		this.duration = duration;
+		this.stakes = stakes;
+		isPrivate = 0;
+		this.bitmap = bitmap;
 	}
 	
 	/**
@@ -157,5 +179,12 @@ public class League {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	
+	public void setBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
+	}
 
+	public Bitmap getBitmap() {
+		return bitmap;
+	}
 }

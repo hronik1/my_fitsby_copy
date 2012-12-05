@@ -1,5 +1,6 @@
 package com.example.fitsbypact.fragments;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbhandlers.UserTableHandler;
+import dbtables.Leader;
 import dbtables.League;
 import dbtables.LeagueMember;
 import dbtables.User;
@@ -32,6 +34,8 @@ import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +47,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -81,9 +86,10 @@ public class GamesFragment extends SherlockFragment {
 	private List<String> spinnerData;
 	
 	private SimpleCursorAdapter mAdapter;
-	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id"};
+	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME,
+			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP};
 	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
-			R.id.list_item_game_leader_checkins, R.id.rank};
+			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview};
 	private int spinnerPosition;
 	
 	private ApplicationUser mApplicationUser;
@@ -165,6 +171,7 @@ public class GamesFragment extends SherlockFragment {
 	private void initializeListView(View viewer) {
 		leadersLV = (ListView)viewer.findViewById(R.id.games_leader_list);
 		mAdapter = new SimpleCursorAdapter(parent, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
+		mAdapter.setViewBinder(new MyViewBinder());
 		leadersLV.setAdapter(mAdapter);
 	}
 	
@@ -385,7 +392,24 @@ public class GamesFragment extends SherlockFragment {
         	new ProgressAsyncTask().execute();
         }
     }
+    
+    private class MyViewBinder implements SimpleCursorAdapter.ViewBinder {
 
+        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+            int viewId = view.getId();
+            if(viewId == R.id.list_item_game_leader_imageview) {
+            	ImageView profilePic = (ImageView) view;
+            	byte[] bytes = cursor.getBlob(columnIndex);
+            	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+            } else {
+            	TextView name = (TextView) view;
+            	name.setText(cursor.getString(columnIndex));
+            }
+            
+            return true;
+        }
+    }
+        
     /**
      * AsyncTask to find users games
      * @author brent
@@ -410,7 +434,6 @@ public class GamesFragment extends SherlockFragment {
         		progressBar.setProgress((int) (response.getProgress() * PROGRESS_MAX));
         	else
         		progressBar.setProgress(0);
-       		
-        }
+		}		
     }
 }

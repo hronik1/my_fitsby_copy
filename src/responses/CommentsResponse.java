@@ -1,12 +1,18 @@
 package responses;
 
+import gravatar.Gravatar;
+
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.Vector;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import servercommunication.MyHttpClient;
+
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import dbtables.Comment;
@@ -36,6 +42,8 @@ public class CommentsResponse {
 			Vector<Comment> comments = new Vector<Comment>();
 			JSONArray jsonComments = json.getJSONArray("all_comments");
 			int length = jsonComments.length();
+			HashMap<String, Bitmap> imageMap = new HashMap<String, Bitmap>();
+			Bitmap bitmap;
 			for (int i = 0; i < length; i++) {
 				JSONObject jsonComment = jsonComments.getJSONObject(i);
 				String firstName = jsonComment.getString("first_name");
@@ -44,7 +52,18 @@ public class CommentsResponse {
 				String message = jsonComment.getString("message");
 				String stamp = jsonComment.getString("stamp");
 				String _id = jsonComment.getString("_id");
-				comments.add(new Comment(id, firstName, lastName, message, stamp, _id));
+				String email = jsonComment.getString("email");
+				//TODO change to actually parse email
+				if (!imageMap.containsKey(email))  {
+					Log.d(TAG, "getting image");
+					String src = Gravatar.getGravatar(email);
+					bitmap = MyHttpClient.getBitmapFromURL(src);
+					imageMap.put(email, bitmap);
+				} else {
+					Log.d(TAG, "image exists");
+					bitmap = imageMap.get(email);
+				}
+				comments.add(new Comment(id, firstName, lastName, message, stamp, _id, bitmap));
 			}
 			return new CommentsResponse(success, comments);
 		} catch (IllegalArgumentException e) {

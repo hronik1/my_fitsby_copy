@@ -24,7 +24,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import android.support.v4.app.FragmentActivity;
@@ -32,6 +34,8 @@ import android.support.v4.app.LoaderManager;
 import android.content.Intent;
 import android.support.v4.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
@@ -52,7 +56,7 @@ public class LeagueJoinActivity extends FragmentActivity
 	private ListView leagueLV;
 	private User mUser;
 	private SimpleCursorAdapter mAdapter;
-	private int[] toArgs = { R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
+	private int[] toArgs = { R.id.list_item_public_leagues_creator, R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
 			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_duration, R.id.list_item_public_leagues_pot };
 	
 
@@ -212,17 +216,20 @@ public class LeagueJoinActivity extends FragmentActivity
 				int wager = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_WAGER));
 				int duration = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_DURATION));
 				boolean isPrivate = false;
-				gotoLeagueDetails(leagueId, players, wager, pot, isPrivate, duration);
+            	byte[] bytes = cursor.getBlob(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_BITMAP));
+            	Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+				gotoLeagueDetails(leagueId, players, wager, pot, isPrivate, duration, bitmap);
 			}
     		
     	});
     	
     	mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_public_leagues, null,
     			PublicLeaguesCursorLoader.FROM_ARGS, toArgs, 0);
+    	mAdapter.setViewBinder(new MyViewBinder());
     	leagueLV.setAdapter(mAdapter);
     }
     
-    private void gotoLeagueDetails(int leagueId, int players, int wager, int pot, boolean isPrivate, int duration) {
+    private void gotoLeagueDetails(int leagueId, int players, int wager, int pot, boolean isPrivate, int duration, Bitmap bitmap) {
     	try {
     		Intent intent = new Intent(this, LeagueJoinDetailActivity.class);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, leagueId);
@@ -231,6 +238,7 @@ public class LeagueJoinActivity extends FragmentActivity
     		intent.putExtra(LeagueDetailBundleKeys.KEY_POT, pot);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_TYPE, isPrivate ? 1 : 0);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_DURATION, duration);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_BITMAP, bitmap);
     		startActivity(intent);
     	} catch(Exception e) {
     		//TODO add robustness, remove from production code.
@@ -292,9 +300,28 @@ public class LeagueJoinActivity extends FragmentActivity
         		League league = response.getLeague();
         		boolean isPrivate = (league.isPrivate() == 0 ? false : true);
         		gotoLeagueDetails(league.getId(), league.getPlayers(), league.getWager(),
-        				league.getStakes(), isPrivate, league.getDuration());
+        				league.getStakes(), isPrivate, league.getDuration(), league.getBitmap());
         	}
         }
     }
+    
+    private class MyViewBinder implements SimpleCursorAdapter.ViewBinder {
+
+        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+            int viewId = view.getId();
+            if(viewId == R.id.list_item_public_leagues_creator) {
+            	ImageView profilePic = (ImageView) view;
+            	byte[] bytes = cursor.getBlob(columnIndex);
+            	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+
+            } else {
+            	TextView name = (TextView) view;
+            	name.setText(cursor.getString(columnIndex));
+            }
+            
+            return true;
+        }
+    }
+    
 }
 

@@ -1,5 +1,6 @@
 package servercommunication;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import dbtables.League;
 import loaders.PublicLeaguesCursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class LeagueCommunication {
@@ -86,10 +88,14 @@ public class LeagueCommunication {
 			return cursor;
 		Vector<League> leagues = publicLeaguesResponse.getLeagues();
 		for(League league: leagues) {
+			Bitmap bitmap = league.getBitmap();
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+			byte[] byteArray = stream.toByteArray();
 			int leagueId = league.getId();
 			int numPlayers = league.getPlayers();
 			int wager = league.getWager();
-			cursor.addRow(new Object[] {leagueId, numPlayers, wager, league.getDuration(), league.getStakes()});
+			cursor.addRow(new Object[] {byteArray, leagueId, numPlayers, wager, league.getDuration(), league.getStakes()});
 		}
 		
 		//TODO parse json into cursor

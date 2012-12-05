@@ -280,8 +280,9 @@
         android:background="@drawable/newsfeed_submit_button"
         android:text="@string/games_button_newgame_text"
         android:textColor="@color/white"
-        android:textSize="12sp" />
-	</LinearLayout>
+		android:textSize="12sp" />
+    
+    </LinearLayout>
 	    
 
 		

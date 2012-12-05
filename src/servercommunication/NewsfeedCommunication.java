@@ -1,5 +1,6 @@
 package servercommunication;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import formatters.LastNameFormatter;
 
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class NewsfeedCommunication {
@@ -99,8 +101,12 @@ public class NewsfeedCommunication {
 		Vector<Comment> comments = commentsResponse.getComments();
 		Log.d(TAG, comments.size()+"");
 		for(Comment comment: comments) {
+			Bitmap bitmap = comment.getBitmap();
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+			byte[] byteArray = stream.toByteArray();
 			cursor.addRow(new Object[] { comment.getFirstName(), LastNameFormatter.format(comment.getLastName()),
-					comment.getStamp(), comment.getMessage(), comment.getId() });
+					comment.getStamp(), comment.getMessage(), comment.getId(), byteArray });
 		}
 		return cursor;
 	}

@@ -1,11 +1,16 @@
 package responses;
 
+import gravatar.Gravatar;
+
 import java.util.Vector;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import servercommunication.MyHttpClient;
+
+import android.graphics.Bitmap;
 import android.util.Log;
 import dbtables.League;
 
@@ -40,7 +45,9 @@ public class PrivateLeagueResponse {
 			int stakes = Integer.parseInt(json.getString("stakes"));
 			String isPrivate = json.getString("is_private");
 			String startDate = json.getString("start_date");
-			League league = new League(id, wager, players, duration, stakes);
+			String email = json.getString("email");
+			Bitmap bitmap = MyHttpClient.getBitmapFromURL(Gravatar.getGravatar(email));
+			League league = new League(id, wager, players, duration, stakes, bitmap);
 			try {
 				String endDate = json.getString("end_date");
 				league.setEndDate(endDate);

@@ -19,10 +19,11 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 	private LeagueTableHandler mLeagueTableHandler;
 	private LeagueMemberTableHandler mLeagueMemberTableHandler;
 	
+	public final static String KEY_BITMAP = "bitmap";
 	public final static String KEY_NUM_PLAYERS = "players";
 	public final static String KEY_POT = "pot";
 	
-	public final static String[] FROM_ARGS = { LeagueTableHandler.KEY_ID, KEY_NUM_PLAYERS,
+	public final static String[] FROM_ARGS = { KEY_BITMAP, LeagueTableHandler.KEY_ID, KEY_NUM_PLAYERS,
 			LeagueTableHandler.KEY_WAGER, LeagueTableHandler.KEY_DURATION, KEY_POT };
 	private Cursor mCursor;
 	

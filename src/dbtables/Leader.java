@@ -1,16 +1,21 @@
 package dbtables;
 
+import android.graphics.Bitmap;
+
 public class Leader {
+	public static final String KEY_BITMAP = "bitmap";
 	private String firstName;
 	private String lastName;
 	private int checkins;
 	private String id;
+	private Bitmap bitmap;
 	
-	public Leader(String firstName, String lastName, int checkins, String id) {
+	public Leader(String firstName, String lastName, int checkins, String id, Bitmap bitmap) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.checkins = checkins;
 		this.id = id;
+		this.bitmap = bitmap;
 	}		
 	
 	public String getFirstName() {
@@ -27,5 +32,13 @@ public class Leader {
 	
 	public String getId() {
 		return id;
+	}
+	
+	public void setBitmap(Bitmap bitmap) {
+		this.bitmap = bitmap;
+	}
+	
+	public Bitmap getBitmap() {
+		return bitmap;
 	}
 }
