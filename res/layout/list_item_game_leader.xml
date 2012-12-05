@@ -23,10 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/rank"
-        android:layout_alignTop="@+id/rank"    
-        android:layout_marginLeft="15dp"
-        android:contentDescription="@string/me_imageview_desc"        
+        android:layout_alignTop="@+id/rank"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:contentDescription="@string/me_imageview_desc"
+        android:maxHeight="80dp"
+        android:maxWidth="80dp"
+        android:minHeight="80dp"
+        android:minWidth="80dp"
         android:src="@drawable/profile_picture_placeholder" />
     
     <TextView
