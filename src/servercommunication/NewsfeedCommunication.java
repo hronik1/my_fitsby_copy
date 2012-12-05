@@ -31,7 +31,7 @@ import dbtables.User;
 import formatters.LastNameFormatter;
 
 import android.database.Cursor;
-import android.database.MatrixCursor;
+import cursors.MatrixCursor;
 import android.graphics.Bitmap;
 import android.util.Log;
 

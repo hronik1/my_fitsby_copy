@@ -16,7 +16,7 @@ import org.apache.http.util.EntityUtils;
 import responses.GamesLeaderResponse;
 
 import android.database.Cursor;
-import android.database.MatrixCursor;
+import cursors.MatrixCursor;
 import android.graphics.Bitmap;
 import android.util.Log;
 import dbhandlers.LeagueMemberTableHandler;

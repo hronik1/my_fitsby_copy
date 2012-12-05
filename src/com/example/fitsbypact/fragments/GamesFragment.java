@@ -34,6 +34,7 @@ import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -397,6 +398,7 @@ public class GamesFragment extends SherlockFragment {
 
         public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
             int viewId = view.getId();
+            Log.d(TAG, cursor.getClass().toString());
             if(viewId == R.id.list_item_game_leader_imageview) {
             	ImageView profilePic = (ImageView) view;
             	byte[] bytes = cursor.getBlob(columnIndex);
