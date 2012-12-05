@@ -33,7 +33,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"     
                 android:textStyle="bold"
-                android:textSize="20sp"        
+                android:textSize="24sp"        
                 android:textColor="@color/white"   
                 android:layout_toRightOf="@+id/me_imageview"
                 android:text="@string/me_textview_name_text" />
@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/me_textview_name"
+                android:textSize="12sp"                
                 android:textColor="@color/white"                   
                 android:layout_alignLeft="@+id/me_textview_name"           
                 android:text="@string/me_textview_join_date_text" />
@@ -117,13 +118,41 @@
                 android:textColor="@color/white"                   
                 android:text="@string/me_textview_total_checkins_text" />
             
+
+                
+            <TextView
+                android:id="@+id/me_settings_tv_change_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"                   
+                android:layout_marginTop="20dp"                
+                android:textSize="14sp"
+                android:textStyle="bold"        
+                android:layout_below="@+id/me_textview_total_checkins"                                        
+                android:text="@string/me_settings_tv_change_picture_text" />
+
+            <TextView
+                android:id="@+id/me_settings_tv_change_picture_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_below="@+id/me_settings_tv_change_picture"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"  
+                android:textSize="14sp"
+                android:textColor="@color/fitsby_red"                   
+                android:text="@string/me_settings_tv_change_picture_link_text">
+            </TextView>
+            
             <TextView
                 android:id="@+id/me_settings_tv_change_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/me_textview_total_checkins"
-                android:layout_marginTop="20dp"                
+                android:layout_below="@+id/me_settings_tv_change_picture_link"
+                android:layout_marginTop="10dp"                
                 android:textColor="@color/white"                   
                 android:layout_marginLeft="10dp" 
                 android:textStyle="bold"                               
@@ -152,35 +181,7 @@
                 android:layout_alignLeft="@+id/me_settings_et_change_email"
                 android:layout_alignRight="@+id/me_settings_et_change_email"
                 android:text="@string/email_means_paypal" />
-                
-            <TextView
-                android:id="@+id/me_settings_tv_change_picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/white"                   
-                android:layout_marginTop="10dp"
-                android:textSize="14sp"
-                android:textStyle="bold"                                
-                android:layout_below="@+id/email_means_paypal"
-                android:text="@string/me_settings_tv_change_picture_text" />
-
-            <TextView
-                android:id="@+id/me_settings_tv_change_picture_link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:layout_below="@+id/me_settings_tv_change_picture"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"  
-                android:textSize="14sp"
-                android:textColor="@color/fitsby_red"                   
-                android:text="@string/me_settings_tv_change_picture_link_text">
-            </TextView>
-
-
-
+            
             <Button
                 android:id="@+id/me_settings_button_submit"
                 android:layout_width="fill_parent"
@@ -192,7 +193,7 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"       
                 android:textSize="17sp"                                                  
-                android:layout_below="@+id/me_settings_tv_change_picture_link"
+                android:layout_below="@+id/email_means_paypal"
                 android:text="@string/me_settings_button_submit_text" />
 
             <Button
@@ -208,6 +209,8 @@
                 android:textSize="17sp"                                   
                 android:layout_below="@+id/me_settings_button_submit"
                 android:text="@string/me_settings_button_logout_text" />
+            
+
         </RelativeLayout>
 
 	</ScrollView>

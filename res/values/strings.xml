@@ -22,7 +22,7 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
-    <string name="login_forgot_password_text">Forgot your password? Resetting it is coming soon</string>
+    <string name="login_forgot_password_text">Forgot your password?</string>
     <string name="fitsby_description">Fitsby is a game where you compete with other people on who can check in at the gym the most. \n \n
   									  You can play against anyone, including friends, and even wager money. \n \n
   									  The top three gym goers at the end of a game are declared the winners and split the pot. \n \n
@@ -86,7 +86,7 @@
     <string name="title_activity_me"></string>
     <string name="me_imageview_desc">me_imageview_desc</string>
     <string name="me_textview_join_date_text">Date Joined: </string>
-    <string name="me_textview_name_text">Brent</string>
+    <string name="me_textview_name_text"></string>
     <string name="me_textview_total_money_earned_money_text"></string>
     <string name="me_textview_total_money_earned_prompt_text">Total Money Earned: </string>
     <string name="me_textview_total_checkins_text"></string>
@@ -105,10 +105,10 @@
     <string name="games_leader_prompt_text">LEADERBOARD</string>
     <string name="games_button_newgame_text">Add New Game</string>
     <string name="games_no_games_prompt_text">Looks like you\'re not in any games! Tap the Add New Game button to start a game.</string>
-    <string name="input_pot">$60</string>
+    <string name="input_pot"></string>
     <string name="input_duration"></string>
-    <string name="input_players">6</string>
-    <string name="input_wager">$10</string>
+    <string name="input_players"></string>
+    <string name="input_wager"></string>
     <string name="input_date"></string>
     <string name="input_end_date"></string>
     <string name="days_left_prompt">Days left:</string>
