@@ -144,7 +144,7 @@ public class UserCommunication {
         	json.put("new_email", email);
         	json.put("user_id", userId);
         	StringEntity stringEntity = new StringEntity(json.toString()); 
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "change_email", stringEntity);
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "users/change_email", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());

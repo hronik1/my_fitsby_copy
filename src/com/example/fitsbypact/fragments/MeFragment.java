@@ -65,7 +65,6 @@ public class MeFragment extends SherlockFragment {
 	private TextView gravatarLinkTV;
 	
 	private Button logoutButton;
-	private Button changePictureButton;
 	private Button submitButton;
 	
 	private EditText emailET;
@@ -285,8 +284,14 @@ public class MeFragment extends SherlockFragment {
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
 		}
-		
-		new ChangeEmailAsyncTask().execute(email, mUser.getID()+"");
+		if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+			new ChangeEmailAsyncTask().execute(email, mUser.getID()+"");
+		} else {
+    		Toast toast = Toast.makeText(parent, "Sorry, but that appears to not be a valid form of an email address",
+    				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
+		}
 	}
 	
 	 /**

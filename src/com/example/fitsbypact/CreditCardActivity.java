@@ -16,8 +16,11 @@ import dbtables.User;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -207,7 +210,27 @@ public class CreditCardActivity extends Activity {
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
     	} else
-    		sendCreditCard();
+    		showConfirmation();
+    }
+    
+    /**
+     * 
+     */
+    private void showConfirmation() {
+	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	
+    	builder.setMessage("You're credit card will be charged, would you like to continue?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					sendCreditCard();
+    				}
+    			})
+    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
     }
     
     /**
@@ -270,29 +293,17 @@ public class CreditCardActivity extends Activity {
 
         protected void onPostExecute(LeagueCreateResponse response) {
         	mProgressDialog.dismiss();
-        	
-/*        	if (response == null ) {
-        		Log.e(TAG, "no response");
-        		Toast toast = Toast.makeText(CreditCardActivity.this, "No Response", Toast.LENGTH_LONG);
-        		toast.setGravity(Gravity.CENTER, 0, 0);
-        		toast.show();
-        	} else if (!response.wasSuccessful()){
-        		Log.e(TAG, "response fail");
-        		Toast toast = Toast.makeText(CreditCardActivity.this, "Failed", Toast.LENGTH_LONG);
-        		toast.setGravity(Gravity.CENTER, 0, 0);
-        		toast.show();*/
-        	//} else {
+
             	if (response.wasSuccessful()) {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
             		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
             		startActivity(intent);
+
             	} else {
             		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
             	}
-        	//}
-
         }
     }
     

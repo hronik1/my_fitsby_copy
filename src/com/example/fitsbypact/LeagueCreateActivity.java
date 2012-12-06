@@ -1,5 +1,6 @@
 package com.example.fitsbypact;
 
+import responses.LeagueCreateResponse;
 import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
 
@@ -16,6 +17,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
@@ -50,7 +52,10 @@ public class LeagueCreateActivity extends Activity {
 	private TextView daysTV;
 	private Button faqButton;
 	
+	private User mUser;
 	private int userID;
+	
+	private ProgressDialog mProgressDialog;
 	
 	private DatabaseHandler dbHandler;
 	private LeagueTableHandler leagueTableHandler;
@@ -76,6 +81,7 @@ public class LeagueCreateActivity extends Activity {
         leagueMemberTableHandler = dbHandler.getLeagueMemberTableHandler();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
+        mUser = mApplicationUser.getUser();
         userID = mApplicationUser.getUser().getID();
         
     }
@@ -280,23 +286,21 @@ public class LeagueCreateActivity extends Activity {
 		wager = Integer.parseInt((String) wagerTV.getText());
 		duration = Integer.parseInt((String) daysTV.getText());
 		isPrivate = createCheckBox.isChecked() ? 1 : 0;
-//		new CreateLeagueAsyncTask().execute(userID+"", duration+"", isPrivate+"", wager+"",
-//				mApplicationUser.getUser().getFirstName());
-		ApplicationUser appData = (ApplicationUser)getApplicationContext();
-		appData.setCreate();
-		appData.setUserId(userID);
-		appData.setDuration(duration);
-		appData.setIsPrivate(isPrivate);
-		appData.setWager(wager);
-		Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
-		intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
-		startActivity(intent);
-//		League league = new League(userID, isPrivate, wager, duration);
-//		leagueTableHandler.addLeague(league);
-		
-//		league = leagueTableHandler.getLeagueByCreatorID(userID);
-//		LeagueMember member = new LeagueMember(league.getId(), userID);
-//		leagueMemberTableHandler.addLeagueMember(member);
+
+		if (wager != 0) {
+			ApplicationUser appData = (ApplicationUser)getApplicationContext();
+			appData.setCreate();
+			appData.setUserId(userID);
+			appData.setDuration(duration);
+			appData.setIsPrivate(isPrivate);
+			appData.setWager(wager);
+			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
+			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
+			startActivity(intent);
+		} else {
+    		new CreateLeagueAsyncTask().execute(userID+"", duration+"",
+    				isPrivate+"", wager+"", mUser.getFirstName());
+		}
 	
 	}
 	
@@ -305,58 +309,34 @@ public class LeagueCreateActivity extends Activity {
      * @author brent
      *
      */
-//    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, StatusResponse> {
-//        protected StatusResponse doInBackground(String... params) {
-//        	StatusResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
-//        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), params[4]);
-//        	return response;
-//        }
-//
-//        protected void onPostExecute(StatusResponse response) {
-//        	if (response == null ) {
-//        		Toast.makeText(getApplicationContext(), "Sorry no response from server", Toast.LENGTH_LONG).show();
-//        	} else if (!response.wasSuccessful()){
-//        		Toast.makeText(getApplicationContext(), response.getStatus(), Toast.LENGTH_LONG).show();
-//        	} else {
-//        		try {
-//        			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
-//        			//TODO think of a better way to get this!
-//        			int wager = Integer.parseInt((String)wagerTV.getText());
-//        			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
-//        			startActivity(intent);
-//        		} catch(Exception e) {
-//        			//TODO handle failure more robustly
-//        			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
-//        			toast.setGravity(Gravity.CENTER, 0, 0);
-//        			toast.show();
-//        		}
-//        	}
-//
-//        }
-//    }
+    private class CreateLeagueAsyncTask extends AsyncTask<String, Void, LeagueCreateResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(LeagueCreateActivity.this, "",
+                    "Creating your free league...");
+		}
+		
+        protected LeagueCreateResponse doInBackground(String... params) {
+        	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
+        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]),
+        			"", "", "", "");
+        	return response;
+        }
+
+        protected void onPostExecute(LeagueCreateResponse response) {
+        	mProgressDialog.dismiss();
+
+            	if (response.wasSuccessful()) {
+            		Intent intent = new Intent(LeagueCreateActivity.this, LoggedinActivity.class);
+            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
+            		startActivity(intent);
+
+            	} else {
+            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Sorry, but your league could not be created at this time.", Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+            		toast.show();
+            	}
+        }
+    }
     
-//    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
-//        protected StatusResponse doInBackground(Integer... params) {
-//        	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1],
-//        			params[2], params[3], params[4], params[5]);
-//        	return response;
-//        }
-//
-//        protected void onPostExecute(StatusResponse response) {
-//        	if (response.wasSuccessful()) {
-//        		try {
-//        			Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
-//        			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
-//        			startActivity(intent);
-//        		} catch(Exception e) {
-//        			//TODO handle failure more robustly
-//        			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
-//        			toast.setGravity(Gravity.CENTER, 0, 0);
-//        			toast.show();
-//        		}
-//        	} else {
-//        		Toast.makeText(getApplicationContext(), "You are already in this game", Toast.LENGTH_LONG).show();
-//        	}
-//        }
-//    }
 }
