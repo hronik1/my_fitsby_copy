@@ -45,6 +45,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -90,9 +91,9 @@ public class GamesFragment extends SherlockFragment {
 	
 	private SimpleCursorAdapter mAdapter;
 	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME,
-			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP};
+			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP, Leader.KEY_RANK};
 	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
-			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview};
+			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview, R.id.winner};
 	private int spinnerPosition;
 	
 	private ApplicationUser mApplicationUser;
@@ -407,6 +408,11 @@ public class GamesFragment extends SherlockFragment {
             	ImageView profilePic = (ImageView) view;
             	byte[] bytes = cursor.getBlob(columnIndex);
             	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+            } else if (viewId == R.id.winner) {
+            	int rank = cursor.getInt(columnIndex);
+            	if (rank > structure) {
+            		view.setVisibility(View.INVISIBLE);
+            	}
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));

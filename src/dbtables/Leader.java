@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 public class Leader {
 	public static final String KEY_BITMAP = "bitmap";
+	public static final String KEY_RANK = "rank";
 	private String firstName;
 	private String lastName;
 	private int checkins;
