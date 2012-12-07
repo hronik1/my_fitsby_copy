@@ -381,7 +381,7 @@
         android:background="@drawable/custom_login_button"
         android:text="@string/league_join_detail_button_join_text"
         android:textColor="@color/white"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
         android:textSize="16sp" />      
     
 </RelativeLayout>
