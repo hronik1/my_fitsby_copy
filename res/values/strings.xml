@@ -69,6 +69,9 @@
     <string name="search_for_a_game">SEARCH FOR A GAME</string>
     <string name="create_new_game_directions">START YOUR OWN GAME</string>
     <string name="league_create_checkbox_text">Make game private</string>
+    <string name="league_create_rb_prompt">How many winners?</string>
+    <string name="league_create_rb_top3">Top 3</string>
+    <string name="league_create_rb_takeall">User Takes All</string>
     <string name="navigation_textview_me_text">Me</string>
     <string name="navigation_textview_game_text">GAMES</string>
     <string name="navigation_textview_newsfeed_text">NEWSFEED</string>

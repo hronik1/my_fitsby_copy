@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
@@ -51,6 +52,8 @@ public class LeagueCreateActivity extends Activity {
 	private TextView wagerTV;
 	private TextView daysTV;
 	private Button faqButton;
+	private RadioButton top3RB;
+	private RadioButton takeAllRB;
 	
 	private User mUser;
 	private int userID;
@@ -73,6 +76,7 @@ public class LeagueCreateActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         initializeButtons();
+        initializeRadioButtons();
         initializeCheckBoxes();  
         initializeTextViews();
         
@@ -227,6 +231,16 @@ public class LeagueCreateActivity extends Activity {
 	}
 	
 	/**
+	 * initializes the radiobuttons
+	 */
+	private void initializeRadioButtons() {
+		top3RB = (RadioButton)findViewById(R.id.league_create_rb_top3);
+		top3RB.setChecked(true);
+		
+		takeAllRB = (RadioButton)findViewById(R.id.league_create_rb_takeall);
+	}
+	
+	/**
 	 * increments the wager and resets it
 	 */
 	private void incrementWager() {
@@ -294,12 +308,16 @@ public class LeagueCreateActivity extends Activity {
 			appData.setDuration(duration);
 			appData.setIsPrivate(isPrivate);
 			appData.setWager(wager);
+			if (takeAllRB.isChecked())
+				appData.setStructure(1);
+			else
+				appData.setStructure(3);
 			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
 			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
 			startActivity(intent);
 		} else {
     		new CreateLeagueAsyncTask().execute(userID+"", duration+"",
-    				isPrivate+"", wager+"", mUser.getFirstName());
+    				isPrivate+"", wager+"", (takeAllRB.isChecked() ? 1 : 3)+"");
 		}
 	
 	}
@@ -318,7 +336,7 @@ public class LeagueCreateActivity extends Activity {
 		
         protected LeagueCreateResponse doInBackground(String... params) {
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
-        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]),
+        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
         			"", "", "", "");
         	return response;
         }
