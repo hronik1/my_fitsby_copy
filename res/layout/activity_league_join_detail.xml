@@ -18,24 +18,30 @@
         android:gravity="center"
         android:textStyle="bold"        
         android:text="@string/league_join_detail_header_text" />
-    
-    <ImageView 
-        android:id="@+id/league_join_detail_imageview"
-        android:layout_alignLeft="@+id/league_join_detail_header"
-        android:layout_below="@+id/league_join_detail_header"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/profile_picture_placeholder"
-        android:contentDescription="image view"/>
+
+    <FrameLayout
+       android:id="@+id/gravatar_framelayout_imageview"
+       android:layout_width="60dp"
+       android:layout_height="60dp"
+       android:layout_alignLeft="@+id/league_join_detail_header"
+       android:layout_below="@+id/league_join_detail_header"
+       android:layout_marginTop="10dp"
+       android:layout_marginLeft="5dp"
+       android:gravity="center" >
+        <ImageView
+        	android:id="@+id/league_join_detail_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="image view"
+            android:src="@drawable/profile_picture_placeholder" />
+ 	</FrameLayout>
  
     <TextView
         android:id="@+id/league_join_detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-      	android:layout_toRightOf="@+id/league_join_detail_imageview"
-		android:layout_alignTop="@+id/league_join_detail_imageview"
+      	android:layout_toRightOf="@+id/gravatar_framelayout_imageview"
+		android:layout_alignTop="@+id/gravatar_framelayout_imageview"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
@@ -61,7 +67,7 @@
 		android:text="@string/league_join_detail_name_last" />    
 		
     <TextView
-   	        android:layout_below="@+id/league_join_detail_imageview"
+   	        android:layout_below="@+id/gravatar_framelayout_imageview"
 		    android:id="@+id/horizontal_divider"
 		    android:layout_width="fill_parent"
 			android:layout_height="1dip"
@@ -74,7 +80,7 @@
 	    android:id="@+id/first_linear_layout"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/league_join_detail_imageview"
+        android:layout_alignLeft="@+id/gravatar_framelayout_imageview"
         android:layout_below="@+id/horizontal_divider"
         android:layout_marginTop="5dp">  
 	    <RelativeLayout

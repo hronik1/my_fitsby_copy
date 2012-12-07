@@ -17,21 +17,22 @@
         android:textSize="15sp"
         android:textStyle="bold" />
     
-     <FrameLayout
-        android:id="@+id/game_leader_framelayout_imageview"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignLeft="@+id/rank"
-        android:layout_alignTop="@+id/rank"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp" >
-         <ImageView
-             android:id="@+id/list_item_game_leader_imageview"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:contentDescription="@string/me_imageview_desc"
-             android:src="@drawable/profile_picture_placeholder" />
-	</FrameLayout>
+    <FrameLayout
+       android:id="@+id/game_leader_framelayout_imageview"
+       android:layout_width="60dp"
+       android:layout_height="60dp"
+       android:layout_alignLeft="@+id/rank"
+       android:layout_alignTop="@+id/rank"
+       android:paddingBottom="5dp"
+       android:layout_marginLeft="15dp"
+       android:gravity="center" >
+        <ImageView
+            android:id="@+id/list_item_game_leader_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/me_imageview_desc"
+            android:src="@drawable/profile_picture_placeholder" />
+ 	</FrameLayout>
     
     <TextView
         android:id="@+id/list_item_game_leader_name"

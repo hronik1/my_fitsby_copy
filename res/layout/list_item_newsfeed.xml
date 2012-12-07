@@ -8,15 +8,15 @@
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="60dp"
-        android:layout_height="60dp">
-
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:paddingBottom="6dp"
+   		android:layout_marginTop="7dp" >
         <ImageView
             android:id="@+id/list_item_newsfeed_imageview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-      		android:layout_marginTop="5dp"
             android:src="@drawable/profile_picture_placeholder"
-            android:paddingBottom="6dp"
             android:contentDescription="@string/list_item_newsfeed_description" />
     </FrameLayout>
 
@@ -29,6 +29,7 @@
         android:textStyle="bold"
         android:textSize="14sp"      
         android:layout_marginTop="1dp"  
+        android:layout_marginLeft="1dp"  
         android:text="@string/list_item_newsfeed_first_name_text" />
 
     <TextView
@@ -74,6 +75,7 @@
         android:layout_below="@+id/list_item_newsfeed_first_name"
         android:layout_toRightOf="@+id/frameLayout1"
         android:paddingBottom="4dp"
+        android:layout_marginLeft="1dp"          
         android:text="@string/list_item_newsfeed_message_text"
         android:textSize="12sp" />
     

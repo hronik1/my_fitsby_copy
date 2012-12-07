@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/light_white" >
 
 <ScrollView
     android:layout_width="match_parent"
@@ -68,6 +69,8 @@
         android:layout_toRightOf="@+id/league_create_wager"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:background="@drawable/custom_login_button"
+        android:textColor="@color/white"
         android:contentDescription="@string/league_create_ib_wager_minus_text"
         android:text="@string/league_create_ib_wager_minus" />
 
@@ -78,6 +81,8 @@
         android:layout_alignTop="@+id/league_create_wager"
         android:layout_toRightOf="@+id/league_create_ib_wager_minus"
         android:contentDescription="@string/league_create_ib_wager_plus_text"
+        android:background="@drawable/custom_login_button"
+        android:textColor="@color/white"        
         android:text="@string/league_create_ib_wager_plus" />
 
     <TextView
@@ -108,6 +113,8 @@
         android:layout_alignRight="@+id/league_create_tv_days"
         android:layout_alignTop="@+id/league_create_days"
         android:contentDescription="@string/league_create_ib_days_minus_text"
+        android:background="@drawable/custom_login_button"
+        android:textColor="@color/white"        
         android:text="@string/league_create_ib_days_minus" />
     
     <TextView
@@ -168,7 +175,10 @@
         android:layout_alignBottom="@+id/league_create_ib_days_minus"
         android:layout_toRightOf="@+id/league_create_ib_days_minus"
         android:contentDescription="@string/league_create_ib_days_plus_text"
-        android:text="@string/league_create_ib_days_plus" />
+        android:text="@string/league_create_ib_days_plus"
+        android:background="@drawable/custom_login_button"
+        android:textColor="@color/white" />
+    
     </RelativeLayout>
     
     </ScrollView>

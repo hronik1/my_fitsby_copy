@@ -11,21 +11,29 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="5dp" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/newsfeed_spinner"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="2dp"
-        android:src="@drawable/profile_picture_placeholder" />
+    <FrameLayout
+        android:id="@+id/frameLayout1"
+        android:layout_below="@+id/newsfeed_spinner"        
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:paddingBottom="6dp"
+        android:layout_marginLeft="1dp"        
+   		android:layout_marginTop="1dp"
+   		android:gravity="center">
+        <ImageView
+        	android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        	android:src="@drawable/profile_picture_placeholder" />
+    </FrameLayout>
+        
     <EditText
         android:id="@+id/newsfeed_et_comment"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/newsfeed_spinner"        
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/frameLayout1"
         android:background="@drawable/post_status_here_box"
         android:ems="10"
         android:hint="@string/newsfeed_et_comment_hint"
