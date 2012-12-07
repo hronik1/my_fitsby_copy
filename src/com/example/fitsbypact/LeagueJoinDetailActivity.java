@@ -204,7 +204,7 @@ public class LeagueJoinDetailActivity extends Activity {
  		potTV.setText("$" + pot);
  		
  		playersTV = (TextView)findViewById(R.id.league_join_detail_players_data);
- 		playersTV.setText(players);
+ 		playersTV.setText(players+"");
  		
  		durationTV = (TextView)findViewById(R.id.league_join_detail_duration_data);
  		durationTV.setText(" (" + duration + ")");

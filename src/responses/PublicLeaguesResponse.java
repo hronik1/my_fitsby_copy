@@ -51,6 +51,12 @@ public class PublicLeaguesResponse {
 				int wager = Integer.parseInt(jsonLeague.getString("wager"));
 				int stakes = Integer.parseInt(jsonLeague.getString("stakes"));
 				String email = jsonLeague.getString("email");
+				int structure;
+				try {
+					structure = json.getInt("winning_structure");
+				} catch (Exception e) {
+					structure = 3;
+				}
 				if (!imageMap.containsKey(email))  {
 					Log.d(TAG, "getting image");
 					String src = Gravatar.getGravatar(email);
@@ -60,7 +66,7 @@ public class PublicLeaguesResponse {
 					Log.d(TAG, "image exists");
 					bitmap = imageMap.get(email);
 				}
-				leagues.add(new League(id, wager, players, duration, stakes, bitmap));
+				leagues.add(new League(id, wager, players, duration, stakes, bitmap, structure));
 			}
 			return new PublicLeaguesResponse(success, leagues);
 		} catch (JSONException e) {

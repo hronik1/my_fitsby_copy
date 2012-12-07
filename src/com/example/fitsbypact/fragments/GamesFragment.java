@@ -77,6 +77,8 @@ public class GamesFragment extends SherlockFragment {
 	private TextView endTV;
 	private TextView daysLeftTV;
 	
+	private int structure;
+	
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
@@ -194,7 +196,7 @@ public class GamesFragment extends SherlockFragment {
 					int position, long id) {
 				//TODO show game states of element clicked on
 				spinnerPosition = position;
-				new CursorDataAsyncTask().execute();
+				new GameInfoAsyncTask().execute();
 				
 			}
 
@@ -328,7 +330,7 @@ public class GamesFragment extends SherlockFragment {
 		protected void onPostExecute(Cursor cursor) {
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
-        	new GameInfoAsyncTask().execute();
+        	new DaysRemainingAsyncTask().execute();	
 
         }
     }
@@ -361,9 +363,11 @@ public class GamesFragment extends SherlockFragment {
         		wagerTV.setText("$" + league.getWager());
         		startTV.setText(" (" + league.getStartDate() + " -");
         		endTV.setText(" " + league.getEndDate() + ")");
+        		structure = league.getStructure();
+        		Toast.makeText(parent, structure + "", Toast.LENGTH_LONG).show();
         	}
-        	new DaysRemainingAsyncTask().execute();	
         	
+        	new CursorDataAsyncTask().execute();
         }
     }
     
