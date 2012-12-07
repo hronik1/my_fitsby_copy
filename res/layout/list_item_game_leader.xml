@@ -22,21 +22,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/rank"
-<<<<<<< HEAD
-        android:layout_alignTop="@+id/rank"    
-        android:layout_marginLeft="15dp"
-        android:contentDescription="@string/me_imageview_desc"        
-        android:paddingBottom="3dp"
-=======
         android:layout_alignTop="@+id/rank"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="15dp"
         android:contentDescription="@string/me_imageview_desc"
-        android:maxHeight="80dp"
-        android:maxWidth="80dp"
-        android:minHeight="80dp"
-        android:minWidth="80dp"
->>>>>>> 905d81f4bcb8fe1b82510309991665a02d5c16c7
+        android:maxHeight="30dp"
+        android:maxWidth="30dp"
+        android:minHeight="30dp"
+        android:minWidth="30dp"
         android:src="@drawable/profile_picture_placeholder" />
     
     <TextView
