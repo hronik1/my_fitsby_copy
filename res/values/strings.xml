@@ -34,8 +34,8 @@
     <string name="league_landing_join_text">Join A Game</string>
     <string name="title_activity_league_create"></string>
     <string name="league_create_create_text">Create Game</string>
-    <string name="league_create_tv_wager_text">Wager:</string>
-    <string name="league_create_tv_days_text">Days:</string>
+    <string name="league_create_tv_wager_text">1. Set the wager.</string>
+    <string name="league_create_tv_days_text">2. Set the days.</string>
     <string name="league_create_ib_wager_plus">+</string>
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
@@ -68,10 +68,11 @@
     <string name="league_join_public_header_text">JOIN A GAME</string>
     <string name="search_for_a_game">SEARCH FOR A GAME</string>
     <string name="create_new_game_directions">START YOUR OWN GAME</string>
-    <string name="league_create_checkbox_text">Make game private</string>
-    <string name="league_create_rb_prompt">How many winners?</string>
+    <string name="league_create_privacy_text">4. Make game private?</string>
+    <string name="league_create_checkbox_text">Yes</string>
+    <string name="league_create_rb_prompt">3. How many winners?</string>
     <string name="league_create_rb_top3">Top 3</string>
-    <string name="league_create_rb_takeall">User Takes All</string>
+    <string name="league_create_rb_takeall">Winner Takes All</string>
     <string name="navigation_textview_me_text">Me</string>
     <string name="navigation_textview_game_text">GAMES</string>
     <string name="navigation_textview_newsfeed_text">NEWSFEED</string>
@@ -170,7 +171,7 @@
     <string name="league_create_ib_days_plus_text">Increment days</string>
     <string name="league_create_ib_wager_minus_text">Decrement wager</string>
     <string name="league_create_ib_wager_plus_text">Increment days</string>
-    <string name="league_create_header_text">Create a game by selecting the wager, duration, and game privacy. All games start on the next day\'s midnight, once there are a minimum of 5 players.</string>
+    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight, once there are a minimum of 5 players.</string>
     <string name="header_title_text">Fitsby</string>
     <string name="header_settings_text">You</string>
     <string name="title_activity_settings"></string>

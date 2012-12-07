@@ -48,7 +48,7 @@
         android:background="@drawable/custom_login_button"
         android:text="@string/friend_invite_button_home_text"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/white" />
 
 </RelativeLayout>

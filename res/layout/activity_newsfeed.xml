@@ -17,8 +17,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:paddingBottom="6dp"
-        android:layout_marginLeft="1dp"        
-   		android:layout_marginTop="1dp"
+        android:layout_marginLeft="0.5dp"        
+   		android:layout_marginTop="0.5dp"
    		android:gravity="center">
         <ImageView
         	android:id="@+id/imageView1"
@@ -37,7 +37,7 @@
         android:background="@drawable/post_status_here_box"
         android:ems="10"
         android:hint="@string/newsfeed_et_comment_hint"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="1dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="-1dp"
         android:textSize="12sp" />

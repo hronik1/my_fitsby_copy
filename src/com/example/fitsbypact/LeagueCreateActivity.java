@@ -17,7 +17,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
@@ -316,12 +318,32 @@ public class LeagueCreateActivity extends Activity {
 			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
 			startActivity(intent);
 		} else {
-    		new CreateLeagueAsyncTask().execute(userID+"", duration+"",
-    				isPrivate+"", wager+"", (takeAllRB.isChecked() ? 1 : 3)+"");
+			showConfirmation();
 		}
 	
 	}
 	
+    /**
+     * 
+     */
+    private void showConfirmation() {
+	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	
+    	builder.setMessage("Are you sure you want to create a free game (you can't earn any money)?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
+    		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), (takeAllRB.isChecked() ? 1 : 3)+"");
+    				}
+    			})
+    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    }
+    
     /**
      * AsyncTask to Register user
      * @author brent

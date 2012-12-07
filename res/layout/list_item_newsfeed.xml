@@ -27,8 +27,7 @@
         android:layout_alignTop="@+id/frameLayout1"
         android:layout_toRightOf="@+id/frameLayout1"
         android:textStyle="bold"
-        android:textSize="14sp"      
-        android:layout_marginTop="1dp"  
+        android:textSize="14sp" 
         android:layout_marginLeft="1dp"  
         android:text="@string/list_item_newsfeed_first_name_text" />
 
@@ -67,13 +66,33 @@
         android:textColor="@color/button_gray"
         android:text="@string/list_item_newsfeed_timestamp_text" />
 
+   <TextView
+        android:id="@+id/list_item_bold"
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:layout_below="@+id/list_item_newsfeed_timestamp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:textSize="0sp"
+        android:textColor="@color/button_gray"
+        android:text="@string/list_item_newsfeed_timestamp_text" />
+   
+    <ImageView
+        android:id="@+id/checkin_icon"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/list_item_newsfeed_timestamp"
+        android:layout_toRightOf="@+id/frameLayout1"
+        android:src="@drawable/checkin_icon" />
+          
     <TextView
         android:id="@+id/list_item_newsfeed_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/list_item_newsfeed_timestamp"
         android:layout_below="@+id/list_item_newsfeed_first_name"
-        android:layout_toRightOf="@+id/frameLayout1"
+        android:layout_toRightOf="@+id/checkin_icon"
         android:paddingBottom="4dp"
         android:layout_marginLeft="1dp"          
         android:text="@string/list_item_newsfeed_message_text"
