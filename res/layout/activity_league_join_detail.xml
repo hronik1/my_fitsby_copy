@@ -304,9 +304,9 @@
         android:id="@+id/game_number_of_winners_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/game_start_date"
-        android:layout_alignTop="@+id/game_start_date"
-        android:layout_toRightOf="@+id/game_start_date"
+        android:layout_alignBaseline="@+id/game_number_of_winners"
+        android:layout_alignTop="@+id/game_number_of_winners"
+        android:layout_toRightOf="@+id/game_number_of_winners"
         android:textSize="16sp" />
  	 
 	<ImageView

@@ -1025,7 +1025,7 @@ containing a value of this type.
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
         public static final int buttons=0x7f040059;
-        public static final int calendar=0x7f0400a8;
+        public static final int calendar=0x7f0400a7;
         public static final int check_in_button_check_in=0x7f040036;
         public static final int check_in_button_check_out=0x7f040034;
         public static final int check_in_iv=0x7f040037;
@@ -1059,7 +1059,7 @@ containing a value of this type.
         public static final int game_leader_framelayout_imageview=0x7f0400d4;
         public static final int game_number_of_winners=0x7f0400a5;
         public static final int game_number_of_winners_value=0x7f0400a6;
-        public static final int game_start_date=0x7f0400a7;
+        public static final int game_start_date=0x7f0400a8;
         public static final int game_start_date_value=0x7f0400a9;
         public static final int games_button_newgame=0x7f040065;
         public static final int games_leader_list=0x7f040062;

@@ -50,7 +50,12 @@ public class PublicLeaguesResponse {
 				int duration = Integer.parseInt(jsonLeague.getString("duration"));
 				int wager = Integer.parseInt(jsonLeague.getString("wager"));
 				int stakes = Integer.parseInt(jsonLeague.getString("stakes"));
-				String email = jsonLeague.getString("email");
+				String email;
+				try {
+					email = jsonLeague.getString("email");
+				} catch(Exception e) {
+					email = "";
+				}
 				int structure;
 				try {
 					structure = json.getInt("winning_structure");

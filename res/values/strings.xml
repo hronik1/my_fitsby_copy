@@ -145,7 +145,7 @@
     <string name="league_join_detail_pot_data_text">$20</string>
     <string name="league_join_detail_players_text">" PLAYERS"</string>
     <string name="league_join_detail_players_data_text">2</string>
-    <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 5 players in the game"</string>
+    <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 4 players in the game"</string>
     <string name="league_join_duration_data_text">" (14 days)"</string>
     <string name="league_join_detail_button_join_text">Join Game</string>
     <string name="league_join_detail_id_text">"GAME ID: "</string>
@@ -155,7 +155,7 @@
     <string name="list_item_game_leader_checkins_text">"Check-ins: "</string>
     <string name="list_item_public_leagues_creator_text">[PIC]</string>
     <string name="list_item_public_leagues_id_text">#1</string>
-    <string name="list_item_public_leagues_players_text">5</string>
+    <string name="list_item_public_leagues_players_text">4</string>
     <string name="list_item_public_leagues_wager_text">$10</string>
     <string name="list_item_public_leagues_duration_text">2</string>
     <string name="list_item_public_leagues_pot_text">$50</string>
@@ -172,7 +172,7 @@
     <string name="league_create_ib_days_plus_text">Increment days</string>
     <string name="league_create_ib_wager_minus_text">Decrement wager</string>
     <string name="league_create_ib_wager_plus_text">Increment days</string>
-    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight, once there are a minimum of 5 players.</string>
+    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight, once there are a minimum of 4 players.</string>
     <string name="header_title_text">Fitsby</string>
     <string name="header_settings_text">You</string>
     <string name="title_activity_settings"></string>
