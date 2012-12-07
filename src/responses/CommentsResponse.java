@@ -57,6 +57,7 @@ public class CommentsResponse {
 				String _id = jsonComment.getString("_id");
 				String email = jsonComment.getString("email");
 				String bold = jsonComment.getBoolean("bold") + "";
+				String checkin = jsonComment.getBoolean("checkin") + "";
 				//TODO change to actually parse email
 				if (!imageMap.containsKey(email))  {
 					Log.d(TAG, "getting image");
@@ -67,7 +68,7 @@ public class CommentsResponse {
 					Log.d(TAG, "image exists");
 					bitmap = imageMap.get(email);
 				}
-				comments.add(new Comment(id, firstName, lastName, message, stamp, _id, bitmap, bold));
+				comments.add(new Comment(id, firstName, lastName, message, stamp, _id, bitmap, bold, checkin));
 			}
 			return new CommentsResponse(success, comments);
 		} catch (IllegalArgumentException e) {

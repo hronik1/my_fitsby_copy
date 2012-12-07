@@ -64,7 +64,7 @@ public class NewsfeedFragment extends SherlockFragment {
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
 			R.id.list_item_newsfeed_last_name, R.id.list_item_newsfeed_timestamp,
-			R.id.list_item_newsfeed_message, R.id.list_item_id, R.id.list_item_newsfeed_imageview, R.id.list_item_bold };
+			R.id.list_item_newsfeed_message, R.id.list_item_id, R.id.list_item_newsfeed_imageview, R.id.list_item_bold, R.id.checkin_icon };
 	
 	private ApplicationUser mApplicationUser;
 	
@@ -326,6 +326,15 @@ public class NewsfeedFragment extends SherlockFragment {
             	byte[] bytes = cursor.getBlob(columnIndex);
             	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
 
+            } else if (viewId == R.id.checkin_icon) {
+            	String checkin = cursor.getString(columnIndex);
+            	if (checkin.equals("true")) {
+            		view.setVisibility(View.VISIBLE);
+            		Log.d(TAG, "setting cup visible: " + checkin);
+            	} else {
+            		view.setVisibility(View.INVISIBLE);
+            		Log.d(TAG, "setting cup invisible: " + checkin);
+            	}
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));

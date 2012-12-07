@@ -295,15 +295,22 @@ public class CheckinFragment extends SherlockFragment{
     			.setCancelable(false)
     			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    					try {
-    						new GooglePlacesAddAsyncTask().execute(mUser.getID()+"", latitude+"",
-    								longitude+"", input.getText().toString());
+    					String text = input.getText().toString();
+    					if (text != null && !text.trim().equals("")) {
+    						try {
+    							new GooglePlacesAddAsyncTask().execute(mUser.getID()+"", latitude+"",
+    									longitude+"", input.getText().toString());
 
-    					} catch (Exception e) {
-    						//TODO make a more better error message
-    						Toast toast = Toast.makeText(parent, e.toString(), Toast.LENGTH_LONG);
-    						toast.setGravity(Gravity.CENTER, 0, 0);
-    						toast.show();
+    						} catch (Exception e) {
+    							//TODO make a more better error message
+    							Toast toast = Toast.makeText(parent, e.toString(), Toast.LENGTH_LONG);
+    							toast.setGravity(Gravity.CENTER, 0, 0);
+    							toast.show();
+    						}
+    					} else {
+							Toast toast = Toast.makeText(parent, "Sorry, but your gym name can't be empty", Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
     					}
     				}
     			})
@@ -500,7 +507,6 @@ public class CheckinFragment extends SherlockFragment{
                 msg.setData(data);
                 try {
 					mService.send(msg);
-					Toast.makeText(parent, gym, Toast.LENGTH_LONG).show();
 				} catch (RemoteException e) {
 					Log.e(TAG, e.toString());
 				}
