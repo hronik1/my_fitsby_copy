@@ -19,6 +19,7 @@ import dbtables.Comment;
 
 
 public class CommentsResponse {
+	private final static String ANNOUNCEMENT_FIRST_NAME = "ANNOUNCEMENT";
 	private final static String TAG = "CommentsResponse";
 	private StatusResponse mStatusResponse;
 	private Vector<Comment> comments;
@@ -48,6 +49,8 @@ public class CommentsResponse {
 				JSONObject jsonComment = jsonComments.getJSONObject(i);
 				String firstName = jsonComment.getString("first_name");
 				String lastName = jsonComment.getString("last_name");
+				if (firstName.equals(ANNOUNCEMENT_FIRST_NAME))
+					lastName = "";
 				int id = Integer.parseInt(jsonComment.getString("user_id"));
 				String message = jsonComment.getString("message");
 				String stamp = jsonComment.getString("stamp");
