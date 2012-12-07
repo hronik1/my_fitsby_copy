@@ -53,7 +53,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/league_join_detail_name"
-		android:layout_alignLeft="@+id/league_join_detail_name"
+		android:layout_toRightOf="@+id/gravatar_framelayout_imageview"
+		android:layout_marginLeft="4dp"
         android:textSize="16sp"		
 		android:text="@string/league_join_detail_name_first" />
     <TextView
