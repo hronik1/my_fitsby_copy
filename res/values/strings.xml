@@ -25,7 +25,7 @@
     <string name="login_forgot_password_text">Forgot your password?</string>
     <string name="fitsby_description">Fitsby is a game where you compete with other people on who can check in at the gym the most. \n \n
   									  You can play against anyone, including friends, and even wager money. \n \n
-  									  The top three gym goers at the end of a game are declared the winners and split the pot. \n \n
+  									  Everytime you go to the gym, use geolocation to check in. Check out after 30 minutes to make it count. \n \n
 									  Press Next to get started!</string>
     <string name="title_activity_help"></string>
     <string name="help_button_text">Next</string>
@@ -80,7 +80,7 @@
     <string name="check_in_button_check_in_text">Check In</string>
     <string name="check_in_button_check_out_text">Check Out</string>
     <string name="verified_gym">You are currently not checked in at a verified gym</string>
-    <string name="checkout_directions">(You can check out only when you\'ve been at the gym for a minimum of 30 minutes)</string>
+    <string name="checkout_directions">You can check out only when you\'ve been at the gym for a minimum of 30 minutes</string>
     <string name="colon">:</string>
     <string name="seconds">00</string>
     <string name="minutes">00</string>
@@ -119,7 +119,7 @@
     <string name="days_left"></string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>
-    <string name="invite_friends_button">Invite Friends to Current Game</string>
+    <string name="invite_friends_button">Invite Friends to Game</string>
     <string name="league_join_league_id_header_text">ID</string>
     <string name="league_join_creator_header_text">Host</string>
     <string name="league_join_players_header_text">Players</string>
@@ -132,6 +132,7 @@
     <string name="public_leagues_duration_header_text">Days</string>
     <string name="public_leagues_pot_header_text">Pot</string>
     <string name="title_activity_league_join_detail"></string>
+    <string name="game_number_of_winners">NUMBER OF WINNERS: </string>
     <string name="league_join_detail_header_text">"GAME DETAILS"</string>
     <string name="league_join_detail_name">"HOST: "</string>
     <string name="league_join_detail_name_first">First</string>
@@ -195,7 +196,7 @@
     <string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
     <string name="faq_button">Questions? Read the FAQ</string>
     <string name="title_activity_forgot_password"></string>
-    <string name="game_start_date">Start Date:  </string>
+    <string name="game_start_date">START DATE:  </string>
     <string name="game_start_date_value">10/12/2012</string>
     <string name="title_activity_loggedin"></string>
     <string name="login_remember_me_textview">Remember me</string>

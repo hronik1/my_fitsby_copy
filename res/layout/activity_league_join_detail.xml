@@ -26,7 +26,7 @@
        android:layout_alignLeft="@+id/league_join_detail_header"
        android:layout_below="@+id/league_join_detail_header"
        android:layout_marginTop="10dp"
-       android:layout_marginLeft="5dp"
+       android:layout_marginLeft="15dp"
        android:gravity="center" >
         <ImageView
         	android:id="@+id/league_join_detail_imageview"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
       	android:layout_toRightOf="@+id/gravatar_framelayout_imageview"
 		android:layout_alignTop="@+id/gravatar_framelayout_imageview"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="1dp"
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -53,7 +53,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/league_join_detail_name"
-		android:layout_alignLeft="@+id/league_join_detail_name"
+		android:layout_toRightOf="@+id/gravatar_framelayout_imageview"
+		android:layout_marginLeft="2.5dp"
         android:textSize="16sp"		
 		android:text="@string/league_join_detail_name_first" />
     <TextView
@@ -86,12 +87,19 @@
 	    <RelativeLayout
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-	        android:layout_weight=".5"
-	        android:layout_marginLeft="10dp">  
+	        android:layout_weight=".5">  
+			<ImageView
+		        android:id="@+id/game_id"
+		        android:layout_width="19dp"
+		        android:layout_height="19dp"
+		        android:layout_marginTop="2dp"
+		        android:src="@drawable/game_id" />	        
 		    <TextView
 		        android:id="@+id/league_join_detail_id"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+				android:layout_toRightOf="@+id/game_id"
+				android:layout_alignTop="@+id/game_id"		        
 		        android:textStyle="bold"
 		        android:textSize="16sp"
 		        android:text="@string/league_join_detail_id_text" />
@@ -103,16 +111,25 @@
 				android:layout_alignTop="@+id/league_join_detail_id"
 		        android:textSize="16sp"		
 				android:text="@string/league_join_detail_id_data_text" />
+
 	    </RelativeLayout>
 	    <RelativeLayout
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight=".5"
-	        android:layout_marginRight="5dp">  	    
+	        android:layout_marginRight="5dp">  	   
+			<ImageView
+		        android:id="@+id/private_game"
+		        android:layout_width="19dp"
+		        android:layout_height="19dp"
+		        android:layout_marginTop="2dp"		        
+		        android:src="@drawable/private_game" />	         
 		    <TextView
 		        android:id="@+id/league_join_detail_type"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+				android:layout_toRightOf="@+id/private_game"
+				android:layout_alignTop="@+id/private_game"		        
 		        android:textStyle="bold"
 		        android:textSize="16sp"
 		        android:text="@string/league_join_detail_type_text" />
@@ -124,6 +141,7 @@
 				android:layout_alignTop="@+id/league_join_detail_type"
 		        android:textSize="16sp"		
 				android:text="@string/league_join_detail_type_data_text" />
+
 	    </RelativeLayout>
     </LinearLayout>
     
@@ -258,13 +276,45 @@
         android:layout_marginLeft="10dp"	
         android:layout_marginRight="10dp"		        		
 		android:background="#949294" />
+
+
+    <ImageView
+        android:id="@+id/trophy"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:src="@drawable/winner"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="1dp"
+        android:layout_alignLeft="@+id/horizontal_divider_3"
+		android:layout_below="@+id/horizontal_divider_3"/>		
+      <TextView
+        android:id="@+id/game_number_of_winners"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/trophy"
+        android:layout_alignTop="@+id/trophy"
+        android:layout_toRightOf="@+id/trophy"
+        android:textSize="16sp"
+        android:layout_marginLeft="5dp"
+        android:text="@string/game_number_of_winners"
+        android:textStyle="bold" />
+ 	 <TextView
+        android:id="@+id/game_number_of_winners_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/game_start_date"
+        android:layout_alignTop="@+id/game_start_date"
+        android:layout_toRightOf="@+id/game_start_date"
+        android:textSize="16sp" />
+ 	 
     		
       <TextView
         android:id="@+id/game_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 		android:layout_alignLeft="@+id/horizontal_divider_3"
-		android:layout_below="@+id/horizontal_divider_3" 
+		android:layout_below="@+id/game_number_of_winners" 
         android:text="@string/game_start_date"
         android:textSize="16sp"
         android:layout_marginTop="10dp"
@@ -297,7 +347,7 @@
 		android:layout_below="@+id/game_start_date" 
         android:layout_toRightOf="@+id/horizontal_divider_3"        		
         android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
         android:textSize="12sp"        
 		android:text="@string/league_join_duration_text"/>
 
@@ -325,6 +375,10 @@
         android:layout_marginRight="10dp"
         android:textSize="16sp" />
       
+ 	 	 
+
+ 	 
+        
     
 </RelativeLayout>
 
