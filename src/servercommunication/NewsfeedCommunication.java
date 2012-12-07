@@ -106,7 +106,7 @@ public class NewsfeedCommunication {
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 			byte[] byteArray = stream.toByteArray();
 			cursor.addRow(new Object[] { comment.getFirstName(), LastNameFormatter.format(comment.getLastName()),
-					comment.getStamp(), comment.getMessage(), comment.getId(), byteArray });
+					comment.getStamp(), comment.getMessage(), comment.getId(), byteArray, comment.getBold() });
 		}
 		return cursor;
 	}

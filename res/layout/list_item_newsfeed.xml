@@ -66,6 +66,16 @@
         android:textColor="@color/button_gray"
         android:text="@string/list_item_newsfeed_timestamp_text" />
 
+   <TextView
+        android:id="@+id/list_item_bold"
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:layout_below="@+id/list_item_newsfeed_timestamp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:textSize="0sp"
+        android:textColor="@color/button_gray"
+        android:text="@string/list_item_newsfeed_timestamp_text" />
     <TextView
         android:id="@+id/list_item_newsfeed_message"
         android:layout_width="wrap_content"

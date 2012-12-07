@@ -166,7 +166,7 @@ public class LoggedinActivity extends SherlockFragmentActivity {
      */
     private class GravatarAsyncTask extends AsyncTask<String, Void, Bitmap> {
         protected Bitmap doInBackground(String... params) {
-        	String gravatarURL = Gravatar.getGravatar(params[0]);
+        	String gravatarURL = Gravatar.getGravatar(params[0], 80);
         	return MyHttpClient.getBitmapFromURL(gravatarURL);
         }
 

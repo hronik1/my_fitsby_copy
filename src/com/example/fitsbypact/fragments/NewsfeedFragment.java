@@ -19,12 +19,14 @@ import com.example.fitsbypact.R;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
+import dbtables.Comment;
 import dbtables.User;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,7 +64,7 @@ public class NewsfeedFragment extends SherlockFragment {
 	private SimpleCursorAdapter mAdapter;
 	private int[] toArgs = { R.id.list_item_newsfeed_first_name, 
 			R.id.list_item_newsfeed_last_name, R.id.list_item_newsfeed_timestamp,
-			R.id.list_item_newsfeed_message, R.id.list_item_id, R.id.list_item_newsfeed_imageview };
+			R.id.list_item_newsfeed_message, R.id.list_item_id, R.id.list_item_newsfeed_imageview, R.id.list_item_bold };
 	
 	private ApplicationUser mApplicationUser;
 	
@@ -327,6 +329,8 @@ public class NewsfeedFragment extends SherlockFragment {
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));
+            	if (viewId == R.id.list_item_newsfeed_message && cursor.getString(cursor.getColumnIndex(Comment.KEY_BOLD)).equals("true"))
+            		name.setTypeface(Typeface.DEFAULT_BOLD);
             }
             
             return true;

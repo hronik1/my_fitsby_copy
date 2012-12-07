@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 public class Comment {
 
 	public final static String KEY_BITMAP = "bitmap";
+	public final static String KEY_BOLD = "bold";
+	
 	private int memberFromId;
 	private String firstName;
 	private String lastName;
@@ -14,6 +16,7 @@ public class Comment {
 	private String stamp;
 	private String id;
 	private Bitmap bitmap;
+	private String bold;
 	
 	/**
 	 * default Comment constructor
@@ -31,7 +34,7 @@ public class Comment {
 	 * @param message
 	 * @param stamp
 	 */
-	public Comment(int memberFromId, String firstName, String lastName, String message, String stamp, String id, Bitmap bitmap) {
+	public Comment(int memberFromId, String firstName, String lastName, String message, String stamp, String id, Bitmap bitmap, String bold) {
 		this.memberFromId = memberFromId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -39,6 +42,7 @@ public class Comment {
 		this.stamp = stamp;
 		this.id = id;
 		this.bitmap = bitmap;
+		this.bold = bold;
 	}
 
 	/**
@@ -76,5 +80,21 @@ public class Comment {
 	
 	public Bitmap getBitmap() {
 		return bitmap;
+	}
+
+
+	/**
+	 * @return the bold
+	 */
+	public String getBold() {
+		return bold;
+	}
+
+
+	/**
+	 * @param bold the bold to set
+	 */
+	public void setBold(String bold) {
+		this.bold = bold;
 	}
 }
