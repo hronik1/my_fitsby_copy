@@ -81,10 +81,9 @@
         android:id="@+id/checkin_icon"
         android:layout_width="17dp"
         android:layout_height="17dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:layout_below="@+id/list_item_newsfeed_timestamp"
-        android:layout_toRightOf="@+id/frameLayout1"
-        android:src="@drawable/checkin_icon" />
+        android:layout_toRightOf="@+id/frameLayout1" />
           
     <TextView
         android:id="@+id/list_item_newsfeed_message"
@@ -93,7 +92,7 @@
         android:layout_alignRight="@+id/list_item_newsfeed_timestamp"
         android:layout_below="@+id/list_item_newsfeed_first_name"
         android:layout_toRightOf="@+id/checkin_icon"
-        android:paddingBottom="4dp"
+        android:paddingBottom="6dp"
         android:layout_marginLeft="1dp"          
         android:text="@string/list_item_newsfeed_message_text"
         android:textSize="12sp" />

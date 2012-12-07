@@ -26,7 +26,7 @@
        android:layout_alignLeft="@+id/league_join_detail_header"
        android:layout_below="@+id/league_join_detail_header"
        android:layout_marginTop="10dp"
-       android:layout_marginLeft="5dp"
+       android:layout_marginLeft="15dp"
        android:gravity="center" >
         <ImageView
         	android:id="@+id/league_join_detail_imageview"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
       	android:layout_toRightOf="@+id/gravatar_framelayout_imageview"
 		android:layout_alignTop="@+id/gravatar_framelayout_imageview"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="1dp"
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
         android:textSize="16sp"
@@ -86,8 +86,7 @@
 	    <RelativeLayout
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-	        android:layout_weight=".5"
-	        android:layout_marginLeft="10dp">  
+	        android:layout_weight=".5">  
 		    <TextView
 		        android:id="@+id/league_join_detail_id"
 		        android:layout_width="wrap_content"
@@ -297,7 +296,7 @@
 		android:layout_below="@+id/game_start_date" 
         android:layout_toRightOf="@+id/horizontal_divider_3"        		
         android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
         android:textSize="12sp"        
 		android:text="@string/league_join_duration_text"/>
 

@@ -119,7 +119,7 @@
     <string name="days_left"></string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>
-    <string name="invite_friends_button">Invite Friends to Current Game</string>
+    <string name="invite_friends_button">Invite Friends to Game</string>
     <string name="league_join_league_id_header_text">ID</string>
     <string name="league_join_creator_header_text">Host</string>
     <string name="league_join_players_header_text">Players</string>
@@ -195,7 +195,7 @@
     <string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
     <string name="faq_button">Questions? Read the FAQ</string>
     <string name="title_activity_forgot_password"></string>
-    <string name="game_start_date">Start Date:  </string>
+    <string name="game_start_date">START DATE:  </string>
     <string name="game_start_date_value">10/12/2012</string>
     <string name="title_activity_loggedin"></string>
     <string name="login_remember_me_textview">Remember me</string>

@@ -207,7 +207,7 @@ public class LeagueJoinDetailActivity extends Activity {
  		playersTV.setText(players+"");
  		
  		durationTV = (TextView)findViewById(R.id.league_join_detail_duration_data);
- 		durationTV.setText(" (" + duration + ")");
+ 		durationTV.setText(" (" + duration + " days)");
  		
  		leagueIdTV = (TextView)findViewById(R.id.league_join_detail_id_data);
  		leagueIdTV.setText(" " + leagueId);
