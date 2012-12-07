@@ -11,19 +11,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
+        <FrameLayout
+            android:id="@+id/me_framelayout_imageview"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" >
+
             <ImageView
                 android:id="@+id/me_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:maxHeight="80dp"
-                android:maxWidth="80dp"
                 android:contentDescription="@string/me_imageview_desc"
                 android:src="@drawable/profile_picture_placeholder" />
-
+            
+			</FrameLayout>
+			
             <TextView
                 android:id="@+id/me_textview_name"
                 android:layout_width="wrap_content"
@@ -35,7 +40,7 @@
                 android:textStyle="bold"
                 android:textSize="24sp"        
                 android:textColor="@color/white"   
-                android:layout_toRightOf="@+id/me_imageview"
+                android:layout_toRightOf="@+id/me_framelayout_imageview"
                 android:text="@string/me_textview_name_text" />
 
             <TextView
@@ -53,7 +58,7 @@
                 android:id="@+id/me_textview_total_money_earned_prompt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/me_imageview"
+                android:layout_below="@+id/me_framelayout_imageview"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="14sp"
@@ -67,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_imageview"
                 android:layout_toRightOf="@+id/me_textview_total_money_earned_prompt"
+                android:layout_alignTop="@+id/me_textview_total_money_earned_prompt"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/white"                   
                 android:textSize="14sp"                

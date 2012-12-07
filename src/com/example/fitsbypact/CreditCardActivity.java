@@ -240,7 +240,7 @@ public class CreditCardActivity extends Activity {
     	ApplicationUser appData = (ApplicationUser)getApplicationContext();
     	if (appData.getCreate()) {
     		new CreateLeagueAsyncTask().execute(appData.getUserId()+"", appData.getDuration()+"",
-    				appData.getIsPrivateString(), appData.getWager()+"", appData.getFirstName());
+    				appData.getIsPrivateString(), appData.getWager()+"", appData.getStructure()+"");
     	} else if (appData.getJoin()) {
     		new JoinLeagueAsyncTask().execute(appData.getUserId(), appData.getLeagueId());
     	}
@@ -285,7 +285,7 @@ public class CreditCardActivity extends Activity {
 		
         protected LeagueCreateResponse doInBackground(String... params) {
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
-        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]),
+        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
         			numberET.getText().toString(), expYearET.getText().toString(), expMonthET.getText().toString(),
         			cvcET.getText().toString());
         	return response;

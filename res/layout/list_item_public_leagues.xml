@@ -6,7 +6,7 @@
     android:background="@color/light_white"
     android:paddingBottom="5dp" >
     
-   <TextView
+   <ImageView
         android:id="@+id/list_item_public_leagues_creator "
         android:layout_width="0dp"
         android:layout_height="wrap_content"

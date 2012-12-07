@@ -308,12 +308,16 @@ public class LeagueCreateActivity extends Activity {
 			appData.setDuration(duration);
 			appData.setIsPrivate(isPrivate);
 			appData.setWager(wager);
+			if (takeAllRB.isChecked())
+				appData.setStructure(1);
+			else
+				appData.setStructure(3);
 			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
 			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
 			startActivity(intent);
 		} else {
     		new CreateLeagueAsyncTask().execute(userID+"", duration+"",
-    				isPrivate+"", wager+"", mUser.getFirstName());
+    				isPrivate+"", wager+"", (takeAllRB.isChecked() ? 1 : 3)+"");
 		}
 	
 	}
@@ -332,7 +336,7 @@ public class LeagueCreateActivity extends Activity {
 		
         protected LeagueCreateResponse doInBackground(String... params) {
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
-        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]),
+        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
         			"", "", "", "");
         	return response;
         }
