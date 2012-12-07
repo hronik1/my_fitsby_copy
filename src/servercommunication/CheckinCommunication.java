@@ -12,7 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.fitsbypact.R;
 
 import android.content.Context;
 import android.net.Uri;

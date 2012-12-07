@@ -51,6 +51,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	private TextView startDateTV;
 	private TextView firstNameTV;
 	private TextView lastNameTV;
+	private TextView numberWinnersTV;
 	
 	private Button joinButton;
 	private Button faqButton;
@@ -220,6 +221,8 @@ public class LeagueJoinDetailActivity extends Activity {
  		firstNameTV.setText(" ");
  		lastNameTV = (TextView)findViewById(R.id.league_join_detail_name_last);
  		lastNameTV.setText(" ");
+ 		
+ 		numberWinnersTV = (TextView)findViewById(R.id.game_number_of_winners_value);
  	}
 
  	/**
@@ -328,6 +331,7 @@ public class LeagueJoinDetailActivity extends Activity {
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
         		startDateTV.setText(" " + league.getStartDate());
+        		numberWinnersTV.setText(" " + league.getStructure());
         	}
         		
         	new CreatorAsyncTask().execute();
