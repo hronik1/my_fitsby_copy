@@ -46,8 +46,14 @@ public class PrivateLeagueResponse {
 			String isPrivate = json.getString("is_private");
 			String startDate = json.getString("start_date");
 			String email = json.getString("email");
+			int structure;
+			try {
+				structure = json.getInt("winning_structure");
+			} catch (Exception e) {
+				structure = 3;
+			}
 			Bitmap bitmap = MyHttpClient.getBitmapFromURL(Gravatar.getGravatar(email));
-			League league = new League(id, wager, players, duration, stakes, bitmap);
+			League league = new League(id, wager, players, duration, stakes, bitmap, structure);
 			try {
 				String endDate = json.getString("end_date");
 				league.setEndDate(endDate);

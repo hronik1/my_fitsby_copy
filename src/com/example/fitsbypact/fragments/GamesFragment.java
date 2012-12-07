@@ -77,6 +77,8 @@ public class GamesFragment extends SherlockFragment {
 	private TextView endTV;
 	private TextView daysLeftTV;
 	
+	private int structure;
+	
 	private ProgressBar progressBar;
 	private ListView leadersLV;
 	private Spinner gamesSpinner;
@@ -361,6 +363,8 @@ public class GamesFragment extends SherlockFragment {
         		wagerTV.setText("$" + league.getWager());
         		startTV.setText(" (" + league.getStartDate() + " -");
         		endTV.setText(" " + league.getEndDate() + ")");
+        		structure = league.getStructure();
+        		Toast.makeText(parent, structure + "", Toast.LENGTH_LONG).show();
         	}
         	new DaysRemainingAsyncTask().execute();	
         	
