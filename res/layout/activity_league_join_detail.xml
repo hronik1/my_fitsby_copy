@@ -92,6 +92,7 @@
 		        android:id="@+id/game_id"
 		        android:layout_width="19dp"
 		        android:layout_height="19dp"
+		        android:layout_marginTop="2dp"
 		        android:src="@drawable/game_id" />	        
 		    <TextView
 		        android:id="@+id/league_join_detail_id"
@@ -121,6 +122,7 @@
 		        android:id="@+id/private_game"
 		        android:layout_width="19dp"
 		        android:layout_height="19dp"
+		        android:layout_marginTop="2dp"		        
 		        android:src="@drawable/private_game" />	         
 		    <TextView
 		        android:id="@+id/league_join_detail_type"
