@@ -22,7 +22,7 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_login">Login</string>
-    <string name="login_forgot_password_text">Forgot your password? Resetting it is coming soon</string>
+    <string name="login_forgot_password_text">Forgot your password?</string>
     <string name="fitsby_description">Fitsby is a game where you compete with other people on who can check in at the gym the most. \n \n
   									  You can play against anyone, including friends, and even wager money. \n \n
   									  The top three gym goers at the end of a game are declared the winners and split the pot. \n \n
@@ -86,7 +86,7 @@
     <string name="title_activity_me"></string>
     <string name="me_imageview_desc">me_imageview_desc</string>
     <string name="me_textview_join_date_text">Date Joined: </string>
-    <string name="me_textview_name_text">Brent</string>
+    <string name="me_textview_name_text"></string>
     <string name="me_textview_total_money_earned_money_text"></string>
     <string name="me_textview_total_money_earned_prompt_text">Total Money Earned: </string>
     <string name="me_textview_total_checkins_text"></string>
@@ -105,10 +105,10 @@
     <string name="games_leader_prompt_text">LEADERBOARD</string>
     <string name="games_button_newgame_text">Add New Game</string>
     <string name="games_no_games_prompt_text">Looks like you\'re not in any games! Tap the Add New Game button to start a game.</string>
-    <string name="input_pot">$60</string>
+    <string name="input_pot"></string>
     <string name="input_duration"></string>
-    <string name="input_players">6</string>
-    <string name="input_wager">$10</string>
+    <string name="input_players"></string>
+    <string name="input_wager"></string>
     <string name="input_date"></string>
     <string name="input_end_date"></string>
     <string name="days_left_prompt">Days left:</string>
@@ -129,21 +129,21 @@
     <string name="public_leagues_pot_header_text">Pot</string>
     <string name="title_activity_league_join_detail"></string>
     <string name="league_join_detail_header_text">"GAME DETAILS"</string>
-    <string name="league_join_detail_name">Host: </string>
+    <string name="league_join_detail_name">"HOST: "</string>
     <string name="league_join_detail_name_first">First</string>
     <string name="league_join_detail_name_last">Last</string>    
-    <string name="league_join_detail_type_text">Type: </string>
+    <string name="league_join_detail_type_text">"TYPE: "</string>
     <string name="league_join_detail_type_data_text">Private</string>
-    <string name="league_join_detail_wager_text">Wager: </string>
+    <string name="league_join_detail_wager_text">" WAGER"</string>
     <string name="league_join_detail_wager_data_text">$10</string>
-    <string name="league_join_detail_pot_text">Pot: </string>
+    <string name="league_join_detail_pot_text">" POT"</string>
     <string name="league_join_detail_pot_data_text">$20</string>
-    <string name="league_join_detail_players_text">Players: </string>
+    <string name="league_join_detail_players_text">" PLAYERS"</string>
     <string name="league_join_detail_players_data_text">2</string>
-    <string name="league_join_duration_text">Duration: </string>
-    <string name="league_join_duration_data_text">14 days</string>
+    <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 5 players in the game"</string>
+    <string name="league_join_duration_data_text">" (14 days)"</string>
     <string name="league_join_detail_button_join_text">Join Game</string>
-    <string name="league_join_detail_id_text">Game ID: </string>
+    <string name="league_join_detail_id_text">"GAME ID: "</string>
     <string name="league_join_detail_id_data_text">111</string>
     <string name="list_item_game_leader_name_text">First Name</string>
     <string name="list_item_game_leader_last_name_text">Last Name</string>
@@ -189,7 +189,7 @@
     <string name="stripe_live_publishable_api_key">pk_0G8Uw4pPr4NBHkdtCw0m2PJBVdAES</string>
     <string name="stripe_test_secret_api_key">sk_0G8UQEXsgKNmNNdy7QRwKr7VIgjxl</string>
     <string name="stripe_test_publishable_api_key">pk_0G8UXbhmoS5TYcFmR3hD1Qx1L4JVh</string>
-    <string name="faq_button">Read the FAQ</string>
+    <string name="faq_button">Questions? Read the FAQ</string>
     <string name="title_activity_forgot_password"></string>
     <string name="game_start_date">Start Date:  </string>
     <string name="game_start_date_value">10/12/2012</string>

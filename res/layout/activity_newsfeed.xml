@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newsfeed_spinner"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="2dp"
         android:src="@drawable/profile_picture_placeholder" />
     <EditText
@@ -53,7 +53,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/newsfeed_button_submit" 
         android:layout_alignParentBottom="true"/>
     

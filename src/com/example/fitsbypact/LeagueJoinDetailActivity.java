@@ -198,16 +198,16 @@ public class LeagueJoinDetailActivity extends Activity {
  		typeTV.setText(isPrivate ? " Private" : " Public");
  		
  		wagerTV = (TextView)findViewById(R.id.league_join_detail_wager_data);
- 		wagerTV.setText(" $" + wager);
+ 		wagerTV.setText("$" + wager);
  		
  		potTV = (TextView)findViewById(R.id.league_join_detail_pot_data);
- 		potTV.setText(" $" + pot);
+ 		potTV.setText("$" + pot);
  		
  		playersTV = (TextView)findViewById(R.id.league_join_detail_players_data);
- 		playersTV.setText(" " + players);
+ 		playersTV.setText(players);
  		
  		durationTV = (TextView)findViewById(R.id.league_join_detail_duration_data);
- 		durationTV.setText(" " + duration);
+ 		durationTV.setText(" (" + duration + ")");
  		
  		leagueIdTV = (TextView)findViewById(R.id.league_join_detail_id_data);
  		leagueIdTV.setText(" " + leagueId);
