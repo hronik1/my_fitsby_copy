@@ -6,7 +6,7 @@
     android:background="@color/light_white"
     android:paddingBottom="5dp" >
     
-   <TextView
+   <ImageView
         android:id="@+id/list_item_public_leagues_creator "
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,14 +33,14 @@
         android:id="@+id/list_item_public_leagues_players"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".2"
+        android:layout_weight=".1"
         android:gravity="center" 
         android:textSize="15sp"
         android:layout_marginTop="5dp"        
         android:text="@string/list_item_public_leagues_players_text" />
     
    <RelativeLayout 
-       android:layout_weight=".2"
+       android:layout_weight=".1"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        android:gravity="center" >
@@ -64,7 +64,7 @@
    </RelativeLayout>
 
    	<RelativeLayout 
-       android:layout_weight=".2"
+       android:layout_weight=".1"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        android:gravity="center" >
@@ -87,7 +87,7 @@
     </RelativeLayout>
     
    	<RelativeLayout 
-       android:layout_weight=".2"
+       android:layout_weight=".1"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        android:gravity="center" >
