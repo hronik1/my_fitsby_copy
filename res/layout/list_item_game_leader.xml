@@ -58,8 +58,8 @@
 
 	<ImageView
         android:id="@+id/winner"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
         android:layout_alignBottom="@+id/list_item_game_leader_last_name"
         android:layout_toRightOf="@+id/list_item_game_leader_last_name"
         android:layout_marginLeft="3dp"

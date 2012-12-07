@@ -43,7 +43,7 @@
       	android:layout_toRightOf="@+id/gravatar_framelayout_imageview"
 		android:layout_alignTop="@+id/gravatar_framelayout_imageview"
         android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="5.5dp"
         android:textStyle="bold"
         android:textSize="16sp"
         android:text="@string/league_join_detail_name" />
@@ -285,18 +285,17 @@
         android:src="@drawable/winner"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
-        android:paddingTop="1dp"
         android:layout_alignLeft="@+id/horizontal_divider_3"
 		android:layout_below="@+id/horizontal_divider_3"/>		
       <TextView
         android:id="@+id/game_number_of_winners"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/trophy"
-        android:layout_alignTop="@+id/trophy"
         android:layout_toRightOf="@+id/trophy"
+        android:layout_alignBottom="@+id/trophy"
         android:textSize="16sp"
         android:layout_marginLeft="5dp"
+        android:layout_marginBottom="-4dp"
         android:text="@string/game_number_of_winners"
         android:textStyle="bold" />
  	 <TextView

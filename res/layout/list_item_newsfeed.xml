@@ -76,7 +76,7 @@
         android:textSize="0sp"
         android:textColor="@color/button_gray"
         android:text="@string/list_item_newsfeed_timestamp_text" />
-   
+   
     <ImageView
         android:id="@+id/checkin_icon"
         android:layout_width="17dp"
