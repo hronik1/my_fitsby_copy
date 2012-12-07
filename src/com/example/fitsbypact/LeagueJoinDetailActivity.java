@@ -15,11 +15,14 @@ import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbtables.League;
 import dbtables.LeagueMember;
+import dbtables.User;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -67,6 +70,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	private boolean isValid;
 	private int duration;
 	private Bitmap bitmap;
+	private User mUser;
 	
 	private ProgressDialog mProgressDialog;
 	
@@ -86,9 +90,7 @@ public class LeagueJoinDetailActivity extends Activity {
         initializeImageView();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
-        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
-        mLeagueMemberTableHandler = mdbHandler.getLeagueMemberTableHandler();
-        mLeagueTableHandler = mdbHandler.getLeagueTableHandler();
+        mUser = mApplicationUser.getUser();
         
         new GameInfoAsyncTask().execute(leagueId);
         
@@ -261,19 +263,18 @@ public class LeagueJoinDetailActivity extends Activity {
  			return;
  		}
  		
- 		//TODO add checking that user is not already in league
- 		
-//		LeagueMember member = new LeagueMember(leagueId, mApplicationUser.getUser().getID());
-//		mLeagueMemberTableHandler.addLeagueMember(member);
-// 		new JoinLeagueAsyncTask().execute(mApplicationUser.getUser().getID(), leagueId);
- 		ApplicationUser appData = (ApplicationUser)getApplicationContext();
- 		appData.setJoin();
- 		appData.setUserId(mApplicationUser.getUser().getID());
- 		appData.setLeagueId(leagueId);
- 		Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
- 		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, leagueId);
- 		intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
- 		startActivity(intent);
+ 		if (wager > 0) {
+ 			ApplicationUser appData = (ApplicationUser)getApplicationContext();
+ 			appData.setJoin();
+ 			appData.setUserId(mApplicationUser.getUser().getID());
+ 			appData.setLeagueId(leagueId);
+ 			Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
+ 			intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, leagueId);
+ 			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
+ 			startActivity(intent);
+ 		} else {
+ 			showConfirmation();
+ 		}
  	}
  	
  	/**
@@ -285,7 +286,25 @@ public class LeagueJoinDetailActivity extends Activity {
  		startActivity(browserIntent);
  	}
  	
- 	
+    /**
+     * 
+     */
+    private void showConfirmation() {
+	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	
+    	builder.setMessage("Sure you want to join this free game?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					new JoinLeagueAsyncTask().execute(mUser.getID(), leagueId);
+    				}
+    			})
+    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    }
     /**
      * AsyncTask to find users games
      * @author brent
@@ -335,32 +354,35 @@ public class LeagueJoinDetailActivity extends Activity {
 
         }
     }
-    /**
-     * AsyncTask to Register user
-     * @author brent
-     *
-     */
-//    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
-//        protected StatusResponse doInBackground(Integer... params) {
-//        	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1]);
-//        	return response;
-//        }
-//
-//        protected void onPostExecute(StatusResponse response) {
-//        	if (response.wasSuccessful()) {
-//        		try {
-//        			Intent intent = new Intent(LeagueJoinDetailActivity.this, CreditCardActivity.class);
-//        			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
-//        			startActivity(intent);
-//        		} catch(Exception e) {
-//        			//TODO handle failure more robustly
-//        			Toast toast = Toast.makeText(getApplicationContext(), "could not start credit card activity", Toast.LENGTH_LONG);
-//        			toast.setGravity(Gravity.CENTER, 0, 0);
-//        			toast.show();
-//        		}
-//        	} else {
-//        		Toast.makeText(getApplicationContext(), "You are already in this game", Toast.LENGTH_LONG).show();
-//        	}
-//        }
-//    }
+    
+    private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+                    "Creating your game...");
+		}
+		
+        protected StatusResponse doInBackground(Integer... params) {
+        	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1],
+        			"", "", "", "");
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	if (response.wasSuccessful()) {
+        		try {
+        			ApplicationUser appData = (ApplicationUser)getApplicationContext();
+            		Intent intent = new Intent(LeagueJoinDetailActivity.this, LoggedinActivity.class);
+            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, appData.getLeagueId());
+            		startActivity(intent);
+        		} catch(Exception e) {
+        		}
+        	} else {
+        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	}
+        }
+    }
 }

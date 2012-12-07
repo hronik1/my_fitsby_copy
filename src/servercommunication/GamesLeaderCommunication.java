@@ -39,7 +39,7 @@ public class GamesLeaderCommunication {
 	
 	public static Cursor getGamesLeader(int gameId) {
 		MatrixCursor cursor = new MatrixCursor(new String[] { UserTableHandler.KEY_FIRST_NAME,
-				UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP});
+				UserTableHandler.KEY_LAST_NAME, LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP, Leader.KEY_RANK});
 		
 		GamesLeaderResponse gamesLeaderResponse = getGamesLeaderHelper(gameId);
 		if (gamesLeaderResponse == null || !gamesLeaderResponse.wasSuccessful())
@@ -51,7 +51,7 @@ public class GamesLeaderCommunication {
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 			byte[] byteArray = stream.toByteArray();
 			cursor.addRow(new Object[] { leader.getFirstName(), LastNameFormatter.format(leader.getLastName()),
-					leader.getCheckins(), leader.getId(), byteArray});
+					leader.getCheckins(), leader.getId(), byteArray, leader.getId()});
 		}
 		//TODO parse JSON, and fill cursor
 		
