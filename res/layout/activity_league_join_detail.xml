@@ -102,6 +102,7 @@
 				android:layout_alignTop="@+id/game_id"		        
 		        android:textStyle="bold"
 		        android:textSize="16sp"
+        		android:layout_marginBottom="-2dp"		        
 		        android:text="@string/league_join_detail_id_text" />
 		    <TextView
 		        android:id="@+id/league_join_detail_id_data"
@@ -132,6 +133,7 @@
 				android:layout_alignTop="@+id/private_game"		        
 		        android:textStyle="bold"
 		        android:textSize="16sp"
+        		android:layout_marginBottom="-2dp"		        		        
 		        android:text="@string/league_join_detail_type_text" />
 		    <TextView
 		        android:id="@+id/league_join_detail_type_data"
@@ -283,7 +285,7 @@
         android:layout_width="14dp"
         android:layout_height="14dp"
         android:src="@drawable/winner"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"
         android:layout_alignLeft="@+id/horizontal_divider_3"
 		android:layout_below="@+id/horizontal_divider_3"/>		
@@ -307,17 +309,25 @@
         android:layout_toRightOf="@+id/game_start_date"
         android:textSize="16sp" />
  	 
-    		
-      <TextView
+	<ImageView
+        android:id="@+id/calendar"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:src="@drawable/calendar"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+		android:layout_alignLeft="@+id/horizontal_divider_3"
+		android:layout_below="@+id/game_number_of_winners" />    		
+     <TextView
         android:id="@+id/game_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_alignLeft="@+id/horizontal_divider_3"
-		android:layout_below="@+id/game_number_of_winners" 
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="-4dp"        
+        android:layout_alignBottom="@+id/calendar"
+        android:layout_toRightOf="@+id/calendar"
         android:text="@string/game_start_date"
         android:textSize="16sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
         android:textStyle="bold" />
  	 <TextView
         android:id="@+id/game_start_date_value"
@@ -366,18 +376,13 @@
         android:id="@+id/league_join_detail_button_join"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/game_start_date"
+        android:layout_alignLeft="@+id/calendar"
         android:layout_below="@+id/league_join_detail_button_faq"
         android:background="@drawable/custom_login_button"
         android:text="@string/league_join_detail_button_join_text"
         android:textColor="@color/white"
         android:layout_marginRight="10dp"
-        android:textSize="16sp" />
-      
- 	 	 
-
- 	 
-        
+        android:textSize="16sp" />      
     
 </RelativeLayout>
 
