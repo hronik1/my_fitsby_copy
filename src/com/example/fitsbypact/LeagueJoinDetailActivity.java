@@ -379,7 +379,7 @@ public class LeagueJoinDetailActivity extends Activity {
         		} catch(Exception e) {
         		}
         	} else {
-        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "Sorry, but the league could not be joined at the moment.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}

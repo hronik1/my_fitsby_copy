@@ -365,7 +365,6 @@ public class GamesFragment extends SherlockFragment {
         		startTV.setText(" (" + league.getStartDate() + " -");
         		endTV.setText(" " + league.getEndDate() + ")");
         		structure = league.getStructure();
-        		Toast.makeText(parent, structure + "", Toast.LENGTH_LONG).show();
         	}
         	
         	new CursorDataAsyncTask().execute();
@@ -412,7 +411,14 @@ public class GamesFragment extends SherlockFragment {
             	int rank = cursor.getInt(columnIndex);
             	if (rank > structure) {
             		view.setVisibility(View.INVISIBLE);
+            		Log.d(TAG, "setting cup invisible: " + rank);
+            	} else {
+            		view.setVisibility(View.VISIBLE);
+            		Log.d(TAG, "setting cup visible: " + rank);
+
             	}
+            		
+            		
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));
