@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/league_create_wager"
-                    android:layout_marginLeft="83dp"
+                    android:layout_marginLeft="120dp"
                     android:layout_marginRight="5dp"
                     android:layout_alignParentLeft="true"
                     android:background="@drawable/custom_login_button"
@@ -141,6 +141,7 @@
 
                     <RadioButton
                         android:id="@+id/league_create_rb_takeall"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/league_create_rb_takeall" />
@@ -175,7 +176,7 @@
                     android:background="@drawable/custom_login_button"
                     android:contentDescription="@string/league_create_ib_days_minus_text"
                     android:text="@string/league_create_ib_days_minus"
-       	            android:layout_marginLeft="83dp"
+       	            android:layout_marginLeft="120dp"
                     android:layout_marginRight="5dp"                    
                     android:textColor="@color/white" />
 

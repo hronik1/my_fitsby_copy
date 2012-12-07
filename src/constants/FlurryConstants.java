@@ -2,8 +2,8 @@ package constants;
 
 public class FlurryConstants {
 
-	public final static String key = "JN5J7235498VKPD53KZ8";
+	public final static String key = "SPXCFGBJFSSSYQM6YD2X";
 	//Flurry Keys:
 	// Testing Key: SPXCFGBJFSSSYQM6YD2X
-	// Beta Testing Key: JN5J7235498VKPD53KZ8
+	// Public Beta Key: CCNZ35SC558GJNMWZZCZ
 }
