@@ -8,6 +8,7 @@ public class Comment {
 
 	public final static String KEY_BITMAP = "bitmap";
 	public final static String KEY_BOLD = "bold";
+	public final static String KEY_CHECKIN = "checkin";
 	
 	private int memberFromId;
 	private String firstName;
@@ -17,6 +18,7 @@ public class Comment {
 	private String id;
 	private Bitmap bitmap;
 	private String bold;
+	private String checkin;
 	
 	/**
 	 * default Comment constructor
@@ -25,6 +27,7 @@ public class Comment {
 		
 	}
 
+	//TODO refactor to use a builder
 	
 	/**
 	 * 5 argument Comment constructor
@@ -34,7 +37,7 @@ public class Comment {
 	 * @param message
 	 * @param stamp
 	 */
-	public Comment(int memberFromId, String firstName, String lastName, String message, String stamp, String id, Bitmap bitmap, String bold) {
+	public Comment(int memberFromId, String firstName, String lastName, String message, String stamp, String id, Bitmap bitmap, String bold, String checkin) {
 		this.memberFromId = memberFromId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -43,6 +46,7 @@ public class Comment {
 		this.id = id;
 		this.bitmap = bitmap;
 		this.bold = bold;
+		this.checkin = checkin;
 	}
 
 	/**
@@ -96,5 +100,9 @@ public class Comment {
 	 */
 	public void setBold(String bold) {
 		this.bold = bold;
+	}
+	
+	public String getCheckin() {
+		return checkin;
 	}
 }
