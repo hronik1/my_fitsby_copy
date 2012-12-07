@@ -39,11 +39,12 @@ public class CheckinCommunication {
 	 * @param id
 	 * @return
 	 */
-	public static StatusResponse checkin(int id) {
+	public static StatusResponse checkin(int id, String gymName) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", id);
+			json.put("gym_name", gymName);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_in_request", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));

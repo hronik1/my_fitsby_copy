@@ -474,7 +474,8 @@ public class CheckinFragment extends SherlockFragment{
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {
-        	StatusResponse response = CheckinCommunication.checkin(params[0]);
+        	//TODO give gym name to Danny
+        	StatusResponse response = CheckinCommunication.checkin(params[0], gym);
         	return response;
         }
 
