@@ -9,7 +9,7 @@ import responses.UsersGamesResponse;
 import servercommunication.CreditCardCommunication;
 import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;
-
+import android.text.Spanned;
 import bundlekeys.CreditCardBundleKeys;
 import bundlekeys.LeagueDetailBundleKeys;
 import dbtables.User;
@@ -21,6 +21,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -169,6 +172,26 @@ public class CreditCardActivity extends Activity {
      */
     private void initializeEditTexts() {
     	numberET = (EditText)findViewById(R.id.credit_card_et_card_number);
+//    	InputFilter filter = new InputFilter() {
+//    	    @Override
+//    	    public CharSequence filter(CharSequence source, int start, int end,
+//    	            Spanned dest, int dstart, int dend) {
+//
+//    	    	StringBuilder filteredStringBuilder = new StringBuilder();
+//    	    	for (int i = 0; i < end && i < 19; i++) { 
+//    	    		char currentChar = source.charAt(i);
+//    	    		if (!Character.isSpaceChar(currentChar)) {    
+//    	    			filteredStringBuilder.append(currentChar);
+//    	    		}  
+//					if (filteredStringBuilder.length() == 4 || filteredStringBuilder.length() == 9 || filteredStringBuilder.length() == 14)
+//						filteredStringBuilder.append(" ");
+//    	    	}
+//    	    	return filteredStringBuilder.toString();
+//    	       
+//    	    }
+//    	};
+//    	numberET.setFilters(new InputFilter[]{filter});
+    	
     	expMonthET = (EditText)findViewById(R.id.credit_card_et_expire_month);
     	expYearET = (EditText)findViewById(R.id.credit_card_et_expire_year);
     	cvcET = (EditText)findViewById(R.id.credit_card_et_card_cvc);
@@ -204,7 +227,12 @@ public class CreditCardActivity extends Activity {
     	String expMonth = expMonthET.getText().toString();
     	String expYear = expYearET.getText().toString();
     	String cvc = cvcET.getText().toString();
-    	
+    	if (number.length() != 19) {
+    		Toast toast = Toast.makeText(this, "Sorry but your credit card is too short", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+    	}
+    		
     	if (number.equals("") || expMonth.equals("") || expYear.equals("") || cvc.equals("")) {
     		Toast toast = Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
@@ -284,9 +312,11 @@ public class CreditCardActivity extends Activity {
 		}
 		
         protected LeagueCreateResponse doInBackground(String... params) {
+        	String number = numberET.getText().toString();
+        	number = (number.substring(0, 4) + number.substring(5, 9) + number.substring(10, 14) + number.substring(15, 19));
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
         			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
-        			numberET.getText().toString(), expYearET.getText().toString(), expMonthET.getText().toString(),
+        			number, expYearET.getText().toString(), expMonthET.getText().toString(),
         			cvcET.getText().toString());
         	return response;
         }

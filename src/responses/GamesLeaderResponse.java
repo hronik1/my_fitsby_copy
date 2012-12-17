@@ -38,7 +38,7 @@ public class GamesLeaderResponse {
 	public static GamesLeaderResponse jsonToGamesLeaderResponse(JSONObject json) {
 		HashMap<String, Bitmap> imageMap = new HashMap<String, Bitmap>();
 		try {
-			Log.d(TAG, json.toString());
+			Log.d(TAG, json.toString() + "");
 			String success = json.getString("status");
 			Vector<Leader> leaders = new Vector<Leader>();
 			JSONArray jsonLeaders = json.getJSONArray("leaderboard");

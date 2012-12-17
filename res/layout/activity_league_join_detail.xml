@@ -348,23 +348,29 @@
         android:textSize="16sp"        
         android:text="@string/league_join_duration_data_text" />	 
 
-      <TextView
-        android:id="@+id/league_join_detail_duration"
-        android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignLeft="@+id/game_start_date"
-		android:layout_below="@+id/game_start_date" 
-        android:layout_toRightOf="@+id/horizontal_divider_3"        		
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="15dp"
-        android:textSize="12sp"        
-		android:text="@string/league_join_duration_text"/>
-
+   <TextView
+	    android:layout_below="@+id/league_join_detail_duration_data"
+	    android:id="@+id/horizontal_divider_4"
+	    android:layout_width="fill_parent"
+		android:layout_alignLeft="@+id/imageView1"	    
+		android:layout_height="1dip"
+        android:layout_marginTop="5dp"	
+        android:layout_marginLeft="10dp"	
+        android:layout_marginRight="10dp"		        		
+		android:background="#949294" />
+   
+   <ListView
+       android:id="@+id/league_join_detail_members_lv"
+       android:layout_below="@+id/horizontal_divider_4"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content" />
+   
+   
    <Button
         android:id="@+id/league_join_detail_button_faq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/league_join_detail_duration"
+        android:layout_below="@+id/league_join_detail_members_lv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
@@ -377,6 +383,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/calendar"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/league_join_detail_button_faq"
         android:background="@drawable/custom_login_button"
         android:text="@string/league_join_detail_button_join_text"

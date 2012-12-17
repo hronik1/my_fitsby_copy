@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
+import responses.StatusResponse;
 import responses.UsersGamesResponse;
 import servercommunication.LeagueCommunication;
+import servercommunication.UserCommunication;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -30,6 +32,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -37,6 +40,10 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.telephony.SmsManager;
 import bundlekeys.LeagueDetailBundleKeys;
 
+import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+import com.facebook.FacebookActivity;
+import com.facebook.Session;
+import com.facebook.SessionState;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
@@ -44,12 +51,14 @@ import constants.FlurryConstants;
 import dbtables.League;
 import dbtables.User;
 
-public class FriendInviteActivity extends Activity {
+public class FriendInviteActivity extends FacebookActivity {
 
 	private final static String TAG = "FriendInviteActivity";
 	private final static int PICK_CONTACT_REQUEST = 2;
 	private Button homeButton;
 	private Button inviteButton;
+	private LinearLayout facebookLL;
+	private LinearLayout twitterLL;
 	
 	private ListView contactsListView;
 	private ArrayList<String> contacts;
@@ -59,6 +68,8 @@ public class FriendInviteActivity extends Activity {
 	private int leagueId;
 	private String creatorName;
 	
+	private ApplicationUser mApplicationUser;
+	private User mUser;
 	/**
 	 * called when activity is created
 	 */
@@ -69,10 +80,17 @@ public class FriendInviteActivity extends Activity {
         
         Log.i(TAG, "onCreate");
         
+        mApplicationUser = (ApplicationUser)getApplicationContext();
+        mUser = mApplicationUser.getUser();
         initializeButtons(); 
+        initializeLinearLayouts();
        // initializeListView();
         parseBundle(getIntent());
-        
+        try {
+        	this.openSession();
+        } catch (Exception e) {
+        	Log.d(TAG, e.toString());
+        }
         new CreatorAsyncTask().execute(leagueId+"");
     }
 
@@ -85,6 +103,18 @@ public class FriendInviteActivity extends Activity {
         Log.i(TAG, "onCreateOptionsMenu");
         return true;
     }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Your existing onSaveInstanceState code
+
+        // Save the Facebook session in the Bundle
+        Session session = Session.getActiveSession();
+        Session.saveSession(session, outState);
+    }
+
     
     /**
      * called when activity is restarted
@@ -150,7 +180,7 @@ public class FriendInviteActivity extends Activity {
      * callback for recieving data from starting an activity for a result
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if (requestCode == PICK_CONTACT_REQUEST) {
     		if (resultCode == RESULT_OK) {
     			Uri contactUri = data.getData();
@@ -158,6 +188,22 @@ public class FriendInviteActivity extends Activity {
     			new PhoneNumberAsyncTask(contactUri).execute(projection);
     		}
         }
+    }
+    
+    /**
+     * callback for when state changes in facebook session
+     */
+    @Override
+    protected void onSessionStateChange(SessionState state, Exception exception) {
+      if (state == null)
+    	  Toast.makeText(this, "null", Toast.LENGTH_LONG).show();
+      else if (state.isClosed())
+    	  Toast.makeText(this, "closed", Toast.LENGTH_LONG).show();
+      else if (state.isOpened())
+    	  Toast.makeText(this, "opend", Toast.LENGTH_LONG).show();
+      
+      if (exception != null)
+    	  Log.d(TAG, exception.toString());
     }
     
     /**
@@ -179,6 +225,35 @@ public class FriendInviteActivity extends Activity {
     	});
     }
     
+    private void initializeLinearLayouts() {
+    	facebookLL = (LinearLayout)findViewById(R.id.friend_invite_facebook_ll);
+    	facebookLL.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Session session = Session.getActiveSession();
+				if (session == null)
+					Toast.makeText(FriendInviteActivity.this, "null", Toast.LENGTH_LONG).show();
+				else if (session.isOpened())
+					Toast.makeText(FriendInviteActivity.this, "opened", Toast.LENGTH_LONG).show();
+				else if (session.isClosed())
+					Toast.makeText(FriendInviteActivity.this, "closed", Toast.LENGTH_LONG).show();
+				else if (session.isCreated())
+					Toast.makeText(FriendInviteActivity.this, "created", Toast.LENGTH_LONG).show();
+				else 
+					Toast.makeText(FriendInviteActivity.this, "none", Toast.LENGTH_LONG).show();
+			}
+    	});
+    	
+    	twitterLL = (LinearLayout)findViewById(R.id.friend_invite_twitter_ll);
+    	twitterLL.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+    	});
+    }
     private void initializeListView() {
 		contacts =  new ArrayList<String>();
 
@@ -378,6 +453,7 @@ public class FriendInviteActivity extends Activity {
 	    				    SmsManager smsManager = SmsManager.getDefault();
 	    				    ArrayList<String> texts = smsManager.divideMessage(input.getText().toString());
 	    				    smsManager.sendMultipartTextMessage(number, null, texts, null, null);
+	    				    new NotifyAsyncTask().execute(mUser.getID());
 	    				}
 	    			})
 	    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -388,5 +464,14 @@ public class FriendInviteActivity extends Activity {
         		
 
         }
+    }
+    
+    private class NotifyAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+
+		@Override
+		protected StatusResponse doInBackground(Integer... params) {
+			return UserCommunication.notifySeverOfInvite(params[0]);
+		}
+    	
     }
 }

@@ -198,7 +198,54 @@
                 android:textSize="17sp"                                                  
                 android:layout_below="@+id/email_means_paypal"
                 android:text="@string/me_settings_button_submit_text" />
-
+            
+            <TextView
+                android:id="@+id/me_faq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_settings_button_submit"
+                android:text="faq"
+                android:textColor="@drawable/faq_button_text" />
+                            
+            <TextView
+                android:id="@+id/me_privacy_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_faq"
+                android:text="privacy policy"
+                android:textColor="@drawable/faq_button_text" />
+                        
+            <TextView
+                android:id="@+id/me_terms_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_privacy_policy"
+                android:text="terms of service"
+                android:textColor="@drawable/faq_button_text" />
+                                    
+            <TextView
+                android:id="@+id/me_facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_terms_service"
+                android:text="facebook page"
+                android:textColor="@drawable/faq_button_text" />
+            
+            <TextView
+                android:id="@+id/me_twitter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_facebook"
+                android:text="twitter page"
+                android:textColor="@drawable/faq_button_text" />
+            
+            <Button
+                android:id="@+id/me_settings_tutorial_button"
+                android:layout_below="@+id/me_twitter"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="tutorial" />
+            
             <Button
                 android:id="@+id/me_settings_button_logout"
                 android:layout_width="fill_parent"
@@ -210,7 +257,7 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"    
                 android:textSize="17sp"                                   
-                android:layout_below="@+id/me_settings_button_submit"
+                android:layout_below="@+id/me_settings_tutorial_button"
                 android:text="@string/me_settings_button_logout_text" />
             
 

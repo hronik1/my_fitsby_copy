@@ -13,6 +13,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.LandingActivity;
 import com.example.fitsbypact.MessengerService;
 import com.example.fitsbypact.R;
+import com.example.fitsbypact.TutorialActivity;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
@@ -63,9 +64,15 @@ public class MeFragment extends SherlockFragment {
 	private TextView checkinsTV;
 	private TextView timeTV;
 	private TextView gravatarLinkTV;
+	private TextView faqTV;
+	private TextView termsTV;
+	private TextView policyTV;
+	private TextView facebookTV;
+	private TextView twitterTV;
 	
 	private Button logoutButton;
 	private Button submitButton;
+	private Button tutorialButton;
 	
 	private EditText emailET;
 	private ProgressDialog mProgressDialog;
@@ -186,6 +193,50 @@ public class MeFragment extends SherlockFragment {
 			}
 		});
 		
+		faqTV = (TextView)viewer.findViewById(R.id.me_faq);
+		faqTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fitsby.com/faq.html"));
+		 		startActivity(browserIntent);
+			}
+		});
+		
+		termsTV  = (TextView)viewer.findViewById(R.id.me_terms_service);
+		termsTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://fitsby.com/terms.html"));
+		 		startActivity(browserIntent);
+			}
+		});
+		
+		policyTV = (TextView)viewer.findViewById(R.id.me_privacy_policy);
+		policyTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://fitsby.com/privacy.html"));
+		 		startActivity(browserIntent);
+			}
+		});
+		
+		facebookTV = (TextView)viewer.findViewById(R.id.me_facebook);
+		facebookTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/FitsbyApp"));
+		 		startActivity(browserIntent);
+			}
+		});
+		
+		twitterTV = (TextView)viewer.findViewById(R.id.me_twitter);
+		termsTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/fitsby"));
+		 		startActivity(browserIntent);
+			}
+		});
 	}
 	
 	/**
@@ -221,6 +272,15 @@ public class MeFragment extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				submit();
+			}
+		});
+		
+		tutorialButton = (Button)viewer.findViewById(R.id.me_settings_tutorial_button);
+		tutorialButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(parent, TutorialActivity.class);
+				startActivity(intent);
 			}
 		});
 		

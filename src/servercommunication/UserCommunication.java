@@ -176,4 +176,18 @@ public class UserCommunication {
 			return new UserResponse(e.toString(), null, e.toString());
 		}
 	}
+	
+	public static StatusResponse notifySeverOfInvite(int userId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		JSONObject json = new JSONObject();
+        try {
+        	json.put("user_id", userId);
+        	StringEntity stringEntity = new StringEntity(json.toString()); 
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "append_text_field", stringEntity);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
+		}
+	}
 }

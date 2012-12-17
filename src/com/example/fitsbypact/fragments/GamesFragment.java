@@ -90,22 +90,20 @@ public class GamesFragment extends SherlockFragment {
 	private List<String> spinnerData;
 	
 	private SimpleCursorAdapter mAdapter;
-	private final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME,
+	public final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME,
 			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP, Leader.KEY_RANK};
-	private final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
+	public final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
 			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview, R.id.winner};
 	private int spinnerPosition;
 	
 	private ApplicationUser mApplicationUser;
-	private DatabaseHandler mdbHandler;
-	private LeagueMemberTableHandler mLeagueMemberTableHandler;
-	private LeagueTableHandler mLeagueTableHandler;
 	
 	private List<LeagueMember> listLeagueMember;
 	private User user;
 	
 	private ProgressDialog mProgressDialog;
 	private String creatorFirstName;
+	
 	/**
 	 * callback to add in the stats fragment
 	 */

@@ -153,7 +153,7 @@ public class LandingActivity extends Activity {
      */
     private void goToHelpPage() {
     	try {
-    		Intent intent = new Intent(this, HelpActivity.class);
+    		Intent intent = new Intent(this, TutorialActivity.class);
     		startActivity(intent);
     	} catch (Exception e) {
     		//remove in deployment

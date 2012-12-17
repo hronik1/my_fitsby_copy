@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_id">426803977352349</string>
     <string name="motto">Stay motivated to hit the gym.</string>
     <string name="or"> OR </string>
     <string name="app_name">Fitsby</string>
@@ -136,7 +138,7 @@
     <string name="league_join_detail_header_text">"GAME DETAILS"</string>
     <string name="league_join_detail_name">"HOST: "</string>
     <string name="league_join_detail_name_first">First</string>
-    <string name="league_join_detail_name_last">Last</string>    
+    <string name="league_join_detail_name_last">Last</string>
     <string name="league_join_detail_type_text">"TYPE: "</string>
     <string name="league_join_detail_type_data_text">Private</string>
     <string name="league_join_detail_wager_text">" WAGER"</string>
@@ -200,5 +202,6 @@
     <string name="game_start_date_value">10/12/2012</string>
     <string name="title_activity_loggedin"></string>
     <string name="login_remember_me_textview">Remember me</string>
+    <string name="title_activity_tutorial">TutorialActivity</string>
 
 </resources>

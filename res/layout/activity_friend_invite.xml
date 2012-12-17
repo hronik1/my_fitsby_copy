@@ -28,12 +28,65 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/white" />
 
+    <LinearLayout 
+        android:id="@+id/friend_invite_facebook_ll"
+        android:layout_below="@+id/friend_invite_button_invite"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        
+        <FrameLayout
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:layout_height="60dp" >
+            
+            <ImageView
+                android:id="@+id/friend_invite_facebook_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/friend_invite_facebook_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="facebook friends" />
+
+	</LinearLayout>
+	
+	<LinearLayout
+        android:id="@+id/friend_invite_twitter_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/friend_invite_facebook_ll" >
+
+        <FrameLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:padding="5dp" >
+
+            <ImageView
+                android:id="@+id/friend_invite_twitter_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/friend_invite_twitter_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="twitter friends" />
+    </LinearLayout>
+	
     <TextView
         android:id="@+id/or_invite_them_later_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/friend_invite_button_invite"
+        android:layout_below="@+id/friend_invite_twitter_ll"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"

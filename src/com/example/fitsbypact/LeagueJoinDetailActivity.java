@@ -1,12 +1,17 @@
 package com.example.fitsbypact;
 
+import java.util.List;
+
 import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
+import responses.UsersGamesResponse;
+import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
 import servercommunication.NewsfeedCommunication;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+import com.example.fitsbypact.fragments.GamesFragment;
 
 import bundlekeys.CreditCardBundleKeys;
 import bundlekeys.LeagueDetailBundleKeys;
@@ -24,7 +29,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -32,6 +41,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
@@ -57,11 +67,9 @@ public class LeagueJoinDetailActivity extends Activity {
 	private Button faqButton;
 	
 	private ImageView mImageView;
+	private ListView mListView;
 	
 	private ApplicationUser mApplicationUser;
-	private DatabaseHandler mdbHandler;
-	private LeagueMemberTableHandler mLeagueMemberTableHandler;
-	private LeagueTableHandler mLeagueTableHandler;
 	
 	private int leagueId;
 	private int pot;
@@ -74,7 +82,9 @@ public class LeagueJoinDetailActivity extends Activity {
 	private User mUser;
 	
 	private ProgressDialog mProgressDialog;
-	
+	private List<LeagueMember> listLeagueMember;
+	private SimpleCursorAdapter mAdapter;
+	private int structure;
 	/**
 	 * called when activtiy is created
 	 */
@@ -89,6 +99,7 @@ public class LeagueJoinDetailActivity extends Activity {
         initializeTextViews();
         initializeButtons();
         initializeImageView();
+        initializeListView();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         mUser = mApplicationUser.getUser();
@@ -254,6 +265,16 @@ public class LeagueJoinDetailActivity extends Activity {
  		mImageView.setImageBitmap(bitmap);
  	}
  	
+ 	/**
+ 	 * initializes the listview
+ 	 */
+ 	private void initializeListView() {
+ 		mListView = (ListView)findViewById(R.id.league_join_detail_members_lv);
+		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, GamesFragment.fromArgs, GamesFragment.toArgs, 0);
+		mAdapter.setViewBinder(new MyViewBinder());
+		mListView.setAdapter(mAdapter);
+ 	}
+ 	
   	/**
  	 * join the game selected by user
  	 */
@@ -331,6 +352,7 @@ public class LeagueJoinDetailActivity extends Activity {
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
         		startDateTV.setText(" " + league.getStartDate());
+        		structure = league.getStructure();
         		numberWinnersTV.setText(" " + league.getStructure());
         	}
         		
@@ -355,7 +377,7 @@ public class LeagueJoinDetailActivity extends Activity {
         	if (response.wasSuccessful()) {
             	firstNameTV.setText(" " + response.getCreatorFirstName());
         	}	
-
+        	new CursorDataAsyncTask().execute();
         }
     }
     
@@ -389,4 +411,60 @@ public class LeagueJoinDetailActivity extends Activity {
         	}
         }
     }
+    
+    /**
+     * AsyncTask to find users games
+     * @author brent
+     *
+     */
+    private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+                    "Getting league members...");
+		}
+		
+        protected Cursor doInBackground(String... params) {
+        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(leagueId);
+        	return cursor;
+        }
+
+		protected void onPostExecute(Cursor cursor) {
+			mProgressDialog.cancel();
+        	mAdapter.swapCursor(cursor);
+        	mAdapter.notifyDataSetChanged();
+
+        }
+    }
+    
+    private class MyViewBinder implements SimpleCursorAdapter.ViewBinder {
+
+        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+            int viewId = view.getId();
+            Log.d(TAG, cursor.getClass().toString());
+            if(viewId == R.id.list_item_game_leader_imageview) {
+            	ImageView profilePic = (ImageView) view;
+            	byte[] bytes = cursor.getBlob(columnIndex);
+            	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+            } else if (viewId == R.id.winner) {
+            	int rank = cursor.getInt(columnIndex);
+            	if (rank > structure) {
+            		view.setVisibility(View.INVISIBLE);
+            		Log.d(TAG, "setting cup invisible: " + rank);
+            	} else {
+            		view.setVisibility(View.VISIBLE);
+            		Log.d(TAG, "setting cup visible: " + rank);
+
+            	}
+            		
+            		
+            } else {
+            	TextView name = (TextView) view;
+            	name.setText(cursor.getString(columnIndex));
+            }
+            
+            return true;
+        }
+    }
+    
 }
