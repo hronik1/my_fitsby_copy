@@ -195,15 +195,36 @@ public class FriendInviteActivity extends FacebookActivity {
      */
     @Override
     protected void onSessionStateChange(SessionState state, Exception exception) {
-      if (state == null)
-    	  Toast.makeText(this, "null", Toast.LENGTH_LONG).show();
-      else if (state.isClosed())
-    	  Toast.makeText(this, "closed", Toast.LENGTH_LONG).show();
-      else if (state.isOpened())
-    	  Toast.makeText(this, "opend", Toast.LENGTH_LONG).show();
-      
-      if (exception != null)
-    	  Log.d(TAG, exception.toString());
+    	switch(state) {
+
+
+    	case CREATED_TOKEN_LOADED:
+    		Toast.makeText(this, "created_token_loaded", Toast.LENGTH_LONG).show();
+    		break;    
+
+    	case OPENED_TOKEN_UPDATED:
+    		Toast.makeText(this, "opened_token_updated", Toast.LENGTH_LONG).show();
+    		break;
+
+    	case CREATED:
+    		Toast.makeText(this, "created", Toast.LENGTH_LONG).show();
+    		break;
+
+    	case OPENING:
+    		Toast.makeText(this, "opning", Toast.LENGTH_LONG).show();
+    		break;
+
+    	case OPENED:
+    		Toast.makeText(this, "opend", Toast.LENGTH_LONG).show();
+    		break;
+
+    	case CLOSED: 
+    		Toast.makeText(this, "closed", Toast.LENGTH_LONG).show();
+    		break;
+
+    	default:
+    		break;
+    	}
     }
     
     /**
@@ -238,8 +259,6 @@ public class FriendInviteActivity extends FacebookActivity {
 					Toast.makeText(FriendInviteActivity.this, "opened", Toast.LENGTH_LONG).show();
 				else if (session.isClosed())
 					Toast.makeText(FriendInviteActivity.this, "closed", Toast.LENGTH_LONG).show();
-				else if (session.isCreated())
-					Toast.makeText(FriendInviteActivity.this, "created", Toast.LENGTH_LONG).show();
 				else 
 					Toast.makeText(FriendInviteActivity.this, "none", Toast.LENGTH_LONG).show();
 			}
