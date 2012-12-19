@@ -181,12 +181,17 @@ public class FriendInviteActivity extends FacebookActivity {
      */
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
     	if (requestCode == PICK_CONTACT_REQUEST) {
     		if (resultCode == RESULT_OK) {
     			Uri contactUri = data.getData();
     			String[] projection = {Phone.NUMBER};
     			new PhoneNumberAsyncTask(contactUri).execute(projection);
     		}
+        } else {
+    	    Session.getActiveSession()
+	        .onActivityResult(this, requestCode, resultCode, data);
         }
     }
     
@@ -211,11 +216,11 @@ public class FriendInviteActivity extends FacebookActivity {
     		break;
 
     	case OPENING:
-    		Toast.makeText(this, "opning", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "opening", Toast.LENGTH_LONG).show();
     		break;
 
     	case OPENED:
-    		Toast.makeText(this, "opend", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "opened", Toast.LENGTH_LONG).show();
     		break;
 
     	case CLOSED: 
