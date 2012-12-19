@@ -259,8 +259,6 @@ public class FriendInviteActivity extends FacebookActivity {
 					Toast.makeText(FriendInviteActivity.this, "opened", Toast.LENGTH_LONG).show();
 				else if (session.isClosed())
 					Toast.makeText(FriendInviteActivity.this, "closed", Toast.LENGTH_LONG).show();
-				else 
-					Toast.makeText(FriendInviteActivity.this, "none", Toast.LENGTH_LONG).show();
 			}
     	});
     	
