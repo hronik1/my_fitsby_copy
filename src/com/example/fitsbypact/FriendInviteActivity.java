@@ -288,20 +288,19 @@ public class FriendInviteActivity extends FacebookActivity {
 			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		    	
 			  	final EditText input = new EditText(FriendInviteActivity.this);
-			  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins! " +
-			  			"First, download the free app at [private beta], then join my game (Game Creator is"  + creatorName + " & Game ID is " + leagueId);
+			  	input.setText("I want to challenge you on gym check-ins using Fitsby! " +
+			  			"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 		    	builder.setView(input);
 		    	
-		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position) +
-		    			" is your email.")
+		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position))
 		    			.setCancelable(false)
-		    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+		    			.setPositiveButton("Send", new DialogInterface.OnClickListener() {
 		    				public void onClick(DialogInterface dialog, int id) {
 		    				    SmsManager smsManager = SmsManager.getDefault();
 		    				    smsManager.sendTextMessage(contacts.get(position), null, input.getText().toString(), null, null);
 		    				}
 		    			})
-		    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+		    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 		    				public void onClick(DialogInterface dialog, int id) {
 		    					dialog.cancel();
 		    				}
@@ -461,8 +460,8 @@ public class FriendInviteActivity extends FacebookActivity {
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		  	
 		  	final EditText input = new EditText(FriendInviteActivity.this);
-		  	input.setText("Hey, I just downloaded this free app called Fitsby and I want to compete with you on gym check-ins! " +
-	    				    		"Download the app at http://fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
+		  	input.setText("I want to challenge you on gym check-ins using Fitsby! " +
+		  			"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 	    	builder.setView(input);
 	    	
 	    	builder.setMessage("Edit personal message to your friend")
