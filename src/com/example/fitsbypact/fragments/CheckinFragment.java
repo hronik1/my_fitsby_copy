@@ -288,7 +288,7 @@ public class CheckinFragment extends SherlockFragment{
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     	
 	  	final EditText input = new EditText(parent);
-	  	input.setText("Gym name here");
+	  	input.setHint("Gym name here");
     	builder.setView(input);
     	
     	builder.setMessage("We couldn't find any gyms nearby you. Please type in your gym name so that we may verify that it exists. Your check-in will still count for now.")

@@ -2,6 +2,12 @@ package com.example.fitsbypact;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
@@ -41,9 +47,15 @@ import android.telephony.SmsManager;
 import bundlekeys.LeagueDetailBundleKeys;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
-import com.facebook.FacebookActivity;
+import com.facebook.FacebookRequestError;
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.RequestAsyncTask;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphObject;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
@@ -51,7 +63,7 @@ import constants.FlurryConstants;
 import dbtables.League;
 import dbtables.User;
 
-public class FriendInviteActivity extends FacebookActivity {
+public class FriendInviteActivity extends Activity {
 
 	private final static String TAG = "FriendInviteActivity";
 	private final static int PICK_CONTACT_REQUEST = 2;
@@ -70,12 +82,26 @@ public class FriendInviteActivity extends FacebookActivity {
 	
 	private ApplicationUser mApplicationUser;
 	private User mUser;
+	
+	//facebook
+	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
+	private static final String PENDING_PUBLISH_KEY = "pendingPublishReauthorization";
+	private boolean pendingPublishReauthorization = false;
+	private UiLifecycleHelper uiHelper;
+	private Session.StatusCallback callback = new Session.StatusCallback() {
+	    @Override
+	    public void call(Session session, SessionState state, Exception exception) {
+	        onSessionStateChange(session, state, exception);
+	    }
+	};
 	/**
 	 * called when activity is created
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_invite);
         
         Log.i(TAG, "onCreate");
@@ -86,11 +112,12 @@ public class FriendInviteActivity extends FacebookActivity {
         initializeLinearLayouts();
        // initializeListView();
         parseBundle(getIntent());
-        try {
-        	this.openSession();
-        } catch (Exception e) {
-        	Log.d(TAG, e.toString());
-        }
+//        try {
+//        	this.openSession();
+//        	Log.d(TAG, "fb opensession called");
+//        } catch (Exception e) {
+//        	Log.d(TAG, e.toString());
+//        }
         new CreatorAsyncTask().execute(leagueId+"");
     }
 
@@ -107,12 +134,7 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        // Your existing onSaveInstanceState code
-
-        // Save the Facebook session in the Bundle
-        Session session = Session.getActiveSession();
-        Session.saveSession(session, outState);
+        uiHelper.onSaveInstanceState(outState);
     }
 
     
@@ -151,7 +173,12 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     public void onResume() {
         super.onResume();
-        
+        Session session = Session.getActiveSession();
+        if (session != null &&
+               (session.isOpened() || session.isClosed()) ) {
+            onSessionStateChange(session, session.getState(), null);
+        }
+        uiHelper.onResume();
         Log.i(TAG, "onResume");
     }
     
@@ -161,7 +188,7 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     public void onPause() {
         super.onPause();
-       
+        uiHelper.onPause();
         Log.i(TAG, "onPause" + (isFinishing() ? " Finishing" : " Not Finishing"));
     }
     
@@ -171,7 +198,7 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     public void onDestroy() {
     	super.onDestroy();
-    	
+    	uiHelper.onDestroy();
     	Log.i(TAG, "onDestroy");
     	
     }
@@ -181,50 +208,27 @@ public class FriendInviteActivity extends FacebookActivity {
      */
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
     	if (requestCode == PICK_CONTACT_REQUEST) {
     		if (resultCode == RESULT_OK) {
     			Uri contactUri = data.getData();
     			String[] projection = {Phone.NUMBER};
     			new PhoneNumberAsyncTask(contactUri).execute(projection);
     		}
+        } else {
+        	uiHelper.onActivityResult(requestCode, resultCode, data);
         }
     }
     
-    /**
-     * callback for when state changes in facebook session
-     */
-    @Override
-    protected void onSessionStateChange(SessionState state, Exception exception) {
-    	switch(state) {
-
-
-    	case CREATED_TOKEN_LOADED:
-    		Toast.makeText(this, "created_token_loaded", Toast.LENGTH_LONG).show();
-    		break;    
-
-    	case OPENED_TOKEN_UPDATED:
-    		Toast.makeText(this, "opened_token_updated", Toast.LENGTH_LONG).show();
-    		break;
-
-    	case CREATED:
-    		Toast.makeText(this, "created", Toast.LENGTH_LONG).show();
-    		break;
-
-    	case OPENING:
-    		Toast.makeText(this, "opning", Toast.LENGTH_LONG).show();
-    		break;
-
-    	case OPENED:
-    		Toast.makeText(this, "opend", Toast.LENGTH_LONG).show();
-    		break;
-
-    	case CLOSED: 
-    		Toast.makeText(this, "closed", Toast.LENGTH_LONG).show();
-    		break;
-
-    	default:
-    		break;
-    	}
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            Log.i(TAG, "Logged in...");
+            facebookLL.setClickable(true);
+        } else if (state.isClosed()) {
+            Log.i(TAG, "Logged out...");
+            facebookLL.setClickable(false);
+        }
     }
     
     /**
@@ -251,19 +255,10 @@ public class FriendInviteActivity extends FacebookActivity {
     	facebookLL.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Session session = Session.getActiveSession();
-				if (session == null)
-					Toast.makeText(FriendInviteActivity.this, "null", Toast.LENGTH_LONG).show();
-				else if (session.isOpened())
-					Toast.makeText(FriendInviteActivity.this, "opened", Toast.LENGTH_LONG).show();
-				else if (session.isClosed())
-					Toast.makeText(FriendInviteActivity.this, "closed", Toast.LENGTH_LONG).show();
-				else 
-					Toast.makeText(FriendInviteActivity.this, "none", Toast.LENGTH_LONG).show();
+				publishStory();
 			}
     	});
-    	
+    	facebookLL.setClickable(false);
     	twitterLL = (LinearLayout)findViewById(R.id.friend_invite_twitter_ll);
     	twitterLL.setOnClickListener(new OnClickListener() {
 			@Override
@@ -385,6 +380,87 @@ public class FriendInviteActivity extends FacebookActivity {
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	}
+    }
+    
+    private void publishStory() {
+        Session session = Session.getActiveSession();
+
+        if (session != null){
+        		
+            // Check for publish permissions    
+            List<String> permissions = session.getPermissions();
+            if (!isSubsetOf(PERMISSIONS, permissions)) {
+                pendingPublishReauthorization = true;
+                Session.NewPermissionsRequest newPermissionsRequest = new Session
+                        .NewPermissionsRequest(this, PERMISSIONS);
+            session.requestNewPublishPermissions(newPermissionsRequest);
+                return;
+            }
+
+            Bundle postParams = new Bundle();
+            postParams.putString("name", "Fitsby");
+            postParams.putString("caption", "An app that motivates you to go to the gym.");
+            postParams.putString("description", "Challenge your friends on gym check-ins and win their money when the don't go to the gym.");
+            postParams.putString("link", "http://fitsby.com");
+            postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
+
+            Request.Callback callback= new Request.Callback() {
+                public void onCompleted(Response response) {
+                	if (response == null) {
+                		Toast.makeText(FriendInviteActivity.this, "response null", Toast.LENGTH_LONG).show();
+                		return;
+                	}
+                    GraphObject graphObject = response.getGraphObject();
+                    
+                    if (graphObject == null) {
+                		Toast.makeText(FriendInviteActivity.this, "graph object null", Toast.LENGTH_LONG).show();
+                		return;
+                    }
+                    
+                    JSONObject graphResponse = graphObject.getInnerJSONObject();
+                    
+                    if (graphResponse == null) {
+                		Toast.makeText(FriendInviteActivity.this, "jsonobject null", Toast.LENGTH_LONG).show();
+                		return;
+                    }
+                    String postId = null;
+                    try {
+                        postId = graphResponse.getString("id");
+                    } catch (JSONException e) {
+                        Log.i(TAG,
+                            "JSON error "+ e.getMessage());
+                    }
+                    FacebookRequestError error = response.getError();
+                    if (error != null) {
+                        Toast.makeText(FriendInviteActivity.this
+                             .getApplicationContext(),
+                             error.getErrorMessage(),
+                             Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(FriendInviteActivity.this
+                                 .getApplicationContext(), 
+                                 postId,
+                                 Toast.LENGTH_LONG).show();
+                    }
+                }
+            };
+
+            Request request = new Request(session, "me/feed", postParams, 
+                                  HttpMethod.POST, callback);
+
+            RequestAsyncTask task = new RequestAsyncTask(request);
+            task.execute();
+        }
+
+    }
+    
+    private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
+        for (String string : subset) {
+            if (!superset.contains(string)) {
+                return false;
+            }
+        }
+        return true;
     }
     
     /**

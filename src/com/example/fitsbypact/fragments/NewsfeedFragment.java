@@ -338,8 +338,8 @@ public class NewsfeedFragment extends SherlockFragment {
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));
-            	if (viewId == R.id.list_item_newsfeed_message && cursor.getString(cursor.getColumnIndex(Comment.KEY_BOLD)).equals("true"))
-            		name.setTypeface(Typeface.DEFAULT_BOLD);
+//            	if (viewId == R.id.list_item_newsfeed_message && cursor.getString(cursor.getColumnIndex(Comment.KEY_BOLD)).equals("true"))
+//            		name.setTypeface(Typeface.DEFAULT_BOLD);
             }
             
             return true;
