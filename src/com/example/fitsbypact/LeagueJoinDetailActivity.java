@@ -281,7 +281,7 @@ public class LeagueJoinDetailActivity extends Activity {
  	private void join() {
  		if(!isValid) {
  			//TODO really have to change this, not sure how to properly handle a bad bundle being passed though
- 			Toast toast = Toast.makeText(getApplicationContext(), "sorry invalid bundle", Toast.LENGTH_LONG);
+ 			Toast toast = Toast.makeText(getApplicationContext(), "Sorry, invalid bundle", Toast.LENGTH_LONG);
  			toast.setGravity(Gravity.CENTER, 0, 0);
  			toast.show();
  			return;
@@ -316,14 +316,14 @@ public class LeagueJoinDetailActivity extends Activity {
     private void showConfirmation() {
 	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
-    	builder.setMessage("Sure you want to join this free game?")
+    	builder.setMessage("Are you sure you want to join this game?")
     			.setCancelable(false)
-    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					new JoinLeagueAsyncTask().execute(mUser.getID(), leagueId);
     				}
     			})
-    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
@@ -363,7 +363,7 @@ public class LeagueJoinDetailActivity extends Activity {
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Gathering creator data...");
+                    "Gathering the game host's data...");
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
@@ -405,7 +405,7 @@ public class LeagueJoinDetailActivity extends Activity {
         		} catch(Exception e) {
         		}
         	} else {
-        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "Sorry, but the league could not be joined at the moment.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "Sorry, but the game could not be joined at the moment.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}
@@ -421,7 +421,7 @@ public class LeagueJoinDetailActivity extends Activity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Getting league members...");
+                    "Getting game members...");
 		}
 		
         protected Cursor doInBackground(String... params) {

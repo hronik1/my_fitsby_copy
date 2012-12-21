@@ -151,7 +151,7 @@ public class RegisterActivity extends Activity {
     	builder.setMessage("Please confirm that " + emailET.getText().toString() +
     			" is your email.")
     			.setCancelable(false)
-    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					String firstName = firstNameET.getText().toString();
     					String lastName = lastNameET.getText().toString();
@@ -181,7 +181,7 @@ public class RegisterActivity extends Activity {
     					}
     				}
     			})
-    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
@@ -234,7 +234,7 @@ public class RegisterActivity extends Activity {
     	}
 
     	if (!comm.isInternetConnected()) {
-    		Toast toast = Toast.makeText(RegisterActivity.this, "Sorry, there doesn't appear to be an internet connection. Please try again later",
+    		Toast toast = Toast.makeText(RegisterActivity.this, "There doesn't appear to be an internet connection. Please try again later.",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();

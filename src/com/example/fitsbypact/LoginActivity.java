@@ -258,14 +258,14 @@ public class LoginActivity extends Activity {
     	final EditText input = new EditText(this);
     	alert.setView(input);
 
-    	alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    	alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
     		public void onClick(DialogInterface dialog, int whichButton) {
     			String value = input.getText().toString();
     			if (!"".equals(value)) {
     				new PasswordResetAsyncTask().execute(value);
     			}
     			else {
-            		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but either your email cannot be empty.", Toast.LENGTH_LONG);
+            		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but your email cannot be empty.", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
     			}	
@@ -326,7 +326,7 @@ public class LoginActivity extends Activity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but either your email or password was invalid. It is also possible that the internet quality may be inadequate.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but either your email or password was invalid. It's also possible that the internet quality may be inadequate.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {

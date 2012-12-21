@@ -293,7 +293,7 @@ public class GamesFragment extends SherlockFragment {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "There doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){

@@ -144,7 +144,7 @@ public class NewsfeedFragment extends SherlockFragment {
 			if (!comment.equals("")) {
 				new AddCommentAsyncTask().execute(user.getID()+"", gameId, comment);
 			} else {
-				Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but you cannot submit a blank comment", Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but you can't submit a blank comment", Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 			}
@@ -257,7 +257,7 @@ public class NewsfeedFragment extends SherlockFragment {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but there doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent.getApplicationContext(), "There doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){

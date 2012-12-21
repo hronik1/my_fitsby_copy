@@ -329,15 +329,15 @@ public class LeagueCreateActivity extends Activity {
     private void showConfirmation() {
 	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
-    	builder.setMessage("Are you sure you want to create a free game (you can't earn any money)?")
+    	builder.setMessage("Are you sure you want to create this game?")
     			.setCancelable(false)
-    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
     		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), (takeAllRB.isChecked() ? 1 : 3)+"");
     				}
     			})
-    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
@@ -353,7 +353,7 @@ public class LeagueCreateActivity extends Activity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueCreateActivity.this, "",
-                    "Creating your free league...");
+                    "Creating your game...");
 		}
 		
         protected LeagueCreateResponse doInBackground(String... params) {
@@ -372,7 +372,7 @@ public class LeagueCreateActivity extends Activity {
             		startActivity(intent);
 
             	} else {
-            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Sorry, but your league could not be created at this time.", Toast.LENGTH_LONG);
+            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Sorry, but your game could not be created at this time.", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
             	}
