@@ -47,7 +47,6 @@ import android.telephony.SmsManager;
 import bundlekeys.LeagueDetailBundleKeys;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
-import com.facebook.FacebookActivity;
 import com.facebook.FacebookRequestError;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
@@ -55,6 +54,8 @@ import com.facebook.RequestAsyncTask;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphObject;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
@@ -62,7 +63,7 @@ import constants.FlurryConstants;
 import dbtables.League;
 import dbtables.User;
 
-public class FriendInviteActivity extends FacebookActivity {
+public class FriendInviteActivity extends Activity {
 
 	private final static String TAG = "FriendInviteActivity";
 	private final static int PICK_CONTACT_REQUEST = 2;
@@ -86,13 +87,21 @@ public class FriendInviteActivity extends FacebookActivity {
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
 	private static final String PENDING_PUBLISH_KEY = "pendingPublishReauthorization";
 	private boolean pendingPublishReauthorization = false;
-	
+	private UiLifecycleHelper uiHelper;
+	private Session.StatusCallback callback = new Session.StatusCallback() {
+	    @Override
+	    public void call(Session session, SessionState state, Exception exception) {
+	        onSessionStateChange(session, state, exception);
+	    }
+	};
 	/**
 	 * called when activity is created
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_invite);
         
         Log.i(TAG, "onCreate");
@@ -103,11 +112,12 @@ public class FriendInviteActivity extends FacebookActivity {
         initializeLinearLayouts();
        // initializeListView();
         parseBundle(getIntent());
-        try {
-        	this.openSession();
-        } catch (Exception e) {
-        	Log.d(TAG, e.toString());
-        }
+//        try {
+//        	this.openSession();
+//        	Log.d(TAG, "fb opensession called");
+//        } catch (Exception e) {
+//        	Log.d(TAG, e.toString());
+//        }
         new CreatorAsyncTask().execute(leagueId+"");
     }
 
@@ -124,12 +134,7 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        // Your existing onSaveInstanceState code
-
-        // Save the Facebook session in the Bundle
-        Session session = Session.getActiveSession();
-        Session.saveSession(session, outState);
+        uiHelper.onSaveInstanceState(outState);
     }
 
     
@@ -168,7 +173,12 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     public void onResume() {
         super.onResume();
-        
+        Session session = Session.getActiveSession();
+        if (session != null &&
+               (session.isOpened() || session.isClosed()) ) {
+            onSessionStateChange(session, session.getState(), null);
+        }
+        uiHelper.onResume();
         Log.i(TAG, "onResume");
     }
     
@@ -178,7 +188,7 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     public void onPause() {
         super.onPause();
-       
+        uiHelper.onPause();
         Log.i(TAG, "onPause" + (isFinishing() ? " Finishing" : " Not Finishing"));
     }
     
@@ -188,7 +198,7 @@ public class FriendInviteActivity extends FacebookActivity {
     @Override
     public void onDestroy() {
     	super.onDestroy();
-    	
+    	uiHelper.onDestroy();
     	Log.i(TAG, "onDestroy");
     	
     }
@@ -207,20 +217,18 @@ public class FriendInviteActivity extends FacebookActivity {
     			new PhoneNumberAsyncTask(contactUri).execute(projection);
     		}
         } else {
-    	    Session.getActiveSession()
-	        .onActivityResult(this, requestCode, resultCode, data);
+        	uiHelper.onActivityResult(requestCode, resultCode, data);
         }
     }
     
-    /**
-     * callback for when state changes in facebook session
-     */
-    @Override
-    protected void onSessionStateChange(SessionState state, Exception exception) {
-    	if (state.isOpened())
-    		facebookLL.setClickable(true);
-    	else 
-    		facebookLL.setClickable(false);
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            Log.i(TAG, "Logged in...");
+            facebookLL.setClickable(true);
+        } else if (state.isClosed()) {
+            Log.i(TAG, "Logged out...");
+            facebookLL.setClickable(false);
+        }
     }
     
     /**
@@ -250,7 +258,7 @@ public class FriendInviteActivity extends FacebookActivity {
 				publishStory();
 			}
     	});
-    	
+    	facebookLL.setClickable(false);
     	twitterLL = (LinearLayout)findViewById(R.id.friend_invite_twitter_ll);
     	twitterLL.setOnClickListener(new OnClickListener() {
 			@Override
@@ -379,29 +387,43 @@ public class FriendInviteActivity extends FacebookActivity {
         Session session = Session.getActiveSession();
 
         if (session != null){
-
+        		
             // Check for publish permissions    
-//            List<String> permissions = session.getPermissions();
-//            if (!isSubsetOf(PERMISSIONS, permissions)) {
-//                pendingPublishReauthorization = true;
-//                Session.NewPermissionsRequest newPermissionsRequest = new Session
-//                        .NewPermissionsRequest(this, PERMISSIONS);
-//            session.requestNewPublishPermissions(newPermissionsRequest);
-//                return;
-//            }
+            List<String> permissions = session.getPermissions();
+            if (!isSubsetOf(PERMISSIONS, permissions)) {
+                pendingPublishReauthorization = true;
+                Session.NewPermissionsRequest newPermissionsRequest = new Session
+                        .NewPermissionsRequest(this, PERMISSIONS);
+            session.requestNewPublishPermissions(newPermissionsRequest);
+                return;
+            }
 
             Bundle postParams = new Bundle();
-            postParams.putString("name", "Facebook SDK for Android");
-            postParams.putString("caption", "Build great social apps and get more installs.");
-            postParams.putString("description", "The Facebook SDK for Android makes it easier and faster to develop Facebook integrated Android apps.");
-            postParams.putString("link", "https://developers.facebook.com/android");
-            postParams.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
+            postParams.putString("name", "Fitsby");
+            postParams.putString("caption", "An app that motivates you to go to the gym.");
+            postParams.putString("description", "Challenge your friends on gym check-ins and win their money when the don't go to the gym.");
+            postParams.putString("link", "http://fitsby.com");
+            postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
 
             Request.Callback callback= new Request.Callback() {
                 public void onCompleted(Response response) {
-                    JSONObject graphResponse = response
-                                               .getGraphObject()
-                                               .getInnerJSONObject();
+                	if (response == null) {
+                		Toast.makeText(FriendInviteActivity.this, "response null", Toast.LENGTH_LONG).show();
+                		return;
+                	}
+                    GraphObject graphObject = response.getGraphObject();
+                    
+                    if (graphObject == null) {
+                		Toast.makeText(FriendInviteActivity.this, "graph object null", Toast.LENGTH_LONG).show();
+                		return;
+                    }
+                    
+                    JSONObject graphResponse = graphObject.getInnerJSONObject();
+                    
+                    if (graphResponse == null) {
+                		Toast.makeText(FriendInviteActivity.this, "jsonobject null", Toast.LENGTH_LONG).show();
+                		return;
+                    }
                     String postId = null;
                     try {
                         postId = graphResponse.getString("id");

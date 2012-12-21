@@ -104,4 +104,12 @@
         android:layout_marginTop="5dp"
         android:textColor="@color/white" />
 
+        <com.facebook.widget.LoginButton
+            android:id="@+id/authButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal" />
+
 </RelativeLayout>
