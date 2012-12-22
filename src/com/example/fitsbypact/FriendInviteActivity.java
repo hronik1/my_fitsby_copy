@@ -262,7 +262,7 @@ public class FriendInviteActivity extends Activity {
     	twitterLL.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				updateTwitter();
 				
 			}
     	});
@@ -421,7 +421,10 @@ public class FriendInviteActivity extends Activity {
 
     }
     
+    private void updateTwitter() {
 
+    }
+    
     /**
      * AsyncTask to find users games
      * @author brent
