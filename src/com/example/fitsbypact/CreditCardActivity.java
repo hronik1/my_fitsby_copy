@@ -228,7 +228,7 @@ public class CreditCardActivity extends Activity {
     	String expYear = expYearET.getText().toString();
     	String cvc = cvcET.getText().toString();
     	if (number.length() != 19) {
-    		Toast toast = Toast.makeText(this, "Sorry but your credit card is too short", Toast.LENGTH_LONG);
+    		Toast toast = Toast.makeText(this, "Sorry, but your card number is too short", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
     	}
@@ -247,14 +247,14 @@ public class CreditCardActivity extends Activity {
     private void showConfirmation() {
 	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
-    	builder.setMessage("You're credit card will be charged, would you like to continue?")
+    	builder.setMessage("Please confirm that you want to create this game")
     			.setCancelable(false)
-    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					sendCreditCard();
     				}
     			})
-    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}

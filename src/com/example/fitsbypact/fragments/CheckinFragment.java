@@ -196,7 +196,7 @@ public class CheckinFragment extends SherlockFragment{
 	 */
 	public void checkin() {
 		if (timeSeconds > 0 || timeMinutes > 0) {
-			Toast toast = Toast.makeText(parent.getApplicationContext(), "Hey buddy, don't go getting greedy ;) you're already checked in", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(parent.getApplicationContext(), "You're already checked in!", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
@@ -259,9 +259,9 @@ public class CheckinFragment extends SherlockFragment{
 
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-    	builder.setMessage("GPS location is required to make sure you are at a gym.\nWould you like to turn it on?")
+    	builder.setMessage("Turning on your phone's GPS is required to make sure you are at a gym.\nWould you like to turn it on?")
     			.setCancelable(false)
-    			.setPositiveButton("Yup!", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					try {
     					  Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -274,7 +274,7 @@ public class CheckinFragment extends SherlockFragment{
     					}
     				}
     			})
-    			.setNegativeButton("I'll pass", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
@@ -291,7 +291,7 @@ public class CheckinFragment extends SherlockFragment{
 	  	input.setHint("Gym name here");
     	builder.setView(input);
     	
-    	builder.setMessage("We can't seem to find any gyms nearby you. Please type in the gym name so that we may verify that it exists. Your check-in will still count for now.")
+    	builder.setMessage("We couldn't find any gyms nearby you. Please type in your gym name so that we may verify that it exists. Your check-in will still count for now.")
     			.setCancelable(false)
     			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -327,7 +327,7 @@ public class CheckinFragment extends SherlockFragment{
 	public void checkout() {
 		//TODO redo checkout
 		if (timeSeconds == 0 && timeMinutes == 0) {
-			Toast toast = Toast.makeText(parent, "Sorry, but you can't check out because you never checked in", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(parent, "You can't check out because you never checked in!", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
@@ -335,9 +335,9 @@ public class CheckinFragment extends SherlockFragment{
 		if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-	    	builder.setMessage("Hey, you have to be here for " + MIN_CHECKIN_TIME + " minutes for the check-in to count for your score, sure you want to stop early?")
+	    	builder.setMessage("You have to be here for at least " + MIN_CHECKIN_TIME + " minutes to have a successful check-out. Are you sure you want to stop early?")
 	    			.setCancelable(false)
-	    			.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+	    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
 	    					Message msg = Message.obtain(null,
 	    							MessengerService.MSG_STOP_TIMER);
@@ -351,7 +351,7 @@ public class CheckinFragment extends SherlockFragment{
 	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 	    				}
 	    			})
-	    			.setNegativeButton("Oops!", new DialogInterface.OnClickListener() {
+	    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
 	    					dialog.cancel();
 	    				}
@@ -384,7 +384,7 @@ public class CheckinFragment extends SherlockFragment{
         		Toast toast = Toast.makeText(parent, "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, "Sorry, but Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Sorry, but the Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
@@ -417,11 +417,11 @@ public class CheckinFragment extends SherlockFragment{
         		Toast toast = Toast.makeText(parent, "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, "Sorry, but Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Sorry, but the Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
-        		Toast toast = Toast.makeText(parent, "Sorry, but there appears to be no gym or rec centers near you", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be a gym or rec center near you", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {
@@ -515,7 +515,7 @@ public class CheckinFragment extends SherlockFragment{
         	} else {
         		String error = response.getError();
         		if (error == null || error.equals(""))
-        			error = "Sorry server could not be reached at the moment";
+        			error = "Sorry, the server could not be reached at the moment";
         		Toast toast = Toast.makeText(parent, error, Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();

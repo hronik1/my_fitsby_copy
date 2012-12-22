@@ -347,7 +347,7 @@ public class MeFragment extends SherlockFragment {
 		if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 			new ChangeEmailAsyncTask().execute(email, mUser.getID()+"");
 		} else {
-    		Toast toast = Toast.makeText(parent, "Sorry, but that appears to not be a valid form of an email address",
+    		Toast toast = Toast.makeText(parent, "Sorry, but that doesn't appear to be a valid email",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
@@ -362,7 +362,7 @@ public class MeFragment extends SherlockFragment {
 
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-    	builder.setMessage("Are you sure you want to logout? If you are currently checked into a gym and 30 minutes has not yet passed, your check-in won't count.")
+    	builder.setMessage("If you are currently checked into a gym, you must check out or else it won't count. Are you sure you want to log out right now?")
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -426,7 +426,7 @@ public class MeFragment extends SherlockFragment {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
@@ -434,7 +434,7 @@ public class MeFragment extends SherlockFragment {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {
-        		Toast toast = Toast.makeText(parent, "Your email was changed", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Your email was successfully changed", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}
