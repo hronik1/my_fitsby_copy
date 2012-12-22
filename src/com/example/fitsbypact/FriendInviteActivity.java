@@ -48,6 +48,7 @@ import bundlekeys.LeagueDetailBundleKeys;
 
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 import com.facebook.FacebookRequestError;
+import com.facebook.FacebookException;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.RequestAsyncTask;
@@ -56,6 +57,8 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphObject;
+import com.facebook.widget.WebDialog;
+import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
@@ -69,7 +72,7 @@ public class FriendInviteActivity extends Activity {
 	private final static int PICK_CONTACT_REQUEST = 2;
 	private Button homeButton;
 	private Button inviteButton;
-	private LinearLayout facebookLL;
+	private Button shareButton;
 	private LinearLayout twitterLL;
 	
 	private ListView contactsListView;
@@ -84,9 +87,6 @@ public class FriendInviteActivity extends Activity {
 	private User mUser;
 	
 	//facebook
-	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
-	private static final String PENDING_PUBLISH_KEY = "pendingPublishReauthorization";
-	private boolean pendingPublishReauthorization = false;
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 	    @Override
@@ -224,10 +224,10 @@ public class FriendInviteActivity extends Activity {
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, "Logged in...");
-            facebookLL.setClickable(true);
+          
         } else if (state.isClosed()) {
             Log.i(TAG, "Logged out...");
-            facebookLL.setClickable(false);
+           
         }
     }
     
@@ -248,17 +248,16 @@ public class FriendInviteActivity extends Activity {
     			home();
     		}
     	});
+    	
+    	shareButton = (Button)findViewById(R.id.facebook_share_button);
+    	shareButton.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			publishStory();
+    		}
+    	});
     }
     
     private void initializeLinearLayouts() {
-    	facebookLL = (LinearLayout)findViewById(R.id.friend_invite_facebook_ll);
-    	facebookLL.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				publishStory();
-			}
-    	});
-    	facebookLL.setClickable(false);
     	twitterLL = (LinearLayout)findViewById(R.id.friend_invite_twitter_ll);
     	twitterLL.setOnClickListener(new OnClickListener() {
 			@Override
@@ -386,17 +385,10 @@ public class FriendInviteActivity extends Activity {
     private void publishStory() {
         Session session = Session.getActiveSession();
 
-        if (session != null){
-        		
-            // Check for publish permissions    
-            List<String> permissions = session.getPermissions();
-            if (!isSubsetOf(PERMISSIONS, permissions)) {
-                pendingPublishReauthorization = true;
-                Session.NewPermissionsRequest newPermissionsRequest = new Session
-                        .NewPermissionsRequest(this, PERMISSIONS);
-            session.requestNewPublishPermissions(newPermissionsRequest);
-                return;
-            }
+        if (session == null || session.isClosed()) {
+        	Toast.makeText(this, "Sorry, but you must sign in", Toast.LENGTH_LONG).show();
+        }
+        else {
 
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
@@ -405,65 +397,32 @@ public class FriendInviteActivity extends Activity {
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
 
-            Request.Callback callback= new Request.Callback() {
-                public void onCompleted(Response response) {
-                	if (response == null) {
-                		Toast.makeText(FriendInviteActivity.this, "response null", Toast.LENGTH_LONG).show();
-                		return;
-                	}
-                    GraphObject graphObject = response.getGraphObject();
-                    
-                    if (graphObject == null) {
-                		Toast.makeText(FriendInviteActivity.this, "graph object null", Toast.LENGTH_LONG).show();
-                		return;
-                    }
-                    
-                    JSONObject graphResponse = graphObject.getInnerJSONObject();
-                    
-                    if (graphResponse == null) {
-                		Toast.makeText(FriendInviteActivity.this, "jsonobject null", Toast.LENGTH_LONG).show();
-                		return;
-                    }
-                    String postId = null;
-                    try {
-                        postId = graphResponse.getString("id");
-                    } catch (JSONException e) {
-                        Log.i(TAG,
-                            "JSON error "+ e.getMessage());
-                    }
-                    FacebookRequestError error = response.getError();
-                    if (error != null) {
-                        Toast.makeText(FriendInviteActivity.this
-                             .getApplicationContext(),
-                             error.getErrorMessage(),
-                             Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(FriendInviteActivity.this
-                                 .getApplicationContext(), 
-                                 postId,
-                                 Toast.LENGTH_LONG).show();
-                    }
-                }
-            };
+            WebDialog feedDialog = (
+                    new WebDialog.FeedDialogBuilder(this,
+                        Session.getActiveSession(),
+                        postParams))
+                    .setOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(Bundle values,
+                            FacebookException error) {
+                            // When the story is posted, echo the success
+                            // and the post Id.
+                            final String postId = values.getString("post_id");
+                            if (postId != null) {
+                                Toast.makeText(FriendInviteActivity.this,
+                                    "Posted story, id: "+postId,
+                                Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-            Request request = new Request(session, "me/feed", postParams, 
-                                  HttpMethod.POST, callback);
-
-            RequestAsyncTask task = new RequestAsyncTask(request);
-            task.execute();
+                    })
+                    .build();
+                feedDialog.show();
         }
 
     }
     
-    private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
-        for (String string : subset) {
-            if (!superset.contains(string)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
+
     /**
      * AsyncTask to find users games
      * @author brent
