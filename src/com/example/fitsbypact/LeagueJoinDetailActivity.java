@@ -281,7 +281,7 @@ public class LeagueJoinDetailActivity extends Activity {
  	private void join() {
  		if(!isValid) {
  			//TODO really have to change this, not sure how to properly handle a bad bundle being passed though
- 			Toast toast = Toast.makeText(getApplicationContext(), "Sorry, invalid bundle", Toast.LENGTH_LONG);
+ 			Toast toast = Toast.makeText(getApplicationContext(), "Invalid bundle", Toast.LENGTH_LONG);
  			toast.setGravity(Gravity.CENTER, 0, 0);
  			toast.show();
  			return;
@@ -405,7 +405,7 @@ public class LeagueJoinDetailActivity extends Activity {
         		} catch(Exception e) {
         		}
         	} else {
-        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "Sorry, but the game could not be joined at the moment.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "The game could not be joined at the moment.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}

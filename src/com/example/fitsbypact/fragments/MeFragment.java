@@ -160,7 +160,7 @@ public class MeFragment extends SherlockFragment {
 					e.printStackTrace();
 				}
 	        } else if (resultCode == parent.RESULT_CANCELED) {
-	    		Toast toast = Toast.makeText(parent, "Sorry, but you did not select a photo",
+	    		Toast toast = Toast.makeText(parent, "You did not select a photo",
 	    				Toast.LENGTH_LONG);
 	    		toast.setGravity(Gravity.CENTER, 0, 0);
 	    		toast.show();
@@ -338,7 +338,7 @@ public class MeFragment extends SherlockFragment {
 	private void changeEmail() {
 		String email = emailET.getText().toString();
 		if (email.equals("")) {
-    		Toast toast = Toast.makeText(parent, "Sorry, you must fill out your email," +
+    		Toast toast = Toast.makeText(parent, "You must fill out your email," +
     				"so we can send you the change email form",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -347,7 +347,7 @@ public class MeFragment extends SherlockFragment {
 		if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 			new ChangeEmailAsyncTask().execute(email, mUser.getID()+"");
 		} else {
-    		Toast toast = Toast.makeText(parent, "Sorry, but that doesn't appear to be a valid email",
+    		Toast toast = Toast.makeText(parent, "That doesn't appear to be a valid email",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
@@ -397,7 +397,7 @@ public class MeFragment extends SherlockFragment {
         		new GravatarAsyncTask().execute(mUser.getEmail());
         		
         	} else {
-        		Toast toast = Toast.makeText(parent, "Sorry, but since there doesn't appear to be an internet connection at the moment, user statistics may be inaccurate.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "User statistics may be inaccurate because there doesn't appear to be an internet connection", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         		earningsTV.setText(" $0");

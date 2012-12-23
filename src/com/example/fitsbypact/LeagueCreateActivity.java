@@ -372,7 +372,7 @@ public class LeagueCreateActivity extends Activity {
             		startActivity(intent);
 
             	} else {
-            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Sorry, but your game could not be created at this time.", Toast.LENGTH_LONG);
+            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Your game could not be created at this time.", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
             	}

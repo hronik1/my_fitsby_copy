@@ -359,8 +359,8 @@ public class FriendInviteActivity extends Activity {
     		pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
     		startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
     	} catch (Exception e) {
-    		Toast.makeText(this, "Sorry but it appears that either your device does not have contacts," +
-    				" or will not allow me to access them", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "It appears that either your device does not have contacts," +
+    				" or will not allow us to access them", Toast.LENGTH_LONG).show();
     	}
 
     }
@@ -375,7 +375,7 @@ public class FriendInviteActivity extends Activity {
 //    		this.finish();
     	} catch(Exception e) {
     		//TODO handle not starting intent better
-    		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but this activity could not be started", Toast.LENGTH_LONG);
+    		Toast toast = Toast.makeText(getApplicationContext(), "This activity could not be started", Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	}
@@ -385,7 +385,7 @@ public class FriendInviteActivity extends Activity {
         Session session = Session.getActiveSession();
 
         if (session == null || session.isClosed()) {
-        	Toast.makeText(this, "Sorry, but you must sign in", Toast.LENGTH_LONG).show();
+        	Toast.makeText(this, "You must sign in", Toast.LENGTH_LONG).show();
         }
         else {
 

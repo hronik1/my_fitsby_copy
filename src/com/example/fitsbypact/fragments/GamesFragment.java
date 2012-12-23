@@ -232,7 +232,7 @@ public class GamesFragment extends SherlockFragment {
 	private void gotoInviteActivity() {
 		
 		if (spinnerData.isEmpty()) {
-	   		Toast toast = Toast.makeText(parent, "Sorry, but you can't invite friends since you aren't in any games", Toast.LENGTH_LONG);
+	   		Toast toast = Toast.makeText(parent, "You can't invite friends since you aren't in any games", Toast.LENGTH_LONG);
 	   		toast.setGravity(Gravity.CENTER, 0, 0);
 	   		toast.show();
 	   		return;
@@ -297,7 +297,7 @@ public class GamesFragment extends SherlockFragment {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, "Sorry, but we weren't able to grab the data for your game", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Error grabbing the data for your game", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         		disableGamesPrompts();
