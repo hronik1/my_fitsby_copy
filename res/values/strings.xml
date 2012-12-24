@@ -69,7 +69,7 @@
     <string name="league_join_button_create">Create Game</string>
     <string name="league_join_public_header_text">JOIN A GAME</string>
     <string name="search_for_a_game">SEARCH FOR A GAME</string>
-    <string name="create_new_game_directions">START YOUR OWN GAME</string>
+    <string name="create_new_game_directions">Don\'t see a game you like? Start your own.</string>
     <string name="league_create_privacy_text">4. Make game private?</string>
     <string name="league_create_checkbox_text">Yes</string>
     <string name="league_create_rb_prompt">3. How many winners?</string>
@@ -147,7 +147,7 @@
     <string name="league_join_detail_pot_data_text">$20</string>
     <string name="league_join_detail_players_text">" PLAYERS"</string>
     <string name="league_join_detail_players_data_text">2</string>
-    <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 4 players in the game"</string>
+    <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 4 players total in the game"</string>
     <string name="league_join_duration_data_text">" (14 days)"</string>
     <string name="league_join_detail_button_join_text">Join Game</string>
     <string name="league_join_detail_id_text">"GAME ID: "</string>
@@ -174,7 +174,7 @@
     <string name="league_create_ib_days_plus_text">Increment days</string>
     <string name="league_create_ib_wager_minus_text">Decrement wager</string>
     <string name="league_create_ib_wager_plus_text">Increment days</string>
-    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight, once there are a minimum of 4 players.</string>
+    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight, once there are a minimum of 4 players total.</string>
     <string name="header_title_text">Fitsby</string>
     <string name="header_settings_text">You</string>
     <string name="title_activity_settings"></string>

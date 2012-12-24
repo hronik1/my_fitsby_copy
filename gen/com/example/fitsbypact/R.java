@@ -1333,8 +1333,8 @@ containing a value of this type.
         public static final int league_join_detail_imageview=0x7f040096;
         public static final int league_join_detail_members_lv=0x7f0400b2;
         public static final int league_join_detail_name=0x7f040097;
-        public static final int league_join_detail_name_first=0x7f040098;
-        public static final int league_join_detail_name_last=0x7f040099;
+        public static final int league_join_detail_name_first=0x7f040099;
+        public static final int league_join_detail_name_last=0x7f040098;
         public static final int league_join_detail_players=0x7f0400a4;
         public static final int league_join_detail_players_data=0x7f0400a3;
         public static final int league_join_detail_pot=0x7f0400a8;

@@ -268,7 +268,7 @@ public class CheckinFragment extends SherlockFragment{
     					  startActivity(intent);
     					} catch (Exception e) {
     						//TODO make a more better error message
-    						Toast toast = Toast.makeText(parent, "It seems we can't track your location at this moment", Toast.LENGTH_LONG);
+    						Toast toast = Toast.makeText(parent, "Unable to track your location at this moment", Toast.LENGTH_LONG);
     						toast.setGravity(Gravity.CENTER, 0, 0);
     						toast.show();
     					}
@@ -291,7 +291,7 @@ public class CheckinFragment extends SherlockFragment{
 	  	input.setHint("Gym name here");
     	builder.setView(input);
     	
-    	builder.setMessage("We couldn't find any gyms nearby you. Please type in your gym name so that we may verify that it exists. Your check-in will still count for now.")
+    	builder.setMessage("We couldn't find any gyms nearby you. Please type in your gym name so that we may verify that it exists. (Your check-in will count for now)")
     			.setCancelable(false)
     			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -552,7 +552,7 @@ public class CheckinFragment extends SherlockFragment{
 				} catch (RemoteException e) {
 					Log.e(TAG, e.toString());
 				}
-        		checkinLocationTV.setText("You are not currently checked into a gym");
+        		checkinLocationTV.setText("You are currently not checked into a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
         	} else {
         		Toast toast = Toast.makeText(parent, "Check-out failed!", Toast.LENGTH_LONG);

@@ -14,7 +14,7 @@
         android:textStyle="bold" />
     
 	<LinearLayout
-	    android:layout_marginTop="5dp"
+	    android:layout_marginTop="2dp"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_alignLeft="@+id/games_spinner"
@@ -47,7 +47,7 @@
 	    android:layout_alignLeft="@+id/games_spinner"
 	    android:layout_alignRight="@+id/games_spinner"
 	    android:layout_below="@+id/games_spinner" 
-	    android:layout_marginTop="50dp"
+	    android:layout_marginTop="47dp"
 	    android:baselineAligned="false"	>
 	
 		<RelativeLayout
@@ -132,7 +132,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/last_linear_layout"
-	    android:layout_marginTop="10dp"
+	    android:layout_marginTop="7dp"
 	    android:layout_above="@+id/buttons">
 
 	    <ProgressBar
@@ -284,7 +284,5 @@
     
 	</LinearLayout>
 	    
-
-		
 	
 </RelativeLayout>
