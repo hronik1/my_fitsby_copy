@@ -190,6 +190,14 @@
     <string name="me_settings_button_logout_text">Logout</string>
     <string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
     <string name="me_settings_button_change_picture_text">Choose picture</string>
+    <string name="me_faq">FAQ</string>
+    <string name="me_privacy_policy">Privacy Policy</string>
+    <string name="me_terms_of_service">Terms of Service</string>
+    <string name="me_facebook">Facebook Page</string>
+    <string name="me_twitter">Twitter Page</string>
+    <string name="me_tutorials_text">Tutorials:</string>
+    <string name="me_links_text">Web Links:</string>
+    <string name="me_settings_tutorial_button">Fitsby Tutorial</string>
     <string name="server_url">place server url here</string>
     <string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
     <string name="stripe_live_secret_api_key">sk_0G8Utv86sXeIUY4EO6fif1hAypeDE</string>
