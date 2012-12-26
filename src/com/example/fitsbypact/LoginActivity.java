@@ -192,7 +192,7 @@ public class LoginActivity extends Activity {
 //    			startActivity(intent);
 //    		} catch (Exception e) {
 //    			//TODO something more robust possibly
-//    			Toast toast = Toast.makeText(LoginActivity.this, "Sorry, we cannot log you in at the moment.", Toast.LENGTH_LONG);
+//    			Toast toast = Toast.makeText(LoginActivity.this, "We cannot log you in at the moment.", Toast.LENGTH_LONG);
 //    			toast.setGravity(Gravity.CENTER, 0, 0);
 //    			toast.show();
 //    		}
@@ -265,7 +265,7 @@ public class LoginActivity extends Activity {
     				new PasswordResetAsyncTask().execute(value);
     			}
     			else {
-            		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but your email cannot be empty.", Toast.LENGTH_LONG);
+            		Toast toast = Toast.makeText(getApplicationContext(), "Your email cannot be empty.", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
     			}	
@@ -322,11 +322,11 @@ public class LoginActivity extends Activity {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but either your email or password was invalid. It's also possible that the internet quality may be inadequate.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Either your email or password was invalid. It's also possible the internet quality may be inadequate.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {
@@ -360,7 +360,7 @@ public class LoginActivity extends Activity {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){

@@ -50,6 +50,7 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/white_textbox"
             android:gravity="center"
+            android:digits="1234567890"
             android:hint="@string/credit_card_et_card_number_hint"
             android:maxLength="16" >
 
@@ -78,6 +79,7 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/white_textbox"
             android:hint="@string/credit_card_et_expire_month_hint"
+            android:digits="1234567890"            
             android:maxLength="2" />
 
         <EditText
@@ -90,6 +92,7 @@
             android:background="@drawable/white_textbox"
             android:gravity="center"
             android:hint="@string/credit_card_et_expire_year_hint"
+            android:digits="1234567890"            
             android:maxLength="4" />
 
         <TextView
@@ -114,6 +117,7 @@
             android:background="@drawable/white_textbox"
             android:gravity="center"
             android:hint="@string/credit_card_et_card_cvc_hint"
+            android:digits="1234567890"            
             android:maxLength="3" />
 
 

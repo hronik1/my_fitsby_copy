@@ -47,7 +47,7 @@
         android:id="@+id/list_item_newsfeed_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/list_item_newsfeed_last_name"
+        android:layout_alignBottom="@+id/list_item_newsfeed_last_name"
         android:layout_alignParentRight="true"
         android:layout_marginTop="1dp"  
         android:layout_marginRight="15dp"

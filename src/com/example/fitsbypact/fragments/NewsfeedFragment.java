@@ -134,7 +134,7 @@ public class NewsfeedFragment extends SherlockFragment {
 	private void submit() {
 		if(spinnerData == null || spinnerData.size() == 0) {
 			//TODO maybe do something more robust
-			Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but there are no games", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(parent.getApplicationContext(), "There are no games", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		}
@@ -144,7 +144,7 @@ public class NewsfeedFragment extends SherlockFragment {
 			if (!comment.equals("")) {
 				new AddCommentAsyncTask().execute(user.getID()+"", gameId, comment);
 			} else {
-				Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but you can't submit a blank comment", Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(parent.getApplicationContext(), "Comment can't be blank", Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 			}
@@ -261,7 +261,7 @@ public class NewsfeedFragment extends SherlockFragment {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent.getApplicationContext(), "Sorry, but we weren't able to grab the data for your game", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent.getApplicationContext(), "Error grabbing the data for your game", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {

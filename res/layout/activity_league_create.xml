@@ -165,6 +165,7 @@
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/faq_button_background"
                     android:text="@string/faq_button"
+                    android:layout_marginBottom="5dp"
                     android:textColor="@drawable/faq_button_text" />
 
                 <Button

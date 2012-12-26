@@ -271,7 +271,7 @@ public class CheckinFragment extends SherlockFragment{
     					  startActivity(intent);
     					} catch (Exception e) {
     						//TODO make a more better error message
-    						Toast toast = Toast.makeText(parent, "Sorry, but it seems we can't track your location at this moment", Toast.LENGTH_LONG);
+    						Toast toast = Toast.makeText(parent, "Unable to track your location at this moment", Toast.LENGTH_LONG);
     						toast.setGravity(Gravity.CENTER, 0, 0);
     						toast.show();
     					}
@@ -294,7 +294,7 @@ public class CheckinFragment extends SherlockFragment{
 	  	input.setHint("Gym name here");
     	builder.setView(input);
     	
-    	builder.setMessage("We couldn't find any gyms nearby you. Please type in your gym name so that we may verify that it exists. Your check-in will still count for now.")
+    	builder.setMessage("We couldn't find any gyms nearby you. Please type in your gym name so that we may verify that it exists. (Your check-in will count for now)")
     			.setCancelable(false)
     			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -311,7 +311,7 @@ public class CheckinFragment extends SherlockFragment{
     							toast.show();
     						}
     					} else {
-							Toast toast = Toast.makeText(parent, "Sorry, but your gym name can't be empty", Toast.LENGTH_LONG);
+							Toast toast = Toast.makeText(parent, "Gym name can't be empty", Toast.LENGTH_LONG);
 							toast.setGravity(Gravity.CENTER, 0, 0);
 							toast.show();
     					}
@@ -406,10 +406,10 @@ public class CheckinFragment extends SherlockFragment{
         protected void onPostExecute(PlacesResponse response) {
         	mProgressDialog.dismiss();
         	if (response == null) {
-        		Toast toast = Toast.makeText(parent, "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
+        		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, "Sorry, but the Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
@@ -439,14 +439,14 @@ public class CheckinFragment extends SherlockFragment{
         protected void onPostExecute(PlacesResponse response) {
         	mProgressDialog.dismiss();
         	if (response == null) {
-        		Toast toast = Toast.makeText(parent, "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
+        		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, "Sorry, but the Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
-        		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be a gym or rec center near you", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "There doesn't appear to be a gym or rec center near you", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	} else {
@@ -478,7 +478,7 @@ public class CheckinFragment extends SherlockFragment{
         protected void onPostExecute(ValidateGymResponse response) {
         	mProgressDialog.dismiss();
         	if (response == null) {
-        		Toast toast = Toast.makeText(parent, "Sorry, but we couldn't find an internet connection", Toast.LENGTH_LONG); 
+        		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(parent, response.getMessage(), Toast.LENGTH_LONG);
@@ -540,7 +540,7 @@ public class CheckinFragment extends SherlockFragment{
         	} else {
         		String error = response.getError();
         		if (error == null || error.equals(""))
-        			error = "Sorry, the server could not be reached at the moment";
+        			error = "Server could not be reached at the moment";
         		Toast toast = Toast.makeText(parent, error, Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
@@ -577,7 +577,7 @@ public class CheckinFragment extends SherlockFragment{
 				} catch (RemoteException e) {
 					Log.e(TAG, e.toString());
 				}
-        		checkinLocationTV.setText("You are not currently checked into a gym");
+        		checkinLocationTV.setText("You are currently not checked into a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
         		showPublishGymDialog();
         	} else {

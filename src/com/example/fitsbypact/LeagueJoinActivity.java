@@ -242,7 +242,7 @@ public class LeagueJoinActivity extends FragmentActivity
     		startActivity(intent);
     	} catch(Exception e) {
     		//TODO add robustness, remove from production code.
-    		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, cant perform operation", Toast.LENGTH_LONG);
+    		Toast toast = Toast.makeText(getApplicationContext(), "Can't perform operation", Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	}
@@ -293,9 +293,9 @@ public class LeagueJoinActivity extends FragmentActivity
 
         protected void onPostExecute(PrivateLeagueResponse response) {
         	if (response == null ) {
-        		Toast.makeText(getApplicationContext(), "Sorry, you don't have a connection to the internet", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getApplicationContext(), "You don't have a connection to the internet", Toast.LENGTH_LONG).show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), "Sorry, but no games with those credentials exist", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getApplicationContext(), "No games with those credentials exist", Toast.LENGTH_LONG).show();
         	} else {
         		League league = response.getLeague();
         		boolean isPrivate = (league.isPrivate() == 0 ? false : true);

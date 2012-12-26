@@ -40,6 +40,7 @@
         android:layout_marginLeft="1dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="-1dp"
+        android:inputType="textCapSentences"
         android:textSize="12sp" />
 
      <Button

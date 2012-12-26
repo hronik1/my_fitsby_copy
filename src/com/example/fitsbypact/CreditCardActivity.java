@@ -228,7 +228,7 @@ public class CreditCardActivity extends Activity {
     	String expYear = expYearET.getText().toString();
     	String cvc = cvcET.getText().toString();
     	if (number.length() != 19) {
-    		Toast toast = Toast.makeText(this, "Sorry, but your card number is too short", Toast.LENGTH_LONG);
+    		Toast toast = Toast.makeText(this, "Your card number is too short", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
     	}
@@ -292,7 +292,7 @@ public class CreditCardActivity extends Activity {
         		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
         		startActivity(intent);
         	} else {
-        		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(CreditCardActivity.this, "Your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}
@@ -330,7 +330,7 @@ public class CreditCardActivity extends Activity {
             		startActivity(intent);
 
             	} else {
-            		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+            		Toast toast = Toast.makeText(CreditCardActivity.this, "Your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
             	}
@@ -362,7 +362,7 @@ public class CreditCardActivity extends Activity {
         		} catch(Exception e) {
         		}
         	} else {
-        		Toast toast = Toast.makeText(CreditCardActivity.this, "Sorry, but your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(CreditCardActivity.this, "Your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}
