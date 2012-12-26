@@ -263,7 +263,6 @@
             
             <TextView
                 android:id="@+id/me_twitter"
-<<<<<<< HEAD
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_facebook"
@@ -281,11 +280,8 @@
             <Button
                 android:id="@+id/me_settings_tutorial_button"
                 android:layout_below="@+id/me_reset_password"
-=======
->>>>>>> 752a57f7125b9bba3000a72941962684c0eefecf
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/me_facebook"
                 android:text="@string/me_twitter"
                 android:background="@drawable/custom_login_button"
                 android:textColor="@color/white"
