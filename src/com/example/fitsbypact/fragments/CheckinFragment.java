@@ -12,10 +12,13 @@ import servercommunication.CheckinCommunication;
 
 
 
+import bundlekeys.LeagueDetailBundleKeys;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.LoggedinActivity;
 import com.example.fitsbypact.MessengerService;
 import com.example.fitsbypact.R;
+import com.example.fitsbypact.ShareCheckinActivity;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbtables.User;
@@ -321,6 +324,28 @@ public class CheckinFragment extends SherlockFragment{
     			}).show();
     }
     
+    public void showPublishGymDialog() {
+    	Log.i(TAG, "showPublisGymDialog");
+
+    	//TODO clean this up
+    	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+    	
+    	builder.setMessage("Would you like to publish this other social networks?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					Intent intent = new Intent(parent, ShareCheckinActivity.class);
+    					intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
+    					startActivity(intent);
+    				}
+    			})
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    }
+    
 	/**
 	 * checks out user
 	 */
@@ -554,6 +579,7 @@ public class CheckinFragment extends SherlockFragment{
 				}
         		checkinLocationTV.setText("You are not currently checked into a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
+        		showPublishGymDialog();
         	} else {
         		Toast toast = Toast.makeText(parent, "Check-out failed!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);

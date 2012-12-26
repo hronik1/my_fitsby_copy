@@ -8,4 +8,5 @@ public class LeagueDetailBundleKeys {
 	public final static String KEY_PLAYERS = "players";
 	public final static String KEY_DURATION = "duration";
 	public final static String KEY_BITMAP = "bitmap";
+	public final static String KEY_GYM_NAME = "gym_name";
 }

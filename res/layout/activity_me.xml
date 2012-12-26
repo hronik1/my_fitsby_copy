@@ -239,9 +239,17 @@
                 android:text="twitter page"
                 android:textColor="@drawable/faq_button_text" />
             
+            <TextView
+                android:id="@+id/me_reset_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_twitter"
+                android:text="reset password"
+                android:textColor="@drawable/faq_button_text" />
+                        
             <Button
                 android:id="@+id/me_settings_tutorial_button"
-                android:layout_below="@+id/me_twitter"
+                android:layout_below="@+id/me_reset_password"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="tutorial" />

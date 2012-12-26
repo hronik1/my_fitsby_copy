@@ -203,5 +203,6 @@
     <string name="title_activity_loggedin"></string>
     <string name="login_remember_me_textview">Remember me</string>
     <string name="title_activity_tutorial">TutorialActivity</string>
+    <string name="title_activity_share_checkin">ShareCheckinActivity</string>
 
 </resources>
