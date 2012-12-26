@@ -66,10 +66,32 @@ import constants.FlurryConstants;
 import dbtables.League;
 import dbtables.User;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
+
 public class FriendInviteActivity extends Activity {
 
 	private final static String TAG = "FriendInviteActivity";
 	private final static int PICK_CONTACT_REQUEST = 2;
+	private String TWITTER_CONSUMER_KEY;
+	private String TWITTER_CONSUMER_SECRET;
+	private String TWITTER_ACCESS_TOKEN;
+	private String TWITTER_ACCESS_TOKEN_SECRET;
+	
+	// Twitter oauth urls
+    static final String URL_TWITTER_AUTH = "auth_url";
+    static final String URL_TWITTER_OAUTH_VERIFIER = "oauth_verifier";
+    static final String URL_TWITTER_OAUTH_TOKEN = "oauth_token";
+    static final String TWITTER_CALLBACK_URL = "oauth://t4jsample";
+    private static Twitter twitter;
+    private static RequestToken requestToken;
+    
 	private Button homeButton;
 	private Button inviteButton;
 	private Button shareButton;
@@ -80,7 +102,7 @@ public class FriendInviteActivity extends Activity {
 	private ArrayAdapter<String> contactsAdapter;
 	
 	private ProgressDialog mProgressDialog;
-	private int leagueId;
+	private static int leagueId;
 	private String creatorName;
 	
 	private ApplicationUser mApplicationUser;
@@ -104,6 +126,11 @@ public class FriendInviteActivity extends Activity {
         uiHelper.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_invite);
         
+    	TWITTER_CONSUMER_KEY = getString(R.string.twitter_consumer_key);
+    	TWITTER_CONSUMER_SECRET = getString(R.string.twitter_consumer_secret);
+    	TWITTER_ACCESS_TOKEN = getString(R.string.twitter_access_token);
+    	TWITTER_ACCESS_TOKEN_SECRET = getString(R.string.twitter_access_token_secret);
+    	
         Log.i(TAG, "onCreate");
         
         mApplicationUser = (ApplicationUser)getApplicationContext();
@@ -308,7 +335,8 @@ public class FriendInviteActivity extends Activity {
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
     	if (extras == null) {
-    		Toast.makeText(getApplicationContext(), "no bundle", Toast.LENGTH_LONG).show();
+    		Toast.makeText(getApplicationContext(), leagueId+"", Toast.LENGTH_LONG).show();
+    		return;
     	}
     		
     	leagueId = extras.getInt(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
@@ -422,6 +450,23 @@ public class FriendInviteActivity extends Activity {
     }
     
     private void updateTwitter() {
+
+    	ConfigurationBuilder builder = new ConfigurationBuilder();
+    	builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
+    	builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);    	
+    	Configuration configuration = builder.build();
+
+    	TwitterFactory factory = new TwitterFactory(configuration);
+    	twitter = factory.getInstance();
+
+    	try {
+    		requestToken = twitter
+    				.getOAuthRequestToken(TWITTER_CALLBACK_URL);
+    		this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+    				.parse(requestToken.getAuthenticationURL())));
+    	} catch (TwitterException e) {
+    		e.printStackTrace();
+    	}
 
     }
     
