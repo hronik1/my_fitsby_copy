@@ -60,7 +60,7 @@
     <string name="thirty_cents_charge_text">plus a 50&#162; processing fee</string>
     <string name="authorize_api_login_id">3C29upX37b</string>
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
-    <string name="title_activity_friend_invite"></string>
+    <string name="title_activity_friend_invite">FriendInviteActivity</string>
     <string name="friend_invite_button_invite_text">Search Contacts List</string>
     <string name="friend_invite_button_home_text">Go To Game</string>
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>

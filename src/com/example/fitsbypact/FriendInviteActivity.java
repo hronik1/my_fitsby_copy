@@ -375,7 +375,6 @@ public class FriendInviteActivity extends Activity {
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
     	if (extras == null) {
-    		Toast.makeText(getApplicationContext(), leagueId+"", Toast.LENGTH_LONG).show();
     		return;
     	}
     		
@@ -452,7 +451,7 @@ public class FriendInviteActivity extends Activity {
     private void publishStory() {
         Session session = Session.getActiveSession();
 
-        if (session == null || session.isClosed()) {
+        if (session == null || !session.isOpened()) {
         	Toast.makeText(this, "You must sign in", Toast.LENGTH_LONG).show();
         }
         else {

@@ -148,6 +148,13 @@
         <activity
             android:name="com.example.fitsbypact.ShareCheckinActivity"
             android:label="@string/title_activity_share_checkin" >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="oauth" android:host="t4jsamplecheckin"/>
+            </intent-filter>
         </activity>
     </application>
 

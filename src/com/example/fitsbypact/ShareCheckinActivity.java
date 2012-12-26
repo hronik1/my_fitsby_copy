@@ -1,8 +1,16 @@
 package com.example.fitsbypact;
 
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
 import bundlekeys.LeagueDetailBundleKeys;
 
+import com.example.fitsbypact.FriendInviteActivity.UpdateTwitterAsyncTask;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 import com.facebook.FacebookException;
 import com.facebook.Session;
@@ -17,15 +25,23 @@ import constants.FlurryConstants;
 import dbtables.User;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class ShareCheckinActivity extends Activity {
@@ -35,7 +51,25 @@ public class ShareCheckinActivity extends Activity {
 	private ApplicationUser mApplicationUser;
 	private User mUser;
 	private Button mShareButton;
-	private String mGymName;
+	private static String mGymName;
+	private ProgressDialog mProgressDialog;
+	
+	//twitter
+	private SharedPreferences mSharedPreferences;
+    static String PREFERENCE_NAME = "twitter_oauth";
+    static final String PREF_KEY_OAUTH_TOKEN = "oauth_token";
+    static final String PREF_KEY_OAUTH_SECRET = "oauth_token_secret";
+    static final String PREF_KEY_TWITTER_LOGIN = "isTwitterLogedIn";
+    static final String URL_TWITTER_AUTH = "auth_url";
+    static final String URL_TWITTER_OAUTH_VERIFIER = "oauth_verifier";
+    static final String URL_TWITTER_OAUTH_TOKEN = "oauth_token";
+    static final String TWITTER_CALLBACK_URL = "oauth://t4jsamplecheckin";
+    private static Twitter twitter;
+    private static RequestToken requestToken;
+	private String TWITTER_CONSUMER_KEY;
+	private String TWITTER_CONSUMER_SECRET;
+	private Button twitterLoginButton;
+	private Button twitterShareButton;
 	
 	//facebook
 	private UiLifecycleHelper uiHelper;
@@ -55,10 +89,47 @@ public class ShareCheckinActivity extends Activity {
 		
         Log.i(TAG, "onCreate");
         
+    	TWITTER_CONSUMER_KEY = getString(R.string.twitter_consumer_key);
+    	TWITTER_CONSUMER_SECRET = getString(R.string.twitter_consumer_secret);
+        mSharedPreferences = getApplicationContext().getSharedPreferences(
+                "MyPref", 0);
+        
         mApplicationUser = (ApplicationUser)getApplicationContext();
         mUser = mApplicationUser.getUser();
         
         parseBundle(getIntent());
+        
+        if (!isTwitterLoggedInAlready()) {
+            Uri uri = getIntent().getData();
+            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
+                // oAuth verifier
+                String verifier = uri
+                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
+     
+                try {
+                    // Get the access token
+                    AccessToken accessToken = twitter.getOAuthAccessToken(
+                            requestToken, verifier);
+     
+                    // Shared Preferences
+                    Editor e = mSharedPreferences.edit();
+     
+                    // After getting access token, access token secret
+                    // store them in application preferences
+                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
+                    e.putString(PREF_KEY_OAUTH_SECRET,
+                            accessToken.getTokenSecret());
+                    // Store login status - true
+                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
+                    e.commit(); // save changes
+
+                } catch (Exception e) {
+                    // Check log for login errors
+                    Log.e("Twitter Login Error", "> " + e.getMessage());
+                }
+            }
+        }
+        
         initializeButtons(); 
 	}
 	
@@ -160,6 +231,131 @@ public class ShareCheckinActivity extends Activity {
     			publishStory();
     		}
     	});
+    	
+    	twitterLoginButton = (Button)findViewById(R.id.checkin_share_twitter_login_button);
+    	twitterLoginButton.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			authenticateTwitter();
+    		}
+    	});
+    	if (isTwitterLoggedInAlready())
+    		twitterLoginButton.setText("twitter logout");
+    	else
+    		twitterLoginButton.setText("twitter login");
+    	
+    	twitterShareButton = (Button)findViewById(R.id.checkin_share_twitter_share_button);
+    	twitterShareButton.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			publishToTwitter();
+    		}
+    	});
+    }
+    
+    /**
+     * 
+     */
+    private void publishToTwitter() {
+    	if (isTwitterLoggedInAlready()) {
+    		showTwitterDialog();
+    	} else {
+    		Toast.makeText(this, "Sorry, must log in to twitter first", Toast.LENGTH_SHORT).show();
+    	}
+    }
+    
+    private void showTwitterDialog() {
+    	Log.i(TAG, "showTwitterDialog");
+
+    	//TODO clean this up
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	
+	  	final EditText input = new EditText(this);
+	  	input.setText(mUser.getFirstName() + " just checked in at " + mGymName);
+    	builder.setView(input);
+    	
+    	builder.setMessage("Enter status and post to twitter.")
+    			.setCancelable(false)
+    			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					String text = input.getText().toString();
+    					if (text != null && !text.trim().equals("")) {
+    						try {
+    							new UpdateTwitterAsyncTask().execute(text);
+    						} catch (Exception e) {
+    							//TODO make a more better error message
+    							Toast toast = Toast.makeText(ShareCheckinActivity.this, e.toString(), Toast.LENGTH_LONG);
+    							toast.setGravity(Gravity.CENTER, 0, 0);
+    							toast.show();
+    						}
+    					} else {
+							Toast toast = Toast.makeText(ShareCheckinActivity.this, "Sorry, but your status can't be empty", Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
+    					}
+    				}
+    			})
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    }
+    
+    /**
+     * Function to update status
+     * */
+    class UpdateTwitterAsyncTask extends AsyncTask<String, String, String> {
+     
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressDialog = ProgressDialog.show(ShareCheckinActivity.this, "",
+                    "Updating to twitter...");
+
+        }
+     
+        /**
+         * getting Places JSON
+         * */
+        protected String doInBackground(String... args) {
+            Log.d("Tweet Text", "> " + args[0]);
+            String status = args[0];
+            try {
+                ConfigurationBuilder builder = new ConfigurationBuilder();
+                builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
+                builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);
+     
+                // Access Token
+                String access_token = mSharedPreferences.getString(PREF_KEY_OAUTH_TOKEN, "");
+                // Access Token Secret
+                String access_token_secret = mSharedPreferences.getString(PREF_KEY_OAUTH_SECRET, "");
+     
+                AccessToken accessToken = new AccessToken(access_token, access_token_secret);
+                Twitter twitter = new TwitterFactory(builder.build()).getInstance(accessToken);
+     
+                // Update status
+                twitter4j.Status response = twitter.updateStatus(status);
+     
+                Log.d("Status", "> " + response.getText());
+            } catch (TwitterException e) {
+                // Error in updating status
+                Log.d("Twitter Update Error", e.getMessage());
+            }
+            return null;
+        }
+     
+        /**
+         * After completing background task Dismiss the progress dialog and show
+         * the data in UI Always use runOnUiThread(new Runnable()) to update UI
+         * from background thread, otherwise you will get error
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all products
+            mProgressDialog.dismiss();
+        }
+     
     }
     
     /**
@@ -169,7 +365,7 @@ public class ShareCheckinActivity extends Activity {
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
     	if (extras == null) {
-    		Toast.makeText(getApplicationContext(), "no bundle", Toast.LENGTH_LONG).show();
+    		return;
     	}
     		
     	mGymName = extras.getString(LeagueDetailBundleKeys.KEY_GYM_NAME);
@@ -181,7 +377,7 @@ public class ShareCheckinActivity extends Activity {
     private void publishStory() {
         Session session = Session.getActiveSession();
 
-        if (session == null || session.isClosed()) {
+        if (session == null || !session.isOpened()) {
         	Toast.makeText(this, "Sorry, but you must sign in", Toast.LENGTH_LONG).show();
         }
         else {
@@ -189,7 +385,7 @@ public class ShareCheckinActivity extends Activity {
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
             postParams.putString("caption", "An app that motivates you to go to the gym.");
-            postParams.putString("description", mUser.getFirstName() + " just checked in at" + mGymName);
+            postParams.putString("description", mUser.getFirstName() + " just checked in at " + mGymName);
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
 
@@ -216,5 +412,48 @@ public class ShareCheckinActivity extends Activity {
                 feedDialog.show();
         }
 
+    }
+    
+    /**
+     * logins in user if not, logsout if logged in
+     */
+    private void authenticateTwitter() {
+    	if (!isTwitterLoggedInAlready()) {
+    		ConfigurationBuilder builder = new ConfigurationBuilder();
+    		builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
+    		builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);    	
+    		Configuration configuration = builder.build();
+
+    		TwitterFactory factory = new TwitterFactory(configuration);
+    		twitter = factory.getInstance();
+
+    		try {
+    			requestToken = twitter
+    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
+    			this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+    					.parse(requestToken.getAuthenticationURL())));
+    		} catch (TwitterException e) {
+    			e.printStackTrace();
+    		}
+    	} else {
+    	    // Clear the shared preferences
+    	    Editor e = mSharedPreferences.edit();
+    	    e.remove(PREF_KEY_OAUTH_TOKEN);
+    	    e.remove(PREF_KEY_OAUTH_SECRET);
+    	    e.remove(PREF_KEY_TWITTER_LOGIN);
+    	    e.commit();
+    	    
+    	    twitterLoginButton.setText("twitter login");
+    	}
+    	
+    }
+    
+    /**
+     * Check user already logged in your application using twitter Login flag is
+     * fetched from Shared Preferences
+     * */
+    private boolean isTwitterLoggedInAlready() {
+        // return twitter login status from Shared Preferences
+        return mSharedPreferences.getBoolean(PREF_KEY_TWITTER_LOGIN, false);
     }
 }
