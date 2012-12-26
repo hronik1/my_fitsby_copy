@@ -27,6 +27,8 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.Gravity;
@@ -79,23 +81,12 @@ public class FriendInviteActivity extends Activity {
 
 	private final static String TAG = "FriendInviteActivity";
 	private final static int PICK_CONTACT_REQUEST = 2;
-	private String TWITTER_CONSUMER_KEY;
-	private String TWITTER_CONSUMER_SECRET;
-	private String TWITTER_ACCESS_TOKEN;
-	private String TWITTER_ACCESS_TOKEN_SECRET;
-	
-	// Twitter oauth urls
-    static final String URL_TWITTER_AUTH = "auth_url";
-    static final String URL_TWITTER_OAUTH_VERIFIER = "oauth_verifier";
-    static final String URL_TWITTER_OAUTH_TOKEN = "oauth_token";
-    static final String TWITTER_CALLBACK_URL = "oauth://t4jsample";
-    private static Twitter twitter;
-    private static RequestToken requestToken;
-    
+
 	private Button homeButton;
 	private Button inviteButton;
 	private Button shareButton;
-	private LinearLayout twitterLL;
+	private Button twitterLoginButton;
+	private Button twitterShareButton;
 	
 	private ListView contactsListView;
 	private ArrayList<String> contacts;
@@ -107,6 +98,22 @@ public class FriendInviteActivity extends Activity {
 	
 	private ApplicationUser mApplicationUser;
 	private User mUser;
+	
+	//twitter
+	private SharedPreferences mSharedPreferences;
+    static String PREFERENCE_NAME = "twitter_oauth";
+    static final String PREF_KEY_OAUTH_TOKEN = "oauth_token";
+    static final String PREF_KEY_OAUTH_SECRET = "oauth_token_secret";
+    static final String PREF_KEY_TWITTER_LOGIN = "isTwitterLogedIn";
+    static final String URL_TWITTER_AUTH = "auth_url";
+    static final String URL_TWITTER_OAUTH_VERIFIER = "oauth_verifier";
+    static final String URL_TWITTER_OAUTH_TOKEN = "oauth_token";
+    static final String TWITTER_CALLBACK_URL = "oauth://t4jsample";
+    private static Twitter twitter;
+    private static RequestToken requestToken;
+	private String TWITTER_CONSUMER_KEY;
+	private String TWITTER_CONSUMER_SECRET;
+	
 	
 	//facebook
 	private UiLifecycleHelper uiHelper;
@@ -128,23 +135,48 @@ public class FriendInviteActivity extends Activity {
         
     	TWITTER_CONSUMER_KEY = getString(R.string.twitter_consumer_key);
     	TWITTER_CONSUMER_SECRET = getString(R.string.twitter_consumer_secret);
-    	TWITTER_ACCESS_TOKEN = getString(R.string.twitter_access_token);
-    	TWITTER_ACCESS_TOKEN_SECRET = getString(R.string.twitter_access_token_secret);
+        mSharedPreferences = getApplicationContext().getSharedPreferences(
+                "MyPref", 0);
     	
         Log.i(TAG, "onCreate");
         
         mApplicationUser = (ApplicationUser)getApplicationContext();
         mUser = mApplicationUser.getUser();
-        initializeButtons(); 
-        initializeLinearLayouts();
-       // initializeListView();
         parseBundle(getIntent());
-//        try {
-//        	this.openSession();
-//        	Log.d(TAG, "fb opensession called");
-//        } catch (Exception e) {
-//        	Log.d(TAG, e.toString());
-//        }
+        
+        if (!isTwitterLoggedInAlready()) {
+            Uri uri = getIntent().getData();
+            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
+                // oAuth verifier
+                String verifier = uri
+                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
+     
+                try {
+                    // Get the access token
+                    AccessToken accessToken = twitter.getOAuthAccessToken(
+                            requestToken, verifier);
+     
+                    // Shared Preferences
+                    Editor e = mSharedPreferences.edit();
+     
+                    // After getting access token, access token secret
+                    // store them in application preferences
+                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
+                    e.putString(PREF_KEY_OAUTH_SECRET,
+                            accessToken.getTokenSecret());
+                    // Store login status - true
+                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
+                    e.commit(); // save changes
+
+                } catch (Exception e) {
+                    // Check log for login errors
+                    Log.e("Twitter Login Error", "> " + e.getMessage());
+                }
+            }
+        }
+        
+        initializeButtons(); 
+        
         new CreatorAsyncTask().execute(leagueId+"");
     }
 
@@ -282,18 +314,26 @@ public class FriendInviteActivity extends Activity {
     			publishStory();
     		}
     	});
-    }
-    
-    private void initializeLinearLayouts() {
-    	twitterLL = (LinearLayout)findViewById(R.id.friend_invite_twitter_ll);
-    	twitterLL.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateTwitter();
-				
-			}
+    	
+    	twitterLoginButton = (Button)findViewById(R.id.invite_twitter_login_button);
+    	twitterLoginButton.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			authenticateTwitter();
+    		}
+    	});
+    	if (isTwitterLoggedInAlready())
+    		twitterLoginButton.setText("twitter logout");
+    	else
+    		twitterLoginButton.setText("twitter login");
+    	
+    	twitterShareButton = (Button)findViewById(R.id.invite_twitter_share_button);
+    	twitterShareButton.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			publishToTwitter();
+    		}
     	});
     }
+
     private void initializeListView() {
 		contacts =  new ArrayList<String>();
 
@@ -449,25 +489,154 @@ public class FriendInviteActivity extends Activity {
 
     }
     
-    private void updateTwitter() {
+    /**
+     * logins in user if not, logsout if logged in
+     */
+    private void authenticateTwitter() {
+    	if (!isTwitterLoggedInAlready()) {
+    		ConfigurationBuilder builder = new ConfigurationBuilder();
+    		builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
+    		builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);    	
+    		Configuration configuration = builder.build();
 
-    	ConfigurationBuilder builder = new ConfigurationBuilder();
-    	builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
-    	builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);    	
-    	Configuration configuration = builder.build();
+    		TwitterFactory factory = new TwitterFactory(configuration);
+    		twitter = factory.getInstance();
 
-    	TwitterFactory factory = new TwitterFactory(configuration);
-    	twitter = factory.getInstance();
-
-    	try {
-    		requestToken = twitter
-    				.getOAuthRequestToken(TWITTER_CALLBACK_URL);
-    		this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-    				.parse(requestToken.getAuthenticationURL())));
-    	} catch (TwitterException e) {
-    		e.printStackTrace();
+    		try {
+    			requestToken = twitter
+    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
+    			this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+    					.parse(requestToken.getAuthenticationURL())));
+    		} catch (TwitterException e) {
+    			e.printStackTrace();
+    		}
+    	} else {
+    	    // Clear the shared preferences
+    	    Editor e = mSharedPreferences.edit();
+    	    e.remove(PREF_KEY_OAUTH_TOKEN);
+    	    e.remove(PREF_KEY_OAUTH_SECRET);
+    	    e.remove(PREF_KEY_TWITTER_LOGIN);
+    	    e.commit();
+    	    
+    	    twitterLoginButton.setText("twitter login");
     	}
+    	
+    }
+    
+    /**
+     * Check user already logged in your application using twitter Login flag is
+     * fetched from Shared Preferences
+     * */
+    private boolean isTwitterLoggedInAlready() {
+        // return twitter login status from Shared Preferences
+        return mSharedPreferences.getBoolean(PREF_KEY_TWITTER_LOGIN, false);
+    }
+    
+    /**
+     * 
+     */
+    private void publishToTwitter() {
+    	if (isTwitterLoggedInAlready()) {
+    		showTwitterDialog();
+    	} else {
+    		Toast.makeText(this, "Sorry, must log in to twitter first", Toast.LENGTH_SHORT).show();
+    	}
+    }
+    
+    private void showTwitterDialog() {
+    	Log.i(TAG, "showTwitterDialog");
 
+    	//TODO clean this up
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	
+	  	final EditText input = new EditText(this);
+	  	input.setHint("status");
+    	builder.setView(input);
+    	
+    	builder.setMessage("Enter status and post to twitter.")
+    			.setCancelable(false)
+    			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					String text = input.getText().toString();
+    					if (text != null && !text.trim().equals("")) {
+    						try {
+    							new UpdateTwitterAsyncTask().execute(text);
+    						} catch (Exception e) {
+    							//TODO make a more better error message
+    							Toast toast = Toast.makeText(FriendInviteActivity.this, e.toString(), Toast.LENGTH_LONG);
+    							toast.setGravity(Gravity.CENTER, 0, 0);
+    							toast.show();
+    						}
+    					} else {
+							Toast toast = Toast.makeText(FriendInviteActivity.this, "Sorry, but your status can't be empty", Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
+    					}
+    				}
+    			})
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    }
+    
+    /**
+     * Function to update status
+     * */
+    class UpdateTwitterAsyncTask extends AsyncTask<String, String, String> {
+     
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+                    "Updating to twitter...");
+
+        }
+     
+        /**
+         * getting Places JSON
+         * */
+        protected String doInBackground(String... args) {
+            Log.d("Tweet Text", "> " + args[0]);
+            String status = args[0];
+            try {
+                ConfigurationBuilder builder = new ConfigurationBuilder();
+                builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
+                builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);
+     
+                // Access Token
+                String access_token = mSharedPreferences.getString(PREF_KEY_OAUTH_TOKEN, "");
+                // Access Token Secret
+                String access_token_secret = mSharedPreferences.getString(PREF_KEY_OAUTH_SECRET, "");
+     
+                AccessToken accessToken = new AccessToken(access_token, access_token_secret);
+                Twitter twitter = new TwitterFactory(builder.build()).getInstance(accessToken);
+     
+                // Update status
+                twitter4j.Status response = twitter.updateStatus(status);
+     
+                Log.d("Status", "> " + response.getText());
+            } catch (TwitterException e) {
+                // Error in updating status
+                Log.d("Twitter Update Error", e.getMessage());
+            }
+            return null;
+        }
+     
+        /**
+         * After completing background task Dismiss the progress dialog and show
+         * the data in UI Always use runOnUiThread(new Runnable()) to update UI
+         * from background thread, otherwise you will get error
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all products
+            mProgressDialog.dismiss();
+        }
+     
     }
     
     /**
