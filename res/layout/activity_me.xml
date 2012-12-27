@@ -206,6 +206,15 @@
                 android:text="@string/me_settings_button_submit_text" />
             
             <TextView
+                android:id="@+id/me_reset_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_settings_button_submit"
+                android:text="@string/me_reset_password"
+                android:layout_marginLeft="10dp"
+                android:textColor="@drawable/faq_button_text" />
+                        
+            <TextView
                 android:id="@+id/me_faq"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -266,14 +275,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_facebook"
-                android:text="@string/me_twitter"
                 android:background="@drawable/custom_login_button"
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"                
                 android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"       
+                android:layout_marginLeft="10dp" 
                 android:textSize="17sp"          
-                android:gravity="center" />
+				android:gravity="center"                
+                android:text="@string/me_twitter" />
             
             <Button
                 android:id="@+id/me_settings_button_logout"
@@ -308,7 +317,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"                            
                 android:layout_alignLeft="@+id/me_settings_tutorial_button"
-                android:layout_below="@+id/me_settings_button_submit"
+                android:layout_below="@+id/me_reset_password"
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"  
                 android:textStyle="bold"              

@@ -1218,9 +1218,40 @@ containing a value of this type.
         public static final int check_in_button_check_in=0x7f040038;
         public static final int check_in_button_check_out=0x7f040036;
         public static final int check_in_iv=0x7f040039;
+<<<<<<< HEAD
         public static final int checkin_icon=0x7f040105;
         public static final int checkin_share_authButton=0x7f0400e4;
         public static final int checkin_share_facebook_shareButton=0x7f0400e5;
+=======
+<<<<<<< HEAD
+        public static final int checkin_icon=0x7f040104;
+        public static final int checkin_share_authButton=0x7f0400e3;
+        public static final int checkin_share_facebook_shareButton=0x7f0400e4;
+        public static final int checkout_directions=0x7f040037;
+        public static final int colon=0x7f040035;
+        public static final int com_facebook_login_activity_progress_bar=0x7f0400e9;
+        public static final int com_facebook_picker_activity_circle=0x7f0400e8;
+        public static final int com_facebook_picker_checkbox=0x7f0400eb;
+        public static final int com_facebook_picker_checkbox_stub=0x7f0400ef;
+        public static final int com_facebook_picker_divider=0x7f0400f3;
+        public static final int com_facebook_picker_done_button=0x7f0400f2;
+        public static final int com_facebook_picker_image=0x7f0400ec;
+        public static final int com_facebook_picker_list_section_header=0x7f0400f0;
+        public static final int com_facebook_picker_list_view=0x7f0400e7;
+        public static final int com_facebook_picker_profile_pic_stub=0x7f0400ed;
+        public static final int com_facebook_picker_row_activity_circle=0x7f0400ea;
+        public static final int com_facebook_picker_title=0x7f0400ee;
+        public static final int com_facebook_picker_title_bar=0x7f0400f5;
+        public static final int com_facebook_picker_title_bar_stub=0x7f0400f4;
+        public static final int com_facebook_picker_top_bar=0x7f0400f1;
+        public static final int com_facebook_placepickerfragment_search_box_stub=0x7f0400f6;
+        public static final int com_facebook_usersettingsfragment_login_button=0x7f0400fb;
+        public static final int com_facebook_usersettingsfragment_logo_image=0x7f0400f9;
+        public static final int com_facebook_usersettingsfragment_profile_name=0x7f0400fa;
+        public static final int create_new_game_directions=0x7f040092;
+=======
+        public static final int checkin_icon=0x7f040103;
+>>>>>>> master
         public static final int checkout_directions=0x7f040037;
         public static final int colon=0x7f040035;
         public static final int com_facebook_login_activity_progress_bar=0x7f0400ea;
@@ -1243,6 +1274,7 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f0400fa;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f0400fb;
         public static final int create_new_game_directions=0x7f040094;
+>>>>>>> design
         public static final int credit_card_button_submit=0x7f04004a;
         public static final int credit_card_cvc_text=0x7f040044;
         public static final int credit_card_et_card_cvc=0x7f040045;
@@ -1264,19 +1296,39 @@ containing a value of this type.
         public static final int find_private_game=0x7f040090;
         public static final int first_linear_layout=0x7f04009c;
         public static final int fitsby_description_text=0x7f04006d;
+<<<<<<< HEAD
         public static final int fragment_tutorial_object_button=0x7f0400fe;
         public static final int fragment_tutorial_object_iv=0x7f0400fd;
+=======
+<<<<<<< HEAD
+        public static final int fragment_tutorial_object_button=0x7f0400fd;
+        public static final int fragment_tutorial_object_iv=0x7f0400fc;
+        public static final int frameLayout1=0x7f0400d7;
+=======
+        public static final int fragment_tutorial_object_button=0x7f0400fc;
+        public static final int fragment_tutorial_object_iv=0x7f0400fb;
+>>>>>>> master
         public static final int frameLayout1=0x7f0400d8;
+>>>>>>> design
         public static final int friend_invite_button_home=0x7f040050;
         public static final int friend_invite_button_invite=0x7f04004d;
         public static final int friend_invite_twitter_iv=0x7f040053;
         public static final int friend_invite_twitter_ll=0x7f04004f;
+<<<<<<< HEAD
+        public static final int game_id=0x7f04009b;
+        public static final int game_leader_framelayout_imageview=0x7f0400ff;
+        public static final int game_number_of_winners=0x7f0400ab;
+        public static final int game_number_of_winners_value=0x7f0400ac;
+        public static final int game_start_date=0x7f0400ae;
+        public static final int game_start_date_value=0x7f0400af;
+=======
         public static final int game_id=0x7f04009d;
         public static final int game_leader_framelayout_imageview=0x7f040100;
         public static final int game_number_of_winners=0x7f0400ad;
         public static final int game_number_of_winners_value=0x7f0400ae;
         public static final int game_start_date=0x7f0400b0;
         public static final int game_start_date_value=0x7f0400b1;
+>>>>>>> design
         public static final int games_button_newgame=0x7f04006b;
         public static final int games_leader_list=0x7f040068;
         public static final int games_leader_prompt=0x7f040063;
@@ -1357,6 +1409,7 @@ containing a value of this type.
         public static final int league_join_public_header=0x7f040087;
         public static final int league_join_wager_header=0x7f04008c;
         public static final int listMode=0x7f040002;
+<<<<<<< HEAD
         public static final int list_item_bold=0x7f04010d;
         public static final int list_item_game_leader_checkins=0x7f040107;
         public static final int list_item_game_leader_checkins_prompt=0x7f040106;
@@ -1378,6 +1431,123 @@ containing a value of this type.
         public static final int list_item_public_leagues_pot_dollar=0x7f040114;
         public static final int list_item_public_leagues_wager=0x7f040113;
         public static final int list_item_public_leagues_wager_dollar=0x7f040112;
+=======
+<<<<<<< HEAD
+        public static final int list_item_bold=0x7f04010c;
+        public static final int list_item_game_leader_checkins=0x7f040106;
+        public static final int list_item_game_leader_checkins_prompt=0x7f040105;
+        public static final int list_item_game_leader_imageview=0x7f040100;
+        public static final int list_item_game_leader_last_name=0x7f040102;
+        public static final int list_item_game_leader_name=0x7f040101;
+        public static final int list_item_id=0x7f04010b;
+        public static final int list_item_newsfeed_first_name=0x7f040108;
+        public static final int list_item_newsfeed_imageview=0x7f040107;
+        public static final int list_item_newsfeed_last_name=0x7f040109;
+        public static final int list_item_newsfeed_message=0x7f04010d;
+        public static final int list_item_newsfeed_timestamp=0x7f04010a;
+        public static final int list_item_public_leagues_creator=0x7f04010e;
+        public static final int list_item_public_leagues_duration=0x7f040115;
+        public static final int list_item_public_leagues_id =0x7f04010f;
+        public static final int list_item_public_leagues_leagues_duration_days=0x7f040116;
+        public static final int list_item_public_leagues_players=0x7f040110;
+        public static final int list_item_public_leagues_pot=0x7f040114;
+        public static final int list_item_public_leagues_pot_dollar=0x7f040113;
+        public static final int list_item_public_leagues_wager=0x7f040112;
+        public static final int list_item_public_leagues_wager_dollar=0x7f040111;
+        public static final int login_button_login=0x7f0400b8;
+        public static final int login_email_id=0x7f0400b6;
+        public static final int login_forgot_password=0x7f0400ba;
+        public static final int login_password_id=0x7f0400b7;
+        public static final int login_remember_me_checkbox=0x7f0400b9;
+        public static final int login_remember_me_textview=0x7f0400bb;
+        public static final int login_text=0x7f0400b5;
+        public static final int me_facebook=0x7f0400d1;
+        public static final int me_faq=0x7f0400cd;
+        public static final int me_framelayout_imageview=0x7f0400bc;
+        public static final int me_imageview=0x7f0400bd;
+        public static final int me_links_text=0x7f0400ce;
+        public static final int me_privacy_policy=0x7f0400cf;
+        public static final int me_reset_password=0x7f0400cc;
+        public static final int me_settings_button_logout=0x7f0400d3;
+        public static final int me_settings_button_submit=0x7f0400cb;
+        public static final int me_settings_et_change_email=0x7f0400c9;
+        public static final int me_settings_tutorial_button=0x7f0400d4;
+        public static final int me_settings_tv_change_email=0x7f0400c8;
+        public static final int me_settings_tv_change_picture=0x7f0400c6;
+        public static final int me_settings_tv_change_picture_link=0x7f0400c7;
+        public static final int me_terms_service=0x7f0400d0;
+        public static final int me_textview_join_date=0x7f0400bf;
+        public static final int me_textview_name=0x7f0400be;
+        public static final int me_textview_total_checkins=0x7f0400c5;
+        public static final int me_textview_total_checkins_prompt=0x7f0400c4;
+        public static final int me_textview_total_gym_time=0x7f0400c3;
+        public static final int me_textview_total_gym_time_prompt=0x7f0400c2;
+        public static final int me_textview_total_money_earned_money=0x7f0400c1;
+        public static final int me_textview_total_money_earned_prompt=0x7f0400c0;
+        public static final int me_tutorials_text=0x7f0400d5;
+        public static final int me_twitter=0x7f0400d2;
+        public static final int menu_settings=0x7f040120;
+        public static final int minutes=0x7f04003c;
+        public static final int motto=0x7f040070;
+        public static final int navigation_textview_checkin=0x7f040119;
+        public static final int navigation_textview_game=0x7f040117;
+        public static final int navigation_textview_me=0x7f04011a;
+        public static final int navigation_textview_newsfeed=0x7f040118;
+        public static final int newsfeed_button_submit=0x7f0400d9;
+        public static final int newsfeed_et_comment=0x7f0400d8;
+        public static final int newsfeed_list_view=0x7f0400da;
+        public static final int newsfeed_spinner=0x7f0400d6;
+        public static final int normal=0x7f040001;
+        public static final int or=0x7f04006e;
+        public static final int or_invite_them_later_text=0x7f04004e;
+        public static final int pager=0x7f0400e5;
+        public static final int pager_title_strip=0x7f0400e6;
+        public static final int picker_subtitle=0x7f0400f8;
+        public static final int players_icon=0x7f040055;
+        public static final int pot_icon=0x7f040057;
+        public static final int private_game=0x7f04009e;
+        public static final int public_leagues_duration_header=0x7f04011e;
+        public static final int public_leagues_league_id_header=0x7f04011b;
+        public static final int public_leagues_players_header=0x7f04011c;
+        public static final int public_leagues_pot_header=0x7f04011f;
+        public static final int public_leagues_wager_header=0x7f04011d;
+        public static final int rank=0x7f0400fe;
+        public static final int realtabcontent=0x01010000;
+        public static final int register_button_register=0x7f0400db;
+        public static final int register_confirm_password_id=0x7f0400dc;
+        public static final int register_email_id=0x7f0400de;
+        public static final int register_first_name_id=0x7f0400df;
+        public static final int register_last_name_id=0x7f0400e1;
+        public static final int register_password_id=0x7f0400dd;
+        public static final int register_text=0x7f0400e0;
+        public static final int search_box=0x7f0400f7;
+        public static final int second_linear_layout=0x7f0400a2;
+        public static final int seconds=0x7f04003b;
+        public static final int secure_payment_logo=0x7f04004b;
+        public static final int settings_frame=0x7f0400e2;
+=======
+        public static final int list_item_bold=0x7f04010b;
+        public static final int list_item_game_leader_checkins=0x7f040105;
+        public static final int list_item_game_leader_checkins_prompt=0x7f040104;
+        public static final int list_item_game_leader_imageview=0x7f0400ff;
+        public static final int list_item_game_leader_last_name=0x7f040101;
+        public static final int list_item_game_leader_name=0x7f040100;
+        public static final int list_item_id=0x7f04010a;
+        public static final int list_item_newsfeed_first_name=0x7f040107;
+        public static final int list_item_newsfeed_imageview=0x7f040106;
+        public static final int list_item_newsfeed_last_name=0x7f040108;
+        public static final int list_item_newsfeed_message=0x7f04010c;
+        public static final int list_item_newsfeed_timestamp=0x7f040109;
+        public static final int list_item_public_leagues_creator=0x7f04010d;
+        public static final int list_item_public_leagues_duration=0x7f040114;
+        public static final int list_item_public_leagues_id =0x7f04010e;
+        public static final int list_item_public_leagues_leagues_duration_days=0x7f040115;
+        public static final int list_item_public_leagues_players=0x7f04010f;
+        public static final int list_item_public_leagues_pot=0x7f040113;
+        public static final int list_item_public_leagues_pot_dollar=0x7f040112;
+        public static final int list_item_public_leagues_wager=0x7f040111;
+        public static final int list_item_public_leagues_wager_dollar=0x7f040110;
+>>>>>>> master
         public static final int login_button_login=0x7f0400ba;
         public static final int login_email_id=0x7f0400b8;
         public static final int login_forgot_password=0x7f0400bc;
@@ -1448,6 +1618,7 @@ containing a value of this type.
         public static final int seconds=0x7f04003b;
         public static final int secure_payment_logo=0x7f04004b;
         public static final int settings_frame=0x7f0400e3;
+>>>>>>> design
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
@@ -1461,7 +1632,15 @@ containing a value of this type.
         public static final int verified_gym=0x7f04003a;
         public static final int wager_box=0x7f040077;
         public static final int wager_icon=0x7f040056;
+<<<<<<< HEAD
         public static final int winner=0x7f040104;
+=======
+<<<<<<< HEAD
+        public static final int winner=0x7f040103;
+=======
+        public static final int winner=0x7f040102;
+>>>>>>> design
+>>>>>>> master
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {
