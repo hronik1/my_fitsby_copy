@@ -26,7 +26,7 @@ public class TutorialActivity extends FragmentActivity {
     ViewPager mViewPager;
     
     private static int[] pageDrawableResources = new int[] {R.drawable.green_check_mark, R.drawable.fitsby_logo,
-    		R.drawable.stripe_cards, R.drawable.sparkle, R.drawable.secure_payment_logo};
+    		R.drawable.stripe_cards};
     
     
 	@Override

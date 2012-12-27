@@ -11,6 +11,7 @@ import servercommunication.UserCommunication;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fitsbypact.LandingActivity;
+import com.example.fitsbypact.LoginActivity;
 import com.example.fitsbypact.MessengerService;
 import com.example.fitsbypact.R;
 import com.example.fitsbypact.TutorialActivity;
@@ -68,6 +69,7 @@ public class MeFragment extends SherlockFragment {
 	private TextView termsTV;
 	private TextView policyTV;
 	private TextView facebookTV;
+	private TextView resetPasswordTV;
 	private TextView twitterTV;
 	
 	private Button logoutButton;
@@ -230,13 +232,22 @@ public class MeFragment extends SherlockFragment {
 		});
 		
 		twitterTV = (TextView)viewer.findViewById(R.id.me_twitter);
-		termsTV.setOnClickListener(new OnClickListener() {
+		twitterTV.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/fitsby"));
 		 		startActivity(browserIntent);
 			}
 		});
+		
+		resetPasswordTV = (TextView)viewer.findViewById(R.id.me_reset_password);
+		resetPasswordTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showAlertResetPassword();
+			}
+		});
+		
 	}
 	
 	/**
@@ -354,6 +365,42 @@ public class MeFragment extends SherlockFragment {
 		}
 	}
 	
+    /**
+     * shows dialog to reset their password
+     */
+    private void showAlertResetPassword() {
+    	AlertDialog.Builder alert = new AlertDialog.Builder(parent);
+
+    	alert.setMessage("Reset password link will be sent to your email.");
+
+    	// Set an EditText view to get user input 
+    	final EditText input = new EditText(parent);
+    	input.setText(mUser.getEmail());
+    	alert.setView(input);
+
+    	alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+    		public void onClick(DialogInterface dialog, int whichButton) {
+    			String value = input.getText().toString();
+    			if (!"".equals(value)) {
+    				new PasswordResetAsyncTask().execute(value);
+    			}
+    			else {
+            		Toast toast = Toast.makeText(parent, "Sorry, but your email cannot be empty.", Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+            		toast.show();
+    			}	
+    		}  
+    	});
+
+    	alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    	  public void onClick(DialogInterface dialog, int whichButton) {
+    		  dialog.cancel();
+    	  }
+    	});
+
+    	alert.show();
+    }
+    
 	 /**
      * shows AlertDialog
      */
@@ -501,6 +548,42 @@ public class MeFragment extends SherlockFragment {
                 default:
                     super.handleMessage(msg);
             }
+        }
+    }
+    
+    /**
+     * AsyncTask class to login the user
+     * @author brent
+     *
+     */
+    private class PasswordResetAsyncTask extends AsyncTask<String, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Sending you a link to reset your password...");
+		}
+		
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = UserCommunication.resetPassword(params[0]);
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	
+        	if (response == null ) {
+        		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(parent, "That email does not exist", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else {
+        		Toast toast = Toast.makeText(parent, "A link to change your password has just been sent to you", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	}
         }
     }
 }
