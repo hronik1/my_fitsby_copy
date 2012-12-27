@@ -212,6 +212,8 @@
                 android:layout_below="@+id/me_settings_button_submit"
                 android:text="@string/me_reset_password"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:textColor="@drawable/faq_button_text" />
                         
             <TextView
