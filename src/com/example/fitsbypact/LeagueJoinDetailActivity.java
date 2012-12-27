@@ -209,7 +209,7 @@ public class LeagueJoinDetailActivity extends Activity {
  	 */
  	private void initializeTextViews() {
  		typeTV = (TextView)findViewById(R.id.league_join_detail_type_data);
- 		typeTV.setText(isPrivate ? " Private" : " Public");
+ 		typeTV.setText(isPrivate ? "Private" : "Public");
  		
  		wagerTV = (TextView)findViewById(R.id.league_join_detail_wager_data);
  		wagerTV.setText("$" + wager);
@@ -224,7 +224,7 @@ public class LeagueJoinDetailActivity extends Activity {
  		durationTV.setText(" (" + duration + " days)");
  		
  		leagueIdTV = (TextView)findViewById(R.id.league_join_detail_id_data);
- 		leagueIdTV.setText(" " + leagueId);
+ 		leagueIdTV.setText("" + leagueId);
  		
  		startDateTV = (TextView)findViewById(R.id.game_start_date_value);
  		
