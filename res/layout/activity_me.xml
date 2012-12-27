@@ -276,20 +276,6 @@
                 android:layout_below="@+id/me_twitter"
                 android:text="reset password"
                 android:textColor="@drawable/faq_button_text" />
-                        
-            <Button
-                android:id="@+id/me_settings_tutorial_button"
-                android:layout_below="@+id/me_reset_password"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/me_twitter"
-                android:background="@drawable/custom_login_button"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"                
-                android:layout_marginRight="10dp"                
-                android:layout_marginLeft="10dp"       
-                android:textSize="17sp"          
-                android:gravity="center" />
             
             <Button
                 android:id="@+id/me_settings_button_logout"
@@ -313,8 +299,8 @@
                 android:layout_below="@+id/me_tutorials_text"
                 android:background="@drawable/custom_login_button"
                 android:gravity="center"
-                android:text="@string/me_settings_tutorial_button"
-                android:textColor="@color/white"            
+                android:textColor="@color/white"
+                android:text="@string/me_settings_tutorial_button"            
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="17sp" />

@@ -1396,11 +1396,11 @@ containing a value of this type.
         public static final int me_links_text=0x7f0400d0;
         public static final int me_privacy_policy=0x7f0400d1;
         public static final int me_reset_password=0x7f0400d5;
-        public static final int me_settings_button_logout=0x7f0400d7;
+        public static final int me_settings_button_logout=0x7f0400d6;
         public static final int me_settings_button_submit=0x7f0400ce;
         public static final int me_settings_checkin_tutorial_button=0x7f0400d9;
         public static final int me_settings_et_change_email=0x7f0400cc;
-        public static final int me_settings_tutorial_button=0x7f0400d6;
+        public static final int me_settings_tutorial_button=0x7f0400d7;
         public static final int me_settings_tv_change_email=0x7f0400cb;
         public static final int me_settings_tv_change_picture=0x7f0400c9;
         public static final int me_settings_tv_change_picture_link=0x7f0400ca;

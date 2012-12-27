@@ -292,6 +292,7 @@ public class MeFragment extends SherlockFragment {
 		tutorialButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(parent, "hello", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(parent, TutorialActivity.class);
 				startActivity(intent);
 			}
@@ -423,7 +424,8 @@ public class MeFragment extends SherlockFragment {
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    					new CheckoutAsyncTask().execute(mUser.getID());
+    					//new CheckoutAsyncTask().execute(mUser.getID());
+    					logout();
     				}
     			})
     			.setNegativeButton("No", new DialogInterface.OnClickListener() {
