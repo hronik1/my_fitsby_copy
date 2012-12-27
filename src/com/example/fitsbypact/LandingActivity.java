@@ -39,19 +39,6 @@ public class LandingActivity extends Activity {
         
         initializeButtons();
         
-        try {
-        	GCMRegistrar.checkDevice(this);
-        	GCMRegistrar.checkManifest(this);
-        	final String regId = GCMRegistrar.getRegistrationId(this);
-        	if (regId.equals("")) {
-        		GCMRegistrar.register(this, getString(R.string.gcm_sender_id));
-        		Log.v(TAG, "Just now registered");
-        	} else {
-        		Log.v(TAG, "Already registered");
-        	}
-        } catch (Exception e) {
-        	Log.e(TAG, e.toString());
-        }
     }
 
     /**

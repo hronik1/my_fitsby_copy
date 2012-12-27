@@ -46,6 +46,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,6 +69,8 @@ public class MeFragment extends SherlockFragment {
 	
 	private Button logoutButton;
 	private Button submitButton;
+	
+	private CheckBox enableNotificationsCB;
 	
 	private EditText emailET;
 	private ProgressDialog mProgressDialog;
@@ -116,6 +121,7 @@ public class MeFragment extends SherlockFragment {
 	    initializeButtons(viewer);
 	    initializeEditTexts(viewer);
 	    initializeImageView(viewer);
+	    initializeCheckBox(viewer);
 
 	    new StatsAsyncTask().execute(mUser.getID());
 	    
@@ -231,6 +237,18 @@ public class MeFragment extends SherlockFragment {
 	 */
 	private void initializeImageView(View viewer) {
 		profileIV = (ImageView)viewer.findViewById(R.id.me_imageview);
+	}
+	
+	private void initializeCheckBox(View viewer) {
+		enableNotificationsCB = (CheckBox)viewer.findViewById(R.id.notifications_enabled);
+		enableNotificationsCB.setChecked(true);
+		enableNotificationsCB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				
+			}
+		});
 	}
 	
 	/**
@@ -431,6 +449,28 @@ public class MeFragment extends SherlockFragment {
         }
     }
     
+    /**
+     * AsyncTask to Register user
+     * @author brent
+     *
+     */
+    private class EnableNotificationsAsyncTask extends AsyncTask<Boolean, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Updating your notification status...");
+		}
+		
+        protected StatusResponse doInBackground(Boolean... params) {
+        	StatusResponse response = UserCommunication.enableNotifications(mUser.getID(), params[0]);
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	//TODO feeling toasty
+        }
+    }
     /**
      * Handler of incoming messages from service.
      */

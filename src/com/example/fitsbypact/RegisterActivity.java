@@ -26,8 +26,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
+import responses.StatusResponse;
 import responses.UserResponse;
 
 public class RegisterActivity extends Activity {
@@ -295,9 +297,25 @@ public class RegisterActivity extends Activity {
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
+        		
+                try {
+                	GCMRegistrar.checkDevice(RegisterActivity.this);
+                	GCMRegistrar.checkManifest(RegisterActivity.this);
+                	final String regId = GCMRegistrar.getRegistrationId(RegisterActivity.this);
+                	if (regId.equals("")) {
+                		GCMRegistrar.register(RegisterActivity.this, getString(R.string.gcm_sender_id));
+                		Log.v(TAG, "Just now registered");
+                	} else {
+                		Log.v(TAG, "Already registered");
+                	}
+                } catch (Exception e) {
+                	Log.e(TAG, e.toString());
+                }
 				Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
 				startActivity(intent);
         	}
         }
     }
+    
+
 }
