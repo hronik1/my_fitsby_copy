@@ -319,6 +319,20 @@
                 android:layout_marginTop="5dp"
                 android:textSize="17sp" />
 
+            <Button
+                android:id="@+id/me_settings_checkin_tutorial_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/me_settings_button_submit"
+                android:layout_below="@+id/me_settings_tutorial_button"
+                android:background="@drawable/custom_login_button"
+                android:gravity="center"
+                android:text="Check-in Tutorial"
+                android:textColor="@color/white"            
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="17sp" />
+            
             <TextView
                 android:id="@+id/me_tutorials_text"
                 android:layout_width="wrap_content"
@@ -339,7 +353,7 @@
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"                
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/me_settings_tutorial_button"
+                android:layout_below="@+id/me_settings_checkin_tutorial_button"
                 android:text="@string/me_links_text" 
                 android:textColor="@color/white"
                 android:textStyle="bold"/>

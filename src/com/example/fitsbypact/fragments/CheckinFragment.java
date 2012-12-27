@@ -15,11 +15,14 @@ import servercommunication.CheckinCommunication;
 import bundlekeys.LeagueDetailBundleKeys;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.example.fitsbypact.FirstTimeCheckinActivity;
 import com.example.fitsbypact.LoggedinActivity;
 import com.example.fitsbypact.MessengerService;
 import com.example.fitsbypact.R;
 import com.example.fitsbypact.ShareCheckinActivity;
 import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+
+import constants.RememberMeConstants;
 
 import dbtables.User;
 import android.app.Activity;
@@ -31,6 +34,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -74,6 +78,7 @@ public class CheckinFragment extends SherlockFragment{
 	
 	private ApplicationUser mApplicationUser;
 	private User mUser;
+	private SharedPreferences mSharedPreferences;
 	
 	private static int timeSeconds;
 	private static int timeMinutes;
@@ -132,6 +137,9 @@ public class CheckinFragment extends SherlockFragment{
         Intent intent = new Intent(parent, MessengerService.class);
         parent.startService(intent);
         doBindService();
+        
+        mSharedPreferences = parent.getSharedPreferences(
+                "FirstCheckinPrefs", 0);
         return viewer;
 	}
 	
@@ -198,6 +206,15 @@ public class CheckinFragment extends SherlockFragment{
 	 * checks in user
 	 */
 	public void checkin() {
+		if (!mSharedPreferences.getBoolean("first_time", false)) {
+			Log.d(TAG, "first time");
+			mSharedPreferences.edit().putBoolean("first_time", true).commit();
+			Intent intent = new Intent(parent, FirstTimeCheckinActivity.class);
+			startActivity(intent);
+			return;
+		} else {
+			Log.d(TAG, "not first time");
+		}
 		if (timeSeconds > 0 || timeMinutes > 0) {
 			Toast toast = Toast.makeText(parent.getApplicationContext(), "You're already checked in!", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);

@@ -72,12 +72,15 @@
             android:name="com.example.fitsbypact.FriendInviteActivity"
             android:label="@string/title_activity_friend_invite"
             android:screenOrientation="portrait" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="oauth" android:host="t4jsample"/>
+
+                <data
+                    android:host="t4jsample"
+                    android:scheme="oauth" />
             </intent-filter>
         </activity>
         <activity
@@ -148,13 +151,20 @@
         <activity
             android:name="com.example.fitsbypact.ShareCheckinActivity"
             android:label="@string/title_activity_share_checkin" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="oauth" android:host="t4jsamplecheckin"/>
+
+                <data
+                    android:host="t4jsamplecheckin"
+                    android:scheme="oauth" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.fitsbypact.FirstTimeCheckinActivity"
+            android:label="@string/title_activity_first_time_checkin" >
         </activity>
     </application>
 

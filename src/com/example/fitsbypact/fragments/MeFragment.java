@@ -10,6 +10,7 @@ import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.example.fitsbypact.FirstTimeCheckinActivity;
 import com.example.fitsbypact.LandingActivity;
 import com.example.fitsbypact.LoginActivity;
 import com.example.fitsbypact.MessengerService;
@@ -75,6 +76,7 @@ public class MeFragment extends SherlockFragment {
 	private Button logoutButton;
 	private Button submitButton;
 	private Button tutorialButton;
+	private Button checkinTutorialButton;
 	
 	private EditText emailET;
 	private ProgressDialog mProgressDialog;
@@ -295,6 +297,14 @@ public class MeFragment extends SherlockFragment {
 			}
 		});
 		
+		checkinTutorialButton = (Button)viewer.findViewById(R.id.me_settings_checkin_tutorial_button);
+		checkinTutorialButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(parent, FirstTimeCheckinActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 	
 	/**
