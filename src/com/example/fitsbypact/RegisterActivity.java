@@ -15,6 +15,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
 
@@ -41,6 +43,8 @@ public class RegisterActivity extends Activity {
 	private EditText emailET;
 	private EditText passwordET;
 	private EditText confirmPasswordET;
+	private TextView serviceTV;
+	private TextView privacyTV;
 	
 	private ServerCommunication comm;
 	private ApplicationUser mApplicationUser;
@@ -60,6 +64,7 @@ public class RegisterActivity extends Activity {
         
         initializeButtons();
         initializeEditTexts();
+        initializeTextViews();
         
         comm = new ServerCommunication(this);
         mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
@@ -264,6 +269,25 @@ public class RegisterActivity extends Activity {
     	confirmPasswordET = (EditText)findViewById(R.id.register_confirm_password_id);
     }
 
+    private void initializeTextViews() {
+    	serviceTV = (TextView)findViewById(R.id.register_tos_tv);
+    	serviceTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://fitsby.com/terms.html"));
+		 		startActivity(browserIntent);
+			}
+    	});
+    	
+    	privacyTV = (TextView)findViewById(R.id.register_privacy_tv);
+    	privacyTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://fitsby.com/privacy.html"));
+		 		startActivity(browserIntent);
+			}
+    	});
+    }
     /**
      * AsyncTask to Register user
      * @author brent
