@@ -90,6 +90,7 @@
     <string name="title_activity_newsfeed"></string>
     <string name="title_activity_check_in"></string>
     <string name="title_activity_me"></string>
+    <string name="me_reset_password">Reset Password</string>
     <string name="me_imageview_desc">me_imageview_desc</string>
     <string name="me_textview_join_date_text">Date Joined: </string>
     <string name="me_textview_name_text"></string>
