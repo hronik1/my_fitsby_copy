@@ -292,7 +292,6 @@ public class MeFragment extends SherlockFragment {
 		tutorialButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(parent, "hello", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(parent, TutorialActivity.class);
 				startActivity(intent);
 			}
