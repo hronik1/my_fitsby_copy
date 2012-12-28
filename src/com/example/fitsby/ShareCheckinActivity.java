@@ -427,14 +427,7 @@ public class ShareCheckinActivity extends Activity {
     		TwitterFactory factory = new TwitterFactory(configuration);
     		twitter = factory.getInstance();
 
-    		try {
-    			requestToken = twitter
-    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
-    			this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-    					.parse(requestToken.getAuthenticationURL())));
-    		} catch (TwitterException e) {
-    			e.printStackTrace();
-    		}
+    		new LoginTwitterAsyncTask().execute();
     	} else {
     	    // Clear the shared preferences
     	    Editor e = mSharedPreferences.edit();
@@ -455,5 +448,30 @@ public class ShareCheckinActivity extends Activity {
     private boolean isTwitterLoggedInAlready() {
         // return twitter login status from Shared Preferences
         return mSharedPreferences.getBoolean(PREF_KEY_TWITTER_LOGIN, false);
+    }
+    
+    private class LoginTwitterAsyncTask extends AsyncTask<Integer, Void, Void> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(ShareCheckinActivity.this, "",
+                    "Connecting to Twitter...");
+		}
+		
+		@Override
+		protected Void doInBackground(Integer... params) {
+	   		try {
+    			requestToken = twitter
+    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
+    		} catch (TwitterException e) {
+    			e.printStackTrace();
+    		}
+			return null;
+		}
+		
+		protected void onPostExecute(Void input) {
+			mProgressDialog.dismiss();
+			ShareCheckinActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+					.parse(requestToken.getAuthenticationURL())));
+		}
     }
 }

@@ -501,14 +501,8 @@ public class FriendInviteActivity extends Activity {
     		TwitterFactory factory = new TwitterFactory(configuration);
     		twitter = factory.getInstance();
 
-    		try {
-    			requestToken = twitter
-    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
-    			this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-    					.parse(requestToken.getAuthenticationURL())));
-    		} catch (TwitterException e) {
-    			e.printStackTrace();
-    		}
+    		new LoginTwitterAsyncTask().execute();
+ 
     	} else {
     	    // Clear the shared preferences
     	    Editor e = mSharedPreferences.edit();
@@ -742,5 +736,30 @@ public class FriendInviteActivity extends Activity {
 			return UserCommunication.notifySeverOfInvite(params[0]);
 		}
     	
+    }
+    
+    private class LoginTwitterAsyncTask extends AsyncTask<Integer, Void, Void> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+                    "Connecting to Twitter...");
+		}
+		
+		@Override
+		protected Void doInBackground(Integer... params) {
+	   		try {
+    			requestToken = twitter
+    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
+    		} catch (TwitterException e) {
+    			e.printStackTrace();
+    		}
+			return null;
+		}
+		
+		protected void onPostExecute(Void input) {
+			mProgressDialog.dismiss();
+			FriendInviteActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+					.parse(requestToken.getAuthenticationURL())));
+		}
     }
 }
