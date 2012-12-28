@@ -419,7 +419,7 @@ public class MeFragment extends SherlockFragment {
 
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-    	builder.setMessage("If you are currently checked into a gym, you must check out or else it won't count. Are you sure you want to log out right now?")
+    	builder.setMessage("If you are currently checked in at a gym, you must check out to have it count. Are you sure you want to logout right now?")
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
