@@ -67,7 +67,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	private Button faqButton;
 	
 	private ImageView mImageView;
-	private ListView mListView;
+//	private ListView mListView;
 	
 	private ApplicationUser mApplicationUser;
 	
@@ -83,7 +83,7 @@ public class LeagueJoinDetailActivity extends Activity {
 	
 	private ProgressDialog mProgressDialog;
 	private List<LeagueMember> listLeagueMember;
-	private SimpleCursorAdapter mAdapter;
+//	private SimpleCursorAdapter mAdapter;
 	private int structure;
 	/**
 	 * called when activtiy is created
@@ -269,10 +269,10 @@ public class LeagueJoinDetailActivity extends Activity {
  	 * initializes the listview
  	 */
  	private void initializeListView() {
- 		mListView = (ListView)findViewById(R.id.league_join_detail_members_lv);
-		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, GamesFragment.fromArgs, GamesFragment.toArgs, 0);
-		mAdapter.setViewBinder(new MyViewBinder());
-		mListView.setAdapter(mAdapter);
+// 		mListView = (ListView)findViewById(R.id.league_join_detail_members_lv);
+//		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, GamesFragment.fromArgs, GamesFragment.toArgs, 0);
+//		mAdapter.setViewBinder(new MyViewBinder());
+//		mListView.setAdapter(mAdapter);
  	}
  	
   	/**
@@ -377,7 +377,7 @@ public class LeagueJoinDetailActivity extends Activity {
         	if (response.wasSuccessful()) {
             	firstNameTV.setText(" " + response.getCreatorFirstName());
         	}	
-        	new CursorDataAsyncTask().execute();
+//        	new CursorDataAsyncTask().execute();
         }
     }
     
@@ -417,25 +417,25 @@ public class LeagueJoinDetailActivity extends Activity {
      * @author brent
      *
      */
-    private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
-    	
-		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Getting game members...");
-		}
-		
-        protected Cursor doInBackground(String... params) {
-        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(leagueId);
-        	return cursor;
-        }
-
-		protected void onPostExecute(Cursor cursor) {
-			mProgressDialog.cancel();
-        	mAdapter.swapCursor(cursor);
-        	mAdapter.notifyDataSetChanged();
-
-        }
-    }
+//    private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
+//    	
+//		protected void onPreExecute() {
+//            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+//                    "Getting game members...");
+//		}
+//		
+//        protected Cursor doInBackground(String... params) {
+//        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(leagueId);
+//        	return cursor;
+//        }
+//
+//		protected void onPostExecute(Cursor cursor) {
+//			mProgressDialog.cancel();
+////        	mAdapter.swapCursor(cursor);
+////        	mAdapter.notifyDataSetChanged();
+//
+//        }
+//    }
     
     private class MyViewBinder implements SimpleCursorAdapter.ViewBinder {
 
