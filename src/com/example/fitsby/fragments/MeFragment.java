@@ -440,12 +440,20 @@ public class MeFragment extends SherlockFragment {
      *
      */
     private class StatsAsyncTask extends AsyncTask<Integer, Void, StatsResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Gathering your information..");
+		}
+		
         protected StatsResponse doInBackground(Integer... params) {
+
         	StatsResponse response = UserCommunication.getStats(params[0]);
         	return response;
         }
 
         protected void onPostExecute(StatsResponse response) {
+        	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
         		Stats stats = response.getStats();
         		earningsTV.setText(" $" + stats.getMoneyEarned());
@@ -505,12 +513,19 @@ public class MeFragment extends SherlockFragment {
      *
      */
     private class GravatarAsyncTask extends AsyncTask<String, Void, Bitmap> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Gathering your gravatar..");
+		}
+		
         protected Bitmap doInBackground(String... params) {
         	String gravatarURL = Gravatar.getGravatar(params[0]);
         	return MyHttpClient.getBitmapFromURL(gravatarURL);
         }
 
         protected void onPostExecute(Bitmap response) {
+        	mProgressDialog.dismiss();
         	if (response != null)
         		profileIV.setImageBitmap(response);
         }
