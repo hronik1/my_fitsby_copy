@@ -1,4 +1,4 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
 import servercommunication.NewsfeedCommunication;
 
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
-import com.example.fitsbypact.fragments.GamesFragment;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
+import com.example.fitsby.fragments.GamesFragment;
 
 import bundlekeys.CreditCardBundleKeys;
 import bundlekeys.LeagueDetailBundleKeys;

@@ -1,4 +1,4 @@
-package com.example.fitsbypact.fragments;
+package com.example.fitsby.fragments;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -14,12 +14,11 @@ import servercommunication.LeagueCommunication;
 import bundlekeys.CreditCardBundleKeys;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.example.fitsbypact.FriendInviteActivity;
-import com.example.fitsbypact.LeagueJoinActivity;
-import com.example.fitsbypact.R;
-import com.example.fitsbypact.R.color;
+import com.example.fitsby.FriendInviteActivity;
+import com.example.fitsby.LeagueJoinActivity;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
+import com.example.fitsby.R;
 
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;

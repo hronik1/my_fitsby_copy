@@ -1,7 +1,8 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.example.fitsbypact.fragments.MeFragment;
+import com.example.fitsby.fragments.MeFragment;
+
 
 import android.os.Bundle;
 import android.app.Activity;

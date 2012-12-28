@@ -1,39 +1,38 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
-import servercommunication.ServerCommunication;
-import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
-import android.view.Menu;
+
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
 
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
-public class ExampleActivity extends Activity {
+public class HelpActivity extends Activity {
 
-	private final static String TAG = "ExampleActivity";
+	private final static String TAG = "HelpActivity";
 	
-	/**
-	 * Called when activity is created
-	 */
+	private Button mButton;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.example);
+        setContentView(R.layout.activity_help);
         
-        Log.i(TAG, "onCreate");
+        initializeButtons();
     }
-    
-    /**
-     * Initialize the contents of the Activity's standard options menu. You should place your menu items in to menu.
-     * This is only called once, the first time the options menu is displayed
-     */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.example, menu);
-        
-        Log.i(TAG, "onCreateOptionsMenu");
+        getMenuInflater().inflate(R.menu.activity_help, menu);
         return true;
     }
     
@@ -55,6 +54,7 @@ public class ExampleActivity extends Activity {
         super.onStart();
 	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
+	    FlurryAgent.logEvent("Help Activity");	    
         Log.i(TAG, "onStart");
     }
     
@@ -95,5 +95,31 @@ public class ExampleActivity extends Activity {
     	Log.i(TAG, "onDestroy");
     	
     }
+    
+    private void initializeButtons() {
+    	mButton = (Button)findViewById(R.id.help_button);
+    	mButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				goToRegisterPage();
+			}
+    	});
+    }
 
+    /**
+     * Changes to the Registration Activity
+     */
+    private void goToRegisterPage() {
+    	try {
+    		Intent intent = new Intent(this, RegisterActivity.class);
+    		startActivity(intent);
+    	} catch (Exception e) {
+    		//remove in deployment
+    		String stackTrace = android.util.Log.getStackTraceString(e);
+    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
+    	} 
+    }
 }

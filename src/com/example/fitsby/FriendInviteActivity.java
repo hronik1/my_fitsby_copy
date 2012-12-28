@@ -1,4 +1,4 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.telephony.SmsManager;
 import bundlekeys.LeagueDetailBundleKeys;
 
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
 import com.facebook.FacebookRequestError;
 import com.facebook.FacebookException;
 import com.facebook.HttpMethod;

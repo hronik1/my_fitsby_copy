@@ -1,4 +1,4 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 import responses.PrivateLeagueResponse;
 import responses.UserResponse;
@@ -37,7 +37,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;

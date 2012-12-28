@@ -1,6 +1,6 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
 
 import android.os.Bundle;
 import android.app.Activity;

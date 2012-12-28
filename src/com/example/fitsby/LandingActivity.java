@@ -1,8 +1,4 @@
-package com.example.fitsbypact;
-
-import com.flurry.android.FlurryAgent;
-
-import constants.FlurryConstants;
+package com.example.fitsby;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,26 +8,46 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
+import com.crittercism.app.Crittercism;
+import com.flurry.android.FlurryAgent;
 
-public class HelpActivity extends Activity {
+import constants.FlurryConstants;
 
-	private final static String TAG = "HelpActivity";
+public class LandingActivity extends Activity {
+
+	private final static String TAG = "LandingActivity";
 	
-	private Button mButton;
+	private Button buttonLogin;
+	private Button buttonStart;
 	
+	/**
+	 * Called when activity is created
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
+        
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        setContentView(R.layout.activity_landing);
+        Log.i(TAG, "onCreate");
         
         initializeButtons();
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu. You should place your menu items in to menu.
+     * This is only called once, the first time the options menu is displayed
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_help, menu);
+        getMenuInflater().inflate(R.menu.activity_landing, menu);
+        
+        Log.i(TAG, "onCreateOptionsMenu");
         return true;
     }
     
@@ -53,7 +69,8 @@ public class HelpActivity extends Activity {
         super.onStart();
 	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
-	    FlurryAgent.logEvent("Help Activity");	    
+	    FlurryAgent.logEvent("Landing Activity");
+        Crittercism.init(getApplicationContext(), "506f841701ed850f8f000003");
         Log.i(TAG, "onStart");
     }
     
@@ -94,23 +111,49 @@ public class HelpActivity extends Activity {
     	Log.i(TAG, "onDestroy");
     	
     }
-    
+
+    /**
+     * initializes the login and start buttons 
+     */
     private void initializeButtons() {
-    	mButton = (Button)findViewById(R.id.help_button);
-    	mButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				goToRegisterPage();
-			}
+    	buttonLogin = (Button)findViewById(R.id.landing_button_login);
+    	buttonLogin.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			goToLoginPage();
+    		}
+    	});
+    	
+    	buttonStart = (Button)findViewById(R.id.landing_button_start);
+    	buttonStart.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v) {
+    			goToHelpPage();
+    		}
     	});
     }
-
+    
+    /**
+     * Changes to the LoginActivity
+     */
+    private void goToLoginPage() {
+    	try {
+    		Intent intent = new Intent(this, LoginActivity.class);
+    		startActivity(intent);
+    	} catch (Exception e) {
+    		//remove in deployment
+    		String stackTrace = android.util.Log.getStackTraceString(e);
+    		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
+    				Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
+    	} 
+    }
+    
     /**
      * Changes to the Registration Activity
      */
-    private void goToRegisterPage() {
+    private void goToHelpPage() {
     	try {
-    		Intent intent = new Intent(this, RegisterActivity.class);
+    		Intent intent = new Intent(this, TutorialActivity.class);
     		startActivity(intent);
     	} catch (Exception e) {
     		//remove in deployment

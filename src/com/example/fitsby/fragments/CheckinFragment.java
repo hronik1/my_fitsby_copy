@@ -1,4 +1,4 @@
-package com.example.fitsbypact.fragments;
+package com.example.fitsby.fragments;
 
 import java.util.List;
 import java.util.Vector;
@@ -15,12 +15,12 @@ import servercommunication.CheckinCommunication;
 import bundlekeys.LeagueDetailBundleKeys;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.example.fitsbypact.FirstTimeCheckinActivity;
-import com.example.fitsbypact.LoggedinActivity;
-import com.example.fitsbypact.MessengerService;
-import com.example.fitsbypact.R;
-import com.example.fitsbypact.ShareCheckinActivity;
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+import com.example.fitsby.FirstTimeCheckinActivity;
+import com.example.fitsby.LoggedinActivity;
+import com.example.fitsby.MessengerService;
+import com.example.fitsby.ShareCheckinActivity;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
+import com.example.fitsby.R;
 
 import constants.RememberMeConstants;
 

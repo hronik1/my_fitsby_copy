@@ -1,14 +1,14 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 
 import gravatar.Gravatar;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.example.fitsbypact.applicationsubclass.*;
-import com.example.fitsbypact.fragments.CheckinFragment;
-import com.example.fitsbypact.fragments.GamesFragment;
-import com.example.fitsbypact.fragments.MeFragment;
-import com.example.fitsbypact.fragments.NewsfeedFragment;
+import com.example.fitsby.applicationsubclass.*;
+import com.example.fitsby.fragments.CheckinFragment;
+import com.example.fitsby.fragments.GamesFragment;
+import com.example.fitsby.fragments.MeFragment;
+import com.example.fitsby.fragments.NewsfeedFragment;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;

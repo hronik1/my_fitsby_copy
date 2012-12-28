@@ -1,7 +1,8 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
-import com.example.fitsbypact.TutorialActivity.TutorialPagerAdapter;
-import com.example.fitsbypact.TutorialActivity.TutorialPagerAdapter.DemoObjectFragment;
+import com.example.fitsby.TutorialActivity.TutorialPagerAdapter;
+import com.example.fitsby.TutorialActivity.TutorialPagerAdapter.DemoObjectFragment;
+
 
 import android.os.Bundle;
 import android.app.Activity;

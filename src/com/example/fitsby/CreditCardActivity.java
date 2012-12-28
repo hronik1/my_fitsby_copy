@@ -1,4 +1,4 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +37,7 @@ import com.flurry.android.FlurryAgent;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Token;
-import com.example.fitsbypact.applicationsubclass.*;
+import com.example.fitsby.applicationsubclass.*;
 
 import constants.FlurryConstants;
 

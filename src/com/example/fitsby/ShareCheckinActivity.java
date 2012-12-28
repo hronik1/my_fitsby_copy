@@ -1,4 +1,4 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 
 import twitter4j.Twitter;
@@ -10,8 +10,8 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 import bundlekeys.LeagueDetailBundleKeys;
 
-import com.example.fitsbypact.FriendInviteActivity.UpdateTwitterAsyncTask;
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
+import com.example.fitsby.FriendInviteActivity.UpdateTwitterAsyncTask;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
 import com.facebook.FacebookException;
 import com.facebook.Session;
 import com.facebook.SessionState;
