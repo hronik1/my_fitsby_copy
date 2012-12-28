@@ -206,6 +206,17 @@
                 android:text="@string/me_settings_button_submit_text" />
             
             <TextView
+                android:id="@+id/me_reset_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/me_settings_button_submit"
+                android:text="@string/me_reset_password"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@drawable/faq_button_text" />
+                        
+            <TextView
                 android:id="@+id/me_faq"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -227,7 +238,7 @@
                 android:text="@string/me_privacy_policy"
                 android:background="@drawable/custom_login_button"
                 android:textColor="@color/white"
-                android:layout_marginTop="10dp"                
+                android:layout_marginTop="5dp"                
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"       
                 android:textSize="17sp"          
@@ -241,7 +252,7 @@
                 android:text="@string/me_terms_of_service"
                 android:background="@drawable/custom_login_button"
                 android:textColor="@color/white"
-                android:layout_marginTop="10dp"                
+                android:layout_marginTop="5dp"                
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"       
                 android:textSize="17sp"          
@@ -255,7 +266,7 @@
                 android:text="@string/me_facebook"
                 android:background="@drawable/custom_login_button"
                 android:textColor="@color/white"
-                android:layout_marginTop="10dp"                
+                android:layout_marginTop="5dp"                
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"       
                 android:textSize="17sp"          
@@ -263,19 +274,17 @@
             
             <TextView
                 android:id="@+id/me_twitter"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_facebook"
-                android:text="twitter page"
-                android:textColor="@drawable/faq_button_text" />
-            
-            <TextView
-                android:id="@+id/me_reset_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/me_twitter"
-                android:text="reset password"
-                android:textColor="@drawable/faq_button_text" />
+                android:background="@drawable/custom_login_button"
+                android:textColor="@color/white"
+                android:layout_marginTop="5dp"                
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp" 
+                android:textSize="17sp"          
+				android:gravity="center"                
+                android:text="@string/me_twitter" />
             
             <Button
                 android:id="@+id/me_settings_button_logout"
@@ -313,7 +322,7 @@
                 android:layout_below="@+id/me_settings_tutorial_button"
                 android:background="@drawable/custom_login_button"
                 android:gravity="center"
-                android:text="Check-in Tutorial"
+                android:text="@string/me_settings_checkin_tutorial_button"
                 android:textColor="@color/white"            
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
@@ -324,7 +333,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"                            
                 android:layout_alignLeft="@+id/me_settings_tutorial_button"
-                android:layout_below="@+id/me_settings_button_submit"
+                android:layout_below="@+id/me_reset_password"
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"  
                 android:textStyle="bold"              

@@ -17,7 +17,7 @@
     <string name="register_confirm_password_hint">Confirm Password</string>
     <string name="register_button_register">Register</string>
     <string name="title_activity_example"></string>
-    <string name="title_activity_landing">Fitsby</string>
+    <string name="title_activity_landing"></string>
     <string name="login_text">"Login to your Fitsby account</string>
     <string name="register_text">By creating a Fitsby account, you are agreeing to our Terms of Service and Privacy Policy.</string>
     <string name="landing_login">Login</string>
@@ -75,10 +75,10 @@
     <string name="search_for_a_game">SEARCH FOR A GAME</string>
     <string name="create_new_game_directions">Don\'t see a game you like? Start your own.</string>
     <string name="league_create_privacy_text">4. Make game private?</string>
-    <string name="league_create_checkbox_text">Yes</string>
+    <string name="league_create_checkbox_text">"Yes"</string>
     <string name="league_create_rb_prompt">3. How many winners?</string>
-    <string name="league_create_rb_top3">Top 3</string>
-    <string name="league_create_rb_takeall">Winner Takes All</string>
+    <string name="league_create_rb_top3">"Top 3"</string>
+    <string name="league_create_rb_takeall">"Winner Takes All"</string>
     <string name="navigation_textview_me_text">Me</string>
     <string name="navigation_textview_game_text">GAMES</string>
     <string name="navigation_textview_newsfeed_text">NEWSFEED</string>
@@ -94,6 +94,7 @@
     <string name="title_activity_newsfeed"></string>
     <string name="title_activity_check_in"></string>
     <string name="title_activity_me"></string>
+    <string name="me_reset_password">Reset Password</string>
     <string name="me_imageview_desc">me_imageview_desc</string>
     <string name="me_textview_join_date_text">Date Joined: </string>
     <string name="me_textview_name_text"></string>
@@ -103,6 +104,7 @@
     <string name="me_textview_total_checkins_prompt_text">"Total Gym Check-ins: "</string>
     <string name="me_textview_total_gym_time_text"></string>
     <string name="me_textview_total_gym_time_prompt_text">Total Gym Minutes: </string>
+    <string name="me_settings_checkin_tutorial_button">Check-In Tutorial</string>
     <string name="me_settings_tv_change_picture_link_text">Go to Gravatar.com</string>
     <string name="newsfeed_button_submit_text">"     Submit     "</string>
     <string name="newsfeed_et_comment_hint">Post a status or leave a comment here</string>

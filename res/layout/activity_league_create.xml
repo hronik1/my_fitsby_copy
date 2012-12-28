@@ -2,209 +2,250 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_white"
-    android:layout_marginBottom="10dp" >
+    android:background="@drawable/dark_gradient_background" >
 
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"  
+            android:textColor="@color/white"                  
+            android:text="@string/league_create_header_text" />
+        <Button
+            android:id="@+id/league_create_button_create"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/league_create_faq_button"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/custom_login_button"
+            android:text="@string/league_create_create_text"
+            android:textColor="@color/white" />
+        
+        <TextView
+            android:id="@+id/league_create_tv_wager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="@string/league_create_tv_wager_text"
+            android:textStyle="bold" />
+        
+        <RelativeLayout
+            android:id="@+id/wager_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/create_game_boxes"
+            android:layout_alignLeft="@+id/league_create_tv_wager"
+            android:layout_below="@+id/league_create_tv_wager" 
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="7dp">
+	        <TextView
+	            android:id="@+id/league_create_wager_dollarsign"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/league_create_wager_dollarsign_text"
+	            android:textSize="40sp"/>
+	        <TextView
+	            android:id="@+id/league_create_wager"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBaseline="@+id/league_create_wager_dollarsign"
+	            android:layout_alignBottom="@+id/league_create_wager_dollarsign"
+	            android:layout_toRightOf="@+id/league_create_wager_dollarsign"
+	            android:text="@string/league_create_wager_text"
+	            android:textSize="40sp" />
+	        <Button
+	            android:id="@+id/league_create_ib_wager_minus"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:layout_alignBottom="@+id/league_create_wager"
+	            android:layout_toLeftOf="@+id/league_create_ib_wager_plus"	            
+	            android:background="@drawable/custom_login_button"
+	            android:contentDescription="@string/league_create_ib_wager_minus_text"
+	            android:text="@string/league_create_ib_wager_minus"
+	            android:layout_marginRight="5dp"
+	            android:textColor="@color/white" />
+	        <Button
+	            android:id="@+id/league_create_ib_wager_plus"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:layout_alignParentRight="true"	            
+	            android:layout_alignBottom="@+id/league_create_wager"
+	            android:background="@drawable/custom_login_button"
+	            android:contentDescription="@string/league_create_ib_wager_plus_text"
+	            android:text="@string/league_create_ib_wager_plus"
+	            android:textColor="@color/white" />
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/league_create_tv_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/wager_box"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/league_create_tv_days_text"
+            android:textSize="16sp"     
+            android:textColor="@color/white"               
+            android:textStyle="bold" />
+        
+        <RelativeLayout
+            android:id="@+id/days_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/create_game_boxes"
+            android:layout_alignLeft="@+id/league_create_tv_days"
+            android:layout_below="@+id/league_create_tv_days"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="7dp" >
+	        <TextView
+	            android:id="@+id/league_create_days"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/league_create_days_text"
+	            android:textSize="40sp" />	            
+	       <Button
+	           android:id="@+id/league_create_ib_days_minus"
+	           android:layout_width="50dp"
+	           android:layout_height="50dp"
+	           android:layout_alignBottom="@+id/league_create_days"
+	           android:layout_toLeftOf="@+id/league_create_ib_days_plus"
+	           android:background="@drawable/custom_login_button"
+	           android:contentDescription="@string/league_create_ib_days_minus_text"
+	           android:text="@string/league_create_ib_days_minus"
+	           android:layout_marginRight="5dp"   
+	           android:textColor="@color/white" />
+	       <Button
+	           android:id="@+id/league_create_ib_days_plus"
+	           android:layout_width="50dp"
+	           android:layout_height="50dp"
+	           android:layout_alignParentRight="true"
+	           android:layout_alignBottom="@+id/league_create_days"
+	           android:background="@drawable/custom_login_button"
+	           android:contentDescription="@string/league_create_ib_days_plus_text"
+	           android:text="@string/league_create_ib_days_plus"
+	           android:textColor="@color/white" />
+       </RelativeLayout>        
+        <TextView
+            android:id="@+id/league_create_rb_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/days_box"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="16sp"      
+            android:textColor="@color/white"              
+            android:text="@string/league_create_rb_prompt"
+            android:textStyle="bold" />
+        <RelativeLayout
+            android:id="@+id/radio_box"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/create_game_boxes"
+            android:layout_alignLeft="@+id/league_create_rb_prompt"
+            android:layout_below="@+id/league_create_rb_prompt" 
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+	       <RadioGroup
+	           android:id="@+id/league_create_radiogroup"
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:layout_below="@+id/league_create_rb_prompt"
+	           android:layout_alignLeft="@+id/textView1"
+	           android:orientation="horizontal" >
+	           <RadioButton
+	               android:id="@+id/league_create_rb_top3"
+	               android:layout_width="wrap_content"
+	               android:layout_height="wrap_content"
+	               android:layout_alignLeft="@+id/textView1"
+	               android:text="@string/league_create_rb_top3" />
+	           <RadioButton
+	               android:id="@+id/league_create_rb_takeall"
+	               android:layout_marginLeft="10dp"     
+	               android:layout_width="wrap_content"
+	               android:layout_height="wrap_content"
+	               android:text="@string/league_create_rb_takeall" />
+	       </RadioGroup>
+	   </RelativeLayout>
+	   <RelativeLayout
+            android:id="@+id/privacy_box"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/create_game_boxes"
+            android:layout_alignLeft="@+id/league_create_privacy_text"
+            android:layout_below="@+id/league_create_privacy_text" 
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+	       <CheckBox
+	           android:id="@+id/league_create_checkbox"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_alignLeft="@+id/league_create_days"
+	           android:layout_below="@+id/league_create_privacy_text"
+	           android:text="@string/league_create_checkbox_text" />
+	   </RelativeLayout>
+       <Button
+           android:id="@+id/league_create_faq_button"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/privacy_box"
+           android:layout_centerHorizontal="true"
+           android:background="@drawable/newsfeed_submit_button"
+           android:text="@string/faq_button"
+           android:layout_marginTop="20dp"
+           android:layout_marginBottom="10dp"
+           android:layout_marginRight="10dp"
+           android:layout_marginLeft="10dp"
+           android:textColor="@color/white" />
+       <TextView
+           android:id="@+id/league_create_privacy_text"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="16sp"
+           android:layout_alignLeft="@+id/textView1"
+           android:layout_marginTop="10dp"
+           android:textStyle="bold"
+           android:textColor="@color/white"
+           android:layout_below="@+id/radio_box"
+           android:layout_marginBottom="5dp"           
+           android:text="@string/league_create_privacy_text" />
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textSize="13sp"                    
-                    android:text="@string/league_create_header_text" />
+       <TextView
+           android:id="@+id/bottom_margin_for_button"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignLeft="@+id/league_create_button_create"
+           android:layout_below="@+id/league_create_button_create"
+           android:textSize="0sp"
+           android:text=" " />
 
-                <Button
-                    android:id="@+id/league_create_button_create"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/league_create_faq_button"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/custom_login_button"
-                    android:text="@string/league_create_create_text"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/league_create_tv_wager"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView1"
-                    android:layout_below="@+id/textView1"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:textSize="16sp"
-                    android:text="@string/league_create_tv_wager_text"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/league_create_wager_dollarsign"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/league_create_tv_wager"
-                    android:layout_below="@+id/league_create_tv_wager"
-                    android:text="@string/league_create_wager_dollarsign_text"
-                    android:textSize="40sp" />
-
-                <TextView
-                    android:id="@+id/league_create_wager"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/league_create_wager_dollarsign"
-                    android:layout_alignBottom="@+id/league_create_wager_dollarsign"
-                    android:layout_toRightOf="@+id/league_create_wager_dollarsign"
-                    android:text="@string/league_create_wager_text"
-                    android:textSize="40sp" />
-
-                <Button
-                    android:id="@+id/league_create_ib_wager_minus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/league_create_wager"
-                    android:layout_marginLeft="120dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/custom_login_button"
-                    android:contentDescription="@string/league_create_ib_wager_minus_text"
-                    android:text="@string/league_create_ib_wager_minus"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/league_create_ib_wager_plus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/league_create_wager"
-                    android:layout_toRightOf="@+id/league_create_ib_wager_minus"
-                    android:background="@drawable/custom_login_button"
-                    android:contentDescription="@string/league_create_ib_wager_plus_text"
-                    android:text="@string/league_create_ib_wager_plus"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/league_create_tv_days"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/league_create_wager_dollarsign"
-                    android:layout_below="@+id/league_create_wager_dollarsign"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/league_create_tv_days_text"
-                    android:textSize="16sp"                    
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/league_create_days"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/league_create_tv_days"
-                    android:layout_below="@+id/league_create_tv_days"
-                    android:text="@string/league_create_days_text"
-                    android:textSize="40sp" />
-
-                <TextView
-                    android:id="@+id/league_create_rb_prompt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView1"
-                    android:layout_below="@+id/league_create_days"
-                    android:layout_marginTop="20dp"
-                    android:textSize="16sp"                    
-                    android:text="@string/league_create_rb_prompt"
-                    android:textStyle="bold" />
-
-                <RadioGroup
-                    android:id="@+id/league_create_radiogroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/league_create_rb_prompt"
-                    android:layout_alignLeft="@+id/textView1"                    
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal" >
-
-                    <RadioButton
-                        android:id="@+id/league_create_rb_top3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/textView1"
-                        android:text="@string/league_create_rb_top3" />
-
-                    <RadioButton
-                        android:id="@+id/league_create_rb_takeall"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/league_create_rb_takeall" />
-                </RadioGroup>
-
-                <CheckBox
-                    android:id="@+id/league_create_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/league_create_days"
-                    android:layout_below="@+id/league_create_privacy_text"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/league_create_checkbox_text" />
-
-                <Button
-                    android:id="@+id/league_create_faq_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/league_create_checkbox"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/faq_button_background"
-                    android:text="@string/faq_button"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@drawable/faq_button_text" />
-
-                <Button
-                    android:id="@+id/league_create_ib_days_minus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/league_create_days"
-                    android:layout_alignParentLeft="true"
-                    android:background="@drawable/custom_login_button"
-                    android:contentDescription="@string/league_create_ib_days_minus_text"
-                    android:text="@string/league_create_ib_days_minus"
-       	            android:layout_marginLeft="120dp"
-                    android:layout_marginRight="5dp"                    
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/league_create_ib_days_plus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/league_create_rb_prompt"
-                    android:layout_toRightOf="@+id/league_create_ib_days_minus"
-                    android:background="@drawable/custom_login_button"
-                    android:contentDescription="@string/league_create_ib_days_plus_text"
-                    android:text="@string/league_create_ib_days_plus"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/league_create_privacy_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_alignLeft="@+id/league_create_radiogroup"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:layout_below="@+id/league_create_radiogroup"
-                    android:text="@string/league_create_privacy_text" />
-
-            </RelativeLayout>
-    
-    </ScrollView>
+    </RelativeLayout>
+ </ScrollView>
     
 </RelativeLayout>
