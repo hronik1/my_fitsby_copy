@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="twitter_consumer_key">bU4k6Hx7NH1VA4lHFsTTg</string>
+    <string name="twitter_consumer_secret">1yZkykC1lbLkpYsBSG8zldqcM4ulL3eULWPTmO4jQ</string>
+    <string name="twitter_access_token">546435692-vjMam22IOKkYL3SiY7AVUsfTqU2VjBa3VvTWcd8</string>
+    <string name="twitter_access_token_secret">8zSFoHJv6zCO8YTiFOToRrjhvvfrMgRn9wXkQrTf1c</string>
     <string name="app_id">426803977352349</string>
     <string name="motto">Stay motivated to hit the gym.</string>
     <string name="or"> OR </string>
@@ -56,7 +60,7 @@
     <string name="thirty_cents_charge_text">plus a 50&#162; processing fee</string>
     <string name="authorize_api_login_id">3C29upX37b</string>
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
-    <string name="title_activity_friend_invite"></string>
+    <string name="title_activity_friend_invite">FriendInviteActivity</string>
     <string name="friend_invite_button_invite_text">Search Contacts List</string>
     <string name="friend_invite_button_home_text">Go To Game</string>
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
@@ -100,6 +104,7 @@
     <string name="me_textview_total_checkins_prompt_text">"Total Gym Check-ins: "</string>
     <string name="me_textview_total_gym_time_text"></string>
     <string name="me_textview_total_gym_time_prompt_text">Total Gym Minutes: </string>
+    <string name="me_settings_checkin_tutorial_button">Check-In Tutorial</string>
     <string name="me_settings_tv_change_picture_link_text">Go to Gravatar.com</string>
     <string name="newsfeed_button_submit_text">"     Submit     "</string>
     <string name="newsfeed_et_comment_hint">Post a status or leave a comment here</string>
@@ -213,5 +218,6 @@
     <string name="login_remember_me_textview">Remember me</string>
     <string name="title_activity_tutorial">TutorialActivity</string>
     <string name="title_activity_share_checkin">ShareCheckinActivity</string>
+    <string name="title_activity_first_time_checkin">FirstTimeCheckinActivity</string>
 
 </resources>

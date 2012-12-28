@@ -1,4 +1,4 @@
-package com.example.fitsbypact.fragments;
+package com.example.fitsby.fragments;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -10,13 +10,14 @@ import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.example.fitsbypact.LandingActivity;
-import com.example.fitsbypact.LoginActivity;
-import com.example.fitsbypact.MessengerService;
-import com.example.fitsbypact.R;
-import com.example.fitsbypact.TutorialActivity;
+import com.example.fitsby.FirstTimeCheckinActivity;
+import com.example.fitsby.LandingActivity;
+import com.example.fitsby.LoginActivity;
+import com.example.fitsby.MessengerService;
+import com.example.fitsby.TutorialActivity;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
+import com.example.fitsby.R;
 
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbtables.Stats;
 import dbtables.User;
@@ -75,6 +76,7 @@ public class MeFragment extends SherlockFragment {
 	private Button logoutButton;
 	private Button submitButton;
 	private Button tutorialButton;
+	private Button checkinTutorialButton;
 	
 	private EditText emailET;
 	private ProgressDialog mProgressDialog;
@@ -290,11 +292,20 @@ public class MeFragment extends SherlockFragment {
 		tutorialButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(parent, "hello", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(parent, TutorialActivity.class);
 				startActivity(intent);
 			}
 		});
 		
+		checkinTutorialButton = (Button)viewer.findViewById(R.id.me_settings_checkin_tutorial_button);
+		checkinTutorialButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(parent, FirstTimeCheckinActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 	
 	/**
@@ -413,7 +424,8 @@ public class MeFragment extends SherlockFragment {
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    					new CheckoutAsyncTask().execute(mUser.getID());
+    					//new CheckoutAsyncTask().execute(mUser.getID());
+    					logout();
     				}
     			})
     			.setNegativeButton("No", new DialogInterface.OnClickListener() {

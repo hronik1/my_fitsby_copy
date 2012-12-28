@@ -1,4 +1,4 @@
-package com.example.fitsbypact.fragments;
+package com.example.fitsby.fragments;
 
 import gravatar.Gravatar;
 
@@ -15,9 +15,9 @@ import servercommunication.NewsfeedCommunication;
 import loaders.NewsfeedCursorLoader;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.example.fitsbypact.R;
+import com.example.fitsby.applicationsubclass.ApplicationUser;
+import com.example.fitsby.R;
 
-import com.example.fitsbypact.applicationsubclass.ApplicationUser;
 
 import dbtables.Comment;
 import dbtables.User;

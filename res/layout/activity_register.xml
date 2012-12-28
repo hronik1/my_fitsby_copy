@@ -94,7 +94,6 @@
         android:layout_marginTop="54dp"
         android:textSize="14sp"        
         android:text="@string/register_text" />
-
     <EditText
         android:id="@+id/register_last_name_id"
         android:layout_width="150dp"
@@ -109,5 +108,31 @@
         android:inputType="textCapSentences"
         android:paddingTop="10dp"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/register_tos_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/register_text"
+        android:background="@drawable/custom_login_button"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/me_terms_of_service"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/register_privacy_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/register_tos_tv"
+        android:background="@drawable/custom_login_button"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/me_privacy_policy"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
 
 </RelativeLayout>

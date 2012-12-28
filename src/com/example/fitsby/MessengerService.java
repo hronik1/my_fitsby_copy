@@ -1,4 +1,4 @@
-package com.example.fitsbypact;
+package com.example.fitsby;
 
 import java.util.Timer;
 import java.util.TimerTask;
