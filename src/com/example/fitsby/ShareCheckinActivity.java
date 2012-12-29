@@ -71,6 +71,8 @@ public class ShareCheckinActivity extends Activity {
 	private Button twitterLoginButton;
 	private Button twitterShareButton;
 	
+	private Uri uri;
+	
 	//facebook
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback callback = new Session.StatusCallback() {
@@ -98,39 +100,41 @@ public class ShareCheckinActivity extends Activity {
         mUser = mApplicationUser.getUser();
         
         parseBundle(getIntent());
-        
-        if (!isTwitterLoggedInAlready()) {
-            Uri uri = getIntent().getData();
-            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
-                // oAuth verifier
-                String verifier = uri
-                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
-     
-                try {
-                    // Get the access token
-                    AccessToken accessToken = twitter.getOAuthAccessToken(
-                            requestToken, verifier);
-     
-                    // Shared Preferences
-                    Editor e = mSharedPreferences.edit();
-     
-                    // After getting access token, access token secret
-                    // store them in application preferences
-                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
-                    e.putString(PREF_KEY_OAUTH_SECRET,
-                            accessToken.getTokenSecret());
-                    // Store login status - true
-                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
-                    e.commit(); // save changes
-
-                } catch (Exception e) {
-                    // Check log for login errors
-                    Log.e("Twitter Login Error", "> " + e.getMessage());
-                }
-            }
-        }
+        uri = getIntent().getData();
+//        if (!isTwitterLoggedInAlready()) {
+//            Uri uri = getIntent().getData();
+//            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
+//                // oAuth verifier
+//                String verifier = uri
+//                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
+//     
+//                try {
+//                    // Get the access token
+//                    AccessToken accessToken = twitter.getOAuthAccessToken(
+//                            requestToken, verifier);
+//     
+//                    // Shared Preferences
+//                    Editor e = mSharedPreferences.edit();
+//     
+//                    // After getting access token, access token secret
+//                    // store them in application preferences
+//                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
+//                    e.putString(PREF_KEY_OAUTH_SECRET,
+//                            accessToken.getTokenSecret());
+//                    // Store login status - true
+//                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
+//                    e.commit(); // save changes
+//
+//                } catch (Exception e) {
+//                    // Check log for login errors
+//                    Log.e("Twitter Login Error", "> " + e.getMessage());
+//                }
+//            }
+//        }
         
         initializeButtons(); 
+        
+        new ParseTwitterLoginResponseAsyncTask().execute();
 	}
 	
     @Override
@@ -472,6 +476,52 @@ public class ShareCheckinActivity extends Activity {
 			mProgressDialog.dismiss();
 			ShareCheckinActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
 					.parse(requestToken.getAuthenticationURL())));
+		}
+    }
+    
+    private class ParseTwitterLoginResponseAsyncTask extends AsyncTask<Integer, Void, Void> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(ShareCheckinActivity.this, "",
+                    "Checking if you are logged in to any social networks...");
+		}
+		
+    	protected Void doInBackground(Integer... params) {
+            if (!isTwitterLoggedInAlready()) {
+                
+                if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
+                    // oAuth verifier
+                    String verifier = uri
+                            .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
+         
+                    try {
+                        // Get the access token
+                        AccessToken accessToken = twitter.getOAuthAccessToken(
+                                requestToken, verifier);
+         
+                        // Shared Preferences
+                        Editor e = mSharedPreferences.edit();
+         
+                        // After getting access token, access token secret
+                        // store them in application preferences
+                        e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
+                        e.putString(PREF_KEY_OAUTH_SECRET,
+                                accessToken.getTokenSecret());
+                        // Store login status - true
+                        e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
+                        e.commit(); // save changes
+                        twitterLoginButton.setText("twitter logout");
+                    } catch (Exception e) {
+                        // Check log for login errors
+                        Log.e("Twitter Login Error", "> " + e.getMessage());
+                    }
+                }
+            }
+            return null;
+    	}
+    	
+		protected void onPostExecute(Void input) {
+            mProgressDialog.dismiss();
 		}
     }
 }

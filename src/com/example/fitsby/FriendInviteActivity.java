@@ -114,6 +114,8 @@ public class FriendInviteActivity extends Activity {
 	private String TWITTER_CONSUMER_KEY;
 	private String TWITTER_CONSUMER_SECRET;
 	
+	private Uri uri;
+	
 	
 	//facebook
 	private UiLifecycleHelper uiHelper;
@@ -143,37 +145,39 @@ public class FriendInviteActivity extends Activity {
         mApplicationUser = (ApplicationUser)getApplicationContext();
         mUser = mApplicationUser.getUser();
         parseBundle(getIntent());
+        uri = getIntent().getData();
         
-        if (!isTwitterLoggedInAlready()) {
-            Uri uri = getIntent().getData();
-            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
-                // oAuth verifier
-                String verifier = uri
-                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
-     
-                try {
-                    // Get the access token
-                    AccessToken accessToken = twitter.getOAuthAccessToken(
-                            requestToken, verifier);
-     
-                    // Shared Preferences
-                    Editor e = mSharedPreferences.edit();
-     
-                    // After getting access token, access token secret
-                    // store them in application preferences
-                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
-                    e.putString(PREF_KEY_OAUTH_SECRET,
-                            accessToken.getTokenSecret());
-                    // Store login status - true
-                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
-                    e.commit(); // save changes
-
-                } catch (Exception e) {
-                    // Check log for login errors
-                    Log.e("Twitter Login Error", "> " + e.getMessage());
-                }
-            }
-        }
+//        if (!isTwitterLoggedInAlready()) {
+//            
+//            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
+//                // oAuth verifier
+//                String verifier = uri
+//                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
+//     
+//                try {
+//                    // Get the access token
+//                    AccessToken accessToken = twitter.getOAuthAccessToken(
+//                            requestToken, verifier);
+//     
+//                    // Shared Preferences
+//                    Editor e = mSharedPreferences.edit();
+//     
+//                    // After getting access token, access token secret
+//                    // store them in application preferences
+//                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
+//                    e.putString(PREF_KEY_OAUTH_SECRET,
+//                            accessToken.getTokenSecret());
+//                    // Store login status - true
+//                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
+//                    e.commit(); // save changes
+//                    Toast.makeText(this, "logged in", Toast.LENGTH_SHORT).show();
+//                } catch (Exception e) {
+//                    // Check log for login errors
+//                	Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//                    Log.e("Twitter Login Error", "> " + e.getMessage());
+//                }
+//            }
+//        }
         
         initializeButtons(); 
         
@@ -673,7 +677,7 @@ public class FriendInviteActivity extends Activity {
             	creatorName = response.getCreatorFirstName();
         	}
         		
-
+        	new ParseTwitterLoginResponseAsyncTask().execute();
         }
     }
     
@@ -760,6 +764,52 @@ public class FriendInviteActivity extends Activity {
 			mProgressDialog.dismiss();
 			FriendInviteActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
 					.parse(requestToken.getAuthenticationURL())));
+		}
+    }
+    
+    private class ParseTwitterLoginResponseAsyncTask extends AsyncTask<Integer, Void, Void> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+                    "Checking if you are logged in to any social networks...");
+		}
+		
+    	protected Void doInBackground(Integer... params) {
+            if (!isTwitterLoggedInAlready()) {
+                
+                if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
+                    // oAuth verifier
+                    String verifier = uri
+                            .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
+         
+                    try {
+                        // Get the access token
+                        AccessToken accessToken = twitter.getOAuthAccessToken(
+                                requestToken, verifier);
+         
+                        // Shared Preferences
+                        Editor e = mSharedPreferences.edit();
+         
+                        // After getting access token, access token secret
+                        // store them in application preferences
+                        e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
+                        e.putString(PREF_KEY_OAUTH_SECRET,
+                                accessToken.getTokenSecret());
+                        // Store login status - true
+                        e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
+                        e.commit(); // save changes
+                        twitterLoginButton.setText("twitter logout");
+                    } catch (Exception e) {
+                        // Check log for login errors
+                        Log.e("Twitter Login Error", "> " + e.getMessage());
+                    }
+                }
+            }
+            return null;
+    	}
+    	
+		protected void onPostExecute(Void input) {
+            mProgressDialog.dismiss();
 		}
     }
 }

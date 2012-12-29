@@ -18,6 +18,8 @@ import com.example.fitsby.TutorialActivity;
 import com.example.fitsby.applicationsubclass.ApplicationUser;
 import com.example.fitsby.R;
 
+import constants.TutorialsConstants;
+
 
 import dbtables.Stats;
 import dbtables.User;
@@ -293,6 +295,7 @@ public class MeFragment extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(parent, TutorialActivity.class);
+				intent.putExtra(TutorialsConstants.FROM_ME, true);
 				startActivity(intent);
 			}
 		});

@@ -15,6 +15,7 @@ import com.crittercism.app.Crittercism;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
+import constants.TutorialsConstants;
 
 public class LandingActivity extends Activity {
 
@@ -154,6 +155,7 @@ public class LandingActivity extends Activity {
     private void goToHelpPage() {
     	try {
     		Intent intent = new Intent(this, TutorialActivity.class);
+    		intent.putExtra(TutorialsConstants.FROM_ME, false);
     		startActivity(intent);
     	} catch (Exception e) {
     		//remove in deployment

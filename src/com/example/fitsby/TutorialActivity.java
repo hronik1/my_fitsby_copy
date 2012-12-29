@@ -2,6 +2,8 @@ package com.example.fitsby;
 
 import com.example.fitsby.applicationsubclass.ApplicationUser;
 
+import constants.TutorialsConstants;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +27,8 @@ public class TutorialActivity extends FragmentActivity {
     TutorialPagerAdapter mTutorialPagerAdapter;
     ViewPager mViewPager;
     
+    private static boolean fromMe;
+    
     private static int[] pageDrawableResources = new int[] {R.drawable.green_check_mark, R.drawable.fitsby_logo,
     		R.drawable.stripe_cards, R.drawable.stripe_cards};
     
@@ -37,6 +41,8 @@ public class TutorialActivity extends FragmentActivity {
 		mTutorialPagerAdapter = new TutorialPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mTutorialPagerAdapter);
+        
+        parseBundle(getIntent());
 	}
 
 	@Override
@@ -44,6 +50,10 @@ public class TutorialActivity extends FragmentActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_tutorial, menu);
 		return true;
+	}
+	
+	private void parseBundle(Intent intent) {
+		fromMe = intent.getBooleanExtra(TutorialsConstants.FROM_ME, false);
 	}
 	
     public static class TutorialPagerAdapter extends FragmentStatePagerAdapter {
@@ -95,8 +105,12 @@ public class TutorialActivity extends FragmentActivity {
                 	button.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-		               		Intent intent = new Intent(parent, RegisterActivity.class);
-		               		startActivity(intent);
+							if (!fromMe) {
+								Intent intent = new Intent(parent, RegisterActivity.class);
+								startActivity(intent);
+							} else {
+								getActivity().finish();
+							}
 						}
                 	});
                 } else {
