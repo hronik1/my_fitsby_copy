@@ -116,7 +116,7 @@ public class TutorialActivity extends FragmentActivity {
 						}
                 	});
                 } else {
-                	button.setVisibility(View.INVISIBLE);
+                	button.setVisibility(View.GONE);
                 	button.setClickable(false);
                 }
                 	
