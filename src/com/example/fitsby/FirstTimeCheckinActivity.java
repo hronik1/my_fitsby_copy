@@ -25,8 +25,8 @@ public class FirstTimeCheckinActivity extends FragmentActivity {
     TutorialPagerAdapter mTutorialPagerAdapter;
     ViewPager mViewPager;
     
-    private static int[] pageDrawableResources = new int[] {R.drawable.green_check_mark, R.drawable.fitsby_logo,
-    		R.drawable.stripe_cards};
+    private static int[] pageDrawableResources = new int[] {R.drawable.checkin_onboard1, R.drawable.checkin_onboard2,
+    		R.drawable.checkin_onboard3};
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class FirstTimeCheckinActivity extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Page " + (position+1) + "/" + pageDrawableResources.length;
+            return "" + (position+1) + "/" + pageDrawableResources.length;
         }
         
         

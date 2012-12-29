@@ -62,7 +62,7 @@
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"
 		        android:text="@string/input_players"
-		        android:textColor="@color/fitsby_red"
+		        android:textColor="@color/fitsby_blue"
 		        android:textStyle="bold" 	       		        
 		        android:gravity="center" />
 		    <TextView
@@ -87,7 +87,7 @@
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"	               
 		        android:text="@string/input_wager"                   
-		        android:textColor="@color/fitsby_red"
+		        android:textColor="@color/fitsby_blue"
 		        android:textStyle="bold" 			           
 		        android:gravity="center" />
 	       <TextView
@@ -112,7 +112,7 @@
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"	                
 		        android:text="@string/input_pot"
-		        android:textColor="@color/fitsby_red"
+		        android:textColor="@color/fitsby_blue"
 		        android:textStyle="bold" 		        		                        
 		        android:gravity="center" />
 	   		<TextView

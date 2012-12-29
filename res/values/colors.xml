@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+     
      <color name="red">#d5352e</color>
      <color name="dark_red">#970700</color>
      <color name="fitsby_red_lighter">#ff1a1a</color>
@@ -14,7 +14,11 @@
      
      <color name="blue">#00f</color>
      <color name="light_blue">#0066ff</color>
-
+	 
+	 <color name="fitsby_blue">#1d8ec8</color>
+	 <color name="fitsby_blue_dark">#174873</color>
+	 
+	 <color name="fitsby_gold">#cec05b</color>
      
      <color name="white">#ffffff</color>
      <color name="tinted_white">#e6e6e6</color>
