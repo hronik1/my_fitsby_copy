@@ -313,8 +313,8 @@ public class RegisterActivity extends Activity {
                 } catch (Exception e) {
                 	Log.e(TAG, e.toString());
                 }
-				Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
-				startActivity(intent);
+//				Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
+//				startActivity(intent);
         	}
         }
     }
@@ -327,6 +327,11 @@ public class RegisterActivity extends Activity {
 			UserCommunication.registerDevice(params[0], (mApplicationUser.getUser().getID()+""));
 			return null;
 
+		}
+		
+		protected void onPostExecute(Void response) {
+			Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
+			startActivity(intent);
 		}
     }
     

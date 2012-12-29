@@ -150,7 +150,7 @@ public class MyHttpClient {
 			}
 			//TODO make this line more elegant, if it works
 			JSONObject json = new JSONObject(buffer.toString());
-			Log.d(TAG, json.toString());
+			Log.i(TAG, json.toString());
 			return json;
 		} catch (IllegalStateException e) {
 			Log.d(TAG, e.toString());
