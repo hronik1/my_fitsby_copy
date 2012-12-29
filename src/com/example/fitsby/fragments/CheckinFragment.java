@@ -308,10 +308,10 @@ public class CheckinFragment extends SherlockFragment{
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     	
 	  	final EditText input = new EditText(parent);
-	  	input.setHint("Gym name here");
+	  	input.setHint("Enter gym name here");
     	builder.setView(input);
     	
-    	builder.setMessage("We couldn't find any gyms nearby you. Please type in your gym name so that we may verify that it exists. (Your check-in will count for now)")
+    	builder.setMessage("We couldn't find any gyms nearby you. Please enter your gym name so we can verify that it exists. (Your check-in will count for now)")
     			.setCancelable(false)
     			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {

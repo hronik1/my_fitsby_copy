@@ -15,19 +15,19 @@
     <string name="register_email_hint">Email</string>
     <string name="register_password_hint">Password (6 characters minimum)</string>
     <string name="register_confirm_password_hint">Confirm Password</string>
-    <string name="register_button_register">Register</string>
+    <string name="register_button_register">Join Fitsby</string>
     <string name="title_activity_example"></string>
     <string name="title_activity_landing"></string>
-    <string name="login_text">"Login to your Fitsby account</string>
-    <string name="register_text">By creating a Fitsby account, you are agreeing to our Terms of Service and Privacy Policy.</string>
-    <string name="landing_login">Login</string>
+    <string name="login_text">"Log in to your Fitsby account</string>
+    <string name="register_text">By creating a Fitsby account, you agree to our</string>
+    <string name="landing_login">Log In</string>
     <string name="landing_start">Get Started</string>
     <string name="register_first_name_hint">First Name</string>
     <string name="register_last_name_hint">Last Name</string>
     <string name="title_activity_login"></string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
-    <string name="login_button_login">Login</string>
+    <string name="login_button_login">Log In</string>
     <string name="login_forgot_password_text">Forgot your password?</string>
     <string name="fitsby_description">Fitsby is a game where you compete with other people on who can check in at the gym the most. \n \n
   									  You can play against anyone, including friends, and even wager money. \n \n
@@ -60,7 +60,7 @@
     <string name="thirty_cents_charge_text">plus a 50&#162; processing fee</string>
     <string name="authorize_api_login_id">3C29upX37b</string>
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
-    <string name="title_activity_friend_invite">FriendInviteActivity</string>
+    <string name="title_activity_friend_invite"></string>
     <string name="friend_invite_button_invite_text">Search Contacts List</string>
     <string name="friend_invite_button_home_text">Go To Game</string>
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
@@ -193,7 +193,7 @@
     <string name="me_settings_et_new_password_confirm_hint">Confirm New password</string>
     <string name="me_settings_button_submit_text">Submit Changes</string>
     <string name="me_settings_button_invite_friends_text">Invite Friends</string>
-    <string name="me_settings_button_logout_text">Logout</string>
+    <string name="me_settings_button_logout_text">Log Out</string>
     <string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
     <string name="me_settings_button_change_picture_text">Choose picture</string>
     <string name="me_faq">FAQ</string>
@@ -205,6 +205,7 @@
     <string name="me_links_text">Web Links:</string>
     <string name="me_settings_tutorial_button">Fitsby Tutorial</string>
     <string name="server_url">place server url here</string>
+    <string name="fragment_tutorial_object_button">Finish</string>
     <string name="places_api_key">AIzaSyDZQwGWpl_TFPSuCJS1mNHRbD1rppE-vA8</string>
     <string name="stripe_live_secret_api_key">sk_0G8Utv86sXeIUY4EO6fif1hAypeDE</string>
     <string name="stripe_live_publishable_api_key">pk_0G8Uw4pPr4NBHkdtCw0m2PJBVdAES</string>
@@ -216,8 +217,8 @@
     <string name="game_start_date_value">10/12/2012</string>
     <string name="title_activity_loggedin"></string>
     <string name="login_remember_me_textview">Remember me</string>
-    <string name="title_activity_tutorial">TutorialActivity</string>
-    <string name="title_activity_share_checkin">ShareCheckinActivity</string>
-    <string name="title_activity_first_time_checkin">FirstTimeCheckinActivity</string>
+    <string name="title_activity_tutorial"></string>
+    <string name="title_activity_share_checkin"></string>
+    <string name="title_activity_first_time_checkin"></string>
 
 </resources>

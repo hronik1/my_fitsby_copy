@@ -170,7 +170,7 @@ public class FriendInviteActivity extends Activity {
 
                 } catch (Exception e) {
                     // Check log for login errors
-                    Log.e("Twitter Login Error", "> " + e.getMessage());
+                    Log.e("Twitter Log In Error", "> " + e.getMessage());
                 }
             }
         }
@@ -322,9 +322,9 @@ public class FriendInviteActivity extends Activity {
     		}
     	});
     	if (isTwitterLoggedInAlready())
-    		twitterLoginButton.setText("twitter logout");
+    		twitterLoginButton.setText("Twitter Log Out");
     	else
-    		twitterLoginButton.setText("twitter login");
+    		twitterLoginButton.setText("Twitter Log In");
     	
     	twitterShareButton = (Button)findViewById(R.id.invite_twitter_share_button);
     	twitterShareButton.setOnClickListener(new OnClickListener() {
@@ -349,7 +349,7 @@ public class FriendInviteActivity extends Activity {
 			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		    	
 			  	final EditText input = new EditText(FriendInviteActivity.this);
-			  	input.setText("I want to challenge you on gym check-ins using Fitsby! " +
+			  	input.setText("I challenge you in a game of gym check-ins using Fitsby! " +
 			  			"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 		    	builder.setView(input);
 		    	
@@ -426,7 +426,7 @@ public class FriendInviteActivity extends Activity {
     		pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
     		startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
     	} catch (Exception e) {
-    		Toast.makeText(this, "It appears that either your device does not have contacts," +
+    		Toast.makeText(this, "Your device does not have contacts," +
     				" or will not allow us to access them", Toast.LENGTH_LONG).show();
     	}
 
@@ -452,14 +452,14 @@ public class FriendInviteActivity extends Activity {
         Session session = Session.getActiveSession();
 
         if (session == null || !session.isOpened()) {
-        	Toast.makeText(this, "You must sign in", Toast.LENGTH_LONG).show();
+        	Toast.makeText(this, "You must first log in to Facebook", Toast.LENGTH_LONG).show();
         }
         else {
 
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
             postParams.putString("caption", "An app that motivates you to go to the gym.");
-            postParams.putString("description", "Challenge your friends on gym check-ins and win their money when the don't go to the gym.");
+            postParams.putString("description", "Challenge your friends in a game of gym check-ins and win their money when the don't work out!");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
 
@@ -489,7 +489,7 @@ public class FriendInviteActivity extends Activity {
     }
     
     /**
-     * logins in user if not, logsout if logged in
+     * logins in user if not, logs out if logged in
      */
     private void authenticateTwitter() {
     	if (!isTwitterLoggedInAlready()) {
@@ -511,7 +511,7 @@ public class FriendInviteActivity extends Activity {
     	    e.remove(PREF_KEY_TWITTER_LOGIN);
     	    e.commit();
     	    
-    	    twitterLoginButton.setText("twitter login");
+    	    twitterLoginButton.setText("Twitter Log In");
     	}
     	
     }
@@ -532,7 +532,7 @@ public class FriendInviteActivity extends Activity {
     	if (isTwitterLoggedInAlready()) {
     		showTwitterDialog();
     	} else {
-    		Toast.makeText(this, "Sorry, must log in to twitter first", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(this, "You must first log in to Twitter to share", Toast.LENGTH_SHORT).show();
     	}
     }
     
@@ -546,7 +546,7 @@ public class FriendInviteActivity extends Activity {
 	  	input.setHint("status");
     	builder.setView(input);
     	
-    	builder.setMessage("Enter status and post to twitter.")
+    	builder.setMessage("Enter status and post to Twitter.")
     			.setCancelable(false)
     			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -561,7 +561,7 @@ public class FriendInviteActivity extends Activity {
     							toast.show();
     						}
     					} else {
-							Toast toast = Toast.makeText(FriendInviteActivity.this, "Sorry, but your status can't be empty", Toast.LENGTH_LONG);
+							Toast toast = Toast.makeText(FriendInviteActivity.this, "Your status can't be empty", Toast.LENGTH_LONG);
 							toast.setGravity(Gravity.CENTER, 0, 0);
 							toast.show();
     					}
@@ -586,7 +586,7 @@ public class FriendInviteActivity extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Updating to twitter...");
+                    "Updating to Twitter...");
 
         }
      
@@ -705,7 +705,7 @@ public class FriendInviteActivity extends Activity {
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		  	
 		  	final EditText input = new EditText(FriendInviteActivity.this);
-		  	input.setText("I want to challenge you on gym check-ins using Fitsby! " +
+		  	input.setText("I want to challenge you in a game of gym check-ins using Fitsby! " +
 		  			"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 	    	builder.setView(input);
 	    	

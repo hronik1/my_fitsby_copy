@@ -125,7 +125,7 @@ public class ShareCheckinActivity extends Activity {
 
                 } catch (Exception e) {
                     // Check log for login errors
-                    Log.e("Twitter Login Error", "> " + e.getMessage());
+                    Log.e("Twitter Log In Error", "> " + e.getMessage());
                 }
             }
         }
@@ -239,9 +239,9 @@ public class ShareCheckinActivity extends Activity {
     		}
     	});
     	if (isTwitterLoggedInAlready())
-    		twitterLoginButton.setText("twitter logout");
+    		twitterLoginButton.setText("Twitter Log Out");
     	else
-    		twitterLoginButton.setText("twitter login");
+    		twitterLoginButton.setText("Twitter Log In");
     	
     	twitterShareButton = (Button)findViewById(R.id.checkin_share_twitter_share_button);
     	twitterShareButton.setOnClickListener(new OnClickListener() {
@@ -258,7 +258,7 @@ public class ShareCheckinActivity extends Activity {
     	if (isTwitterLoggedInAlready()) {
     		showTwitterDialog();
     	} else {
-    		Toast.makeText(this, "Sorry, must log in to twitter first", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(this, "Please log in to Twitter to share", Toast.LENGTH_SHORT).show();
     	}
     }
     
@@ -269,10 +269,10 @@ public class ShareCheckinActivity extends Activity {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
 	  	final EditText input = new EditText(this);
-	  	input.setText(mUser.getFirstName() + " just checked in at " + mGymName);
+	  	input.setText("I just had an awesome workout at " + mGymName + "! Challenge me in a game of gym check-ins using @Fitsby!");
     	builder.setView(input);
     	
-    	builder.setMessage("Enter status and post to twitter.")
+    	builder.setMessage("Enter status and post to Twitter.")
     			.setCancelable(false)
     			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -287,7 +287,7 @@ public class ShareCheckinActivity extends Activity {
     							toast.show();
     						}
     					} else {
-							Toast toast = Toast.makeText(ShareCheckinActivity.this, "Sorry, but your status can't be empty", Toast.LENGTH_LONG);
+							Toast toast = Toast.makeText(ShareCheckinActivity.this, "Your status can't be empty", Toast.LENGTH_LONG);
 							toast.setGravity(Gravity.CENTER, 0, 0);
 							toast.show();
     					}
@@ -312,7 +312,7 @@ public class ShareCheckinActivity extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog = ProgressDialog.show(ShareCheckinActivity.this, "",
-                    "Updating to twitter...");
+                    "Updating to Twitter...");
 
         }
      
@@ -372,20 +372,20 @@ public class ShareCheckinActivity extends Activity {
     }
     
     /**
-     * opens up dialog for users to share their checkin on facebook
+     * opens up dialog for users to share their check-in on Facebook
      */
     private void publishStory() {
         Session session = Session.getActiveSession();
 
         if (session == null || !session.isOpened()) {
-        	Toast.makeText(this, "Sorry, but you must sign in", Toast.LENGTH_LONG).show();
+        	Toast.makeText(this, "Please log in to Facebook to share", Toast.LENGTH_LONG).show();
         }
         else {
 
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
             postParams.putString("caption", "An app that motivates you to go to the gym.");
-            postParams.putString("description", mUser.getFirstName() + " just checked in at " + mGymName);
+            postParams.putString("description", "I just had an awesome workout at " + mGymName + "! Challenge me in a game of gym check-ins with Fitsby! Download the free app at fitsby.com.");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
 
@@ -436,7 +436,7 @@ public class ShareCheckinActivity extends Activity {
     	    e.remove(PREF_KEY_TWITTER_LOGIN);
     	    e.commit();
     	    
-    	    twitterLoginButton.setText("twitter login");
+    	    twitterLoginButton.setText("Twitter Login");
     	}
     	
     }

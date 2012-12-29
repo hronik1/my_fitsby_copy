@@ -25,8 +25,8 @@ public class TutorialActivity extends FragmentActivity {
     TutorialPagerAdapter mTutorialPagerAdapter;
     ViewPager mViewPager;
     
-    private static int[] pageDrawableResources = new int[] {R.drawable.green_check_mark, R.drawable.fitsby_logo,
-    		R.drawable.stripe_cards, R.drawable.stripe_cards};
+    private static int[] pageDrawableResources = new int[] {R.drawable.registration_onboard1, R.drawable.registration_onboard2,
+    		R.drawable.registration_onboard3, R.drawable.registration_onboard4};
     
     
 	@Override
@@ -72,7 +72,7 @@ public class TutorialActivity extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Page " + (position+1) + "/" + pageDrawableResources.length;
+            return "" + (position+1) + "/" + pageDrawableResources.length;
         }
         
         

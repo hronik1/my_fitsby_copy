@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
     
 	<ImageView
 	    android:id="@+id/fragment_tutorial_object_iv"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:layout_above="@+id/fragment_tutorial_object_button"
+	    android:scaleType="fitXY"
 	    android:layout_alignParentTop="true" />
 	
 	<Button
@@ -15,6 +15,11 @@
 	    android:layout_alignParentBottom="true"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:text="finish"/>
+	    android:text="@string/fragment_tutorial_object_button"
+        android:background="@drawable/newsfeed_submit_button"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white" />
 	
 </RelativeLayout>

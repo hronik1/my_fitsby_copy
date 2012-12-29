@@ -3,33 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShareCheckinActivity" >
-
-        <com.facebook.widget.LoginButton
-            android:id="@+id/checkin_share_authButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:padding="10dp" />
         <Button
             android:id="@+id/checkin_share_facebook_shareButton"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/checkin_share_authButton"
             android:layout_alignBottom="@+id/checkin_share_authButton"
             android:layout_toRightOf="@+id/checkin_share_authButton"
-            android:text="share" />
+            android:text="Share" />
         
         <Button
             android:id="@+id/checkin_share_twitter_login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/checkin_share_authButton"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/checkin_share_authButton"
-            android:padding="10dp" 
-            android:text="twitter login"/>
+            android:layout_below="@+id/checkin_share_authButton"
+            android:padding="10dp"
+            android:text="twitter login" />
         
         <Button
             android:id="@+id/checkin_share_twitter_share_button"
@@ -37,7 +27,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/checkin_share_twitter_login_button"
-            android:layout_toRightOf="@+id/checkin_share_twitter_login_button"
             android:text="share" />
+
+        <com.facebook.widget.LoginButton
+            android:id="@+id/checkin_share_authButton"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:padding="10dp" />
 
 </RelativeLayout>

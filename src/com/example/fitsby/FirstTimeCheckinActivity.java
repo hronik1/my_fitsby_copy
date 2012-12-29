@@ -71,7 +71,7 @@ public class FirstTimeCheckinActivity extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Page " + (position+1) + "/" + pageDrawableResources.length;
+            return "" + (position+1) + "/" + pageDrawableResources.length;
         }
         
         
