@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dark_gradient_background" >
+    android:background="@color/light_white" >
 
 <ScrollView
     android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:textSize="13sp"  
-            android:textColor="@color/white"                  
+            android:textColor="@color/black"                  
             android:text="@string/league_create_header_text" />
         <Button
             android:id="@+id/league_create_button_create"
@@ -29,7 +29,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/custom_login_button"
+            android:background="@drawable/newsfeed_submit_button"
             android:text="@string/league_create_create_text"
             android:textColor="@color/white" />
         
@@ -42,7 +42,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:textSize="16sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:text="@string/league_create_tv_wager_text"
             android:textStyle="bold" />
         
@@ -62,6 +62,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text="@string/league_create_wager_dollarsign_text"
+	            android:textColor="@color/white"
 	            android:textSize="40sp"/>
 	        <TextView
 	            android:id="@+id/league_create_wager"
@@ -71,27 +72,31 @@
 	            android:layout_alignBottom="@+id/league_create_wager_dollarsign"
 	            android:layout_toRightOf="@+id/league_create_wager_dollarsign"
 	            android:text="@string/league_create_wager_text"
+	            android:textColor="@color/white"
 	            android:textSize="40sp" />
 	        <Button
 	            android:id="@+id/league_create_ib_wager_minus"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
-	            android:layout_alignBottom="@+id/league_create_wager"
+	            android:layout_alignTop="@+id/league_create_wager"
 	            android:layout_toLeftOf="@+id/league_create_ib_wager_plus"	            
-	            android:background="@drawable/custom_login_button"
+	            android:background="@color/fitsby_blue"
 	            android:contentDescription="@string/league_create_ib_wager_minus_text"
 	            android:text="@string/league_create_ib_wager_minus"
 	            android:layout_marginRight="5dp"
+	            android:textStyle="bold"
 	            android:textColor="@color/white" />
 	        <Button
 	            android:id="@+id/league_create_ib_wager_plus"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:layout_alignParentRight="true"	            
-	            android:layout_alignBottom="@+id/league_create_wager"
-	            android:background="@drawable/custom_login_button"
+	            android:layout_alignTop="@+id/league_create_wager"
+	            android:background="@color/fitsby_blue"
 	            android:contentDescription="@string/league_create_ib_wager_plus_text"
 	            android:text="@string/league_create_ib_wager_plus"
+	            android:layout_marginRight="2dp"	
+	            android:textStyle="bold"	                        
 	            android:textColor="@color/white" />
         </RelativeLayout>
 
@@ -105,7 +110,7 @@
             android:layout_marginBottom="5dp"
             android:text="@string/league_create_tv_days_text"
             android:textSize="16sp"     
-            android:textColor="@color/white"               
+            android:textColor="@color/black"               
             android:textStyle="bold" />
         
         <RelativeLayout
@@ -124,27 +129,31 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text="@string/league_create_days_text"
+	            android:textColor="@color/white"
 	            android:textSize="40sp" />	            
 	       <Button
 	           android:id="@+id/league_create_ib_days_minus"
 	           android:layout_width="50dp"
 	           android:layout_height="50dp"
-	           android:layout_alignBottom="@+id/league_create_days"
+	           android:layout_alignTop="@+id/league_create_days"
 	           android:layout_toLeftOf="@+id/league_create_ib_days_plus"
-	           android:background="@drawable/custom_login_button"
+               android:background="@color/fitsby_blue"
 	           android:contentDescription="@string/league_create_ib_days_minus_text"
 	           android:text="@string/league_create_ib_days_minus"
 	           android:layout_marginRight="5dp"   
+  	           android:textStyle="bold"
 	           android:textColor="@color/white" />
 	       <Button
 	           android:id="@+id/league_create_ib_days_plus"
 	           android:layout_width="50dp"
 	           android:layout_height="50dp"
 	           android:layout_alignParentRight="true"
-	           android:layout_alignBottom="@+id/league_create_days"
-	           android:background="@drawable/custom_login_button"
+	           android:layout_alignTop="@+id/league_create_days"
+			   android:background="@color/fitsby_blue"
 	           android:contentDescription="@string/league_create_ib_days_plus_text"
 	           android:text="@string/league_create_ib_days_plus"
+	           android:layout_marginRight="2dp"	            	   
+  	           android:textStyle="bold"
 	           android:textColor="@color/white" />
        </RelativeLayout>        
         <TextView
@@ -156,7 +165,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:textSize="16sp"      
-            android:textColor="@color/white"              
+            android:textColor="@color/black"              
             android:text="@string/league_create_rb_prompt"
             android:textStyle="bold" />
         <RelativeLayout
@@ -182,12 +191,14 @@
 	               android:layout_width="wrap_content"
 	               android:layout_height="wrap_content"
 	               android:layout_alignLeft="@+id/textView1"
+	               android:textColor="@color/white"
 	               android:text="@string/league_create_rb_top3" />
 	           <RadioButton
 	               android:id="@+id/league_create_rb_takeall"
 	               android:layout_marginLeft="10dp"     
 	               android:layout_width="wrap_content"
 	               android:layout_height="wrap_content"
+	               android:textColor="@color/white"
 	               android:text="@string/league_create_rb_takeall" />
 	       </RadioGroup>
 	   </RelativeLayout>
@@ -207,6 +218,7 @@
 	           android:layout_width="wrap_content"
 	           android:layout_height="wrap_content"
 	           android:layout_alignLeft="@+id/league_create_days"
+	           android:textColor="@color/white"
 	           android:layout_below="@+id/league_create_privacy_text"
 	           android:text="@string/league_create_checkbox_text" />
 	   </RelativeLayout>
@@ -216,13 +228,13 @@
            android:layout_height="wrap_content"
            android:layout_below="@+id/privacy_box"
            android:layout_centerHorizontal="true"
-           android:background="@drawable/newsfeed_submit_button"
+           android:textColor="@drawable/faq_button_text"
+           android:background="@color/light_white"
            android:text="@string/faq_button"
            android:layout_marginTop="20dp"
            android:layout_marginBottom="10dp"
            android:layout_marginRight="10dp"
-           android:layout_marginLeft="10dp"
-           android:textColor="@color/white" />
+           android:layout_marginLeft="10dp" />
        <TextView
            android:id="@+id/league_create_privacy_text"
            android:layout_width="wrap_content"
@@ -231,7 +243,7 @@
            android:layout_alignLeft="@+id/textView1"
            android:layout_marginTop="10dp"
            android:textStyle="bold"
-           android:textColor="@color/white"
+           android:textColor="@color/black"
            android:layout_below="@+id/radio_box"
            android:layout_marginBottom="5dp"           
            android:text="@string/league_create_privacy_text" />

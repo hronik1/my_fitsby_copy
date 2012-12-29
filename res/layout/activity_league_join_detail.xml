@@ -196,7 +196,7 @@
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"
 		        android:text="@string/league_join_detail_players_data_text"
-		        android:textColor="@color/fitsby_red"
+		        android:textColor="@color/fitsby_blue"
 		        android:textStyle="bold" 	       		        
 		        android:gravity="center" />
 		    <TextView
@@ -221,7 +221,7 @@
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"	               
 		        android:text="@string/league_join_detail_wager_data_text"                   
-		        android:textColor="@color/fitsby_red"
+		        android:textColor="@color/fitsby_blue"
 		        android:textStyle="bold" 			           
 		        android:gravity="center" />
 	       <TextView
@@ -245,7 +245,7 @@
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"	                
 		        android:text="@string/league_join_detail_pot_data_text"
-		        android:textColor="@color/fitsby_red"
+		        android:textColor="@color/fitsby_blue"
 		        android:textStyle="bold" 		        		                        
 		        android:gravity="center" />
 	   		<TextView

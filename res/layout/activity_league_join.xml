@@ -159,6 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/league_join_button_create"
         android:text="@string/create_new_game_directions"
+        android:gravity="center"
   		android:layout_marginTop="10dp"
   		android:layout_marginRight="10dp"
   		android:layout_marginLeft="10dp"  		
@@ -173,7 +174,7 @@
   		android:layout_marginRight="10dp"
   		android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/custom_login_button"     
+        android:background="@drawable/newsfeed_submit_button"     
         android:textSize="14sp"
 		android:textColor="@color/white" 
         android:text="@string/league_join_button_create" />
