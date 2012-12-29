@@ -81,33 +81,7 @@ public class MeFragment extends SherlockFragment {
 	private User mUser;
 	
 	private Activity parent;
-	
-	private Messenger mService;
-	final Messenger mMessenger = new Messenger(new IncomingHandler());
-	
-    /**
-     * Class for interacting with the main interface of the service.
-     */
-    private ServiceConnection mConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className,
-                IBinder service) {
-            mService = new Messenger(service);
 
-            try {
-                Message msg = Message.obtain(null,
-                        MessengerService.MSG_REGISTER_CLIENT);
-                msg.replyTo = mMessenger;
-                mService.send(msg);
-            } catch (RemoteException e) {
-            	Log.e(TAG, e.toString());
-            }
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            mService = null;
-
-        }
-    };
     
 	/**
 	 * callback to add in the stats fragment
@@ -324,7 +298,7 @@ public class MeFragment extends SherlockFragment {
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    					new CheckoutAsyncTask().execute(mUser.getID());
+    					//
     				}
     			})
     			.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -416,71 +390,39 @@ public class MeFragment extends SherlockFragment {
         }
     }
     
-    /**
-     * AsyncTask to Register user
-     * @author brent
-     *
-     */
-    private class CheckoutAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
-    	
-		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Checking you out of your games...");
-		}
-		
-        protected StatusResponse doInBackground(Integer... params) {
-        	StatusResponse response = CheckinCommunication.checkout(params[0]);
-        	return response;
-        }
-
-        protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
-        	if (response.wasSuccessful()) {
-                Message msg = Message.obtain(null,
-                        MessengerService.MSG_STOP_TIMER);
-                msg.replyTo = mMessenger;
-                try {
-					mService.send(msg);
-				} catch (RemoteException e) {
-					Log.e(TAG, e.toString());
-				}
-        	}
-			logout();
-        }
-    }
     
     /**
      * AsyncTask to Register user
      * @author brent
      *
      */
-    private class EnableNotificationsAsyncTask extends AsyncTask<Boolean, Void, StatusResponse> {
-    	
-		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Updating your notification status...");
-		}
-		
-        protected StatusResponse doInBackground(Boolean... params) {
-        	StatusResponse response = UserCommunication.enableNotifications(mUser.getID(), params[0]);
-        	return response;
-        }
-
-        protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
-        	//TODO feeling toasty
-        }
-    }
-    /**
-     * Handler of incoming messages from service.
-     */
-    static class IncomingHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                default:
-                    super.handleMessage(msg);
-            }
-        }
-    }
+//    private class EnableNotificationsAsyncTask extends AsyncTask<Boolean, Void, StatusResponse> {
+//    	
+//		protected void onPreExecute() {
+//            mProgressDialog = ProgressDialog.show(parent, "",
+//                    "Updating your notification status...");
+//		}
+//		
+//        protected StatusResponse doInBackground(Boolean... params) {
+//        	StatusResponse response = UserCommunication.enableNotifications(mUser.getID(), params[0]);
+//        	return response;
+//        }
+//
+//        protected void onPostExecute(StatusResponse response) {
+//        	mProgressDialog.dismiss();
+//        	//TODO feeling toasty
+//        }
+//    }
+//    /**
+//     * Handler of incoming messages from service.
+//     */
+//    static class IncomingHandler extends Handler {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            switch (msg.what) {
+//                default:
+//                    super.handleMessage(msg);
+//            }
+//        }
+//    }
 }

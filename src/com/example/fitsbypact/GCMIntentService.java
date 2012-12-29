@@ -10,11 +10,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentService {
 
+	private final static String SENDER_ID = "979881390942";
+	private String TAG = "GCMINTENTSERVICE";
+	
 	public GCMIntentService() {
-		
+		super(SENDER_ID);
 	}
 	
 	@Override
@@ -52,6 +56,7 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 	protected void onRegistered(Context context, String regId) {
 		// TODO Auto-generated method stub
 		// TODO send message to danny so that he can map the person to push notifications to 
+		Log.v(TAG, "registered " + regId);
 		UserCommunication.registerDevice(regId, ((ApplicationUser)getApplicationContext()).getUser().getID()+"");
 	}
 

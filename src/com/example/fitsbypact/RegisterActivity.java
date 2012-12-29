@@ -297,16 +297,18 @@ public class RegisterActivity extends Activity {
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
-        		
+        		Log.v(TAG, "successful registration");
                 try {
-                	GCMRegistrar.checkDevice(RegisterActivity.this);
-                	GCMRegistrar.checkManifest(RegisterActivity.this);
-                	final String regId = GCMRegistrar.getRegistrationId(RegisterActivity.this);
+                	GCMRegistrar.checkDevice(getApplicationContext());
+                	GCMRegistrar.checkManifest(getApplicationContext());
+                	final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
                 	if (regId.equals("")) {
-                		GCMRegistrar.register(RegisterActivity.this, getString(R.string.gcm_sender_id));
+                		GCMRegistrar.register(getApplicationContext(), getString(R.string.gcm_sender_id));
                 		Log.v(TAG, "Just now registered");
                 	} else {
                 		Log.v(TAG, "Already registered");
+                		new RegisterGCMAsyncTask().execute(regId);
+                		Toast.makeText(RegisterActivity.this, regId + "", Toast.LENGTH_LONG).show();
                 	}
                 } catch (Exception e) {
                 	Log.e(TAG, e.toString());
@@ -316,6 +318,16 @@ public class RegisterActivity extends Activity {
         	}
         }
     }
+   
     
+    private class RegisterGCMAsyncTask extends AsyncTask<String, Void, Void> {
 
+		@Override
+		protected Void doInBackground(String... params) {
+			UserCommunication.registerDevice(params[0], (mApplicationUser.getUser().getID()+""));
+			return null;
+
+		}
+    }
+    
 }
