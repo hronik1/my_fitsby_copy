@@ -6,6 +6,7 @@
     <string name="twitter_access_token">546435692-vjMam22IOKkYL3SiY7AVUsfTqU2VjBa3VvTWcd8</string>
     <string name="twitter_access_token_secret">8zSFoHJv6zCO8YTiFOToRrjhvvfrMgRn9wXkQrTf1c</string>
     <string name="app_id">426803977352349</string>
+    <string name="gcm_sender_id">979881390942</string>
     <string name="motto">Stay motivated to hit the gym.</string>
     <string name="or"> OR </string>
     <string name="app_name">Fitsby</string>

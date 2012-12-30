@@ -10,6 +10,7 @@ import com.example.fitsby.fragments.GamesFragment;
 import com.example.fitsby.fragments.MeFragment;
 import com.example.fitsby.fragments.NewsfeedFragment;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
 
@@ -73,6 +74,7 @@ public class LoggedinActivity extends SherlockFragmentActivity {
 		if (savedInstanceState != null) {
 			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
 		}
+
 	}
 	
     @Override

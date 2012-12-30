@@ -29,8 +29,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
+import responses.StatusResponse;
 import responses.UserResponse;
 
 public class RegisterActivity extends Activity {
@@ -320,9 +322,42 @@ public class RegisterActivity extends Activity {
         	} else {
         		//TODO switch to next page
         		mApplicationUser.setUser(response.getUser());
-				Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
-				startActivity(intent);
+        		Log.v(TAG, "successful registration");
+                try {
+                	GCMRegistrar.checkDevice(getApplicationContext());
+                	GCMRegistrar.checkManifest(getApplicationContext());
+                	final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
+                	if (regId.equals("")) {
+                		GCMRegistrar.register(getApplicationContext(), getString(R.string.gcm_sender_id));
+                		Log.v(TAG, "Just now registered");
+                	} else {
+                		Log.v(TAG, "Already registered");
+                		new RegisterGCMAsyncTask().execute(regId);
+                		Toast.makeText(RegisterActivity.this, regId + "", Toast.LENGTH_LONG).show();
+                	}
+                } catch (Exception e) {
+                	Log.e(TAG, e.toString());
+                }
+//				Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
+//				startActivity(intent);
         	}
         }
     }
+   
+    
+    private class RegisterGCMAsyncTask extends AsyncTask<String, Void, Void> {
+
+		@Override
+		protected Void doInBackground(String... params) {
+			UserCommunication.registerDevice(params[0], (mApplicationUser.getUser().getID()+""));
+			return null;
+
+		}
+		
+		protected void onPostExecute(Void response) {
+			Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
+			startActivity(intent);
+		}
+    }
+    
 }

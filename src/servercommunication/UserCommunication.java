@@ -177,6 +177,7 @@ public class UserCommunication {
 		}
 	}
 	
+
 	public static StatusResponse notifySeverOfInvite(int userId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
@@ -184,6 +185,37 @@ public class UserCommunication {
         	json.put("user_id", userId);
         	StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "append_text_field", stringEntity);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
+		}
+	}
+
+	public static StatusResponse registerDevice(String deviceId, String userId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		JSONObject json = new JSONObject();
+        try {
+        	json.put("registration_id", deviceId);
+        	json.put("user_id", userId);
+        	StringEntity stringEntity = new StringEntity(json.toString()); 
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "push_registration", stringEntity);
+			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
+		}
+	}
+	
+	public static StatusResponse enableNotifications(String userId, boolean enabled) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		JSONObject json = new JSONObject();
+        try {
+        	json.put("enabled", enabled);
+        	json.put("user_id", userId);
+        	StringEntity stringEntity = new StringEntity(json.toString()); 
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "enable_notifications", stringEntity);
+
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());

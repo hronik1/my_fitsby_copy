@@ -9,12 +9,15 @@ import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
 import dbtables.League;
 import android.support.v4.content.AsyncTaskLoader;
+import android.util.Log;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 
 public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 
+	private final static String TAG = "PublicLeagueCursorLoader";
+	
 	private DatabaseHandler mDBHandler;
 	private LeagueTableHandler mLeagueTableHandler;
 	private LeagueMemberTableHandler mLeagueMemberTableHandler;
@@ -45,6 +48,7 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	@Override
 	public Cursor loadInBackground() {
+		Log.d(TAG, "userID = " + userId);
 		return LeagueCommunication.getPublicLeagues(userId);
 	}
 		

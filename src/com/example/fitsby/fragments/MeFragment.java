@@ -51,6 +51,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -80,6 +83,8 @@ public class MeFragment extends SherlockFragment {
 	private Button tutorialButton;
 	private Button checkinTutorialButton;
 	
+	private CheckBox enableNotificationsCB;
+	
 	private EditText emailET;
 	private ProgressDialog mProgressDialog;
 	
@@ -89,33 +94,7 @@ public class MeFragment extends SherlockFragment {
 	private User mUser;
 	
 	private Activity parent;
-	
-	private Messenger mService;
-	final Messenger mMessenger = new Messenger(new IncomingHandler());
-	
-    /**
-     * Class for interacting with the main interface of the service.
-     */
-    private ServiceConnection mConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className,
-                IBinder service) {
-            mService = new Messenger(service);
 
-            try {
-                Message msg = Message.obtain(null,
-                        MessengerService.MSG_REGISTER_CLIENT);
-                msg.replyTo = mMessenger;
-                mService.send(msg);
-            } catch (RemoteException e) {
-            	Log.e(TAG, e.toString());
-            }
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            mService = null;
-
-        }
-    };
     
 	/**
 	 * callback to add in the stats fragment
@@ -129,6 +108,7 @@ public class MeFragment extends SherlockFragment {
 	    initializeButtons(viewer);
 	    initializeEditTexts(viewer);
 	    initializeImageView(viewer);
+	    initializeCheckBox(viewer);
 
 	    new StatsAsyncTask().execute(mUser.getID());
 	    
@@ -315,6 +295,18 @@ public class MeFragment extends SherlockFragment {
 	 */
 	private void initializeImageView(View viewer) {
 		profileIV = (ImageView)viewer.findViewById(R.id.me_imageview);
+	}
+	
+	private void initializeCheckBox(View viewer) {
+		enableNotificationsCB = (CheckBox)viewer.findViewById(R.id.notifications_enabled);
+		enableNotificationsCB.setChecked(true);
+		enableNotificationsCB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				
+			}
+		});
 	}
 	
 	/**
@@ -546,6 +538,7 @@ public class MeFragment extends SherlockFragment {
         }
     }
     
+    
     /**
      * AsyncTask to Register user
      * @author brent
@@ -627,4 +620,35 @@ public class MeFragment extends SherlockFragment {
         	}
         }
     }
+
+//    private class EnableNotificationsAsyncTask extends AsyncTask<Boolean, Void, StatusResponse> {
+//    	
+//		protected void onPreExecute() {
+//            mProgressDialog = ProgressDialog.show(parent, "",
+//                    "Updating your notification status...");
+//		}
+//		
+//        protected StatusResponse doInBackground(Boolean... params) {
+//        	StatusResponse response = UserCommunication.enableNotifications(mUser.getID(), params[0]);
+//        	return response;
+//        }
+//
+//        protected void onPostExecute(StatusResponse response) {
+//        	mProgressDialog.dismiss();
+//        	//TODO feeling toasty
+//        }
+//    }
+//    /**
+//     * Handler of incoming messages from service.
+//     */
+//    static class IncomingHandler extends Handler {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            switch (msg.what) {
+//                default:
+//                    super.handleMessage(msg);
+//            }
+//        }
+//    }
+
 }

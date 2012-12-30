@@ -57,6 +57,7 @@ public class LoginActivity extends Activity {
 	/**
 	 * Called when activity is created
 	 */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

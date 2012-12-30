@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.crittercism.app.Crittercism;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
 import constants.TutorialsConstants;
@@ -38,6 +39,7 @@ public class LandingActivity extends Activity {
         Log.i(TAG, "onCreate");
         
         initializeButtons();
+        
     }
 
     /**
