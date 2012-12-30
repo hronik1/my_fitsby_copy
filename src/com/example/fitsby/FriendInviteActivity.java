@@ -709,8 +709,7 @@ public class FriendInviteActivity extends Activity {
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		  	
 		  	final EditText input = new EditText(FriendInviteActivity.this);
-		  	input.setText("I want to challenge you in a game of gym check-ins using Fitsby! " +
-		  			"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
+		  	input.setText("Can you beat me in a game of gym check-ins? Download @Fitsby, join my game, & stay motivated to work out!!");
 	    	builder.setView(input);
 	    	
 	    	builder.setMessage("Edit personal message to your friend")
