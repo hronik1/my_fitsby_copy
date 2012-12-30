@@ -101,6 +101,7 @@ public class CheckinFragment extends SherlockFragment{
     private ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
                 IBinder service) {
+        	Log.d(TAG, "service connected");
             mService = new Messenger(service);
 
             try {
@@ -114,6 +115,7 @@ public class CheckinFragment extends SherlockFragment{
         }
 
         public void onServiceDisconnected(ComponentName className) {
+        	Log.d(TAG, "service disconnected");
             mService = null;
 
         }

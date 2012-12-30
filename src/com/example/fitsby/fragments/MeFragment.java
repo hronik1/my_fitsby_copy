@@ -321,6 +321,18 @@ public class MeFragment extends SherlockFragment {
 	 * logs the user out
 	 */
 	private void logout() {
+//        Message msg = Message.obtain(null,
+//                MessengerService.MSG_STOP_TIMER);
+//        msg.replyTo = mMessenger;
+        Message msg = Message.obtain(null,
+                MessengerService.MSG_STOP_TIMER);
+        msg.replyTo = mMessenger;
+        try {
+
+			mService.send(msg);
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
 		Intent intent = new Intent(parent, LandingActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		mApplicationUser.setUser(null);
