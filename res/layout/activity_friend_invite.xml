@@ -20,7 +20,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/fitsby_blue"
         android:textSize="14sp"
         android:text="@string/invite_friends_directions" />
         
@@ -31,7 +31,7 @@
             android:layout_below="@+id/facebook_text"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="1dp"
+            android:layout_marginRight="3dp"
             android:padding="10dp" />
         <Button
             android:id="@+id/facebook_share_button"
@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/authButton"
             android:layout_toRightOf="@+id/authButton"
+            android:layout_alignBottom="@+id/authButton"
             android:text="Share"
             android:layout_marginRight="10dp"            
             android:textColor="@color/white"
@@ -54,7 +55,7 @@
             android:layout_alignRight="@+id/authButton"
             android:padding="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="1dp" 
+            android:layout_marginRight="3dp" 
             android:textColor="@color/white"
             android:background="@color/twitter_blue"
             android:text="Twitter Log In"/>
@@ -64,9 +65,11 @@
             android:layout_height="wrap_content"        
             android:layout_marginRight="10dp"            
             android:layout_alignTop="@+id/invite_twitter_login_button"
+            android:layout_alignBottom="@+id/invite_twitter_login_button"
             android:layout_toRightOf="@+id/invite_twitter_login_button"
             android:textColor="@color/white"
             android:background="@color/twitter_blue"
+        	android:padding="10dp"            
             android:text="Share" />
 
         <TextView
@@ -99,9 +102,9 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/friend_invite_button_invite"
             android:layout_below="@+id/friend_invite_button_invite"
-            android:textColor="@color/white"
+            android:textColor="@color/fitsby_blue"
             android:textSize="14sp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:text="@string/invite_friends_directions2" />
 
         <TextView
@@ -144,7 +147,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/invite_twitter_login_button"
-            android:layout_alignRight="@+id/invite_twitter_share_button"
+            android:layout_alignRight="@+id/friend_invite_button_invite"
             android:layout_below="@+id/or_invite_them_later_text"
             android:layout_marginTop="2dp"
             android:background="@drawable/custom_login_button"
