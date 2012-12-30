@@ -82,19 +82,6 @@
         android:hint="@string/register_first_name_hint" >
         <requestFocus />
     </EditText>
-
-    <TextView
-        android:id="@+id/register_text"
-        style="@style/white_font"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/register_button_register"
-        android:layout_alignLeft="@+id/register_button_register"
-        android:layout_alignRight="@+id/register_button_register"
-        android:layout_marginTop="54dp"
-        android:textSize="14sp"        
-        android:text="@string/register_text" />
-
     <EditText
         android:id="@+id/register_last_name_id"
         android:layout_width="150dp"
@@ -109,5 +96,62 @@
         android:inputType="textCapSentences"
         android:paddingTop="10dp"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/register_text"
+        style="@style/white_font"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/register_button_register"
+        android:layout_alignRight="@+id/register_button_register"
+        android:layout_below="@+id/register_button_register"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/register_text"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/register_privacy_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_text"
+        android:layout_toRightOf="@+id/and"
+        android:gravity="center"
+        android:text="@string/me_privacy_policy"
+        android:textColor="@drawable/faq_button_text"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/register_privacy_tv"
+        android:layout_alignBottom="@+id/register_privacy_tv"
+        android:layout_toRightOf="@+id/register_privacy_tv"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:text="." />
+
+    <TextView
+        android:id="@+id/and"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_text"
+        android:layout_centerHorizontal="true"
+        android:text="  and  "
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/register_tos_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/and"
+        android:layout_alignBottom="@+id/and"
+        android:layout_toLeftOf="@+id/and"
+        android:gravity="center"
+        android:text="@string/me_terms_of_service"
+        android:textColor="@drawable/faq_button_text"
+        android:textSize="12sp" />
 
 </RelativeLayout>
