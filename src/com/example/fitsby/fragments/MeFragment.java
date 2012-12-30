@@ -95,7 +95,32 @@ public class MeFragment extends SherlockFragment {
 	
 	private Activity parent;
 
-    
+	private Messenger mService;
+	final Messenger mMessenger = new Messenger(new IncomingHandler());
+
+	/**
+	 * Class for interacting with the main interface of the service.
+	 */
+	private ServiceConnection mConnection = new ServiceConnection() {
+		public void onServiceConnected(ComponentName className,
+				IBinder service) {
+			mService = new Messenger(service);
+
+			try {
+				Message msg = Message.obtain(null,
+						MessengerService.MSG_REGISTER_CLIENT);
+				msg.replyTo = mMessenger;
+				mService.send(msg);
+			} catch (RemoteException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
+
+		public void onServiceDisconnected(ComponentName className) {
+			mService = null;
+
+		}
+	};
 	/**
 	 * callback to add in the stats fragment
 	 */
