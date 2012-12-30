@@ -463,7 +463,7 @@ public class FriendInviteActivity extends Activity {
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
             postParams.putString("caption", "An app that motivates you to go to the gym.");
-            postParams.putString("description", "Challenge your friends in a game of gym check-ins and win their money when the don't work out!");
+            postParams.putString("description", "Challenge your friends in a game of gym check-ins and win their money when they don't work out!");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
 
@@ -547,10 +547,10 @@ public class FriendInviteActivity extends Activity {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
 	  	final EditText input = new EditText(this);
-	  	input.setHint("status");
+	  	input.setHint("Enter status here");
     	builder.setView(input);
     	
-    	builder.setMessage("Enter status and post to Twitter.")
+    	builder.setMessage("Post a status to Twitter.")
     			.setCancelable(false)
     			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {

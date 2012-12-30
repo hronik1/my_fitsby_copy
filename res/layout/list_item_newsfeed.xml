@@ -81,7 +81,7 @@
         android:id="@+id/checkin_icon"
         android:layout_width="17dp"
         android:layout_height="17dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="-2dp"
         android:layout_below="@+id/list_item_newsfeed_timestamp"
         android:layout_toRightOf="@+id/frameLayout1"
         android:src="@drawable/checkin_icon" />

@@ -10,7 +10,7 @@
                 android:angle="270"
                  />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
             <padding
                 android:left="10dp"
                 android:top="10dp"
@@ -26,7 +26,7 @@
                 android:startColor="@color/gray2"
                 android:angle="270" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
             <padding
                 android:left="10dp"
                 android:top="10dp"
@@ -42,7 +42,7 @@
                 android:startColor="@color/second_button_gray"
                 android:angle="270" />
             <corners
-                android:radius="5dp" />
+                android:radius="0dp" />
             <padding
                 android:left="10dp"
                 android:top="10dp"

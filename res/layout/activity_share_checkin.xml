@@ -2,39 +2,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_white"
     tools:context=".ShareCheckinActivity" >
-        <Button
-            android:id="@+id/checkin_share_facebook_shareButton"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/checkin_share_authButton"
-            android:layout_alignBottom="@+id/checkin_share_authButton"
-            android:layout_toRightOf="@+id/checkin_share_authButton"
-            android:text="Share" />
-        
-        <Button
-            android:id="@+id/checkin_share_twitter_login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/checkin_share_authButton"
-            android:padding="10dp"
-            android:text="twitter login" />
-        
-        <Button
-            android:id="@+id/checkin_share_twitter_share_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/checkin_share_twitter_login_button"
-            android:text="share" />
 
-        <com.facebook.widget.LoginButton
-            android:id="@+id/checkin_share_authButton"
-            android:layout_width="wrap_content"
-            android:layout_height="110dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:padding="10dp" />
+    <TextView
+        android:id="@+id/nice_workout_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/fitsby_blue"
+        android:text="@string/nice_workout_big" />
+
+    <Button
+        android:id="@+id/checkin_share_twitter_share_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/checkin_share_twitter_login_button"
+        android:layout_toRightOf="@+id/checkin_share_twitter_login_button"
+        android:layout_marginRight="10dp"
+        android:background="@color/twitter_blue"
+		android:textColor="@color/white"                
+        android:text="Share" />
+
+    <TextView
+        android:id="@+id/nice_workout_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nice_workout_big"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"        
+        android:text="@string/nice_workout_small" />
+
+    <TextView
+        android:id="@+id/facebook_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nice_workout_small"
+		android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"	
+		android:textStyle="bold"
+        android:layout_marginLeft="10dp"		
+		android:text="Facebook:" />
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/checkin_share_authButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/facebook_text"
+        android:layout_below="@+id/facebook_text"
+        android:layout_marginRight="1dp"    
+        android:textColor="@color/white"            
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/checkin_share_facebook_shareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/checkin_share_authButton"
+        android:layout_toRightOf="@+id/checkin_share_authButton"
+        android:layout_marginRight="10dp"
+        android:background="@color/facebook_blue"
+        android:textColor="@color/white"                    
+        android:text="Share" />
+
+    <TextView
+        android:id="@+id/twitter_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/checkin_share_authButton"
+        android:layout_below="@+id/checkin_share_authButton"
+        android:layout_marginTop="10dp"	
+		android:textStyle="bold"	        
+        android:text="Twitter:" />
+
+    <Button
+        android:id="@+id/checkin_share_twitter_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/twitter_text"
+        android:layout_below="@+id/twitter_text"
+        android:padding="10dp"
+        android:layout_marginRight="1dp"
+        android:background="@color/twitter_blue"
+		android:textColor="@color/white"        
+        android:text="Twitter Log In" />
 
 </RelativeLayout>

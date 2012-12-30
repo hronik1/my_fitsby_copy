@@ -315,7 +315,7 @@ public class CheckinFragment extends SherlockFragment{
     	
     	builder.setMessage("We couldn't find any gyms nearby you. Please enter your gym name so we can verify that it exists. (Your check-in will count for now)")
     			.setCancelable(false)
-    			.setPositiveButton("Request verification", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					String text = input.getText().toString();
     					if (text != null && !text.trim().equals("")) {
@@ -349,7 +349,7 @@ public class CheckinFragment extends SherlockFragment{
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     	
-    	builder.setMessage("Would you like to publish this other social networks?")
+    	builder.setMessage("Would you like to publish this to your social networks?")
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {

@@ -27,7 +27,7 @@
         android:layout_marginLeft="10dp"        
         android:layout_marginRight="10dp"     
         android:textSize="18sp"        
-        android:background="@drawable/logout_button"
+        android:background="@drawable/newsfeed_submit_button"
         android:text="@string/check_in_button_check_out_text"
         android:textColor="@color/white" />
 

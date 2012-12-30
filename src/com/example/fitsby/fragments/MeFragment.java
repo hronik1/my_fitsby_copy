@@ -456,7 +456,7 @@ public class MeFragment extends SherlockFragment {
     private void showAlertResetPassword() {
     	AlertDialog.Builder alert = new AlertDialog.Builder(parent);
 
-    	alert.setMessage("Reset password link will be sent to your email.");
+    	alert.setMessage("A password reset link will be sent to your email.");
 
     	// Set an EditText view to get user input 
     	final EditText input = new EditText(parent);

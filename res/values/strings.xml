@@ -18,7 +18,7 @@
     <string name="register_confirm_password_hint">Confirm Password</string>
     <string name="register_button_register">Join Fitsby</string>
     <string name="title_activity_example"></string>
-    <string name="title_activity_landing"></string>
+    <string name="title_activity_landing">Fitsby</string>
     <string name="login_text">"Log in to your Fitsby account</string>
     <string name="register_text">By creating a Fitsby account, you agree to our</string>
     <string name="landing_login">Log In</string>
@@ -66,7 +66,8 @@
     <string name="friend_invite_button_home_text">Go To Game</string>
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
     <string name="add_friend_button">Add Friend</string>
-    <string name="invite_friends_directions">Invite your friends to your current game via SMS. You can change what your message says before you send it.</string>
+    <string name="invite_friends_directions">INVITE FRIENDS TO YOUR CURRENT GAME</string>
+    <string name="invite_friends_directions2">INVITE FRIENDS TO FITSBY</string>
     <string name="title_activity_league_join"></string>
     <string name="league_join_et_first_name_hint">Game Host\'s First Name</string>
     <string name="league_join_et_invite_code_hint">Game ID</string>
@@ -143,7 +144,7 @@
     <string name="title_activity_league_join_detail"></string>
     <string name="game_number_of_winners">NUMBER OF WINNERS: </string>
     <string name="league_join_detail_header_text">"GAME DETAILS"</string>
-    <string name="league_join_detail_name">"HOST: "</string>
+    <string name="league_join_detail_name">"HOST:"</string>
     <string name="league_join_detail_name_first">First</string>
     <string name="league_join_detail_name_last">Last</string>
     <string name="league_join_detail_type_text">"TYPE: "</string>
@@ -197,6 +198,7 @@
     <string name="me_settings_button_logout_text">Log Out</string>
     <string name="me_settings_tv_change_picture_text">Change Profile Picture: </string>
     <string name="me_settings_button_change_picture_text">Choose picture</string>
+    <string name="notifications_enabled">Enable Push Notifications</string>
     <string name="me_faq">FAQ</string>
     <string name="me_privacy_policy">Privacy Policy</string>
     <string name="me_terms_of_service">Terms of Service</string>
@@ -220,6 +222,8 @@
     <string name="login_remember_me_textview">Remember me</string>
     <string name="title_activity_tutorial"></string>
     <string name="title_activity_share_checkin"></string>
+    <string name="nice_workout_big">Nice Workout!</string>
+    <string name="nice_workout_small">Would you like to share your progress with your friends?</string>
     <string name="title_activity_first_time_checkin"></string>
 
 </resources>

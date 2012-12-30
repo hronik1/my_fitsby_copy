@@ -70,7 +70,8 @@
         android:id="@+id/checkin_icon"
         android:layout_width="17dp"
         android:layout_height="17dp"  
-        android:layout_marginLeft="-4dp"      
+        android:layout_marginLeft="-4dp"  
+        android:layout_marginTop="1dp"    
         android:layout_alignLeft="@+id/list_item_game_leader_name"
         android:layout_below="@+id/list_item_game_leader_name"     
         android:src="@drawable/checkin_icon" />
