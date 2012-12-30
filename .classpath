@@ -5,6 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry exported="true" kind="lib" path="/home/brent/SDKs/android-sdk-linux/extras/google/gcm/gcm-client/dist/gcm.jar"/>
+	<classpathentry kind="lib" path="gcm.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

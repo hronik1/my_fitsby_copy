@@ -30,6 +30,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -96,6 +97,7 @@ public class MeFragment extends SherlockFragment {
 	private Activity parent;
 
 	private Messenger mService;
+	private boolean isBound;
 	final Messenger mMessenger = new Messenger(new IncomingHandler());
 
 	/**
@@ -152,6 +154,7 @@ public class MeFragment extends SherlockFragment {
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
 //        new StatsAsyncTask().execute(mUser.getID());
+		doBindService();
 	}
 	
 	
@@ -334,6 +337,46 @@ public class MeFragment extends SherlockFragment {
 		});
 	}
 	
+    private void doBindService() {
+    	Log.d(TAG, "bindService");
+        parent.bindService(new Intent(parent, 
+                MessengerService.class), mConnection, Context.BIND_AUTO_CREATE);
+        isBound = true;
+        if (mService != null) {
+        	try {
+        		Message msg = Message.obtain(null,
+        				MessengerService.MSG_REGISTER_CLIENT);
+        		msg.replyTo = mMessenger;
+        		mService.send(msg);
+        	} catch (RemoteException e) {
+        		Log.e(TAG, e.toString());
+        	}
+        }
+          
+    }
+
+    private void doUnbindService() {
+        if (isBound) {
+            // If we have received the service, and hence registered with
+            // it, then now is the time to unregister.
+            if (mService != null) {
+                try {
+                    Message msg = Message.obtain(null,
+                            MessengerService.MSG_UNREGISTER_CLIENT);
+                    msg.replyTo = mMessenger;
+                    mService.send(msg);
+                } catch (RemoteException e) {
+                    // There is nothing special we need to do if the service
+                    // has crashed.
+                }
+            }
+
+            // Detach our existing connection.
+            parent.unbindService(mConnection);
+            isBound = false;
+        }
+    }
+    
 	/**
 	 * logs the user out
 	 */
