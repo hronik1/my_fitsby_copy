@@ -313,7 +313,6 @@ public class CreditCardActivity extends Activity {
 		
         protected LeagueCreateResponse doInBackground(String... params) {
         	String number = numberET.getText().toString();
-        	number = (number.substring(0, 4) + number.substring(5, 9) + number.substring(10, 14) + number.substring(15, 19));
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
         			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
         			number, expYearET.getText().toString(), expMonthET.getText().toString(),
