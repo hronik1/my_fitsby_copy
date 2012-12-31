@@ -199,9 +199,8 @@ public class CheckinFragment extends SherlockFragment{
 		checkoutButton = (Button)viewer.findViewById(R.id.check_in_button_check_out);
 		checkoutButton.setOnClickListener(new OnClickListener () {
 			public void onClick(View v) {
-				Intent intent = new Intent(parent, ShareCheckinActivity.class);
-				startActivity(intent);
-//				checkout();
+
+				checkout();
 			}
 		});
 	}
@@ -378,7 +377,7 @@ public class CheckinFragment extends SherlockFragment{
 			toast.show();
 			return;
 		} 
-		if (timeMinutes < MIN_CHECKIN_TIME) {
+		/*if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
 	    	builder.setMessage("You have to be here for at least " + MIN_CHECKIN_TIME + " minutes to have a successful check-out. Are you sure you want to stop early?")
@@ -404,14 +403,61 @@ public class CheckinFragment extends SherlockFragment{
 	    			}).show();
 	    	return;
 
+		} */else {
+			LocationManager service = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
+			boolean gpsEnabled = service
+			  .isProviderEnabled(LocationManager.GPS_PROVIDER);
+			if (!gpsEnabled) {
+				showAlertDialog(); 
+			} else {
+				LocationListener listener = new LocationListener() {
+					public void onLocationChanged(Location location) {
+					}
+
+					public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+					public void onProviderEnabled(String provider) {}
+
+					public void onProviderDisabled(String provider) {}
+				};
+				List<String> matchingProviders = service.getAllProviders();
+				Location bestResult = service.getLastKnownLocation(matchingProviders.get(0));
+				float bestAccuracy = Float.MAX_VALUE;
+				long bestTime = Long.MIN_VALUE;
+				long minTime = Long.MAX_VALUE;
+				for (String provider: matchingProviders) {
+				  Location location = service.getLastKnownLocation(provider);
+				  if (location != null) {
+				    float accuracy = location.getAccuracy();
+				    long time = location.getTime();
+				        
+				    if ((time > minTime && accuracy < bestAccuracy)) {
+				      bestResult = location;
+				      bestAccuracy = accuracy;
+				      bestTime = time;
+				    }
+				    else if (time < minTime && 
+				             bestAccuracy == Float.MAX_VALUE && time > bestTime){
+				      bestResult = location;
+				      bestTime = time;
+				    }
+				  }
+				}
+				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
+				latitude = bestResult.getLatitude();
+				longitude = bestResult.getLongitude();
+				new CheckoutAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+
+			}
 		}
 		
 
-		new CheckoutAsyncTask().execute(mUser.getID());
+		
 	}
 	
 	private class GooglePlacesAsyncTast extends AsyncTask<String, Void, PlacesResponse> {
 
+		String latitude, longitude;
 		protected void onPreExecute() {
 			gyms.clear();
             mProgressDialog = ProgressDialog.show(parent, "",
@@ -421,6 +467,8 @@ public class CheckinFragment extends SherlockFragment{
         protected PlacesResponse doInBackground(String... params) {
         	PlacesResponse response = CheckinCommunication.getNearbyGyms(params[0],
         			params[1], params[2], params[3], params[4]);
+        	latitude = params[1];
+        	longitude = params[2];
         	return response;
         }
 
@@ -440,7 +488,7 @@ public class CheckinFragment extends SherlockFragment{
         	} else {
         		gyms.addAll(response.getGyms());
         		gym = response.getGyms().get(0);
-				new CheckinAsyncTask().execute(mUser.getID());
+				new CheckinAsyncTask().execute(mUser.getID()+"", latitude, longitude);
         	}
         }
 	}
@@ -478,12 +526,14 @@ public class CheckinFragment extends SherlockFragment{
         			toast.show();
         		}
         		gyms.addAll(response.getGyms());
-				new CheckinAsyncTask().execute(mUser.getID());
+				//new CheckinAsyncTask().execute(mUser.getID()+"");
         	}
         }
 	}
 	
 	private class GooglePlacesAddAsyncTask extends AsyncTask<String, Void, ValidateGymResponse> {
+		String latitude, longitude;
+		
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Adding your gym...");
@@ -493,6 +543,8 @@ public class CheckinFragment extends SherlockFragment{
         	ValidateGymResponse response = CheckinCommunication.addGym(params[0],
         			params[1], params[2], params[3]);
         	gym = params[3];
+        	latitude = params[1];
+        	longitude = params[2];
         	return response;
         }
 
@@ -509,7 +561,7 @@ public class CheckinFragment extends SherlockFragment{
         		Toast toast = Toast.makeText(parent, "Verification successfully sent", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
-        		new CheckinAsyncTask().execute(mUser.getID());
+        		new CheckinAsyncTask().execute(mUser.getID()+"", latitude, longitude);
         	}
         }
 	}
@@ -519,16 +571,16 @@ public class CheckinFragment extends SherlockFragment{
      * @author brent
      *
      */
-    private class CheckinAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+    private class CheckinAsyncTask extends AsyncTask<String, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Checking you in to your games...");
 		}
 		
-        protected StatusResponse doInBackground(Integer... params) {
+        protected StatusResponse doInBackground(String... params) {
         	//TODO give gym name to Danny
-        	StatusResponse response = CheckinCommunication.checkin(params[0], gym);
+        	StatusResponse response = CheckinCommunication.checkin(Integer.parseInt(params[0]), gym, params[1], params[2]);
         	return response;
         }
 
@@ -575,15 +627,15 @@ public class CheckinFragment extends SherlockFragment{
      * @author brent
      *
      */
-    private class CheckoutAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+    private class CheckoutAsyncTask extends AsyncTask<String, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Checking you out of your games...");
 		}
 		
-        protected StatusResponse doInBackground(Integer... params) {
-        	StatusResponse response = CheckinCommunication.checkout(params[0]);
+        protected StatusResponse doInBackground(String... params) {
+        	StatusResponse response = CheckinCommunication.checkout(Integer.parseInt(params[0]), params[1], params[2]);
         	return response;
         }
 

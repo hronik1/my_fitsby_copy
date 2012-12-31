@@ -38,12 +38,14 @@ public class CheckinCommunication {
 	 * @param id
 	 * @return
 	 */
-	public static StatusResponse checkin(int id, String gymName) {
+	public static StatusResponse checkin(int id, String gymName, String latitude, String longitude) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", id);
 			json.put("gym_name", gymName);
+			json.put("latitude", latitude);
+			json.put("longitude", longitude);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_in_request", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
@@ -61,11 +63,13 @@ public class CheckinCommunication {
 	 * @param id
 	 * @return
 	 */
-	public static StatusResponse checkout(int id) {
+	public static StatusResponse checkout(int id, String latitude, String longitude) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", id);
+			json.put("latitude", latitude);
+			json.put("longitude", longitude);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_out_request", stringEntity);
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));

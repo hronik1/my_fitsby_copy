@@ -125,4 +125,5 @@
         android:paddingBottom="9dp"
         android:src="@drawable/twitter_bird_white" />
 
+
 </RelativeLayout>

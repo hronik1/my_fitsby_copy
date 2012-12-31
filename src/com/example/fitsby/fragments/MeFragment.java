@@ -108,8 +108,11 @@ public class MeFragment extends SherlockFragment {
 	private ServiceConnection mConnection = new ServiceConnection() {
 		public void onServiceConnected(ComponentName className,
 				IBinder service) {
+			Log.d(TAG, "service connected");
+			
 			mService = new Messenger(service);
 
+			doBindService();
 			try {
 				Message msg = Message.obtain(null,
 						MessengerService.MSG_REGISTER_CLIENT);
@@ -122,7 +125,7 @@ public class MeFragment extends SherlockFragment {
 
 		public void onServiceDisconnected(ComponentName className) {
 			mService = null;
-
+			Log.d(TAG, "service disconnected");
 		}
 	};
 	/**
@@ -135,15 +138,17 @@ public class MeFragment extends SherlockFragment {
 
         mSharedPreferences = parent.getSharedPreferences(
                 "EnableNotifications", 0);
-        
+		
 	    initializeTextViews(viewer);
 	    initializeButtons(viewer);
 	    initializeEditTexts(viewer);
 	    initializeImageView(viewer);
 	    initializeCheckBox(viewer);
 
+//		doBindService();
+		
 	    new StatsAsyncTask().execute(mUser.getID());
-        
+		
 	    return viewer;
 	}
 	
@@ -159,7 +164,7 @@ public class MeFragment extends SherlockFragment {
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
 //        new StatsAsyncTask().execute(mUser.getID());
-		doBindService();
+
 	}
 	
 	
@@ -332,7 +337,7 @@ public class MeFragment extends SherlockFragment {
 	
 	private void initializeCheckBox(View viewer) {
 		enableNotificationsCB = (CheckBox)viewer.findViewById(R.id.notifications_enabled);
-		enableNotificationsCB.setChecked(mSharedPreferences.getBoolean("enabled", false));
+		enableNotificationsCB.setChecked(mSharedPreferences.getBoolean("enabled", true));
 		enableNotificationsCB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
@@ -354,7 +359,7 @@ public class MeFragment extends SherlockFragment {
         				MessengerService.MSG_REGISTER_CLIENT);
         		msg.replyTo = mMessenger;
         		mService.send(msg);
-        	} catch (RemoteException e) {
+        	} catch (Exception e) {
         		Log.e(TAG, e.toString());
         	}
         }
@@ -626,8 +631,9 @@ public class MeFragment extends SherlockFragment {
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {
-        	StatusResponse response = CheckinCommunication.checkout(params[0]);
-        	return response;
+//        	StatusResponse response = CheckinCommunication.checkout(params[0]);
+//        	return response;
+        	return null;
         }
 
         protected void onPostExecute(StatusResponse response) {
