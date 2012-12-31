@@ -561,7 +561,7 @@ public class MeFragment extends SherlockFragment {
     private class ChangeEmailAsyncTask extends AsyncTask<String, Void, StatusResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Changing your email..");
+                    "Updating changes..");
 		}
 		
         protected StatusResponse doInBackground(String... params) {
@@ -581,7 +581,7 @@ public class MeFragment extends SherlockFragment {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {
-        		Toast toast = Toast.makeText(parent, "Your email was successfully changed", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "Changes successfully updated", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}
