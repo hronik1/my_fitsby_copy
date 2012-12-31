@@ -78,7 +78,7 @@
 	            android:id="@+id/league_create_ib_wager_minus"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
-	            android:layout_marginTop="1dp"
+	            android:layout_marginTop="1.5dp"
 	            android:layout_alignTop="@+id/league_create_wager"
 	            android:layout_toLeftOf="@+id/league_create_ib_wager_plus"	            
 	            android:background="@color/fitsby_blue"
@@ -97,7 +97,7 @@
 	            android:contentDescription="@string/league_create_ib_wager_plus_text"
 	            android:text="@string/league_create_ib_wager_plus"
 	            android:layout_marginRight="2dp"	
-  	            android:layout_marginTop="1dp"
+  	            android:layout_marginTop="1.5dp"
 	            android:textStyle="bold"	                        
 	            android:textColor="@color/white" />
         </RelativeLayout>
@@ -143,7 +143,7 @@
 	           android:contentDescription="@string/league_create_ib_days_minus_text"
 	           android:text="@string/league_create_ib_days_minus"
 	           android:layout_marginRight="5dp"  
-	           android:layout_marginTop="1dp"	            
+	           android:layout_marginTop="1.5dp"	            
   	           android:textStyle="bold"
 	           android:textColor="@color/white" />
 	       <Button
@@ -156,7 +156,7 @@
 	           android:contentDescription="@string/league_create_ib_days_plus_text"
 	           android:text="@string/league_create_ib_days_plus"
 	           android:layout_marginRight="2dp"	   
- 	           android:layout_marginTop="1dp"
+ 	           android:layout_marginTop="1.5dp"
   	           android:textStyle="bold"
 	           android:textColor="@color/white" />
        </RelativeLayout>        

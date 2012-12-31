@@ -4,8 +4,22 @@
     
     <style name="AppTheme" parent="Theme.Sherlock.Light.DarkActionBar">
       	<item name="android:typeface">sans</item>  
+    	<item name="android:selectableItemBackground">@color/fitsby_blue</item>
+      	<item name="android:actionBarTabStyle">@style/MyActionBarTabStyle</item>
+    	<item name="actionBarTabBarStyle">@style/Widget.app.ActionBar.TabBar</item>
     </style>
 
+    <style name="MyActionBarTabStyle" parent="@style/Theme.Sherlock.Light">
+		<item name="android:background">#1d8ec8</item>
+		<item name="background">#1d8ec8</item>
+	</style>
+
+	<style name="Widget.app.ActionBar.TabBar" parent="Widget.Sherlock.ActionBar.TabBar">
+	    <item name="android:background">#1d8ec8</item>
+	    <item name="background">#1d8ec8</item>
+	</style>    
+    
+    
     
     <style name="CustomLandingStyle" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">#333333</item>

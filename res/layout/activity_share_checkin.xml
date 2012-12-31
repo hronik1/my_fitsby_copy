@@ -28,9 +28,12 @@
         android:layout_alignBottom="@+id/checkin_share_twitter_login_button"
         android:layout_toRightOf="@+id/checkin_share_twitter_login_button"
         android:layout_marginRight="10dp"
-        android:background="@color/twitter_blue"
+        android:background="@drawable/twitter_button"
 		android:textColor="@color/white"  
-        android:padding="10dp"	              
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"       
+        android:layout_marginLeft="4dp"         	        
+        android:textSize="16sp"                                                                               
         android:text="Share" />
 
     <TextView
@@ -58,24 +61,27 @@
     <com.facebook.widget.LoginButton
         android:id="@+id/checkin_share_authButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/facebook_text"
+        android:layout_height="54dp"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/facebook_text"
         android:layout_marginRight="3dp"    
+        android:layout_marginLeft="9dp"
         android:textColor="@color/white"            
         android:padding="10dp" />
 
     <Button
         android:id="@+id/checkin_share_facebook_shareButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignTop="@+id/checkin_share_authButton"
-        android:layout_alignBottom="@+id/checkin_share_authButton"
         android:layout_toRightOf="@+id/checkin_share_authButton"
         android:layout_marginRight="10dp"
-        android:background="@color/facebook_blue"
-        android:textColor="@color/white"      
-        android:padding="10dp"                      
+        android:background="@drawable/facebook_button"
+        android:textColor="@color/white" 
+        android:layout_marginTop="0.5dp"                     
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"     
+        android:textSize="16sp"                                 
         android:text="Share" />
 
     <TextView
@@ -91,13 +97,32 @@
     <Button
         android:id="@+id/checkin_share_twitter_login_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignLeft="@+id/twitter_text"
+        android:layout_alignRight="@+id/checkin_share_authButton"
         android:layout_below="@+id/twitter_text"
-        android:padding="10dp"
-        android:layout_marginRight="3dp"
-        android:background="@color/twitter_blue"
-		android:textColor="@color/white"        
-        android:text="Twitter Log In" />
+        android:background="@drawable/twitter_button"
+        android:paddingLeft="52dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp" 
+        android:paddingBottom="10dp"
+        android:layout_marginRight="1dp"        
+        android:text="Log In"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/twitter_bird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/checkin_share_twitter_login_button"
+        android:layout_alignLeft="@+id/checkin_share_twitter_login_button"
+        android:layout_alignRight="@+id/twitter_text"
+        android:layout_alignTop="@+id/checkin_share_twitter_login_button"
+        android:paddingRight="13dp"
+        android:paddingTop="9dp"
+        android:paddingLeft="2dp"
+        android:paddingBottom="9dp"
+        android:src="@drawable/twitter_bird_white" />
 
 </RelativeLayout>

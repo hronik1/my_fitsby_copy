@@ -20,45 +20,51 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:textColor="@color/fitsby_blue"
-        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
         android:text="@string/invite_friends_directions" />
         
         <com.facebook.widget.LoginButton
             android:id="@+id/authButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_below="@+id/facebook_text"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="9dp"
             android:layout_marginRight="3dp"
             android:padding="10dp" />
         <Button
             android:id="@+id/facebook_share_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignTop="@+id/authButton"
             android:layout_toRightOf="@+id/authButton"
-            android:layout_alignBottom="@+id/authButton"
             android:text="Share"
-            android:layout_marginRight="10dp"            
+            android:layout_marginRight="10dp"    
+            android:layout_marginTop="0.5dp"        
             android:textColor="@color/white"
-            android:background="@color/facebook_blue"
-            android:padding="10dp" />
+            android:background="@drawable/facebook_button"
+            android:paddingRight="10dp"    
+            android:textSize="16sp"
+            android:paddingLeft="10dp" />
        
         <Button
             android:id="@+id/invite_twitter_login_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_below="@+id/twitter_text"
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/authButton"
-            android:padding="10dp"
+            android:paddingLeft="52dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp" 
+            android:paddingBottom="10dp"           
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="3dp" 
+            android:layout_marginRight="1dp"
             android:textColor="@color/white"
-            android:background="@color/twitter_blue"
-            android:text="Twitter Log In"/>
+            android:textSize="16sp"
+            android:background="@drawable/twitter_button"
+            android:text="Log In"/>
         <Button
             android:id="@+id/invite_twitter_share_button"
             android:layout_width="wrap_content"
@@ -68,8 +74,11 @@
             android:layout_alignBottom="@+id/invite_twitter_login_button"
             android:layout_toRightOf="@+id/invite_twitter_login_button"
             android:textColor="@color/white"
-            android:background="@color/twitter_blue"
-        	android:padding="10dp"            
+            android:background="@drawable/twitter_button"
+        	android:paddingRight="10dp"
+        	android:paddingLeft="10dp" 
+            android:layout_marginLeft="4dp"         	
+        	android:textSize="16sp"     	          
             android:text="Share" />
 
         <TextView
@@ -78,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/invite_friends_directions"
             android:layout_below="@+id/invite_friends_directions"
-            android:text="SMS:"
+            android:text="SMS:  "
             android:textSize="16sp"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
@@ -86,15 +95,19 @@
 
         <Button
             android:id="@+id/friend_invite_button_invite"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignLeft="@+id/sms_text"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:layout_alignRight="@+id/facebook_share_button"
             android:layout_below="@+id/sms_text"
-            android:background="@drawable/custom_login_button"
+            android:background="@drawable/sms_button"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
             android:text="@string/friend_invite_button_invite_text"
-            android:textColor="@color/white" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/invite_friends_directions2"
@@ -102,8 +115,8 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/friend_invite_button_invite"
             android:layout_below="@+id/friend_invite_button_invite"
-            android:textColor="@color/fitsby_blue"
-            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             android:layout_marginTop="30dp"
             android:text="@string/invite_friends_directions2" />
 
@@ -131,12 +144,39 @@
             android:textStyle="bold"            
             android:text="Twitter:" />
 
+        <ImageView
+            android:id="@+id/twitter_bird"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/invite_twitter_login_button"
+            android:layout_alignLeft="@+id/invite_twitter_login_button"
+            android:layout_alignRight="@+id/twitter_text"
+            android:layout_alignTop="@+id/invite_twitter_login_button"
+            android:paddingRight="13dp"
+            android:paddingTop="9dp"
+            android:paddingLeft="2dp"
+            android:paddingBottom="9dp"
+            android:src="@drawable/twitter_bird_white" />
+
+        <ImageView
+            android:id="@+id/sms_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/friend_invite_button_invite"
+            android:layout_alignLeft="@+id/friend_invite_button_invite"
+            android:layout_alignRight="@+id/sms_text"
+            android:layout_alignTop="@+id/friend_invite_button_invite"
+            android:paddingRight="3dp"
+            android:src="@drawable/sms_icon" />
+
+</RelativeLayout>
+</ScrollView>
         <TextView
             android:id="@+id/or_invite_them_later_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/invite_twitter_share_button"
+            android:layout_above="@+id/friend_invite_button_home"
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:text="@string/or_invite_them_later_text"
@@ -146,14 +186,15 @@
             android:id="@+id/friend_invite_button_home"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/invite_twitter_login_button"
-            android:layout_alignRight="@+id/friend_invite_button_invite"
-            android:layout_below="@+id/or_invite_them_later_text"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"            
+            android:layout_marginLeft="10dp"            
+            android:layout_marginRight="10dp"            
             android:background="@drawable/custom_login_button"
             android:text="@string/friend_invite_button_home_text"
             android:textColor="@color/white" />
 
-</RelativeLayout>
-</ScrollView>
 </RelativeLayout>

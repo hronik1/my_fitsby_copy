@@ -245,9 +245,9 @@ public class ShareCheckinActivity extends Activity {
     		}
     	});
     	if (isTwitterLoggedInAlready())
-    		twitterLoginButton.setText("Twitter Log Out");
+    		twitterLoginButton.setText("Log Out");
     	else
-    		twitterLoginButton.setText("Twitter Log In");
+    		twitterLoginButton.setText("Log In");
     	
     	twitterShareButton = (Button)findViewById(R.id.checkin_share_twitter_share_button);
     	twitterShareButton.setOnClickListener(new OnClickListener() {
@@ -264,7 +264,9 @@ public class ShareCheckinActivity extends Activity {
     	if (isTwitterLoggedInAlready()) {
     		showTwitterDialog();
     	} else {
-    		Toast.makeText(this, "Please log in to Twitter to share", Toast.LENGTH_SHORT).show();
+    		Toast toast = Toast.makeText(this, "You must first log in to Twitter to share", Toast.LENGTH_SHORT);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     }
     
@@ -384,7 +386,9 @@ public class ShareCheckinActivity extends Activity {
         Session session = Session.getActiveSession();
 
         if (session == null || !session.isOpened()) {
-        	Toast.makeText(this, "Please log in to Facebook to share", Toast.LENGTH_LONG).show();
+        	Toast toast = Toast.makeText(this, "You must first log in to Facebook to share", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
         }
         else {
 
@@ -442,7 +446,7 @@ public class ShareCheckinActivity extends Activity {
     	    e.remove(PREF_KEY_TWITTER_LOGIN);
     	    e.commit();
     	    
-    	    twitterLoginButton.setText("Twitter Login");
+    	    twitterLoginButton.setText("Log In");
     	}
     	
     }
@@ -512,10 +516,10 @@ public class ShareCheckinActivity extends Activity {
                         // Store login status - true
                         e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
                         e.commit(); // save changes
-                        twitterLoginButton.setText("twitter logout");
+                        twitterLoginButton.setText("Log Out");
                     } catch (Exception e) {
                         // Check log for login errors
-                        Log.e("Twitter Login Error", "> " + e.getMessage());
+                        Log.e("Twitter Log In Error", "> " + e.getMessage());
                     }
                 }
             }

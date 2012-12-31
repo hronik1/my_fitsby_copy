@@ -369,7 +369,7 @@
         android:layout_alignLeft="@+id/calendar"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/league_join_detail_button_faq"
-        android:background="@drawable/custom_login_button"
+        android:background="@drawable/newsfeed_submit_button"
         android:text="@string/league_join_detail_button_join_text"
         android:textColor="@color/white"
         android:layout_marginRight="15dp"

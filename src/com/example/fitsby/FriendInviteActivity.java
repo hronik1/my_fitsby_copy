@@ -326,9 +326,9 @@ public class FriendInviteActivity extends Activity {
     		}
     	});
     	if (isTwitterLoggedInAlready())
-    		twitterLoginButton.setText("Twitter Log Out");
+    		twitterLoginButton.setText("Log Out");
     	else
-    		twitterLoginButton.setText("Twitter Log In");
+    		twitterLoginButton.setText("Log In");
     	
     	twitterShareButton = (Button)findViewById(R.id.invite_twitter_share_button);
     	twitterShareButton.setOnClickListener(new OnClickListener() {
@@ -456,7 +456,9 @@ public class FriendInviteActivity extends Activity {
         Session session = Session.getActiveSession();
 
         if (session == null || !session.isOpened()) {
-        	Toast.makeText(this, "You must first log in to Facebook", Toast.LENGTH_LONG).show();
+        	Toast toast = Toast.makeText(this, "You must first log in to Facebook to share", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
         }
         else {
 
@@ -515,7 +517,7 @@ public class FriendInviteActivity extends Activity {
     	    e.remove(PREF_KEY_TWITTER_LOGIN);
     	    e.commit();
     	    
-    	    twitterLoginButton.setText("Twitter Log In");
+    	    twitterLoginButton.setText("Log In");
     	}
     	
     }
@@ -536,7 +538,9 @@ public class FriendInviteActivity extends Activity {
     	if (isTwitterLoggedInAlready()) {
     		showTwitterDialog();
     	} else {
-    		Toast.makeText(this, "You must first log in to Twitter to share", Toast.LENGTH_SHORT).show();
+    		Toast toast = Toast.makeText(this, "You must first log in to Twitter to share", Toast.LENGTH_SHORT);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
     	}
     }
     
@@ -550,7 +554,7 @@ public class FriendInviteActivity extends Activity {
 	  	input.setHint("Enter status here");
     	builder.setView(input);
     	
-    	builder.setMessage("Post a status to Twitter.")
+    	builder.setMessage("Share to Twitter.")
     			.setCancelable(false)
     			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -797,10 +801,10 @@ public class FriendInviteActivity extends Activity {
                         // Store login status - true
                         e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
                         e.commit(); // save changes
-                        twitterLoginButton.setText("twitter logout");
+                        twitterLoginButton.setText("Log Out");
                     } catch (Exception e) {
                         // Check log for login errors
-                        Log.e("Twitter Login Error", "> " + e.getMessage());
+                        Log.e("Twitter Log In Error", "> " + e.getMessage());
                     }
                 }
             }

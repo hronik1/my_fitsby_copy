@@ -223,7 +223,7 @@
     <string name="title_activity_tutorial"></string>
     <string name="title_activity_share_checkin"></string>
     <string name="nice_workout_big">Nice Workout!</string>
-    <string name="nice_workout_small">Would you like to share your progress with your friends?</string>
+    <string name="nice_workout_small">You\'re a step ahead of the competition! Share the news with your friends!</string>
     <string name="title_activity_first_time_checkin"></string>
 
 </resources>
