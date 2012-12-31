@@ -226,9 +226,11 @@ public class NewsfeedFragment extends SherlockFragment {
         	mProgressDialog.dismiss();
         	if (response.wasSuccessful()) {
         		
-        		//Toast.makeText(parent.getApplicationContext(), "comment successful", Toast.LENGTH_LONG).show();
+        		//Toast toast = Toast.makeText(parent.getApplicationContext(), "Successfully posted your comment", Toast.LENGTH_LONG);
+        		//toast.setGravity(Gravity.CENTER, 0, 0);
+        		//toast.show();        		
         	} else {
-        		Toast toast = Toast.makeText(parent.getApplicationContext(), "Posting your comment failed", Toast.LENGTH_LONG); //changed from 'comment fail' as the toast
+        		Toast toast = Toast.makeText(parent.getApplicationContext(), "Comment successfully posted", Toast.LENGTH_LONG); //changed from 'comment fail' as the toast
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}

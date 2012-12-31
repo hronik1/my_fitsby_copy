@@ -47,7 +47,7 @@
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
     <string name="league_create_ib_days_plus">+</string>
-    <string name="credit_card_main_directions_text">Last Step! Please enter your credit card information in order to start your game.</string>
+    <string name="credit_card_main_directions_text">In order to join this game, you must pay an initial wager! Please enter your credit card information below (All payments secured by Stripe).</string>
     <string name="credit_card_number_text">Card Number:</string>
     <string name="credit_card_expiration_text">Expiration Date:</string>
     <string name="credit_card_cvc_text">CVC:</string>
@@ -145,10 +145,10 @@
     <string name="game_number_of_winners">NUMBER OF WINNERS: </string>
     <string name="league_join_detail_header_text">"GAME DETAILS"</string>
     <string name="league_join_detail_name">"HOST:"</string>
-    <string name="league_join_detail_name_first">First</string>
-    <string name="league_join_detail_name_last">Last</string>
+    <string name="league_join_detail_name_first"></string>
+    <string name="league_join_detail_name_last"></string>
     <string name="league_join_detail_type_text">"TYPE: "</string>
-    <string name="league_join_detail_type_data_text">Private</string>
+    <string name="league_join_detail_type_data_text"></string>
     <string name="league_join_detail_wager_text">" WAGER"</string>
     <string name="league_join_detail_wager_data_text">$10</string>
     <string name="league_join_detail_pot_text">" POT"</string>
@@ -156,10 +156,10 @@
     <string name="league_join_detail_players_text">" PLAYERS"</string>
     <string name="league_join_detail_players_data_text">2</string>
     <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 4 players total in the game"</string>
-    <string name="league_join_duration_data_text">" (14 days)"</string>
+    <string name="league_join_duration_data_text"></string>
     <string name="league_join_detail_button_join_text">Join Game</string>
     <string name="league_join_detail_id_text">"GAME ID: "</string>
-    <string name="league_join_detail_id_data_text">111</string>
+    <string name="league_join_detail_id_data_text"></string>
     <string name="list_item_game_leader_name_text">First Name</string>
     <string name="list_item_game_leader_last_name_text">Last Name</string>
     <string name="list_item_game_leader_checkins_text">"Check-ins: "</string>
@@ -217,7 +217,7 @@
     <string name="faq_button">Questions? Read the FAQ</string>
     <string name="title_activity_forgot_password"></string>
     <string name="game_start_date">START DATE:  </string>
-    <string name="game_start_date_value">10/12/2012</string>
+    <string name="game_start_date_value"></string>
     <string name="title_activity_loggedin"></string>
     <string name="login_remember_me_textview">Remember me</string>
     <string name="title_activity_tutorial"></string>
