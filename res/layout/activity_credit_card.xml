@@ -17,7 +17,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/credit_card_main_directions_text"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
 
         <ImageView
             android:id="@+id/stripe_cards"
