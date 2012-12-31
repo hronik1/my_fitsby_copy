@@ -199,7 +199,9 @@ public class CheckinFragment extends SherlockFragment{
 		checkoutButton = (Button)viewer.findViewById(R.id.check_in_button_check_out);
 		checkoutButton.setOnClickListener(new OnClickListener () {
 			public void onClick(View v) {
-				checkout();
+				Intent intent = new Intent(parent, ShareCheckinActivity.class);
+				startActivity(intent);
+//				checkout();
 			}
 		});
 	}

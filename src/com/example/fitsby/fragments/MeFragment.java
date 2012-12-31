@@ -34,6 +34,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -85,6 +86,7 @@ public class MeFragment extends SherlockFragment {
 	private Button checkinTutorialButton;
 	
 	private CheckBox enableNotificationsCB;
+	private SharedPreferences mSharedPreferences;
 	
 	private EditText emailET;
 	private ProgressDialog mProgressDialog;
@@ -131,6 +133,9 @@ public class MeFragment extends SherlockFragment {
 	    View viewer = (View) inflater.inflate(R.layout.activity_me, container, false);
 	    Log.i(TAG, "onCreateView");
 
+        mSharedPreferences = parent.getSharedPreferences(
+                "EnableNotifications", 0);
+        
 	    initializeTextViews(viewer);
 	    initializeButtons(viewer);
 	    initializeEditTexts(viewer);
@@ -138,7 +143,7 @@ public class MeFragment extends SherlockFragment {
 	    initializeCheckBox(viewer);
 
 	    new StatsAsyncTask().execute(mUser.getID());
-	    
+        
 	    return viewer;
 	}
 	
@@ -327,12 +332,13 @@ public class MeFragment extends SherlockFragment {
 	
 	private void initializeCheckBox(View viewer) {
 		enableNotificationsCB = (CheckBox)viewer.findViewById(R.id.notifications_enabled);
-		enableNotificationsCB.setChecked(true);
+		enableNotificationsCB.setChecked(mSharedPreferences.getBoolean("enabled", false));
 		enableNotificationsCB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
-				
+				mSharedPreferences.edit().putBoolean("enabled", isChecked).commit();
+				Log.d(TAG, "is checked: " + isChecked);
 			}
 		});
 	}
