@@ -631,8 +631,9 @@ public class MeFragment extends SherlockFragment {
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {
-        	StatusResponse response = CheckinCommunication.checkout(params[0]);
-        	return response;
+//        	StatusResponse response = CheckinCommunication.checkout(params[0]);
+//        	return response;
+        	return null;
         }
 
         protected void onPostExecute(StatusResponse response) {
