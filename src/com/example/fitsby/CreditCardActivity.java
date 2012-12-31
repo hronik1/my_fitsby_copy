@@ -227,7 +227,7 @@ public class CreditCardActivity extends Activity {
     	String expMonth = expMonthET.getText().toString();
     	String expYear = expYearET.getText().toString();
     	String cvc = cvcET.getText().toString();
-    	if (number.length() != 19) {
+    	if (number.length() != 16) {
     		Toast toast = Toast.makeText(this, "Your card number is too short", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
