@@ -66,8 +66,8 @@
     <string name="friend_invite_button_home_text">Go To Game</string>
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
     <string name="add_friend_button">Add Friend</string>
-    <string name="invite_friends_directions">INVITE FRIENDS TO YOUR CURRENT GAME</string>
-    <string name="invite_friends_directions2">INVITE FRIENDS TO FITSBY</string>
+    <string name="invite_friends_directions">INVITE FRIENDS TO JOIN YOUR CURRENT GAME</string>
+    <string name="invite_friends_directions2">INVITE FRIENDS TO JOIN FITSBY</string>
     <string name="title_activity_league_join"></string>
     <string name="league_join_et_first_name_hint">Game Host\'s First Name</string>
     <string name="league_join_et_invite_code_hint">Game ID</string>

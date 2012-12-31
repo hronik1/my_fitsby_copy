@@ -26,8 +26,7 @@
         android:background="@drawable/white_textbox"
         android:hint="@string/login_email_hint"
         android:fontFamily="sans"   
-        android:layout_below="@+id/login_text"       
-		android:inputType="textCapSentences"              
+        android:layout_below="@+id/login_text"            
         tools:context=".LoginActivity" />
 
     <EditText

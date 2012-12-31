@@ -1895,11 +1895,10 @@ containing a value of this type.
     }
     public static final class style {
         public static final int AppTheme=0x7f0a005c;
-        public static final int CustomLandingStyle=0x7f0a005f;
+        public static final int CustomLandingStyle=0x7f0a005d;
         public static final int DialogWindowTitle_Sherlock=0x7f0a0036;
         public static final int DialogWindowTitle_Sherlock_Light=0x7f0a0037;
         public static final int FitsbyTheme=0x7f0a005b;
-        public static final int MyActionBarTabStyle=0x7f0a005d;
         public static final int Sherlock___TextAppearance_Small=0x7f0a004a;
         public static final int Sherlock___Theme=0x7f0a004e;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0a0050;
@@ -1987,11 +1986,10 @@ containing a value of this type.
         public static final int Widget_Sherlock_SearchAutoCompleteTextView=0x7f0a0034;
         public static final int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f0a0024;
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0a0032;
-        public static final int Widget_app_ActionBar_TabBar=0x7f0a005e;
         public static final int com_facebook_loginview_default_style=0x7f0a0059;
         public static final int com_facebook_loginview_silver_style=0x7f0a005a;
-        public static final int credit_card_boxes=0x7f0a0061;
-        public static final int white_font=0x7f0a0060;
+        public static final int credit_card_boxes=0x7f0a005f;
+        public static final int white_font=0x7f0a005e;
     }
     public static final class styleable {
         /**  Attributes used to style the Action Bar. 

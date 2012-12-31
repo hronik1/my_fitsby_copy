@@ -430,8 +430,10 @@ public class FriendInviteActivity extends Activity {
     		pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
     		startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
     	} catch (Exception e) {
-    		Toast.makeText(this, "Your device does not have contacts," +
-    				" or will not allow us to access them", Toast.LENGTH_LONG).show();
+    		Toast toast = Toast.makeText(this, "Your device does not have contacts," +
+    				" or will not allow us to access them", Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();    		
     	}
 
     }
@@ -467,7 +469,7 @@ public class FriendInviteActivity extends Activity {
             postParams.putString("caption", "An app that motivates you to go to the gym.");
             postParams.putString("description", "Challenge your friends in a game of gym check-ins and win their money when they don't work out!");
             postParams.putString("link", "http://fitsby.com");
-            postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
+            postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 
             WebDialog feedDialog = (
                     new WebDialog.FeedDialogBuilder(this,
@@ -481,9 +483,9 @@ public class FriendInviteActivity extends Activity {
                             // and the post Id.
                             final String postId = values.getString("post_id");
                             if (postId != null) {
-                                Toast.makeText(FriendInviteActivity.this,
-                                    "Posted story, id: "+postId,
-                                Toast.LENGTH_SHORT).show();
+                                Toast toast = Toast.makeText(FriendInviteActivity.this,"Successfully posted to Facebook"+postId, Toast.LENGTH_SHORT);
+                        		toast.setGravity(Gravity.CENTER, 0, 0);
+                        		toast.show();
                             }
                         }
 
@@ -552,9 +554,10 @@ public class FriendInviteActivity extends Activity {
     	
 	  	final EditText input = new EditText(this);
 	  	input.setHint("Enter status here");
+	  	input.setText("Can you beat me in a game of gym check-ins? Download @Fitsby & stay motivated to work out! http://fitsby.com #gymmotivation");	  	
     	builder.setView(input);
     	
-    	builder.setMessage("Share to Twitter.")
+    	builder.setMessage("Share on Twitter:")
     			.setCancelable(false)
     			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -713,7 +716,9 @@ public class FriendInviteActivity extends Activity {
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		  	
 		  	final EditText input = new EditText(FriendInviteActivity.this);
-		  	input.setText("Can you beat me in a game of gym check-ins? Download @Fitsby, join my game, & stay motivated to work out!!");
+		  	input.setHint("Challenge your friend");		  	
+		  	input.setText("Hey, couch potato! I challenge you to a game of gym check-ins using Fitsby! " +
+		  			"Download the free app at http://fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 	    	builder.setView(input);
 	    	
 	    	builder.setMessage("Edit personal message to your friend")

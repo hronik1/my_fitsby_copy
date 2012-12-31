@@ -21,6 +21,26 @@
                 android:bottom="10dp" />
         </shape>
     </item>
+    
+    <item android:state_selected="true" >
+        <shape>
+            <gradient
+                android:startColor="@color/fitsby_blue_dark"
+                android:endColor="@color/fitsby_blue_dark"
+                android:angle="270" 
+                android:textColor="@color/white" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/fitsby_blue_dark" />
+            <corners
+                android:radius="0dp" />
+            <padding
+                android:left="40dp"
+                android:top="10dp"
+                android:right="40dp"
+                android:bottom="10dp" />
+        </shape>
+    </item>    
 
     <item android:state_focused="true" >
         <shape>

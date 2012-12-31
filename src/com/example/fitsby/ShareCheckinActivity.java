@@ -277,10 +277,11 @@ public class ShareCheckinActivity extends Activity {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
 	  	final EditText input = new EditText(this);
-	  	input.setText("I just had an awesome workout at " + mGymName + "! Challenge me in a game of gym check-ins using @Fitsby!");
+	  	input.setHint("Enter a message here");	  	
+	  	input.setText("I just had an awesome workout at " + mGymName + "! @Fitsby's motivating me to hit the gym! http://fitsby.com #gymmotivation");
     	builder.setView(input);
     	
-    	builder.setMessage("Enter status and post to Twitter.")
+    	builder.setMessage("Share on Twitter:")
     			.setCancelable(false)
     			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -395,9 +396,9 @@ public class ShareCheckinActivity extends Activity {
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
             postParams.putString("caption", "An app that motivates you to go to the gym.");
-            postParams.putString("description", "I just had an awesome workout at " + mGymName + "! Challenge me in a game of gym check-ins with Fitsby! Download the free app at fitsby.com.");
+            postParams.putString("description", "I just had an awesome workout at " + mGymName + "! Fitsby is motivating me to hit the gym! Download the free app at http://fitsby.com.");
             postParams.putString("link", "http://fitsby.com");
-            postParams.putString("picture", "http://fitsby.com/images/Fitsby_Logo.png");
+            postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 
             WebDialog feedDialog = (
                     new WebDialog.FeedDialogBuilder(this,
@@ -411,9 +412,9 @@ public class ShareCheckinActivity extends Activity {
                             // and the post Id.
                             final String postId = values.getString("post_id");
                             if (postId != null) {
-                                Toast.makeText(ShareCheckinActivity.this,
-                                    "Posted story, id: "+postId,
-                                Toast.LENGTH_SHORT).show();
+                                Toast toast = Toast.makeText(ShareCheckinActivity.this, "Successfully posted to Facebook", Toast.LENGTH_SHORT);
+                        		toast.setGravity(Gravity.CENTER, 0, 0);
+                        		toast.show();
                             }
                         }
 
