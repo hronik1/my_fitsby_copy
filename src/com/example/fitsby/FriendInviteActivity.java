@@ -481,12 +481,14 @@ public class FriendInviteActivity extends Activity {
                             FacebookException error) {
                             // When the story is posted, echo the success
                             // and the post Id.
-                            final String postId = values.getString("post_id");
-                            if (postId != null) {
-                                Toast toast = Toast.makeText(FriendInviteActivity.this,"Successfully posted to Facebook"+postId, Toast.LENGTH_SHORT);
-                        		toast.setGravity(Gravity.CENTER, 0, 0);
-                        		toast.show();
-                            }
+                        	if (error == null && values != null) {
+                        		final String postId = values.getString("post_id");
+                        		if (postId != null) {
+                        			Toast toast = Toast.makeText(FriendInviteActivity.this,"Successfully posted to Facebook"+postId, Toast.LENGTH_SHORT);
+                        			toast.setGravity(Gravity.CENTER, 0, 0);
+                        			toast.show();
+                        		}
+                        	}
                         }
 
                     })

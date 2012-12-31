@@ -410,12 +410,14 @@ public class ShareCheckinActivity extends Activity {
                             FacebookException error) {
                             // When the story is posted, echo the success
                             // and the post Id.
-                            final String postId = values.getString("post_id");
-                            if (postId != null) {
-                                Toast toast = Toast.makeText(ShareCheckinActivity.this, "Successfully posted to Facebook", Toast.LENGTH_SHORT);
-                        		toast.setGravity(Gravity.CENTER, 0, 0);
-                        		toast.show();
-                            }
+                        	if (error == null && values != null) {
+                        		final String postId = values.getString("post_id");
+                        		if (postId != null) {
+                        			Toast toast = Toast.makeText(ShareCheckinActivity.this, "Successfully posted to Facebook", Toast.LENGTH_SHORT);
+                        			toast.setGravity(Gravity.CENTER, 0, 0);
+                        			toast.show();
+                        		}
+                        	}
                         }
 
                     })
