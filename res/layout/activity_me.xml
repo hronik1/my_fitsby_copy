@@ -175,8 +175,7 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
-                android:textSize="14sp"               
-                android:inputType="textCapSentences"               
+                android:textSize="14sp"             
                 android:hint="@string/me_settings_et_change_email_hint" />
 
             <TextView

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="50sp"
+        android:textSize="65sp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -72,7 +72,7 @@
     <Button
         android:id="@+id/checkin_share_facebook_shareButton"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="51dp"
         android:layout_alignTop="@+id/checkin_share_authButton"
         android:layout_toRightOf="@+id/checkin_share_authButton"
         android:layout_marginRight="10dp"

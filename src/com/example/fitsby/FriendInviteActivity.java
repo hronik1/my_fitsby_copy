@@ -484,7 +484,7 @@ public class FriendInviteActivity extends Activity {
                         	if (error == null && values != null) {
                         		final String postId = values.getString("post_id");
                         		if (postId != null) {
-                        			Toast toast = Toast.makeText(FriendInviteActivity.this,"Successfully posted to Facebook"+postId, Toast.LENGTH_SHORT);
+                        			Toast toast = Toast.makeText(FriendInviteActivity.this,"Successfully posted to Facebook", Toast.LENGTH_SHORT);
                         			toast.setGravity(Gravity.CENTER, 0, 0);
                         			toast.show();
                         		}
@@ -720,10 +720,10 @@ public class FriendInviteActivity extends Activity {
 		  	final EditText input = new EditText(FriendInviteActivity.this);
 		  	input.setHint("Challenge your friend");		  	
 		  	input.setText("Hey, couch potato! I challenge you to a game of gym check-ins using Fitsby! " +
-		  			"Download the free app at http://fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
+		  			"Download the free app at http://fitsby.com/, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 	    	builder.setView(input);
 	    	
-	    	builder.setMessage("Edit personal message to your friend")
+	    	builder.setMessage("Edit personal message to your friend:")
 	    			.setCancelable(false)
 	    			.setPositiveButton("Send", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {

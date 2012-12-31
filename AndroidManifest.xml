@@ -165,7 +165,8 @@
 
         <activity
             android:name="com.example.fitsby.TutorialActivity"
-            android:label="@string/title_activity_tutorial" >
+            android:label="@string/title_activity_tutorial"
+            android:screenOrientation="portrait" >
         </activity>
 
         <meta-data
@@ -188,7 +189,8 @@
         </activity>
         <activity
             android:name="com.example.fitsby.FirstTimeCheckinActivity"
-            android:label="@string/title_activity_first_time_checkin" >
+            android:label="@string/title_activity_first_time_checkin"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
