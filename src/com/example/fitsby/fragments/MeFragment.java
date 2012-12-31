@@ -332,7 +332,7 @@ public class MeFragment extends SherlockFragment {
 	
 	private void initializeCheckBox(View viewer) {
 		enableNotificationsCB = (CheckBox)viewer.findViewById(R.id.notifications_enabled);
-		enableNotificationsCB.setChecked(mSharedPreferences.getBoolean("enabled", false));
+		enableNotificationsCB.setChecked(mSharedPreferences.getBoolean("enabled", true));
 		enableNotificationsCB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
