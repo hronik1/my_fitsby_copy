@@ -483,7 +483,7 @@ public class FriendInviteActivity extends Activity {
                             // and the post Id.
                             final String postId = values.getString("post_id");
                             if (postId != null) {
-                                Toast toast = Toast.makeText(FriendInviteActivity.this,"Successfully posted to Facebook"+postId, Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(FriendInviteActivity.this,"Successfully posted to Facebook", Toast.LENGTH_SHORT);
                         		toast.setGravity(Gravity.CENTER, 0, 0);
                         		toast.show();
                             }
