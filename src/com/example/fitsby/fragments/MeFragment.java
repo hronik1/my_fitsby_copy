@@ -111,8 +111,8 @@ public class MeFragment extends SherlockFragment {
 			Log.d(TAG, "service connected");
 			
 			mService = new Messenger(service);
-
-			doBindService();
+//
+//			doBindService();
 			try {
 				Message msg = Message.obtain(null,
 						MessengerService.MSG_REGISTER_CLIENT);
@@ -145,7 +145,7 @@ public class MeFragment extends SherlockFragment {
 	    initializeImageView(viewer);
 	    initializeCheckBox(viewer);
 
-//		doBindService();
+		doBindService();
 		
 	    new StatsAsyncTask().execute(mUser.getID());
 		
@@ -343,7 +343,7 @@ public class MeFragment extends SherlockFragment {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				mSharedPreferences.edit().putBoolean("enabled", isChecked).commit();
-				Log.d(TAG, "is checked: " + isChecked);
+				new EnableNotificationsAsyncTask().execute(isChecked);
 			}
 		});
 	}
@@ -701,23 +701,23 @@ public class MeFragment extends SherlockFragment {
         }
     }
 
-//    private class EnableNotificationsAsyncTask extends AsyncTask<Boolean, Void, StatusResponse> {
-//    	
-//		protected void onPreExecute() {
-//            mProgressDialog = ProgressDialog.show(parent, "",
-//                    "Updating your notification status...");
-//		}
-//		
-//        protected StatusResponse doInBackground(Boolean... params) {
-//        	StatusResponse response = UserCommunication.enableNotifications(mUser.getID(), params[0]);
-//        	return response;
-//        }
-//
-//        protected void onPostExecute(StatusResponse response) {
-//        	mProgressDialog.dismiss();
-//        	//TODO feeling toasty
-//        }
-//    }
+    private class EnableNotificationsAsyncTask extends AsyncTask<Boolean, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Updating your notification status...");
+		}
+		
+        protected StatusResponse doInBackground(Boolean... params) {
+        	StatusResponse response = UserCommunication.enableNotifications(mUser.getID()+"", params[0]);
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	//TODO feeling toasty
+        }
+    }
 //    /**
 //     * Handler of incoming messages from service.
 //     */

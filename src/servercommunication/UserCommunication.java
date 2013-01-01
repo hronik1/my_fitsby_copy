@@ -211,11 +211,14 @@ public class UserCommunication {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
-        	json.put("enabled", enabled);
         	json.put("user_id", userId);
         	StringEntity stringEntity = new StringEntity(json.toString()); 
-			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "enable_notifications", stringEntity);
-
+        	ServerResponse serverResponse;
+        	if (enabled)
+        		serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "push_enable", stringEntity);
+        	else 
+        		serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "push_disable", stringEntity);
+        	
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
