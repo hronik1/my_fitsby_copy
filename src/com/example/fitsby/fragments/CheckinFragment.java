@@ -446,7 +446,21 @@ public class CheckinFragment extends SherlockFragment{
 				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
 				latitude = bestResult.getLatitude();
 				longitude = bestResult.getLongitude();
-				new CheckoutAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+				
+			  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+		    	builder.setMessage("Are you sure you want to checkout?")
+		    			.setCancelable(false)
+		    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		    				public void onClick(DialogInterface dialog, int id) {
+		    					new CheckoutAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+		    				}
+		    			})
+		    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+		    				public void onClick(DialogInterface dialog, int id) {
+		    					dialog.cancel();
+		    				}
+		    			}).show();
+		    	
 
 			}
 		}
