@@ -671,7 +671,7 @@ public class FriendInviteActivity extends Activity {
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Gathering game data...");
+                    "Getting league information...");
 		}
 		
         protected CreatorResponse doInBackground(String... params) {

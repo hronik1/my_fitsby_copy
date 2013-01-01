@@ -377,7 +377,7 @@ public class CheckinFragment extends SherlockFragment{
 			toast.show();
 			return;
 		} 
-		/*if (timeMinutes < MIN_CHECKIN_TIME) {
+		if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
 	    	builder.setMessage("You have to be here for at least " + MIN_CHECKIN_TIME + " minutes to have a successful check-out. Are you sure you want to stop early?")
@@ -403,7 +403,7 @@ public class CheckinFragment extends SherlockFragment{
 	    			}).show();
 	    	return;
 
-		} */else {
+		} else {
 			LocationManager service = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
 			boolean gpsEnabled = service
 			  .isProviderEnabled(LocationManager.GPS_PROVIDER);
