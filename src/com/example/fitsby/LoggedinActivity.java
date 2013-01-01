@@ -112,7 +112,7 @@ public class LoggedinActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString("tab", mTabHost.getCurrentTabTag());
+//		outState.putString("tab", mTabHost.getCurrentTabTag());
 		
 		Log.i(TAG, "onSaveInstanceState");
 	}
