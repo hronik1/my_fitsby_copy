@@ -93,7 +93,7 @@
             android:name="com.example.fitsby.LeagueJoinActivity"
             android:label="@string/title_activity_league_join"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.fitsby.GamesActivity"
@@ -110,7 +110,8 @@
             android:name="com.example.fitsby.CheckInActivity"
             android:label="@string/title_activity_check_in"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.example.fitsby.MeActivity"

@@ -3,19 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/white_gradient_background" >
-   
-    <TextView
-        android:id="@+id/colon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="serif"
-        android:text="@string/colon"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"         
-        android:textSize="40sp"
-        android:paddingBottom="80dp"
-        android:layout_centerVertical="true"/>
     
     <Button
         android:id="@+id/check_in_button_check_out"
@@ -24,7 +11,7 @@
         android:layout_below="@+id/colon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-70dp"        
-        android:layout_marginLeft="10dp"        
+        android:layout_marginLeft="20dp"        
         android:layout_marginRight="10dp"     
         android:textSize="18sp"        
         android:background="@drawable/newsfeed_submit_button"
@@ -44,20 +31,6 @@
         android:layout_alignLeft="@+id/check_in_button_check_in"        
         android:gravity="center" />
 
-     <Button
-         android:id="@+id/check_in_button_check_in"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/colon"
-         android:layout_centerHorizontal="true"
-         android:background="@drawable/custom_login_button"         
-         android:text="@string/check_in_button_check_in_text"
-         android:layout_marginLeft="10dp"
-         android:layout_marginRight="10dp"
-         android:layout_marginTop="10dp" 
-         android:textSize="18sp"       
-         android:textColor="@color/white" />
-
      <ImageView
          android:id="@+id/check_in_iv"
          android:src="@drawable/red_x_mark"
@@ -73,10 +46,11 @@
          android:layout_height="wrap_content"
          android:layout_toRightOf="@+id/check_in_iv"
          android:layout_alignRight="@+id/check_in_button_check_in"
-         android:layout_above="@+id/check_in_button_check_in"         
+         android:layout_alignParentTop="true"         
          android:text="@string/verified_gym"
          android:layout_marginLeft="5dp"         
          android:textStyle="bold"
+         android:layout_marginTop="5dp"
          android:textSize="14sp" />
 
      <TextView
@@ -87,7 +61,7 @@
          android:layout_alignBottom="@+id/colon"
          android:layout_toRightOf="@+id/colon"
          android:text="@string/seconds"
-         android:layout_marginLeft="-6dp"   
+         android:layout_marginLeft="5dp"   
          android:textSize="40dp"               
          android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -102,5 +76,30 @@
          android:layout_marginRight="5dp"
          android:textSize="40dp"
          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+     <Button
+         android:id="@+id/check_in_button_check_in"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/check_in_button_check_out"
+         android:layout_below="@+id/verified_gym"
+         android:background="@drawable/custom_login_button"
+         android:text="@string/check_in_button_check_in_text"
+         android:textColor="@color/white"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="20dp"
+         android:textSize="18sp" />
+
+     <TextView
+         android:id="@+id/colon"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/check_in_button_check_in"
+         android:layout_centerHorizontal="true"
+         android:fontFamily="serif"
+         android:paddingBottom="80dp"
+         android:text="@string/colon"
+         android:layout_marginTop="20dp"
+         android:textSize="40sp" />
 
 </RelativeLayout>
