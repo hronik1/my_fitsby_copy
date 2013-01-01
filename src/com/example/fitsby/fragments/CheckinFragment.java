@@ -8,6 +8,7 @@ import responses.PlacesResponse;
 import responses.StatusResponse;
 import responses.ValidateGymResponse;
 import servercommunication.CheckinCommunication;
+import servercommunication.UserCommunication;
 
 
 
@@ -372,12 +373,12 @@ public class CheckinFragment extends SherlockFragment {
 	public void checkout() {
 		//TODO redo checkout
 		if (timeSeconds == 0 && timeMinutes == 0) {
-			Toast toast = Toast.makeText(parent, "You can't check out because you never checked in!", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(parent, "You can't check out because you never checked n!", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
 		} 
-		if (timeMinutes < MIN_CHECKIN_TIME) {
+		/*if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
 	    	builder.setMessage("You have to be here for at least " + MIN_CHECKIN_TIME + " minutes to have a successful check-out. Are you sure you want to stop early?")
@@ -403,7 +404,7 @@ public class CheckinFragment extends SherlockFragment {
 	    			}).show();
 	    	return;
 
-		} else {
+		} */else {
 			LocationManager service = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
 			boolean gpsEnabled = service
 			  .isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -636,6 +637,22 @@ public class CheckinFragment extends SherlockFragment {
         }
     }
     
+    private class NotificationAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
+		protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Checking you out of your games...");
+		}
+		
+        protected StatusResponse doInBackground(Integer... params) {
+        	StatusResponse response = UserCommunication.pushNotificationChange(params[0]);
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+        	mProgressDialog.dismiss();
+        	showPublishGymDialog();
+        }
+    }
     /**
      * AsyncTask to Register user
      * @author brent
@@ -666,7 +683,7 @@ public class CheckinFragment extends SherlockFragment {
 				}
         		checkinLocationTV.setText("You are currently not checked into a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
-        		showPublishGymDialog();
+        		new NotificationAsyncTask().execute(mUser.getID());
         	} else {
         		Toast toast = Toast.makeText(parent, "Check-out failed!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -750,6 +767,6 @@ public class CheckinFragment extends SherlockFragment {
             isBound = false;
         }
     }
-    
+
 }
 

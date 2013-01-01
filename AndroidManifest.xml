@@ -138,7 +138,7 @@
             android:name="com.example.fitsby.LoggedinActivity"
             android:label="@string/title_activity_loggedin"
             android:theme="@style/StyledIndicators"
-            android:windowSoftInputMode="stateHidden"> 
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" >
         </activity>
         
