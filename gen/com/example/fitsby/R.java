@@ -1581,7 +1581,7 @@ containing a value of this type.
         public static final int buttons=0x7f04006c;
         public static final int calendar=0x7f0400c0;
         public static final int check_in_button_check_in=0x7f04003d;
-        public static final int check_in_button_check_out=0x7f04003a;
+        public static final int check_in_button_check_out=0x7f04003b;
         public static final int check_in_iv=0x7f04003e;
         public static final int checkin_icon=0x7f040122;
         public static final int checkin_share_authButton=0x7f040101;
@@ -1589,7 +1589,7 @@ containing a value of this type.
         public static final int checkin_share_twitter_login_button=0x7f0400ff;
         public static final int checkin_share_twitter_share_button=0x7f0400fe;
         public static final int checkout_directions=0x7f04003c;
-        public static final int colon=0x7f04003b;
+        public static final int colon=0x7f04003a;
         public static final int com_facebook_login_activity_progress_bar=0x7f040107;
         public static final int com_facebook_picker_activity_circle=0x7f040106;
         public static final int com_facebook_picker_checkbox=0x7f040109;
