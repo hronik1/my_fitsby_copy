@@ -93,7 +93,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/me_textview_total_money_earned_prompt"
                 android:layout_toRightOf="@+id/me_textview_total_gym_time_prompt"
+                android:layout_above="@+id/me_textview_total_checkins"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:textColor="@color/white"                   
                 android:textSize="14sp"                
                 android:text="@string/me_textview_total_gym_time_text" />
@@ -315,42 +317,6 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/me_settings_button_submit"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/email_means_paypal"
-                android:layout_alignRight="@+id/email_means_paypal"
-                android:layout_below="@+id/notifications_enabled"
-                android:background="@drawable/newsfeed_submit_button"
-                android:text="@string/me_settings_button_submit_text"
-                android:layout_marginTop="3dp"                
-                android:textColor="@color/white"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/me_reset_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/me_tutorials_text"
-                android:layout_below="@+id/me_settings_button_submit"
-                android:text="@string/me_reset_password"
-                android:layout_marginTop="10dp"      
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp" 
-                android:textSize="17sp"                         
-                android:textColor="@drawable/faq_button_text" />
-
-            <CheckBox
-                android:id="@+id/notifications_enabled"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/email_means_paypal"
-                android:layout_below="@+id/email_means_paypal"
-                android:button="@drawable/checkbox"
-                android:text="@string/notifications_enabled"
-                android:textColor="@color/white" />
-
             <TextView
                 android:id="@+id/me_tutorials_text"
                 android:layout_width="wrap_content"
@@ -362,6 +328,43 @@
                 android:textSize="14sp"
                 android:layout_marginTop="10dp"                                
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/me_reset_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/me_settings_button_submit"
+                android:layout_below="@+id/notifications_enabled"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:layout_marginTop="2dp"
+                android:text="@string/me_reset_password"
+                android:textColor="@drawable/faq_button_text"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/me_settings_button_submit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/email_means_paypal"
+                android:layout_below="@+id/email_means_paypal"
+                android:background="@drawable/newsfeed_submit_button"
+                android:text="@string/me_settings_button_submit_text"
+                android:textColor="@color/white"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:textSize="17sp" />
+
+            <CheckBox
+                android:id="@+id/notifications_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/me_reset_password"
+                android:layout_below="@+id/me_settings_button_submit"
+                android:button="@drawable/checkbox"
+                android:layout_marginTop="5dp"                
+                android:text="@string/notifications_enabled"
+                android:textColor="@color/white" />
 
         </RelativeLayout>
 

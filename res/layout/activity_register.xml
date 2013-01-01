@@ -64,7 +64,6 @@
         android:background="@drawable/white_textbox"
         android:textSize="14sp"
         android:hint="@string/register_email_hint"
-        android:inputType="textCapSentences"
         tools:context=".RegisterActivity" />
 
     <EditText
