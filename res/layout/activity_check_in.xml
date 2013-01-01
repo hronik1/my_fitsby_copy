@@ -78,7 +78,7 @@
          android:text="@string/verified_gym"
          android:layout_marginLeft="5dp"         
          android:textStyle="bold"
-         android:textSize="14sp" />
+         android:textSize="13sp" />
 
      <TextView
          android:id="@+id/seconds"
