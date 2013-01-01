@@ -4,6 +4,8 @@ package com.example.fitsby;
 import gravatar.Gravatar;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.example.fitsby.applicationsubclass.*;
 import com.example.fitsby.fragments.CheckinFragment;
 import com.example.fitsby.fragments.GamesFragment;
@@ -11,6 +13,8 @@ import com.example.fitsby.fragments.MeFragment;
 import com.example.fitsby.fragments.NewsfeedFragment;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gcm.GCMRegistrar;
+import com.viewpagerindicator.TabPageIndicator;
+
 
 import constants.FlurryConstants;
 
@@ -27,9 +31,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+
+
 
 import dbtables.User;
 import android.widget.SearchView;
@@ -37,7 +46,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 public class LoggedinActivity extends SherlockFragmentActivity {
-
+	private static final String[] CONTENT = new String[] { "GAMES", "NEWSFEED", "CHECK IN"};
 	private static final String TAG = "LoggedinActivity";
 	
 	private SearchView searchView;
@@ -55,26 +64,33 @@ public class LoggedinActivity extends SherlockFragmentActivity {
 		Log.i(TAG, "onCreate");
 		
 		setContentView(R.layout.activity_loggedin);
-        mTabHost = (TabHost)findViewById(android.R.id.tabhost);
-        mTabHost.setup();
+//        mTabHost = (TabHost)findViewById(android.R.id.tabhost);
+//        mTabHost.setup();
+//
+//        mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
+//
+//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_game_text))
+//				.setIndicator(getString(R.string.navigation_textview_game_text)),
+//				GamesFragment.class, null);
+//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_newsfeed_text))
+//				.setIndicator(getString(R.string.navigation_textview_newsfeed_text)),
+//				NewsfeedFragment.class, null);
+//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_checkin_text))
+//				.setIndicator(getString(R.string.navigation_textview_checkin_text)),
+//				CheckinFragment.class, null);
+//
+//
+//		if (savedInstanceState != null) {
+//			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+//		}
 
-        mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
+        FragmentPagerAdapter adapter = new LoggedinFragmentAdapter(getSupportFragmentManager());
 
-		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_game_text))
-				.setIndicator(getString(R.string.navigation_textview_game_text)),
-				GamesFragment.class, null);
-		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_newsfeed_text))
-				.setIndicator(getString(R.string.navigation_textview_newsfeed_text)),
-				NewsfeedFragment.class, null);
-		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_checkin_text))
-				.setIndicator(getString(R.string.navigation_textview_checkin_text)),
-				CheckinFragment.class, null);
+        ViewPager pager = (ViewPager)findViewById(R.id.loggedin_pager);
+        pager.setAdapter(adapter);
 
-
-		if (savedInstanceState != null) {
-			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
-		}
-
+        TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.loggedin_indicator);
+        indicator.setViewPager(pager);
 	}
 	
     @Override
@@ -179,4 +195,29 @@ public class LoggedinActivity extends SherlockFragmentActivity {
         }
     }
 
+    class LoggedinFragmentAdapter extends FragmentPagerAdapter {
+        public LoggedinFragmentAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+        	if (position == 0) 
+        		return new GamesFragment();
+        	else if (position == 1) 
+        		return new NewsfeedFragment();
+        	else 
+        		return new CheckinFragment();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return CONTENT[position % CONTENT.length].toUpperCase();
+        }
+
+        @Override
+        public int getCount() {
+          return CONTENT.length;
+        }
+    }
 }
