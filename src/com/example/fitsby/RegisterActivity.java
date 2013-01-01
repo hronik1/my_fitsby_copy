@@ -329,11 +329,9 @@ public class RegisterActivity extends Activity {
                 	final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
                 	if (regId.equals("")) {
                 		GCMRegistrar.register(getApplicationContext(), getString(R.string.gcm_sender_id));
-                		Log.v(TAG, "Just now registered");
+                		Log.d(TAG, "Just now registered");
                 	} else {
-                		Log.v(TAG, "Already registered");
-                		new RegisterGCMAsyncTask().execute(regId);
-                		Toast.makeText(RegisterActivity.this, regId + "", Toast.LENGTH_LONG).show();
+                		Log.d(TAG, "Already registered");
                 	}
                 } catch (Exception e) {
                 	Log.e(TAG, e.toString());

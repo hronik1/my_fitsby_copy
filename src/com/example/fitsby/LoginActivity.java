@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
 import constants.RememberMeConstants;
@@ -334,6 +335,19 @@ public class LoginActivity extends Activity {
         		//TODO switch to next page
         		updateRememberMe();
         		mApplicationUser.setUser(response.getUser());
+                try {
+                	GCMRegistrar.checkDevice(getApplicationContext());
+                	GCMRegistrar.checkManifest(getApplicationContext());
+                	final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
+                	if (regId.equals("")) {
+                		GCMRegistrar.register(getApplicationContext(), getString(R.string.gcm_sender_id));
+                		Log.d(TAG, "Just now registered");
+                	} else {
+                		Log.d(TAG, "Already registered");
+                	}
+                } catch (Exception e) {
+                	Log.e(TAG, e.toString());
+                }
     			Intent intent = new Intent(LoginActivity.this, LoggedinActivity.class);
     			startActivity(intent);
         	}
