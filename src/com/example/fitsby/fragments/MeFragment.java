@@ -27,7 +27,7 @@ import formatters.LastNameFormatter;
 import gravatar.Gravatar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;

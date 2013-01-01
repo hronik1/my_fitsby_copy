@@ -26,7 +26,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/league_create_faq_button"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/newsfeed_submit_button"
@@ -255,7 +254,7 @@
        <TextView
            android:id="@+id/bottom_margin_for_button"
            android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
+           android:layout_height="10dp"
            android:layout_alignLeft="@+id/league_create_button_create"
            android:layout_below="@+id/league_create_button_create"
            android:textSize="0sp"

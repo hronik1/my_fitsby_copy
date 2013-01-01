@@ -59,7 +59,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CheckinFragment extends SherlockFragment{
+public class CheckinFragment extends SherlockFragment {
 
 	private final static String TAG = "CheckinFragment";
 	
