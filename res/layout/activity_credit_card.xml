@@ -28,24 +28,22 @@
             android:layout_below="@+id/credit_card_main_directions_text"
             android:src="@drawable/stripe_cards" />
         
-        <TextView
-            android:id="@+id/credit_card_number_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+		<ImageView
+            android:id="@+id/lock_image"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_below="@+id/stripe_cards"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/credit_card_number_text"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:layout_marginTop="15dp"    
+            android:layout_marginLeft="10dp"  
+            android:paddingBottom="2dp"                  
+            android:src="@drawable/lock" />
 
         <EditText
             android:id="@+id/credit_card_et_card_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/credit_card_number_text"
-            android:layout_below="@+id/credit_card_number_text"
+            android:layout_alignLeft="@+id/lock_image"
+            android:layout_below="@+id/lock_image"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/white_textbox"
@@ -164,7 +162,7 @@
             android:textSize="12sp"
             android:textColor="@color/white" />
         
-                <Button
+        <Button
             android:id="@+id/credit_card_button_submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -186,8 +184,16 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/secure_payment_logo" />
-        
-        
+
+        <TextView
+            android:id="@+id/credit_card_number_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/lock_image"
+            android:layout_toRightOf="@+id/lock_image"
+            android:text="@string/credit_card_number_text"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
