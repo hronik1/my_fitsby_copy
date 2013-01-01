@@ -337,7 +337,6 @@
                 android:layout_below="@+id/notifications_enabled"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:layout_marginTop="2dp"
                 android:text="@string/me_reset_password"
                 android:textColor="@drawable/faq_button_text"
                 android:textSize="17sp" />
