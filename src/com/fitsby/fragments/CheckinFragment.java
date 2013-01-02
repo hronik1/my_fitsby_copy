@@ -359,7 +359,7 @@ public class CheckinFragment extends SherlockFragment {
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     	
-    	builder.setMessage("Nice workout! Want to share the news with your friends?")
+    	builder.setMessage("Congratulations! You had a successful workout! Share the news with your friends?")
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -381,7 +381,7 @@ public class CheckinFragment extends SherlockFragment {
 	public void checkout() {
 		//TODO redo checkout
 		if (timeSeconds == 0 && timeMinutes == 0) {
-			Toast toast = Toast.makeText(parent, "You can't check out because you never checked n!", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(parent, "You can't check out because you never checked in!", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
@@ -401,7 +401,7 @@ public class CheckinFragment extends SherlockFragment {
 	    					} catch (RemoteException e) {
 	    						Log.e(TAG, e.toString());
 	    					}
-	    					checkinLocationTV.setText("You are not currently checked into a verified gym");
+	    					checkinLocationTV.setText("You are currently not checked in at a verified gym");
 	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 	    				}
 	    			})
@@ -457,7 +457,7 @@ public class CheckinFragment extends SherlockFragment {
 				longitude = bestResult.getLongitude();
 				
 			  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-		    	builder.setMessage("Are you sure you want to checkout?")
+		    	builder.setMessage("Are you sure you want to check out?")
 		    			.setCancelable(false)
 		    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 		    				public void onClick(DialogInterface dialog, int id) {
@@ -689,7 +689,7 @@ public class CheckinFragment extends SherlockFragment {
 				} catch (RemoteException e) {
 					Log.e(TAG, e.toString());
 				}
-        		checkinLocationTV.setText("You are currently not checked into a gym");
+        		checkinLocationTV.setText("You are currently not checked in at a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
         		new NotificationAsyncTask().execute(mUser.getID());
         	} else {
