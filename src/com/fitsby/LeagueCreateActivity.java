@@ -1,10 +1,9 @@
-package com.example.fitsby;
+package com.fitsby;
 
 import responses.LeagueCreateResponse;
 import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
 
-import com.example.fitsby.applicationsubclass.ApplicationUser;
 
 import bundlekeys.CreditCardBundleKeys;
 import dbhandlers.DatabaseHandler;
@@ -31,6 +30,8 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;

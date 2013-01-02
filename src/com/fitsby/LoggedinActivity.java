@@ -1,4 +1,4 @@
-package com.example.fitsby;
+package com.fitsby;
 
 
 import gravatar.Gravatar;
@@ -6,11 +6,11 @@ import gravatar.Gravatar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.example.fitsby.applicationsubclass.*;
-import com.example.fitsby.fragments.CheckinFragment;
-import com.example.fitsby.fragments.GamesFragment;
-import com.example.fitsby.fragments.MeFragment;
-import com.example.fitsby.fragments.NewsfeedFragment;
+import com.fitsby.applicationsubclass.*;
+import com.fitsby.fragments.CheckinFragment;
+import com.fitsby.fragments.GamesFragment;
+import com.fitsby.fragments.MeFragment;
+import com.fitsby.fragments.NewsfeedFragment;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gcm.GCMRegistrar;
 import com.viewpagerindicator.TabPageIndicator;

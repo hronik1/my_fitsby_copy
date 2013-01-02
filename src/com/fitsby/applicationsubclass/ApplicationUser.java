@@ -1,4 +1,4 @@
-package com.example.fitsby.applicationsubclass;
+package com.fitsby.applicationsubclass;
 
 import dbtables.User;
 import android.app.Application;

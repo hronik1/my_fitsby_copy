@@ -1,8 +1,8 @@
-package com.example.fitsby;
+package com.fitsby;
 
 import java.util.Set;
 
-import com.example.fitsby.applicationsubclass.ApplicationUser;
+import com.fitsby.applicationsubclass.ApplicationUser;
 
 import servercommunication.UserCommunication;
 import android.app.NotificationManager;

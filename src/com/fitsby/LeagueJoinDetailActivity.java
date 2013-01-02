@@ -1,4 +1,4 @@
-package com.example.fitsby;
+package com.fitsby;
 
 import java.util.List;
 
@@ -10,8 +10,6 @@ import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
 import servercommunication.NewsfeedCommunication;
 
-import com.example.fitsby.applicationsubclass.ApplicationUser;
-import com.example.fitsby.fragments.GamesFragment;
 
 import bundlekeys.CreditCardBundleKeys;
 import bundlekeys.LeagueDetailBundleKeys;
@@ -44,6 +42,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fitsby.applicationsubclass.ApplicationUser;
+import com.fitsby.fragments.GamesFragment;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;

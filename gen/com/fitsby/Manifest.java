@@ -5,10 +5,10 @@
  * should not be modified by hand.
  */
 
-package com.example.fitsby;
+package com.fitsby;
 
 public final class Manifest {
     public static final class permission {
-        public static final String C2D_MESSAGE="com.example.fitsby.permission.C2D_MESSAGE";
+        public static final String C2D_MESSAGE="com.fitsby.permission.C2D_MESSAGE";
     }
 }

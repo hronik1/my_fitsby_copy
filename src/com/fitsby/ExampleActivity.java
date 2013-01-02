@@ -1,4 +1,4 @@
-package com.example.fitsby;
+package com.fitsby;
 
 import servercommunication.ServerCommunication;
 import android.os.Bundle;

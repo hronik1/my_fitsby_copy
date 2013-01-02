@@ -1,4 +1,4 @@
-package com.example.fitsby;
+package com.fitsby;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,11 +33,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fitsby.applicationsubclass.*;
 import com.flurry.android.FlurryAgent;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Token;
-import com.example.fitsby.applicationsubclass.*;
 
 import constants.FlurryConstants;
 

@@ -1,8 +1,8 @@
-package com.example.fitsby;
+package com.fitsby;
 
-import com.example.fitsby.applicationsubclass.ApplicationUser;
+import com.fitsby.TutorialActivity.TutorialPagerAdapter;
+import com.fitsby.TutorialActivity.TutorialPagerAdapter.DemoObjectFragment;
 
-import constants.TutorialsConstants;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,52 +12,39 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-public class TutorialActivity extends FragmentActivity {
+public class FirstTimeCheckinActivity extends FragmentActivity {
 
     TutorialPagerAdapter mTutorialPagerAdapter;
     ViewPager mViewPager;
     
-
-    private static boolean fromMe;
-    
-    private static int[] pageDrawableResources = new int[] {R.drawable.registration_onboard1, R.drawable.registration_onboard2,
-    		R.drawable.registration_onboard3, R.drawable.registration_onboard4};
-
-    
+    private static int[] pageDrawableResources = new int[] {R.drawable.checkin_onboard1, R.drawable.checkin_onboard2,
+    		R.drawable.checkin_onboard3};
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tutorial);
+		setContentView(R.layout.activity_first_time_checkin);
 		
 		mTutorialPagerAdapter = new TutorialPagerAdapter(getSupportFragmentManager());
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = (ViewPager) findViewById(R.id.first_checkin_pager);
         mViewPager.setAdapter(mTutorialPagerAdapter);
-        
-        parseBundle(getIntent());
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_tutorial, menu);
+		getMenuInflater().inflate(R.menu.activity_first_time_checkin, menu);
 		return true;
 	}
-	
-	private void parseBundle(Intent intent) {
-		fromMe = intent.getBooleanExtra(TutorialsConstants.FROM_ME, false);
-	}
-	
+
     public static class TutorialPagerAdapter extends FragmentStatePagerAdapter {
 
         public TutorialPagerAdapter(FragmentManager fm) {
@@ -68,8 +55,8 @@ public class TutorialActivity extends FragmentActivity {
         public Fragment getItem(int i) {
             Fragment fragment = new DemoObjectFragment();
             Bundle args = new Bundle();
-            args.putInt(DemoObjectFragment.ARG_OBJECT, TutorialActivity.pageDrawableResources[i]); 
-            if (i == TutorialActivity.pageDrawableResources.length-1)
+            args.putInt(DemoObjectFragment.ARG_OBJECT, FirstTimeCheckinActivity.pageDrawableResources[i]); 
+            if (i == FirstTimeCheckinActivity.pageDrawableResources.length-1)
             	args.putBoolean(DemoObjectFragment.ARG_LAST, true);
             else
             	args.putBoolean(DemoObjectFragment.ARG_LAST, false);
@@ -79,7 +66,7 @@ public class TutorialActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-        	return TutorialActivity.pageDrawableResources.length;
+        	return FirstTimeCheckinActivity.pageDrawableResources.length;
         }
 
         @Override
@@ -107,12 +94,7 @@ public class TutorialActivity extends FragmentActivity {
                 	button.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							if (!fromMe) {
-								Intent intent = new Intent(parent, RegisterActivity.class);
-								startActivity(intent);
-							} else {
-								getActivity().finish();
-							}
+							getActivity().finish();
 						}
                 	});
                 } else {
@@ -134,5 +116,4 @@ public class TutorialActivity extends FragmentActivity {
         	}
         }
     }
-
 }

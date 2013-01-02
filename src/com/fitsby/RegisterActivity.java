@@ -1,7 +1,6 @@
-package com.example.fitsby;
+package com.fitsby;
 
 
-import com.example.fitsby.applicationsubclass.ApplicationUser;
 
 
 import dbhandlers.DatabaseHandler;
@@ -28,6 +27,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gcm.GCMRegistrar;
 
