@@ -65,7 +65,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/facebook_text"
         android:layout_marginRight="3dp"    
-        android:layout_marginLeft="9dp"
+        android:layout_marginLeft="8.5dp"
         android:textColor="@color/white"            
         android:padding="10dp" />
 

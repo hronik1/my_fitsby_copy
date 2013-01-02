@@ -30,7 +30,7 @@
             android:layout_height="54dp"
             android:layout_below="@+id/facebook_text"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="9dp"
+            android:layout_marginLeft="8.5dp"
             android:layout_marginRight="3dp"
             android:padding="10dp" />
         <Button
