@@ -139,7 +139,7 @@ public class CheckinFragment extends SherlockFragment {
         gyms = new Vector<String>();
         Intent intent = new Intent(parent, MessengerService.class);
         parent.startService(intent);
-        doBindService();
+//        doBindService();
         
         mSharedPreferences = parent.getSharedPreferences(
                 "FirstCheckinPrefs", 0);
@@ -156,8 +156,16 @@ public class CheckinFragment extends SherlockFragment {
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
+
 	}
 	   
+	@Override
+	public void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume");
+		doBindService();
+	}
+	
 	/**
 	 * 
 	 */
@@ -378,7 +386,7 @@ public class CheckinFragment extends SherlockFragment {
 			toast.show();
 			return;
 		} 
-		/*if (timeMinutes < MIN_CHECKIN_TIME) {
+		if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
 	    	builder.setMessage("You have to be here for at least " + MIN_CHECKIN_TIME + " minutes to have a successful check-out. Are you sure you want to stop early?")
@@ -404,7 +412,7 @@ public class CheckinFragment extends SherlockFragment {
 	    			}).show();
 	    	return;
 
-		} */else {
+		} else {
 			LocationManager service = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
 			boolean gpsEnabled = service
 			  .isProviderEnabled(LocationManager.GPS_PROVIDER);
