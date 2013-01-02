@@ -65,7 +65,7 @@ public class CheckinFragment extends SherlockFragment {
 	private final static String TAG = "CheckinFragment";
 	
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
-	private final static int DEFAULT_PLACES_RADIUS = 50; //200 meters
+	private final static int DEFAULT_PLACES_RADIUS = 500; //200 meters
 	private final static int MIN_CHECKIN_TIME = 30;
 	private static Activity parent;
 	
@@ -693,7 +693,7 @@ public class CheckinFragment extends SherlockFragment {
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
         		new NotificationAsyncTask().execute(mUser.getID());
         	} else {
-        		Toast toast = Toast.makeText(parent, "Check-out failed!", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}
