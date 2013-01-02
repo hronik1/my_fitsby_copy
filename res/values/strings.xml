@@ -87,7 +87,7 @@
     <string name="navigation_textview_checkin_text">CHECK IN</string>
     <string name="check_in_button_check_in_text">Check In</string>
     <string name="check_in_button_check_out_text">Check Out</string>
-    <string name="verified_gym">You are currently not checked in at a verified gym</string>
+    <string name="verified_gym">You are currently not checked in at a gym</string>
     <string name="checkout_directions">You can check out only when you\'ve been at the gym for a minimum of 30 minutes</string>
     <string name="colon">:</string>
     <string name="seconds">00</string>
