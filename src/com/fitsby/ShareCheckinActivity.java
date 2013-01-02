@@ -1,4 +1,4 @@
-package com.example.fitsby;
+package com.fitsby;
 
 
 import twitter4j.Twitter;
@@ -10,14 +10,14 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 import bundlekeys.LeagueDetailBundleKeys;
 
-import com.example.fitsby.FriendInviteActivity.UpdateTwitterAsyncTask;
-import com.example.fitsby.applicationsubclass.ApplicationUser;
 import com.facebook.FacebookException;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
+import com.fitsby.FriendInviteActivity.UpdateTwitterAsyncTask;
+import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;

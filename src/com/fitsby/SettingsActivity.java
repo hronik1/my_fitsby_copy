@@ -1,7 +1,7 @@
-package com.example.fitsby;
+package com.fitsby;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.example.fitsby.fragments.MeFragment;
+import com.fitsby.fragments.MeFragment;
 
 
 import android.os.Bundle;

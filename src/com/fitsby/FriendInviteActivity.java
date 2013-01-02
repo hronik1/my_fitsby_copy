@@ -1,4 +1,4 @@
-package com.example.fitsby;
+package com.fitsby;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -48,7 +48,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.telephony.SmsManager;
 import bundlekeys.LeagueDetailBundleKeys;
 
-import com.example.fitsby.applicationsubclass.ApplicationUser;
 import com.facebook.FacebookRequestError;
 import com.facebook.FacebookException;
 import com.facebook.HttpMethod;
@@ -61,6 +60,7 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphObject;
 import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
+import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;

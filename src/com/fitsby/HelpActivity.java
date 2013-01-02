@@ -1,4 +1,4 @@
-package com.example.fitsby;
+package com.fitsby;
 
 
 import com.flurry.android.FlurryAgent;

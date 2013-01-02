@@ -1,4 +1,4 @@
-package com.example.fitsby.fragments;
+package com.fitsby.fragments;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -10,13 +10,13 @@ import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.example.fitsby.FirstTimeCheckinActivity;
-import com.example.fitsby.LandingActivity;
-import com.example.fitsby.LoginActivity;
-import com.example.fitsby.MessengerService;
-import com.example.fitsby.TutorialActivity;
-import com.example.fitsby.applicationsubclass.ApplicationUser;
-import com.example.fitsby.R;
+import com.fitsby.FirstTimeCheckinActivity;
+import com.fitsby.LandingActivity;
+import com.fitsby.LoginActivity;
+import com.fitsby.MessengerService;
+import com.fitsby.R;
+import com.fitsby.TutorialActivity;
+import com.fitsby.applicationsubclass.ApplicationUser;
 
 import constants.TutorialsConstants;
 
