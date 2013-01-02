@@ -225,4 +225,19 @@ public class UserCommunication {
 			return new StatusResponse(e.toString());
 		}
 	}
+	
+	public static StatusResponse pushNotificationChange(int userId) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		JSONObject json = new JSONObject();
+		try {
+        	json.put("user_id", userId);
+        	StringEntity stringEntity = new StringEntity(json.toString()); 
+        	ServerResponse serverResponse;
+        	serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "push_position_change", stringEntity);
+        	return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse(e.toString());
+		}
+	}
 }

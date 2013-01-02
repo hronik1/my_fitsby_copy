@@ -358,7 +358,7 @@ public class LeagueCreateActivity extends Activity {
 		
         protected LeagueCreateResponse doInBackground(String... params) {
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
-        			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
+        			Integer.parseInt(params[1]), "1".equals(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
         			"", "", "", "");
         	return response;
         }
