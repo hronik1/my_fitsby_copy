@@ -690,7 +690,7 @@ public class MeFragment extends SherlockFragment {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, "That email does not exist", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(parent, "That email doesn't exist", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {

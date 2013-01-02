@@ -126,16 +126,18 @@ public class MessengerService extends Service {
 	 * stops the timer
 	 */
 	static private void stopTimer() {
-		Log.d(TAG, "startTimer");
-		mTimer.cancel();
-		minutes = 0;
-		seconds = 0;
-		gym = null;
-		try {
-        	mClient.send(Message.obtain(null, MSG_SET_VALUE,
-        			minutes, seconds));
-		} catch (RemoteException e) {
-			mClient = null;
+		Log.d(TAG, "stopTimer");
+		if (mTimer != null) {
+			mTimer.cancel();
+			minutes = 0;
+			seconds = 0;
+			gym = null;
+			try {
+				mClient.send(Message.obtain(null, MSG_SET_VALUE,
+						minutes, seconds));
+			} catch (RemoteException e) {
+				mClient = null;
+			}
 		}
 	}
 	
