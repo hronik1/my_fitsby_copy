@@ -359,7 +359,7 @@ public class CheckinFragment extends SherlockFragment {
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     	
-    	builder.setMessage("Nice workout! Want to share the news with your friends?")
+    	builder.setMessage("Congratulations! You had a successful workout! Share the news with your friends?")
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
