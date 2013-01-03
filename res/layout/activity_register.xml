@@ -54,16 +54,17 @@
         android:id="@+id/register_email_id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/register_first_name_id"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/register_first_name_id"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/white_textbox"
-        android:textSize="14sp"
         android:hint="@string/register_email_hint"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp"
         tools:context=".RegisterActivity" />
 
     <EditText

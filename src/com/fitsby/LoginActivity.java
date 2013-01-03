@@ -17,6 +17,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -259,6 +260,7 @@ public class LoginActivity extends Activity {
 
     	// Set an EditText view to get user input 
     	final EditText input = new EditText(this);
+    	input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     	alert.setView(input);
 
     	alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
