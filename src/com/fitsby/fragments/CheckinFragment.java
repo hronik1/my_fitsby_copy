@@ -54,11 +54,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class CheckinFragment extends SherlockFragment {
 
@@ -323,7 +327,7 @@ public class CheckinFragment extends SherlockFragment {
 	  	input.setHint("Enter gym name here");
     	builder.setView(input);
     	
-    	builder.setMessage("We couldn't find any gyms nearby you. Please enter your gym name so we can verify that it exists. (Your check-in will count for now)")
+    	builder.setMessage("We couldn't find any gyms nearby you, or you have requested to add your gym. Please enter your gym name so we can verify that it exists. (Your check-in will count for now)")
     			.setCancelable(false)
     			.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
@@ -353,6 +357,44 @@ public class CheckinFragment extends SherlockFragment {
     			}).show();
     }
     
+    private void showSelectGymDialog(final Object[] gymNames) {
+    	Log.i(TAG, "showSelectGymDialog");
+
+        
+        ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(parent,
+        		android.R.layout.simple_list_item_1, gymNames);
+        ListView listView = new ListView(parent);
+        listView.setAdapter(adapter);
+ 
+    	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+    	builder.setView(listView);
+        
+    	builder.setMessage("Please select your gym, or add your own if your gym is not listed")
+		.setCancelable(false)
+		.setPositiveButton("Add my own gym", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				showAddGymDialog();
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+    	final AlertDialog dialog = builder.create();
+    	
+        listView.setOnItemClickListener(new OnItemClickListener() {
+ 			@Override
+ 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
+ 					long id) {
+ 				gym = gymNames[position].toString();
+ 				new CheckinAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+ 				dialog.dismiss();
+ 			}
+         });
+        dialog.show();
+    }
+    
     public void showPublishGymDialog() {
     	Log.i(TAG, "showPublisGymDialog");
 
@@ -363,13 +405,6 @@ public class CheckinFragment extends SherlockFragment {
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    					if (gym == null) {
-    						//TODO remove after debugging purposes
-    						Toast.makeText(parent, "gym is a null reference", Toast.LENGTH_SHORT).show();
-    					} else if ("null".equals(gym)) {
-    						//TODO remove after debugging purposes
-    						Toast.makeText(parent, "gym is a string entitled null", Toast.LENGTH_SHORT).show();
-    					}
     					Intent intent = new Intent(parent, ShareCheckinActivity.class);
     					intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
     					startActivity(intent);
@@ -516,9 +551,10 @@ public class CheckinFragment extends SherlockFragment {
 //        		new GooglePlacesSearchAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
 //				longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
         	} else {
-        		gyms.addAll(response.getGyms());
-        		gym = response.getGyms().get(0);
-				new CheckinAsyncTask().execute(mUser.getID()+"", latitude, longitude);
+//        		gyms.addAll(response.getGyms());
+//        		gym = response.getGyms().get(0);
+//				new CheckinAsyncTask().execute(mUser.getID()+"", latitude, longitude);
+        		showSelectGymDialog(response.getGyms().toArray());
         	}
         }
 	}
