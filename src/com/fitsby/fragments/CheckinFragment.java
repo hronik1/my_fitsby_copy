@@ -363,6 +363,13 @@ public class CheckinFragment extends SherlockFragment {
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
+    					if (gym == null) {
+    						//TODO remove after debugging purposes
+    						Toast.makeText(parent, "gym is a null reference", Toast.LENGTH_SHORT).show();
+    					} else if ("null".equals(gym)) {
+    						//TODO remove after debugging purposes
+    						Toast.makeText(parent, "gym is a string entitled null", Toast.LENGTH_SHORT).show();
+    					}
     					Intent intent = new Intent(parent, ShareCheckinActivity.class);
     					intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
     					startActivity(intent);

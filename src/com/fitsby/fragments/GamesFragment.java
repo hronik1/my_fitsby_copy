@@ -405,17 +405,19 @@ public class GamesFragment extends SherlockFragment {
             	byte[] bytes = cursor.getBlob(columnIndex);
             	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
             } else if (viewId == R.id.winner) {
+            	ImageView cup = (ImageView) view;
             	int rank = cursor.getInt(columnIndex);
             	if (rank > structure) {
             		view.setVisibility(View.INVISIBLE);
-            		Log.d(TAG, "setting cup invisible: " + rank);
+            	} else if(rank == 3) {
+            		view.setVisibility(View.VISIBLE);
+            		cup.setImageResource(R.drawable.winner3);
+            	} else if (rank == 2) {
+            		view.setVisibility(View.VISIBLE);
+            		cup.setImageResource(R.drawable.winner2);
             	} else {
             		view.setVisibility(View.VISIBLE);
-            		Log.d(TAG, "setting cup visible: " + rank);
-
-            	}
-            		
-            		
+            	}           		
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));

@@ -374,10 +374,15 @@ public class ShareCheckinActivity extends Activity {
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
     	if (extras == null) {
+    		Toast.makeText(this, "extras null", Toast.LENGTH_SHORT).show();
     		return;
     	}
     		
     	mGymName = extras.getString(LeagueDetailBundleKeys.KEY_GYM_NAME);
+    	if (mGymName == null)
+    		Toast.makeText(this, "mGymName is null reference", Toast.LENGTH_SHORT).show();
+    	else if ("null".equals(mGymName))
+    		Toast.makeText(this, "mGymName is a string that states null", Toast.LENGTH_SHORT).show();
     }
     
     /**
