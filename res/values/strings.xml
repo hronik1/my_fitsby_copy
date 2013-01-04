@@ -182,7 +182,7 @@
     <string name="league_create_ib_days_plus_text">Increment days</string>
     <string name="league_create_ib_wager_minus_text">Decrement wager</string>
     <string name="league_create_ib_wager_plus_text">Increment days</string>
-    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight, once there are a minimum of 4 players total.</string>
+    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight.</string>
     <string name="header_title_text">Fitsby</string>
     <string name="header_settings_text">You</string>
     <string name="title_activity_settings"></string>
