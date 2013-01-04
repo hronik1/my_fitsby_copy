@@ -47,6 +47,7 @@ import android.widget.Toast;
 public class ShareCheckinActivity extends Activity {
 
 	private final static String TAG = "ShareCheckinActivity";
+	private final static String GYM_KEY = "gymKey";
 	
 	private ApplicationUser mApplicationUser;
 	private User mUser;
@@ -375,14 +376,20 @@ public class ShareCheckinActivity extends Activity {
     	Bundle extras = intent.getExtras();
     	if (extras == null) {
     		Toast.makeText(this, "extras null", Toast.LENGTH_SHORT).show();
+    		mGymName = mSharedPreferences.getString(GYM_KEY, "");
     		return;
-    	}
-    		
+    	}	
     	mGymName = extras.getString(LeagueDetailBundleKeys.KEY_GYM_NAME);
-    	if (mGymName == null)
-    		Toast.makeText(this, "mGymName is null reference", Toast.LENGTH_SHORT).show();
-    	else if ("null".equals(mGymName))
-    		Toast.makeText(this, "mGymName is a string that states null", Toast.LENGTH_SHORT).show();
+    	if (mGymName == null) {
+    		mGymName = mSharedPreferences.getString(GYM_KEY, "");
+    	}
+    	else {
+            Editor e = mSharedPreferences.edit();
+            // After getting access token, access token secret
+            // store them in application preferences
+            e.putString(GYM_KEY, mGymName);
+            e.commit();
+    	}
     }
     
     /**
