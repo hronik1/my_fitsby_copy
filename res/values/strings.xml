@@ -73,7 +73,7 @@
     <string name="league_join_et_invite_code_hint">Game ID</string>
     <string name="league_join_button_submit_text">Submit Search</string>
     <string name="league_join_button_create">Create Game</string>
-    <string name="league_join_public_header_text">JOIN A GAME</string>
+    <string name="league_join_public_header_text">JOIN A PUBLIC GAME</string>
     <string name="search_for_a_game">SEARCH FOR A GAME</string>
     <string name="create_new_game_directions">Don\'t see a game you like? Start your own.</string>
     <string name="league_create_privacy_text">4. Make game private?</string>
