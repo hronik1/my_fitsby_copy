@@ -141,7 +141,8 @@
         android:background="@drawable/white_textbox"
         android:hint="@string/league_join_et_invite_code_hint"
         android:digits="1234567890"        
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:inputType="number" />
     
     <Button
         android:id="@+id/league_join_button_submit"

@@ -245,7 +245,7 @@ public class LeagueCreateActivity extends Activity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if (isChecked) {
-            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Your game will automatically convert to winner takes all if it starts with less than 4 contestants.", Toast.LENGTH_LONG);
+            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Your game will automatically convert to Winner Takes All if it starts with less than 4 players", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
             		toast.show();
 				}
