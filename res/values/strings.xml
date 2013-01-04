@@ -38,7 +38,7 @@
     <string name="help_button_text">Next</string>
     <string name="title_activity_league_landing"></string>
     <string name="league_landing_create_text">Create A Game</string>
-    <string name="league_landing_join_text">Join A Game</string>
+    <string name="league_landing_join_text">Join A Public Game</string>
     <string name="title_activity_league_create"></string>
     <string name="league_create_create_text">Create Game</string>
     <string name="league_create_tv_wager_text">1. Set the wager:</string>
@@ -117,8 +117,8 @@
     <string name="games_start_date_prompt_text">START DATE</string>
     <string name="games_end_date_prompt_text">END DATE</string>
     <string name="games_leader_prompt_text">LEADERBOARD</string>
-    <string name="games_button_newgame_text">Add New Game</string>
-    <string name="games_no_games_prompt_text">Looks like you\'re not in any games! Tap the Add New Game button to start a game.</string>
+    <string name="games_button_newgame_text">Join New Game</string>
+    <string name="games_no_games_prompt_text">Looks like you\'re not in any games! Tap the \'Join New Game\' button below to start a new game.</string>
     <string name="input_pot"></string>
     <string name="input_duration"></string>
     <string name="input_players"></string>
