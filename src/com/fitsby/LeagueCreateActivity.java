@@ -27,6 +27,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -238,9 +240,19 @@ public class LeagueCreateActivity extends Activity {
 	 */
 	private void initializeRadioButtons() {
 		top3RB = (RadioButton)findViewById(R.id.league_create_rb_top3);
-		top3RB.setChecked(true);
-		
+		top3RB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				if (isChecked) {
+            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Your game will automatically convert to winner takes all if it starts with less than 4 contestants.", Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+            		toast.show();
+				}
+			}
+		});
 		takeAllRB = (RadioButton)findViewById(R.id.league_create_rb_takeall);
+		takeAllRB.setChecked(true);
 	}
 	
 	/**

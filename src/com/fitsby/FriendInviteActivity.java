@@ -514,16 +514,37 @@ public class FriendInviteActivity extends Activity {
     		new LoginTwitterAsyncTask().execute();
  
     	} else {
-    	    // Clear the shared preferences
-    	    Editor e = mSharedPreferences.edit();
-    	    e.remove(PREF_KEY_OAUTH_TOKEN);
-    	    e.remove(PREF_KEY_OAUTH_SECRET);
-    	    e.remove(PREF_KEY_TWITTER_LOGIN);
-    	    e.commit();
-    	    
-    	    twitterLoginButton.setText("Log In");
+    		showTwitterLogoutAlertDialog();
     	}
     	
+    }
+    
+	 /**
+     * shows AlertDialog
+     */
+    private void showTwitterLogoutAlertDialog() {
+    	Log.i(TAG, "showTwitterLogoutAlertDialog");
+
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage("Are you sure that you would like to log out of Twitter?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    		    	    // Clear the shared preferences
+    		    	    Editor e = mSharedPreferences.edit();
+    		    	    e.remove(PREF_KEY_OAUTH_TOKEN);
+    		    	    e.remove(PREF_KEY_OAUTH_SECRET);
+    		    	    e.remove(PREF_KEY_TWITTER_LOGIN);
+    		    	    e.commit();
+    		    	    
+    		    	    twitterLoginButton.setText("Log In");
+    				}
+    			})
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
     }
     
     /**
@@ -704,42 +725,52 @@ public class FriendInviteActivity extends Activity {
 		}
 		
         protected String doInBackground(String... params) {
-			Cursor cursor = getContentResolver()
-					.query(uri, params, null, null, null);
-			cursor.moveToFirst();
-			int column = cursor.getColumnIndex(Phone.NUMBER);
-			String number = cursor.getString(column);
-        	return number;
+        	try {
+    			Cursor cursor = getContentResolver()
+    					.query(uri, params, null, null, null);
+    			cursor.moveToFirst();
+    			int column = cursor.getColumnIndex(Phone.NUMBER);
+    			String number = cursor.getString(column);
+            	return number;
+        	} catch (Exception e) {
+        		Log.d(TAG, e.toString());
+        		return null;
+        	}
+
         }
 
 		protected void onPostExecute(final String number) {
         	mProgressDialog.dismiss();
         	
-		  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
-		  	
-		  	final EditText input = new EditText(FriendInviteActivity.this);
-		  	input.setHint("Challenge your friend");		  	
-		  	input.setText("Hey, couch potato! I challenge you to a game of gym check-ins using Fitsby! " +
-		  			"Download the free app at http://fitsby.com/, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
-	    	builder.setView(input);
-	    	
-	    	builder.setMessage("Edit personal message to your friend:")
-	    			.setCancelable(false)
-	    			.setPositiveButton("Send", new DialogInterface.OnClickListener() {
-	    				public void onClick(DialogInterface dialog, int id) {
-	    				    SmsManager smsManager = SmsManager.getDefault();
-	    				    ArrayList<String> texts = smsManager.divideMessage(input.getText().toString());
-	    				    smsManager.sendMultipartTextMessage(number, null, texts, null, null);
-	    				    new NotifyAsyncTask().execute(mUser.getID());
-	    				}
-	    			})
-	    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-	    				public void onClick(DialogInterface dialog, int id) {
-	    					dialog.cancel();
-	    				}
-	    			}).show();
-        		
+        	if (number != null) {
+        		AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 
+        		final EditText input = new EditText(FriendInviteActivity.this);
+        		input.setHint("Challenge your friend");		  	
+        		input.setText("Hey, couch potato! I challenge you to a game of gym check-ins using Fitsby! " +
+        				"Download the free app at http://fitsby.com/, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
+        		builder.setView(input);
+
+        		builder.setMessage("Edit personal message to your friend:")
+        		.setCancelable(false)
+        		.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int id) {
+        				SmsManager smsManager = SmsManager.getDefault();
+        				ArrayList<String> texts = smsManager.divideMessage(input.getText().toString());
+        				smsManager.sendMultipartTextMessage(number, null, texts, null, null);
+        				new NotifyAsyncTask().execute(mUser.getID());
+        			}
+        		})
+        		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int id) {
+        				dialog.cancel();
+        			}
+        		}).show();
+        	} else {
+    			Toast toast = Toast.makeText(FriendInviteActivity.this, "Invalid phone number", Toast.LENGTH_SHORT);
+    			toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	}
         }
     }
     

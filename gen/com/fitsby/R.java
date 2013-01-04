@@ -1690,8 +1690,8 @@ containing a value of this type.
         public static final int league_create_privacy_text=0x7f040095;
         public static final int league_create_radiogroup=0x7f040091;
         public static final int league_create_rb_prompt=0x7f04008f;
-        public static final int league_create_rb_takeall=0x7f040093;
-        public static final int league_create_rb_top3=0x7f040092;
+        public static final int league_create_rb_takeall=0x7f040092;
+        public static final int league_create_rb_top3=0x7f040093;
         public static final int league_create_tv_days=0x7f04008a;
         public static final int league_create_tv_wager=0x7f040084;
         public static final int league_create_wager=0x7f040087;

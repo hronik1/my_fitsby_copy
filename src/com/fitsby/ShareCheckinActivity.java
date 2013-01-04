@@ -442,16 +442,37 @@ public class ShareCheckinActivity extends Activity {
 
     		new LoginTwitterAsyncTask().execute();
     	} else {
-    	    // Clear the shared preferences
-    	    Editor e = mSharedPreferences.edit();
-    	    e.remove(PREF_KEY_OAUTH_TOKEN);
-    	    e.remove(PREF_KEY_OAUTH_SECRET);
-    	    e.remove(PREF_KEY_TWITTER_LOGIN);
-    	    e.commit();
-    	    
-    	    twitterLoginButton.setText("Log In");
+    		showTwitterLogoutAlertDialog();
     	}
     	
+    }
+    
+    /**
+     * shows AlertDialog
+     */
+    private void showTwitterLogoutAlertDialog() {
+    	Log.i(TAG, "showTwitterLogoutAlertDialog");
+
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage("Are you sure that you would like to log out of Twitter?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    		    	    // Clear the shared preferences
+    		    	    Editor e = mSharedPreferences.edit();
+    		    	    e.remove(PREF_KEY_OAUTH_TOKEN);
+    		    	    e.remove(PREF_KEY_OAUTH_SECRET);
+    		    	    e.remove(PREF_KEY_TWITTER_LOGIN);
+    		    	    e.commit();
+    		    	    
+    		    	    twitterLoginButton.setText("Log In");
+    				}
+    			})
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
     }
     
     /**
