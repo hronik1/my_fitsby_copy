@@ -154,7 +154,7 @@ public class ShareCheckinActivity extends Activity {
         super.onStart();
 	    FlurryAgent.onStartSession(this, FlurryConstants.key);
 	    FlurryAgent.onPageView();
-	    FlurryAgent.logEvent("Invite Friends");
+	    FlurryAgent.logEvent("Share successful workout");
         Log.i(TAG, "onStart");
     }
     
