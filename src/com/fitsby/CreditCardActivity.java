@@ -192,7 +192,49 @@ public class CreditCardActivity extends Activity {
 //    	    }
 //    	};
 //    	numberET.setFilters(new InputFilter[]{filter});
-    	
+    	numberET.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				Log.d(TAG, s.toString());
+				char[] digits = s.toString().toCharArray();
+				if (!isCreditCardFormatValid(digits)) {
+					String strippedString = "";
+					
+					for (char digit: digits) {
+						if (digit != ' ')
+							strippedString += digit;
+					}
+					char[] strippedDigits = strippedString.toCharArray();
+					String validString = "";
+					for (int i = 0, j = 0; i < strippedDigits.length; i++, j++) {
+						if (j == 4 || j == 9 || j == 14) {
+							validString += ' ';
+							j++;
+						}
+						validString += strippedDigits[i];
+					}
+					s.clear();
+					s.append(validString);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				
+			}
+    		
+    	});
     	expMonthET = (EditText)findViewById(R.id.credit_card_et_expire_month);
     	expYearET = (EditText)findViewById(R.id.credit_card_et_expire_year);
     	cvcET = (EditText)findViewById(R.id.credit_card_et_card_cvc);
@@ -220,6 +262,19 @@ public class CreditCardActivity extends Activity {
     }
     
     /**
+     * 
+     */
+    private boolean isCreditCardFormatValid(char[] digits) {
+    	for (int i = 0; i < digits.length; i++ ) {
+    		if ((i == 4 || i == 9 || i == 14) && digits[i] != ' ')
+    			return false;
+    		else if ((i != 4 && i != 9 && i != 14) && digits[i] == ' ')
+    			return false;
+    	}
+    	return true;
+    }
+    
+    /**
      * submit to database and/or charge customer
      */
     private void submit() {
@@ -228,11 +283,12 @@ public class CreditCardActivity extends Activity {
     	String expMonth = expMonthET.getText().toString();
     	String expYear = expYearET.getText().toString();
     	String cvc = cvcET.getText().toString();
-    	if (number.length() != 16) {
+    	if (number.length() != 19) {
     		Toast toast = Toast.makeText(this, "Your card number is too short", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
-    	}
+			return;
+    	} 
     		
     	if (number.equals("") || expMonth.equals("") || expYear.equals("") || cvc.equals("")) {
     		Toast toast = Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG);
@@ -276,6 +332,10 @@ public class CreditCardActivity extends Activity {
     	
     }
     
+    private String parseCreditCard(String unparsed) {
+    	return (unparsed.substring(0,4) + unparsed.substring(5,9) + 
+    			unparsed.substring(10,14) + unparsed.substring(15,19));
+    }
     /**
      * AsyncTask class to send info to server
      * @author brent
@@ -313,7 +373,7 @@ public class CreditCardActivity extends Activity {
 		}
 		
         protected LeagueCreateResponse doInBackground(String... params) {
-        	String number = numberET.getText().toString();
+        	String number = parseCreditCard(numberET.getText().toString());
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
         			Integer.parseInt(params[1]), Boolean.parseBoolean(params[2]), Integer.parseInt(params[3]), Integer.parseInt(params[4]),
         			number, expYearET.getText().toString(), expMonthET.getText().toString(),
@@ -346,7 +406,7 @@ public class CreditCardActivity extends Activity {
 		
         protected StatusResponse doInBackground(Integer... params) {
         	StatusResponse response = LeagueCommunication.joinLeague(params[0], params[1],
-        			numberET.getText().toString(), expYearET.getText().toString(), expMonthET.getText().toString(),
+        			parseCreditCard(numberET.getText().toString()), expYearET.getText().toString(), expMonthET.getText().toString(),
         			cvcET.getText().toString());
         	return response;
         }
