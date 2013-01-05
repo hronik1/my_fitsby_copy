@@ -369,7 +369,7 @@ public class CheckinFragment extends SherlockFragment {
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     	builder.setView(listView);
         
-    	builder.setMessage("Please select your gym, or add your own if your gym is not listed")
+    	builder.setTitle("Please select your gym, or add your own if your gym is not listed")
 		.setCancelable(false)
 		.setPositiveButton("Add New Gym", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
