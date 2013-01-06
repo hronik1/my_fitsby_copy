@@ -263,6 +263,16 @@
 				android:gravity="center"                
                 android:text="@string/me_twitter" />
             
+            <TextView
+                android:id="@+id/email_us_tv"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_below="@+id/me_twitter"
+                android:textColor="@color/white"
+                android:text="@string/email_us"
+                android:textSize="14sp" 
+                android:layout_margin="10dp"/>
+            
             <Button
                 android:id="@+id/me_settings_button_logout"
                 android:layout_width="fill_parent"
@@ -274,7 +284,7 @@
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"    
                 android:textSize="17sp"                                   
-                android:layout_below="@+id/me_twitter"
+                android:layout_below="@+id/email_us_tv"
                 android:text="@string/me_settings_button_logout_text" />
 
             <Button

@@ -488,6 +488,8 @@ public class FriendInviteActivity extends Activity {
                         			toast.setGravity(Gravity.CENTER, 0, 0);
                         			toast.show();
                         		}
+                        	} else if (error != null) {
+                        		Log.d(TAG, error.toString());
                         	}
                         }
 
