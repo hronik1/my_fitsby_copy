@@ -1,25 +1,56 @@
 package com.fitsby.applicationsubclass;
 
+import constants.RememberMeConstants;
 import dbtables.User;
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 public class ApplicationUser extends Application {
+	
+	private static final String PREF_KEY_USER = "prefKeyUser";
+	private static final String PREF_KEY_ID = "prefKeyID";
+	private static final String PREF_KEY_FIRST_NAME = "prefKeyFirstName";
+	private static final String PREF_KEY_LAST_NAME = "prefKeyLastName";
+	private static final String PREF_KEY_EMAIL = "prefKeyEmail";
+	
 	private User mUser;
+	private SharedPreferences mSharedPreferences;
+	
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		mSharedPreferences = getSharedPreferences(PREF_KEY_USER,MODE_PRIVATE);
+	}
 	
 	/**
-	 * 
+	 * reads user data from sharedpreferences, if non existent
 	 * @return the user
 	 */
 	public User getUser() {
+		if (mUser == null) {
+			int id = mSharedPreferences.getInt(PREF_KEY_ID, -1);
+			String firstName = mSharedPreferences.getString(PREF_KEY_FIRST_NAME, "");
+			String lastName = mSharedPreferences.getString(PREF_KEY_LAST_NAME, "");
+			String email = mSharedPreferences.getString(PREF_KEY_EMAIL, "");
+			mUser = new User(id, firstName, lastName, email);
+		}
 		return mUser;
 	}
 	
 	/**
-	 * sets user
+	 * sets user, writing to shared preferences as well
 	 * @param user
 	 */
 	public void setUser(User user) {
 		mUser = user;
+		Editor e = mSharedPreferences.edit();
+		e.putInt(PREF_KEY_ID, user.getID());
+		e.putString(PREF_KEY_FIRST_NAME, user.getFirstName());
+		e.putString(PREF_KEY_LAST_NAME, user.getLastName());
+		e.putString(PREF_KEY_EMAIL, user.getEmail());
+		e.commit();
 	}
 	
 	private boolean isJoin;

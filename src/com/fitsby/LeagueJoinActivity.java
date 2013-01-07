@@ -258,6 +258,7 @@ public class LeagueJoinActivity extends FragmentActivity
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     	Log.d(TAG, "inited loader");
+    	//TODO think a null pointer exception is occuring here but not sure why
     	return new PublicLeaguesCursorLoader(this, mUser.getID());
     }
     
