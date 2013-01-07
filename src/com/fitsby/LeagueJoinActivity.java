@@ -294,9 +294,13 @@ public class LeagueJoinActivity extends FragmentActivity
 
         protected void onPostExecute(PrivateLeagueResponse response) {
         	if (response == null ) {
-        		Toast.makeText(getApplicationContext(), "You don't have a connection to the internet", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "You don't have a connection to the internet", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else if (!response.wasSuccessful()){
-        		Toast.makeText(getApplicationContext(), "No games with those credentials exist", Toast.LENGTH_LONG).show();
+        		Toast toast = Toast.makeText(getApplicationContext(), "No games with those credentials exist", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
         	} else {
         		League league = response.getLeague();
         		boolean isPrivate = (league.isPrivate() == 0 ? false : true);

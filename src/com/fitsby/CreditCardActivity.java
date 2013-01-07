@@ -304,7 +304,7 @@ public class CreditCardActivity extends Activity {
     private void showConfirmation() {
 	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
-    	builder.setMessage("Please confirm that you want to create this game")
+    	builder.setMessage("Please confirm that you want to start this game")
     			.setCancelable(false)
     			.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {

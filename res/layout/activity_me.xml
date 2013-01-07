@@ -201,7 +201,7 @@
                 android:text="@string/me_faq"
                 android:background="@drawable/custom_login_button"
                 android:textColor="@color/white"
-                android:layout_marginTop="5dp"                
+                android:layout_marginTop="3dp"                
                 android:layout_marginRight="10dp"                
                 android:layout_marginLeft="10dp"       
                 android:textSize="17sp"          
