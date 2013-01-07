@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="1dp"
     android:background="@color/light_white" >
@@ -54,17 +54,7 @@
 		android:textStyle="bold"        
         android:textSize="16sp"		
         android:layout_toRightOf="@+id/list_item_game_leader_name"
-        android:text="@string/list_item_game_leader_last_name_text" />
-
-	<ImageView
-        android:id="@+id/winner"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
-        android:layout_alignBottom="@+id/list_item_game_leader_last_name"
-        android:layout_toRightOf="@+id/list_item_game_leader_last_name"
-        android:layout_marginLeft="3dp"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/winner" />    
+        android:text="@string/list_item_game_leader_last_name_text" />    
         
     <ImageView
         android:id="@+id/checkin_icon"
@@ -93,5 +83,15 @@
 	        android:layout_toRightOf="@+id/list_item_game_leader_checkins_prompt"
 	        android:layout_below="@+id/list_item_game_leader_name"
 	        android:textSize="14sp" />
+
+	    <ImageView
+	        android:id="@+id/winner"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:layout_alignTop="@+id/list_item_game_leader_last_name"
+	        android:layout_alignBottom="@+id/list_item_game_leader_checkins_prompt"
+	        android:src="@drawable/winner" />
 
 </RelativeLayout>

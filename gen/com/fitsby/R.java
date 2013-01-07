@@ -1586,7 +1586,7 @@ containing a value of this type.
         public static final int check_in_button_check_in=0x7f04003d;
         public static final int check_in_button_check_out=0x7f04003b;
         public static final int check_in_iv=0x7f04003e;
-        public static final int checkin_icon=0x7f040123;
+        public static final int checkin_icon=0x7f040122;
         public static final int checkin_share_authButton=0x7f040102;
         public static final int checkin_share_facebook_shareButton=0x7f040103;
         public static final int checkin_share_twitter_login_button=0x7f040100;
@@ -1732,8 +1732,8 @@ containing a value of this type.
         public static final int league_join_wager_header=0x7f04009f;
         public static final int listMode=0x7f040002;
         public static final int list_item_bold=0x7f04012b;
-        public static final int list_item_game_leader_checkins=0x7f040125;
-        public static final int list_item_game_leader_checkins_prompt=0x7f040124;
+        public static final int list_item_game_leader_checkins=0x7f040124;
+        public static final int list_item_game_leader_checkins_prompt=0x7f040123;
         public static final int list_item_game_leader_imageview=0x7f04011f;
         public static final int list_item_game_leader_last_name=0x7f040121;
         public static final int list_item_game_leader_name=0x7f040120;
@@ -1855,7 +1855,7 @@ containing a value of this type.
         public static final int verified_gym=0x7f04003f;
         public static final int wager_box=0x7f040085;
         public static final int wager_icon=0x7f040064;
-        public static final int winner=0x7f040122;
+        public static final int winner=0x7f040125;
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {

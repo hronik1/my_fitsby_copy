@@ -80,7 +80,7 @@
 	    android:layout_marginTop="5dp"
 	    android:clickable="true"	    
 	    android:text="@string/login_forgot_password_text"
-	    android:textColor="@color/white"
+	    android:textColor="@drawable/faq_button_text"
 	    android:textSize="16sp" />
 
 </RelativeLayout>
