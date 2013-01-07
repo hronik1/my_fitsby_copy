@@ -5,6 +5,7 @@ import java.util.Set;
 import com.fitsby.applicationsubclass.ApplicationUser;
 
 import servercommunication.UserCommunication;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +34,8 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 		// TODO get message from intent and display as a push notification
 		NotificationCompat.Builder mBuilder =
 		        new NotificationCompat.Builder(this)
-		        .setSmallIcon(R.drawable.fitsby_logo)
+				.setDefaults(Notification.DEFAULT_SOUND) 
+		        .setSmallIcon(R.drawable.ic_launcher)
 		        .setContentTitle("Fitsby update");
 		
 		Bundle bundle = intent.getExtras();
