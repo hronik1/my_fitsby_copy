@@ -29,6 +29,8 @@ import dbtables.User;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -325,6 +327,35 @@ public class CheckinFragment extends SherlockFragment {
     	
 	  	final EditText input = new EditText(parent);
 	  	input.setHint("Enter gym name here");
+	  	input.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				Log.d(TAG, s.toString());
+				String string = s.toString();
+				if (string.length() > 0 && Character.isLowerCase(s.charAt(0))) {
+					string = (Character.toUpperCase(s.charAt(0)) + string.substring(1, string.length()));
+					s.clear();
+					s.append(string);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				
+			}
+    		
+    	});
     	builder.setView(input);
     	
     	builder.setMessage("We couldn't find any gyms nearby you, or you have requested to add your gym. Please enter your gym name so we can verify that it exists. (Your check-in will count for now)")
