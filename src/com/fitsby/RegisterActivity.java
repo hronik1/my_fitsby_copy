@@ -152,10 +152,9 @@ public class RegisterActivity extends Activity {
     /**
      * shows AlertDialog
      */
-    public void showAlertDialog() {
-    	Log.i(TAG, "onCreateDialog");
+    private void showAlertDialog() {
+    	Log.i(TAG, "showAlertDialog");
 
-    	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage("Please confirm that " + emailET.getText().toString() +
     			" is your email.")
@@ -168,8 +167,7 @@ public class RegisterActivity extends Activity {
     					String password = passwordET.getText().toString();
     					//TODO password salting maybe?
     					User user = new User(firstName, lastName, email);
-//    					mdbHandler.getUserTableHandler().addUser(user);
-//    					user = mUserTableHandler.getUser(email);
+
     					if (user != null) {
     						mApplicationUser.setUser(user);
     						try {
@@ -214,22 +212,22 @@ public class RegisterActivity extends Activity {
      * pulls information from editTexts and then registers user
      */
     private void register() {  
-    	String firstName = "";
-    	String lastName = "";
-    	String password = "";
-    	String confirmPassword = "";
-    	String email = "";
+    	final String firstName = firstNameET.getText().toString();
+    	final String lastName = lastNameET.getText().toString();
+    	final String password  = passwordET.getText().toString();
+    	final String confirmPassword = confirmPasswordET.getText().toString();
+    	final String email = emailET.getText().toString();
     	
-    	if (firstNameET != null && firstNameET.getText() != null)
-    		firstName = firstNameET.getText().toString();
-    	if (lastNameET != null && lastNameET.getText() != null)
-        	lastName = lastNameET.getText().toString();
-    	if (passwordET != null && passwordET.getText() != null)
-    		password = passwordET.getText().toString();
-    	if (confirmPasswordET != null && confirmPasswordET.getText() != null)
-    		confirmPassword = confirmPasswordET.getText().toString();
-    	if (emailET != null && emailET.getText() != null)
-    		email = emailET.getText().toString();
+//    	if (firstNameET != null && firstNameET.getText() != null)
+//    		firstName = firstNameET.getText().toString();
+//    	if (lastNameET != null && lastNameET.getText() != null)
+//        	lastName = lastNameET.getText().toString();
+//    	if (passwordET != null && passwordET.getText() != null)
+//    		password = passwordET.getText().toString();
+//    	if (confirmPasswordET != null && confirmPasswordET.getText() != null)
+//    		confirmPassword = confirmPasswordET.getText().toString();
+//    	if (emailET != null && emailET.getText() != null)
+//    		email = emailET.getText().toString();
 
     	String validity = RegisterClientSideValidation.validateName(firstName, lastName);
     	validity += RegisterClientSideValidation.validateEmail(email);
@@ -250,7 +248,22 @@ public class RegisterActivity extends Activity {
     		return;
     	}
     
-    	new RegisterAsyncTask().execute(email, password, confirmPassword, firstName, lastName);
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage("Please confirm that " + email +
+    			" is your email.")
+    			 .setCancelable(false)
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					new RegisterAsyncTask().execute(email, password, confirmPassword, firstName, lastName);
+    				}
+    			})
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
+    			
+//    	new RegisterAsyncTask().execute(email, password, confirmPassword, firstName, lastName);
 //    	if (!mUserTableHandler.isEmailUnique(email)) {
 //    		Toast toast = Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG);
 //    		toast.setGravity(Gravity.CENTER, 0, 0);
