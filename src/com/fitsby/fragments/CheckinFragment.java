@@ -420,7 +420,7 @@ public class CheckinFragment extends SherlockFragment {
         dialog.show();
     }
     
-    public void showPublishGymDialog() {
+    private void showPublishGymDialog() {
     	Log.i(TAG, "showPublisGymDialog");
 
     	//TODO clean this up
@@ -726,7 +726,10 @@ public class CheckinFragment extends SherlockFragment {
 
         protected void onPostExecute(StatusResponse response) {
         	mProgressDialog.dismiss();
-        	showPublishGymDialog();
+			Intent intent = new Intent(parent, ShareCheckinActivity.class);
+			intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
+			startActivity(intent);
+//        	showPublishGymDialog();
         }
     }
     /**
