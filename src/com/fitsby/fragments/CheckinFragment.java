@@ -390,20 +390,24 @@ public class CheckinFragment extends SherlockFragment {
     
     private void showSelectGymDialog(final Object[] gymNames) {
     	Log.i(TAG, "showSelectGymDialog");
-
-        final String[] strings = new String[gymNames.length];
-        for (int i = 0; i < gymNames.length; i++)
-        	strings[i] = (String)gymNames[i];
+    	
+    	ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(parent,android.R.layout.simple_list_item_1, gymNames);
+    	ListView listView = new ListView(parent);
+    	listView.setAdapter(adapter);
+    	
+//        final String[] strings = new String[gymNames.length];
+//        for (int i = 0; i < gymNames.length; i++)
+//        	strings[i] = (String)gymNames[i];
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-        
-    	builder.setMessage("Please select your gym, or add your own if your gym is not listed")
-    	.setItems(strings, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
- 				gym = gymNames[which].toString();
- 				new CheckinAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
-			}	
-    	})
+        builder.setView(listView);
+    	builder.setTitle("Please select your gym, or add your own if your gym is not listed")
+//    	.setItems(strings, new DialogInterface.OnClickListener() {
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+// 				gym = gymNames[which].toString();
+// 				new CheckinAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+//			}	
+//    	})
 		.setCancelable(false)
 		.setPositiveButton("Add New Gym", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
@@ -416,8 +420,16 @@ public class CheckinFragment extends SherlockFragment {
 			}
 		});
     	final AlertDialog dialog = builder.create();
-
-        dialog.show();
+    	listView.setOnItemClickListener(new OnItemClickListener() {
+    		@Override
+    		public void onItemClick(AdapterView<?> adapterView, View view, int position,
+    				long id) {
+    			gym = gymNames[position].toString();
+    			new CheckinAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+    			dialog.dismiss();
+    		}
+    	});
+    	dialog.show();
     }
     
     private void showPublishGymDialog() {
