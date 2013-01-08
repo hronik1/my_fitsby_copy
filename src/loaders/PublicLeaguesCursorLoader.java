@@ -10,6 +10,7 @@ import dbhandlers.LeagueTableHandler;
 import dbtables.League;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -29,7 +30,8 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 	public final static String[] FROM_ARGS = { KEY_BITMAP, LeagueTableHandler.KEY_ID, KEY_NUM_PLAYERS,
 			LeagueTableHandler.KEY_WAGER, LeagueTableHandler.KEY_DURATION, KEY_POT };
 	private Cursor mCursor;
-	
+	private Context mContext;
+	private ProgressDialog mProgressDialog;
 	private int userId;
 	
 	/**
@@ -38,6 +40,7 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 	 */
 	public PublicLeaguesCursorLoader(Context context, int userId) {
 		super(context);
+		mContext = context;
 		this.userId = userId;
 		mDBHandler = DatabaseHandler.getInstance(context);
 		mLeagueTableHandler = mDBHandler.getLeagueTableHandler();
@@ -83,10 +86,13 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
      */
     @Override
     protected void onStartLoading() {
+
         if (mCursor != null) {
             deliverResult(mCursor);
         }
         if (takeContentChanged() || mCursor == null) {
+        	mProgressDialog = ProgressDialog.show(mContext, "",
+                    "Games are loading...");
             forceLoad();
         }
     }
@@ -102,6 +108,7 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 
     @Override
     public void onCanceled(Cursor cursor) {
+
         if (cursor != null && !cursor.isClosed()) {
             cursor.close();
         }
@@ -121,4 +128,7 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
     }
     
     /**end overriden asynctaskloader methods **/
+    public ProgressDialog getProgressDialog() {
+    	return mProgressDialog;
+    }
 }

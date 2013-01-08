@@ -56,6 +56,7 @@ public class LeagueJoinActivity extends FragmentActivity
 	private ListView leagueLV;
 	private User mUser;
 	private SimpleCursorAdapter mAdapter;
+	private PublicLeaguesCursorLoader mPublicLeaguesCursorLoader;
 	private int[] toArgs = { R.id.list_item_public_leagues_creator, R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
 			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_duration, R.id.list_item_public_leagues_pot };
 	
@@ -258,8 +259,8 @@ public class LeagueJoinActivity extends FragmentActivity
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     	Log.d(TAG, "inited loader");
-    	//TODO think a null pointer exception is occuring here but not sure why
-    	return new PublicLeaguesCursorLoader(this, mUser.getID());
+    	mPublicLeaguesCursorLoader = new PublicLeaguesCursorLoader(this, mUser.getID());
+    	return mPublicLeaguesCursorLoader;
     }
     
     /**
@@ -269,6 +270,7 @@ public class LeagueJoinActivity extends FragmentActivity
      */
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	mAdapter.swapCursor(data);
+    	mPublicLeaguesCursorLoader.getProgressDialog().dismiss();
     }
     
     /**
