@@ -400,7 +400,8 @@ public class LeagueJoinDetailActivity extends Activity {
         	if (response.wasSuccessful()) {
         		try {
         			ApplicationUser appData = (ApplicationUser)getApplicationContext();
-            		Intent intent = new Intent(LeagueJoinDetailActivity.this, LoggedinActivity.class);
+//            		Intent intent = new Intent(LeagueJoinDetailActivity.this, LoggedinActivity.class);
+        			Intent intent = new Intent(LeagueJoinDetailActivity.this, FriendInviteActivity.class);
             		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, appData.getLeagueId());
             		startActivity(intent);
         		} catch(Exception e) {
