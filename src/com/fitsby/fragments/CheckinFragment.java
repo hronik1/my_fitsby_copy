@@ -400,7 +400,7 @@ public class CheckinFragment extends SherlockFragment {
 //        	strings[i] = (String)gymNames[i];
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
         builder.setView(listView);
-    	builder.setTitle("Please select your gym, or add your own if your gym is not listed")
+    	builder.setTitle("Please select your gym, or add your own.")
 //    	.setItems(strings, new DialogInterface.OnClickListener() {
 //			@Override
 //			public void onClick(DialogInterface dialog, int which) {
