@@ -22,6 +22,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.HttpResponse;
 import org.json.JSONException;
@@ -35,15 +38,23 @@ public class MyHttpClient {
 	
 	private final static String TAG = "MyHttpClient";
 	public final static String SERVER_URL = "https://f-app.herokuapp.com/";
-	
-	static HttpClient httpClient = new DefaultHttpClient();
+	private final static int SOCKET_TIMEOUT_MILLIS = 5000;
+	private final static int CONNECTION_TIMEOUT_MILLIS = 5000;
+	private static DefaultHttpClient httpClient = new DefaultHttpClient();
+	private static HttpParams httpParams = new BasicHttpParams(); 
 	
 	public ServerResponse createPostRequest(String urlString, StringEntity stringEntity) {
 
 		if(httpClient == null) {
-			httpClient = new DefaultHttpClient();
+			httpClient = new DefaultHttpClient();			
 		}
-
+		if (httpParams == null) {
+			httpParams = new BasicHttpParams();
+		}
+		HttpConnectionParams.setConnectionTimeout(httpParams, CONNECTION_TIMEOUT_MILLIS);
+		HttpConnectionParams.setSoTimeout(httpParams, SOCKET_TIMEOUT_MILLIS);
+		httpClient.setParams(httpParams);
+		
 		ServerResponse serverResponseObject = new ServerResponse();
 		HttpResponse response = null;
 		Exception exception = null;
@@ -79,7 +90,13 @@ public class MyHttpClient {
 		if(httpClient == null) {
 			httpClient = new DefaultHttpClient();
 		}
-
+		if (httpParams == null) {
+			httpParams = new BasicHttpParams();
+		}
+		HttpConnectionParams.setConnectionTimeout(httpParams, CONNECTION_TIMEOUT_MILLIS);
+		HttpConnectionParams.setSoTimeout(httpParams, SOCKET_TIMEOUT_MILLIS);
+		httpClient.setParams(httpParams);
+		
 		ServerResponse serverResponseObject = new ServerResponse();
 		HttpResponse response = null;
 		Exception exception = null;
