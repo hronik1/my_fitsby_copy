@@ -269,7 +269,14 @@ public class LeagueJoinActivity extends FragmentActivity
      * @param data
      */
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    	mAdapter.swapCursor(data);
+    	if (data != null) {
+    		mAdapter.swapCursor(data);
+    	} else {
+    		Toast toast = Toast.makeText(LeagueJoinActivity.this, getString(R.string.timeout_message), Toast.LENGTH_LONG);
+    		toast.setGravity(Gravity.CENTER, 0, 0);
+    		toast.show();
+    	}
+    	
     	mPublicLeaguesCursorLoader.getProgressDialog().dismiss();
     }
     
@@ -299,6 +306,10 @@ public class LeagueJoinActivity extends FragmentActivity
         		Toast toast = Toast.makeText(getApplicationContext(), "You don't have a connection to the internet", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
+        	}  else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(LeagueJoinActivity.this, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(getApplicationContext(), "No games with those credentials exist", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);

@@ -13,6 +13,10 @@ public class AddPlaceResponse {
 	private String reference;
 	private String id;
 	
+	public AddPlaceResponse() {
+		
+	}
+	
 	/**
 	 * @param status
 	 * @param reference
@@ -53,6 +57,19 @@ public class AddPlaceResponse {
 	 */
 	public boolean wasSuccessful() {
 		return mStatusResponse.wasSuccessful();
+	}
+	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 	/**
 	 * parses the json response and turns it into an AddPlaceResponse class

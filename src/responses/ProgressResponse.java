@@ -12,6 +12,10 @@ public class ProgressResponse {
 	private StatusResponse mStatusResponse;
 	private double progress;
 	
+	public ProgressResponse() {
+		
+	}
+	
 	public ProgressResponse(String status, double progress) {
 		mStatusResponse = new StatusResponse(status);
 		this.progress = progress;
@@ -25,6 +29,18 @@ public class ProgressResponse {
 		return mStatusResponse.wasSuccessful();
 	}
 
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
+	}
 	public static ProgressResponse jsonToProgressResponse(JSONObject json) {
 		try {
 			Log.d(TAG, json.toString());

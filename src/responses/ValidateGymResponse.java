@@ -14,6 +14,10 @@ public class ValidateGymResponse {
 	private StatusResponse mStatusResponse;
 	private String message;
 	
+	public ValidateGymResponse() {
+		
+	}
+	
 	public ValidateGymResponse(String status, String message) {
 		mStatusResponse = new StatusResponse(status);
 		this.message = message;
@@ -27,6 +31,18 @@ public class ValidateGymResponse {
 		return message;
 	}
 	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
+	}
 	public static ValidateGymResponse jsonToValidateGymResponse(JSONObject json) {
 		try {
 			Log.d(TAG, json.toString());

@@ -27,6 +27,11 @@ import responses.StatsResponse;
 import responses.StatusResponse;
 import responses.UserResponse;
 
+import com.fitsby.R;
+
+import constants.SingletonContext;
+
+import android.content.res.Resources;
 import android.util.Log;
 
 public class UserCommunication {
@@ -64,6 +69,11 @@ public class UserCommunication {
 			//nameValuePairs.add(new BasicNameValuePair("creator_id", creatorId + ""));
 			//TODO add something to nameValuePairs
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "users.json", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				UserResponse response = new UserResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.d(TAG, e.toString());
@@ -93,6 +103,12 @@ public class UserCommunication {
 			//ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login.json", params);
 			StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login_android", stringEntity);
+			
+			if (serverResponse.exception instanceof IOException) {
+				UserResponse response = new UserResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
@@ -111,6 +127,11 @@ public class UserCommunication {
         try {
 			params.add(new BasicNameValuePair("user_id", userId+""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "user_stats", params);
+			if (serverResponse.exception instanceof IOException) {
+				StatsResponse response = new StatsResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatsResponse.jsonToStatsResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -129,6 +150,11 @@ public class UserCommunication {
         try {
 			params.add(new BasicNameValuePair("email", email));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "reset_password", params);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -145,6 +171,11 @@ public class UserCommunication {
         	json.put("user_id", userId);
         	StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "update_email", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -185,6 +216,11 @@ public class UserCommunication {
         	json.put("user_id", userId);
         	StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "append_text_field", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -200,6 +236,11 @@ public class UserCommunication {
         	json.put("user_id", userId);
         	StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "push_registration", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -219,6 +260,11 @@ public class UserCommunication {
         	else 
         		serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "push_disable", stringEntity);
         	
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -234,6 +280,11 @@ public class UserCommunication {
         	StringEntity stringEntity = new StringEntity(json.toString()); 
         	ServerResponse serverResponse;
         	serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "push_position_change", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
         	return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());

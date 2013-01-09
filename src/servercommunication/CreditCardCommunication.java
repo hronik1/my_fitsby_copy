@@ -1,5 +1,6 @@
 package servercommunication;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +8,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
+import com.fitsby.R;
+
+import constants.SingletonContext;
 
 import android.util.Log;
 
@@ -40,7 +45,11 @@ public class CreditCardCommunication {
 			json.put("credit_card_cvc", cvc+"");
 			StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "get_and_save_stripe_info", stringEntity);
-
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());

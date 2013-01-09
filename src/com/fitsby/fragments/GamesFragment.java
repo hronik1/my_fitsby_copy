@@ -295,6 +295,10 @@ public class GamesFragment extends SherlockFragment {
         		Toast toast = Toast.makeText(parent, "There doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(parent, "Error grabbing the data for your game", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -326,8 +330,14 @@ public class GamesFragment extends SherlockFragment {
         }
 
 		protected void onPostExecute(Cursor cursor) {
-        	mAdapter.swapCursor(cursor);
-        	mAdapter.notifyDataSetChanged();
+        	if (cursor != null) {
+        		mAdapter.swapCursor(cursor);
+        		mAdapter.notifyDataSetChanged();
+        	} else {
+        		Toast toast = Toast.makeText(parent, parent.getString(R.string.timeout_message), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} 
         	new DaysRemainingAsyncTask().execute();	
 
         }
@@ -362,7 +372,11 @@ public class GamesFragment extends SherlockFragment {
         		startTV.setText(" (" + league.getStartDate() + " -");
         		endTV.setText(" " + league.getEndDate() + ")");
         		structure = league.getStructure();
-        	}
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} 
         	
         	new CursorDataAsyncTask().execute();
         }
@@ -390,7 +404,11 @@ public class GamesFragment extends SherlockFragment {
         	
         	if (response.wasSuccessful()) {
         		daysLeftTV.setText(response.getDaysLeft());
-        	}
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} 
         	new ProgressAsyncTask().execute();
         }
     }
@@ -447,10 +465,15 @@ public class GamesFragment extends SherlockFragment {
 
 		protected void onPostExecute(ProgressResponse response) {
         	mProgressDialog.dismiss();
-        	if (response.wasSuccessful())
+        	if (response.wasSuccessful()) {
         		progressBar.setProgress((int) (response.getProgress() * PROGRESS_MAX));
-        	else
+			} else if (response.getError() != null && !response.getError().equals("")) {
+          		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+          		toast.setGravity(Gravity.CENTER, 0, 0);
+      			toast.show();
+          	} else {
         		progressBar.setProgress(0);
+          	}
 		}		
     }
 }

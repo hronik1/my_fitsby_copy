@@ -17,6 +17,7 @@ import bundlekeys.LeagueDetailBundleKeys;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.fitsby.FirstTimeCheckinActivity;
+import com.fitsby.LeagueCreateActivity;
 import com.fitsby.LoggedinActivity;
 import com.fitsby.MessengerService;
 import com.fitsby.R;
@@ -579,6 +580,10 @@ public class CheckinFragment extends SherlockFragment {
         	if (response == null) {
         		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(parent, "Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -656,6 +661,10 @@ public class CheckinFragment extends SherlockFragment {
         	if (response == null) {
         		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
+        	}  else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(parent, response.getMessage(), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -716,7 +725,7 @@ public class CheckinFragment extends SherlockFragment {
         	} else {
         		String error = response.getError();
         		if (error == null || error.equals(""))
-        			error = "Server could not be reached at the moment";
+        			error = getString(R.string.timeout_message);
         		Toast toast = Toast.makeText(parent, error, Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();

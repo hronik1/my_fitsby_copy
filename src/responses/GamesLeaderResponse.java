@@ -22,6 +22,10 @@ public class GamesLeaderResponse {
 	private StatusResponse mStatusResponse;
 	private Vector<Leader> leaders;
 	
+	public GamesLeaderResponse() {
+		
+	}
+	
 	public GamesLeaderResponse(String status, Vector<Leader> leaders) {
 		mStatusResponse = new StatusResponse(status);
 		this.leaders = leaders;
@@ -33,6 +37,19 @@ public class GamesLeaderResponse {
 	
 	public Vector<Leader> getLeaders() {
 		return leaders;
+	}
+	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 	
 	public static GamesLeaderResponse jsonToGamesLeaderResponse(JSONObject json) {

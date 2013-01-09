@@ -22,6 +22,10 @@ public class PublicLeaguesResponse {
 	private StatusResponse mStatusResponse;
 	private Vector<League> leagues;
 	
+	public PublicLeaguesResponse() {
+		
+	}
+	
 	public PublicLeaguesResponse(String success, Vector<League> leagues) {
 		mStatusResponse = new StatusResponse(success);
 		this.leagues = leagues;
@@ -35,6 +39,18 @@ public class PublicLeaguesResponse {
 		return leagues;
 	}
 	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
+	}
 	public static PublicLeaguesResponse jsonToPublicLeagueResponse(JSONObject json) {
 		try {
 			HashMap<String, Bitmap> imageMap = new HashMap<String, Bitmap>();

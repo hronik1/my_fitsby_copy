@@ -12,6 +12,10 @@ public class CountdownResponse {
 	private StatusResponse mStatusResponse;
 	private String daysLeft;
 	
+	public CountdownResponse() {
+		
+	}
+	
 	public CountdownResponse(String status, String daysLeft) {
 		mStatusResponse = new StatusResponse(status);
 		this.daysLeft = daysLeft;
@@ -23,6 +27,19 @@ public class CountdownResponse {
 	
 	public String getDaysLeft() {
 		return daysLeft;
+	}
+	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 	
 	public static CountdownResponse jsonToCountdownResponse(JSONObject json) {

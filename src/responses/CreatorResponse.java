@@ -12,6 +12,10 @@ public class CreatorResponse {
 	private StatusResponse mStatusResponse;
 	private String creatorFirstName;
 	
+	public CreatorResponse() {
+		
+	}
+	
 	public CreatorResponse(String status, String creatorFirstName) {
 		mStatusResponse = new StatusResponse(status);
 		this.creatorFirstName = creatorFirstName;
@@ -23,6 +27,19 @@ public class CreatorResponse {
 	
 	public String getCreatorFirstName() {
 		return creatorFirstName;
+	}
+	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 	
 	public static CreatorResponse jsonToCreatorResponse(JSONObject json) {

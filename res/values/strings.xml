@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="timeout_message">Limited or no internet connectivity</string>
     <string name="email_us">Questions or Feedback? Send us an email at team@fitsby.com.</string>
     <string name="twitter_consumer_key">bU4k6Hx7NH1VA4lHFsTTg</string>
     <string name="twitter_consumer_secret">1yZkykC1lbLkpYsBSG8zldqcM4ulL3eULWPTmO4jQ</string>

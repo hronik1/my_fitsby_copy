@@ -330,7 +330,11 @@ public class LoginActivity extends Activity {
         		Toast toast = Toast.makeText(getApplicationContext(), "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
-        	} else if (!response.wasSuccessful()){
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+         		Toast toast = Toast.makeText(LoginActivity.this, response.getError(), Toast.LENGTH_LONG);
+         		toast.setGravity(Gravity.CENTER, 0, 0);
+     			toast.show();
+         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(getApplicationContext(), "Either your email or password was invalid. It's also possible the internet quality may be inadequate.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
@@ -381,7 +385,12 @@ public class LoginActivity extends Activity {
         		Toast toast = Toast.makeText(getApplicationContext(), "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
-        	} else if (!response.wasSuccessful()){
+        	} 
+        	 else if (response.getError() != null && !response.getError().equals("")) {
+         		Toast toast = Toast.makeText(LoginActivity.this, response.getError(), Toast.LENGTH_LONG);
+         		toast.setGravity(Gravity.CENTER, 0, 0);
+     			toast.show();
+         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(getApplicationContext(), "That email does not exist", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();

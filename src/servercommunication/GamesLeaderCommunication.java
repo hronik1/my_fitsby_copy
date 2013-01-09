@@ -13,7 +13,12 @@ import org.apache.http.ParseException;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.fitsby.R;
+
+import constants.SingletonContext;
+
 import responses.GamesLeaderResponse;
+import responses.StatusResponse;
 
 import android.database.Cursor;
 import cursors.MatrixCursor;
@@ -33,6 +38,11 @@ public class GamesLeaderCommunication {
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("game_id", gameId+""));
 		ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "leaderboard", nameValuePairs);
+		if (serverResponse.exception instanceof IOException) {
+			GamesLeaderResponse response = new GamesLeaderResponse();
+			response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+			return response;
+		}
 		return GamesLeaderResponse.jsonToGamesLeaderResponse(MyHttpClient.parseResponse(serverResponse));
 		
 	}
@@ -43,7 +53,7 @@ public class GamesLeaderCommunication {
 		
 		GamesLeaderResponse gamesLeaderResponse = getGamesLeaderHelper(gameId);
 		if (gamesLeaderResponse == null || !gamesLeaderResponse.wasSuccessful())
-			return cursor;
+			return null;
 		Vector<Leader> leaders = gamesLeaderResponse.getLeaders();
 		for (Leader leader: leaders) {
 			Bitmap bitmap = leader.getBitmap();

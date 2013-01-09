@@ -707,6 +707,10 @@ public class FriendInviteActivity extends Activity {
         	
         	if (response.wasSuccessful()) {
             	creatorName = response.getCreatorFirstName();
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(FriendInviteActivity.this, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	}
         		
         	new ParseTwitterLoginResponseAsyncTask().execute();

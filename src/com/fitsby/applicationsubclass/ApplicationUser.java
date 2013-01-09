@@ -1,6 +1,7 @@
 package com.fitsby.applicationsubclass;
 
 import constants.RememberMeConstants;
+import constants.SingletonContext;
 import dbtables.User;
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -22,6 +23,7 @@ public class ApplicationUser extends Application {
 	public void onCreate() {
 		super.onCreate();
 		mSharedPreferences = getSharedPreferences(PREF_KEY_USER,MODE_PRIVATE);
+		SingletonContext.initializeContext(this);
 	}
 	
 	/**

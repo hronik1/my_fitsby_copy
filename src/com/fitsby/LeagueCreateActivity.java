@@ -384,6 +384,10 @@ public class LeagueCreateActivity extends Activity {
             		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
             		startActivity(intent);
 
+            	} else if (response.getError() != null && !response.getError().equals("")) {
+            		Toast toast = Toast.makeText(LeagueCreateActivity.this, response.getError(), Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+        			toast.show();
             	} else {
             		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Your game could not be created at this time.", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);

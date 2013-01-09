@@ -24,6 +24,10 @@ public class CommentsResponse {
 	private StatusResponse mStatusResponse;
 	private Vector<Comment> comments;
 	
+	public CommentsResponse() {
+		
+	}
+	
 	public CommentsResponse(String status, Vector<Comment> comments) {
 		mStatusResponse = new StatusResponse(status);
 		this.comments = comments;
@@ -35,6 +39,19 @@ public class CommentsResponse {
 	
 	public Vector<Comment> getComments() {
 		return comments;
+	}
+	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 	
 	public static CommentsResponse jsonToCommentsResponse(JSONObject json) {

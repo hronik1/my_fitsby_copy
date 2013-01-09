@@ -15,6 +15,10 @@ public class StatsResponse {
 	private StatusResponse mStatusResponse;
 	private Stats mStats;
 	
+	public StatsResponse() {
+		
+	}
+	
 	public StatsResponse(String status, Stats stats) {
 		mStatusResponse = new StatusResponse(status);
 		this.mStats = stats;
@@ -28,6 +32,18 @@ public class StatsResponse {
 		return mStats;
 	}
 	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
+	}
 	public static StatsResponse jsonToStatsResponse(JSONObject json) {
 		try {
 			Log.d(TAG, json.toString());

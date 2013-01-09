@@ -11,6 +11,10 @@ public class StakesResponse {
 	private StatusResponse mStatusResponse;
 	private String stakes;
 	
+	public StakesResponse() {
+		
+	}
+	
 	public StakesResponse(String status, String stakes) {
 		mStatusResponse = new StatusResponse(status);
 		this.stakes = stakes;
@@ -24,6 +28,19 @@ public class StakesResponse {
 		return mStatusResponse.wasSuccessful();
 	}
 
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
+	}
+	
 	public static StakesResponse jsonToStakesResponse(JSONObject json) {
 		try {
 			Log.d(TAG, json.toString());

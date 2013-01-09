@@ -20,6 +20,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.fitsby.R;
+
+import constants.SingletonContext;
+
 import responses.CommentsResponse;
 import responses.StatusResponse;
 
@@ -50,6 +54,11 @@ public class NewsfeedCommunication {
         try {
 			params.add(new BasicNameValuePair("game_id", leagueId + ""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "game_comments", params);
+			if (serverResponse.exception instanceof IOException) {
+				CommentsResponse response = new CommentsResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return CommentsResponse.jsonToCommentsResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.d(TAG, e.toString());
@@ -75,6 +84,11 @@ public class NewsfeedCommunication {
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "post_comment", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
@@ -96,7 +110,7 @@ public class NewsfeedCommunication {
 		MatrixCursor cursor = new MatrixCursor(NewsfeedCursorLoader.FROM_ARGS);
 		if (commentsResponse == null || !commentsResponse.wasSuccessful()) {
 			Log.d(TAG, "unsuccess");
-			return cursor;
+			return null;
 		}
 		Vector<Comment> comments = commentsResponse.getComments();
 		Log.d(TAG, comments.size()+"");

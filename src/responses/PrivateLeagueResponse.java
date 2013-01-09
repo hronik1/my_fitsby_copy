@@ -21,6 +21,10 @@ public class PrivateLeagueResponse {
 	private StatusResponse mStatusResponse;
 	private League mLeague;
 	
+	public PrivateLeagueResponse() {
+		
+	}
+	
 	public PrivateLeagueResponse(String status, League league) {
 		mStatusResponse = new StatusResponse(status);
 		mLeague = league;
@@ -34,6 +38,18 @@ public class PrivateLeagueResponse {
 		return mLeague;
 	}
 	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
+	}
 	public static PrivateLeagueResponse jsonToPrivateLeagueResponse(JSONObject json) {
 		try {
 			Log.d(TAG, json.toString());

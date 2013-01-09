@@ -5,12 +5,16 @@ public class UserResponse {
 	private User user;
 	private StatusResponse mStatusResponse;
 	private String status;
-	private String error;
+	
+	public UserResponse() {
+		
+	}
 	
 	public UserResponse(String status, User user, String error) {
 		mStatusResponse = new StatusResponse(status);
 		this.status = status;
 		this.user = user;
+		mStatusResponse.setError(error);
 	}
 	
 	public User getUser() {
@@ -25,7 +29,16 @@ public class UserResponse {
 		return status;
 	}
 	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
 	public String getError() {
-		return error;
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 }

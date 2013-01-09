@@ -389,6 +389,10 @@ public class CreditCardActivity extends Activity {
             		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
             		startActivity(intent);
 
+            	} else if (response.getError() != null && !response.getError().equals("")) {
+            		Toast toast = Toast.makeText(CreditCardActivity.this, response.getError(), Toast.LENGTH_LONG);
+            		toast.setGravity(Gravity.CENTER, 0, 0);
+        			toast.show();
             	} else {
             		Toast toast = Toast.makeText(CreditCardActivity.this, "Your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
             		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -421,6 +425,10 @@ public class CreditCardActivity extends Activity {
             		startActivity(intent);
         		} catch(Exception e) {
         		}
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(CreditCardActivity.this, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else {
         		Toast toast = Toast.makeText(CreditCardActivity.this, "Your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);

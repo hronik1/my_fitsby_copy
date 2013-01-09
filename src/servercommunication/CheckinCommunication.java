@@ -1,5 +1,6 @@
 package servercommunication;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,6 +12,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.fitsby.R;
+
+import constants.SingletonContext;
 
 
 import android.content.Context;
@@ -48,6 +53,11 @@ public class CheckinCommunication {
 			json.put("longitude", longitude);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_in_request", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
@@ -72,6 +82,11 @@ public class CheckinCommunication {
 			json.put("longitude", longitude);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_out_request", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
@@ -94,6 +109,11 @@ public class CheckinCommunication {
 	        nameValuePairs.add(new BasicNameValuePair("types", "gym"));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(
 					"https://maps.googleapis.com/maps/api/place/nearbysearch/json", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				PlacesResponse response = new PlacesResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return PlacesResponse.jsonToPlacesResponse(MyHttpClient.parseResponse(serverResponse));
         } catch (Exception e) {
         	Log.d(TAG, e.toString());
@@ -113,6 +133,11 @@ public class CheckinCommunication {
 	        nameValuePairs.add(new BasicNameValuePair("query", "recreation"));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(
 					"https://maps.googleapis.com/maps/api/place/nearbysearch/json", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				PlacesResponse response = new PlacesResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return PlacesResponse.jsonToPlacesResponse(MyHttpClient.parseResponse(serverResponse));
         } catch (Exception e) {
         	Log.d(TAG, e.toString());
@@ -144,6 +169,11 @@ public class CheckinCommunication {
             StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(
 					MyHttpClient.SERVER_URL + "validate_gym", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				ValidateGymResponse response = new ValidateGymResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return ValidateGymResponse.jsonToValidateGymResponse(MyHttpClient.parseResponse(serverResponse));
         } catch (Exception e) {
         	Log.d(TAG, e.toString());

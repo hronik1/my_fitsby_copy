@@ -14,6 +14,10 @@ public class UsersGamesResponse {
 	private StatusResponse mStatusResponse;
 	private List<String> games;
 	
+	public UsersGamesResponse() {
+		
+	}
+	
 	public UsersGamesResponse(String status, List<String> games) {
 		mStatusResponse = new StatusResponse(status);
 		this.games = games;
@@ -25,6 +29,19 @@ public class UsersGamesResponse {
 	
 	public List<String> getGames() {
 		return games;
+	}
+	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 	
 	public static UsersGamesResponse jsonToGamesResponse(JSONObject json) {

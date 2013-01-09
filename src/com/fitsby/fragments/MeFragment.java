@@ -689,6 +689,10 @@ public class MeFragment extends SherlockFragment {
         		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(parent, "That email doesn't exist", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);

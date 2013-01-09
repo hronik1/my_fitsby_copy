@@ -15,6 +15,10 @@ public class StatusResponse {
 	private String status;
 	private String error;
 	
+	public StatusResponse() {
+		
+	}
+	
 	public StatusResponse(String status) {
 		this.status = status;
 	}

@@ -329,6 +329,10 @@ public class RegisterActivity extends Activity {
         		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
+        	}  else if (response.getError() != null && !response.getError().equals("")) {
+        		Toast toast = Toast.makeText(RegisterActivity.this, response.getError(), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
         	} else if (!response.wasSuccessful()){
         		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, that email is either invalid or already taken. It is also possible that the internet quality may be inadequate.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);

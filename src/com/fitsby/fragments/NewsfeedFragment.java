@@ -230,7 +230,11 @@ public class NewsfeedFragment extends SherlockFragment {
         		//Toast toast = Toast.makeText(parent.getApplicationContext(), "Successfully posted your comment", Toast.LENGTH_LONG);
         		//toast.setGravity(Gravity.CENTER, 0, 0);
         		//toast.show();        		
-        	} else {
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+          		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+          		toast.setGravity(Gravity.CENTER, 0, 0);
+      			toast.show();
+          	}  else {
         		Toast toast = Toast.makeText(parent.getApplicationContext(), "Comment successfully posted", Toast.LENGTH_LONG); //changed from 'comment fail' as the toast
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
@@ -263,7 +267,11 @@ public class NewsfeedFragment extends SherlockFragment {
         		Toast toast = Toast.makeText(parent.getApplicationContext(), "There doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
-        	} else if (!response.wasSuccessful()){
+        	} else if (response.getError() != null && !response.getError().equals("")) {
+          		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
+          		toast.setGravity(Gravity.CENTER, 0, 0);
+      			toast.show();
+          	}  else if (!response.wasSuccessful()) {
         		Toast toast = Toast.makeText(parent.getApplicationContext(), "Error grabbing the data for your game", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
@@ -295,9 +303,15 @@ public class NewsfeedFragment extends SherlockFragment {
         }
 
 		protected void onPostExecute(Cursor cursor) {
-        	mProgressDialog.dismiss();
+			mProgressDialog.dismiss();
+        	if (cursor != null) {
         	mAdapter.swapCursor(cursor);
         	mAdapter.notifyDataSetChanged();
+        	} else {
+        		Toast toast = Toast.makeText(parent, parent.getString(R.string.timeout_message), Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+    			toast.show();
+        	} 
 
         }
     }

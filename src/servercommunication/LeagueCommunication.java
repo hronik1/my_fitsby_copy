@@ -18,6 +18,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.fitsby.R;
+
+import constants.SingletonContext;
+
 import responses.CountdownResponse;
 import responses.CreatorResponse;
 import responses.LeagueCreateResponse;
@@ -46,6 +50,11 @@ public class LeagueCommunication {
         try {
 			nameValuePairs.add(new BasicNameValuePair("user_id", userId+""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "public_games", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				PublicLeaguesResponse response = new PublicLeaguesResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return PublicLeaguesResponse.jsonToPublicLeagueResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -61,6 +70,11 @@ public class LeagueCommunication {
 			nameValuePairs.add(new BasicNameValuePair("first_name_of_creator", firstName));
 			nameValuePairs.add(new BasicNameValuePair("user_id", userId));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "get_private_game_info", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				PrivateLeagueResponse response = new PrivateLeagueResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return PrivateLeagueResponse.jsonToPrivateLeagueResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -74,6 +88,11 @@ public class LeagueCommunication {
         try {  
 	        nameValuePairs.add(new BasicNameValuePair("game_id", id));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "single_game_info", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				PrivateLeagueResponse response = new PrivateLeagueResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return PrivateLeagueResponse.jsonToPrivateLeagueResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -85,7 +104,7 @@ public class LeagueCommunication {
 		MatrixCursor cursor = new MatrixCursor(PublicLeaguesCursorLoader.FROM_ARGS);
 		PublicLeaguesResponse publicLeaguesResponse = getPublicLeaguesHelper(userId);
 		if (publicLeaguesResponse == null || !publicLeaguesResponse.wasSuccessful())
-			return cursor;
+			return null;
 		Vector<League> leagues = publicLeaguesResponse.getLeagues();
 		for(League league: leagues) {
 			Bitmap bitmap = league.getBitmap();
@@ -123,6 +142,11 @@ public class LeagueCommunication {
 			json.put("credit_card_cvc", cvc);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "create_game", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				LeagueCreateResponse response = new LeagueCreateResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return LeagueCreateResponse.jsonToLeagueCreateResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
@@ -152,6 +176,11 @@ public class LeagueCommunication {
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 	        //TODO add route
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "join_game", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+				StatusResponse response = new StatusResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StatusResponse.jsonToStatusResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (JSONException e) {
 			Log.e(TAG, e.toString());
@@ -169,6 +198,11 @@ public class LeagueCommunication {
         try {
 	        nameValuePairs.add(new BasicNameValuePair("user_id", userId +"")); 
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "games_user_is_in", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				UsersGamesResponse response = new UsersGamesResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return UsersGamesResponse.jsonToGamesResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -183,6 +217,11 @@ public class LeagueCommunication {
         try {
 	        nameValuePairs.add(new BasicNameValuePair("game_id", gameId +"")); 
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "countdown", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				CountdownResponse response = new CountdownResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return CountdownResponse.jsonToCountdownResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -197,6 +236,11 @@ public class LeagueCommunication {
         try {
 	        nameValuePairs.add(new BasicNameValuePair("game_id", leagueId)); 
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "get_first_name", nameValuePairs);
+			if (serverResponse.exception instanceof IOException) {
+				CreatorResponse response = new CreatorResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return CreatorResponse.jsonToCreatorResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -214,6 +258,11 @@ public class LeagueCommunication {
         try {
 			params.add(new BasicNameValuePair("game_id", gameId + ""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "stakes", params);
+			if (serverResponse.exception instanceof IOException) {
+				StakesResponse response = new StakesResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return StakesResponse.jsonToStakesResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -250,6 +299,11 @@ public class LeagueCommunication {
         try {
 			params.add(new BasicNameValuePair("game_id", gameId + ""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "percentage_of_game", params);
+			if (serverResponse.exception instanceof IOException) {
+				ProgressResponse response = new ProgressResponse();
+				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+				return response;
+			}
 			return ProgressResponse.jsonToProgressResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());

@@ -13,6 +13,10 @@ public class PlacesResponse {
 	private StatusResponse mStatusResponse;
 	private Vector<String> gyms;
 	
+	public PlacesResponse() {
+		
+	}
+	
 	public PlacesResponse(String status, Vector<String> gyms) {
 		mStatusResponse = new StatusResponse(status);
 		this.gyms = gyms;
@@ -24,6 +28,19 @@ public class PlacesResponse {
 	
 	public Vector<String> getGyms() {
 		return gyms;
+	}
+	
+	public void setError(String error) {
+		if (mStatusResponse == null)
+			mStatusResponse = new StatusResponse("fail");
+		mStatusResponse.setError(error);
+	}
+	
+	public String getError() {
+		if (mStatusResponse != null)
+			return mStatusResponse.getError();
+		else 
+			return "";
 	}
 	
 	public static PlacesResponse jsonToPlacesResponse(JSONObject json) {
