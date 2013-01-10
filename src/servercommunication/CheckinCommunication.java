@@ -65,6 +65,9 @@ public class CheckinCommunication {
 		} catch (UnsupportedEncodingException e) {
 			Log.e(TAG, e.toString());
 			return new StatusResponse("fail");
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+			return new StatusResponse("fail");
 		}
 	}
 	

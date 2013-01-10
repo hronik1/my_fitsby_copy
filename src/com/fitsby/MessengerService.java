@@ -65,6 +65,14 @@ public class MessengerService extends Service {
         }
     }
     
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        
+        // If we get killed, after returning from here, restart
+        return START_REDELIVER_INTENT;
+    }
+    
     @Override
     public void onCreate() {
        // mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);

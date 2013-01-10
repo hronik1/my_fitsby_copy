@@ -163,6 +163,8 @@ public class CheckinFragment extends SherlockFragment {
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
+		Intent intent = new Intent(parent, MessengerService.class);
+		parent.startService(intent);
 
 	}
 	   

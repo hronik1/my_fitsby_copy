@@ -24,7 +24,10 @@ public class StatusResponse {
 	}
 	
 	public boolean wasSuccessful() {
-		return (status.equals(RESPONSE_SUCCESS) || status.equals(RESPONSE_SUCCESS_GOOGLE_PLACES));
+		if (status == null)
+			return false;
+		else
+			return (status.equals(RESPONSE_SUCCESS) || status.equals(RESPONSE_SUCCESS_GOOGLE_PLACES));
 	}
 	
 	public String getStatus() {
