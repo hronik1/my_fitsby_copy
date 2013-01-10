@@ -103,7 +103,6 @@ public class UserCommunication {
 			//ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "login.json", params);
 			StringEntity stringEntity = new StringEntity(json.toString()); 
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "login_android", stringEntity);
-			
 			if (serverResponse.exception instanceof IOException) {
 				UserResponse response = new UserResponse();
 				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));

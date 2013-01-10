@@ -6,6 +6,7 @@ import dbtables.User;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 public class ApplicationUser extends Application {
 	
@@ -24,6 +25,7 @@ public class ApplicationUser extends Application {
 		super.onCreate();
 		mSharedPreferences = getSharedPreferences(PREF_KEY_USER,MODE_PRIVATE);
 		SingletonContext.initializeContext(this);
+		Log.d(this.toString(), "createdSingletonContext");
 	}
 	
 	/**
