@@ -335,7 +335,7 @@ public class LoginActivity extends Activity {
          		toast.setGravity(Gravity.CENTER, 0, 0);
      			toast.show();
          	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(getApplicationContext(), "Either your email or password was invalid. It's also possible the internet quality may be inadequate.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Either your email or password was invalid.", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {

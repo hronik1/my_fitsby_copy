@@ -193,7 +193,13 @@ public class UserCommunication {
 				User user = new User(id, firstName, lastName, email);
 				return new UserResponse(json.get("status").toString(), user, null);
 			} else {
-				return new UserResponse(json.get("status").toString(), null, json.getString("errors"));
+				String error = null;
+				try {
+					error = json.getString("error");
+				} catch (Exception e){
+					
+				}
+				return new UserResponse(json.get("status").toString(), null, error);
 			}
 		} catch (NumberFormatException e) {
 			Log.d(TAG, e.toString());
