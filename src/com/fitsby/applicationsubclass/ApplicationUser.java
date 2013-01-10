@@ -49,12 +49,14 @@ public class ApplicationUser extends Application {
 	 */
 	public void setUser(User user) {
 		mUser = user;
-		Editor e = mSharedPreferences.edit();
-		e.putInt(PREF_KEY_ID, user.getID());
-		e.putString(PREF_KEY_FIRST_NAME, user.getFirstName());
-		e.putString(PREF_KEY_LAST_NAME, user.getLastName());
-		e.putString(PREF_KEY_EMAIL, user.getEmail());
-		e.commit();
+		if (user != null) {
+			Editor e = mSharedPreferences.edit();
+			e.putInt(PREF_KEY_ID, user.getID());
+			e.putString(PREF_KEY_FIRST_NAME, user.getFirstName());
+			e.putString(PREF_KEY_LAST_NAME, user.getLastName());
+			e.putString(PREF_KEY_EMAIL, user.getEmail());
+			e.commit();
+		}
 	}
 	
 	private boolean isJoin;
