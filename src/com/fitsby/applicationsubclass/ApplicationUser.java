@@ -1,9 +1,12 @@
 package com.fitsby.applicationsubclass;
 
+import com.fitsby.LoggedinActivity;
+
 import constants.RememberMeConstants;
 import constants.SingletonContext;
 import dbtables.User;
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
@@ -15,6 +18,7 @@ public class ApplicationUser extends Application {
 	private static final String PREF_KEY_FIRST_NAME = "prefKeyFirstName";
 	private static final String PREF_KEY_LAST_NAME = "prefKeyLastName";
 	private static final String PREF_KEY_EMAIL = "prefKeyEmail";
+	public static final int DEFAULT_ID = -1;
 	
 	private User mUser;
 	private SharedPreferences mSharedPreferences;
@@ -25,7 +29,6 @@ public class ApplicationUser extends Application {
 		super.onCreate();
 		mSharedPreferences = getSharedPreferences(PREF_KEY_USER,MODE_PRIVATE);
 		SingletonContext.initializeContext(this);
-		Log.d(this.toString(), "createdSingletonContext");
 	}
 	
 	/**
@@ -55,6 +58,13 @@ public class ApplicationUser extends Application {
 			e.putString(PREF_KEY_FIRST_NAME, user.getFirstName());
 			e.putString(PREF_KEY_LAST_NAME, user.getLastName());
 			e.putString(PREF_KEY_EMAIL, user.getEmail());
+			e.commit();
+		} else {
+			Editor e = mSharedPreferences.edit();
+			e.putInt(PREF_KEY_ID, DEFAULT_ID);
+			e.putString(PREF_KEY_FIRST_NAME, "");
+			e.putString(PREF_KEY_LAST_NAME, "");
+			e.putString(PREF_KEY_EMAIL, "");
 			e.commit();
 		}
 	}

@@ -12,6 +12,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 import com.crittercism.app.Crittercism;
+import com.fitsby.applicationsubclass.ApplicationUser;
+import com.fitsby.LoggedinActivity;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gcm.GCMRegistrar;
 
@@ -32,9 +34,12 @@ public class LandingActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        //Remove title bar
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        
+        if (((ApplicationUser)getApplicationContext()).getUser().getID() != ApplicationUser.DEFAULT_ID) {
+        	Intent intent = new Intent(this, LoggedinActivity.class);
+        	startActivity(intent);
+        	this.finish();
+        }
+        	
         setContentView(R.layout.activity_landing);
         Log.i(TAG, "onCreate");
         
