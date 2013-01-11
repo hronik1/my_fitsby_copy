@@ -20,6 +20,7 @@ import com.fitsby.R;
 import com.fitsby.applicationsubclass.ApplicationUser;
 
 
+
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
@@ -120,7 +121,7 @@ public class GamesFragment extends SherlockFragment {
 	    initializeListView(viewer);
 	    initializeButtons(viewer);
 	    
-	    new SpinnerDataAsyncTask().execute();
+//	    new SpinnerDataAsyncTask().execute();
 	    
 	    return viewer;
 	}
@@ -136,6 +137,12 @@ public class GamesFragment extends SherlockFragment {
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		user = mApplicationUser.getUser();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+        new SpinnerDataAsyncTask().execute();
 	}
 	
 	/**
