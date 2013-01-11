@@ -96,6 +96,8 @@ public class CheckinFragment extends SherlockFragment {
 
 	private Vector<String> gyms;
 	
+	private static LocationManager mLocationManager;
+	private static LocationListener mLocationListener;
 	double longitude;
 	double latitude;
 	
@@ -243,14 +245,14 @@ public class CheckinFragment extends SherlockFragment {
 			return;
 		}
 		
-		LocationManager service = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
-		boolean gpsEnabled = service
+		mLocationManager = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
+		boolean gpsEnabled = mLocationManager
 		  .isProviderEnabled(LocationManager.GPS_PROVIDER);
 		
 		if (!gpsEnabled) {
 			showAlertDialog(); 
 		} else {
-			LocationListener listener = new LocationListener() {
+			mLocationListener = new LocationListener() {
 				public void onLocationChanged(Location location) {
 				}
 
@@ -260,13 +262,13 @@ public class CheckinFragment extends SherlockFragment {
 
 				public void onProviderDisabled(String provider) {}
 			};
-			List<String> matchingProviders = service.getAllProviders();
-			Location bestResult = service.getLastKnownLocation(matchingProviders.get(0));
+			List<String> matchingProviders = mLocationManager.getAllProviders();
+			Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
 			float bestAccuracy = Float.MAX_VALUE;
 			long bestTime = Long.MIN_VALUE;
 			long minTime = Long.MAX_VALUE;
 			for (String provider: matchingProviders) {
-			  Location location = service.getLastKnownLocation(provider);
+			  Location location = mLocationManager.getLastKnownLocation(provider);
 			  if (location != null) {
 			    float accuracy = location.getAccuracy();
 			    long time = location.getTime();
@@ -283,7 +285,7 @@ public class CheckinFragment extends SherlockFragment {
 			    }
 			  }
 			}
-			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
+			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener); 
 			latitude = bestResult.getLatitude();
 			longitude = bestResult.getLongitude();
 			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
@@ -485,6 +487,10 @@ public class CheckinFragment extends SherlockFragment {
 	    					}
 	    					checkinLocationTV.setText("You are currently not checked in at a verified gym");
 	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
+	    	        		if (mLocationManager != null && mLocationListener != null) {
+	    	        			mLocationManager.removeUpdates(mLocationListener);
+	    	        			new NotificationAsyncTask().execute(mUser.getID());
+	    	        		}
 	    				}
 	    			})
 	    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -495,29 +501,32 @@ public class CheckinFragment extends SherlockFragment {
 	    	return;
 
 		} else {
-			LocationManager service = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
-			boolean gpsEnabled = service
+			if (mLocationManager == null)
+				mLocationManager = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
+			boolean gpsEnabled = mLocationManager
 			  .isProviderEnabled(LocationManager.GPS_PROVIDER);
 			if (!gpsEnabled) {
 				showAlertDialog(); 
 			} else {
-				LocationListener listener = new LocationListener() {
-					public void onLocationChanged(Location location) {
-					}
+				if (mLocationListener == null) {
+					mLocationListener = new LocationListener() {
+						public void onLocationChanged(Location location) {
+						}
 
-					public void onStatusChanged(String provider, int status, Bundle extras) {}
+						public void onStatusChanged(String provider, int status, Bundle extras) {}
 
-					public void onProviderEnabled(String provider) {}
+						public void onProviderEnabled(String provider) {}
 
-					public void onProviderDisabled(String provider) {}
-				};
-				List<String> matchingProviders = service.getAllProviders();
-				Location bestResult = service.getLastKnownLocation(matchingProviders.get(0));
+						public void onProviderDisabled(String provider) {}
+					};
+				}
+				List<String> matchingProviders = mLocationManager.getAllProviders();
+				Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
 				float bestAccuracy = Float.MAX_VALUE;
 				long bestTime = Long.MIN_VALUE;
 				long minTime = Long.MAX_VALUE;
 				for (String provider: matchingProviders) {
-				  Location location = service.getLastKnownLocation(provider);
+				  Location location = mLocationManager.getLastKnownLocation(provider);
 				  if (location != null) {
 				    float accuracy = location.getAccuracy();
 				    long time = location.getTime();
@@ -534,7 +543,7 @@ public class CheckinFragment extends SherlockFragment {
 				    }
 				  }
 				}
-				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener); 
+				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener); 
 				latitude = bestResult.getLatitude();
 				longitude = bestResult.getLongitude();
 				
@@ -785,7 +794,10 @@ public class CheckinFragment extends SherlockFragment {
 				}
         		checkinLocationTV.setText("You are currently not checked in at a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
-        		new NotificationAsyncTask().execute(mUser.getID());
+        		if (mLocationManager != null && mLocationListener != null) {
+        			mLocationManager.removeUpdates(mLocationListener);
+        			new NotificationAsyncTask().execute(mUser.getID());
+        		}
         	} else {
         		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
