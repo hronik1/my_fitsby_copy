@@ -63,10 +63,16 @@ public class PrivateLeagueResponse {
 			String startDate = json.getString("start_date");
 			String email = json.getString("email");
 			int structure;
+			String error;
 			try {
 				structure = json.getInt("winning_structure");
 			} catch (Exception e) {
 				structure = 3;
+			}
+			try {
+				error = json.getString("error");
+			} catch (Exception e) {
+				error = "";
 			}
 			Bitmap bitmap = MyHttpClient.getBitmapFromURL(Gravatar.getGravatar(email));
 			League league = new League(id, wager, players, duration, stakes, bitmap, structure);
@@ -79,8 +85,9 @@ public class PrivateLeagueResponse {
 			league.setStartDate(startDate);
 			if (isPrivate.equals("true"))
 				league.setPrivate(1);
-
-			return new PrivateLeagueResponse(success, league);
+			PrivateLeagueResponse response = new PrivateLeagueResponse(success, league);
+			response.setError(error);
+			return response;
 		} catch (JSONException e) {
 			Log.d(TAG, e.toString());
 			return new PrivateLeagueResponse(e.toString(), null);
