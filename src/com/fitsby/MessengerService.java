@@ -201,7 +201,7 @@ public class MessengerService extends Service {
 
 	    // Set the Notification UI parameters
 	    Notification notification =  new NotificationCompat.Builder(this)
-        .setContentTitle("Check in at " + gym) 
+        .setContentTitle("Checked in at " + gym) 
         .setSmallIcon(R.drawable.ic_launcher)
         .setContentIntent(pendingIntent)
         .build();
