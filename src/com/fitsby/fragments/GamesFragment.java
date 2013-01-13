@@ -18,6 +18,10 @@ import com.fitsby.FriendInviteActivity;
 import com.fitsby.LeagueJoinActivity;
 import com.fitsby.R;
 import com.fitsby.applicationsubclass.ApplicationUser;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.State;
 
 
 
@@ -81,7 +85,9 @@ public class GamesFragment extends SherlockFragment {
 	private int structure;
 	
 	private ProgressBar progressBar;
-	private ListView leadersLV;
+	private PullToRefreshListView leadersLV;
+	private boolean refreshFinished = true;
+//	private ListView leadersLV;
 	private Spinner gamesSpinner;
 	private Button inviteButton;
 	private Button newGamesButton;
@@ -177,10 +183,23 @@ public class GamesFragment extends SherlockFragment {
 	 * initializes the list view
 	 */
 	private void initializeListView(View viewer) {
-		leadersLV = (ListView)viewer.findViewById(R.id.games_leader_list);
+		leadersLV = (PullToRefreshListView)viewer.findViewById(R.id.games_leader_list);
 		mAdapter = new SimpleCursorAdapter(parent, R.layout.list_item_game_leader, null, fromArgs, toArgs, 0);
 		mAdapter.setViewBinder(new MyViewBinder());
 		leadersLV.setAdapter(mAdapter);
+		
+	   	leadersLV.setOnPullEventListener(new PullToRefreshBase.OnPullEventListener<ListView>() {
+
+				@Override
+				public void onPullEvent(PullToRefreshBase<ListView> refreshView,
+						State state, Mode direction) {
+					if (refreshFinished) {
+						new SpinnerDataAsyncTask().execute();
+						refreshFinished = false;
+					}
+				}
+	    		
+	    	});
 	}
 	
 	/**
@@ -317,10 +336,12 @@ public class GamesFragment extends SherlockFragment {
         		if (games == null || games.size() == 0) {
         			disableGamesPrompts();
         		}
+        		spinnerData.clear();
         		spinnerData.addAll(games);
         		spinnerDataAdapter.notifyDataSetChanged();
         		disableNoGamesPrompts();
         	}
+        	refreshFinished = true;
         }
     }
     
@@ -338,9 +359,11 @@ public class GamesFragment extends SherlockFragment {
 
 		protected void onPostExecute(Cursor cursor) {
         	if (cursor != null) {
+        		Log.d(TAG, "cursor rows: " + cursor.getCount());
         		mAdapter.swapCursor(cursor);
         		mAdapter.notifyDataSetChanged();
         	} else {
+        		Log.d(TAG, "cursor is null");
         		Toast toast = Toast.makeText(parent, parent.getString(R.string.timeout_message), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();

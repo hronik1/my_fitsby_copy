@@ -94,7 +94,6 @@
 		        android:background="@drawable/public_leagues_top_words"
 	            android:text="@string/league_join_duration_header_text" />
 	    </LinearLayout>
-	    
 	    <ListView
 	        android:id="@+id/league_join_list"
 	        android:layout_below="@+id/league_join_list_header" 

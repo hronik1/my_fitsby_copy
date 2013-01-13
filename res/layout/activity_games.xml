@@ -226,12 +226,24 @@
 	        android:textSize="10sp"
 	        android:textStyle="bold" />
 	   
-	    <ListView
-	        android:id="@+id/games_leader_list"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/games_leader_prompt"
-        	android:background="@color/light_white"/>
+	     <com.handmark.pulltorefresh.library.PullToRefreshListView
+	         android:id="@+id/games_leader_list"
+	         android:layout_width="fill_parent"
+	         android:layout_height="fill_parent"
+	         android:layout_below="@+id/games_leader_prompt"
+	         android:background="@color/light_white"
+	         android:fadingEdge="none"
+	         android:fastScrollEnabled="false"
+	         android:footerDividersEnabled="false"
+	         android:headerDividersEnabled="false"
+	         android:smoothScrollbar="true" />
+
+<!-- 	    <ListView -->
+<!-- 	        android:id="@+id/games_leader_list" -->
+<!-- 	        android:layout_width="fill_parent" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:layout_below="@+id/games_leader_prompt" -->
+<!--         	android:background="@color/light_white"/> -->
 
         <TextView
 	        android:id="@+id/games_no_games_prompt"

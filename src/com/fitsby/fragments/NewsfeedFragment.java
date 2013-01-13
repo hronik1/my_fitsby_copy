@@ -302,6 +302,7 @@ public class NewsfeedFragment extends SherlockFragment {
         		toast.show();
         	} else {
         		//TODO switch to next page
+        		spinnerData.clear();
         		spinnerData.addAll(response.getGames());
         		spinnerDataAdapter.notifyDataSetChanged();
         		//new CursorDataAsyncTask().execute();
@@ -330,8 +331,8 @@ public class NewsfeedFragment extends SherlockFragment {
 		protected void onPostExecute(Cursor cursor) {
 			mProgressDialog.dismiss();
         	if (cursor != null) {
-        	mAdapter.swapCursor(cursor);
-        	mAdapter.notifyDataSetChanged();
+        		mAdapter.swapCursor(cursor);
+        		mAdapter.notifyDataSetChanged();
         	} else {
         		Toast toast = Toast.makeText(parent, parent.getString(R.string.timeout_message), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
