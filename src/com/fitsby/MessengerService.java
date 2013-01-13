@@ -3,7 +3,10 @@ package com.fitsby;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +15,14 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
 public class MessengerService extends Service {
 
 	private final static String TAG = "MessengerService";
+	private final int NOTIFICATION_ID = 1;
 	
 	private NotificationManager mNotificationManager;
 	private static Messenger mClient;
@@ -40,7 +46,7 @@ public class MessengerService extends Service {
     /**
      * Handler of incoming messages from clients.
      */
-    static class IncomingHandler extends Handler {
+    private class IncomingHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -55,9 +61,11 @@ public class MessengerService extends Service {
                 	break;
                 case MSG_STOP_TIMER:
                 	stopTimer();
+                	stopForeground(true);
                 	break;
                 case MSG_SET_GYM:
                 	setGym(msg);
+                	createForegroundNotification();
                 	break;
                 default:
                     super.handleMessage(msg);
@@ -75,7 +83,7 @@ public class MessengerService extends Service {
     
     @Override
     public void onCreate() {
-       // mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     }
     
     /**
@@ -87,7 +95,7 @@ public class MessengerService extends Service {
 	}
 
 	
-	static private void registerClient(Message message) {
+	private void registerClient(Message message) {
 		mClient = message.replyTo;
 		try {
 			Bundle data = new Bundle();
@@ -104,7 +112,7 @@ public class MessengerService extends Service {
 	/**
 	 * starts the timer sending messages to the client
 	 */
-	static private void startTimer() {
+	private void startTimer() {
 		Log.d(TAG, "startTimer");
        	minutes = 0;
     	seconds = 0;
@@ -126,6 +134,24 @@ public class MessengerService extends Service {
             			mClient = null;
             		}
             	}
+            	String minutesText = (minutes < 10 ? "0" + minutes : minutes + "");
+            	String secondsText = (seconds < 10 ? "0" + seconds : seconds + "");
+        	    Intent intent = new Intent(MessengerService.this, LoggedinActivity.class);
+        	    PendingIntent pendingIntent = PendingIntent.getActivity(MessengerService.this, 1, intent, 0);
+        	    // Set the Notification UI parameters
+        	    Notification notification =  new NotificationCompat.Builder(getApplicationContext())
+                .setContentTitle("Check in at " + gym) 
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentIntent(pendingIntent)
+                .setContentText(minutesText + " : " + secondsText)
+                .build();
+
+        	    // Set the Notification as ongoing
+        	    notification.flags = notification.flags |
+        	                         Notification.FLAG_ONGOING_EVENT;
+        	    mNotificationManager.notify(
+        	            NOTIFICATION_ID,
+        	            notification);
     		}
     	}, 0, 1000);
 	}
@@ -133,7 +159,7 @@ public class MessengerService extends Service {
 	/**
 	 * stops the timer
 	 */
-	static private void stopTimer() {
+	private void stopTimer() {
 		Log.d(TAG, "stopTimer");
 		if (mTimer != null) {
 			mTimer.cancel();
@@ -153,7 +179,7 @@ public class MessengerService extends Service {
 	 * sets the gym name
 	 * @param message
 	 */
-	static private void setGym(Message message) {
+	private void setGym(Message message) {
 		Bundle data = message.getData();
 		gym = data.getString(GYM_NAME_KEY);
 		if (gym != null)
@@ -162,5 +188,29 @@ public class MessengerService extends Service {
 			Log.i(TAG, "gym is null");
 
 		
+	}
+	
+	/**
+	 * creates the notification for the placing in the foreground
+	 */
+	private void createForegroundNotification() {
+	    // Create an Intent that will open the main Activity
+	    // if the notification is clicked.
+	    Intent intent = new Intent(this, LoggedinActivity.class);
+	    PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, 0);
+
+	    // Set the Notification UI parameters
+	    Notification notification =  new NotificationCompat.Builder(this)
+        .setContentTitle("Check in at " + gym) 
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentIntent(pendingIntent)
+        .build();
+
+	    // Set the Notification as ongoing
+	    notification.flags = notification.flags |
+	                         Notification.FLAG_ONGOING_EVENT;
+
+	    // Move the Service to the Foreground
+	    startForeground(NOTIFICATION_ID, notification);
 	}
 }
