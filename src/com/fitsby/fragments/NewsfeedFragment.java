@@ -49,12 +49,19 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.State;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
 public class NewsfeedFragment extends SherlockFragment {
 
 	private static final String TAG = "NewsfeedActivity";
-
+	
+	private boolean refreshFinished = true;
 	private Spinner gamesSpinner;
-	private ListView newsfeedLV;
+//	private ListView newsfeedLV;
+	private PullToRefreshListView newsfeedLV;
 	private EditText commentET;
 	private Button submitButton;
 	private ImageView mImageView;
@@ -90,7 +97,7 @@ public class NewsfeedFragment extends SherlockFragment {
         initializeSpinner(viewer);
         initializeImageView(viewer);
 
-        new SpinnerDataAsyncTask().execute();
+//        new SpinnerDataAsyncTask().execute();
         
 	    return viewer;
 	}
@@ -106,8 +113,13 @@ public class NewsfeedFragment extends SherlockFragment {
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		user = mApplicationUser.getUser();
-    
-//		new SpinnerDataAsyncTask().execute();
+
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+        new SpinnerDataAsyncTask().execute();
 	}
 	
 	/**
@@ -157,7 +169,7 @@ public class NewsfeedFragment extends SherlockFragment {
 	 * initialize the listview
 	 */
 	private void initializeListView(View viewer) {
-		newsfeedLV = (ListView)viewer.findViewById(R.id.newsfeed_list_view);
+		newsfeedLV = (PullToRefreshListView)viewer.findViewById(R.id.newsfeed_list_view);
 		newsfeedLV.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -170,6 +182,19 @@ public class NewsfeedFragment extends SherlockFragment {
     			NewsfeedCursorLoader.FROM_ARGS, toArgs, 0);
     	mAdapter.setViewBinder(new MyViewBinder());
     	newsfeedLV.setAdapter(mAdapter);
+    	
+    	newsfeedLV.setOnPullEventListener(new PullToRefreshBase.OnPullEventListener<ListView>() {
+
+			@Override
+			public void onPullEvent(PullToRefreshBase<ListView> refreshView,
+					State state, Mode direction) {
+				if (refreshFinished) {
+					new SpinnerDataAsyncTask().execute();
+					refreshFinished = false;
+				}
+			}
+    		
+    	});
 	}
 	
 	/**
@@ -331,6 +356,7 @@ public class NewsfeedFragment extends SherlockFragment {
         protected void onPostExecute(Bitmap response) {
         	if (response != null)
         		mImageView.setImageBitmap(response);
+        	refreshFinished = true;
         }
     }
     

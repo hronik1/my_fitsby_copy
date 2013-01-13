@@ -57,13 +57,26 @@
         android:textSize="12sp" >
     </Button>
     
-    <ListView
-        android:id="@+id/newsfeed_list_view"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/newsfeed_button_submit" 
-        android:layout_alignParentBottom="true"/>
+     <com.handmark.pulltorefresh.library.PullToRefreshListView 
+         android:id="@+id/newsfeed_list_view"
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content" 
+         android:layout_alignParentBottom="true"
+         android:layout_below="@+id/newsfeed_button_submit"
+         android:layout_marginBottom="10dp"
+         android:layout_marginTop="8dp"
+         android:fadingEdge="none" 
+         android:fastScrollEnabled="false" 
+         android:footerDividersEnabled="false" 
+         android:headerDividersEnabled="false"
+         android:smoothScrollbar="true"/>
+<!--     <ListView -->
+<!--         android:id="@+id/newsfeed_list_view" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_marginBottom="10dp" -->
+<!--         android:layout_marginTop="8dp" -->
+<!--         android:layout_below="@+id/newsfeed_button_submit"  -->
+<!--         android:layout_alignParentBottom="true"/> -->
     
 </RelativeLayout>
