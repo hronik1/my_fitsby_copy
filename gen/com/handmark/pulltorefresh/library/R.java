@@ -20,15 +20,15 @@ public final class R {
 		public static final int scrollview = 0x7f050010;
 		public static final int pullFromEnd = 0x7f050007;
 		public static final int pull_to_refresh_image = 0x7f05014c;
-		public static final int fl_inner = 0x7f05014b;
 		public static final int pull_to_refresh_sub_text = 0x7f05014f;
-		public static final int disabled = 0x7f050005;
+		public static final int fl_inner = 0x7f05014b;
 		public static final int flip = 0x7f05000d;
+		public static final int disabled = 0x7f050005;
 		public static final int manualOnly = 0x7f050009;
 	}
 	public static final class anim {
-		public static final int slide_out_to_bottom = 0x7f040002;
 		public static final int slide_out_to_top = 0x7f040003;
+		public static final int slide_out_to_bottom = 0x7f040002;
 		public static final int slide_in_from_bottom = 0x7f040000;
 		public static final int slide_in_from_top = 0x7f040001;
 	}
@@ -41,8 +41,8 @@ public final class R {
 		public static final int pull_to_refresh_from_bottom_release_label = 0x7f0b0004;
 	}
 	public static final class layout {
-		public static final int pull_to_refresh_header_horizontal = 0x7f03003e;
 		public static final int pull_to_refresh_header_vertical = 0x7f03003f;
+		public static final int pull_to_refresh_header_horizontal = 0x7f03003e;
 	}
 	public static final class styleable {
 		public static final int PullToRefresh_ptrDrawableStart = 7;
@@ -68,9 +68,9 @@ public final class R {
 	}
 	public static final class drawable {
 		public static final int indicator_bg_top = 0x7f0200b2;
+		public static final int indicator_bg_bottom = 0x7f0200b1;
 		public static final int default_ptr_flip = 0x7f0200a3;
 		public static final int indicator_arrow = 0x7f0200b0;
-		public static final int indicator_bg_bottom = 0x7f0200b1;
 		public static final int default_ptr_rotate = 0x7f0200a4;
 	}
 	public static final class attr {
