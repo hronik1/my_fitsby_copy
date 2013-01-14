@@ -38,6 +38,9 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 		        .setSmallIcon(R.drawable.ic_launcher)
 		        .setContentTitle("Fitsby update");
 		
+		Notification notification = mBuilder.build();
+		notification.defaults |= Notification.DEFAULT_VIBRATE;
+
 		Bundle bundle = intent.getExtras();
 		Set<String> keySet = bundle.keySet();
 		String content = "";
@@ -49,7 +52,7 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 		//TODO maybe add intent
 		NotificationManager mNotificationManager =
 			    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotificationManager.notify(100, mBuilder.build());
+		mNotificationManager.notify(100, notification);
 		//TODO maybe switch up id for different purposes
 		
 	}
