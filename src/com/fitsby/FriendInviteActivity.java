@@ -77,7 +77,7 @@ import twitter4j.auth.RequestToken;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class FriendInviteActivity extends Activity {
+public class FriendInviteActivity extends KiipFragmentActivity {
 
 	private final static String TAG = "FriendInviteActivity";
 	private final static int PICK_CONTACT_REQUEST = 2;

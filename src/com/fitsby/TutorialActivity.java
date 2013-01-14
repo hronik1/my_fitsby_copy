@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TutorialActivity extends FragmentActivity {
+public class TutorialActivity extends KiipFragmentActivity {
 
     TutorialPagerAdapter mTutorialPagerAdapter;
     ViewPager mViewPager;

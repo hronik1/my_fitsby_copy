@@ -38,7 +38,7 @@ import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
 
-public class LeagueCreateActivity extends Activity {
+public class LeagueCreateActivity extends KiipFragmentActivity {
 	
 	private final static String TAG = "LeagueCreateActivity";
 	

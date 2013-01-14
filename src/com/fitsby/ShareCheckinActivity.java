@@ -44,7 +44,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ShareCheckinActivity extends Activity {
+public class ShareCheckinActivity extends KiipFragmentActivity {
 
 	private final static String TAG = "ShareCheckinActivity";
 	private final static String GYM_KEY = "gymKey";

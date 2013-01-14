@@ -3,6 +3,8 @@ package com.fitsby.fragments;
 import java.util.List;
 import java.util.Vector;
 
+import me.kiip.sdk.Kiip;
+import me.kiip.sdk.Poptart;
 import responses.AddPlaceResponse;
 import responses.PlacesResponse;
 import responses.StatusResponse;
@@ -17,6 +19,7 @@ import bundlekeys.LeagueDetailBundleKeys;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.fitsby.FirstTimeCheckinActivity;
+import com.fitsby.KiipSherlockFragmentActivity;
 import com.fitsby.LeagueCreateActivity;
 import com.fitsby.LoggedinActivity;
 import com.fitsby.MessengerService;
@@ -74,7 +77,7 @@ public class CheckinFragment extends SherlockFragment {
 	private final static int UPDATE_TIME_MILLIS = 1000; //one second
 	private final static int DEFAULT_PLACES_RADIUS = 500; //200 meters
 	private final static int MIN_CHECKIN_TIME = 30;
-	private static Activity parent;
+	private static KiipSherlockFragmentActivity parent;
 	
 	private static TextView checkinLocationTV;
 	private static TextView minutesTV;
@@ -161,7 +164,7 @@ public class CheckinFragment extends SherlockFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		parent = activity;
+		parent = (KiipSherlockFragmentActivity)activity;
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
@@ -794,6 +797,19 @@ public class CheckinFragment extends SherlockFragment {
 				}
         		checkinLocationTV.setText("You are currently not checked in at a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
+        		Kiip.getInstance().saveMoment(ApplicationUser.MY_MOMENT_ID, new Kiip.Callback() {
+        			@Override
+        			public void onFinished(Kiip kiip, Poptart reward) {
+        				parent.onPoptart(reward);
+        			}
+
+        			@Override
+        			public void onFailed(Kiip kiip, Exception exception) {
+        				// handle failure
+        			}
+        		});
+
+
         		if (mLocationManager != null && mLocationListener != null) {
         			mLocationManager.removeUpdates(mLocationListener);
         			new NotificationAsyncTask().execute(mUser.getID());

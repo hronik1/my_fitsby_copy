@@ -45,7 +45,7 @@ import android.widget.SearchView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-public class LoggedinActivity extends SherlockFragmentActivity {
+public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	private static final String[] CONTENT = new String[] { "GAMES", "NEWSFEED", "CHECK IN"};
 	private static final String TAG = "LoggedinActivity";
 	

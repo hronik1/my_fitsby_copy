@@ -36,7 +36,7 @@ import constants.FlurryConstants;
 import responses.StatusResponse;
 import responses.UserResponse;
 
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends KiipFragmentActivity {
 
 	private final static String TAG = "MainActivity";
 	

@@ -49,7 +49,7 @@ import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
 
-public class LeagueJoinDetailActivity extends Activity {
+public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 
 	private final static String TAG = "LeagueJoinDetailActivity";
 	

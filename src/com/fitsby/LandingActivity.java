@@ -20,7 +20,7 @@ import com.google.android.gcm.GCMRegistrar;
 import constants.FlurryConstants;
 import constants.TutorialsConstants;
 
-public class LandingActivity extends Activity {
+public class LandingActivity extends KiipFragmentActivity {
 
 	private final static String TAG = "LandingActivity";
 	

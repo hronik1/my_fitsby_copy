@@ -9,7 +9,7 @@ import android.app.Activity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 
-public class SettingsActivity extends SherlockFragmentActivity {
+public class SettingsActivity extends KiipSherlockFragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
