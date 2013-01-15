@@ -16,7 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class HelpActivity extends Activity {
+public class HelpActivity extends KiipFragmentActivity {
 
 	private final static String TAG = "HelpActivity";
 	

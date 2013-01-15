@@ -1,5 +1,7 @@
 package com.fitsby.applicationsubclass;
 
+import me.kiip.sdk.Kiip;
+
 import com.fitsby.LoggedinActivity;
 
 import constants.RememberMeConstants;
@@ -18,6 +20,9 @@ public class ApplicationUser extends Application {
 	private static final String PREF_KEY_FIRST_NAME = "prefKeyFirstName";
 	private static final String PREF_KEY_LAST_NAME = "prefKeyLastName";
 	private static final String PREF_KEY_EMAIL = "prefKeyEmail";
+	private static final String MY_APP_KEY = "38c7edc90b99cfbd0880160ce03a9af2";
+	private static final String MY_APP_SECRET = "733d6f4d3738825840d81d7ed0854740";
+	public static final String MY_MOMENT_ID = "checkin_moment";
 	public static final int DEFAULT_ID = -1;
 	
 	private User mUser;
@@ -29,6 +34,8 @@ public class ApplicationUser extends Application {
 		super.onCreate();
 		mSharedPreferences = getSharedPreferences(PREF_KEY_USER,MODE_PRIVATE);
 		SingletonContext.initializeContext(this);
+	    Kiip kiip = Kiip.init(this, MY_APP_KEY, MY_APP_SECRET);
+	    Kiip.setInstance(kiip);
 	}
 	
 	/**

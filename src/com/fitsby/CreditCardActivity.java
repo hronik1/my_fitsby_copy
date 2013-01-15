@@ -42,7 +42,7 @@ import com.stripe.model.Token;
 
 import constants.FlurryConstants;
 
-public class CreditCardActivity extends Activity {
+public class CreditCardActivity extends KiipFragmentActivity {
 
 	private final static String TAG = "CreditCardActivity";
 	

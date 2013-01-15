@@ -36,7 +36,7 @@ import com.google.android.gcm.GCMRegistrar;
 import constants.FlurryConstants;
 import constants.RememberMeConstants;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends KiipFragmentActivity {
 
 	private static final String TAG = "LoginActivity";
 	

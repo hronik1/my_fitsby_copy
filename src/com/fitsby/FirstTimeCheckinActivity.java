@@ -20,7 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class FirstTimeCheckinActivity extends FragmentActivity {
+public class FirstTimeCheckinActivity extends KiipFragmentActivity {
 
     TutorialPagerAdapter mTutorialPagerAdapter;
     ViewPager mViewPager;

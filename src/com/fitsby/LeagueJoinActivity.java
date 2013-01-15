@@ -42,7 +42,7 @@ import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
 
-public class LeagueJoinActivity extends FragmentActivity 
+public class LeagueJoinActivity extends KiipFragmentActivity 
 	implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
 	private final static String TAG = "LeagueJoinActivity";
