@@ -77,7 +77,7 @@ public class CheckinFragment extends SherlockFragment {
 	
 	private final static long UPDATE_TIME_MILLIS = 1000; //one second
 	private final static float UPDATE_MIN_DISTANCE = 0;
-	private final static int DEFAULT_PLACES_RADIUS = 500; //200 meters
+	private final static int DEFAULT_PLACES_RADIUS = 700; //200 meters
 	private final static int MIN_CHECKIN_TIME = 30;
 	private static KiipSherlockFragmentActivity parent;
 	
