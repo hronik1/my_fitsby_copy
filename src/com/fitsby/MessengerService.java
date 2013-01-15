@@ -140,7 +140,7 @@ public class MessengerService extends Service {
         	    PendingIntent pendingIntent = PendingIntent.getActivity(MessengerService.this, 1, intent, 0);
         	    // Set the Notification UI parameters
         	    Notification notification =  new NotificationCompat.Builder(getApplicationContext())
-                .setContentTitle("Check in at " + gym) 
+                .setContentTitle("Checked in at " + gym) 
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .setContentText(minutesText + " : " + secondsText)
