@@ -97,7 +97,7 @@ public class NewsfeedFragment extends SherlockFragment {
         initializeSpinner(viewer);
         initializeImageView(viewer);
 
-//        new SpinnerDataAsyncTask().execute();
+        new SpinnerDataAsyncTask().execute();
         
 	    return viewer;
 	}
@@ -119,7 +119,7 @@ public class NewsfeedFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-        new SpinnerDataAsyncTask().execute();
+//        new SpinnerDataAsyncTask().execute();
 	}
 	
 	/**

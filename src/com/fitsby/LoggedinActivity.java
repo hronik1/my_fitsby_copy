@@ -87,6 +87,7 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
         FragmentPagerAdapter adapter = new LoggedinFragmentAdapter(getSupportFragmentManager());
 
         ViewPager pager = (ViewPager)findViewById(R.id.loggedin_pager);
+        pager.setOffscreenPageLimit(CONTENT.length);
         pager.setAdapter(adapter);
 
         TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.loggedin_indicator);
