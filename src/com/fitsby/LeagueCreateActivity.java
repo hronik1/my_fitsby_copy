@@ -6,6 +6,7 @@ import servercommunication.LeagueCommunication;
 
 
 import bundlekeys.CreditCardBundleKeys;
+import bundlekeys.LeagueDetailBundleKeys;
 import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
 import dbhandlers.LeagueTableHandler;
@@ -380,8 +381,8 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
         	mProgressDialog.dismiss();
 
             	if (response.wasSuccessful()) {
-            		Intent intent = new Intent(LeagueCreateActivity.this, LoggedinActivity.class);
-            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
+            		Intent intent = new Intent(LeagueCreateActivity.this, FriendInviteActivity.class);
+            		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
             		startActivity(intent);
 
             	} else if (response.getError() != null && !response.getError().equals("")) {
