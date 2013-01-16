@@ -47,6 +47,8 @@ import android.widget.Toast;
 
 public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	private static final String[] CONTENT = new String[] { "GAMES", "NEWSFEED", "CHECK IN"};
+	public static final int CHECK_IN_POSITION = 2;
+	public static final String POSITION_KEY = "positionKey";
 	private static final String TAG = "LoggedinActivity";
 	
 	private SearchView searchView;
@@ -61,6 +63,11 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
 		//setTheme(SampleList.THEME); //Used for theme switching in samples
 		super.onCreate(savedInstanceState);
 		mUser = ((ApplicationUser)getApplicationContext()).getUser();
+		if (mUser == null) {
+			// if user gets alert when logged out send them to the landing activity
+			Intent intent = new Intent(this, LandingActivity.class);
+			startActivity(intent);
+		}
 		Log.i(TAG, "onCreate");
 		
 		setContentView(R.layout.activity_loggedin);
@@ -89,9 +96,14 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
         ViewPager pager = (ViewPager)findViewById(R.id.loggedin_pager);
         pager.setOffscreenPageLimit(CONTENT.length);
         pager.setAdapter(adapter);
+        int position = getIntent().getIntExtra(POSITION_KEY, 0);
+        Log.i(TAG, position + "");
+        
+        
 
         TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.loggedin_indicator);
         indicator.setViewPager(pager);
+        pager.setCurrentItem(position);
 	}
 	
     @Override

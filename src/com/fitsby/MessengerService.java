@@ -137,6 +137,8 @@ public class MessengerService extends Service {
             	String minutesText = (minutes < 10 ? "0" + minutes : minutes + "");
             	String secondsText = (seconds < 10 ? "0" + seconds : seconds + "");
         	    Intent intent = new Intent(MessengerService.this, LoggedinActivity.class);
+        	    intent.putExtra(LoggedinActivity.POSITION_KEY,
+        	    		LoggedinActivity.CHECK_IN_POSITION);
         	    PendingIntent pendingIntent = PendingIntent.getActivity(MessengerService.this, 1, intent, 0);
         	    // Set the Notification UI parameters
         	    Notification notification =  new NotificationCompat.Builder(getApplicationContext())
@@ -197,6 +199,9 @@ public class MessengerService extends Service {
 	    // Create an Intent that will open the main Activity
 	    // if the notification is clicked.
 	    Intent intent = new Intent(this, LoggedinActivity.class);
+	    intent.putExtra(LoggedinActivity.POSITION_KEY,
+	    		LoggedinActivity.CHECK_IN_POSITION);
+	    
 	    PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, 0);
 
 	    // Set the Notification UI parameters
