@@ -527,7 +527,7 @@ public class CheckinFragment extends SherlockFragment {
 	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 	    	        		if (mLocationManager != null && mLocationListener != null) {
 	    	        			mLocationManager.removeUpdates(mLocationListener);
-	    	        			new NotificationAsyncTask().execute(mUser.getID());
+//	    	        			new NotificationAsyncTask().execute(mUser.getID());
 	    	        		}
 	    				}
 	    			})
