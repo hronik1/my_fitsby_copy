@@ -38,16 +38,6 @@
             android:paddingBottom="2.5dp"                  
             android:src="@drawable/lock" />
 
-        <TextView
-            android:id="@+id/credit_card_number_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/lock_image"
-            android:layout_toRightOf="@+id/lock_image"
-            android:text="@string/credit_card_number_text"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
         <EditText
             android:id="@+id/credit_card_et_card_number"
             android:layout_width="wrap_content"
@@ -61,13 +51,154 @@
             android:hint="@string/credit_card_et_card_number_hint"
             android:maxLength="19"
             android:inputType="number" >
+
             <requestFocus />
         </EditText>
 
-        
+        <TextView
+            android:id="@+id/credit_card_expiration_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/credit_card_et_expire_year"
+            android:layout_below="@+id/credit_card_et_card_number"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/credit_card_expiration_text"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/credit_card_et_expire_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/credit_card_expiration_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/white_textbox"
+            android:hint="@string/credit_card_et_expire_month_hint"
+            android:digits="1234567890"            
+            android:maxLength="2"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/credit_card_et_expire_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/credit_card_et_expire_month"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/credit_card_et_expire_month"
+            android:background="@drawable/white_textbox"
+            android:hint="@string/credit_card_et_expire_year_hint"
+            android:digits="1234567890"            
+            android:maxLength="4"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/credit_card_cvc_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/credit_card_et_expire_year"
+            android:layout_alignRight="@+id/credit_card_et_card_cvc"
+            android:layout_alignLeft="@+id/credit_card_et_card_cvc"
+            android:text="@string/credit_card_cvc_text"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/credit_card_et_card_cvc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/credit_card_et_expire_year"
+            android:layout_alignBottom="@+id/credit_card_et_expire_year"
+            android:layout_alignRight="@+id/credit_card_et_card_number"
+            android:background="@drawable/white_textbox"
+            android:hint="@string/credit_card_et_card_cvc_hint"
+            android:digits="1234567890"            
+            android:maxLength="3"
+            android:inputType="number" />
 
 
+        <TextView
+            android:id="@+id/horizontal_div"
+            android:layout_below="@+id/credit_card_et_expire_month"
+			android:layout_width="fill_parent"
+			android:layout_marginTop="20dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_height="2dip"
+			android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/credit_card_tv_wager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/horizontal_div"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"            
+            android:text="@string/credit_card_tv_wager_text"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
         
+        <TextView
+            android:id="@+id/credit_card_wager_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/credit_card_tv_wager"
+            android:layout_alignBottom="@+id/credit_card_tv_wager"
+            android:layout_toLeftOf="@+id/credit_card_tv_wager"
+            android:text="@string/credit_card_wager_text"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginRight="5dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/thirty_cents_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/credit_card_tv_wager"
+            android:layout_below="@+id/credit_card_tv_wager"
+            android:text="@string/thirty_cents_charge_text"
+            android:textSize="12sp"
+            android:textColor="@color/white" />
+        
+        <Button
+            android:id="@+id/credit_card_button_submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/thirty_cents_charge"
+            android:background="@drawable/custom_login_button"
+            android:text="@string/credit_card_button_submit_text"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/secure_payment_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/credit_card_button_submit"
+            android:layout_below="@+id/credit_card_button_submit"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/secure_payment_logo" />
+
+        <TextView
+            android:id="@+id/credit_card_number_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/lock_image"
+            android:layout_toRightOf="@+id/lock_image"
+            android:text="@string/credit_card_number_text"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </RelativeLayout>
+
 </ScrollView>
