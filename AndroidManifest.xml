@@ -159,7 +159,8 @@
             android:value="@string/app_id" />
 
         <activity
-            android:name="com.fitsby.ShareCheckinActivity">
+            android:name="com.fitsby.ShareCheckinActivity"
+            android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

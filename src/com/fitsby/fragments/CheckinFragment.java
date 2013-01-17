@@ -502,7 +502,9 @@ public class CheckinFragment extends SherlockFragment {
 	 * checks out user
 	 */
 	public void checkout() {
-
+		Intent intent = new Intent(parent, ShareCheckinActivity.class);
+		intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
+		startActivity(intent);
 		//TODO redo checkout
 		if (timeSeconds == 0 && timeMinutes == 0) {
 			Toast toast = Toast.makeText(parent, "You can't check out because you never checked in!", Toast.LENGTH_LONG);
