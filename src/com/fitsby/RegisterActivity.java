@@ -157,9 +157,9 @@ public class RegisterActivity extends KiipFragmentActivity {
 
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage("Please confirm that " + emailET.getText().toString() +
-    			" is your email.")
+    			" is your email")
     			.setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					String firstName = firstNameET.getText().toString();
     					String lastName = lastNameET.getText().toString();
@@ -188,7 +188,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     					}
     				}
     			})
-    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
@@ -241,7 +241,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     	}
 
     	if (!comm.isInternetConnected()) {
-    		Toast toast = Toast.makeText(RegisterActivity.this, "There doesn't appear to be an internet connection. Please try again later.",
+    		Toast toast = Toast.makeText(RegisterActivity.this, "Low or no internet connectiviy. Please try again later",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
@@ -326,7 +326,7 @@ public class RegisterActivity extends KiipFragmentActivity {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, there appears to be no internet connection at the moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Limited or no internet connectivity", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}  else if (response.getError() != null && !response.getError().equals("")) {

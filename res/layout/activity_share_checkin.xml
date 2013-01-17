@@ -55,6 +55,7 @@
 		android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp"	
 		android:textStyle="bold"
+        android:textSize="16sp"		
         android:layout_marginLeft="10dp"		
 		android:text="Facebook:" />
 
@@ -91,7 +92,8 @@
         android:layout_alignLeft="@+id/checkin_share_authButton"
         android:layout_below="@+id/checkin_share_authButton"
         android:layout_marginTop="10dp"	
-		android:textStyle="bold"	        
+		android:textStyle="bold"	
+        android:textSize="16sp"		        
         android:text="Twitter:" />
 
     <Button
@@ -119,9 +121,9 @@
         android:layout_alignLeft="@+id/checkin_share_twitter_login_button"
         android:layout_alignRight="@+id/twitter_text"
         android:layout_alignTop="@+id/checkin_share_twitter_login_button"
-        android:paddingRight="11dp"
+        android:paddingRight="7dp"
         android:paddingTop="9dp"
-        android:paddingLeft="2dp"
+        android:paddingLeft="4dp"
         android:paddingBottom="9dp"
         android:src="@drawable/twitter_bird_white" />
 

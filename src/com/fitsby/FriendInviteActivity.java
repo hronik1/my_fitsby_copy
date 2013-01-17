@@ -353,7 +353,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
 		    	
 			  	final EditText input = new EditText(FriendInviteActivity.this);
-			  	input.setText("I challenge you in a game of gym check-ins using Fitsby! " +
+			  	input.setText("I challenge you to a game of gym check-ins using Fitsby! " +
 			  			"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
 		    	builder.setView(input);
 		    	
@@ -466,8 +466,8 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
-            postParams.putString("caption", "An app that motivates you to go to the gym.");
-            postParams.putString("description", "Challenge your friends in a game of gym check-ins and win their money when they don't work out!");
+            postParams.putString("caption", "Stay motivated to hit the gym.");
+            postParams.putString("description", "Fitsby is an app where you challenge your friends in a game of gym check-ins and win their money when they don't work out!");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 
@@ -530,7 +530,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage("Are you sure that you would like to log out of Twitter?")
     			.setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     		    	    // Clear the shared preferences
     		    	    Editor e = mSharedPreferences.edit();
@@ -542,7 +542,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     		    	    twitterLoginButton.setText("Log In");
     				}
     			})
-    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
@@ -694,7 +694,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Getting league information...");
+                    "Getting game information...");
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
@@ -753,8 +753,8 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 
         		final EditText input = new EditText(FriendInviteActivity.this);
         		input.setHint("Challenge your friend");		  	
-        		input.setText("Hey, couch potato! I challenge you to a game of gym check-ins using Fitsby! " +
-        				"Download the free app at http://fitsby.com/, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
+        		input.setText("I challenge you to a game of gym check-ins using Fitsby! " +
+        				"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
         		builder.setView(input);
 
         		builder.setMessage("Edit personal message to your friend:")

@@ -270,7 +270,7 @@
                 android:layout_below="@+id/me_twitter"
                 android:textColor="@color/white"
                 android:text="@string/email_us"
-                android:textSize="14sp" 
+                android:textSize="12sp" 
                 android:layout_margin="10dp"/>
             
             <Button
