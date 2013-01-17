@@ -34,6 +34,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 import android.view.Gravity;
@@ -500,7 +501,12 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(ShareCheckinActivity.this, "",
-                    "Connecting to Twitter...");
+                    "Connecting to Twitter...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				LoginTwitterAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
 		@Override
@@ -525,7 +531,12 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(ShareCheckinActivity.this, "",
-                    "Checking if you are logged in to any social networks...");
+                    "Checking if you are logged in to any social networks...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				ParseTwitterLoginResponseAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
     	protected Void doInBackground(Integer... params) {

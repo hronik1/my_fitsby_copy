@@ -27,6 +27,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -339,7 +340,12 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Gathering game data...");
+                    "Gathering game data...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				GameInfoAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected PrivateLeagueResponse doInBackground(Integer... params) {
@@ -364,7 +370,12 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Gathering the game host's data...");
+                    "Gathering the game host's data...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				CreatorAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
@@ -386,7 +397,12 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Creating your game...");
+                    "Creating your game...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				JoinLeagueAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {

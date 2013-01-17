@@ -17,6 +17,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnCancelListener;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -315,7 +316,12 @@ public class LoginActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
-                    "Logging you in...");
+                    "Logging you in...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				LoginAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected UserResponse doInBackground(String... params) {
@@ -370,7 +376,12 @@ public class LoginActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
-                    "Sending you a link to reset your password...");
+                    "Sending you a link to reset your password...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				PasswordResetAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(String... params) {

@@ -19,10 +19,13 @@ import com.fitsby.R;
 import com.fitsby.applicationsubclass.ApplicationUser;
 
 
+
 import dbtables.Comment;
 import dbtables.User;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -240,7 +243,12 @@ public class NewsfeedFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			commentET.setText("");
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Submitting your comment...");
+                    "Submitting your comment...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				AddCommentAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(String... params) {
@@ -277,7 +285,12 @@ public class NewsfeedFragment extends SherlockFragment {
 		
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Getting your games...");
+                    "Getting your games...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				SpinnerDataAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected UsersGamesResponse doInBackground(String... params) {
@@ -320,7 +333,12 @@ public class NewsfeedFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Filling out your newsfeed...");
+                    "Filling out your newsfeed...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				CursorDataAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected Cursor doInBackground(String... params) {

@@ -35,6 +35,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -529,7 +530,12 @@ public class MeFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering your information..");
+                    "Gathering your information..", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				StatsAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatsResponse doInBackground(Integer... params) {
@@ -566,7 +572,12 @@ public class MeFragment extends SherlockFragment {
     private class ChangeEmailAsyncTask extends AsyncTask<String, Void, StatusResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Updating changes..");
+                    "Updating changes..", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				ChangeEmailAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(String... params) {
@@ -602,7 +613,12 @@ public class MeFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering your gravatar..");
+                    "Gathering your gravatar..", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				GravatarAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected Bitmap doInBackground(String... params) {
@@ -627,7 +643,12 @@ public class MeFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Checking you out of your games...");
+                    "Checking you out of your games...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				CheckoutAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {
@@ -674,7 +695,12 @@ public class MeFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Sending you a link to reset your password...");
+                    "Sending you a link to reset your password...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				PasswordResetAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(String... params) {

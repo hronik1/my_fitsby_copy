@@ -36,7 +36,9 @@ import dbtables.User;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.Bitmap;
@@ -306,7 +308,12 @@ public class GamesFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Finding your games...");
+                    "Finding your games...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				SpinnerDataAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected UsersGamesResponse doInBackground(String... params) {
@@ -382,7 +389,12 @@ public class GamesFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering game data...");
+                    "Gathering game data...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				GameInfoAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected PrivateLeagueResponse doInBackground(String... params) {
@@ -421,7 +433,12 @@ public class GamesFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering game data...");
+                    "Gathering game data...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				DaysRemainingAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected CountdownResponse doInBackground(String... params) {
@@ -484,7 +501,12 @@ public class GamesFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering game progress...");
+                    "Gathering game progress...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				ProgressAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected ProgressResponse doInBackground(String... params) {

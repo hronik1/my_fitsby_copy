@@ -28,6 +28,7 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.util.Log;
@@ -793,7 +794,12 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Connecting to Twitter...");
+                    "Connecting to Twitter...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				LoginTwitterAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
 		@Override
@@ -818,7 +824,12 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Checking if you are logged in to any social networks...");
+                    "Checking if you are logged in to any social networks...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				ParseTwitterLoginResponseAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
     	protected Void doInBackground(Integer... params) {

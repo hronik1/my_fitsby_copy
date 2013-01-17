@@ -1,8 +1,5 @@
 package com.fitsby;
 
-
-
-
 import dbhandlers.DatabaseHandler;
 import dbhandlers.UserTableHandler;
 import dbtables.User;
@@ -15,6 +12,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -314,7 +312,12 @@ public class RegisterActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(RegisterActivity.this, "",
-                    "Registering you...");
+                    "Registering you...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				RegisterAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected UserResponse doInBackground(String... params) {

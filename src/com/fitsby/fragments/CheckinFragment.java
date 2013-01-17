@@ -39,6 +39,7 @@ import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -501,6 +502,7 @@ public class CheckinFragment extends SherlockFragment {
 	 * checks out user
 	 */
 	public void checkout() {
+
 		//TODO redo checkout
 		if (timeSeconds == 0 && timeMinutes == 0) {
 			Toast toast = Toast.makeText(parent, "You can't check out because you never checked in!", Toast.LENGTH_LONG);
@@ -634,7 +636,12 @@ public class CheckinFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			gyms.clear();
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Finding nearby gyms...");
+                    "Finding nearby gyms...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				GooglePlacesAsyncTast.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected PlacesResponse doInBackground(String... params) {
@@ -674,7 +681,12 @@ public class CheckinFragment extends SherlockFragment {
 	private class GooglePlacesSearchAsyncTask extends AsyncTask<String, Void, PlacesResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Finding nearby gyms and rec centers...");
+                    "Finding nearby gyms and rec centers...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				GooglePlacesSearchAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected PlacesResponse doInBackground(String... params) {
@@ -714,7 +726,12 @@ public class CheckinFragment extends SherlockFragment {
 		
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Adding your gym...");
+                    "Adding your gym...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				GooglePlacesAddAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 
         protected ValidateGymResponse doInBackground(String... params) {
@@ -757,7 +774,12 @@ public class CheckinFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Checking you in to your games...");
+                    "Checking you in to your games...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				CheckinAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(String... params) {
@@ -807,7 +829,12 @@ public class CheckinFragment extends SherlockFragment {
     private class NotificationAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Checking you out of your games...");
+                    "Checking you out of your games...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				NotificationAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {
@@ -834,7 +861,12 @@ public class CheckinFragment extends SherlockFragment {
     	
     	protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Getting your location");
+                    "Getting your location", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				GetLocationAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected Location doInBackground(Void... params) {
@@ -868,7 +900,12 @@ public class CheckinFragment extends SherlockFragment {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(parent, "",
-                    "Checking you out of your games...");
+                    "Checking you out of your games...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				CheckoutAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(String... params) {

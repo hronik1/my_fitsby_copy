@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -367,7 +368,12 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LeagueCreateActivity.this, "",
-                    "Creating your game...");
+                    "Creating your game...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				CreateLeagueAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected LeagueCreateResponse doInBackground(String... params) {

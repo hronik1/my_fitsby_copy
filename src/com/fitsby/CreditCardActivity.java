@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -369,7 +370,12 @@ public class CreditCardActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
-                    "Submitting your card information for verification...");
+                    "Submitting your card information for verification...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				CreateLeagueAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected LeagueCreateResponse doInBackground(String... params) {
@@ -405,7 +411,12 @@ public class CreditCardActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
-                    "Submiting your card info for verification...");
+                    "Submiting your card info for verification...", true, true,
+                    new OnCancelListener() {
+            			public void onCancel(DialogInterface pd) {
+            				JoinLeagueAsyncTask.this.cancel(true);
+            			}
+            		});
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {
