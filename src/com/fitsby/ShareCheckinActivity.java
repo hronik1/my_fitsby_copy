@@ -280,7 +280,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	
 	  	final EditText input = new EditText(this);
 	  	input.setHint("Enter a message here");	  	
-	  	input.setText("I just had an awesome workout at " + mGymName + "! @Fitsby's motivating me to hit the gym! http://fitsby.com #gymmotivation");
+	  	input.setText("I just had an awesome workout at " + mGymName + "! @Fitsby's motivating me to hit the gym! fitsby.com #gymmotivation");
     	builder.setView(input);
     	
     	builder.setMessage("Share on Twitter:")
