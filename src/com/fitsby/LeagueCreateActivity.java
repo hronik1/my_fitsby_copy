@@ -346,7 +346,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     	
     	builder.setMessage("Are you sure you want to create this game?")
     			.setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Create", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
     		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), (takeAllRB.isChecked() ? 1 : 3)+"");

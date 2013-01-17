@@ -179,7 +179,7 @@ public class LoginActivity extends KiipFragmentActivity {
     		email = emailET.getText().toString();
 
     	if (!comm.isInternetConnected()) {
-    		Toast toast = Toast.makeText(LoginActivity.this, "You are not connected to the internet. Please try again later.",
+    		Toast toast = Toast.makeText(LoginActivity.this, "Limited or no internet connectivity. Please try again later",
     				Toast.LENGTH_LONG);
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
@@ -333,7 +333,7 @@ public class LoginActivity extends KiipFragmentActivity {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Limited or no internet connectivity", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else if (response.getError() != null && !response.getError().equals("")) {
@@ -376,7 +376,7 @@ public class LoginActivity extends KiipFragmentActivity {
     	
 		protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
-                    "Sending you a link to reset your password...", true, true,
+					"Sending you a link to set a new password...", true, true,
                     new OnCancelListener() {
             			public void onCancel(DialogInterface pd) {
             				PasswordResetAsyncTask.this.cancel(true);
@@ -393,7 +393,7 @@ public class LoginActivity extends KiipFragmentActivity {
         	mProgressDialog.dismiss();
         	
         	if (response == null ) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Low or no internet connectivity", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} 
@@ -406,7 +406,7 @@ public class LoginActivity extends KiipFragmentActivity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	} else {
-        		Toast toast = Toast.makeText(getApplicationContext(), "A link to change your password has just been sent to you", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "A link to set a new password has just been sent to you", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}

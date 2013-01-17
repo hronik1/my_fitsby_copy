@@ -152,9 +152,9 @@
             android:layout_alignLeft="@+id/invite_twitter_login_button"
             android:layout_alignRight="@+id/twitter_text"
             android:layout_alignTop="@+id/invite_twitter_login_button"
-            android:paddingRight="11dp"
+            android:paddingRight="7dp"
             android:paddingTop="9dp"
-            android:paddingLeft="2dp"
+            android:paddingLeft="4dp"
             android:paddingBottom="9dp"
             android:src="@drawable/twitter_bird_white" />
 

@@ -320,7 +320,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     	
     	builder.setMessage("Are you sure you want to join this game?")
     			.setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Join", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					new JoinLeagueAsyncTask().execute(mUser.getID(), leagueId);
     				}
@@ -423,7 +423,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         		} catch(Exception e) {
         		}
         	} else {
-        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "The game could not be joined at the moment.", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(LeagueJoinDetailActivity.this, "The game could not be joined at the moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}

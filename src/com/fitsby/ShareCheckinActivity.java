@@ -210,7 +210,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
 	}
 	
     /**
-     * callback for recieving data from starting an activity for a result
+     * callback for receiving data from starting an activity for a result
      */
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -408,8 +408,8 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
 
             Bundle postParams = new Bundle();
             postParams.putString("name", "Fitsby");
-            postParams.putString("caption", "An app that motivates you to go to the gym.");
-            postParams.putString("description", "I just had an awesome workout at " + mGymName + "! Fitsby is motivating me to hit the gym! Download the free app at http://fitsby.com.");
+            postParams.putString("caption", "Stay motivated to hit the gym.");
+            postParams.putString("description", "I just had an awesome workout at " + mGymName + "! Fitsby is motivating me to hit the gym! Download the free app at fitsby.com.");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 
@@ -469,7 +469,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage("Are you sure that you would like to log out of Twitter?")
     			.setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     		    	    // Clear the shared preferences
     		    	    Editor e = mSharedPreferences.edit();
@@ -481,7 +481,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     		    	    twitterLoginButton.setText("Log In");
     				}
     			})
-    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}

@@ -303,7 +303,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
 
         protected void onPostExecute(PrivateLeagueResponse response) {
         	if (response == null ) {
-        		Toast toast = Toast.makeText(getApplicationContext(), "You don't have a connection to the internet", Toast.LENGTH_LONG);
+        		Toast toast = Toast.makeText(getApplicationContext(), "Limited or no internet connectivity", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
         		toast.show();
         	}  else if (response.getError() != null && !response.getError().equals("")) {
