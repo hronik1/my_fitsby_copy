@@ -45,6 +45,7 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -74,8 +75,9 @@ public class CheckinFragment extends SherlockFragment {
 
 	private final static String TAG = "CheckinFragment";
 	
-	private final static int UPDATE_TIME_MILLIS = 1000; //one second
-	private final static int DEFAULT_PLACES_RADIUS = 500; //200 meters
+	private final static long UPDATE_TIME_MILLIS = 1000; //one second
+	private final static float UPDATE_MIN_DISTANCE = 0;
+	private final static int DEFAULT_PLACES_RADIUS = 700; //200 meters
 	private final static int MIN_CHECKIN_TIME = 30;
 	private static KiipSherlockFragmentActivity parent;
 	
@@ -265,36 +267,69 @@ public class CheckinFragment extends SherlockFragment {
 
 				public void onProviderDisabled(String provider) {}
 			};
-			List<String> matchingProviders = mLocationManager.getAllProviders();
-			Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
-			float bestAccuracy = Float.MAX_VALUE;
-			long bestTime = Long.MIN_VALUE;
-			long minTime = Long.MAX_VALUE;
-			for (String provider: matchingProviders) {
-			  Location location = mLocationManager.getLastKnownLocation(provider);
-			  if (location != null) {
-			    float accuracy = location.getAccuracy();
-			    long time = location.getTime();
-			        
-			    if ((time > minTime && accuracy < bestAccuracy)) {
-			      bestResult = location;
-			      bestAccuracy = accuracy;
-			      bestTime = time;
-			    }
-			    else if (time < minTime && 
-			             bestAccuracy == Float.MAX_VALUE && time > bestTime){
-			      bestResult = location;
-			      bestTime = time;
-			    }
-			  }
+			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+					UPDATE_TIME_MILLIS, UPDATE_MIN_DISTANCE, mLocationListener);
+			LocationProvider gpsProvider = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
+			Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if (location != null) {
+				latitude = location.getLatitude();
+				longitude = location.getLongitude();
+				new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
+						longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
+			} else {
+				new GetLocationAsyncTask(true);
 			}
-			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener); 
-			latitude = bestResult.getLatitude();
-			longitude = bestResult.getLongitude();
-			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
-					longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
+//			List<String> matchingProviders = mLocationManager.getAllProviders();
+//			Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
+//			float bestAccuracy = Float.MAX_VALUE;
+//			long bestTime = Long.MIN_VALUE;
+//			long minTime = Long.MAX_VALUE;
+//			for (String provider: matchingProviders) {
+//			  Location location = mLocationManager.getLastKnownLocation(provider);
+//			  if (location != null) {
+//			    float accuracy = location.getAccuracy();
+//			    long time = location.getTime();
+//			        
+//			    if ((time > minTime && accuracy < bestAccuracy)) {
+//			      bestResult = location;
+//			      bestAccuracy = accuracy;
+//			      bestTime = time;
+//			    }
+//			    else if (time < minTime && 
+//			             bestAccuracy == Float.MAX_VALUE && time > bestTime){
+//			      bestResult = location;
+//			      bestTime = time;
+//			    }
+//			  }
+//			}
+//			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, mLocationListener); 
+//			latitude = bestResult.getLatitude();
+//			longitude = bestResult.getLongitude();
+//			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
+//					longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
 
 		}
+	}
+	
+	/**
+	 * show the alertdialog for confirmation that user should checkout
+	 */
+	public void showCheckoutDialog() {
+		Log.d(TAG, "showCheckoutDialog");
+		
+	  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+    	builder.setMessage("Are you sure you want to check out?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					new CheckoutAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+    				}
+    			})
+    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
 	}
 	
     /**
@@ -492,7 +527,7 @@ public class CheckinFragment extends SherlockFragment {
 	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 	    	        		if (mLocationManager != null && mLocationListener != null) {
 	    	        			mLocationManager.removeUpdates(mLocationListener);
-	    	        			new NotificationAsyncTask().execute(mUser.getID());
+//	    	        			new NotificationAsyncTask().execute(mUser.getID());
 	    	        		}
 	    				}
 	    			})
@@ -504,6 +539,7 @@ public class CheckinFragment extends SherlockFragment {
 	    	return;
 
 		} else {
+			
 			if (mLocationManager == null)
 				mLocationManager = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
 			boolean gpsEnabled = mLocationManager
@@ -522,48 +558,68 @@ public class CheckinFragment extends SherlockFragment {
 
 						public void onProviderDisabled(String provider) {}
 					};
+//					mLocationListener = new LocationListener() {
+//						public void onLocationChanged(Location location) {
+//						}
+//
+//						public void onStatusChanged(String provider, int status, Bundle extras) {}
+//
+//						public void onProviderEnabled(String provider) {}
+//
+//						public void onProviderDisabled(String provider) {}
+//					};
 				}
-				List<String> matchingProviders = mLocationManager.getAllProviders();
-				Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
-				float bestAccuracy = Float.MAX_VALUE;
-				long bestTime = Long.MIN_VALUE;
-				long minTime = Long.MAX_VALUE;
-				for (String provider: matchingProviders) {
-				  Location location = mLocationManager.getLastKnownLocation(provider);
-				  if (location != null) {
-				    float accuracy = location.getAccuracy();
-				    long time = location.getTime();
-				        
-				    if ((time > minTime && accuracy < bestAccuracy)) {
-				      bestResult = location;
-				      bestAccuracy = accuracy;
-				      bestTime = time;
-				    }
-				    else if (time < minTime && 
-				             bestAccuracy == Float.MAX_VALUE && time > bestTime){
-				      bestResult = location;
-				      bestTime = time;
-				    }
-				  }
+				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+						UPDATE_TIME_MILLIS, UPDATE_MIN_DISTANCE, mLocationListener);				LocationProvider gpsProvider = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
+				Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				if (location != null) {
+					latitude = location.getLatitude();
+					longitude = location.getLongitude();
+					showCheckoutDialog();
+				} else {
+					new GetLocationAsyncTask(false);
 				}
-				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener); 
-				latitude = bestResult.getLatitude();
-				longitude = bestResult.getLongitude();
-				
-			  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-		    	builder.setMessage("Are you sure you want to check out?")
-		    			.setCancelable(false)
-		    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-		    				public void onClick(DialogInterface dialog, int id) {
-		    					new CheckoutAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
-		    				}
-		    			})
-		    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
-		    				public void onClick(DialogInterface dialog, int id) {
-		    					dialog.cancel();
-		    				}
-		    			}).show();
-		    	
+//				List<String> matchingProviders = mLocationManager.getAllProviders();
+//				Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
+//				float bestAccuracy = Float.MAX_VALUE;
+//				long bestTime = Long.MIN_VALUE;
+//				long minTime = Long.MAX_VALUE;
+//				for (String provider: matchingProviders) {
+//				  Location location = mLocationManager.getLastKnownLocation(provider);
+//				  if (location != null) {
+//				    float accuracy = location.getAccuracy();
+//				    long time = location.getTime();
+//				        
+//				    if ((time > minTime && accuracy < bestAccuracy)) {
+//				      bestResult = location;
+//				      bestAccuracy = accuracy;
+//				      bestTime = time;
+//				    }
+//				    else if (time < minTime && 
+//				             bestAccuracy == Float.MAX_VALUE && time > bestTime){
+//				      bestResult = location;
+//				      bestTime = time;
+//				    }
+//				  }
+//				}
+//				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener); 
+//				latitude = bestResult.getLatitude();
+//				longitude = bestResult.getLongitude();
+//				
+//			  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+//		    	builder.setMessage("Are you sure you want to check out?")
+//		    			.setCancelable(false)
+//		    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//		    				public void onClick(DialogInterface dialog, int id) {
+//		    					new CheckoutAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
+//		    				}
+//		    			})
+//		    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//		    				public void onClick(DialogInterface dialog, int id) {
+//		    					dialog.cancel();
+//		    				}
+//		    			}).show();
+//		    	
 
 			}
 		}
@@ -767,6 +823,42 @@ public class CheckinFragment extends SherlockFragment {
 //        	showPublishGymDialog();
         }
     }
+    
+    private class GetLocationAsyncTask extends AsyncTask<Void, Void, Location> {
+		
+    	private final boolean onCheckin;
+    	public GetLocationAsyncTask(boolean onCheckin) {
+    		super();
+    		this.onCheckin = onCheckin;
+    	}
+    	
+    	protected void onPreExecute() {
+            mProgressDialog = ProgressDialog.show(parent, "",
+                    "Getting your location");
+		}
+		
+        protected Location doInBackground(Void... params) {
+        	Location location = null;
+        	while ((location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER))
+        			== null) {
+        		//TODO think of a cleaner solution
+        	}
+        	return location;
+        }
+
+        protected void onPostExecute(Location response) {
+        	mProgressDialog.dismiss();
+			latitude = response.getLatitude();
+			longitude = response.getLongitude();
+			if (onCheckin) {
+				new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
+						longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
+			} else {
+				showCheckoutDialog();
+			}
+        }
+    }
+    
     /**
      * AsyncTask to Register user
      * @author brent

@@ -127,7 +127,7 @@ public class GamesFragment extends SherlockFragment {
 	    initializeListView(viewer);
 	    initializeButtons(viewer);
 	    
-//	    new SpinnerDataAsyncTask().execute();
+	    new SpinnerDataAsyncTask().execute();
 	    
 	    return viewer;
 	}
@@ -148,7 +148,7 @@ public class GamesFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-        new SpinnerDataAsyncTask().execute();
+//        new SpinnerDataAsyncTask().execute();
 	}
 	
 	/**
