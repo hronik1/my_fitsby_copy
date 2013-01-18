@@ -387,6 +387,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
         	mProgressDialog.dismiss();
 
             	if (response.wasSuccessful()) {
+            		Log.d(TAG, "create response: league id");
             		Intent intent = new Intent(LeagueCreateActivity.this, FriendInviteActivity.class);
             		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
             		startActivity(intent);

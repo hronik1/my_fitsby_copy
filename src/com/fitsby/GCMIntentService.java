@@ -51,6 +51,7 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 		Set<String> keySet = bundle.keySet();
 		String content = "";
 		for (String key: keySet) {
+			Log.i(TAG, key);
 			content += (" " + bundle.getString(key));
 		}
 		mBuilder.setContentText(content);
