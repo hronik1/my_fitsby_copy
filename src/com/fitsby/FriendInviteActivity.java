@@ -580,7 +580,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	
 	  	final EditText input = new EditText(this);
 	  	input.setHint("Enter status here");
-	  	input.setText("Can you beat me in a game of gym check-ins? Download @Fitsby & stay motivated to work out! http://fitsby.com #gymmotivation");	  	
+	  	input.setText("Can you beat me in a game of gym check-ins? Download @Fitsby & stay motivated to work out! fitsby.com #gymmotivation");	  	
     	builder.setView(input);
     	
     	builder.setMessage("Share on Twitter:")
