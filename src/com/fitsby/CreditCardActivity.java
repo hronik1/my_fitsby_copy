@@ -392,7 +392,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
 
             	if (response.wasSuccessful()) {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
-            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, response.getLeagueId());
+            		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, Integer.parseInt(response.getLeagueId()));
             		startActivity(intent);
 
             	} else if (response.getError() != null && !response.getError().equals("")) {
@@ -432,7 +432,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
         		try {
         			ApplicationUser appData = (ApplicationUser)getApplicationContext();
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
-            		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, appData.getLeagueId());
+            		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, appData.getLeagueId());
             		startActivity(intent);
         		} catch(Exception e) {
         		}
