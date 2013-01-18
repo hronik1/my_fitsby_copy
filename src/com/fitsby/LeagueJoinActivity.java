@@ -12,6 +12,7 @@ import loaders.PublicLeaguesCursorLoader;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.content.Loader;
 import android.database.Cursor;
@@ -319,6 +322,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
         		boolean isPrivate = (league.isPrivate() == 0 ? false : true);
         		gotoLeagueDetails(league.getId(), league.getPlayers(), league.getWager(),
         				league.getStakes(), isPrivate, league.getDuration(), league.getBitmap());
+ 
         	}
         }
     }

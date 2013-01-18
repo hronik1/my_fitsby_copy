@@ -74,6 +74,7 @@ public class PrivateLeagueResponse {
 			} catch (Exception e) {
 				error = "";
 			}
+			Log.i(TAG, email);
 			Bitmap bitmap = MyHttpClient.getBitmapFromURL(Gravatar.getGravatar(email));
 			League league = new League(id, wager, players, duration, stakes, bitmap, structure);
 			try {
