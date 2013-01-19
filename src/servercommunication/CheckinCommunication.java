@@ -76,13 +76,14 @@ public class CheckinCommunication {
 	 * @param id
 	 * @return
 	 */
-	public static StatusResponse checkout(int id, String latitude, String longitude) {
+	public static StatusResponse checkout(int id, String latitude, String longitude, String gymName) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
 			json.put("user_id", id);
 			json.put("latitude", latitude);
 			json.put("longitude", longitude);
+			json.put("gym_name", gymName);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "check_out_request", stringEntity);
 			if (serverResponse.exception instanceof IOException) {

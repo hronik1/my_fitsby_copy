@@ -33,28 +33,37 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 	protected void onMessage(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		// TODO get message from intent and display as a push notification
-	    Intent clickedIntent = new Intent(GCMIntentService.this, LoggedinActivity.class);
-	    clickedIntent.putExtra(LoggedinActivity.POSITION_KEY,
-	    		LoggedinActivity.CHECK_IN_POSITION);
-	    PendingIntent pendingIntent = PendingIntent.getActivity(GCMIntentService.this, 2, clickedIntent, 0);
+
 		NotificationCompat.Builder mBuilder =
 		        new NotificationCompat.Builder(this)
 				.setDefaults(Notification.DEFAULT_SOUND)
-				.setContentIntent(pendingIntent)
+
 		        .setSmallIcon(R.drawable.ic_launcher)
 		        .setContentTitle("Fitsby update");
 		
+//		Notification notification = mBuilder.build();
+//		notification.defaults |= Notification.DEFAULT_VIBRATE;
+//
+		Bundle bundle = intent.getExtras();
+//		Set<String> keySet = bundle.keySet();
+//		String content = "";
+//		for (String key: keySet) {
+//			Log.i(TAG, key + " " + bundle.getString(key));
+//			content += (" " + bundle.getString(key));
+//		}
+		mBuilder.setContentText(bundle.getString("message_text"));
+		Intent clickedIntent = new Intent(GCMIntentService.this, LoggedinActivity.class);
+	    if ("newsfeed".equals(bundle.getString("collapse_key"))) {
+    	    intent.putExtra(LoggedinActivity.POSITION_KEY,
+    	    		LoggedinActivity.NEWSFEED_POSITION);
+	    }
+	    clickedIntent.putExtra(LoggedinActivity.POSITION_KEY,
+	    		LoggedinActivity.CHECK_IN_POSITION);
+	    PendingIntent pendingIntent = PendingIntent.getActivity(GCMIntentService.this, 2, clickedIntent, 0);
+	    mBuilder.setContentIntent(pendingIntent);
+	    
 		Notification notification = mBuilder.build();
 		notification.defaults |= Notification.DEFAULT_VIBRATE;
-
-		Bundle bundle = intent.getExtras();
-		Set<String> keySet = bundle.keySet();
-		String content = "";
-		for (String key: keySet) {
-			Log.i(TAG, key);
-			content += (" " + bundle.getString(key));
-		}
-		mBuilder.setContentText(content);
 		
 		//TODO maybe add intent
 		NotificationManager mNotificationManager =

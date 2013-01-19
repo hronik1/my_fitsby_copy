@@ -1,14 +1,9 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_white"
-    android:scrollbars="vertical"
     tools:context=".ShareCheckinActivity" >
-
-    <RelativeLayout
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent">
     <TextView
         android:id="@+id/nice_workout_big"
         android:layout_width="wrap_content"
@@ -131,5 +126,4 @@
         android:paddingBottom="9dp"
         android:src="@drawable/twitter_bird_white" />
 
-    </RelativeLayout>
-</ScrollView>
+</RelativeLayout>

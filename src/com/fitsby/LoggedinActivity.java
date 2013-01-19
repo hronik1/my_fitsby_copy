@@ -48,6 +48,7 @@ import android.widget.Toast;
 public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	private static final String[] CONTENT = new String[] { "GAMES", "NEWSFEED", "CHECK IN"};
 	public static final int CHECK_IN_POSITION = 2;
+	public static final int NEWSFEED_POSITION = 1;
 	public static final String POSITION_KEY = "positionKey";
 	private static final String TAG = "LoggedinActivity";
 	
