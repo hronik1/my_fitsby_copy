@@ -27,10 +27,10 @@ public final class R {
 		public static final int manualOnly = 0x7f05001b;
 	}
 	public static final class anim {
-		public static final int slide_out_to_bottom = 0x7f040002;
-		public static final int slide_out_to_top = 0x7f040003;
-		public static final int slide_in_from_bottom = 0x7f040000;
-		public static final int slide_in_from_top = 0x7f040001;
+		public static final int slide_out_to_bottom = 0x7f040003;
+		public static final int slide_out_to_top = 0x7f040004;
+		public static final int slide_in_from_bottom = 0x7f040001;
+		public static final int slide_in_from_top = 0x7f040002;
 	}
 	public static final class string {
 		public static final int pull_to_refresh_refreshing_label = 0x7f0b002a;
