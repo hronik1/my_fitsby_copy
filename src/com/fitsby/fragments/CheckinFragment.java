@@ -273,12 +273,14 @@ public class CheckinFragment extends SherlockFragment {
 			LocationProvider gpsProvider = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
 			Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if (location != null) {
+				Log.i(TAG, "location not null");
 				latitude = location.getLatitude();
 				longitude = location.getLongitude();
 				new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
 						longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
 			} else {
-				new GetLocationAsyncTask(true);
+				Log.i(TAG, "location null");
+				new GetLocationAsyncTask(true).execute();
 			}
 //			List<String> matchingProviders = mLocationManager.getAllProviders();
 //			Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
@@ -575,11 +577,13 @@ public class CheckinFragment extends SherlockFragment {
 						UPDATE_TIME_MILLIS, UPDATE_MIN_DISTANCE, mLocationListener);				LocationProvider gpsProvider = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
 				Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				if (location != null) {
+					Log.i(TAG, "location null");
 					latitude = location.getLatitude();
 					longitude = location.getLongitude();
 					showCheckoutDialog();
 				} else {
-					new GetLocationAsyncTask(false);
+					Log.i(TAG, "location not null");
+					new GetLocationAsyncTask(false).execute();
 				}
 //				List<String> matchingProviders = mLocationManager.getAllProviders();
 //				Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
@@ -860,6 +864,7 @@ public class CheckinFragment extends SherlockFragment {
     	}
     	
     	protected void onPreExecute() {
+    		Log.i(TAG, "GetLocationAsyncTask onPreExecute");
             mProgressDialog = ProgressDialog.show(parent, "",
                     "Getting your location", true, true,
                     new OnCancelListener() {
@@ -879,6 +884,7 @@ public class CheckinFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(Location response) {
+        	Log.i(TAG, "GetLocationAsyncTask onPostExecute");
         	mProgressDialog.dismiss();
 			latitude = response.getLatitude();
 			longitude = response.getLongitude();
