@@ -64,6 +64,7 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 	    
 		Notification notification = mBuilder.build();
 		notification.defaults |= Notification.DEFAULT_VIBRATE;
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		
 		//TODO maybe add intent
 		NotificationManager mNotificationManager =
