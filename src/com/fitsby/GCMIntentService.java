@@ -57,13 +57,13 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
     	    intent.putExtra(LoggedinActivity.POSITION_KEY,
     	    		LoggedinActivity.NEWSFEED_POSITION);
 	    }
-	    clickedIntent.putExtra(LoggedinActivity.POSITION_KEY,
-	    		LoggedinActivity.CHECK_IN_POSITION);
+
 	    PendingIntent pendingIntent = PendingIntent.getActivity(GCMIntentService.this, 2, clickedIntent, 0);
 	    mBuilder.setContentIntent(pendingIntent);
 	    
 		Notification notification = mBuilder.build();
 		notification.defaults |= Notification.DEFAULT_VIBRATE;
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		
 		//TODO maybe add intent
 		NotificationManager mNotificationManager =
