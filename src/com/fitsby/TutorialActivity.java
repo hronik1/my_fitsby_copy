@@ -31,7 +31,7 @@ public class TutorialActivity extends KiipFragmentActivity {
     private static boolean fromMe;
     
     private static int[] pageDrawableResources = new int[] {R.drawable.registration_onboard1, R.drawable.registration_onboard2,
-    		R.drawable.registration_onboard3, R.drawable.registration_onboard4};
+    		R.drawable.registration_onboard3, R.drawable.registration_onboard4, R.drawable.registration_onboard5};
 
     
     
