@@ -388,7 +388,9 @@ public class CreditCardActivity extends KiipFragmentActivity {
         }
 
         protected void onPostExecute(LeagueCreateResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
 
             	if (response.wasSuccessful()) {
             		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
@@ -427,7 +429,10 @@ public class CreditCardActivity extends KiipFragmentActivity {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response.wasSuccessful()) {
         		try {
         			ApplicationUser appData = (ApplicationUser)getApplicationContext();

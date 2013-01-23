@@ -657,7 +657,10 @@ public class CheckinFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(PlacesResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response == null) {
         		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
@@ -700,7 +703,10 @@ public class CheckinFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(PlacesResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response == null) {
         		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
@@ -748,7 +754,10 @@ public class CheckinFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(ValidateGymResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response == null) {
         		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
     			toast.show();
@@ -793,7 +802,10 @@ public class CheckinFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response.wasSuccessful()) {
         		Toast toast = Toast.makeText(parent, "Check-in successful!", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -847,7 +859,10 @@ public class CheckinFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
 			Intent intent = new Intent(parent, ShareCheckinActivity.class);
 			intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
 			startActivity(intent);
@@ -885,7 +900,10 @@ public class CheckinFragment extends SherlockFragment {
 
         protected void onPostExecute(Location response) {
         	Log.i(TAG, "GetLocationAsyncTask onPostExecute");
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
 			latitude = response.getLatitude();
 			longitude = response.getLongitude();
 			if (onCheckin) {
@@ -920,7 +938,10 @@ public class CheckinFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response.wasSuccessful()) {
                 Message msg = Message.obtain(null,
                         MessengerService.MSG_STOP_TIMER);

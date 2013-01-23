@@ -38,8 +38,7 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 		        new NotificationCompat.Builder(this)
 				.setDefaults(Notification.DEFAULT_SOUND)
 
-		        .setSmallIcon(R.drawable.ic_launcher)
-		        .setContentTitle("Fitsby update");
+		        .setSmallIcon(R.drawable.ic_launcher);
 		
 //		Notification notification = mBuilder.build();
 //		notification.defaults |= Notification.DEFAULT_VIBRATE;
@@ -56,6 +55,9 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 	    if ("newsfeed".equals(bundle.getString("collapse_key"))) {
     	    intent.putExtra(LoggedinActivity.POSITION_KEY,
     	    		LoggedinActivity.NEWSFEED_POSITION);
+    	    mBuilder.setContentTitle("New comment");
+	    } else {
+	    	mBuilder.setContentTitle("Position change");
 	    }
 
 	    PendingIntent pendingIntent = PendingIntent.getActivity(GCMIntentService.this, 2, clickedIntent, 0);

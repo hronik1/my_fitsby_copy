@@ -273,16 +273,20 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
+    	Log.i(TAG, "request:" + requestCode + " result:"
+    			+ resultCode + "data null?" + (data == null));
     	
-    	if (requestCode == PICK_CONTACT_REQUEST) {
-    		if (resultCode == RESULT_OK) {
-    			Uri contactUri = data.getData();
-    			String[] projection = {Phone.NUMBER};
-    			new PhoneNumberAsyncTask(contactUri).execute(projection);
+    	if (resultCode != RESULT_CANCELED) {
+    		if (requestCode == PICK_CONTACT_REQUEST) {
+    			if (resultCode == RESULT_OK) {
+    				Uri contactUri = data.getData();
+    				String[] projection = {Phone.NUMBER};
+    				new PhoneNumberAsyncTask(contactUri).execute(projection);
+    			}
+    		} else {
+    			uiHelper.onActivityResult(requestCode, resultCode, data);
     		}
-        } else {
-        	uiHelper.onActivityResult(requestCode, resultCode, data);
-        }
+    	}
     }
     
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
@@ -664,7 +668,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
          * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
-            mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         }
      
     }
@@ -687,7 +693,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         }
 
 		protected void onPostExecute() {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         }
     }
@@ -704,7 +712,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         }
 
 		protected void onPostExecute(CreatorResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response.wasSuccessful()) {
             	creatorName = response.getCreatorFirstName();
@@ -747,7 +757,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         }
 
 		protected void onPostExecute(final String number) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (number != null) {
         		AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
@@ -814,7 +826,10 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 		}
 		
 		protected void onPostExecute(Void input) {
-			mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
 			FriendInviteActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
 					.parse(requestToken.getAuthenticationURL())));
 		}
@@ -867,7 +882,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	}
     	
 		protected void onPostExecute(Void input) {
-            mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
 		}
     }
 }

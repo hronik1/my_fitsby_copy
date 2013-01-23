@@ -545,7 +545,10 @@ public class MeFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatsResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+        	
         	if (response.wasSuccessful()) {
         		Stats stats = response.getStats();
         		earningsTV.setText(" $" + stats.getMoneyEarned());
@@ -586,8 +589,10 @@ public class MeFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
-        	
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response == null ) {
         		Toast toast = Toast.makeText(parent, "There doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -627,7 +632,10 @@ public class MeFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(Bitmap response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response != null)
         		profileIV.setImageBitmap(response);
         }
@@ -658,7 +666,10 @@ public class MeFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response.wasSuccessful()) {
                 Message msg = Message.obtain(null,
                         MessengerService.MSG_STOP_TIMER);
@@ -709,7 +720,9 @@ public class MeFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response == null ) {
         		Toast toast = Toast.makeText(parent, "Sorry, but there doesn't appear to be a connection to the internet at this moment", Toast.LENGTH_LONG);
@@ -744,7 +757,9 @@ public class MeFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	//TODO feeling toasty
         }
     }

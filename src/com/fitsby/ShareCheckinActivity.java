@@ -215,7 +215,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
-    	uiHelper.onActivityResult(requestCode, resultCode, data);
+    	if (resultCode != RESULT_CANCELED) {
+    		uiHelper.onActivityResult(requestCode, resultCode, data);
+    	}
 
     }
   
@@ -521,7 +523,10 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
 		}
 		
 		protected void onPostExecute(Void input) {
-			mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
 			ShareCheckinActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
 					.parse(requestToken.getAuthenticationURL())));
 		}
@@ -574,7 +579,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	}
     	
 		protected void onPostExecute(Void input) {
-            mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
 		}
     }
 }

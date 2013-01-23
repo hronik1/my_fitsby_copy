@@ -257,7 +257,10 @@ public class NewsfeedFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response.wasSuccessful()) {
         		
         		//Toast toast = Toast.makeText(parent.getApplicationContext(), "Successfully posted your comment", Toast.LENGTH_LONG);
@@ -299,7 +302,9 @@ public class NewsfeedFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(UsersGamesResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response == null ) {
         		Toast toast = Toast.makeText(parent.getApplicationContext(), "There doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
@@ -347,7 +352,10 @@ public class NewsfeedFragment extends SherlockFragment {
         }
 
 		protected void onPostExecute(Cursor cursor) {
-			mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (cursor != null) {
         		mAdapter.swapCursor(cursor);
         		mAdapter.notifyDataSetChanged();

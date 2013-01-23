@@ -322,7 +322,9 @@ public class GamesFragment extends SherlockFragment {
         }
 
         protected void onPostExecute(UsersGamesResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response == null ) {
         		Toast toast = Toast.makeText(parent, "There doesn't appear to be an internet connection at the moment", Toast.LENGTH_LONG);
@@ -403,7 +405,9 @@ public class GamesFragment extends SherlockFragment {
         }
 
 		protected void onPostExecute(PrivateLeagueResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
@@ -447,7 +451,9 @@ public class GamesFragment extends SherlockFragment {
         }
 
 		protected void onPostExecute(CountdownResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response.wasSuccessful()) {
         		daysLeftTV.setText(response.getDaysLeft());
@@ -516,7 +522,10 @@ public class GamesFragment extends SherlockFragment {
         }
 
 		protected void onPostExecute(ProgressResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response.wasSuccessful()) {
         		progressBar.setProgress((int) (response.getProgress() * PROGRESS_MAX));
 			} else if (response.getError() != null && !response.getError().equals("")) {

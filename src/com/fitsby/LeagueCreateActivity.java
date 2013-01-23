@@ -384,7 +384,9 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
         }
 
         protected void onPostExecute(LeagueCreateResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
 
             	if (response.wasSuccessful()) {
             		Log.d(TAG, "create response: league id" + response.getLeagueId());

@@ -354,7 +354,9 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         }
 
 		protected void onPostExecute(PrivateLeagueResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
@@ -384,7 +386,9 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         }
 
 		protected void onPostExecute(CreatorResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response.wasSuccessful()) {
             	firstNameTV.setText(" " + response.getCreatorFirstName());
@@ -412,7 +416,10 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         }
 
         protected void onPostExecute(StatusResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+			
         	if (response.wasSuccessful()) {
         		try {
         			ApplicationUser appData = (ApplicationUser)getApplicationContext();

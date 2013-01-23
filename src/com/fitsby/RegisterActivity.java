@@ -326,7 +326,9 @@ public class RegisterActivity extends KiipFragmentActivity {
         }
 
         protected void onPostExecute(UserResponse response) {
-        	mProgressDialog.dismiss();
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
         	
         	if (response == null ) {
         		Toast toast = Toast.makeText(getApplicationContext(), "Limited or no internet connectivity", Toast.LENGTH_LONG);
