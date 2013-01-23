@@ -409,9 +409,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
         else {
 
             Bundle postParams = new Bundle();
-            postParams.putString("name", "Fitsby");
-            postParams.putString("caption", "Stay motivated to hit the gym.");
-            postParams.putString("description", "I just had an awesome workout at " + mGymName + "! Fitsby is motivating me to hit the gym! Download the free app at fitsby.com.");
+            postParams.putString("name", "I just had an awesome workout using Fitsby!");
+            postParams.putString("caption", "Play against me in a game of gym check-ins.");
+            postParams.putString("description", "I just worked out at " + mGymName + "! Fitsby is motivating me to hit the gym!");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 

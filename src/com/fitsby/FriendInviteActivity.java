@@ -470,9 +470,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         else {
 
             Bundle postParams = new Bundle();
-            postParams.putString("name", "Fitsby");
-            postParams.putString("caption", "Stay motivated to hit the gym.");
-            postParams.putString("description", "Fitsby is an app where you challenge your friends in a game of gym check-ins and win their money when they don't work out!");
+            postParams.putString("name", "I challenge you to a game of Fitsby!");
+            postParams.putString("caption", "Let's stay motivated to hit the gym.");
+            postParams.putString("description", "I want to compete with you in a game of gym check-ins and win your money when you don't work out!");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 

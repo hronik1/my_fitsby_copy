@@ -515,9 +515,9 @@ public class CheckinFragment extends SherlockFragment {
 		if (timeMinutes < MIN_CHECKIN_TIME) {
 
 		  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-	    	builder.setMessage("You have to be here for at least " + MIN_CHECKIN_TIME + " minutes to have a successful check-out. Are you sure you want to stop early?")
+	    	builder.setMessage("You have to be at the gym for at least " + MIN_CHECKIN_TIME + " minutes to have a successful check-out. Are you sure you want to stop early?")
 	    			.setCancelable(false)
-	    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	    			.setPositiveButton("Stop Early", new DialogInterface.OnClickListener() {
 	    				public void onClick(DialogInterface dialog, int id) {
 	    					Message msg = Message.obtain(null,
 	    							MessengerService.MSG_STOP_TIMER);
