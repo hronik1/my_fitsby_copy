@@ -367,13 +367,15 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     private class CreateLeagueAsyncTask extends AsyncTask<String, Void, LeagueCreateResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(LeagueCreateActivity.this, "",
-                    "Creating your game...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				CreateLeagueAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(LeagueCreateActivity.this, "",
+						"Creating your game...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						CreateLeagueAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected LeagueCreateResponse doInBackground(String... params) {

@@ -311,13 +311,15 @@ public class RegisterActivity extends KiipFragmentActivity {
     private class RegisterAsyncTask extends AsyncTask<String, Void, UserResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(RegisterActivity.this, "",
-                    "Registering you...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				RegisterAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(RegisterActivity.this, "",
+						"Registering you...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						RegisterAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected UserResponse doInBackground(String... params) {

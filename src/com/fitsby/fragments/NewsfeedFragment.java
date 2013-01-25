@@ -242,13 +242,15 @@ public class NewsfeedFragment extends SherlockFragment {
     private class AddCommentAsyncTask extends AsyncTask<String, Void, StatusResponse> {
 		protected void onPreExecute() {
 			commentET.setText("");
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Submitting your comment...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				AddCommentAsyncTask.this.cancel(true);
-            			}
-            		});
+            try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+				        "Submitting your comment...", true, true,
+				        new OnCancelListener() {
+							public void onCancel(DialogInterface pd) {
+								AddCommentAsyncTask.this.cancel(true);
+							}
+						});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(String... params) {
@@ -287,13 +289,15 @@ public class NewsfeedFragment extends SherlockFragment {
     private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
 		
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Getting your games...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				SpinnerDataAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Getting your games...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						SpinnerDataAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected UsersGamesResponse doInBackground(String... params) {
@@ -337,13 +341,15 @@ public class NewsfeedFragment extends SherlockFragment {
     private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Filling out your newsfeed...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				CursorDataAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Filling out your newsfeed...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						CursorDataAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected Cursor doInBackground(String... params) {

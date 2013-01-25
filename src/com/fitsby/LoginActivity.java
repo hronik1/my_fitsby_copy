@@ -315,13 +315,15 @@ public class LoginActivity extends KiipFragmentActivity {
     private class LoginAsyncTask extends AsyncTask<String, Void, UserResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
-                    "Logging you in...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				LoginAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
+						"Logging you in...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						LoginAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected UserResponse doInBackground(String... params) {
@@ -377,13 +379,15 @@ public class LoginActivity extends KiipFragmentActivity {
     private class PasswordResetAsyncTask extends AsyncTask<String, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
-					"Sending you a link to set a new password...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				PasswordResetAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(LoginActivity.this, "",
+						"Sending you a link to set a new password...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						PasswordResetAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(String... params) {

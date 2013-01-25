@@ -369,13 +369,15 @@ public class CreditCardActivity extends KiipFragmentActivity {
     private class CreateLeagueAsyncTask extends AsyncTask<String, Void, LeagueCreateResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
-                    "Submitting your card information for verification...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				CreateLeagueAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
+						"Submitting your card information for verification...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						CreateLeagueAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected LeagueCreateResponse doInBackground(String... params) {
@@ -412,13 +414,15 @@ public class CreditCardActivity extends KiipFragmentActivity {
     private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
-                    "Submiting your card info for verification...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				JoinLeagueAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(CreditCardActivity.this, "",
+						"Submiting your card info for verification...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						JoinLeagueAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {

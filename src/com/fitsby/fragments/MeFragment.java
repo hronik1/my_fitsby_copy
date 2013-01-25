@@ -529,13 +529,15 @@ public class MeFragment extends SherlockFragment {
     private class StatsAsyncTask extends AsyncTask<Integer, Void, StatsResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering your information..", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				StatsAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Gathering your information..", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						StatsAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatsResponse doInBackground(Integer... params) {
@@ -574,13 +576,15 @@ public class MeFragment extends SherlockFragment {
      */
     private class ChangeEmailAsyncTask extends AsyncTask<String, Void, StatusResponse> {
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Updating changes..", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				ChangeEmailAsyncTask.this.cancel(true);
-            			}
-            		});
+			try { 
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Updating changes..", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						ChangeEmailAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(String... params) {
@@ -617,13 +621,15 @@ public class MeFragment extends SherlockFragment {
     private class GravatarAsyncTask extends AsyncTask<String, Void, Bitmap> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering your gravatar..", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				GravatarAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Gathering your gravatar..", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						GravatarAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected Bitmap doInBackground(String... params) {
@@ -650,13 +656,15 @@ public class MeFragment extends SherlockFragment {
     private class CheckoutAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Checking you out of your games...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				CheckoutAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Checking you out of your games...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						CheckoutAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {
@@ -705,13 +713,15 @@ public class MeFragment extends SherlockFragment {
     private class PasswordResetAsyncTask extends AsyncTask<String, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Sending you a link to reset your password...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				PasswordResetAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Sending you a link to reset your password...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						PasswordResetAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(String... params) {
@@ -747,8 +757,15 @@ public class MeFragment extends SherlockFragment {
     private class EnableNotificationsAsyncTask extends AsyncTask<Boolean, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Updating your notification status...");
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Updating your notification status...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						EnableNotificationsAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(Boolean... params) {

@@ -626,8 +626,15 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Updating to Twitter...");
+            try {
+            	mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+            			"Updating to Twitter...", true, true,
+            			new OnCancelListener() {
+            		public void onCancel(DialogInterface pd) {
+            			UpdateTwitterAsyncTask.this.cancel(true);
+            		}
+            	});
+            } catch (Exception e) { }
 
         }
      
@@ -683,8 +690,15 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     private class ContactsAsyncTask extends AsyncTask<String, Void, Void> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Gathering your contacts...");
+			try {
+				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+						"Gathering your contacts...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						ContactsAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected Void doInBackground(String... params) {
@@ -702,8 +716,15 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Getting game information...");
+			try {
+				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+						"Getting game information...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						CreatorAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
@@ -737,8 +758,16 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	}
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Gathering contact info...");
+			try {
+				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+						"Gathering contact info...", true, true, 
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						PhoneNumberAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
+                  
 		}
 		
         protected String doInBackground(String... params) {
@@ -805,13 +834,15 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     private class LoginTwitterAsyncTask extends AsyncTask<Integer, Void, Void> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Connecting to Twitter...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				LoginTwitterAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+						"Connecting to Twitter...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						LoginTwitterAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
 		@Override
@@ -838,13 +869,15 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     private class ParseTwitterLoginResponseAsyncTask extends AsyncTask<Integer, Void, Void> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-                    "Checking if you are logged in to any social networks...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				ParseTwitterLoginResponseAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+						"Checking if you are logged in to any social networks...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						ParseTwitterLoginResponseAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
     	protected Void doInBackground(Integer... params) {

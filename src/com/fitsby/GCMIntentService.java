@@ -56,6 +56,8 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
     	    intent.putExtra(LoggedinActivity.POSITION_KEY,
     	    		LoggedinActivity.NEWSFEED_POSITION);
     	    mBuilder.setContentTitle("New comment");
+	    } else if ("game_start".equals(bundle.getString("collapse_key"))) {
+	    	mBuilder.setContentTitle("Fitsby");
 	    } else {
 	    	mBuilder.setContentTitle("Position change");
 	    }

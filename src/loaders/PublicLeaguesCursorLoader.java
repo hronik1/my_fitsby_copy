@@ -91,8 +91,10 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
             deliverResult(mCursor);
         }
         if (takeContentChanged() || mCursor == null) {
-        	mProgressDialog = ProgressDialog.show(mContext, "",
-                    "Games are loading...");
+        	try {
+        		mProgressDialog = ProgressDialog.show(mContext, "",
+        				"Games are loading...", true, true);
+        	} catch (Exception e) { }
             forceLoad();
         }
     }

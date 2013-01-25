@@ -339,13 +339,15 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     private class GameInfoAsyncTask extends AsyncTask<Integer, Void, PrivateLeagueResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Gathering game data...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				GameInfoAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+						"Gathering game data...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						GameInfoAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected PrivateLeagueResponse doInBackground(Integer... params) {
@@ -371,13 +373,15 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Gathering the game host's data...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				CreatorAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+						"Gathering the game host's data...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						CreatorAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected CreatorResponse doInBackground(String... params) {
@@ -400,13 +404,15 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-                    "Creating your game...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				JoinLeagueAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
+						"Creating your game...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						JoinLeagueAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected StatusResponse doInBackground(Integer... params) {

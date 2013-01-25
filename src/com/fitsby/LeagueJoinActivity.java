@@ -279,8 +279,9 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();
     	}
-    	
-    	mPublicLeaguesCursorLoader.getProgressDialog().dismiss();
+    	try {
+    		mPublicLeaguesCursorLoader.getProgressDialog().dismiss();
+    	} catch (Exception e) { }
     }
     
     /**

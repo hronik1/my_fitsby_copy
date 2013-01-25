@@ -307,13 +307,15 @@ public class GamesFragment extends SherlockFragment {
     private class SpinnerDataAsyncTask extends AsyncTask<String, Void, UsersGamesResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Finding your games...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				SpinnerDataAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Finding your games...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						SpinnerDataAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected UsersGamesResponse doInBackground(String... params) {
@@ -390,13 +392,15 @@ public class GamesFragment extends SherlockFragment {
     private class GameInfoAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering game data...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				GameInfoAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Gathering game data...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						GameInfoAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected PrivateLeagueResponse doInBackground(String... params) {
@@ -436,13 +440,15 @@ public class GamesFragment extends SherlockFragment {
     private class DaysRemainingAsyncTask extends AsyncTask<String, Void, CountdownResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering game data...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				DaysRemainingAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Gathering game data...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						DaysRemainingAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected CountdownResponse doInBackground(String... params) {
@@ -506,13 +512,15 @@ public class GamesFragment extends SherlockFragment {
     private class ProgressAsyncTask extends AsyncTask<String, Void, ProgressResponse> {
     	
 		protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(parent, "",
-                    "Gathering game progress...", true, true,
-                    new OnCancelListener() {
-            			public void onCancel(DialogInterface pd) {
-            				ProgressAsyncTask.this.cancel(true);
-            			}
-            		});
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Gathering game progress...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						ProgressAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
 		}
 		
         protected ProgressResponse doInBackground(String... params) {
