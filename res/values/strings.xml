@@ -34,7 +34,7 @@
     <string name="login_forgot_password_text">Forgot your password?</string>
     <string name="fitsby_description">Fitsby is a game where you compete with other people on who can check in at the gym the most. \n \n
   									  You can play against anyone, including friends, and even wager money. \n \n
-  									  Everytime you go to the gym, use geolocation to check in. Check out after 30 minutes to make it count. \n \n
+  									  Everytime you go to the gym, use GPS to check in. Check out after 30 minutes to make it count. \n \n
 									  Press Next to get started!</string>
     <string name="title_activity_help"></string>
     <string name="help_button_text">Next</string>
@@ -49,7 +49,7 @@
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
     <string name="league_create_ib_days_plus">+</string>
-    <string name="credit_card_main_directions_text">In order to start this game, you must pay an initial wager. Please enter your credit card information below (All payments are safely secured by Stripe).</string>
+    <string name="credit_card_main_directions_text">In order to start this game, you must commit to pay a wager amount if you do not reach the gym goal. Please enter your credit card information below (All payments are safely secured by Stripe and you will never be charged unless you lose a game).</string>
     <string name="credit_card_number_text">Card Number:</string>
     <string name="credit_card_expiration_text">Expiration Date:</string>
     <string name="credit_card_cvc_text">CVC:</string>
@@ -57,7 +57,7 @@
     <string name="title_activity_credit_card"></string>
     <string name="credit_card_button_submit_text">Submit</string>
     <string name="credit_card_et_card_cvc_hint">123</string>
-    <string name="credit_card_et_card_number_hint">"4242 4242 4242 4242"</string>
+    <string name="credit_card_et_card_number_hint">"Required                    "</string>
     <string name="credit_card_et_expire_year_hint">YYYY</string>
     <string name="credit_card_et_expire_month_hint">MM</string>
     <string name="thirty_cents_charge_text">plus a 50&#162; processing fee</string>

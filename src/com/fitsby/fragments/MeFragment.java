@@ -715,7 +715,7 @@ public class MeFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			try {
 				mProgressDialog = ProgressDialog.show(parent, "",
-						"Sending you a link to reset your password...", true, true,
+						"Sending you a link to change your password...", true, true,
 						new OnCancelListener() {
 					public void onCancel(DialogInterface pd) {
 						PasswordResetAsyncTask.this.cancel(true);
