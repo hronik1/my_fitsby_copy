@@ -257,7 +257,7 @@ public class LoginActivity extends KiipFragmentActivity {
     private void showAlertInput() {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-    	alert.setMessage("Enter your email to receive a link to set a new password");
+    	alert.setMessage("Enter your email to receive a link to set a new password.");
 
     	// Set an EditText view to get user input 
     	final EditText input = new EditText(this);

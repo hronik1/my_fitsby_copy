@@ -471,8 +471,8 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 
             Bundle postParams = new Bundle();
             postParams.putString("name", "I challenge you to a game of Fitsby!");
-            postParams.putString("caption", "Let's stay motivated to hit the gym.");
-            postParams.putString("description", "I want to compete with you in a game of gym check-ins and win your money when you don't work out!");
+            postParams.putString("caption", "Want to stay motivated to work out with me?");
+            postParams.putString("description", "With Fitsby, we can play a game of gym check-ins and whoever doesn't reach their gym goal has to pay up!");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 
@@ -583,8 +583,8 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
     	
 	  	final EditText input = new EditText(this);
-	  	input.setHint("Enter status here");
-	  	input.setText("Can you beat me in a game of gym check-ins? Download @Fitsby & stay motivated to work out! fitsby.com #gymmotivation");	  	
+	  	input.setHint("Enter message here:");
+	  	input.setText("Let's stay motivated to work out using @Fitsby! Download the free app at fitsby.com & let's start a game of gym check-ins!");	  	
     	builder.setView(input);
     	
     	builder.setMessage("Share on Twitter:")
@@ -795,7 +795,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 
         		final EditText input = new EditText(FriendInviteActivity.this);
         		input.setHint("Challenge your friend");		  	
-        		input.setText("I challenge you to a game of gym check-ins using Fitsby! " +
+        		input.setText("Want to stay motivated to work out with me using Fitsby? " +
         				"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
         		builder.setView(input);
 
