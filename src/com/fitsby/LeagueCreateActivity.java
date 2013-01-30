@@ -346,9 +346,10 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	 * Creates the game specified by the wager and days
 	 */
 	private void create() {
-		int wager, duration, isPrivate;
+		int wager, duration, isPrivate, goal;
 		wager = Integer.parseInt((String) wagerTV.getText());
 		duration = Integer.parseInt((String) daysTV.getText());
+		goal = Integer.parseInt((String) goalsTV.getText());
 		isPrivate = createCheckBox.isChecked() ? 1 : 0;
 
 		if (wager != 0) {
@@ -358,7 +359,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 			appData.setDuration(duration);
 			appData.setIsPrivate(isPrivate);
 			appData.setWager(wager);
-
+			appData.setGoal(goal);
 			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
 			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
 			startActivity(intent);
@@ -378,9 +379,9 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     			.setCancelable(false)
     			.setPositiveButton("Create", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    					//TODO uncomment this!
-//    		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
-//    		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), (takeAllRB.isChecked() ? 1 : 3)+"");
+
+    		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
+    		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), goalsTV.getText().toString());
     				}
     			})
     			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

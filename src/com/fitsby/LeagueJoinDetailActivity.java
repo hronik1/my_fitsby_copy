@@ -63,7 +63,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 	private TextView startDateTV;
 	private TextView firstNameTV;
 	private TextView lastNameTV;
-	private TextView numberWinnersTV;
 	
 	private Button joinButton;
 	private Button faqButton;
@@ -86,7 +85,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 	private ProgressDialog mProgressDialog;
 	private List<LeagueMember> listLeagueMember;
 //	private SimpleCursorAdapter mAdapter;
-	private int structure;
+
 	/**
 	 * called when activtiy is created
 	 */
@@ -234,8 +233,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  		firstNameTV.setText(" ");
  		lastNameTV = (TextView)findViewById(R.id.league_join_detail_name_last);
  		lastNameTV.setText(" ");
- 		
- 		numberWinnersTV = (TextView)findViewById(R.id.game_number_of_winners_value);
+
  	}
 
  	/**
@@ -363,8 +361,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
         		startDateTV.setText(" " + league.getStartDate());
-        		structure = league.getStructure();
-        		numberWinnersTV.setText(" " + league.getStructure());
+
         	}
         		
         	new CreatorAsyncTask().execute();
@@ -477,18 +474,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
             	ImageView profilePic = (ImageView) view;
             	byte[] bytes = cursor.getBlob(columnIndex);
             	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-            } else if (viewId == R.id.winner) {
-            	int rank = cursor.getInt(columnIndex);
-            	if (rank > structure) {
-            		view.setVisibility(View.INVISIBLE);
-            		Log.d(TAG, "setting cup invisible: " + rank);
-            	} else {
-            		view.setVisibility(View.VISIBLE);
-            		Log.d(TAG, "setting cup visible: " + rank);
-
-            	}
-            		
-            		
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));

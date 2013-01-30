@@ -84,8 +84,6 @@ public class GamesFragment extends SherlockFragment {
 	private TextView endTV;
 	private TextView daysLeftTV;
 	
-	private int structure;
-	
 	private ProgressBar progressBar;
 	private PullToRefreshListView leadersLV;
 	private boolean refreshFinished = true;
@@ -99,9 +97,9 @@ public class GamesFragment extends SherlockFragment {
 	
 	private SimpleCursorAdapter mAdapter;
 	public final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME,
-			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP, Leader.KEY_RANK};
+			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP};
 	public final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
-			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview, R.id.winner};
+			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview};
 	private int spinnerPosition;
 	
 	private ApplicationUser mApplicationUser;
@@ -421,7 +419,6 @@ public class GamesFragment extends SherlockFragment {
         		wagerTV.setText("$" + league.getWager());
         		startTV.setText(" (" + league.getStartDate() + " -");
         		endTV.setText(" " + league.getEndDate() + ")");
-        		structure = league.getStructure();
         	} else if (response.getError() != null && !response.getError().equals("")) {
         		Toast toast = Toast.makeText(parent, response.getError(), Toast.LENGTH_LONG);
         		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -481,20 +478,6 @@ public class GamesFragment extends SherlockFragment {
             	ImageView profilePic = (ImageView) view;
             	byte[] bytes = cursor.getBlob(columnIndex);
             	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-            } else if (viewId == R.id.winner) {
-            	ImageView cup = (ImageView) view;
-            	int rank = cursor.getInt(columnIndex);
-            	if (rank > structure) {
-            		view.setVisibility(View.INVISIBLE);
-            	} else if(rank == 3) {
-            		view.setVisibility(View.VISIBLE);
-            		cup.setImageResource(R.drawable.winner3);
-            	} else if (rank == 2) {
-            		view.setVisibility(View.VISIBLE);
-            		cup.setImageResource(R.drawable.winner2);
-            	} else {
-            		view.setVisibility(View.VISIBLE);
-            	}           		
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));

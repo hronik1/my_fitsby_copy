@@ -270,35 +270,6 @@
         android:layout_marginRight="10dp"		        		
 		android:background="#949294" />
 
-
-    <ImageView
-        android:id="@+id/trophy"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
-        android:src="@drawable/winner"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_alignLeft="@+id/horizontal_divider_3"
-		android:layout_below="@+id/horizontal_divider_3"/>		
-      <TextView
-        android:id="@+id/game_number_of_winners"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/trophy"
-        android:layout_alignBottom="@+id/trophy"
-        android:textSize="16sp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="-4dp"
-        android:text="@string/game_number_of_winners"
-        android:textStyle="bold" />
- 	 <TextView
-        android:id="@+id/game_number_of_winners_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/game_number_of_winners"
-        android:layout_alignTop="@+id/game_number_of_winners"
-        android:layout_toRightOf="@+id/game_number_of_winners"
-        android:textSize="16sp" />
  	 
 	<ImageView
         android:id="@+id/calendar"
@@ -308,7 +279,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
 		android:layout_alignLeft="@+id/horizontal_divider_3"
-		android:layout_below="@+id/game_number_of_winners" />    		
+		android:layout_below="@+id/horizontal_divider_3" />    		
      <TextView
         android:id="@+id/game_start_date"
         android:layout_width="wrap_content"

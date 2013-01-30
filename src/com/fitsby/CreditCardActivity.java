@@ -326,7 +326,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     	ApplicationUser appData = (ApplicationUser)getApplicationContext();
     	if (appData.getCreate()) {
     		new CreateLeagueAsyncTask().execute(appData.getUserId()+"", appData.getDuration()+"",
-    				appData.getIsPrivateString(), appData.getWager()+"", appData.getStructure()+"");
+    				appData.getIsPrivateString(), appData.getWager()+"", appData.getGoal()+"");
     	} else if (appData.getJoin()) {
     		new JoinLeagueAsyncTask().execute(appData.getUserId(), appData.getLeagueId());
     	}

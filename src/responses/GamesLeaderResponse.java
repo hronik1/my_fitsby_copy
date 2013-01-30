@@ -66,6 +66,7 @@ public class GamesLeaderResponse {
 				String firstName  = leader.getString("first_name");
 				String lastName = leader.getString("last_name");
 				int checkins = Integer.parseInt(leader.getString("successful_checks"));
+//				int goal = Integer.parseInt(leader.getString("goal_days"));
 				String id = (i+1) + "";
 				String email = leader.getString("email");
 				//TODO change to actually parse email

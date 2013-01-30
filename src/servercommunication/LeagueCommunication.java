@@ -126,7 +126,7 @@ public class LeagueCommunication {
 	 * @param creatorId
 	 * @return
 	 */
-	public static LeagueCreateResponse createLeague(int creatorId, int duration, boolean isPrivate, int wager, int structure, String cardNumber, String expYear, String expMonth, String cvc) {
+	public static LeagueCreateResponse createLeague(int creatorId, int duration, boolean isPrivate, int wager, int goal, String cardNumber, String expYear, String expMonth, String cvc) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		JSONObject json = new JSONObject();
         try {
@@ -134,7 +134,7 @@ public class LeagueCommunication {
 			json.put("duration", duration);
 			json.put("is_private", isPrivate);
 			json.put("wager", wager);
-			json.put("winning_structure", structure);
+			json.put("goal_days", goal);
 			//json.put("creator_first_name", creatorFirstName);
 			json.put("credit_card_number", cardNumber);
 			json.put("credit_card_exp_month", expMonth);

@@ -62,13 +62,8 @@ public class PrivateLeagueResponse {
 			String isPrivate = json.getString("is_private");
 			String startDate = json.getString("start_date");
 			String email = json.getString("email");
-			int structure;
 			String error;
-			try {
-				structure = json.getInt("winning_structure");
-			} catch (Exception e) {
-				structure = 3;
-			}
+			int goal = json.getInt("goal_days");
 			try {
 				error = json.getString("error");
 			} catch (Exception e) {
@@ -76,7 +71,7 @@ public class PrivateLeagueResponse {
 			}
 			Log.i(TAG, email);
 			Bitmap bitmap = MyHttpClient.getBitmapFromURL(Gravatar.getGravatar(email));
-			League league = new League(id, wager, players, duration, stakes, bitmap, structure);
+			League league = new League(id, wager, players, duration, stakes, bitmap, goal);
 			try {
 				String endDate = json.getString("end_date");
 				league.setEndDate(endDate);

@@ -13,7 +13,7 @@ public class League {
 	private int stakes;
 	private String startDate;
 	private String endDate;
-	private int structure;
+	private int goal;
 	private Bitmap bitmap;
 
 	/* add time information */
@@ -65,7 +65,7 @@ public class League {
 	 * @param duration
 	 * @param bitmap
 	 */
-	public League(int id, int wager, int players, int duration, int stakes, Bitmap bitmap, int structure) {
+	public League(int id, int wager, int players, int duration, int stakes, Bitmap bitmap, int goal) {
 		this.id = id;
 		this.wager = wager; 
 		this.players = players;
@@ -73,7 +73,7 @@ public class League {
 		this.stakes = stakes;
 		isPrivate = 0;
 		this.bitmap = bitmap;
-		this.structure = structure;
+		this.goal= goal;
 	}
 	
 	/**
@@ -190,7 +190,7 @@ public class League {
 		return bitmap;
 	}
 
-	public int getStructure() {
-		return structure;
+	public int getGoal() {
+		return goal;
 	}
 }

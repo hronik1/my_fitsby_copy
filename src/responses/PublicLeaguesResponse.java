@@ -67,16 +67,16 @@ public class PublicLeaguesResponse {
 				int wager = Integer.parseInt(jsonLeague.getString("wager"));
 				int stakes = Integer.parseInt(jsonLeague.getString("stakes"));
 				String email;
+				int goal;
 				try {
 					email = jsonLeague.getString("email");
 				} catch(Exception e) {
 					email = "";
 				}
-				int structure;
 				try {
-					structure = json.getInt("winning_structure");
+					goal = json.getInt("goal_days");
 				} catch (Exception e) {
-					structure = 3;
+					goal = duration;
 				}
 				if (!imageMap.containsKey(email))  {
 					Log.d(TAG, "getting image");
@@ -87,7 +87,7 @@ public class PublicLeaguesResponse {
 					Log.d(TAG, "image exists");
 					bitmap = imageMap.get(email);
 				}
-				leagues.add(new League(id, wager, players, duration, stakes, bitmap, structure));
+				leagues.add(new League(id, wager, players, duration, stakes, bitmap, goal));
 			}
 			return new PublicLeaguesResponse(success, leagues);
 		} catch (JSONException e) {

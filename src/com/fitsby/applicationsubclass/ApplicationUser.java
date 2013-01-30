@@ -88,7 +88,7 @@ public class ApplicationUser extends Application {
 	private int userId;
 	//in join
 	private int leagueId;
-	private int structure;
+	private int goal;
 	
 	
 	
@@ -165,11 +165,11 @@ public class ApplicationUser extends Application {
 		this.leagueId = leagueId;
 	}
 	
-	public void setStructure(int structure) {
-		this.structure = structure;
+	public int getGoal() {
+		return this.goal;
 	}
 	
-	public int getStructure() {
-		return structure;
+	public void setGoal(int goal) {
+		this.goal = goal;
 	}
 }
