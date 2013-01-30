@@ -158,55 +158,65 @@
  	           android:layout_marginTop="2dp"
   	           android:textStyle="bold"
 	           android:textColor="@color/white" />
-       </RelativeLayout>        
-        <TextView
-            android:id="@+id/league_create_rb_prompt"
+       </RelativeLayout>  
+       
+       <TextView
+            android:id="@+id/league_create_tv_goals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textView1"
             android:layout_below="@+id/days_box"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:textSize="16sp"      
-            android:textColor="@color/black"              
-            android:text="@string/league_create_rb_prompt"
+            android:text="@string/league_create_tv_goals_text"
+            android:textSize="16sp"     
+            android:textColor="@color/black"               
             android:textStyle="bold" />
+                
         <RelativeLayout
-            android:id="@+id/radio_box"
+            android:id="@+id/goals_box"
             android:layout_width="fill_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/create_game_boxes"
-            android:layout_alignLeft="@+id/league_create_rb_prompt"
-            android:layout_below="@+id/league_create_rb_prompt" 
+            android:layout_alignLeft="@+id/league_create_tv_goals"
+            android:layout_below="@+id/league_create_tv_goals"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="10dp"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp">
-	       <RadioGroup
-	           android:id="@+id/league_create_radiogroup"
-	           android:layout_width="match_parent"
-	           android:layout_height="wrap_content"
-	           android:layout_below="@+id/league_create_rb_prompt"
-	           android:layout_alignLeft="@+id/textView1"
-	           android:orientation="horizontal" >
-	           
-	           <RadioButton
-	               android:id="@+id/league_create_rb_takeall" 
-	               android:layout_width="wrap_content"
-	               android:layout_height="wrap_content"
-	               android:textColor="@color/white"
-	               android:text="@string/league_create_rb_takeall" />
-	           	           
-	           <RadioButton
-	               android:id="@+id/league_create_rb_top3"
-	               android:layout_width="wrap_content"
-	               android:layout_height="wrap_content"
-	               android:layout_marginLeft="10dp"  
-	               android:textColor="@color/white"
-	               android:text="@string/league_create_rb_top3" />
+            android:paddingBottom="7dp" >
+	        <TextView
+	            android:id="@+id/league_create_goals"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/league_create_goals_text"
+	            android:textColor="@color/white"
+	            android:textSize="40sp" />	            
+	       <Button
+	           android:id="@+id/league_create_ib_goals_minus"
+	           android:layout_width="50dp"
+	           android:layout_height="50dp"
+	           android:layout_alignTop="@+id/league_create_goals"
+	           android:layout_toLeftOf="@+id/league_create_ib_goals_plus"
+               android:background="@color/fitsby_blue"
+	           android:text="@string/league_create_ib_days_minus"
+	           android:layout_marginRight="5dp"  
+	           android:layout_marginTop="2dp"	            
+  	           android:textStyle="bold"
+	           android:textColor="@color/white" />
+	       <Button
+	           android:id="@+id/league_create_ib_goals_plus"
+	           android:layout_width="50dp"
+	           android:layout_height="50dp"
+	           android:layout_alignParentRight="true"
+	           android:layout_alignTop="@+id/league_create_goals"
+			   android:background="@color/fitsby_blue"
+	           android:text="@string/league_create_ib_days_plus"
+	           android:layout_marginRight="2dp"	   
+ 	           android:layout_marginTop="2dp"
+  	           android:textStyle="bold"
+	           android:textColor="@color/white" />
+       </RelativeLayout>     
 
-	       </RadioGroup>
-	   </RelativeLayout>
 	   <RelativeLayout
             android:id="@+id/privacy_box"
             android:layout_width="fill_parent"
@@ -249,7 +259,7 @@
            android:layout_marginTop="10dp"
            android:textStyle="bold"
            android:textColor="@color/black"
-           android:layout_below="@+id/radio_box"
+           android:layout_below="@+id/goals_box"
            android:layout_marginBottom="5dp"           
            android:text="@string/league_create_privacy_text" />
 

@@ -49,6 +49,8 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	private final static int START_WAGER = 5;
 	private final static int DAYS_INCREMENT = 7;
 	private final static int MAX_DAYS = 28;
+	private final static int MIN_GOAL_PER_WEEK = 2;
+	private final static int DAYS_PER_WEEK = 7;
 	
 	private Button createButton;
 	private CheckBox createCheckBox;
@@ -56,11 +58,12 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	private Button wagerMinusButton;
 	private Button daysPlusButton;
 	private Button daysMinusButton;
+	private Button goalsPlusButton;
+	private Button goalsMinusButton;
 	private TextView wagerTV;
 	private TextView daysTV;
+	private TextView goalsTV;
 	private Button faqButton;
-	private RadioButton top3RB;
-	private RadioButton takeAllRB;
 	
 	private User mUser;
 	private int userID;
@@ -83,7 +86,6 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
         Log.i(TAG, "onCreate");
         
         initializeButtons();
-        initializeRadioButtons();
         initializeCheckBoxes();  
         initializeTextViews();
         
@@ -182,6 +184,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 		wagerTV = (TextView)findViewById(R.id.league_create_wager);
 		wagerTV.setText(START_WAGER + "");
 		daysTV = (TextView)findViewById(R.id.league_create_days);
+		goalsTV = (TextView)findViewById(R.id.league_create_goals);
 	}
 	
 	/**
@@ -228,6 +231,23 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 			}
 		});
 		
+		goalsPlusButton = (Button)findViewById(R.id.league_create_ib_goals_plus);
+		goalsPlusButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				incrementGoal();
+			}
+		});
+		
+		goalsMinusButton = (Button)findViewById(R.id.league_create_ib_goals_minus);
+		goalsMinusButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				decrementGoal();
+			}
+		});
+		
 		faqButton = (Button)findViewById(R.id.league_create_faq_button);
 		faqButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -235,26 +255,6 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 				showFaqBrowser();
 			}
 		});
-	}
-	
-	/**
-	 * initializes the radiobuttons
-	 */
-	private void initializeRadioButtons() {
-		top3RB = (RadioButton)findViewById(R.id.league_create_rb_top3);
-		top3RB.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked) {
-            		Toast toast = Toast.makeText(LeagueCreateActivity.this, "Your game will automatically convert to Winner Takes All if it starts with less than 4 players", Toast.LENGTH_LONG);
-            		toast.setGravity(Gravity.CENTER, 0, 0);
-            		toast.show();
-				}
-			}
-		});
-		takeAllRB = (RadioButton)findViewById(R.id.league_create_rb_takeall);
-		takeAllRB.setChecked(true);
 	}
 	
 	/**
@@ -283,10 +283,13 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	 */
 	private void incrementDays() {
 		int days = Integer.parseInt((String)daysTV.getText());
+		int goal = Integer.parseInt((String)goalsTV.getText());
 		if (days < MAX_DAYS) {
 			days += DAYS_INCREMENT;
 			daysTV.setText(days + "");
 		}
+		if (goal < minGoalDays(days))
+			goalsTV.setText(minGoalDays(days) + "");
 	}
 	
 	/**
@@ -294,12 +297,42 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	 */
 	private void decrementDays() {
 		int days = Integer.parseInt((String)daysTV.getText());
+		int goal = Integer.parseInt((String)goalsTV.getText());
 		if (days > DAYS_INCREMENT) {
 			days -= DAYS_INCREMENT;
 			daysTV.setText(days + "");
 		}
+		if (goal > days)
+			goalsTV.setText(days + "");
 	}
 	
+	/**
+	 * increment the goal days if valid
+	 */
+	private void incrementGoal() {
+		int days = Integer.parseInt((String)daysTV.getText());
+		int goal = Integer.parseInt((String)goalsTV.getText());
+		if (days > goal) {
+			goal++;
+			goalsTV.setText(goal + "");
+		}
+	}
+	
+	/**
+	 * decrement the goal day if valid
+	 */
+	private void decrementGoal() {
+		int days = Integer.parseInt((String)daysTV.getText());
+		int goal = Integer.parseInt((String)goalsTV.getText());
+		if (goal > minGoalDays(days)) {
+			goal--;
+			goalsTV.setText(goal + "");
+		}
+	}
+	
+	private int minGoalDays(int days) {
+		return (days/DAYS_PER_WEEK*MIN_GOAL_PER_WEEK);
+	}
 	/**
 	 * opens up browser to faq page
 	 */
@@ -325,10 +358,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 			appData.setDuration(duration);
 			appData.setIsPrivate(isPrivate);
 			appData.setWager(wager);
-			if (takeAllRB.isChecked())
-				appData.setStructure(1);
-			else
-				appData.setStructure(3);
+
 			Intent intent = new Intent(LeagueCreateActivity.this, CreditCardActivity.class);
 			intent.putExtra(CreditCardBundleKeys.KEY_WAGER, wager);
 			startActivity(intent);
@@ -348,8 +378,9 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     			.setCancelable(false)
     			.setPositiveButton("Create", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
-    		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), (takeAllRB.isChecked() ? 1 : 3)+"");
+    					//TODO uncomment this!
+//    		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
+//    		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), (takeAllRB.isChecked() ? 1 : 3)+"");
     				}
     			})
     			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
