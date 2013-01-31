@@ -33,6 +33,7 @@
 		    android:textColor="@color/white"
 		    android:textSize="24sp"
 		    android:textStyle="bold" />
+		
     </LinearLayout>
     
 	<LinearLayout
@@ -71,7 +72,7 @@
 	    android:layout_below="@+id/games_spinner_wrapper" 
 	    android:layout_marginTop="47dp"
 	    android:baselineAligned="false"	>
-	
+
 		<RelativeLayout
 		    android:layout_weight=".2"
 	        android:layout_width="0px"
@@ -118,7 +119,7 @@
 		        android:layout_toRightOf="@+id/input_wager"	                
 		        android:gravity="center" />
 		</RelativeLayout>	     
-		
+
 		<RelativeLayout
 		    android:layout_weight=".2"
 	        android:layout_width="0px"
@@ -142,9 +143,9 @@
 		        android:layout_toRightOf="@+id/input_pot"
 				android:gravity="center" />
 		</RelativeLayout>
-	
+
 	</LinearLayout>   
-	
+
 
 	<RelativeLayout
 	    android:layout_width="match_parent"
@@ -162,7 +163,7 @@
 	        android:layout_alignParentLeft="true"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginRight="10dp" />
-	    
+
 		<TextView
    	        android:layout_below="@+id/days_left_prompt"
 		    android:id="@+id/horizontal_divider"
@@ -170,7 +171,7 @@
 			android:layout_height="0.5dp"
 	        android:layout_marginTop="10dp"			
 			android:background="#949294" />
-		
+
 	    <TextView
 	        android:id="@+id/games_leader_prompt"
 	        android:layout_width="fill_parent"
@@ -221,7 +222,7 @@
 		        android:textStyle="bold" />
 
 	    </RelativeLayout>
-	    
+
 	    <TextView
 	        android:id="@+id/days_left_prompt"
 	        android:layout_width="wrap_content"
@@ -245,7 +246,7 @@
 	        android:text="@string/days_left"
 	        android:textSize="10sp"
 	        android:textStyle="bold" />
-	   
+
 	     <com.handmark.pulltorefresh.library.PullToRefreshListView
 	         android:id="@+id/games_leader_list"
 	         android:layout_width="fill_parent"
@@ -269,37 +270,33 @@
 	        android:id="@+id/games_no_games_prompt"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/games_leader_list"
-	        android:textColor="@color/black"
+	        android:layout_below="@+id/games_leader_prompt"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginRight="10dp"
+	        android:gravity="center"
+	        android:textColor="@color/fitsby_blue_dark"
+	        android:textSize="20sp"
 	        android:text="@string/games_no_games_prompt_text"
 	        android:textStyle="bold" />
-		        
 	</RelativeLayout>
-	
-<LinearLayout 
-     android:id="@+id/buttons"
-   	 android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_below="@+id/games_leader_list"
-     android:layout_alignParentBottom="true"
-     android:background="@color/light_white">
-	  <Button
-        android:id="@+id/invite_friends_button"
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight=".5"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/custom_login_button"
-        android:text="@string/invite_friends_button"
-        android:textColor="@color/white"    
-        android:textSize="12sp"/>
-    
+
+	<LinearLayout 
+	     android:id="@+id/bottom_extra_space"
+	   	 android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_below="@+id/games_leader_list"
+	     android:layout_alignParentBottom="true"
+	     android:background="@color/light_white">
+        	  <Button
+		        android:id="@+id/invite_friends_button"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/custom_login_button"
+		        android:text="@string/invite_friends_button"
+		        android:textColor="@color/white"    
+		        android:textStyle="bold"
+		        android:textSize="12sp"/>
 	</LinearLayout>
 
-	
+
 </RelativeLayout>
