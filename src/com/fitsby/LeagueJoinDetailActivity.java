@@ -216,7 +216,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  		wagerTV.setText("$" + wager);
  		
  		potTV = (TextView)findViewById(R.id.league_join_detail_pot_data);
- 		potTV.setText("$" + pot);
+ 		potTV.setText(pot);
  		
  		playersTV = (TextView)findViewById(R.id.league_join_detail_players_data);
  		playersTV.setText(players+"");
