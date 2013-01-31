@@ -119,7 +119,7 @@
     <string name="games_pot_prompt_text">" GOAL"</string>
     <string name="games_start_date_prompt_text">START DATE</string>
     <string name="games_end_date_prompt_text">END DATE</string>
-    <string name="games_leader_prompt_text">STANDINGS</string>
+    <string name="games_leader_prompt_text"></string>
     <string name="games_button_newgame_text">Join New Game</string>
     <string name="games_no_games_prompt_text">Looks like you\'re not in any games! Tap the \'+\' button on the top right to join a game.</string>
     <string name="input_pot"></string>
