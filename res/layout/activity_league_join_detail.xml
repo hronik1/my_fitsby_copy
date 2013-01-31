@@ -149,12 +149,13 @@
 		android:background="#949294" />
 	
 	<LinearLayout
-	    android:layout_marginTop="5dp"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/first_linear_layout"
-	    android:layout_alignRight="@+id/first_linear_layout"
-	    android:layout_below="@+id/horizontal_divider_2" >
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_below="@+id/horizontal_divider_2"
+	    android:layout_marginTop="5dp" >
+
 	    <ImageView
 		    android:id="@+id/players_icon"
 		    android:layout_width="0dp"
@@ -179,8 +180,8 @@
 	    android:id="@+id/second_linear_layout"    
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/first_linear_layout"
-	    android:layout_alignRight="@+id/first_linear_layout"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentRight="true"
 	    android:layout_below="@+id/horizontal_divider_2" 
 	    android:layout_marginTop="50dp"
 	    android:baselineAligned="false"	>
@@ -188,8 +189,7 @@
 		    android:layout_weight=".2"
 	        android:layout_width="0px"
 	     	android:layout_height="wrap_content"
-	     	android:gravity="center"
-		    android:layout_marginRight="4dp" >
+	     	android:gravity="center" >
 		    <TextView
 		        android:id="@+id/league_join_detail_players_data"
 		        android:layout_width="wrap_content"      
@@ -212,9 +212,7 @@
 	        android:layout_weight=".2"
 	        android:layout_width="0px"
 	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:layout_marginLeft="2dp"
-	        android:layout_marginRight="2dp" >
+	        android:gravity="center" >
 		    <TextView
 		        android:id="@+id/league_join_detail_wager_data"
 		        android:layout_width="wrap_content"      
@@ -237,8 +235,7 @@
 		    android:layout_weight=".2"
 	        android:layout_width="0px"
 	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:layout_marginLeft="4dp" >
+	        android:gravity="center" >
 		   <TextView
 		        android:id="@+id/league_join_detail_pot_data"
 		        android:layout_width="wrap_content"      

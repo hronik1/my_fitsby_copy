@@ -52,8 +52,7 @@
 		    android:layout_weight=".2"
 	        android:layout_width="0px"
 	     	android:layout_height="wrap_content"
-	     	android:gravity="center"
-		    android:layout_marginRight="4dp" >
+	     	android:gravity="center" >
 		    <TextView
 		        android:id="@+id/input_players"
 		        android:layout_width="wrap_content"      
@@ -76,9 +75,7 @@
 	        android:layout_weight=".2"
 	        android:layout_width="0px"
 	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:layout_marginLeft="2dp"
-	        android:layout_marginRight="2dp" >
+	        android:gravity="center">
 		    <TextView
 		        android:id="@+id/input_wager"
 		        android:layout_width="wrap_content"      
@@ -102,8 +99,7 @@
 		    android:layout_weight=".2"
 	        android:layout_width="0px"
 	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:layout_marginLeft="4dp" >
+	        android:gravity="center">
 		   <TextView
 		        android:id="@+id/input_pot"
 		        android:layout_width="wrap_content"      
@@ -137,7 +133,7 @@
 	        android:id="@+id/games_progress_bar"
 	        style="@android:style/Widget.ProgressBar.Horizontal"
 	        android:layout_width="fill_parent"
-	        android:progressDrawable="@drawable/progress_bar"
+	        android:progressDrawable="@drawable/progress_bar_days"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
 	        android:layout_marginLeft="10dp"
@@ -147,7 +143,7 @@
    	        android:layout_below="@+id/days_left_prompt"
 		    android:id="@+id/horizontal_divider"
 		    android:layout_width="fill_parent"
-			android:layout_height="0.5dp"
+			android:layout_height="0.1dp"
 	        android:layout_marginTop="10dp"			
 			android:background="#949294" />
 		
@@ -157,11 +153,11 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/horizontal_divider"
-	        android:layout_marginLeft="5dp"
+	        android:layout_marginLeft="5dp"			        
+	        android:layout_marginBottom="2dp"
 	        android:layout_marginTop="10dp"				        
-	        android:layout_marginBottom="2dp"				        
 	        android:text="@string/games_leader_prompt_text"
-	        android:textSize="14sp"
+	        android:textSize="0sp"
 	        android:gravity="center"
 	        android:textStyle="bold" />
 		<RelativeLayout 

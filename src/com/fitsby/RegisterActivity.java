@@ -250,7 +250,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     	builder.setMessage("Please confirm that " + email +
     			" is your email.")
     			 .setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					new RegisterAsyncTask().execute(email, password, confirmPassword, firstName, lastName);
     				}

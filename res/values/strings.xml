@@ -45,7 +45,7 @@
     <string name="league_create_create_text">Create Game</string>
     <string name="league_create_tv_wager_text">1. Set the wager:</string>
     <string name="league_create_tv_days_text">2. Set the days:</string>
-    <string name="league_create_tv_goals_text">3. Set the goal:</string>
+    <string name="league_create_tv_goals_text">3. Set the gym goal:</string>
     <string name="league_create_ib_wager_plus">+</string>
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
@@ -116,10 +116,10 @@
     <string name="games_duration_prompt_text">"DURATION"</string>
     <string name="games_wager_prompt_text">" WAGER"</string>
     <string name="games_player_prompt_text">" PLAYERS"</string>
-    <string name="games_pot_prompt_text">" POT"</string>
+    <string name="games_pot_prompt_text">" GOAL"</string>
     <string name="games_start_date_prompt_text">START DATE</string>
     <string name="games_end_date_prompt_text">END DATE</string>
-    <string name="games_leader_prompt_text">LEADERBOARD</string>
+    <string name="games_leader_prompt_text">STANDINGS</string>
     <string name="games_button_newgame_text">Join New Game</string>
     <string name="games_no_games_prompt_text">Looks like you\'re not in any games! Tap the \'Join New Game\' button below to start a new game.</string>
     <string name="input_pot"></string>
@@ -138,12 +138,12 @@
     <string name="league_join_players_header_text">Players</string>
     <string name="league_join_wager_header_text">Wager</string>
     <string name="league_join_duration_header_text">Days</string>
-    <string name="league_join_pot_header_text">Pot</string>
+    <string name="league_join_pot_header_text">Goal</string>
     <string name="public_leagues_league_id_header_text">Game ID</string>
     <string name="public_leagues_players_header_text">Players</string>
     <string name="public_leagues_wager_header_text">Wager</string>
     <string name="public_leagues_duration_header_text">Days</string>
-    <string name="public_leagues_pot_header_text">Pot</string>
+    <string name="public_leagues_pot_header_text">Goal</string>
     <string name="title_activity_league_join_detail"></string>
     <string name="game_number_of_winners">NUMBER OF WINNERS: </string>
     <string name="league_join_detail_header_text">"GAME DETAILS"</string>
@@ -154,8 +154,8 @@
     <string name="league_join_detail_type_data_text"></string>
     <string name="league_join_detail_wager_text">" WAGER"</string>
     <string name="league_join_detail_wager_data_text">$10</string>
-    <string name="league_join_detail_pot_text">" POT"</string>
-    <string name="league_join_detail_pot_data_text">$20</string>
+    <string name="league_join_detail_pot_text">" GOAL"</string>
+    <string name="league_join_detail_pot_data_text">20</string>
     <string name="league_join_detail_players_text">" PLAYERS"</string>
     <string name="league_join_detail_players_data_text">2</string>
     <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 4 players total in the game"</string>
@@ -171,7 +171,7 @@
     <string name="list_item_public_leagues_players_text">4</string>
     <string name="list_item_public_leagues_wager_text">$10</string>
     <string name="list_item_public_leagues_duration_text">2</string>
-    <string name="list_item_public_leagues_pot_text">$50</string>
+    <string name="list_item_public_leagues_pot_text">20</string>
     <string name="list_item_newsfeed_first_name_text">Brent</string>
     <string name="list_item_newsfeed_last_name_text">Hronik</string>
     <string name="list_item_newsfeed_timestamp_text">Now</string>
@@ -186,7 +186,7 @@
     <string name="league_create_ib_days_plus_text">Increment days</string>
     <string name="league_create_ib_wager_minus_text">Decrement wager</string>
     <string name="league_create_ib_wager_plus_text">Increment days</string>
-    <string name="league_create_header_text">Create a game by selecting the wager, days, number of winners, and privacy. All games start on the next day\'s midnight.</string>
+    <string name="league_create_header_text">Create a game by selecting the wager, days, gym goal, and privacy. All games start on the next day\'s midnight.</string>
     <string name="header_title_text">Fitsby</string>
     <string name="header_settings_text">You</string>
     <string name="title_activity_settings"></string>
