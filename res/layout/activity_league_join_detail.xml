@@ -237,7 +237,7 @@
 	        android:layout_height="wrap_content"
 	        android:gravity="center" >
 		   <TextView
-		        android:id="@+id/league_join_detail_pot_data"
+		        android:id="@+id/league_join_detail_goal_data"
 		        android:layout_width="wrap_content"      
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"	                
@@ -246,12 +246,12 @@
 		        android:textStyle="bold" 		        		                        
 		        android:gravity="center" />
 	   		<TextView
-		        android:id="@+id/league_join_detail_pot"
+		        android:id="@+id/league_join_detail_goal"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:text="@string/league_join_detail_pot_text"
 		        android:textSize="13sp"
-		        android:layout_toRightOf="@+id/league_join_detail_pot_data"
+		        android:layout_toRightOf="@+id/league_join_detail_goal_data"
 				android:gravity="center" />
 		</RelativeLayout>
 	</LinearLayout>   	

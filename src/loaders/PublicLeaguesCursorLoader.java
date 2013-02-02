@@ -25,10 +25,10 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 	
 	public final static String KEY_BITMAP = "bitmap";
 	public final static String KEY_NUM_PLAYERS = "players";
-	public final static String KEY_POT = "pot";
+	public final static String KEY_GOAL = "goal";
 	
 	public final static String[] FROM_ARGS = { KEY_BITMAP, LeagueTableHandler.KEY_ID, KEY_NUM_PLAYERS,
-			LeagueTableHandler.KEY_WAGER, LeagueTableHandler.KEY_DURATION, KEY_POT };
+			LeagueTableHandler.KEY_WAGER, KEY_GOAL, LeagueTableHandler.KEY_DURATION };
 	private Cursor mCursor;
 	private Context mContext;
 	private ProgressDialog mProgressDialog;

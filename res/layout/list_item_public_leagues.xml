@@ -86,7 +86,7 @@
             android:textSize="16sp" />
    	   
        <TextView
-            android:id="@+id/list_item_public_leagues_pot"
+            android:id="@+id/list_item_public_leagues_goal"
             android:layout_toRightOf="@+id/list_item_public_leagues_pot_dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

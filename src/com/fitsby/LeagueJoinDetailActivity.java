@@ -56,7 +56,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 	
 	private TextView typeTV;
 	private TextView wagerTV;
-	private TextView potTV;
+	private TextView goalTV;
 	private TextView playersTV;
 	private TextView durationTV;
 	private TextView leagueIdTV;
@@ -73,7 +73,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 	private ApplicationUser mApplicationUser;
 	
 	private int leagueId;
-	private int pot;
+	private int goal;
 	private boolean isPrivate;
 	private int wager;
 	private int players;
@@ -195,7 +195,8 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  		leagueId = extras.getInt(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
  		players = extras.getInt(LeagueDetailBundleKeys.KEY_PLAYERS);
  		wager = extras.getInt(LeagueDetailBundleKeys.KEY_WAGER);
- 		pot = extras.getInt(LeagueDetailBundleKeys.KEY_POT);
+ 		goal = extras.getInt(LeagueDetailBundleKeys.KEY_GOAL);
+ 		Log.i(TAG, goal +"");
  		if (extras.getInt(LeagueDetailBundleKeys.KEY_TYPE) == 0)
  			isPrivate = false;
  		else
@@ -215,8 +216,8 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  		wagerTV = (TextView)findViewById(R.id.league_join_detail_wager_data);
  		wagerTV.setText("$" + wager);
  		
- 		potTV = (TextView)findViewById(R.id.league_join_detail_pot_data);
- 		potTV.setText(pot);
+ 		goalTV = (TextView)findViewById(R.id.league_join_detail_goal_data);
+ 		goalTV.setText(goal+"");
  		
  		playersTV = (TextView)findViewById(R.id.league_join_detail_players_data);
  		playersTV.setText(players+"");

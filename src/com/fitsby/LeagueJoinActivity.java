@@ -61,7 +61,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
 	private SimpleCursorAdapter mAdapter;
 	private PublicLeaguesCursorLoader mPublicLeaguesCursorLoader;
 	private int[] toArgs = { R.id.list_item_public_leagues_creator, R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
-			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_duration, R.id.list_item_public_leagues_pot };
+			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_goal, R.id.list_item_public_leagues_duration };
 	
 
 	/**
@@ -215,14 +215,14 @@ public class LeagueJoinActivity extends KiipFragmentActivity
 					long id) {
 				Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
 				int leagueId = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_ID));
-				int pot = cursor.getInt(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_POT));
+				int goal = cursor.getInt(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_GOAL));
 				int players = cursor.getInt(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_NUM_PLAYERS));
 				int wager = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_WAGER));
 				int duration = cursor.getInt(cursor.getColumnIndex(LeagueTableHandler.KEY_DURATION));
 				boolean isPrivate = false;
             	byte[] bytes = cursor.getBlob(cursor.getColumnIndex(PublicLeaguesCursorLoader.KEY_BITMAP));
             	Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-				gotoLeagueDetails(leagueId, players, wager, pot, isPrivate, duration, bitmap);
+				gotoLeagueDetails(leagueId, players, wager, goal, isPrivate, duration, bitmap);
 			}
     		
     	});
@@ -233,13 +233,13 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     	leagueLV.setAdapter(mAdapter);
     }
     
-    private void gotoLeagueDetails(int leagueId, int players, int wager, int pot, boolean isPrivate, int duration, Bitmap bitmap) {
+    private void gotoLeagueDetails(int leagueId, int players, int wager, int goal, boolean isPrivate, int duration, Bitmap bitmap) {
     	try {
     		Intent intent = new Intent(this, LeagueJoinDetailActivity.class);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_LEAGUE_ID, leagueId);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_PLAYERS, players);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_WAGER, wager);
-    		intent.putExtra(LeagueDetailBundleKeys.KEY_POT, pot);
+    		intent.putExtra(LeagueDetailBundleKeys.KEY_GOAL, goal);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_TYPE, isPrivate ? 1 : 0);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_DURATION, duration);
     		intent.putExtra(LeagueDetailBundleKeys.KEY_BITMAP, bitmap);
@@ -322,7 +322,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
         		League league = response.getLeague();
         		boolean isPrivate = (league.isPrivate() == 0 ? false : true);
         		gotoLeagueDetails(league.getId(), league.getPlayers(), league.getWager(),
-        				league.getStakes(), isPrivate, league.getDuration(), league.getBitmap());
+        				league.getGoal(), isPrivate, league.getDuration(), league.getBitmap());
  
         	}
         }

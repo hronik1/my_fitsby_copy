@@ -109,7 +109,7 @@
 	        android:layout_height="wrap_content"
 	        android:gravity="center">
 		   <TextView
-		        android:id="@+id/input_pot"
+		        android:id="@+id/input_goal"
 		        android:layout_width="wrap_content"      
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"	                
@@ -118,12 +118,12 @@
 		        android:textStyle="bold" 		        		                        
 		        android:gravity="center" />
 	   		<TextView
-		        android:id="@+id/games_pot_prompt"
+		        android:id="@+id/games_goal_prompt"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:text="@string/games_pot_prompt_text"
 		        android:textSize="13sp"
-		        android:layout_toRightOf="@+id/input_pot"
+		        android:layout_toRightOf="@+id/input_goal"
 				android:gravity="center" />
 		</RelativeLayout>
 

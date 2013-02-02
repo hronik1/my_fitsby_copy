@@ -114,7 +114,7 @@ public class LeagueCommunication {
 			int leagueId = league.getId();
 			int numPlayers = league.getPlayers();
 			int wager = league.getWager();
-			cursor.addRow(new Object[] {byteArray, leagueId, numPlayers, wager, league.getDuration(), league.getStakes()});
+			cursor.addRow(new Object[] {byteArray, leagueId, numPlayers, wager, league.getGoal(), league.getDuration()});
 		}
 		
 		//TODO parse json into cursor

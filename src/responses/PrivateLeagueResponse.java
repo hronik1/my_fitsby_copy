@@ -63,7 +63,12 @@ public class PrivateLeagueResponse {
 			String startDate = json.getString("start_date");
 			String email = json.getString("email");
 			String error;
-			int goal = json.getInt("goal_days");
+			int goal;
+			try {
+				goal = json.getJSONArray("goal_days").getInt(0);
+			} catch (Exception e) {
+				goal = duration;
+			}
 			try {
 				error = json.getString("error");
 			} catch (Exception e) {

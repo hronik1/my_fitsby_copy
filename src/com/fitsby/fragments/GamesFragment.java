@@ -73,13 +73,13 @@ public class GamesFragment extends SherlockFragment {
 	
 	private TextView playersPromptTV;
 	private TextView wagerPromptTV;
-	private TextView potPromptTV;
+	private TextView goalPromptTV;
 	private TextView noGamesPromptTV;
 	
 	private TextView playersTV;
 	private TextView wagerTV;
 	private TextView durationTV;
-	private TextView potTV;
+	private TextView goalTV;
 	private TextView startTV;
 	private TextView endTV;
 	private TextView daysLeftTV;
@@ -97,9 +97,11 @@ public class GamesFragment extends SherlockFragment {
 	
 	private SimpleCursorAdapter mAdapter;
 	public final static String[] fromArgs = {UserTableHandler.KEY_FIRST_NAME, UserTableHandler.KEY_LAST_NAME,
-			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP};
+			LeagueMemberTableHandler.KEY_CHECKINS, "_id", Leader.KEY_BITMAP, 
+			LeagueMemberTableHandler.KEY_CHECKINS, LeagueMemberTableHandler.KEY_CHECKINS};
 	public final static int[] toArgs = {R.id.list_item_game_leader_name, R.id.list_item_game_leader_last_name,
-			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview};
+			R.id.list_item_game_leader_checkins, R.id.rank, R.id.list_item_game_leader_imageview,
+			R.id.winner, R.id.game_leader_goal_progress};
 	private int spinnerPosition;
 	
 	private ApplicationUser mApplicationUser;
@@ -109,6 +111,8 @@ public class GamesFragment extends SherlockFragment {
 	
 	private ProgressDialog mProgressDialog;
 	private String creatorFirstName;
+	
+	private int mGoal;
 	
 	/**
 	 * callback to add in the stats fragment
@@ -158,14 +162,14 @@ public class GamesFragment extends SherlockFragment {
 		playersTV = (TextView)viewer.findViewById(R.id.input_players);
 		wagerTV = (TextView)viewer.findViewById(R.id.input_wager);
 		durationTV = (TextView)viewer.findViewById(R.id.input_duration);
-		potTV = (TextView)viewer.findViewById(R.id.input_pot);
+		goalTV = (TextView)viewer.findViewById(R.id.input_goal);
 		startTV = (TextView)viewer.findViewById(R.id.input_date);
 		endTV = (TextView)viewer.findViewById(R.id.input_end_date);
 		daysLeftTV = (TextView)viewer.findViewById(R.id.days_left_prompt);
 		
 		playersPromptTV = (TextView)viewer.findViewById(R.id.games_player_prompt);
 		wagerPromptTV = (TextView)viewer.findViewById(R.id.games_wager_prompt);
-		potPromptTV = (TextView)viewer.findViewById(R.id.games_pot_prompt);
+		goalPromptTV = (TextView)viewer.findViewById(R.id.games_goal_prompt);
 		noGamesPromptTV = (TextView)viewer.findViewById(R.id.games_no_games_prompt);
 		noGamesPromptTV.setVisibility(View.INVISIBLE);
 
@@ -289,7 +293,7 @@ public class GamesFragment extends SherlockFragment {
 	private void disableGamesPrompts() {
 		playersPromptTV.setVisibility(View.INVISIBLE);
 		wagerPromptTV.setVisibility(View.INVISIBLE);
-		potPromptTV.setVisibility(View.INVISIBLE);
+		goalPromptTV.setVisibility(View.INVISIBLE);
 		noGamesPromptTV.setVisibility(View.VISIBLE);
 	}
 	
@@ -414,7 +418,8 @@ public class GamesFragment extends SherlockFragment {
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
         		playersTV.setText("" + league.getPlayers());
-        		potTV.setText("$" + league.getStakes());
+        		goalTV.setText("" + league.getGoal());
+        		mGoal = league.getGoal();
         		durationTV.setText("" + league.getDuration() + " days");
         		wagerTV.setText("$" + league.getWager());
         		startTV.setText(" (" + league.getStartDate() + " -");
@@ -478,6 +483,21 @@ public class GamesFragment extends SherlockFragment {
             	ImageView profilePic = (ImageView) view;
             	byte[] bytes = cursor.getBlob(columnIndex);
             	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+            } else if (viewId == R.id.list_item_game_leader_checkins) {
+            	TextView text = (TextView) view;
+            	text.setText(cursor.getString(columnIndex) + "/" + mGoal);
+            } else if (viewId == R.id.winner) {
+            	ImageView winner = (ImageView) view;
+            	int checkins = Integer.parseInt(cursor.getString(columnIndex));
+            	if (checkins < mGoal)
+            		winner.setVisibility(View.INVISIBLE);
+            } else if (viewId == R.id.game_leader_goal_progress) {
+            	ProgressBar progress = (ProgressBar) view;
+            	int checkins = Integer.parseInt(cursor.getString(columnIndex));
+            	if (checkins >= mGoal)
+            		progress.setProgressDrawable(parent.getResources().getDrawable(R.drawable.progress_bar_goal));
+            	double progressPercent = (checkins >= mGoal ? 100 : (double)checkins/(double)mGoal*100.0);
+            	progress.setProgress((int)progressPercent);
             } else {
             	TextView name = (TextView) view;
             	name.setText(cursor.getString(columnIndex));
