@@ -68,6 +68,7 @@
 		        android:textSize="13sp"
 		        android:text="@string/input_players"
 		        android:textColor="@color/fitsby_blue"
+			    android:layout_toRightOf="@+id/games_player_prompt"	        
 		        android:textStyle="bold" 	       		        
 		        android:gravity="center" />
 		    <TextView
@@ -76,7 +77,6 @@
 		        android:layout_height="wrap_content"
 		        android:text="@string/games_player_prompt_text"
 		        android:textSize="13sp"
-		        android:layout_toRightOf="@+id/input_players"
 		        android:gravity="center" />
 	    </RelativeLayout>
 	    <RelativeLayout
@@ -91,7 +91,8 @@
 		        android:textSize="13sp"	               
 		        android:text="@string/input_wager"                   
 		        android:textColor="@color/fitsby_blue"
-		        android:textStyle="bold" 			           
+		        android:textStyle="bold" 			  
+		        android:layout_toRightOf="@+id/games_wager_prompt"	                	                 
 		        android:gravity="center" />
 	       <TextView
 		        android:id="@+id/games_wager_prompt"
@@ -99,7 +100,6 @@
 		        android:layout_height="wrap_content"
 		        android:textSize="13sp"        
 		        android:text="@string/games_wager_prompt_text"
-		        android:layout_toRightOf="@+id/input_wager"	                
 		        android:gravity="center" />
 		</RelativeLayout>	     
 
@@ -115,6 +115,7 @@
 		        android:textSize="13sp"	                
 		        android:text="@string/input_pot"
 		        android:textColor="@color/fitsby_blue"
+		        android:layout_toRightOf="@+id/games_goal_prompt"	        
 		        android:textStyle="bold" 		        		                        
 		        android:gravity="center" />
 	   		<TextView
@@ -123,7 +124,6 @@
 		        android:layout_height="wrap_content"
 		        android:text="@string/games_pot_prompt_text"
 		        android:textSize="13sp"
-		        android:layout_toRightOf="@+id/input_goal"
 				android:gravity="center" />
 		</RelativeLayout>
 

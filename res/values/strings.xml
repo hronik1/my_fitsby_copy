@@ -114,9 +114,9 @@
     <string name="newsfeed_button_submit_text">"     Submit     "</string>
     <string name="newsfeed_et_comment_hint">Post a status or leave a comment here</string>
     <string name="games_duration_prompt_text">"DURATION"</string>
-    <string name="games_wager_prompt_text">" WAGER"</string>
-    <string name="games_player_prompt_text">" PLAYERS"</string>
-    <string name="games_pot_prompt_text">" GOAL"</string>
+    <string name="games_wager_prompt_text">"WAGER "</string>
+    <string name="games_player_prompt_text">"PLAYERS "</string>
+    <string name="games_pot_prompt_text">"GOAL "</string>
     <string name="games_start_date_prompt_text">START DATE</string>
     <string name="games_end_date_prompt_text">END DATE</string>
     <string name="games_leader_prompt_text"></string>
@@ -128,7 +128,7 @@
     <string name="input_wager"></string>
     <string name="input_date"></string>
     <string name="input_end_date"></string>
-    <string name="days_left_prompt">Days left:</string>
+    <string name="days_left_prompt">"Days Left: "</string>
     <string name="days_left"></string>
     <string name="list_item_game_leader_name">Name</string>
     <string name="forfeit_game_button">Forfeit Game</string>
@@ -152,11 +152,11 @@
     <string name="league_join_detail_name_last"></string>
     <string name="league_join_detail_type_text">"TYPE: "</string>
     <string name="league_join_detail_type_data_text"></string>
-    <string name="league_join_detail_wager_text">" WAGER"</string>
+    <string name="league_join_detail_wager_text">"WAGER "</string>
     <string name="league_join_detail_wager_data_text">$10</string>
-    <string name="league_join_detail_pot_text">" GOAL"</string>
+    <string name="league_join_detail_pot_text">"GOAL "</string>
     <string name="league_join_detail_pot_data_text">20</string>
-    <string name="league_join_detail_players_text">" PLAYERS"</string>
+    <string name="league_join_detail_players_text">"PLAYERS "</string>
     <string name="league_join_detail_players_data_text">2</string>
     <string name="league_join_duration_text">"*Start Date will extend 24 hours until there are at least 4 players total in the game"</string>
     <string name="league_join_duration_data_text"></string>
