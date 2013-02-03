@@ -37,10 +37,10 @@ import android.util.Log;
 public class MyHttpClient {
 	
 	private final static String TAG = "MyHttpClient";
-//	public final static String SERVER_URL = "https://f-app.herokuapp.com/"; //production server
-	public final static String SERVER_URL = "https://test-fitsby.herokuapp.com/"; //test server
-	private final static int SOCKET_TIMEOUT_MILLIS = 20000;
-	private final static int CONNECTION_TIMEOUT_MILLIS = 20000;
+	public final static String SERVER_URL = "https://f-app.herokuapp.com/"; //production server
+//	public final static String SERVER_URL = "https://test-fitsby.herokuapp.com/"; //test server
+	private final static int SOCKET_TIMEOUT_MILLIS = 10000;
+	private final static int CONNECTION_TIMEOUT_MILLIS = 10000;
 	private static DefaultHttpClient httpClient = new DefaultHttpClient();
 	private static HttpParams httpParams = new BasicHttpParams(); 
 	

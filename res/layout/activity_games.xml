@@ -134,8 +134,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/last_linear_layout"
-	    android:layout_marginTop="7dp"
-	    android:layout_above="@+id/buttons">
+	    android:layout_marginTop="7dp">
 
 	    <ProgressBar
 	        android:id="@+id/games_progress_bar"
