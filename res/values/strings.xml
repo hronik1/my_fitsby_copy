@@ -57,10 +57,10 @@
     <string name="credit_card_wager_text">Wager:</string>
     <string name="title_activity_credit_card"></string>
     <string name="credit_card_button_submit_text">Submit</string>
-    <string name="credit_card_et_card_cvc_hint">123</string>
-    <string name="credit_card_et_card_number_hint">"Required                    "</string>
-    <string name="credit_card_et_expire_year_hint">YYYY</string>
-    <string name="credit_card_et_expire_month_hint">MM</string>
+    <string name="credit_card_et_card_cvc_hint">"123 "</string>
+    <string name="credit_card_et_card_number_hint">"Required    "</string>
+    <string name="credit_card_et_expire_year_hint">"YYYY "</string>
+    <string name="credit_card_et_expire_month_hint">"MM "</string>
     <string name="thirty_cents_charge_text">plus a 50&#162; processing fee</string>
     <string name="authorize_api_login_id">3C29upX37b</string>
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>

@@ -1771,12 +1771,12 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f050123;
         public static final int create_new_game_directions=0x7f0500b3;
         public static final int credit_card_button_submit=0x7f05005b;
-        public static final int credit_card_cvc_text=0x7f050055;
+        public static final int credit_card_cvc_text=0x7f050052;
         public static final int credit_card_et_card_cvc=0x7f050056;
         public static final int credit_card_et_card_number=0x7f050051;
-        public static final int credit_card_et_expire_month=0x7f050054;
-        public static final int credit_card_et_expire_year=0x7f050053;
-        public static final int credit_card_expiration_text=0x7f050052;
+        public static final int credit_card_et_expire_month=0x7f050055;
+        public static final int credit_card_et_expire_year=0x7f050054;
+        public static final int credit_card_expiration_text=0x7f050053;
         public static final int credit_card_main_directions_text=0x7f05004e;
         public static final int credit_card_number_text=0x7f05005d;
         public static final int credit_card_tv_wager=0x7f050058;
