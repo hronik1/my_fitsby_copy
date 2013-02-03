@@ -2436,13 +2436,13 @@ containing a value of this type.
     }
     public static final class style {
         public static final int AppTheme=0x7f0b0060;
-        public static final int CustomCirclePageIndicator=0x7f0b0067;
-        public static final int CustomLandingStyle=0x7f0b0061;
-        public static final int CustomLinePageIndicator=0x7f0b0066;
-        public static final int CustomTabPageIndicator=0x7f0b0068;
-        public static final int CustomTabPageIndicator_Text=0x7f0b0069;
-        public static final int CustomTitlePageIndicator=0x7f0b0065;
-        public static final int CustomUnderlinePageIndicator=0x7f0b006a;
+        public static final int CustomCirclePageIndicator=0x7f0b0068;
+        public static final int CustomLandingStyle=0x7f0b0062;
+        public static final int CustomLinePageIndicator=0x7f0b0067;
+        public static final int CustomTabPageIndicator=0x7f0b0069;
+        public static final int CustomTabPageIndicator_Text=0x7f0b006a;
+        public static final int CustomTitlePageIndicator=0x7f0b0066;
+        public static final int CustomUnderlinePageIndicator=0x7f0b006b;
         public static final int DialogWindowTitle_Sherlock=0x7f0b0036;
         public static final int DialogWindowTitle_Sherlock_Light=0x7f0b0037;
         public static final int FitsbyTheme=0x7f0b005f;
@@ -2458,7 +2458,7 @@ containing a value of this type.
         public static final int Sherlock___Widget_Holo_ListView=0x7f0b0026;
         public static final int Sherlock___Widget_Holo_Spinner=0x7f0b0023;
         public static final int Sherlock___Widget_SearchAutoCompleteTextView=0x7f0b0033;
-        public static final int StyledIndicators=0x7f0b0064;
+        public static final int StyledIndicators=0x7f0b0065;
         public static final int TextAppearance_Sherlock_DialogWindowTitle=0x7f0b0048;
         public static final int TextAppearance_Sherlock_Light_DialogWindowTitle=0x7f0b0049;
         public static final int TextAppearance_Sherlock_Light_Small=0x7f0b004c;
@@ -2481,6 +2481,9 @@ containing a value of this type.
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Small=0x7f0b0044;
         public static final int TextAppearance_Sherlock_Widget_TextView_SpinnerItem=0x7f0b0046;
         public static final int TextAppearance_TabPageIndicator=0x7f0b005d;
+        /**  taking out the fitsby text (logo) in the black action bar 
+         */
+        public static final int Theme_App_ActionBar=0x7f0b0061;
         public static final int Theme_PageIndicatorDefaults=0x7f0b005b;
         public static final int Theme_Sherlock=0x7f0b0052;
         public static final int Theme_Sherlock_Dialog=0x7f0b0057;
@@ -2540,8 +2543,8 @@ containing a value of this type.
         public static final int Widget_TabPageIndicator=0x7f0b005c;
         public static final int com_facebook_loginview_default_style=0x7f0b0059;
         public static final int com_facebook_loginview_silver_style=0x7f0b005a;
-        public static final int credit_card_boxes=0x7f0b0063;
-        public static final int white_font=0x7f0b0062;
+        public static final int credit_card_boxes=0x7f0b0064;
+        public static final int white_font=0x7f0b0063;
     }
     public static final class styleable {
         /** Attributes that can be used with a CirclePageIndicator.

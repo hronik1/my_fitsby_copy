@@ -4,9 +4,16 @@
     
     <style name="AppTheme" parent="Theme.Sherlock.Light.DarkActionBar">
       	<item name="android:typeface">sans</item>
+        <item name="android:actionBarStyle">@style/Theme.App.ActionBar</item>
+        <item name="actionBarStyle">@style/Theme.App.ActionBar</item>	
     </style>
 	
-	
+    <!-- taking out the fitsby text (logo) in the black action bar -->
+    <style name="Theme.App.ActionBar" parent="Widget.Sherlock.ActionBar">
+        <item name="android:displayOptions">showHome|useLogo</item>
+        <item name="displayOptions">showHome|useLogo</item>
+	</style>
+
     <style name="CustomLandingStyle" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">#333333</item>
         <item name="android:typeface">sans</item>
