@@ -1805,7 +1805,7 @@ containing a value of this type.
         public static final int friend_invite_button_invite=0x7f050068;
         public static final int game_id=0x7f0500bc;
         public static final int game_leader_framelayout_imageview=0x7f050128;
-        public static final int game_leader_goal_progress=0x7f050130;
+        public static final int game_leader_goal_progress=0x7f05012d;
         public static final int game_start_date=0x7f0500cc;
         public static final int game_start_date_value=0x7f0500cd;
         public static final int games_button_newgame=0x7f050086;
@@ -1894,8 +1894,8 @@ containing a value of this type.
         public static final int league_join_wager_header=0x7f0500ac;
         public static final int listMode=0x7f050002;
         public static final int list_item_bold=0x7f050136;
-        public static final int list_item_game_leader_checkins=0x7f05012e;
-        public static final int list_item_game_leader_checkins_prompt=0x7f05012d;
+        public static final int list_item_game_leader_checkins=0x7f05012f;
+        public static final int list_item_game_leader_checkins_prompt=0x7f05012e;
         public static final int list_item_game_leader_imageview=0x7f050129;
         public static final int list_item_game_leader_last_name=0x7f05012b;
         public static final int list_item_game_leader_name=0x7f05012a;
@@ -2027,7 +2027,7 @@ containing a value of this type.
         public static final int wager_box=0x7f050092;
         public static final int wager_icon=0x7f050071;
         public static final int webview=0x7f050021;
-        public static final int winner=0x7f05012f;
+        public static final int winner=0x7f050130;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {

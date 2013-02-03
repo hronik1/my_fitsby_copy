@@ -58,32 +58,52 @@
 
     <ImageView
         android:id="@+id/checkin_icon"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignLeft="@+id/list_item_game_leader_name"
         android:layout_below="@+id/list_item_game_leader_name"
         android:layout_marginLeft="-4dp"
         android:layout_marginTop="0dp"
         android:src="@drawable/checkin_icon" />
+    
+    <ProgressBar
+        android:id="@+id/game_leader_goal_progress"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:progressDrawable="@drawable/progress_bar_days"
+        android:max="100"
+        android:progress="50"
+        android:layout_toRightOf="@+id/checkin_icon"        
+        android:layout_below="@+id/list_item_game_leader_last_name"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp" />    
 
     <TextView
         android:id="@+id/list_item_game_leader_checkins_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/checkin_icon"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="5dp"
         android:layout_below="@+id/list_item_game_leader_name"
-        android:layout_toRightOf="@+id/checkin_icon"
+        android:layout_alignLeft="@+id/game_leader_goal_progress"        
         android:text="@string/list_item_game_leader_checkins_text"
-        android:textColor="@color/gray"
-        android:textSize="14sp" />
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/list_item_game_leader_checkins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_game_leader_name"
+        android:layout_marginTop="4dp"        
+        android:layout_below="@+id/list_item_game_leader_name"        
         android:layout_toRightOf="@+id/list_item_game_leader_checkins_prompt"
-        android:textSize="14sp" />
+        android:textStyle="bold"  
+        android:textColor="@color/white"              
+        android:textSize="10sp" />
 
     <ImageView
         android:id="@+id/winner"
@@ -94,20 +114,5 @@
         android:layout_marginLeft="3dp"
         android:layout_toRightOf="@+id/list_item_game_leader_last_name"
         android:src="@drawable/winner" />
-
-    <ProgressBar
-        android:id="@+id/game_leader_goal_progress"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progressDrawable="@drawable/progress_bar_days"
-        android:max="100"
-        android:progress="50"
-        android:layout_below="@+id/checkin_icon"
-        android:layout_alignLeft="@+id/checkin_icon"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginLeft="5dp" />
 
 </RelativeLayout>
