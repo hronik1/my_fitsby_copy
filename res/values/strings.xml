@@ -9,7 +9,7 @@
     <string name="twitter_access_token_secret">8zSFoHJv6zCO8YTiFOToRrjhvvfrMgRn9wXkQrTf1c</string>
     <string name="app_id">426803977352349</string>
     <string name="gcm_sender_id">979881390942</string>
-    <string name="motto">Stay motivated to hit the gym.</string>
+    <string name="motto">Stay motivated to work out.</string>
     <string name="or"> OR </string>
     <string name="app_name"></string>
     <string name="hello_world">Hello world!</string>
@@ -66,7 +66,7 @@
     <string name="authorize_api_transaction_key">97925saQZfMX5J4C</string>
     <string name="title_activity_friend_invite"></string>
     <string name="friend_invite_button_invite_text">Search Contacts List</string>
-    <string name="friend_invite_button_home_text">Go To Game</string>
+    <string name="friend_invite_button_home_text">GO TO GAME</string>
     <string name="or_invite_them_later_text">Or you can invite them later and...</string>
     <string name="add_friend_button">Add Friend</string>
     <string name="invite_friends_directions">INVITE FRIENDS TO JOIN YOUR CURRENT GAME</string>
