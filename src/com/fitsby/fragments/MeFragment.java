@@ -508,13 +508,13 @@ public class MeFragment extends SherlockFragment {
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
     	builder.setMessage("If you are currently checked in at a gym, you must check out to have it count. Are you sure you want to log out right now?")
     			.setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    			.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					//new CheckoutAsyncTask().execute(mUser.getID());
     					logout();
     				}
     			})
-    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
     					dialog.cancel();
     				}
