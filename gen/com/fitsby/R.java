@@ -2437,7 +2437,7 @@ containing a value of this type.
     public static final class style {
         public static final int AppTheme=0x7f0b0060;
         public static final int CustomCirclePageIndicator=0x7f0b0068;
-        public static final int CustomLandingStyle=0x7f0b0062;
+        public static final int CustomLandingStyle=0x7f0b0061;
         public static final int CustomLinePageIndicator=0x7f0b0067;
         public static final int CustomTabPageIndicator=0x7f0b0069;
         public static final int CustomTabPageIndicator_Text=0x7f0b006a;
@@ -2481,9 +2481,6 @@ containing a value of this type.
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Small=0x7f0b0044;
         public static final int TextAppearance_Sherlock_Widget_TextView_SpinnerItem=0x7f0b0046;
         public static final int TextAppearance_TabPageIndicator=0x7f0b005d;
-        /**  taking out the fitsby text (logo) in the black action bar 
-         */
-        public static final int Theme_App_ActionBar=0x7f0b0061;
         public static final int Theme_PageIndicatorDefaults=0x7f0b005b;
         public static final int Theme_Sherlock=0x7f0b0052;
         public static final int Theme_Sherlock_Dialog=0x7f0b0057;
@@ -2540,11 +2537,14 @@ containing a value of this type.
         public static final int Widget_Sherlock_SearchAutoCompleteTextView=0x7f0b0034;
         public static final int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f0b0024;
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0b0032;
+        /**  taking out the fitsby text (logo) in the black action bar 
+         */
+        public static final int Widget_Styled_ActionBar=0x7f0b0064;
         public static final int Widget_TabPageIndicator=0x7f0b005c;
         public static final int com_facebook_loginview_default_style=0x7f0b0059;
         public static final int com_facebook_loginview_silver_style=0x7f0b005a;
-        public static final int credit_card_boxes=0x7f0b0064;
-        public static final int white_font=0x7f0b0063;
+        public static final int credit_card_boxes=0x7f0b0063;
+        public static final int white_font=0x7f0b0062;
     }
     public static final class styleable {
         /** Attributes that can be used with a CirclePageIndicator.
