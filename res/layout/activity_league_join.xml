@@ -126,6 +126,7 @@
         android:background="@drawable/white_textbox"
         android:hint="@string/league_join_et_first_name_hint"
 		android:inputType="textCapSentences"        
+        android:imeOptions="actionNext"        		
         android:textSize="14sp" />
 
     <EditText
@@ -141,6 +142,7 @@
         android:hint="@string/league_join_et_invite_code_hint"
         android:digits="1234567890"        
         android:textSize="14sp"
+		android:imeOptions="actionDone"                
         android:inputType="number" />
     
     <Button
