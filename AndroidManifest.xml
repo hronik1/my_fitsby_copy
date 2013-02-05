@@ -51,28 +51,34 @@
         </activity>
         <activity
             android:name="com.fitsby.RegisterActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" >
         </activity>
         <activity
             android:name="com.fitsby.LoginActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@style/StyledIndicators" >
         </activity>
         <activity
             android:name="com.fitsby.LeagueLandingActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@style/StyledIndicators" >
         </activity>
         <activity
             android:name="com.fitsby.LeagueCreateActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" >
         </activity>
         <activity
             android:name="com.fitsby.CreditCardActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/StyledIndicators" >
         </activity>
         <activity
             android:name="com.fitsby.FriendInviteActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -87,6 +93,7 @@
         <activity
             android:name="com.fitsby.LeagueJoinActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
@@ -107,25 +114,29 @@
         <activity
             android:name="com.fitsby.MeActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.fitsby.LeagueJoinDetailActivity"
+            android:theme="@style/StyledIndicators"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.fitsby.SettingsActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.fitsby.HelpActivity"
+            android:theme="@style/StyledIndicators"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.fitsby.LoggedinActivity"
             android:theme="@style/StyledIndicators"
-            android:windowSoftInputMode="stateHidden"
+            android:windowSoftInputMode="stateHidden"            
             android:screenOrientation="portrait" >
         </activity>
 		
@@ -151,6 +162,7 @@
         <activity
             android:name="com.fitsby.TutorialActivity"
             android:label="@string/title_activity_tutorial"
+            android:theme="@style/StyledIndicators"
             android:screenOrientation="portrait" >
         </activity>
 
@@ -159,7 +171,8 @@
             android:value="@string/app_id" />
 
         <activity
-            android:name="com.fitsby.ShareCheckinActivity">
+            android:name="com.fitsby.ShareCheckinActivity"
+            android:theme="@style/StyledIndicators" >
 <!--             android:theme="@android:style/Theme.Dialog"> -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -174,6 +187,7 @@
         </activity>
         <activity
             android:name="com.fitsby.FirstTimeCheckinActivity"
+            android:theme="@style/StyledIndicators"
             android:screenOrientation="portrait" >
         </activity>
     </application>

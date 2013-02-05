@@ -343,7 +343,7 @@ public class CheckinFragment extends SherlockFragment {
 
     	//TODO clean this up
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-    	builder.setMessage("Turning on your phone's GPS is required to make sure you are at a gym.\nWould you like to turn it on?")
+    	builder.setMessage("Turning on GPS is required to verify that you are at a gym. Would you like to turn GPS on?")
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {

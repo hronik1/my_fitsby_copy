@@ -43,14 +43,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/lock_image"
+            android:layout_alignRight="@+id/credit_card_cvc_text"
             android:layout_below="@+id/lock_image"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/white_textbox"
             android:digits="1234567890 "
             android:hint="@string/credit_card_et_card_number_hint"
-            android:maxLength="19"
-            android:inputType="number" >
+            android:inputType="number"
+        	android:imeOptions="actionNext"        		            
+            android:maxLength="19" >
 
             <requestFocus />
         </EditText>
@@ -79,6 +80,7 @@
             android:hint="@string/credit_card_et_expire_month_hint"
             android:digits="1234567890"            
             android:maxLength="2"
+        	android:imeOptions="actionNext"        		            
             android:inputType="number" />
 
         <EditText
@@ -92,6 +94,7 @@
             android:hint="@string/credit_card_et_expire_year_hint"
             android:digits="1234567890"            
             android:maxLength="4"
+        	android:imeOptions="actionNext"        		            
             android:inputType="number" />
 
         <TextView
@@ -105,19 +108,6 @@
             android:layout_marginBottom="5dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/credit_card_et_card_cvc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/credit_card_et_expire_year"
-            android:layout_alignBottom="@+id/credit_card_et_expire_year"
-            android:layout_alignRight="@+id/credit_card_et_card_number"
-            android:background="@drawable/white_textbox"
-            android:hint="@string/credit_card_et_card_cvc_hint"
-            android:digits="1234567890"            
-            android:maxLength="3"
-            android:inputType="number" />
 
 
         <TextView
@@ -198,6 +188,20 @@
             android:text="@string/credit_card_number_text"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/credit_card_et_card_cvc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/credit_card_et_expire_year"
+            android:layout_toRightOf="@+id/credit_card_et_expire_year"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/white_textbox"
+            android:digits="1234567890"
+            android:hint="@string/credit_card_et_card_cvc_hint"
+            android:inputType="number"
+        	android:imeOptions="actionDone"        		            
+            android:maxLength="3" />
 
     </RelativeLayout>
 
