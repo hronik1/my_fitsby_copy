@@ -491,6 +491,8 @@ public class GamesFragment extends SherlockFragment {
             	int checkins = Integer.parseInt(cursor.getString(columnIndex));
             	if (checkins < mGoal)
             		winner.setVisibility(View.INVISIBLE);
+            	else
+            		winner.setVisibility(View.VISIBLE);
             } else if (viewId == R.id.game_leader_goal_progress) {
             	ProgressBar progress = (ProgressBar) view;
             	int checkins = Integer.parseInt(cursor.getString(columnIndex));

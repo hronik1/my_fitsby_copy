@@ -56,6 +56,7 @@ public class LeagueCommunication {
 				return response;
 			}
 			return PublicLeaguesResponse.jsonToPublicLeagueResponse(MyHttpClient.parseResponse(serverResponse));
+			
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 			return new PublicLeaguesResponse(e.toString(), null);
@@ -140,7 +141,9 @@ public class LeagueCommunication {
 			json.put("credit_card_exp_month", expMonth);
 			json.put("credit_card_exp_year", expYear);
 			json.put("credit_card_cvc", cvc);
-	        StringEntity stringEntity = new StringEntity(json.toString());  
+			String request = json.toString();
+			Log.i(TAG + ":Create", request);
+	        StringEntity stringEntity = new StringEntity(request);  
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "create_game", stringEntity);
 			if (serverResponse.exception instanceof IOException) {
 				LeagueCreateResponse response = new LeagueCreateResponse();

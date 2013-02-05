@@ -74,8 +74,9 @@ public class PublicLeaguesResponse {
 					email = "";
 				}
 				try {
-					goal = json.getInt("goal_days");
+					goal = jsonLeague.getInt("goal_days");
 				} catch (Exception e) {
+					Log.e(TAG, e.toString());
 					goal = duration;
 				}
 				if (!imageMap.containsKey(email))  {
