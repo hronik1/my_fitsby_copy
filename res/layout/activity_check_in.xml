@@ -96,7 +96,7 @@
                 android:layout_toRightOf="@+id/colon"
                 android:text="@string/seconds"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="40dp" />
+                android:textSize="40sp" />
 
             <TextView
                 android:id="@+id/minutes"
@@ -108,6 +108,6 @@
                 android:layout_toLeftOf="@+id/colon"
                 android:text="@string/minutes"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="40dp" />
+                android:textSize="40sp" />
 
 </RelativeLayout>
