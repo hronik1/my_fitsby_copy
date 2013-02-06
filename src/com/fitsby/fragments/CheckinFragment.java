@@ -378,12 +378,14 @@ public class CheckinFragment extends SherlockFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-				Log.d(TAG, s.toString());
+				Log.d(TAG + ":afterTextChanged", s.toString());
 				String string = s.toString();
 				if (string.length() > 0 && Character.isLowerCase(s.charAt(0))) {
-					string = (Character.toUpperCase(s.charAt(0)) + string.substring(1, string.length()));
-					s.clear();
-					s.append(string);
+//					string = (Character.toUpperCase(s.charAt(0)) + string.substring(1, string.length()));
+					string = Character.toUpperCase(s.charAt(0)) + "";
+					s.replace(0, 1, string, 0, 1);
+					//s.clear();
+					//s.append(string);
 				}
 			}
 
@@ -391,6 +393,8 @@ public class CheckinFragment extends SherlockFragment {
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
+				Log.d(TAG + ":beforeTextChanged", s.toString() + "Start:" + start
+						+ " Count:" + count + " After:" + after);
 				
 			}
 
@@ -398,7 +402,8 @@ public class CheckinFragment extends SherlockFragment {
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				// TODO Auto-generated method stub
-				
+				Log.d(TAG + ":onTextChanged", s.toString() + "Start:" + start
+						+ " Count:" + count + " Before:" + before);
 			}
     		
     	});
