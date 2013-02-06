@@ -88,8 +88,8 @@
     <string name="navigation_textview_game_text">GAMES</string>
     <string name="navigation_textview_newsfeed_text">NEWSFEED</string>
     <string name="navigation_textview_checkin_text">CHECK IN</string>
-    <string name="check_in_button_check_in_text">Check In</string>
-    <string name="check_in_button_check_out_text">Check Out</string>
+    <string name="check_in_button_check_in_text">CHECK IN</string>
+    <string name="check_in_button_check_out_text">CHECK OUT</string>
     <string name="verified_gym">Currently not checked in at a gym</string>
     <string name="checkout_directions"></string>
     <string name="colon">:</string>

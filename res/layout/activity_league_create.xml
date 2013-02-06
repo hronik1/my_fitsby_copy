@@ -31,6 +31,14 @@
             android:background="@drawable/newsfeed_submit_button"
             android:text="@string/league_create_create_text"
             android:textColor="@color/white" />
+		<TextView
+	  	    android:layout_below="@+id/league_create_button_create"
+	  	    android:layout_alignLeft="@+id/league_create_button_create"
+	  	    android:layout_alignRight="@+id/league_create_button_create"
+		    android:id="@+id/button_shadow"
+		    android:layout_width="fill_parent"
+			android:layout_height="1dp"		
+			android:background="@color/fitsby_blue_dark" />           
         
         <TextView
             android:id="@+id/league_create_tv_wager"

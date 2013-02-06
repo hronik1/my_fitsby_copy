@@ -343,6 +343,14 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="10dp"
         android:textSize="16sp" />
+	<TextView
+  	    android:layout_below="@+id/league_join_detail_button_join"
+  	    android:layout_alignLeft="@+id/league_join_detail_button_join"
+  	    android:layout_alignRight="@+id/league_join_detail_button_join"
+	    android:id="@+id/button_shadow"
+	    android:layout_width="fill_parent"
+		android:layout_height="1dp"		
+		android:background="@color/fitsby_blue_dark" />        
 
     <TextView
         android:id="@+id/league_join_detail_name_first"
