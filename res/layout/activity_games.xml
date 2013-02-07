@@ -233,7 +233,7 @@
 	         android:layout_width="fill_parent"
 	         android:layout_height="fill_parent"
 	         android:layout_below="@+id/games_leader_prompt"
-	         android:background="@color/light_white"
+	         android:background="@color/darker_gray"
 	         android:fadingEdge="none"
 	         android:fastScrollEnabled="false"
 	         android:footerDividersEnabled="false"

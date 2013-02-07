@@ -30,7 +30,7 @@ public final class R {
 	}
 	public static final class color {
 		public static final int vpi__bright_foreground_disabled_holo_dark = 0x7f09000d;
-		public static final int vpi__light_theme = 0x7f090043;
+		public static final int vpi__light_theme = 0x7f090044;
 		public static final int vpi__background_holo_light = 0x7f09000a;
 		public static final int default_title_indicator_text_color = 0x7f090018;
 		public static final int vpi__background_holo_dark = 0x7f090009;
@@ -44,7 +44,7 @@ public final class R {
 		public static final int default_line_indicator_unselected_color = 0x7f090015;
 		public static final int default_underline_indicator_selected_color = 0x7f090019;
 		public static final int vpi__bright_foreground_holo_dark = 0x7f09000b;
-		public static final int vpi__dark_theme = 0x7f090042;
+		public static final int vpi__dark_theme = 0x7f090043;
 		public static final int default_circle_indicator_stroke_color = 0x7f090013;
 		public static final int vpi__bright_foreground_holo_light = 0x7f09000c;
 		public static final int default_circle_indicator_page_color = 0x7f090012;
