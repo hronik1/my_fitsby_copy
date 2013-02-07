@@ -50,7 +50,7 @@
     <string name="league_create_ib_wager_minus">-</string>
     <string name="league_create_ib_days_minus">-</string>
     <string name="league_create_ib_days_plus">+</string>
-    <string name="credit_card_main_directions_text">In order to start this game, you must commit to pay a wager amount if you do not reach the gym goal. Please enter your credit card information below (All payments are safely secured by Stripe and you will never be charged unless you lose a game).</string>
+    <string name="credit_card_main_directions_text">"In order to start this game, you must commit to pay a wager amount if you do not reach the gym goal. Please enter your credit card information below (all payments are safely secured by Stripe Payments and you will never be charged unless you lose a game)."</string>
     <string name="credit_card_number_text">Card Number:</string>
     <string name="credit_card_expiration_text">Expiration Date:</string>
     <string name="credit_card_cvc_text">CVC:</string>
