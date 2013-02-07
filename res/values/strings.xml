@@ -226,8 +226,8 @@
     <string name="login_remember_me_textview">Remember me</string>
     <string name="title_activity_tutorial"></string>
     <string name="title_activity_share_checkin"></string>
-    <string name="nice_workout_big">Nice Workout!</string>
-    <string name="nice_workout_small">You\'re a step ahead of the competition! Share the news with your friends!</string>
+    <string name="nice_workout_big">Nice Job!</string>
+    <string name="nice_workout_small">You\'re a step ahead of the competition! Want to share the awesome news with your friends?</string>
     <string name="title_activity_first_time_checkin"></string>
 
 </resources>
