@@ -85,6 +85,7 @@ public class MeFragment extends SherlockFragment {
 	private Button submitButton;
 	private Button tutorialButton;
 	private Button checkinTutorialButton;
+	private Button deleteButton;
 	
 	private CheckBox enableNotificationsCB;
 	private SharedPreferences mSharedPreferences;
@@ -327,6 +328,15 @@ public class MeFragment extends SherlockFragment {
 				startActivity(intent);
 			}
 		});
+		
+		deleteButton = (Button)viewer.findViewById(R.id.me_settings_button_delete);
+		deleteButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(parent, FirstTimeCheckinActivity.class);
+				showDeleteDialog();
+			}
+		});
 	}
 	
 	/**
@@ -411,6 +421,28 @@ public class MeFragment extends SherlockFragment {
 		startActivity(intent);
 //		
 //		parent.finish();
+	}
+	
+	/**
+	 * shows the alert dialog prompting user if the would like to delete their account
+	 */
+	private void showDeleteDialog() {
+    	Log.i(TAG, "showDeleteDialog");
+
+    	//TODO clean this up
+    	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+    	builder.setMessage("Are you sure you would like to delete your account?")
+    			.setCancelable(false)
+    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					UserCommunication.deleteUser(mUser.getID());
+    				}
+    			})
+    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int id) {
+    					dialog.cancel();
+    				}
+    			}).show();
 	}
 	
 	/**
