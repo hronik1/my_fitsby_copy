@@ -812,6 +812,39 @@ public class MeFragment extends SherlockFragment {
         	//TODO feeling toasty
         }
     }
+    
+    private class DeleteAccountAsyncTask extends AsyncTask<Void, Void, StatusResponse> {
+    	
+		protected void onPreExecute() {
+			try {
+				mProgressDialog = ProgressDialog.show(parent, "",
+						"Sending request to delete your account...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						DeleteAccountAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
+		}
+		
+        protected StatusResponse doInBackground(Void... params) {
+        	StatusResponse response = UserCommunication.deleteUser(mUser.getID());
+        	return response;
+        }
+
+        protected void onPostExecute(StatusResponse response) {
+			try {
+				mProgressDialog.dismiss();
+				if (response.wasSuccessful()) {
+	        		Toast toast = Toast.makeText(parent, "Your account will be deleted when your most last game has ended.", Toast.LENGTH_LONG);
+	        		toast.setGravity(Gravity.CENTER, 0, 0);
+	        		toast.show();
+				}
+			} catch (Exception e) { }
+        	//TODO feeling toasty
+        }
+    }
+    
 //    /**
 //     * Handler of incoming messages from service.
 //     */

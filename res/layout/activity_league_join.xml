@@ -159,6 +159,14 @@
         android:textColor="@color/white"
         android:text="@string/league_join_button_submit_text">
    </Button>
+	<TextView
+  	    android:layout_below="@+id/league_join_button_submit"
+  	    android:layout_alignLeft="@+id/league_join_button_submit"
+  	    android:layout_alignRight="@+id/league_join_button_submit"
+	    android:id="@+id/button_shadow_dark"
+	    android:layout_width="fill_parent"
+		android:layout_height="1dp"		
+		android:background="@color/fitsby_blue_dark" />    
     
    	 <TextView
         android:id="@+id/create_new_game_directions"
@@ -176,15 +184,23 @@
         android:id="@+id/league_join_button_create"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/button_shadow"
  		android:layout_marginTop="5dp"
   		android:layout_marginRight="10dp"
   		android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/newsfeed_submit_button"     
         android:textSize="14sp"
 		android:textColor="@color/white" 
         android:text="@string/league_join_button_create" />
+	<TextView
+  	    android:layout_alignParentBottom="true"
+  	    android:layout_alignLeft="@+id/league_join_button_create"
+  	    android:layout_alignRight="@+id/league_join_button_create"
+	    android:id="@+id/button_shadow"
+	    android:layout_width="fill_parent"
+        android:layout_marginBottom="10dp"
+		android:layout_height="1dp"		
+		android:background="@color/fitsby_blue_dark" />     	
 
    	 
 </RelativeLayout>

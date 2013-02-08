@@ -282,7 +282,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	
 	  	final EditText input = new EditText(this);
 	  	input.setHint("Enter message here:");	  	
-	  	input.setText("I just had an awesome workout at " + mGymName + "! @Fitsby's motivating me to hit the gym! fitsby.com #gymmotivation");
+	  	input.setText("Just had an awesome workout at " + mGymName + "! One step closer to my goal! via @Fitsby #gymmotivation");
     	builder.setView(input);
     	
     	builder.setMessage("Share on Twitter:")
@@ -411,7 +411,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
             Bundle postParams = new Bundle();
             postParams.putString("name", "I just had an awesome workout at " + mGymName + " using Fitsby!");
             postParams.putString("caption", "Want to stay motivated to work out with me?");
-            postParams.putString("description", "With Fitsby, we can play a game of gym check-ins and whoever doesn't reach their gym goal has to pay up!");
+            postParams.putString("description", "I'm one step closer to my goal! Come challenge me to a game of gym check-ins.");
             postParams.putString("link", "http://fitsby.com");
             postParams.putString("picture", "http://fitsby.com/images/icon_logo.png");
 
