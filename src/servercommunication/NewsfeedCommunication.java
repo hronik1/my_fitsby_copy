@@ -116,6 +116,9 @@ public class NewsfeedCommunication {
 		Log.d(TAG, comments.size()+"");
 		for(Comment comment: comments) {
 			Bitmap bitmap = comment.getBitmap();
+			if (bitmap == null) {
+				bitmap = Bitmap.createBitmap(60, 60, Bitmap.Config.ALPHA_8);
+			}
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 			byte[] byteArray = stream.toByteArray();

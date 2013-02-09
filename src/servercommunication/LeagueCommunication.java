@@ -109,6 +109,9 @@ public class LeagueCommunication {
 		Vector<League> leagues = publicLeaguesResponse.getLeagues();
 		for(League league: leagues) {
 			Bitmap bitmap = league.getBitmap();
+			if (bitmap == null) {
+				bitmap = Bitmap.createBitmap(60, 60, Bitmap.Config.ALPHA_8);
+			}
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 			byte[] byteArray = stream.toByteArray();
@@ -118,7 +121,6 @@ public class LeagueCommunication {
 			cursor.addRow(new Object[] {byteArray, leagueId, numPlayers, wager, league.getGoal(), league.getDuration()});
 		}
 		
-		//TODO parse json into cursor
 		return cursor;
 	}
 	

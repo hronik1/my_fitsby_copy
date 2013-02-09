@@ -40,17 +40,14 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 
 		        .setSmallIcon(R.drawable.ic_launcher);
 		
-//		Notification notification = mBuilder.build();
-//		notification.defaults |= Notification.DEFAULT_VIBRATE;
-//
 		Bundle bundle = intent.getExtras();
-//		Set<String> keySet = bundle.keySet();
-//		String content = "";
-//		for (String key: keySet) {
-//			Log.i(TAG, key + " " + bundle.getString(key));
-//			content += (" " + bundle.getString(key));
-//		}
-		mBuilder.setContentText(bundle.getString("message_text"));
+		if (bundle == null) {
+			//TODO handle not having a bundle more elegantly
+			return;
+		}
+		String messageText = bundle.getString("message_text");
+		
+		mBuilder.setContentText(messageText);
 		Intent clickedIntent = new Intent(GCMIntentService.this, LoggedinActivity.class);
 	    if ("newsfeed".equals(bundle.getString("collapse_key"))) {
     	    intent.putExtra(LoggedinActivity.POSITION_KEY,

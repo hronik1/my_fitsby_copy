@@ -337,6 +337,7 @@ public class MeFragment extends SherlockFragment {
 				showDeleteDialog();
 			}
 		});
+		deleteButton.setVisibility(View.GONE);
 	}
 	
 	/**
@@ -435,7 +436,7 @@ public class MeFragment extends SherlockFragment {
     			.setCancelable(false)
     			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int id) {
-    					UserCommunication.deleteUser(mUser.getID());
+    					new DeleteAccountAsyncTask().execute();
     				}
     			})
     			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
