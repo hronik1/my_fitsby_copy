@@ -498,6 +498,8 @@ public class GamesFragment extends SherlockFragment {
             	int checkins = Integer.parseInt(cursor.getString(columnIndex));
             	if (checkins >= mGoal)
             		progress.setProgressDrawable(parent.getResources().getDrawable(R.drawable.progress_bar_goal));
+            	else 
+            		progress.setProgressDrawable(parent.getResources().getDrawable(R.drawable.progress_bar_days));
             	double progressPercent = (checkins >= mGoal ? 100 : (double)checkins/(double)mGoal*100.0);
             	progress.setProgress((int)progressPercent);
             } else {
