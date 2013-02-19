@@ -532,7 +532,7 @@ public class CheckinFragment extends SherlockFragment {
 	    					} catch (RemoteException e) {
 	    						Log.e(TAG, e.toString());
 	    					}
-	    					checkinLocationTV.setText("You are currently not checked in at a verified gym");
+	    					checkinLocationTV.setText("Currently not checked in at a gym");
 	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 	    	        		if (mLocationManager != null && mLocationListener != null) {
 	    	        			mLocationManager.removeUpdates(mLocationListener);
