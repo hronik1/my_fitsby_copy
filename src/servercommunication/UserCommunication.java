@@ -304,7 +304,7 @@ public class UserCommunication {
         	json.put("user_id", userId);
         	StringEntity stringEntity = new StringEntity(json.toString()); 
         	ServerResponse serverResponse;
-        	serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "delete_user", stringEntity);
+        	serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "user_deletion", stringEntity);
 			if (serverResponse.exception instanceof IOException) {
 				StatusResponse response = new StatusResponse();
 				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));

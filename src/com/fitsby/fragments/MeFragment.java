@@ -337,7 +337,6 @@ public class MeFragment extends SherlockFragment {
 				showDeleteDialog();
 			}
 		});
-		deleteButton.setVisibility(View.GONE);
 	}
 	
 	/**

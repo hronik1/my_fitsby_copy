@@ -49,11 +49,15 @@ public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentServi
 		
 		mBuilder.setContentText(messageText);
 		Intent clickedIntent = new Intent(GCMIntentService.this, LoggedinActivity.class);
-	    if ("newsfeed".equals(bundle.getString("collapse_key"))) {
+		String collapseKey = bundle.getString("collapse_key");
+	    if ("newsfeed".equals(collapseKey)) {
     	    intent.putExtra(LoggedinActivity.POSITION_KEY,
     	    		LoggedinActivity.NEWSFEED_POSITION);
     	    mBuilder.setContentTitle("New comment");
-	    } else if ("game_start".equals(bundle.getString("collapse_key"))) {
+	    } else if ("game_start".equals(collapseKey)) {
+	    	mBuilder.setContentTitle("Fitsby");
+	    } else if ("no_check_in".equals(collapseKey)) {
+	    	//TODO this could be changed
 	    	mBuilder.setContentTitle("Fitsby");
 	    } else {
 	    	mBuilder.setContentTitle("Position change");
