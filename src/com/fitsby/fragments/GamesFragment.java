@@ -79,6 +79,7 @@ public class GamesFragment extends SherlockFragment {
 	private Spinner gamesSpinner;
 	private Button inviteButton;
 	private Button newGamesButton;
+	private Button cancelGameButton;
 	
 	private ArrayAdapter<String> spinnerDataAdapter;
 	private List<String> spinnerData;
@@ -241,6 +242,14 @@ public class GamesFragment extends SherlockFragment {
 				gotoLeagueJoinActivity();
 			}
 		});
+		
+		cancelGameButton = (Button)viewer.findViewById(R.id.games_cancel_button);
+		cancelGameButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				cancelGame();
+			}
+		});
 	}
 	
 	private void gotoInviteActivity() {
@@ -273,6 +282,14 @@ public class GamesFragment extends SherlockFragment {
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		} 
+	}
+	
+	/**
+	 * Send request to cancel the current game
+	 * Only applicable if game just contains creator
+	 */
+	private void cancelGame() {
+		
 	}
 	
 	private void disableGamesPrompts() {
@@ -398,6 +415,10 @@ public class GamesFragment extends SherlockFragment {
         	if (response.wasSuccessful()) {
         		League league = response.getLeague();
         		playersTV.setText("" + league.getPlayers());
+        		if (league.getPlayers() == 1)
+        			cancelGameButton.setVisibility(View.VISIBLE);
+        		else
+        			cancelGameButton.setVisibility(View.INVISIBLE);
         		goalTV.setText("" + league.getGoal());
         		mGoal = league.getGoal();
         		durationTV.setText("" + league.getDuration() + " days");
