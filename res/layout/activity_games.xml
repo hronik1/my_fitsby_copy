@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_white" >
 
-    <LinearLayout
+    <RelativeLayout
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:id="@+id/games_spinner_wrapper"
@@ -12,12 +12,26 @@
 		android:layout_alignParentRight="true" >	    
 	    <Spinner
 	        android:id="@+id/games_spinner"
-	        android:layout_width="0dp"
-	        android:layout_height="match_parent"
-	        android:layout_weight="1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_alignParentLeft="true"
 	        android:textStyle="bold" />
 		
-    </LinearLayout>
+	    <Button
+	        android:id="@+id/games_cancel_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height ="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:background="@drawable/newsfeed_submit_button"
+	       	android:textColor="@color/white"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:layout_margin="10dp"
+	        android:text="CANCEL"
+	        android:visibility="invisible" />
+    </RelativeLayout>
     
 	<LinearLayout
 	    android:layout_marginTop="2dp"
