@@ -229,5 +229,7 @@
     <string name="nice_workout_big">Nice Job!</string>
     <string name="nice_workout_small">You\'re a step ahead of the competition! Want to share the awesome news with your friends?</string>
     <string name="title_activity_first_time_checkin"></string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

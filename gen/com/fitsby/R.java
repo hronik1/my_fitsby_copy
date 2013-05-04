@@ -1432,6 +1432,12 @@ containing a value of this type.
  Minimum width for an action button in the menu area of an action bar 
          */
         public static final int action_button_min_width=0x7f08002e;
+        /** 
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
+    
+         */
+        public static final int activity_horizontal_margin=0x7f08002f;
         public static final int com_facebook_loginview_height=0x7f080007;
         public static final int com_facebook_loginview_padding_bottom=0x7f080005;
         public static final int com_facebook_loginview_padding_left=0x7f080002;
@@ -2181,6 +2187,7 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f060028;
+        public static final int action_settings=0x7f060110;
         public static final int add_friend_button=0x7f06006e;
         public static final int app_id=0x7f060034;
         public static final int app_name=0x7f060038;
@@ -2429,6 +2436,7 @@ containing a value of this type.
         public static final int title_activity_league_landing=0x7f060050;
         public static final int title_activity_loggedin=0x7f060108;
         public static final int title_activity_login=0x7f060048;
+        public static final int title_activity_main=0x7f06010f;
         public static final int title_activity_me=0x7f06008c;
         public static final int title_activity_newsfeed=0x7f06008a;
         public static final int title_activity_register=0x7f06003b;
