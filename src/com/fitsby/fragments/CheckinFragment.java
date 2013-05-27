@@ -1,40 +1,16 @@
 package com.fitsby.fragments;
 
-import java.util.List;
 import java.util.Vector;
 
 import me.kiip.sdk.Kiip;
 import me.kiip.sdk.Poptart;
-import responses.AddPlaceResponse;
 import responses.PlacesResponse;
 import responses.StatusResponse;
 import responses.ValidateGymResponse;
 import servercommunication.CheckinCommunication;
 import servercommunication.UserCommunication;
-
-
-
-
-import bundlekeys.LeagueDetailBundleKeys;
-
-import com.actionbarsherlock.app.SherlockFragment;
-import com.fitsby.FirstTimeCheckinActivity;
-import com.fitsby.KiipSherlockFragmentActivity;
-import com.fitsby.LeagueCreateActivity;
-import com.fitsby.LoggedinActivity;
-import com.fitsby.MessengerService;
-import com.fitsby.R;
-import com.fitsby.ShareCheckinActivity;
-import com.fitsby.applicationsubclass.ApplicationUser;
-
-import constants.RememberMeConstants;
-
-import dbtables.User;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -46,8 +22,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,13 +30,16 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +47,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import bundlekeys.LeagueDetailBundleKeys;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.fitsby.FirstTimeCheckinActivity;
+import com.fitsby.KiipSherlockFragmentActivity;
+import com.fitsby.LoggedinActivity;
+import com.fitsby.MessengerService;
+import com.fitsby.R;
+import com.fitsby.ShareCheckinActivity;
+import com.fitsby.applicationsubclass.ApplicationUser;
+
+import dbtables.User;
 
 public class CheckinFragment extends SherlockFragment {
 
