@@ -1,23 +1,18 @@
 package com.fitsby;
 
 
-import registration.RegisterClientSideValidation;
 import responses.StatusResponse;
 import responses.UserResponse;
 import servercommunication.ServerCommunication;
 import servercommunication.UserCommunication;
-import dbhandlers.DatabaseHandler;
-import dbhandlers.UserTableHandler;
-import dbtables.User;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnCancelListener;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;

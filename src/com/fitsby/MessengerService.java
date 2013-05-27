@@ -3,7 +3,6 @@ package com.fitsby;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,7 +15,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
 public class MessengerService extends Service {
@@ -41,7 +39,6 @@ public class MessengerService extends Service {
     private static int seconds = 0;
     
     private static String gym;
-    private static int count = 0;
     
     /**
      * Handler of incoming messages from clients.
@@ -99,7 +96,6 @@ public class MessengerService extends Service {
 		mClient = message.replyTo;
 		try {
 			Bundle data = new Bundle();
-			count++;
 			data.putString(GYM_NAME_KEY, gym);
 			Message msg = Message.obtain(null, MSG_SET_GYM);
 			msg.setData(data);
