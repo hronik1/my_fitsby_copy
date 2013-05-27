@@ -2,48 +2,29 @@ package com.fitsby;
 
 
 import gravatar.Gravatar;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.fitsby.applicationsubclass.*;
-import com.fitsby.fragments.CheckinFragment;
-import com.fitsby.fragments.GamesFragment;
-import com.fitsby.fragments.MeFragment;
-import com.fitsby.fragments.NewsfeedFragment;
-import com.flurry.android.FlurryAgent;
-import com.google.android.gcm.GCMRegistrar;
-import com.viewpagerindicator.TabPageIndicator;
-
-
-import constants.FlurryConstants;
-
 import servercommunication.MyHttpClient;
-import tablisteners.TabManager;
-
-
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.fitsby.applicationsubclass.ApplicationUser;
+import com.fitsby.fragments.CheckinFragment;
+import com.fitsby.fragments.GamesFragment;
+import com.fitsby.fragments.NewsfeedFragment;
+import com.flurry.android.FlurryAgent;
+import com.viewpagerindicator.TabPageIndicator;
 
-
+import constants.FlurryConstants;
 import dbtables.User;
-import android.widget.SearchView;
-import android.widget.TabHost;
-import android.widget.Toast;
 
 public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	private static final String[] CONTENT = new String[] { "GAMES", "NEWSFEED", "CHECK IN"};
@@ -52,16 +33,11 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	public static final String POSITION_KEY = "positionKey";
 	private static final String TAG = "LoggedinActivity";
 	
-	private SearchView searchView;
-
-	private TabHost mTabHost;
-	private TabManager mTabManager;
 	private MenuItem settingsMenuItem;
 	private User mUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//setTheme(SampleList.THEME); //Used for theme switching in samples
 		super.onCreate(savedInstanceState);
 		mUser = ((ApplicationUser)getApplicationContext()).getUser();
 		if (mUser == null) {
@@ -72,26 +48,7 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
 		Log.i(TAG, "onCreate");
 		
 		setContentView(R.layout.activity_loggedin);
-//        mTabHost = (TabHost)findViewById(android.R.id.tabhost);
-//        mTabHost.setup();
-//
-//        mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
-//
-//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_game_text))
-//				.setIndicator(getString(R.string.navigation_textview_game_text)),
-//				GamesFragment.class, null);
-//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_newsfeed_text))
-//				.setIndicator(getString(R.string.navigation_textview_newsfeed_text)),
-//				NewsfeedFragment.class, null);
-//		mTabManager.addTab(mTabHost.newTabSpec(getString(R.string.navigation_textview_checkin_text))
-//				.setIndicator(getString(R.string.navigation_textview_checkin_text)),
-//				CheckinFragment.class, null);
-//
-//
-//		if (savedInstanceState != null) {
-//			mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
-//		}
-
+		
         FragmentPagerAdapter adapter = new LoggedinFragmentAdapter(getSupportFragmentManager());
 
         ViewPager pager = (ViewPager)findViewById(R.id.loggedin_pager);
@@ -126,7 +83,6 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-//		outState.putString("tab", mTabHost.getCurrentTabTag());
 		
 		Log.i(TAG, "onSaveInstanceState");
 	}
