@@ -1,21 +1,18 @@
 package com.fitsby;
 
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.crittercism.app.Crittercism;
 import com.fitsby.applicationsubclass.ApplicationUser;
-import com.fitsby.LoggedinActivity;
 import com.flurry.android.FlurryAgent;
-import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
 import constants.TutorialsConstants;
