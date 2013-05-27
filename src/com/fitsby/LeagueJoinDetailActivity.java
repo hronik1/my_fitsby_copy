@@ -68,7 +68,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 	private Button faqButton;
 	
 	private ImageView mImageView;
-//	private ListView mListView;
 	
 	private ApplicationUser mApplicationUser;
 	
@@ -83,8 +82,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 	private User mUser;
 	
 	private ProgressDialog mProgressDialog;
-	private List<LeagueMember> listLeagueMember;
-//	private SimpleCursorAdapter mAdapter;
 
 	/**
 	 * called when activtiy is created
@@ -100,7 +97,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         initializeTextViews();
         initializeButtons();
         initializeImageView();
-        initializeListView();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         mUser = mApplicationUser.getUser();
@@ -266,16 +262,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  		mImageView.setImageBitmap(bitmap);
  	}
  	
- 	/**
- 	 * initializes the listview
- 	 */
- 	private void initializeListView() {
-// 		mListView = (ListView)findViewById(R.id.league_join_detail_members_lv);
-//		mAdapter = new SimpleCursorAdapter(this, R.layout.list_item_game_leader, null, GamesFragment.fromArgs, GamesFragment.toArgs, 0);
-//		mAdapter.setViewBinder(new MyViewBinder());
-//		mListView.setAdapter(mAdapter);
- 	}
- 	
   	/**
  	 * join the game selected by user
  	 */
@@ -306,7 +292,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	 * opens up the faq browser
  	 */
  	private void showFaqBrowser() {
- 		//TODO change url to point to faq url
  		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fitsby.com/faq.html"));
  		startActivity(browserIntent);
  	}
@@ -330,6 +315,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     				}
     			}).show();
     }
+    
     /**
      * AsyncTask to find users games
      * @author brent
@@ -394,8 +380,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         	
         	if (response.wasSuccessful()) {
             	firstNameTV.setText(" " + response.getCreatorFirstName());
-        	}	
-//        	new CursorDataAsyncTask().execute();
+        	}
         }
     }
     
@@ -427,7 +412,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         	if (response.wasSuccessful()) {
         		try {
         			ApplicationUser appData = (ApplicationUser)getApplicationContext();
-//            		Intent intent = new Intent(LeagueJoinDetailActivity.this, LoggedinActivity.class);
         			Intent intent = new Intent(LeagueJoinDetailActivity.this, FriendInviteActivity.class);
             		intent.putExtra(CreditCardBundleKeys.KEY_LEAGUE_ID, appData.getLeagueId());
             		startActivity(intent);
@@ -438,49 +422,6 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         		toast.setGravity(Gravity.CENTER, 0, 0);
     			toast.show();
         	}
-        }
-    }
-    
-    /**
-     * AsyncTask to find users games
-     * @author brent
-     *
-     */
-//    private class CursorDataAsyncTask extends AsyncTask<String, Void, Cursor> {
-//    	
-//		protected void onPreExecute() {
-//            mProgressDialog = ProgressDialog.show(LeagueJoinDetailActivity.this, "",
-//                    "Getting game members...");
-//		}
-//		
-//        protected Cursor doInBackground(String... params) {
-//        	Cursor cursor = GamesLeaderCommunication.getGamesLeader(leagueId);
-//        	return cursor;
-//        }
-//
-//		protected void onPostExecute(Cursor cursor) {
-//			mProgressDialog.cancel();
-////        	mAdapter.swapCursor(cursor);
-////        	mAdapter.notifyDataSetChanged();
-//
-//        }
-//    }
-    
-    private class MyViewBinder implements SimpleCursorAdapter.ViewBinder {
-
-        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-            int viewId = view.getId();
-            Log.d(TAG, cursor.getClass().toString());
-            if(viewId == R.id.list_item_game_leader_imageview) {
-            	ImageView profilePic = (ImageView) view;
-            	byte[] bytes = cursor.getBlob(columnIndex);
-            	profilePic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-            } else {
-            	TextView name = (TextView) view;
-            	name.setText(cursor.getString(columnIndex));
-            }
-            
-            return true;
         }
     }
     
