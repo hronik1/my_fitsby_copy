@@ -1,29 +1,16 @@
 package com.fitsby;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import responses.LeagueCreateResponse;
 import responses.StatusResponse;
-import responses.UsersGamesResponse;
-import servercommunication.CreditCardCommunication;
 import servercommunication.LeagueCommunication;
-import servercommunication.UserCommunication;
-import android.text.Spanned;
-import bundlekeys.CreditCardBundleKeys;
-import bundlekeys.LeagueDetailBundleKeys;
-import dbtables.User;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
-import android.telephony.SmsManager;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -34,12 +21,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import bundlekeys.CreditCardBundleKeys;
+import bundlekeys.LeagueDetailBundleKeys;
 
-import com.fitsby.applicationsubclass.*;
+import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
-import com.stripe.Stripe;
-import com.stripe.exception.StripeException;
-import com.stripe.model.Token;
 
 import constants.FlurryConstants;
 
@@ -56,10 +42,6 @@ public class CreditCardActivity extends KiipFragmentActivity {
 	private Bundle extras;
 	
 	private int wager;
-	private int leagueId;
-	private boolean isValid;
-	
-	private User mUser;
 	
 	private ProgressDialog mProgressDialog;
 	
@@ -78,8 +60,6 @@ public class CreditCardActivity extends KiipFragmentActivity {
         initializeButtons();
         initializeEditTexts();
         initializeTextViews();
-        
-        mUser = ((ApplicationUser)getApplicationContext()).getUser();
     }
 
     /**
@@ -154,19 +134,15 @@ public class CreditCardActivity extends KiipFragmentActivity {
 
     private void parseBundle(Intent intent) {
     	if(intent == null) {
-    		isValid = false;
     		return;
     	}
     	
     	extras = intent.getExtras();
     	if(extras == null) {
-    		isValid = false;
     		return;
     	}
     	
     	wager = extras.getInt(CreditCardBundleKeys.KEY_WAGER);
-
-    	isValid = true;
     }
     
     /**
@@ -174,25 +150,6 @@ public class CreditCardActivity extends KiipFragmentActivity {
      */
     private void initializeEditTexts() {
     	numberET = (EditText)findViewById(R.id.credit_card_et_card_number);
-//    	InputFilter filter = new InputFilter() {
-//    	    @Override
-//    	    public CharSequence filter(CharSequence source, int start, int end,
-//    	            Spanned dest, int dstart, int dend) {
-//
-//    	    	StringBuilder filteredStringBuilder = new StringBuilder();
-//    	    	for (int i = 0; i < end && i < 19; i++) { 
-//    	    		char currentChar = source.charAt(i);
-//    	    		if (!Character.isSpaceChar(currentChar)) {    
-//    	    			filteredStringBuilder.append(currentChar);
-//    	    		}  
-//					if (filteredStringBuilder.length() == 4 || filteredStringBuilder.length() == 9 || filteredStringBuilder.length() == 14)
-//						filteredStringBuilder.append(" ");
-//    	    	}
-//    	    	return filteredStringBuilder.toString();
-//    	       
-//    	    }
-//    	};
-//    	numberET.setFilters(new InputFilter[]{filter});
     	numberET.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -336,29 +293,6 @@ public class CreditCardActivity extends KiipFragmentActivity {
     private String parseCreditCard(String unparsed) {
     	return (unparsed.substring(0,4) + unparsed.substring(5,9) + 
     			unparsed.substring(10,14) + unparsed.substring(15,19));
-    }
-    /**
-     * AsyncTask class to send info to server
-     * @author brent
-     *
-     */
-    private class SendCreditCardAsyncTask extends AsyncTask<String, Void, StatusResponse> {
-        protected StatusResponse doInBackground(String... params) {
-        	StatusResponse response = CreditCardCommunication.sendCreditCardInformation(params[0], params[1],
-        			params[2], params[3], params[4]);
-        	return response;
-        }
-
-        protected void onPostExecute(StatusResponse response) {
-        	if (response.wasSuccessful()) {
-        		Intent intent = new Intent(CreditCardActivity.this, FriendInviteActivity.class);
-        		startActivity(intent);
-        	} else {
-        		Toast toast = Toast.makeText(CreditCardActivity.this, "Your card was declined. Are you sure you filled in all the information correctly?", Toast.LENGTH_LONG);
-        		toast.setGravity(Gravity.CENTER, 0, 0);
-        		toast.show();
-        	}
-        }
     }
     
     /**

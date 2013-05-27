@@ -1432,12 +1432,6 @@ containing a value of this type.
  Minimum width for an action button in the menu area of an action bar 
          */
         public static final int action_button_min_width=0x7f08002e;
-        /** 
-         Customize dimensions originally defined in res/values/dimens.xml (such as
-         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
-    
-         */
-        public static final int activity_horizontal_margin=0x7f08002f;
         public static final int com_facebook_loginview_height=0x7f080007;
         public static final int com_facebook_loginview_padding_bottom=0x7f080005;
         public static final int com_facebook_loginview_padding_left=0x7f080002;
