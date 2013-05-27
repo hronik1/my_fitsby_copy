@@ -1,82 +1,52 @@
 package com.fitsby;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import responses.CreatorResponse;
-import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
-import responses.UsersGamesResponse;
 import servercommunication.LeagueCommunication;
 import servercommunication.UserCommunication;
-
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.SharedPreferences.Editor;
-import android.database.Cursor;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.telephony.SmsManager;
 import bundlekeys.LeagueDetailBundleKeys;
 
-import com.facebook.FacebookRequestError;
 import com.facebook.FacebookException;
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.RequestAsyncTask;
-import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.model.GraphObject;
 import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
-
-import dbtables.League;
 import dbtables.User;
-
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-
-import twitter4j.auth.AccessToken;
-import twitter4j.auth.RequestToken;
-import twitter4j.conf.Configuration;
-import twitter4j.conf.ConfigurationBuilder;
 
 public class FriendInviteActivity extends KiipFragmentActivity {
 
@@ -88,10 +58,6 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 	private Button shareButton;
 	private Button twitterLoginButton;
 	private Button twitterShareButton;
-	
-	private ListView contactsListView;
-	private ArrayList<String> contacts;
-	private ArrayAdapter<String> contactsAdapter;
 	
 	private ProgressDialog mProgressDialog;
 	private static int leagueId;
@@ -147,38 +113,6 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         mUser = mApplicationUser.getUser();
         parseBundle(getIntent());
         uri = getIntent().getData();
-
-//        if (!isTwitterLoggedInAlready()) {
-//            
-//            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
-//                // oAuth verifier
-//                String verifier = uri
-//                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
-//     
-//                try {
-//                    // Get the access token
-//                    AccessToken accessToken = twitter.getOAuthAccessToken(
-//                            requestToken, verifier);
-//     
-//                    // Shared Preferences
-//                    Editor e = mSharedPreferences.edit();
-//     
-//                    // After getting access token, access token secret
-//                    // store them in application preferences
-//                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
-//                    e.putString(PREF_KEY_OAUTH_SECRET,
-//                            accessToken.getTokenSecret());
-//                    // Store login status - true
-//                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
-//                    e.commit(); // save changes
-//                    Toast.makeText(this, "logged in", Toast.LENGTH_SHORT).show();
-//                } catch (Exception e) {
-//                    // Check log for login errors
-//                	Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-//                    Log.e("Twitter Login Error", "> " + e.getMessage());
-//                }
-//            }
-//        }
 
         initializeButtons(); 
         
@@ -342,44 +276,6 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     		}
     	});
     }
-
-    private void initializeListView() {
-		contacts =  new ArrayList<String>();
-
-		contactsAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, contacts);
-		contactsListView.setAdapter(contactsAdapter);
-		
-		contactsListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parentView, View view, final int position,
-					long id) {
-			  	AlertDialog.Builder builder = new AlertDialog.Builder(FriendInviteActivity.this);
-		    	
-			  	final EditText input = new EditText(FriendInviteActivity.this);
-			  	input.setText("I challenge you to a game of gym check-ins using Fitsby! " +
-			  			"Download the free app at fitsby.com, then join my game (Game Host is "  + creatorName + " & Game ID is " + leagueId + ")");
-		    	builder.setView(input);
-		    	
-		    	builder.setMessage("Please confirm that you want to send an invite to " + contacts.get(position))
-		    			.setCancelable(false)
-		    			.setPositiveButton("Send", new DialogInterface.OnClickListener() {
-		    				public void onClick(DialogInterface dialog, int id) {
-		    				    SmsManager smsManager = SmsManager.getDefault();
-		    				    smsManager.sendTextMessage(contacts.get(position), null, input.getText().toString(), null, null);
-		    				}
-		    			})
-		    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-		    				public void onClick(DialogInterface dialog, int id) {
-		    					dialog.cancel();
-		    				}
-		    			}).show();
-			}
-			
-		});
-		
-    }
     
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
@@ -389,47 +285,18 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     		
     	leagueId = extras.getInt(LeagueDetailBundleKeys.KEY_LEAGUE_ID);
     }
+    
     /**
      * invite your friends selected from the content provider
      */
     private void invite() {
-    	//TODO implement inviting functionality
     	queryContacts();
     }
     
     /**
      * querys the contacts of the given user
      */
-    private void queryContacts() {
-    	//TODO turn this shitty looking throw away code into something beautiful
-    	
-//    	ContentResolver contentResolver = getContentResolver();
-//    	Cursor contactsCursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
-//    			null, null, null, null);
-//        if (contactsCursor.getCount() > 0) {
-//        	while (contactsCursor.moveToNext()) {
-//        		String id = contactsCursor.getString(
-//        				contactsCursor.getColumnIndex(ContactsContract.Contacts._ID));
-//        		String name = contactsCursor.getString(
-//        				contactsCursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-//        		if (Integer.parseInt(contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-//        			if (Integer.parseInt(contactsCursor.getString(
-//        					contactsCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-//        				Cursor phoneNumberCursor = contentResolver.query(
-//        						ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, 
-//        						ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?", 
-//        								new String[]{id}, null);
-//        				while (phoneNumberCursor.moveToNext()) {
-//        					String phoneNumber = phoneNumberCursor.getString(phoneNumberCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
-//        					contacts.add(phoneNumber);
-//        					contactsAdapter.notifyDataSetChanged();
-//        				} 
-//        				phoneNumberCursor.close();
-//        			}
-//        		}
-//        	}
-//        }
-    	
+    private void queryContacts() {  	
     	try {
     		Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
     		pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
@@ -442,6 +309,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	}
 
     }
+    
     /**
      * go to your home page
      */
@@ -450,7 +318,6 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     		Intent intent = new Intent(this, LoggedinActivity.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		startActivity(intent);
-//    		this.finish();
     	} catch(Exception e) {
     		//TODO handle not starting intent better
     		Toast toast = Toast.makeText(getApplicationContext(), "This activity could not be started", Toast.LENGTH_LONG);
@@ -680,38 +547,6 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 			} catch (Exception e) { }
         }
      
-    }
-    
-    /**
-     * AsyncTask to find users games
-     * @author brent
-     *
-     */
-    private class ContactsAsyncTask extends AsyncTask<String, Void, Void> {
-    	
-		protected void onPreExecute() {
-			try {
-				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-						"Gathering your contacts...", true, true,
-						new OnCancelListener() {
-					public void onCancel(DialogInterface pd) {
-						ContactsAsyncTask.this.cancel(true);
-					}
-				});
-			} catch (Exception e) { }
-		}
-		
-        protected Void doInBackground(String... params) {
-        	queryContacts();
-			return null;
-        }
-
-		protected void onPostExecute() {
-			try {
-				mProgressDialog.dismiss();
-			} catch (Exception e) { }
-        	
-        }
     }
     
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
