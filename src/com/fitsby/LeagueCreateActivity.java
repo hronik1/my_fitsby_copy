@@ -1,27 +1,15 @@
 package com.fitsby;
 
 import responses.LeagueCreateResponse;
-import responses.StatusResponse;
 import servercommunication.LeagueCommunication;
-
-
-import bundlekeys.CreditCardBundleKeys;
-import bundlekeys.LeagueDetailBundleKeys;
-import dbhandlers.DatabaseHandler;
-import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.LeagueTableHandler;
-import dbtables.League;
-import dbtables.LeagueMember;
-import dbtables.User;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -29,11 +17,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import bundlekeys.CreditCardBundleKeys;
+import bundlekeys.LeagueDetailBundleKeys;
 
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;

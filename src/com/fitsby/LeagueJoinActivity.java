@@ -1,20 +1,16 @@
 package com.fitsby;
 
-import responses.PrivateLeagueResponse;
-import responses.UserResponse;
-import servercommunication.LeagueCommunication;
-import servercommunication.UserCommunication;
-import bundlekeys.LeagueDetailBundleKeys;
-import dbhandlers.LeagueTableHandler;
-import dbtables.League;
-import dbtables.User;
 import loaders.PublicLeaguesCursorLoader;
+import responses.PrivateLeagueResponse;
+import servercommunication.LeagueCommunication;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -22,28 +18,21 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Toast;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.LoaderManager;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v4.content.Loader;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import bundlekeys.LeagueDetailBundleKeys;
 
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
+import dbhandlers.LeagueTableHandler;
+import dbtables.League;
+import dbtables.User;
 
 public class LeagueJoinActivity extends KiipFragmentActivity 
 	implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
@@ -54,7 +43,6 @@ public class LeagueJoinActivity extends KiipFragmentActivity
 	private Button buttonCreate;
 	
 	private EditText etFirstName;
-	private EditText etLastName;
 	private EditText etInviteCode;
 	private ListView leagueLV;
 	private User mUser;
