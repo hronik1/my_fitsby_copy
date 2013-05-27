@@ -52,8 +52,6 @@ public class LoginActivity extends KiipFragmentActivity {
 	private String preferencesPassword;
 	
 	private ServerCommunication comm;
-	private DatabaseHandler mdbHandler;
-	private UserTableHandler mUserTableHandler;
 	private ApplicationUser mApplicationUser;
 	
 	private ProgressDialog mProgressDialog;
@@ -74,9 +72,7 @@ public class LoginActivity extends KiipFragmentActivity {
         initializeTextViews();
         initializeCheckBox();
         initializeSharedPreferences();
-        
-        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
-        mUserTableHandler = mdbHandler.getUserTableHandler();
+
         mApplicationUser = ((ApplicationUser)getApplicationContext());
     }
 
@@ -171,7 +167,6 @@ public class LoginActivity extends KiipFragmentActivity {
 
     	String password = "";
     	String email = "";
-    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
 
     	if (passwordET != null && passwordET.getText() != null)
     		password = passwordET.getText().toString();
@@ -187,26 +182,6 @@ public class LoginActivity extends KiipFragmentActivity {
     	}
     	
     	 new LoginAsyncTask().execute(email, password);
-//    	String string = new UserCommunication().loginUser(email, password);
-//    	Toast.makeText(this, string, Toast.LENGTH_LONG).show();
-//    	if (dbHandler.getUserTableHandler().isEmailPasswordComboValid(email, password)) {
-//    		User user = mUserTableHandler.getUser(email);
-//    		mApplicationUser.setUser(user);
-//    		try {
-//    			Intent intent = new Intent(this, GamesActivity.class);
-//    			startActivity(intent);
-//    		} catch (Exception e) {
-//    			//TODO something more robust possibly
-//    			Toast toast = Toast.makeText(LoginActivity.this, "We cannot log you in at the moment.", Toast.LENGTH_LONG);
-//    			toast.setGravity(Gravity.CENTER, 0, 0);
-//    			toast.show();
-//    		}
-//    	} else {
-//    		//TODO password salting maybe?
-//    		Toast toast = Toast.makeText(LoginActivity.this, "Incorrect Email or Password.", Toast.LENGTH_LONG);
-//    		toast.setGravity(Gravity.CENTER, 0, 0);
-//    		toast.show();
-//    	}
     	
     }
     
