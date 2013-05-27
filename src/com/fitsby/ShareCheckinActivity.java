@@ -104,37 +104,6 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
         parseBundle(getIntent());
 
         uri = getIntent().getData();
-//        if (!isTwitterLoggedInAlready()) {
-//            Uri uri = getIntent().getData();
-//            if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
-//                // oAuth verifier
-//                String verifier = uri
-//                        .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
-//     
-//                try {
-//                    // Get the access token
-//                    AccessToken accessToken = twitter.getOAuthAccessToken(
-//                            requestToken, verifier);
-//     
-//                    // Shared Preferences
-//                    Editor e = mSharedPreferences.edit();
-//     
-//                    // After getting access token, access token secret
-//                    // store them in application preferences
-//                    e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
-//                    e.putString(PREF_KEY_OAUTH_SECRET,
-//                            accessToken.getTokenSecret());
-//                    // Store login status - true
-//                    e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
-//                    e.commit(); // save changes
-//
-//                } catch (Exception e) {
-//                    // Check log for login errors
-//                    Log.e("Twitter Login Error", "> " + e.getMessage());
-//                }
-//            }
-//        }
-
         
         initializeButtons(); 
         
