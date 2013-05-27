@@ -154,7 +154,6 @@ public class CheckinFragment extends SherlockFragment {
         gyms = new Vector<String>();
         Intent intent = new Intent(parent, MessengerService.class);
         parent.startService(intent);
-//        doBindService();
         
         mSharedPreferences = parent.getSharedPreferences(
                 "FirstCheckinPrefs", 0);
@@ -270,7 +269,6 @@ public class CheckinFragment extends SherlockFragment {
 			};
 			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 					UPDATE_TIME_MILLIS, UPDATE_MIN_DISTANCE, mLocationListener);
-			LocationProvider gpsProvider = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
 			Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if (location != null) {
 				Log.i(TAG, "location not null");
@@ -282,35 +280,6 @@ public class CheckinFragment extends SherlockFragment {
 				Log.i(TAG, "location null");
 				new GetLocationAsyncTask(true).execute();
 			}
-//			List<String> matchingProviders = mLocationManager.getAllProviders();
-//			Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
-//			float bestAccuracy = Float.MAX_VALUE;
-//			long bestTime = Long.MIN_VALUE;
-//			long minTime = Long.MAX_VALUE;
-//			for (String provider: matchingProviders) {
-//			  Location location = mLocationManager.getLastKnownLocation(provider);
-//			  if (location != null) {
-//			    float accuracy = location.getAccuracy();
-//			    long time = location.getTime();
-//			        
-//			    if ((time > minTime && accuracy < bestAccuracy)) {
-//			      bestResult = location;
-//			      bestAccuracy = accuracy;
-//			      bestTime = time;
-//			    }
-//			    else if (time < minTime && 
-//			             bestAccuracy == Float.MAX_VALUE && time > bestTime){
-//			      bestResult = location;
-//			      bestTime = time;
-//			    }
-//			  }
-//			}
-//			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 100, mLocationListener); 
-//			latitude = bestResult.getLatitude();
-//			longitude = bestResult.getLongitude();
-//			new GooglePlacesAsyncTast().execute(getString(R.string.places_api_key), latitude+"",
-//					longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
-
 		}
 	}
 	
@@ -381,11 +350,8 @@ public class CheckinFragment extends SherlockFragment {
 				Log.d(TAG + ":afterTextChanged", s.toString());
 				String string = s.toString();
 				if (string.length() > 0 && Character.isLowerCase(s.charAt(0))) {
-//					string = (Character.toUpperCase(s.charAt(0)) + string.substring(1, string.length()));
 					string = Character.toUpperCase(s.charAt(0)) + "";
 					s.replace(0, 1, string, 0, 1);
-					//s.clear();
-					//s.append(string);
 				}
 			}
 
@@ -446,19 +412,9 @@ public class CheckinFragment extends SherlockFragment {
     	ListView listView = new ListView(parent);
     	listView.setAdapter(adapter);
     	
-//        final String[] strings = new String[gymNames.length];
-//        for (int i = 0; i < gymNames.length; i++)
-//        	strings[i] = (String)gymNames[i];
     	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
         builder.setView(listView);
     	builder.setTitle("Please select your gym, or add your own.")
-//    	.setItems(strings, new DialogInterface.OnClickListener() {
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-// 				gym = gymNames[which].toString();
-// 				new CheckinAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
-//			}	
-//    	})
 		.setCancelable(false)
 		.setPositiveButton("Add New Gym", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
@@ -481,29 +437,6 @@ public class CheckinFragment extends SherlockFragment {
     		}
     	});
     	dialog.show();
-    }
-    
-    private void showPublishGymDialog() {
-    	Log.i(TAG, "showPublisGymDialog");
-
-    	//TODO clean this up
-    	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-    	
-    	builder.setMessage("Congratulations! You had a successful workout! Share the news with your friends?")
-    			.setCancelable(false)
-    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					Intent intent = new Intent(parent, ShareCheckinActivity.class);
-    					intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
-    					startActivity(intent);
-    					parent.overridePendingTransition(R.anim.popup_in, 0);
-    				}
-    			})
-    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					dialog.cancel();
-    				}
-    			}).show();
     }
     
 	/**
@@ -536,6 +469,7 @@ public class CheckinFragment extends SherlockFragment {
 	    					checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
 	    	        		if (mLocationManager != null && mLocationListener != null) {
 	    	        			mLocationManager.removeUpdates(mLocationListener);
+	    	        			//TODO look into why this is commented out
 //	    	        			new NotificationAsyncTask().execute(mUser.getID());
 	    	        		}
 	    				}
@@ -567,19 +501,9 @@ public class CheckinFragment extends SherlockFragment {
 
 						public void onProviderDisabled(String provider) {}
 					};
-//					mLocationListener = new LocationListener() {
-//						public void onLocationChanged(Location location) {
-//						}
-//
-//						public void onStatusChanged(String provider, int status, Bundle extras) {}
-//
-//						public void onProviderEnabled(String provider) {}
-//
-//						public void onProviderDisabled(String provider) {}
-//					};
 				}
 				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-						UPDATE_TIME_MILLIS, UPDATE_MIN_DISTANCE, mLocationListener);				LocationProvider gpsProvider = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
+						UPDATE_TIME_MILLIS, UPDATE_MIN_DISTANCE, mLocationListener);
 				Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				if (location != null) {
 					Log.i(TAG, "location null");
@@ -590,58 +514,14 @@ public class CheckinFragment extends SherlockFragment {
 					Log.i(TAG, "location not null");
 					new GetLocationAsyncTask(false).execute();
 				}
-//				List<String> matchingProviders = mLocationManager.getAllProviders();
-//				Location bestResult = mLocationManager.getLastKnownLocation(matchingProviders.get(0));
-//				float bestAccuracy = Float.MAX_VALUE;
-//				long bestTime = Long.MIN_VALUE;
-//				long minTime = Long.MAX_VALUE;
-//				for (String provider: matchingProviders) {
-//				  Location location = mLocationManager.getLastKnownLocation(provider);
-//				  if (location != null) {
-//				    float accuracy = location.getAccuracy();
-//				    long time = location.getTime();
-//				        
-//				    if ((time > minTime && accuracy < bestAccuracy)) {
-//				      bestResult = location;
-//				      bestAccuracy = accuracy;
-//				      bestTime = time;
-//				    }
-//				    else if (time < minTime && 
-//				             bestAccuracy == Float.MAX_VALUE && time > bestTime){
-//				      bestResult = location;
-//				      bestTime = time;
-//				    }
-//				  }
-//				}
-//				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocationListener); 
-//				latitude = bestResult.getLatitude();
-//				longitude = bestResult.getLongitude();
-//				
-//			  	AlertDialog.Builder builder = new AlertDialog.Builder(parent);
-//		    	builder.setMessage("Are you sure you want to check out?")
-//		    			.setCancelable(false)
-//		    			.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//		    				public void onClick(DialogInterface dialog, int id) {
-//		    					new CheckoutAsyncTask().execute(mUser.getID()+"", latitude+"", longitude+"");
-//		    				}
-//		    			})
-//		    			.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//		    				public void onClick(DialogInterface dialog, int id) {
-//		    					dialog.cancel();
-//		    				}
-//		    			}).show();
-//		    	
 
 			}
 		}
-		
-
 		
 	}
 	
 	private class GooglePlacesAsyncTast extends AsyncTask<String, Void, PlacesResponse> {
 
-		String latitude, longitude;
 		protected void onPreExecute() {
 			gyms.clear();
 			try {
@@ -658,8 +538,6 @@ public class CheckinFragment extends SherlockFragment {
         protected PlacesResponse doInBackground(String... params) {
         	PlacesResponse response = CheckinCommunication.getNearbyGyms(params[0],
         			params[1], params[2], params[3], params[4]);
-        	latitude = params[1];
-        	longitude = params[2];
         	return response;
         }
 
@@ -681,61 +559,9 @@ public class CheckinFragment extends SherlockFragment {
     			toast.show();
         	} else if (response.getGyms().isEmpty()){
         		showAddGymDialog();
-//        		new GooglePlacesSearchAsyncTask().execute(getString(R.string.places_api_key), latitude+"",
-//				longitude+"", DEFAULT_PLACES_RADIUS+"", "true");
         	} else {
-//        		gyms.addAll(response.getGyms());
-//        		gym = response.getGyms().get(0);
-//				new CheckinAsyncTask().execute(mUser.getID()+"", latitude, longitude);
-        		showSelectGymDialog(response.getGyms().toArray());
-        	}
-        }
-	}
-	
-	private class GooglePlacesSearchAsyncTask extends AsyncTask<String, Void, PlacesResponse> {
-		protected void onPreExecute() {
-			try {
-				mProgressDialog = ProgressDialog.show(parent, "",
-						"Finding nearby gyms and rec centers...", true, true,
-						new OnCancelListener() {
-					public void onCancel(DialogInterface pd) {
-						GooglePlacesSearchAsyncTask.this.cancel(true);
-					}
-				});
-			} catch (Exception e) { }
-		}
-		
-        protected PlacesResponse doInBackground(String... params) {
-        	PlacesResponse response = CheckinCommunication.getNearbyRecCenter(params[0],
-        			params[1], params[2], params[3], params[4]);
-        	return response;
-        }
 
-        protected void onPostExecute(PlacesResponse response) {
-			try {
-				mProgressDialog.dismiss();
-			} catch (Exception e) { }
-			
-        	if (response == null) {
-        		Toast toast = Toast.makeText(parent, "Couldn't find an internet connection", Toast.LENGTH_LONG); 
-    			toast.show();
-        	} else if (!response.wasSuccessful()){
-        		Toast toast = Toast.makeText(parent, "Google Places API appears to be down at the moment", Toast.LENGTH_LONG);
-        		toast.setGravity(Gravity.CENTER, 0, 0);
-    			toast.show();
-        	} else if (response.getGyms().isEmpty()){
-        		Toast toast = Toast.makeText(parent, "There doesn't appear to be a gym or rec center near you", Toast.LENGTH_LONG);
-        		toast.setGravity(Gravity.CENTER, 0, 0);
-    			toast.show();
-        	} else {
-        		gym = response.getGyms().get(0);
-        		for (String temp: response.getGyms()) {
-            		Toast toast = Toast.makeText(parent, temp, Toast.LENGTH_LONG);
-            		toast.setGravity(Gravity.CENTER, 0, 0);
-        			toast.show();
-        		}
-        		gyms.addAll(response.getGyms());
-				//new CheckinAsyncTask().execute(mUser.getID()+"");
+        		showSelectGymDialog(response.getGyms().toArray());
         	}
         }
 	}
@@ -881,7 +707,6 @@ public class CheckinFragment extends SherlockFragment {
 			Intent intent = new Intent(parent, ShareCheckinActivity.class);
 			intent.putExtra(LeagueDetailBundleKeys.KEY_GYM_NAME, gym);
 			startActivity(intent);
-//        	showPublishGymDialog();
         }
     }
     
