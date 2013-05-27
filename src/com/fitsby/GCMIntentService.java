@@ -1,9 +1,5 @@
 package com.fitsby;
 
-import java.util.Set;
-
-import com.fitsby.applicationsubclass.ApplicationUser;
-
 import servercommunication.UserCommunication;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -13,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.fitsby.applicationsubclass.ApplicationUser;
 
 public class GCMIntentService extends  com.google.android.gcm.GCMBaseIntentService {
 
