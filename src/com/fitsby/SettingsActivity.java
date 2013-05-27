@@ -1,13 +1,9 @@
 package com.fitsby;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.fitsby.fragments.MeFragment;
-
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
+
+import com.fitsby.fragments.MeFragment;
 
 public class SettingsActivity extends KiipSherlockFragmentActivity {
 
@@ -20,7 +16,6 @@ public class SettingsActivity extends KiipSherlockFragmentActivity {
         MeFragment meFragment = new MeFragment();
         ft.add(R.id.settings_frame, meFragment);
         ft.commit();
-       // ft.attach(meFragme)
     }
 
 }
