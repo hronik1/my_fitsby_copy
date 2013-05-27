@@ -50,8 +50,6 @@ public class RegisterActivity extends KiipFragmentActivity {
 	
 	private ServerCommunication comm;
 	private ApplicationUser mApplicationUser;
-	private DatabaseHandler mdbHandler;
-	private UserTableHandler mUserTableHandler;
 	
 	private ProgressDialog mProgressDialog;
 	
@@ -69,8 +67,6 @@ public class RegisterActivity extends KiipFragmentActivity {
         initializeTextViews();
         
         comm = new ServerCommunication(this);
-        mdbHandler = DatabaseHandler.getInstance(getApplicationContext());
-        mUserTableHandler = mdbHandler.getUserTableHandler();
         
         mApplicationUser = ((ApplicationUser)getApplicationContext());
         
@@ -148,53 +144,6 @@ public class RegisterActivity extends KiipFragmentActivity {
     }
     
     /**
-     * shows AlertDialog
-     */
-    private void showAlertDialog() {
-    	Log.i(TAG, "showAlertDialog");
-
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("Please confirm that " + emailET.getText().toString() +
-    			" is your email")
-    			.setCancelable(false)
-    			.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					String firstName = firstNameET.getText().toString();
-    					String lastName = lastNameET.getText().toString();
-    					String email = emailET.getText().toString();
-    					String password = passwordET.getText().toString();
-    					//TODO password salting maybe?
-    					User user = new User(firstName, lastName, email);
-
-    					if (user != null) {
-    						mApplicationUser.setUser(user);
-    						try {
-    							Intent intent = new Intent(RegisterActivity.this, LeagueJoinActivity.class);
-    							startActivity(intent);
-    						} catch (Exception e) {
-    							//remove in deployment
-    							String stackTrace = android.util.Log.getStackTraceString(e);
-    							Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
-    									Toast.LENGTH_LONG);
-    							toast.setGravity(Gravity.CENTER, 0, 0);
-    							toast.show();
-    						} 
-    					} else {
-    						Toast toast = Toast.makeText(RegisterActivity.this, "Sorry, but an error occured", Toast.LENGTH_LONG);
-    						toast.setGravity(Gravity.CENTER, 0, 0);
-    						toast.show();
-    					}
-    				}
-    			})
-    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					dialog.cancel();
-    				}
-    			}).show();
-    
-    }
-    
-    /**
      * helper function which initializes the buttons
      */
     private void initializeButtons() {
@@ -215,17 +164,6 @@ public class RegisterActivity extends KiipFragmentActivity {
     	final String password  = passwordET.getText().toString();
     	final String confirmPassword = confirmPasswordET.getText().toString();
     	final String email = emailET.getText().toString();
-    	
-//    	if (firstNameET != null && firstNameET.getText() != null)
-//    		firstName = firstNameET.getText().toString();
-//    	if (lastNameET != null && lastNameET.getText() != null)
-//        	lastName = lastNameET.getText().toString();
-//    	if (passwordET != null && passwordET.getText() != null)
-//    		password = passwordET.getText().toString();
-//    	if (confirmPasswordET != null && confirmPasswordET.getText() != null)
-//    		confirmPassword = confirmPasswordET.getText().toString();
-//    	if (emailET != null && emailET.getText() != null)
-//    		email = emailET.getText().toString();
 
     	String validity = RegisterClientSideValidation.validateName(firstName, lastName);
     	validity += RegisterClientSideValidation.validateEmail(email);
@@ -260,16 +198,6 @@ public class RegisterActivity extends KiipFragmentActivity {
     					dialog.cancel();
     				}
     			}).show();
-    			
-//    	new RegisterAsyncTask().execute(email, password, confirmPassword, firstName, lastName);
-//    	if (!mUserTableHandler.isEmailUnique(email)) {
-//    		Toast toast = Toast.makeText(RegisterActivity.this, "That email already exists.", Toast.LENGTH_LONG);
-//    		toast.setGravity(Gravity.CENTER, 0, 0);
-//    		toast.show();
-//    	} else {
-//    		Log.i(TAG, "showing dialog");
-//    		showAlertDialog();
-//    	}
     	
     }
     
@@ -369,7 +297,7 @@ public class RegisterActivity extends KiipFragmentActivity {
    
     
     private class RegisterGCMAsyncTask extends AsyncTask<String, Void, Void> {
-
+    	//TODO check if this needs to be called
 		@Override
 		protected Void doInBackground(String... params) {
 			UserCommunication.registerDevice(params[0], (mApplicationUser.getUser().getID()+""));
