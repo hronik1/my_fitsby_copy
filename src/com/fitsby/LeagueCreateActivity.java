@@ -65,15 +65,10 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	private TextView goalsTV;
 	private Button faqButton;
 	
-	private User mUser;
 	private int userID;
 	
 	private ProgressDialog mProgressDialog;
-	
-	private DatabaseHandler dbHandler;
-	private LeagueTableHandler leagueTableHandler;
-	private LeagueMemberTableHandler leagueMemberTableHandler;
-	
+
 	private ApplicationUser mApplicationUser;
 	
 	/**
@@ -88,13 +83,8 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
         initializeButtons();
         initializeCheckBoxes();  
         initializeTextViews();
-        
-        dbHandler = DatabaseHandler.getInstance(getApplicationContext());
-        leagueTableHandler = dbHandler.getLeagueTableHandler();
-        leagueMemberTableHandler = dbHandler.getLeagueMemberTableHandler();
-        
+
         mApplicationUser = ((ApplicationUser)getApplicationContext());
-        mUser = mApplicationUser.getUser();
         userID = mApplicationUser.getUser().getID();
         
     }
