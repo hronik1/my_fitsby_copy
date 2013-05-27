@@ -1,17 +1,11 @@
 package com.fitsby.applicationsubclass;
 
 import me.kiip.sdk.Kiip;
-
-import com.fitsby.LoggedinActivity;
-
-import constants.RememberMeConstants;
-import constants.SingletonContext;
-import dbtables.User;
 import android.app.Application;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
+import constants.SingletonContext;
+import dbtables.User;
 
 public class ApplicationUser extends Application {
 	
