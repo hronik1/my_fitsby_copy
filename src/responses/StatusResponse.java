@@ -10,7 +10,6 @@ public class StatusResponse {
 	
 	private final static String RESPONSE_SUCCESS = "okay";
 	private final static String RESPONSE_SUCCESS_GOOGLE_PLACES = "OK";
-	private final static String RESPONSE_FAIL = "fail";
 	
 	private String status;
 	private String error;
