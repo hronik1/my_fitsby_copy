@@ -1,12 +1,9 @@
 package gravatar;
 
-import java.net.URL;
 import java.util.Locale;
 
 
 public class Gravatar {
-
-	private static final String TAG = "Gravatar";
 	
 	private static final int DEFAULT_SIZE = 120;
 	private static final String DEFAULT_RATING = "pg";
