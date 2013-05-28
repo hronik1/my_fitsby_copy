@@ -1,6 +1,5 @@
 package responses;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
@@ -49,7 +48,6 @@ public class CreatorResponse {
 			String firstName = json.getString("creator_first_name");
 			return new CreatorResponse(status, firstName);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			Log.d(TAG, e.toString());
 			return new CreatorResponse(e.toString(), null);
 		}
