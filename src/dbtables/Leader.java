@@ -10,7 +10,6 @@ public class Leader {
 	private int checkins;
 	private String id;
 	private Bitmap bitmap;
-//	private int goal;
 	
 	public Leader(String firstName, String lastName, int checkins, String id, Bitmap bitmap) {
 		this.firstName = firstName;
@@ -18,7 +17,6 @@ public class Leader {
 		this.checkins = checkins;
 		this.id = id;
 		this.bitmap = bitmap;
-//		this.goal = goal;
 	}		
 	
 	public String getFirstName() {
@@ -44,12 +42,5 @@ public class Leader {
 	public Bitmap getBitmap() {
 		return bitmap;
 	}
-	
-//	public int getGoal() {
-//		return goal;
-//	}
-//	
-//	public void setGoal(int goal) {
-//		this.goal = goal;
-//	}
+
 }
