@@ -1,27 +1,16 @@
 package loaders;
 
-import java.util.List;
-
 import servercommunication.LeagueCommunication;
-
-import dbhandlers.DatabaseHandler;
-import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.LeagueTableHandler;
-import dbtables.League;
-import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.MatrixCursor;
+import android.support.v4.content.AsyncTaskLoader;
+import android.util.Log;
+import dbhandlers.LeagueTableHandler;
 
 public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 
 	private final static String TAG = "PublicLeagueCursorLoader";
-	
-	private DatabaseHandler mDBHandler;
-	private LeagueTableHandler mLeagueTableHandler;
-	private LeagueMemberTableHandler mLeagueMemberTableHandler;
 	
 	public final static String KEY_BITMAP = "bitmap";
 	public final static String KEY_NUM_PLAYERS = "players";
@@ -42,9 +31,6 @@ public class PublicLeaguesCursorLoader extends AsyncTaskLoader<Cursor> {
 		super(context);
 		mContext = context;
 		this.userId = userId;
-		mDBHandler = DatabaseHandler.getInstance(context);
-		mLeagueTableHandler = mDBHandler.getLeagueTableHandler();
-		mLeagueMemberTableHandler = mDBHandler.getLeagueMemberTableHandler();
 	}
 
 	/** start overridden AsyncTaskLoader methods **/
