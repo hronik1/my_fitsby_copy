@@ -1,11 +1,9 @@
 package responses;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-
 import dbtables.Stats;
 
 
@@ -54,7 +52,6 @@ public class StatsResponse {
 			String joinedMonth = json.getString("joined_month");
 			String joinedDay = json.getString("joined_day");
 			String joinedYear = json.getString("joined_year");
-			//TODO parse checkins and total gym time
 			String totalCheckins = json.getString("successful_checks");
 			String totalTime = json.getString("total_minutes_at_gym");
 			Stats stats = new Stats(gamesPlayed, gamesWon, moneyEarned, joinedMonth, joinedDay, joinedYear);
@@ -62,7 +59,6 @@ public class StatsResponse {
 			stats.setTotalTime(totalTime);
 			return new StatsResponse(status, stats);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			Log.d(TAG, e.toString());
 			return new StatsResponse("fail", null);
 		}
