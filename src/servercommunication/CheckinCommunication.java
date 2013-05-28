@@ -3,32 +3,21 @@ package servercommunication;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import responses.PlacesResponse;
+import responses.StatusResponse;
+import responses.ValidateGymResponse;
+import android.util.Log;
 
 import com.fitsby.R;
 
 import constants.SingletonContext;
-
-
-import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
-import android.widget.Toast;
-
-import responses.AddPlaceResponse;
-import responses.PlacesResponse;
-import responses.PrivateLeagueResponse;
-import responses.StatusResponse;
-import responses.UserResponse;
-import responses.ValidateGymResponse;
 
 public class CheckinCommunication {
 
