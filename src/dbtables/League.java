@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 public class League {
 
 	private int id;
-	//private int creatorId;
 	private int isPrivate;
 	private int players;
 	private int wager;
@@ -24,20 +23,6 @@ public class League {
 	public League() {
 		
 	}
-	
-//	/**
-//	 * 4 argument league constructor
-//	 * @param creatorId
-//	 * @param isPrivate
-//	 * @param wager
-//	 * @param duration
-//	 */
-//	public League(int creatorId, int isPrivate, int wager, int duration, int stakes) {
-////		this.creatorId = creatorId;
-////		this.isPrivate = isPrivate;
-//		this.wager = wager;
-//		this.duration = duration;
-//	}
 	
 	/**
 	 * 5 argument league constructor
@@ -91,36 +76,6 @@ public class League {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-//	/**
-//	 * returns creatorId()
-//	 * @return
-//	 */
-//	public int getCreatorId() {
-//		return creatorId;
-//	}
-//	
-//	/**
-//	 * returns creatorId
-//	 * @param creatorId
-//	 */
-//	public void setCreatorId(int creatorId) {
-//		this.creatorId = creatorId;
-//	}
-//
-//	/**
-//	 * @return the isPrivate
-//	 */
-//	public int isPrivate() {
-//		return isPrivate;
-//	}
-//
-//	/**
-//	 * @param isPrivate the isPrivate to set
-//	 */
-//	public void setPrivate(int isPrivate) {
-//		this.isPrivate = isPrivate;
-//	}
 
 	/**
 	 * @return the wager
