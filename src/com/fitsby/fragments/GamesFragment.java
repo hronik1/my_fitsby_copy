@@ -1,6 +1,5 @@
 package com.fitsby.fragments;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,32 @@ import responses.ProgressResponse;
 import responses.UsersGamesResponse;
 import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
-
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 import bundlekeys.CreditCardBundleKeys;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -19,50 +43,15 @@ import com.fitsby.LeagueJoinActivity;
 import com.fitsby.R;
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.State;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-
-
-import dbhandlers.DatabaseHandler;
 import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.LeagueTableHandler;
 import dbhandlers.UserTableHandler;
 import dbtables.Leader;
 import dbtables.League;
-import dbtables.LeagueMember;
 import dbtables.User;
-import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.DialogInterface.OnCancelListener;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.view.ViewParent;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class GamesFragment extends SherlockFragment {
 
@@ -87,7 +76,6 @@ public class GamesFragment extends SherlockFragment {
 	private ProgressBar progressBar;
 	private PullToRefreshListView leadersLV;
 	private boolean refreshFinished = true;
-//	private ListView leadersLV;
 	private Spinner gamesSpinner;
 	private Button inviteButton;
 	private Button newGamesButton;
@@ -106,11 +94,9 @@ public class GamesFragment extends SherlockFragment {
 	
 	private ApplicationUser mApplicationUser;
 	
-	private List<LeagueMember> listLeagueMember;
 	private User user;
 	
 	private ProgressDialog mProgressDialog;
-	private String creatorFirstName;
 	
 	private int mGoal;
 	
@@ -152,7 +138,6 @@ public class GamesFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-//        new SpinnerDataAsyncTask().execute();
 	}
 	
 	/**
@@ -297,10 +282,6 @@ public class GamesFragment extends SherlockFragment {
 		noGamesPromptTV.setVisibility(View.VISIBLE);
 	}
 	
-	private void disableNoGamesPrompts() {
-		//noGamesPromptTV.setText("");
-	}
-	
     /**
      * AsyncTask to find users games
      * @author brent
@@ -352,7 +333,6 @@ public class GamesFragment extends SherlockFragment {
         		spinnerData.clear();
         		spinnerData.addAll(games);
         		spinnerDataAdapter.notifyDataSetChanged();
-        		disableNoGamesPrompts();
         	}
         	refreshFinished = true;
         }
