@@ -2,7 +2,6 @@ package responses;
 
 import gravatar.Gravatar;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -11,10 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import servercommunication.MyHttpClient;
-
 import android.graphics.Bitmap;
 import android.util.Log;
-
 import dbtables.Comment;
 
 
