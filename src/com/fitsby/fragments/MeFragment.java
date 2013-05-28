@@ -113,8 +113,7 @@ public class MeFragment extends SherlockFragment {
 			Log.d(TAG, "service connected");
 			
 			mService = new Messenger(service);
-//
-//			doBindService();
+			
 			try {
 				Message msg = Message.obtain(null,
 						MessengerService.MSG_REGISTER_CLIENT);
@@ -165,13 +164,13 @@ public class MeFragment extends SherlockFragment {
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
-//        new StatsAsyncTask().execute(mUser.getID());
 
 	}
 	
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//keep around for potential future profile pic implementation
 	    if (requestCode == PICK_PHOTO_REQUEST) {
 
 	        if (resultCode == parent.RESULT_OK) {
@@ -204,13 +203,10 @@ public class MeFragment extends SherlockFragment {
 		nameTV = (TextView)viewer.findViewById(R.id.me_textview_name);
 		nameTV.setText(mUser.getFirstName() + " " + LastNameFormatter.format(mUser.getLastName()));
 		
-		joinTV = (TextView)viewer.findViewById(R.id.me_textview_join_date);
-		//TODO add join date
-		
+		joinTV = (TextView)viewer.findViewById(R.id.me_textview_join_date);		
 		earningsTV = (TextView)viewer.findViewById(R.id.me_textview_total_money_earned_money);
 		checkinsTV = (TextView)viewer.findViewById(R.id.me_textview_total_checkins);
 		timeTV = (TextView)viewer.findViewById(R.id.me_textview_total_gym_time);
-		//add earnings for user
 		gravatarLinkTV = (TextView)viewer.findViewById(R.id.me_settings_tv_change_picture_link);
 		gravatarLinkTV.setOnClickListener(new OnClickListener() {
 			@Override
@@ -294,14 +290,6 @@ public class MeFragment extends SherlockFragment {
 			}
 		});
 		
-//		//changePictureButton = (Button)viewer.findViewById(R.id.me_settings_button_change_picture);
-//		changePictureButton.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				changePicture();
-//			}
-//		});
-		
 		submitButton = (Button)viewer.findViewById(R.id.me_settings_button_submit); 
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -378,6 +366,7 @@ public class MeFragment extends SherlockFragment {
     }
 
     private void doUnbindService() {
+    	//keep around in case service needs unbinding from this context
         if (isBound) {
             // If we have received the service, and hence registered with
             // it, then now is the time to unregister.
@@ -403,9 +392,6 @@ public class MeFragment extends SherlockFragment {
 	 * logs the user out
 	 */
 	private void logout() {
-//        Message msg = Message.obtain(null,
-//                MessengerService.MSG_STOP_TIMER);
-//        msg.replyTo = mMessenger;
         Message msg = Message.obtain(null,
                 MessengerService.MSG_STOP_TIMER);
         msg.replyTo = mMessenger;
@@ -419,8 +405,6 @@ public class MeFragment extends SherlockFragment {
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		mApplicationUser.setUser(null);
 		startActivity(intent);
-//		
-//		parent.finish();
 	}
 	
 	/**
@@ -449,7 +433,7 @@ public class MeFragment extends SherlockFragment {
 	 * change picture
 	 */
 	private void changePicture() {
-		//TODO figure out how to do and then implement
+		//TODO keep around for potential profile pic implementation
 		Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 		photoPickerIntent.setType("image/*");
 		startActivityForResult(photoPickerIntent, PICK_PHOTO_REQUEST);
@@ -459,7 +443,6 @@ public class MeFragment extends SherlockFragment {
 	 * opens up the gravatar url page
 	 */
 	private void openGravatarSite() {
- 		//TODO change url to point to faq url
  		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.gravatar.com"));
  		startActivity(browserIntent);
 	}
@@ -468,7 +451,6 @@ public class MeFragment extends SherlockFragment {
 	 * submits user input info
 	 */
 	private void submit() {
-		//TODO figure out what need to be submit and then submit it
 		changeEmail();
 	}
 	
@@ -502,8 +484,7 @@ public class MeFragment extends SherlockFragment {
 
     	alert.setMessage("A link to change your password will be sent to your email.");
 
-    	// Set an EditText view to get user input 
-    	final EditText input = new EditText(parent);
+       	final EditText input = new EditText(parent);
     	input.setText(mUser.getEmail());
     	alert.setView(input);
 
@@ -686,7 +667,7 @@ public class MeFragment extends SherlockFragment {
      *
      */
     private class CheckoutAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
-    	
+    	//keep around in case we need to be able to checkout from this context
 		protected void onPreExecute() {
 			try {
 				mProgressDialog = ProgressDialog.show(parent, "",
@@ -844,18 +825,5 @@ public class MeFragment extends SherlockFragment {
         	//TODO feeling toasty
         }
     }
-    
-//    /**
-//     * Handler of incoming messages from service.
-//     */
-//    static class IncomingHandler extends Handler {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                default:
-//                    super.handleMessage(msg);
-//            }
-//        }
-//    }
 
 }
