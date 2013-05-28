@@ -1,37 +1,22 @@
 package loaders;
 
-import java.util.List;
-
-
 import servercommunication.GamesLeaderCommunication;
-
-import dbhandlers.DatabaseHandler;
-import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.UserTableHandler;
-import dbtables.LeagueMember;
-import dbtables.User;
-import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.MatrixCursor;
+import android.support.v4.content.AsyncTaskLoader;
 
 public class GameLeaderCursorLoader extends AsyncTaskLoader<Cursor> {
 
 	private int mLeagueId;
-	private DatabaseHandler mDBHandler;
-	private LeagueMemberTableHandler mLeagueMemberTableHandler;
-	private UserTableHandler mUserTableHandler;
 	
 	private Cursor mCursor;
+	
 	/**
 	 * default GameLeaderCursorLoader class
 	 * @param context
 	 */
 	public GameLeaderCursorLoader(Context context) {
 		super(context);
-		mDBHandler = DatabaseHandler.getInstance(context);
-		mLeagueMemberTableHandler = mDBHandler.getLeagueMemberTableHandler();
-		mUserTableHandler = mDBHandler.getUserTableHandler();
 	}
 
 	/**
