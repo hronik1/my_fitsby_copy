@@ -48,7 +48,6 @@ public class StakesResponse {
 			String stakes = json.getString("stakes");
 			return new StakesResponse(status, stakes);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			Log.d(TAG, e.toString());
 			return new StakesResponse(e.toString(), null);
 		}
