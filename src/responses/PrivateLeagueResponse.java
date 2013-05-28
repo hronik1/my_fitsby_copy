@@ -2,14 +2,10 @@ package responses;
 
 import gravatar.Gravatar;
 
-import java.util.Vector;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import servercommunication.MyHttpClient;
-
 import android.graphics.Bitmap;
 import android.util.Log;
 import dbtables.League;
