@@ -1,7 +1,5 @@
 package dbtables;
 
-import java.sql.Timestamp;
-
 import android.graphics.Bitmap;
 
 public class Comment {
