@@ -49,7 +49,6 @@ public class CountdownResponse {
 			String daysRemaining = json.getString("string");
 			return new CountdownResponse(status, daysRemaining);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			Log.d(TAG, e.toString());
 			return new CountdownResponse(e.toString(), null);
 		}
