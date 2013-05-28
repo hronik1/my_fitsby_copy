@@ -10,12 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import servercommunication.MyHttpClient;
-
-import android.util.Log;
 import android.graphics.Bitmap;
-
+import android.util.Log;
 import dbtables.Leader;
-import dbtables.League;
 
 public class GamesLeaderResponse {
 	private final static String TAG = "GamesLeaderResponse";
@@ -66,10 +63,8 @@ public class GamesLeaderResponse {
 				String firstName  = leader.getString("first_name");
 				String lastName = leader.getString("last_name");
 				int checkins = Integer.parseInt(leader.getString("successful_checks"));
-//				int goal = Integer.parseInt(leader.getString("goal_days"));
 				String id = (i+1) + "";
 				String email = leader.getString("email");
-				//TODO change to actually parse email
 				if (!imageMap.containsKey(email))  {
 					Log.d(TAG, "getting image");
 					String src = Gravatar.getGravatar(email);
