@@ -48,7 +48,6 @@ public class LeagueCreateResponse {
 			String gameId = json.getString("game_id");
 			return new LeagueCreateResponse(status, gameId);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			Log.d(TAG, e.toString());
 			return new LeagueCreateResponse(e.toString(), null);
 		}
