@@ -1,31 +1,15 @@
 package loaders;
 
-import java.util.List;
-
 import servercommunication.NewsfeedCommunication;
-
-import dbhandlers.CommentTableHandler;
-import dbhandlers.DatabaseHandler;
-import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.LeagueTableHandler;
-import dbhandlers.UserTableHandler;
-import dbtables.Comment;
-import dbtables.League;
-import dbtables.LeagueMember;
-import dbtables.User;
-import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.MatrixCursor;
+import android.support.v4.content.AsyncTaskLoader;
+import dbhandlers.CommentTableHandler;
+import dbhandlers.UserTableHandler;
+import dbtables.Comment;
 
 
 public class NewsfeedCursorLoader extends AsyncTaskLoader<Cursor> {
-	
-	private DatabaseHandler mDBHandler;
-	private LeagueTableHandler mLeagueTableHandler;
-	private LeagueMemberTableHandler mLeagueMemberTableHandler;
-	private UserTableHandler mUserTableHandler;
-	private CommentTableHandler mCommentTableHandler;
 	
 	public final static String[] FROM_ARGS = { UserTableHandler.KEY_FIRST_NAME,
 			UserTableHandler.KEY_LAST_NAME, CommentTableHandler.KEY_TIMESTAMP,
@@ -39,10 +23,6 @@ public class NewsfeedCursorLoader extends AsyncTaskLoader<Cursor> {
 	 */
 	public NewsfeedCursorLoader(Context context, int leagueId) {
 		super(context);
-		mDBHandler = DatabaseHandler.getInstance(context);
-		mLeagueTableHandler = mDBHandler.getLeagueTableHandler();
-		mLeagueMemberTableHandler = mDBHandler.getLeagueMemberTableHandler();
-		mCommentTableHandler = mDBHandler.getCommentTableHandler();
 		mLeagueId = leagueId;
 	}
 
