@@ -48,7 +48,6 @@ public class ProgressResponse {
 			double progress = json.getDouble("percentage");
 			return new ProgressResponse(status, progress);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			Log.d(TAG, e.toString());
 			return new ProgressResponse(e.toString(), 0.0);
 		}
