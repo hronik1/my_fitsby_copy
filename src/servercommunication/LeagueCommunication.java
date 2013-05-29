@@ -46,7 +46,6 @@ public class LeagueCommunication {
 	private static PublicLeaguesResponse getPublicLeaguesHelper(int userId) {
 		MyHttpClient myHttpClient = new MyHttpClient();
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		//TODO add something to nameValuePairs
         try {
 			nameValuePairs.add(new BasicNameValuePair("user_id", userId+""));
 			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "public_games", nameValuePairs);
@@ -138,7 +137,6 @@ public class LeagueCommunication {
 			json.put("is_private", isPrivate);
 			json.put("wager", wager);
 			json.put("goal_days", goal);
-			//json.put("creator_first_name", creatorFirstName);
 			json.put("credit_card_number", cardNumber);
 			json.put("credit_card_exp_month", expMonth);
 			json.put("credit_card_exp_year", expYear);
@@ -179,7 +177,7 @@ public class LeagueCommunication {
 			json.put("credit_card_exp_year", expYear);
 			json.put("credit_card_cvc", cvc);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
-	        //TODO add route
+
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "join_game", stringEntity);
 			if (serverResponse.exception instanceof IOException) {
 				StatusResponse response = new StatusResponse();
@@ -274,24 +272,6 @@ public class LeagueCommunication {
 			return new StakesResponse(e.toString(), null);
 		}
 	}
-	
-	
-//	/**
-//	 * method to get Number of Players for a league
-//	 * @param gameId
-//	 * @return
-//	 */
-//	public static String getNumberPlayers(int gameId) {
-//		MyHttpClient myHttpClient = new MyHttpClient();
-//		List<NameValuePair> params = new LinkedList<NameValuePair>();
-//        try {
-//			params.add(new BasicNameValuePair("league_id", gameId + ""));
-//			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "number_of_players", params);
-//			return MyHttpClient.parseResponse(serverResponse);
-//		} catch (Exception e) {
-//			return e.toString();
-//		}
-//	}
 	
 	/**
 	 * gets the progress of a game
