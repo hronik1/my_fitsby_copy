@@ -6,22 +6,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import loaders.NewsfeedCursorLoader;
 import responses.StatusResponse;
 import responses.UsersGamesResponse;
 import servercommunication.LeagueCommunication;
 import servercommunication.MyHttpClient;
 import servercommunication.NewsfeedCommunication;
-
-import loaders.NewsfeedCursorLoader;
-
-import com.actionbarsherlock.app.SherlockFragment;
-import com.fitsby.R;
-import com.fitsby.applicationsubclass.ApplicationUser;
-
-
-
-import dbtables.Comment;
-import dbtables.User;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -29,33 +19,36 @@ import android.content.DialogInterface.OnCancelListener;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.actionbarsherlock.app.SherlockFragment;
+import com.fitsby.R;
+import com.fitsby.applicationsubclass.ApplicationUser;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.State;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import dbtables.User;
 
 public class NewsfeedFragment extends SherlockFragment {
 
@@ -63,7 +56,6 @@ public class NewsfeedFragment extends SherlockFragment {
 	
 	private boolean refreshFinished = true;
 	private Spinner gamesSpinner;
-//	private ListView newsfeedLV;
 	private PullToRefreshListView newsfeedLV;
 	private EditText commentET;
 	private Button submitButton;
@@ -122,7 +114,6 @@ public class NewsfeedFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-//        new SpinnerDataAsyncTask().execute();
 	}
 	
 	/**
@@ -264,7 +255,7 @@ public class NewsfeedFragment extends SherlockFragment {
 			} catch (Exception e) { }
 			
         	if (response.wasSuccessful()) {
-        		
+        		//TODO figure out whether confirmation is needed
         		//Toast toast = Toast.makeText(parent.getApplicationContext(), "Successfully posted your comment", Toast.LENGTH_LONG);
         		//toast.setGravity(Gravity.CENTER, 0, 0);
         		//toast.show();        		
@@ -327,7 +318,6 @@ public class NewsfeedFragment extends SherlockFragment {
         		spinnerData.clear();
         		spinnerData.addAll(response.getGames());
         		spinnerDataAdapter.notifyDataSetChanged();
-        		//new CursorDataAsyncTask().execute();
         		new GravatarAsyncTask().execute(user.getEmail());
         	}
         }
