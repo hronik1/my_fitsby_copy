@@ -1,21 +1,16 @@
 package servercommunication;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
+import responses.StatusResponse;
+import android.util.Log;
 
 import com.fitsby.R;
 
 import constants.SingletonContext;
-
-import android.util.Log;
-
-import responses.StatusResponse;
 
 public class CreditCardCommunication {
 
@@ -54,26 +49,6 @@ public class CreditCardCommunication {
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 			return new StatusResponse(e.toString());
-		}
-	}
-	
-	/**
-	 * sends get request to user to see if they actually have an associated customer already
-	 * @param userId
-	 * @return
-	 */
-	public static boolean doesUserHaveCreditCard(int userId) {
-		MyHttpClient myHttpClient = new MyHttpClient();
-		List<NameValuePair> params = new LinkedList<NameValuePair>();
-        try {
-			params.add(new BasicNameValuePair("user_id", userId+""));
-			ServerResponse serverResponse = myHttpClient.createGetRequest(MyHttpClient.SERVER_URL + "credit_card", params);
-			return false;
-			//TODO parse whether or not user has credit card
-			//return MyHttpClient.parseResponse(serverResponse);
-		} catch (Exception e) {
-			return false;
-			//return e.toString();
 		}
 	}
 }
