@@ -3,41 +3,30 @@ package servercommunication;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
 import loaders.NewsfeedCursorLoader;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import responses.CommentsResponse;
+import responses.StatusResponse;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.fitsby.R;
 
 import constants.SingletonContext;
-
-import responses.CommentsResponse;
-import responses.StatusResponse;
-
-import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.UserTableHandler;
-import dbtables.Comment;
-import dbtables.LeagueMember;
-import dbtables.User;
-import formatters.LastNameFormatter;
-
-import android.database.Cursor;
 import cursors.MatrixCursor;
-import android.graphics.Bitmap;
-import android.util.Log;
+import dbtables.Comment;
+import formatters.LastNameFormatter;
 
 public class NewsfeedCommunication {
 
@@ -82,7 +71,7 @@ public class NewsfeedCommunication {
 			json.put("message", comment);
 			json.put("stamp", stamp);
 	        StringEntity stringEntity = new StringEntity(json.toString());  
-	        //TODO add route
+	        
 			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "post_comment", stringEntity);
 			if (serverResponse.exception instanceof IOException) {
 				StatusResponse response = new StatusResponse();
