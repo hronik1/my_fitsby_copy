@@ -1,8 +1,8 @@
 package bundlekeys;
 
 /**
- * This class contains keys to be used in bundles passed from 
- * CreditCardActivity.
+ * CreditCardBundleKeys is a class that contains keys to be used in bundles
+ * passed from CreditCardActivity.
  * 
  * @author brenthronk
  *
