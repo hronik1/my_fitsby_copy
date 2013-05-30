@@ -14,14 +14,35 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+/**
+ * FirstTimeCheckinActivity takes the user through a tutorial, showing them
+ * how the checkin process works.
+ * 
+ * @author brenthronk
+ *
+ */
 public class FirstTimeCheckinActivity extends KiipFragmentActivity {
 
+	/** 
+	 * This is responsible for switching adapting the viewpager for the
+	 * various tutorial pages.
+	 */
     TutorialPagerAdapter mTutorialPagerAdapter;
+    
+    /**
+     * This is where the various pages will be displayed and swiped through.
+     */
     ViewPager mViewPager;
     
+    /**
+     * These are the resources for the corresponding tutorial pages.
+     */
     private static int[] pageDrawableResources = new int[] {R.drawable.checkin_onboard1, R.drawable.checkin_onboard2,
     		R.drawable.checkin_onboard3};
     
+    /**
+     * Callback for the creation of the activity, initializes the view.
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,6 +53,9 @@ public class FirstTimeCheckinActivity extends KiipFragmentActivity {
         mViewPager.setAdapter(mTutorialPagerAdapter);
 	}
 
+	/**
+	 * Callback for when the options menu is created.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -39,7 +63,15 @@ public class FirstTimeCheckinActivity extends KiipFragmentActivity {
 		return true;
 	}
 
-    public static class TutorialPagerAdapter extends FragmentStatePagerAdapter {
+	/**
+	 * TutorialPagerAdapter is an adapter class which is responsible for
+	 * for giving a viewpager the appropriate view, as well as activating
+	 * the done button on the last page.
+	 * 
+	 * @author brenthronk
+	 *
+	 */
+    private static class TutorialPagerAdapter extends FragmentStatePagerAdapter {
 
         public TutorialPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -96,10 +128,7 @@ public class FirstTimeCheckinActivity extends KiipFragmentActivity {
                 	
                 return rootView;
             }
-            
-        	/**
-        	 * callback for when this fragment is attached to a view
-        	 */
+
         	@Override
         	public void onAttach(Activity activity) {
         		super.onAttach(activity);
