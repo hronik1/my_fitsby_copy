@@ -29,24 +29,69 @@ import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
 
+/**
+ * CreditCardActivity is the class that the application user will interact
+ * with when submitting their credit card information.
+ * 
+ * @author brenthronk
+ *
+ */
 public class CreditCardActivity extends KiipFragmentActivity {
 
+	/**
+	 * This is the tag used for logcat messages.
+	 */
 	private final static String TAG = "CreditCardActivity";
 	
+	/**
+	 * Button to submit credit card information.
+	 */
 	private Button submitButton;
+	
+	/**
+	 * EditText to enter card number.
+	 */
 	private EditText numberET;
+	
+	/**
+	 * EditText to enter expiration month.
+	 */
 	private EditText expMonthET;
+	
+	/**
+	 * EditText to enter expiration year.
+	 */
 	private EditText expYearET;
+	
+	/**
+	 * EditText to enter security digits.
+	 */
 	private EditText cvcET;
+	
+	/**
+	 * TextView to display wager.
+	 */
 	private TextView wagerTV;
+	
+	/**
+	 * Bundle to store data passed in from Activity that started this.
+	 */
 	private Bundle extras;
 	
+	/**
+	 * The amount that will be displayed and submitted for payment.
+	 */
 	private int wager;
 	
+	/**
+	 * Spinner used to display progress while submitting information for
+	 * verification.
+	 */
 	private ProgressDialog mProgressDialog;
 	
 	/**
-	 * called when activity first created
+	 * Callback for when activity is first created, initializes the interface
+	 * and parses passed in information.
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +108,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
 
     /**
-     * called when menu is created
+     * Callback for when menu is first created.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,7 +118,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is restarted
+     * Callback for when activity is restarted.
      */
     @Override
     public void onRestart() {
@@ -83,7 +128,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
 
     /**
-     * called when activity is starting
+     * Callback for when activity is started, starts a flurry session.
      */
     @Override
     public void onStart() {
@@ -94,6 +139,9 @@ public class CreditCardActivity extends KiipFragmentActivity {
         Log.i(TAG, "onStart");
     }
     
+    /**
+     * Callback for when the activity is stopped, stops the flurry session.
+     */
 	@Override
 	protected void onStop()
 	{
@@ -102,7 +150,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
 	}
 	
     /**
-     * called when activity resumes
+     * Callback for when activity resumes.
      */
     @Override
     public void onResume() {
@@ -112,7 +160,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is paused
+     * Callback for when activity is paused.
      */
     @Override
     public void onPause() {
@@ -122,7 +170,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is destroyed
+     * Callback for when activity is destroyed.
      */
     @Override
     public void onDestroy() {
@@ -132,6 +180,12 @@ public class CreditCardActivity extends KiipFragmentActivity {
     	
     }
 
+    /**
+     * Parses incoming wager information from the activity which started this
+     * activity, will store state in wager.
+     * 
+     * @param intent the bundle to be parsed
+     */
     private void parseBundle(Intent intent) {
     	if(intent == null) {
     		return;
@@ -146,7 +200,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * registers all the edittexts to their corresponding fields in the layout
+     * Inflates all the edittexts to their corresponding fields in the layout.
      */
     private void initializeEditTexts() {
     	numberET = (EditText)findViewById(R.id.credit_card_et_card_number);
@@ -199,7 +253,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * registers buttons from layout and adds listeners to them
+     * Registers buttons from layout and adds listeners to them.
      */
     private void initializeButtons() {
     	submitButton =(Button)findViewById(R.id.credit_card_button_submit);
@@ -211,7 +265,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * initializes the textviews
+     * Initialize the textview to display appropriate wager.
      */
     private void initializeTextViews() {
     	wagerTV = (TextView)findViewById(R.id.credit_card_tv_wager);
@@ -220,7 +274,12 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
+     * This is a helper method, that tests for the validity of a credit card
+     * format.
      * 
+     * @param digits  	a character array containing the number, contains 
+     * 				  	spaces
+     * @return			true if valid format, false otherwise
      */
     private boolean isCreditCardFormatValid(char[] digits) {
     	for (int i = 0; i < digits.length; i++ ) {
@@ -233,7 +292,8 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * submit to database and/or charge customer
+     * Validates credit card information and provides appropriate alerts to
+     * users based on outcome.
      */
     private void submit() {
 
@@ -257,7 +317,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * 
+     * Opens a dialog for the user, confirming their want to start the game.
      */
     private void showConfirmation() {
 	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -277,7 +337,8 @@ public class CreditCardActivity extends KiipFragmentActivity {
     }
     
     /**
-     * sends credit card info to server
+     * Sends credit card information to the server to either join or create a
+     * league, as appropriate.
      */
     private void sendCreditCard() {
     	ApplicationUser appData = (ApplicationUser)getApplicationContext();
@@ -290,14 +351,23 @@ public class CreditCardActivity extends KiipFragmentActivity {
     	
     }
     
+    /**
+     * Strips out the inner white space, from an valid format credit card.
+     * 
+     * @param unparsed	string containing a valid format credit, where the
+     * 					space will be removed from
+     * @return			string containing the numbers without white space
+     */
     private String parseCreditCard(String unparsed) {
     	return (unparsed.substring(0,4) + unparsed.substring(5,9) + 
     			unparsed.substring(10,14) + unparsed.substring(15,19));
     }
     
     /**
-     * AsyncTask to Register user
-     * @author brent
+     * CreateLeagueAsyncTask sends, on a background thread, all of the
+     * information necessary to create a league.
+     * 
+     * @author brenthronk
      *
      */
     private class CreateLeagueAsyncTask extends AsyncTask<String, Void, LeagueCreateResponse> {
@@ -314,6 +384,7 @@ public class CreditCardActivity extends KiipFragmentActivity {
 			} catch (Exception e) { }
 		}
 		
+
         protected LeagueCreateResponse doInBackground(String... params) {
         	String number = parseCreditCard(numberET.getText().toString());
         	LeagueCreateResponse response = LeagueCommunication.createLeague(Integer.parseInt(params[0]),
@@ -345,6 +416,13 @@ public class CreditCardActivity extends KiipFragmentActivity {
         }
     }
     
+    /**
+     * JoinLeagueAsyncTask sends, on a background thread, the information
+     * needed to join a league.
+     * 
+     * @author brenthronk
+     *
+     */
     private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
