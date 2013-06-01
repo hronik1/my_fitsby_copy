@@ -7,48 +7,71 @@ import me.kiip.sdk.Kiip.Callback;
 import me.kiip.sdk.KiipFragmentCompat;
 import android.os.Bundle;
 
+/**
+ * KiipSherlockFragmentActivity is a class that classes that need to use
+ * kiip and actionbarsherlock functionality will subclass.
+ * 
+ * @author brenthronk
+ *
+ */
 public class KiipSherlockFragmentActivity extends SherlockFragmentActivity {
 
-	  private final static String KIIP_TAG = "kiip_fragment_tag";
+	/**
+	 * Key for adding/finding the kiip fragment.
+	 */
+	private final static String KIIP_TAG = "kiip_fragment_tag";
 
-	    private KiipFragmentCompat mKiipFragment;
+	/**
+	 * Reference to the kiip fragment.
+	 */
+	private KiipFragmentCompat mKiipFragment;
 
-	    @Override
-	    protected void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
+	/**
+	 * Callback for creation of the activity, obtains reference to kiip
+	 * fragment.
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-	        // Create or re-use KiipFragment.
-	        if (savedInstanceState != null) {
-	            mKiipFragment = (KiipFragmentCompat) getSupportFragmentManager().findFragmentByTag(KIIP_TAG);
-	        } else {
-	            mKiipFragment = new KiipFragmentCompat();
-	            getSupportFragmentManager().beginTransaction().add(mKiipFragment, KIIP_TAG).commit();
-	        }
-	    }
+		// Create or re-use KiipFragment.
+		if (savedInstanceState != null) {
+			mKiipFragment = (KiipFragmentCompat) getSupportFragmentManager().findFragmentByTag(KIIP_TAG);
+		} else {
+			mKiipFragment = new KiipFragmentCompat();
+			getSupportFragmentManager().beginTransaction().add(mKiipFragment, KIIP_TAG).commit();
+		}
+	}
 
-	    @Override
-	    protected void onStart() {
-	        super.onStart();
-	        Kiip.getInstance().startSession(new Callback() {
-	            @Override
-	            public void onFailed(Kiip kiip, Exception exception) {
-	                // handle failure
-	            }
+	/**
+	 * Callback for starting of the activity, starts kiip session.
+	 */
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Kiip.getInstance().startSession(new Callback() {
+			@Override
+			public void onFailed(Kiip kiip, Exception exception) {
+				// handle failure
+			}
 
-	            @Override
-	            public void onFinished(Kiip kiip, Poptart poptart) {
-	                onPoptart(poptart);
-	            }
-	        });
-	    }
+			@Override
+			public void onFinished(Kiip kiip, Poptart poptart) {
+				onPoptart(poptart);
+			}
+		});
+	}
 
-	    @Override
-	    protected void onStop() {
-	        super.onStop();
-	        Kiip.getInstance().endSession(null);
-	    }
+	/**
+	 * Callback for stopping of the activity, stops kiip session.
+	 */
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Kiip.getInstance().endSession(null);
+	}
 
-	    public void onPoptart(Poptart poptart) {
-	        mKiipFragment.showPoptart(poptart);
-	    }
+	public void onPoptart(Poptart poptart) {
+		mKiipFragment.showPoptart(poptart);
+	}
 }
