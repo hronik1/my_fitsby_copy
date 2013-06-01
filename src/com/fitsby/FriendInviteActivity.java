@@ -48,26 +48,77 @@ import com.flurry.android.FlurryAgent;
 import constants.FlurryConstants;
 import dbtables.User;
 
+/**
+ * FriendInviteActivity is the activity that displays your contacts in various
+ * network mediums.
+ * 
+ * @author brenthronk
+ *
+ */
 public class FriendInviteActivity extends KiipFragmentActivity {
 
+	/**
+	 * Tag used in logcat messages.
+	 */
 	private final static String TAG = "FriendInviteActivity";
+	/**
+	 * Constant used to distinguish the picking a contact among other
+	 * activities.
+	 */
 	private final static int PICK_CONTACT_REQUEST = 2;
 
+	/**
+	 * Button which will take the user home.
+	 */
 	private Button homeButton;
+	/**
+	 * Button which will invite selected friend.
+	 */
 	private Button inviteButton;
+	/**
+	 * Button will share a fitsby post to facebook.
+	 */
 	private Button shareButton;
+	/**
+	 * Button which will login to twitter.
+	 */
 	private Button twitterLoginButton;
+	/**
+	 * Button which will share to twitter.
+	 */
 	private Button twitterShareButton;
 	
+	/**
+	 * Spinner used to show ongoing progress when something is going on in 
+	 * the background.
+	 */
 	private ProgressDialog mProgressDialog;
+	/**
+	 * The id of the league which will be shared.
+	 */
 	private static int leagueId;
+	/**
+	 * The first name of the person who created the corresponding league.
+	 */
 	private String creatorName;
 	
+	/**
+	 * Where the user information persists across the application.
+	 */
 	private ApplicationUser mApplicationUser;
+	/**
+	 * Reference to the currently logged-in user.
+	 */
 	private User mUser;
 	
 	//twitter
+	/**
+	 * SharedPreferences where twitter information will be stored.
+	 */
 	private SharedPreferences mSharedPreferences;
+	/**
+	 * The key into the shared preference to store twitter information.
+	 */
     static String PREFERENCE_NAME = "twitter_oauth";
     static final String PREF_KEY_OAUTH_TOKEN = "oauth_token";
     static final String PREF_KEY_OAUTH_SECRET = "oauth_token_secret";
@@ -92,8 +143,10 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 	        onSessionStateChange(session, state, exception);
 	    }
 	};
+	
 	/**
-	 * called when activity is created
+	 * Callback for when the activity is created, initializes the view and
+	 * initiates connections to social media.
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,7 +173,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     }
 
     /**
-     * callled when menu is created
+     * Callback for when menu is created.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,6 +182,11 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         return true;
     }
     
+    /**
+     * Callback for saving state.
+     * 
+     * @param outState	bundle where state will be written to
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -137,7 +195,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 
     
     /**
-     * called when activity is restarted
+     * Callback for when the activity is restarted.
      */
     @Override
     public void onRestart() {
@@ -234,7 +292,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     }
     
     /**
-     * registers the buttons from the layout and adds listeners to them
+     * Registers the buttons and adds listeners to them.
      */
     private void initializeButtons() {
     	inviteButton = (Button)findViewById(R.id.friend_invite_button_invite);
@@ -277,6 +335,12 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	});
     }
     
+    /**
+     * Parses the league id from the passed in intent, and stores in the
+     * leagueId global variable.
+     * 
+     * @param intent	the intent where the league id is stored
+     */
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
     	if (extras == null) {
@@ -287,16 +351,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     }
     
     /**
-     * invite your friends selected from the content provider
+     * Opens up the contacts to allow user to select.
      */
     private void invite() {
-    	queryContacts();
-    }
-    
-    /**
-     * querys the contacts of the given user
-     */
-    private void queryContacts() {  	
     	try {
     		Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
     		pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
@@ -307,11 +364,10 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     		toast.setGravity(Gravity.CENTER, 0, 0);
     		toast.show();    		
     	}
-
     }
     
     /**
-     * go to your home page
+     * Opens up the home page.
      */
     private void home() {
     	try {
@@ -326,6 +382,9 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	}
     }
     
+    /**
+     * Opens a dialog to allow users to post story to facebook, and posts content.
+     */
     private void publishStory() {
         Session session = Session.getActiveSession();
 
@@ -373,7 +432,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     }
     
     /**
-     * logins in user if not, logs out if logged in
+     * Logins user to twitter if logged out, or logs out if logged in.
      */
     private void authenticateTwitter() {
     	if (!isTwitterLoggedInAlready()) {
@@ -394,7 +453,8 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     }
     
 	 /**
-     * shows AlertDialog
+     * Shows a dialog asking user for confirmation that they would like
+     * to log out of Twitter.
      */
     private void showTwitterLogoutAlertDialog() {
     	Log.i(TAG, "showTwitterLogoutAlertDialog");
@@ -422,16 +482,17 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     }
     
     /**
-     * Check user already logged in your application using twitter Login flag is
-     * fetched from Shared Preferences
-     * */
+     * Verifies whether user is logged in.
+     * 
+     * @return	true if logged in, false otherwise
+     */
     private boolean isTwitterLoggedInAlready() {
         // return twitter login status from Shared Preferences
         return mSharedPreferences.getBoolean(PREF_KEY_TWITTER_LOGIN, false);
     }
     
     /**
-     * 
+     * Confirms that user is logged in and then publishes their story.
      */
     private void publishToTwitter() {
     	if (isTwitterLoggedInAlready()) {
@@ -443,6 +504,10 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	}
     }
     
+    /**
+     * Opens up dialog allowing user to post to Twitter, assumes that user is
+     * already logged in to twitter.
+     */
     private void showTwitterDialog() {
     	Log.i(TAG, "showTwitterDialog");
 
@@ -483,13 +548,14 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     }
     
     /**
-     * Function to update status
-     * */
+     * UpdateTwitterAsyncTask is the class responsible for posting updates to
+     * Twitter on a background thread.
+     * 
+     * @author brenthronk
+     *
+     */
     class UpdateTwitterAsyncTask extends AsyncTask<String, String, String> {
      
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -505,9 +571,6 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 
         }
      
-        /**
-         * getting Places JSON
-         * */
         protected String doInBackground(String... args) {
             Log.d("Tweet Text", "> " + args[0]);
             String status = args[0];
@@ -535,11 +598,6 @@ public class FriendInviteActivity extends KiipFragmentActivity {
             return null;
         }
      
-        /**
-         * After completing background task Dismiss the progress dialog and show
-         * the data in UI Always use runOnUiThread(new Runnable()) to update UI
-         * from background thread, otherwise you will get error
-         * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
 			try {
@@ -549,6 +607,13 @@ public class FriendInviteActivity extends KiipFragmentActivity {
      
     }
     
+    /**
+     * CreatorAsyncTask is responsible for gathering league creator information
+     * on a background thread.
+     * 
+     * @author brenthronk
+     *
+     */
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
 			try {
@@ -584,6 +649,13 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         }
     }
     
+    /**
+     * PhoneNumberAsyncTask is responsible for querying contacts on a 
+     * background thread, and then sending them a text.
+     * 
+     * @author brenthronk
+     *
+     */
     private class PhoneNumberAsyncTask extends AsyncTask<String, Void, String> {
     	
     	private Uri uri;
@@ -666,6 +738,13 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	
     }
     
+    /**
+     * LoginTwitterAsyncTask is responsible for authenticating users to
+     * Twitter on a background thread.
+     * 
+     * @author brenthronk
+     *
+     */
     private class LoginTwitterAsyncTask extends AsyncTask<Integer, Void, Void> {
     	
 		protected void onPreExecute() {
