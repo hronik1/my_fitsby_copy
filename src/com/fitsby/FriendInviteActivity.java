@@ -780,6 +780,13 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 		}
     }
     
+    /**
+     * ParseTwitterLoginResponseAsyncTask handles the logging in callback
+     * on a background thread, and informs user as to success of failure.
+     * 
+     * @author brenthronk
+     *
+     */
     private class ParseTwitterLoginResponseAsyncTask extends AsyncTask<Integer, Void, Void> {
     	
 		protected void onPreExecute() {
