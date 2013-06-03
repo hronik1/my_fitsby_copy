@@ -17,15 +17,32 @@ import com.flurry.android.FlurryAgent;
 import constants.FlurryConstants;
 import constants.TutorialsConstants;
 
+/**
+ * LandingActivity is the page that users will be taken to when they first
+ * open the application.
+ * 
+ * @author brenthronk
+ *
+ */
 public class LandingActivity extends KiipFragmentActivity {
 
+	/**
+	 * Tag used in logcat.
+	 */
 	private final static String TAG = "LandingActivity";
 	
+	/**
+	 * Button to open login page.
+	 */
 	private Button buttonLogin;
+	/**
+	 * Button to open start page.
+	 */
 	private Button buttonStart;
 	
 	/**
-	 * Called when activity is created
+	 * Callback for when activity is created. If user is logged in will
+	 * redirect to logged in page, otherwise initializes view.
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +74,7 @@ public class LandingActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is restarted
+     * Callback for restarting the activity.
      */
     @Override
     public void onRestart() {
@@ -67,7 +84,8 @@ public class LandingActivity extends KiipFragmentActivity {
     }
 
     /**
-     * called when activity is starting
+     * Callback for when the activity is started.
+     * Starts flurry session.
      */
     @Override
     public void onStart() {
@@ -79,6 +97,9 @@ public class LandingActivity extends KiipFragmentActivity {
         Log.i(TAG, "onStart");
     }
     
+    /**
+     * Callback for when the activity is stopped. Ends the flurry session.
+     */
 	@Override
 	protected void onStop()
 	{
@@ -87,7 +108,7 @@ public class LandingActivity extends KiipFragmentActivity {
 	}
     
     /**
-     * called when activity resumes
+     * Callback for when the activity resumes.
      */
     @Override
     public void onResume() {
@@ -97,7 +118,7 @@ public class LandingActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is paused
+     * Callback for when the activity is paused.
      */
     @Override
     public void onPause() {
@@ -107,7 +128,7 @@ public class LandingActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is destroyed
+     * Callback for when activity is destroyed.
      */
     @Override
     public void onDestroy() {
@@ -118,7 +139,7 @@ public class LandingActivity extends KiipFragmentActivity {
     }
 
     /**
-     * initializes the login and start buttons 
+     * Connects buttons and adds listeners.
      */
     private void initializeButtons() {
     	buttonLogin = (Button)findViewById(R.id.landing_button_login);
@@ -137,14 +158,14 @@ public class LandingActivity extends KiipFragmentActivity {
     }
     
     /**
-     * Changes to the LoginActivity
+     * Changes to the Login Activity.
      */
     private void goToLoginPage() {
     	try {
     		Intent intent = new Intent(this, LoginActivity.class);
     		startActivity(intent);
     	} catch (Exception e) {
-    		//remove in deployment
+    		//TODO possibly change or remove
     		String stackTrace = android.util.Log.getStackTraceString(e);
     		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
     				Toast.LENGTH_LONG);
@@ -154,7 +175,7 @@ public class LandingActivity extends KiipFragmentActivity {
     }
     
     /**
-     * Changes to the Registration Activity
+     * Changes to the Registration Activity.
      */
     private void goToHelpPage() {
     	try {
@@ -162,7 +183,7 @@ public class LandingActivity extends KiipFragmentActivity {
     		intent.putExtra(TutorialsConstants.FROM_ME, false);
     		startActivity(intent);
     	} catch (Exception e) {
-    		//remove in deployment
+    		//TODO possibly change or remove
     		String stackTrace = android.util.Log.getStackTraceString(e);
     		Toast toast = Toast.makeText(getApplicationContext(), stackTrace,
     				Toast.LENGTH_LONG);
