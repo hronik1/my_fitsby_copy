@@ -29,37 +29,107 @@ import constants.FlurryConstants;
 
 public class LeagueCreateActivity extends KiipFragmentActivity {
 	
+	/**
+	 * Tag used in logcat.
+	 */
 	private final static String TAG = "LeagueCreateActivity";
 	
+	/**
+	 * Value to increment wager by.
+	 */
 	private final static int WAGER_INCREMENT = 1;
+	/**
+	 * The minimum wager.
+	 */
 	private final static int MIN_WAGER = 0;
+	/**
+	 * The initial wager amount.
+	 */
 	private final static int START_WAGER = 5;
+	/**
+	 * The amount to increment days by.
+	 */
 	private final static int DAYS_INCREMENT = 7;
+	/**
+	 * The maximum amount of days.
+	 */
 	private final static int MAX_DAYS = 28;
+	/**
+	 * The minimum number of goal days in a week.
+	 */
 	private final static int MIN_GOAL_PER_WEEK = 2;
+	/**
+	 * Number of days in a week
+	 */
 	private final static int DAYS_PER_WEEK = 7;
 	
+	/**
+	 * Pressed to create game.
+	 */
 	private Button createButton;
-	private CheckBox createCheckBox;
+	/**
+	 * Checked to make game private.
+	 */
+	private CheckBox privateCheckBox;
+	/**
+	 * Pressed to increment wager.
+	 */
 	private Button wagerPlusButton;
+	/**
+	 * Pressed to decrement wager.
+	 */
 	private Button wagerMinusButton;
+	/**
+	 * Pressed to increment days.
+	 */
 	private Button daysPlusButton;
+	/**
+	 * Pressed to decrement days.
+	 */
 	private Button daysMinusButton;
+	/**
+	 * Pressed to increment goal.
+	 */
 	private Button goalsPlusButton;
+	/**
+	 * Pressed to decrement goal.
+	 */
 	private Button goalsMinusButton;
+	/**
+	 * Displays the wager.
+	 */
 	private TextView wagerTV;
+	/**
+	 * Displays the days.
+	 */
 	private TextView daysTV;
+	/**
+	 * Displays the goals.
+	 */
 	private TextView goalsTV;
+	/**
+	 * Pressed to open up faq.
+	 */
 	private Button faqButton;
 	
+	/**
+	 * The id of the user.
+	 */
 	private int userID;
 	
+	/**
+	 * Displayed to show progress in asynctasks.
+	 */
 	private ProgressDialog mProgressDialog;
 
+	/**
+	 * The session information for the user.
+	 */
 	private ApplicationUser mApplicationUser;
 	
 	/**
-	 * called when activity is first created
+	 * Callback for the creation of the activity, intitializes views and
+	 * obtains session information.
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +147,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     }
 
     /**
-     * called when menu is first create
+     * Callback for creation of the option menu.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,7 +158,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     }
 
 	/**
-	 * called when activity is restarted
+	 * Callback for the restarting of this activity.
 	 */
 	@Override
 	public void onRestart() {
@@ -98,7 +168,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * called when activity is starting
+	 * Callback for when the activity is restarted.
 	 */
 	@Override
 	public void onStart() {
@@ -109,6 +179,9 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	    Log.i(TAG, "onStart");
 	}
 	
+	/**
+	 * Callback for when the activity is stopped.
+	 */
 	@Override
 	protected void onStop()
 	{
@@ -117,7 +190,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * called when activity resumes
+	 * Callback for when the activity is resumed.
 	 */
 	@Override
 	public void onResume() {
@@ -127,7 +200,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * called when activity is paused
+	 * Callback for when the activity is paused.
 	 */
 	@Override
 	public void onPause() {
@@ -137,7 +210,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * called when activity is destroyed
+	 * Callback for when the activity is destroyed.
 	 */
 	@Override
 	public void onDestroy() {
@@ -148,14 +221,14 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
     
 	/**
-	 * initializes the checkbox
+	 * Connects checkboxes to layout.
 	 */
 	private void initializeCheckBoxes() {
-		createCheckBox = (CheckBox)findViewById(R.id.league_create_checkbox);
+		privateCheckBox = (CheckBox)findViewById(R.id.league_create_checkbox);
 	}
 	
 	/**
-	 * initializes the text views
+	 * Connects textviews to layout.
 	 */
 	private void initializeTextViews() {
 		wagerTV = (TextView)findViewById(R.id.league_create_wager);
@@ -165,7 +238,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * initializes create button
+	 * Connects buttons to layout and adds listener.
 	 */
 	private void initializeButtons() {
 		createButton = (Button)findViewById(R.id.league_create_button_create);
@@ -195,7 +268,6 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 		daysPlusButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				incrementDays();
 			}
 		});
@@ -212,7 +284,6 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 		goalsPlusButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				incrementGoal();
 			}
 		});
@@ -235,7 +306,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * increments the wager and resets it
+	 * Increments the wager and resets it.
 	 */
 	private void incrementWager() {
 		int wager = Integer.parseInt((String)wagerTV.getText());
@@ -245,7 +316,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * decrements the wager in the text view if valid, and resets it
+	 * Decrements the wager in the text view if valid, and resets it.
 	 */
 	private void decrementWager() {
 		int wager = Integer.parseInt((String)wagerTV.getText());
@@ -256,7 +327,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * increments the days in the text view if valid, and resets it
+	 * Increments the days in the text view if valid, and resets it.
 	 */
 	private void incrementDays() {
 		int days = Integer.parseInt((String)daysTV.getText());
@@ -270,7 +341,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * decrements the days in the text view if valid, and resets it
+	 * Decrements the days in the text view if valid, and resets it.
 	 */
 	private void decrementDays() {
 		int days = Integer.parseInt((String)daysTV.getText());
@@ -284,7 +355,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * increment the goal days if valid
+	 * Increment the goal days if valid.
 	 */
 	private void incrementGoal() {
 		int days = Integer.parseInt((String)daysTV.getText());
@@ -296,7 +367,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * decrement the goal day if valid
+	 * Decrement the goal day if valid.
 	 */
 	private void decrementGoal() {
 		int days = Integer.parseInt((String)daysTV.getText());
@@ -307,11 +378,18 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 		}
 	}
 	
+	/**
+	 * Calculates the minimum goal for the desired number of days.
+	 * 
+	 * @param days	the desired number of days
+	 * @return		the minimum length that the goal can be
+	 */
 	private int minGoalDays(int days) {
 		return (days/DAYS_PER_WEEK*MIN_GOAL_PER_WEEK);
 	}
+	
 	/**
-	 * opens up browser to faq page
+	 * Opens up browser to faq page.
 	 */
 	private void showFaqBrowser() {
  		//TODO change url to point to faq url
@@ -320,14 +398,14 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
 	/**
-	 * Creates the game specified by the wager and days
+	 * Creates the game specified by the wager and days.
 	 */
 	private void create() {
 		int wager, duration, isPrivate, goal;
 		wager = Integer.parseInt((String) wagerTV.getText());
 		duration = Integer.parseInt((String) daysTV.getText());
 		goal = Integer.parseInt((String) goalsTV.getText());
-		isPrivate = createCheckBox.isChecked() ? 1 : 0;
+		isPrivate = privateCheckBox.isChecked() ? 1 : 0;
 
 		if (wager != 0) {
 			ApplicationUser appData = (ApplicationUser)getApplicationContext();
@@ -347,7 +425,8 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
 	}
 	
     /**
-     * 
+     * Opens up a dialog, allowing user to confirm that they actually want to
+     * create the game.
      */
     private void showConfirmation() {
 	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -358,7 +437,7 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     				public void onClick(DialogInterface dialog, int id) {
 
     		    		new CreateLeagueAsyncTask().execute(userID+"", daysTV.getText().toString(),
-    		    				(createCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), goalsTV.getText().toString());
+    		    				(privateCheckBox.isChecked() ? "1" : "0"), wagerTV.getText().toString(), goalsTV.getText().toString());
     				}
     			})
     			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -369,7 +448,8 @@ public class LeagueCreateActivity extends KiipFragmentActivity {
     }
     
     /**
-     * AsyncTask to Register user
+     * AsyncTask to create league, handles creation on a background thread.
+     * 
      * @author brent
      *
      */
