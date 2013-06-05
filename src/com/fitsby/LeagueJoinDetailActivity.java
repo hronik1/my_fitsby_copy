@@ -1,38 +1,18 @@
 package com.fitsby;
 
-import java.util.List;
-
 import responses.CreatorResponse;
 import responses.PrivateLeagueResponse;
 import responses.StatusResponse;
-import responses.UsersGamesResponse;
-import servercommunication.GamesLeaderCommunication;
 import servercommunication.LeagueCommunication;
-import servercommunication.NewsfeedCommunication;
-
-
-import bundlekeys.CreditCardBundleKeys;
-import bundlekeys.LeagueDetailBundleKeys;
-import dbhandlers.DatabaseHandler;
-import dbhandlers.LeagueMemberTableHandler;
-import dbhandlers.LeagueTableHandler;
-import dbtables.League;
-import dbtables.LeagueMember;
-import dbtables.User;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
-import android.database.Cursor;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -40,51 +20,132 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import bundlekeys.CreditCardBundleKeys;
+import bundlekeys.LeagueDetailBundleKeys;
 
 import com.fitsby.applicationsubclass.ApplicationUser;
-import com.fitsby.fragments.GamesFragment;
 import com.flurry.android.FlurryAgent;
 
 import constants.FlurryConstants;
+import dbtables.League;
+import dbtables.User;
 
+/**
+ * LeagueJoinDetailActivity shows a detailed version of a selected league.
+ * 
+ * @author brenthronk
+ *
+ */
 public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 
+	/**
+	 * Tag used for logcat messages.
+	 */
 	private final static String TAG = "LeagueJoinDetailActivity";
 	
+	/**
+	 * Displays whether the game is private or public.
+	 */
 	private TextView typeTV;
+	/**
+	 * Displays the wager amount.
+	 */
 	private TextView wagerTV;
+	/**
+	 * Displays the number of goal days.
+	 */
 	private TextView goalTV;
+	/**
+	 * Displays the number of players in the league.
+	 */
 	private TextView playersTV;
+	/**
+	 * Displays the duration of the league.
+	 */
 	private TextView durationTV;
+	/**
+	 * Displays the id of the league.
+	 */
 	private TextView leagueIdTV;
+	/**
+	 * Displays the start date.
+	 */
 	private TextView startDateTV;
+	/**
+	 * Displays the creator's first name.
+	 */
 	private TextView firstNameTV;
+	/**
+	 * Displays the creator's last name.
+	 */
 	private TextView lastNameTV;
 	
+	/**
+	 * Pressed to join the league.
+	 */
 	private Button joinButton;
+	/**
+	 * Pressed to display open up faq in browser.
+	 */
 	private Button faqButton;
 	
+	/**
+	 * Displays image of league creator.
+	 */
 	private ImageView mImageView;
 	
+	/**
+	 * Stores session information.
+	 */
 	private ApplicationUser mApplicationUser;
 	
+	/**
+	 * Id of the league.
+	 */
 	private int leagueId;
+	/**
+	 * Goal number of days.
+	 */
 	private int goal;
+	/**
+	 * True if league is private, false if public.
+	 */
 	private boolean isPrivate;
+	/**
+	 * The amount being wagered.
+	 */
 	private int wager;
+	/**
+	 * The number of players.
+	 */
 	private int players;
+	/**
+	 * Flag used to set whether information was properly passed in from the
+	 * previous activity.
+	 */
 	private boolean isValid;
+	/**
+	 * Duration of the league.
+	 */
 	private int duration;
+	/**
+	 * Bitmap of the league creator.
+	 */
 	private Bitmap bitmap;
+	/**
+	 * Stores information of currently loggged in user.
+	 */
 	private User mUser;
 	
+	/**
+	 * Used to show ongoing background activity.
+	 */
 	private ProgressDialog mProgressDialog;
 
 	/**
-	 * called when activtiy is created
+	 * Callback for the creation of the activity, initializes views.
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +167,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     }
 
     /**
-     * called when options menu is created
+     * Callback for when options menu is created.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,7 +177,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     }
     
     /**
- 	 * called when activity is restarted
+ 	 * Callback for when activity is restarted.
  	 */
  	@Override
  	public void onRestart() {
@@ -126,7 +187,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
  	
  	/**
- 	 * called when activity is starting
+ 	 * Callback for when activity is starting, starts flurry session.
  	 */
  	@Override
  	public void onStart() {
@@ -137,6 +198,9 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	    Log.i(TAG, "onStart");
  	}
  	
+ 	/**
+ 	 * Callback for stopping of the activity, stops flurry session.
+ 	 */
 	@Override
 	protected void onStop()
 	{
@@ -145,7 +209,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
 	}
  	
  	/**
- 	 * called when activity resumes
+ 	 * Callback when activity resumes.
  	 */
  	@Override
  	public void onResume() {
@@ -155,7 +219,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
  	
  	/**
- 	 * called when activity is paused
+ 	 * Callback for when activity is paused.
  	 */
  	@Override
  	public void onPause() {
@@ -165,7 +229,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
  	
  	/**
- 	 * called when activity is destroyed
+ 	 * Callback for when activity is destroyed.
  	 */
  	@Override
  	public void onDestroy() {
@@ -175,6 +239,11 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  		
  	}
  	
+ 	/**
+ 	 * Parses the incoming bundle, sets isValid flag true if bundle was valid.
+ 	 * 
+ 	 * @param intent	contains the to-be-parsed bundle
+ 	 */
  	public void parseBundle(Intent intent) {
  		//TODO robustly handle bad bundle
  		if (intent == null) {
@@ -202,8 +271,9 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  		bitmap = extras.getParcelable(LeagueDetailBundleKeys.KEY_BITMAP);
 
  	}
+ 	
  	/**
- 	 * initializes the TextViews
+ 	 * Connects the TextViews to their corresponding view in layout.
  	 */
  	private void initializeTextViews() {
  		typeTV = (TextView)findViewById(R.id.league_join_detail_type_data);
@@ -234,7 +304,8 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
 
  	/**
- 	 * initializes buttons
+ 	 * Connects the buttons to their corresponding view in layout, and adds
+ 	 * listeners.
  	 */
  	private void initializeButtons() {
  		joinButton = (Button)findViewById(R.id.league_join_detail_button_join);
@@ -255,7 +326,8 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
  	
  	/**
- 	 * initialize the imageview
+ 	 * Connects the imageview to its corresponding view in layout, and sets
+ 	 * the bitmap.
  	 */
  	private void initializeImageView() {
  		mImageView = (ImageView)findViewById(R.id.league_join_detail_imageview);
@@ -263,7 +335,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
  	
   	/**
- 	 * join the game selected by user
+ 	 * Joins the game selected by user.
  	 */
  	private void join() {
  		if(!isValid) {
@@ -289,7 +361,7 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
  	
  	/**
- 	 * opens up the faq browser
+ 	 * Opens up the faq in browser.
  	 */
  	private void showFaqBrowser() {
  		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fitsby.com/faq.html"));
@@ -297,7 +369,8 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
  	}
  	
     /**
-     * 
+     * Shows a confirmation dialog, confirming that user really wants to join
+     * the league.
      */
     private void showConfirmation() {
 	  	AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -317,8 +390,11 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
     }
     
     /**
-     * AsyncTask to find users games
-     * @author brent
+     * GameInfoAsyncTask gathers extra information about the league, that
+     * wasn't passed in from the previous activity, and does so on a
+     * background thread.
+     * 
+     * @author brenthronk
      *
      */
     private class GameInfoAsyncTask extends AsyncTask<Integer, Void, PrivateLeagueResponse> {
@@ -355,6 +431,14 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         }
     }
     
+    /**
+     * CreatorAsyncTask gathers information about the league creator, that
+     * wasn't passed in from the previous activity, and does so on a
+     * background thread.
+     * 
+     * @author brenthronk
+     *
+     */
     private class CreatorAsyncTask extends AsyncTask<String, Void, CreatorResponse> {
 		protected void onPreExecute() {
 			try {
@@ -384,6 +468,13 @@ public class LeagueJoinDetailActivity extends KiipFragmentActivity {
         }
     }
     
+    /**
+     * JoinLeagueAsyncTask sends the information needed for the user to join
+     * the selected league, and does so on a background thread.
+     * 
+     * @author brenthronk
+     *
+     */
     private class JoinLeagueAsyncTask extends AsyncTask<Integer, Void, StatusResponse> {
     	
 		protected void onPreExecute() {
