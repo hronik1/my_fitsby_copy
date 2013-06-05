@@ -34,26 +34,67 @@ import dbhandlers.LeagueTableHandler;
 import dbtables.League;
 import dbtables.User;
 
+/**
+ * LeagueJoinActivity is the activity where users will look at the
+ * leagues that are available to join.
+ *  
+ * @author brenthronk
+ *
+ */
 public class LeagueJoinActivity extends KiipFragmentActivity 
 	implements android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
+	/**
+	 * Tag used for logcat messages.
+	 */
 	private final static String TAG = "LeagueJoinActivity";
 	
+	/**
+	 * Pressed to submit search.
+	 */
 	private Button buttonSubmit;
+	/**
+	 * Pressed to open up create activity.
+	 */
 	private Button buttonCreate;
-	
+	/**
+	 * EditText where users will enter the first name of the creator of the
+	 * game that they are searching for.
+	 */
 	private EditText etFirstName;
+	/**
+	 * EditText where users will enter the id of the game that they are 
+	 * searching for.
+	 */
 	private EditText etInviteCode;
+	/**
+	 * The listview which will contain the leagues.
+	 */
 	private ListView leagueLV;
+	
+	/**
+	 * The logged in user.
+	 */
 	private User mUser;
+	
+	/**
+	 * Adapter responsible for mapping data to the listview.
+	 */
 	private SimpleCursorAdapter mAdapter;
+	/**
+	 * CursorLoader responsible for gathering underlying data.
+	 */
 	private PublicLeaguesCursorLoader mPublicLeaguesCursorLoader;
+	/**
+	 * Array of ids to be mapped to be adapter.
+	 */
 	private int[] toArgs = { R.id.list_item_public_leagues_creator, R.id.list_item_public_leagues_id, R.id.list_item_public_leagues_players,
 			R.id.list_item_public_leagues_wager, R.id.list_item_public_leagues_goal, R.id.list_item_public_leagues_duration };
 	
 
 	/**
-	 * called when activity is first created
+	 * Callback for when activity is first created, initializes the views and
+	 * gathers session information.
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +103,6 @@ public class LeagueJoinActivity extends KiipFragmentActivity
         
         Log.i(TAG, "onCreate");
         
-        //TODO loadermanager stuffs
         initializeButtons();
         initializeEditTexts();
         initializeListView();
@@ -73,7 +113,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
 
 	/**
-	 * called when menu is created
+	 * Callback for when menu is created.
 	 */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,7 +123,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * called when activity is restarted
+     * Callback for when activity is restarted.
      */
     @Override
     public void onRestart() {
@@ -93,7 +133,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
 
     /**
-     * called when activity is starting
+     * Callback for when activity is starting, starts flurry session.
      */
     @Override
     public void onStart() {
@@ -104,6 +144,9 @@ public class LeagueJoinActivity extends KiipFragmentActivity
         Log.i(TAG, "onStart");
     }
     
+    /**
+     * Callback for the when activity is stopped, stops flurry session.
+     */
 	@Override
 	protected void onStop()
 	{
@@ -112,7 +155,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
 	}
 	
     /**
-     * called when activity resumes
+     * Callback when activity resumes.
      */
     @Override
     public void onResume() {
@@ -122,7 +165,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * called when activity is paused
+     * Callback when activity is paused.
      */
     @Override
     public void onPause() {
@@ -132,7 +175,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * called when activity is destroyed
+     * Callback when activity is destroyed.
      */
     @Override
     public void onDestroy() {
@@ -143,7 +186,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * registers buttons from layout and adds listeners
+     * Registers buttons from layout and adds listeners.
      */
     private void initializeButtons() {
     	buttonSubmit = (Button)findViewById(R.id.league_join_button_submit);
@@ -162,7 +205,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * submits data entered by user
+     * Submits private league query entered by user.
      */
     private void submit() {
     	String firstName = etFirstName.getText().toString();
@@ -177,7 +220,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * goes to create activity
+     * Goes to create activity.
      */
     private void create() {
     	Intent intent = new Intent(this, LeagueCreateActivity.class);
@@ -185,7 +228,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * registers EditTexts from the layout
+     * Registers EditTexts from the layout.
      */
     private void initializeEditTexts() {
     	etFirstName = (EditText)findViewById(R.id.league_join_et_first_name);
@@ -193,7 +236,7 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * initialize the list view
+     * Initialize the list view of leagues.
      */
     private void initializeListView() {
     	leagueLV = (ListView)findViewById(R.id.league_join_list);
@@ -221,6 +264,17 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     	leagueLV.setAdapter(mAdapter);
     }
     
+    /**
+     * Opens up the detail view of the selceted league.
+     * 
+     * @param leagueId	id of the selected league
+     * @param players	number of players
+     * @param wager		the amount being wagered
+     * @param goal		the goal number of days
+     * @param isPrivate	whether the league is private
+     * @param duration	the length of the league
+     * @param bitmap	the image corresponding to the league creator
+     */
     private void gotoLeagueDetails(int leagueId, int players, int wager, int goal, boolean isPrivate, int duration, Bitmap bitmap) {
     	try {
     		Intent intent = new Intent(this, LeagueJoinDetailActivity.class);
@@ -243,10 +297,11 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     /** LoaderManager callBacks **/
     
     /**
+     * Callback for creation of the loader.
      * 
-     * @param id
-     * @param args
-     * @return
+     * @param id	not used
+     * @param args	not used
+     * @return		initialized loader for the leagues
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     	Log.d(TAG, "inited loader");
@@ -255,9 +310,10 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * callback for finishing of loader
-     * @param loader
-     * @param data
+     * Callback for finishing of loader.
+     * 
+     * @param loader	not used
+     * @param data		data to be loaded
      */
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     	if (data != null) {
@@ -273,21 +329,25 @@ public class LeagueJoinActivity extends KiipFragmentActivity
     }
     
     /**
-     * callback for resetting of loader
-     * @param loader
+     * Callback for resetting of loader.
+     * 
+     * @param loader	not used
      */
     public void onLoaderReset(Loader<Cursor> loader) {
     	mAdapter.swapCursor(null);
     }
     
     /** end LoaderManager callbacks **/
-    
+   
     /**
-     * AsyncTask class to login the user
-     * @author brent
+     * FindGamesAsyncTask submits, on a background thread, the query for a
+     * league.
+     * 
+     * @author brenthronk
      *
      */
     private class FindGamesAsyncTask extends AsyncTask<String, Void, PrivateLeagueResponse> {
+    	//TODO possible add onPreExecute to start a progressdialog
         protected PrivateLeagueResponse doInBackground(String... params) {
         	PrivateLeagueResponse response = LeagueCommunication.getPrivateLeague(params[0], params[1], params[2]);
         	return response;
@@ -316,6 +376,13 @@ public class LeagueJoinActivity extends KiipFragmentActivity
         }
     }
     
+    /**
+     * MyViewBinder provides custom mapping of specific elements within
+     * specific elements of a list row, specifically it handles the bitmap.
+     * 
+     * @author brenthronk
+     *
+     */
     private class MyViewBinder implements SimpleCursorAdapter.ViewBinder {
 
         public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
