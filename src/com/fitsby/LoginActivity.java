@@ -34,27 +34,62 @@ import constants.RememberMeConstants;
 
 public class LoginActivity extends KiipFragmentActivity {
 
+	/**
+	 * Tag used for logcat messages.
+	 */
 	private static final String TAG = "LoginActivity";
 	
+	/**
+	 * Pressed to login.
+	 */
 	private Button buttonLogin;
+	/**
+	 * Where users enter their email.
+	 */
 	private EditText emailET;
+	/**
+	 * Where users enter their password.
+	 */
 	private EditText passwordET;
+	/**
+	 * Clicked when users forget their password.
+	 */
 	private TextView forgotPasswordTV;
+	/**
+	 * Checked if users want their credentials to be remembered.
+	 */
 	private CheckBox rememberMeCB;
 	
+	/**
+	 * Where the users credentials will be remembered, if they so choose.
+	 */
 	private SharedPreferences mSharedPreferences;
+	/**
+	 * The stored email, if exists.
+	 */
 	private String preferencesEmail;
+	/**
+	 * The stored password, if exists.
+	 */
 	private String preferencesPassword;
 	
+	/**
+	 * Checks internet connectivity.
+	 */
 	private ServerCommunication comm;
+	/**
+	 * Where session information is stored.
+	 */
 	private ApplicationUser mApplicationUser;
 	
+	/**
+	 * Used to display ongoing background activity.
+	 */
 	private ProgressDialog mProgressDialog;
 	
 	/**
-	 * Called when activity is created
+	 * Callback for when activity is created, initializes views.
 	 */
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +119,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is restarted
+     * Callback for when activity is restarted.
      */
     @Override
     public void onRestart() {
@@ -94,7 +129,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
 
     /**
-     * called when activity is starting
+     * Callback for when activity is started, starts the flurry session.
      */
     @Override
     public void onStart() {
@@ -105,6 +140,9 @@ public class LoginActivity extends KiipFragmentActivity {
         Log.i(TAG, "onStart");
     }
     
+    /**
+     * Callback for the stopping of the activity, stops flurry session.
+     */
 	@Override
 	protected void onStop()
 	{
@@ -113,7 +151,7 @@ public class LoginActivity extends KiipFragmentActivity {
 	}
     
     /**
-     * called when activity resumes
+     * Callback for when activity resumes.
      */
     @Override
     public void onResume() {
@@ -123,7 +161,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is paused
+     * Callback for when activity is paused.
      */
     @Override
     public void onPause() {
@@ -133,7 +171,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is destroyed
+     * Callback for when activity is destroyed.
      */
     @Override
     public void onDestroy() {
@@ -144,7 +182,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * helper function which initializes the buttons
+     * Connects buttons to the layout and adds listeners.
      */
     private void initializeButtons() {
     	buttonLogin = (Button)findViewById(R.id.login_button_login);
@@ -156,7 +194,8 @@ public class LoginActivity extends KiipFragmentActivity {
     }	
     
     /**
-     * pulls information from editTexts and registers user
+     * Pulls information from editTexts and passes information off to
+     * asynctask to login.
      */
     private void login() {  
 
@@ -181,7 +220,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /** 
-     * helper function which initializes the EditTexts
+     * Connects the editTexts to the layout.
      */
     private void initializeEditTexts() {
     	emailET = (EditText)findViewById(R.id.login_email_id);
@@ -189,7 +228,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * initializes the textview
+     * Connects the textViews to the layout.
      */
     private void initializeTextViews() {
     	forgotPasswordTV = (TextView)findViewById(R.id.login_forgot_password);
@@ -202,12 +241,16 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * initializes the checkbox
+     * Connects the checkBox to the layout.
      */
     private void initializeCheckBox() {
     	rememberMeCB = (CheckBox)findViewById(R.id.login_remember_me_checkbox);
     }
     
+    /**
+     * Initializes the sharedpreferences, and gathers the stored email and
+     * password if they exist.
+     */
     private void initializeSharedPreferences() {
     	mSharedPreferences = getSharedPreferences(RememberMeConstants.PREFS_NAME,MODE_PRIVATE); 
     	preferencesEmail = mSharedPreferences.getString(RememberMeConstants.PREF_EMAIL, null);
@@ -221,8 +264,9 @@ public class LoginActivity extends KiipFragmentActivity {
     		rememberMeCB.setChecked(true);
     	}
     }
+    
     /**
-     * shows dialog to reset their password
+     * Shows dialog for user to reset password.
      */
     private void showAlertInput() {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -258,7 +302,7 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * helper function to update password
+     * Helper function to update password in sharedpreference.
      */
     private void updateRememberMe() {
     	String email = emailET.getText().toString();
@@ -277,9 +321,11 @@ public class LoginActivity extends KiipFragmentActivity {
             .commit();
     	}
     }
+
     /**
-     * AsyncTask class to login the user
-     * @author brent
+     * LoginAsyncTask logins the user on a background thread.
+     * 
+     * @author brenthronk
      *
      */
     private class LoginAsyncTask extends AsyncTask<String, Void, UserResponse> {
@@ -342,8 +388,10 @@ public class LoginActivity extends KiipFragmentActivity {
     }
     
     /**
-     * AsyncTask class to login the user
-     * @author brent
+     * PasswordResetAsyncTask sends information to the server to reset the
+     * users forgotten password.
+     * 
+     * @author brenthronk
      *
      */
     private class PasswordResetAsyncTask extends AsyncTask<String, Void, StatusResponse> {
