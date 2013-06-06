@@ -26,16 +26,48 @@ import com.viewpagerindicator.TabPageIndicator;
 import constants.FlurryConstants;
 import dbtables.User;
 
+/**
+ * LoggedinActivity class is the activity which displays the main content of a
+ * logged in user, namely, their games, newsfeed and ability to check in.
+ * 
+ * @author brenthronk
+ *
+ */
 public class LoggedinActivity extends KiipSherlockFragmentActivity {
+	
+	/**
+	 * Names of the 3 tabs.
+	 */
 	private static final String[] CONTENT = new String[] { "GAMES", "NEWSFEED", "CHECK IN"};
+	/**
+	 * Position of the check in tab.
+	 */
 	public static final int CHECK_IN_POSITION = 2;
+	/**
+	 * Position of the newsfeed tab.
+	 */
 	public static final int NEWSFEED_POSITION = 1;
+	/**
+	 * Key used in bundles to restore appropriate tab.
+	 */
 	public static final String POSITION_KEY = "positionKey";
+	/**
+	 * Tag used for logcat messages.
+	 */
 	private static final String TAG = "LoggedinActivity";
 	
+	/**
+	 * Item in actionbar which will contain users photo.
+	 */
 	private MenuItem settingsMenuItem;
+	/**
+	 * The currently logged in user.
+	 */
 	private User mUser;
 
+	/**
+	 * Callback for the creation of the activity, initializes views.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,13 +89,15 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
         int position = getIntent().getIntExtra(POSITION_KEY, 0);
         Log.i(TAG, position + "");
         
-        
-
         TabPageIndicator indicator = (TabPageIndicator)findViewById(R.id.loggedin_indicator);
         indicator.setViewPager(pager);
         pager.setCurrentItem(position);
 	}
 	
+	/**
+	 * Callback for creation of the options menu, adds the users gravatar
+	 * to the actionbar.
+	 */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         settingsMenuItem = menu.add("Settings");
@@ -71,6 +105,10 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
         return true;
     }
 
+    /**
+     * Callback for selecting an item in the option menu, takes the user to
+     * the settings activity.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -80,6 +118,10 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
     	return true;
     }
     
+    /**
+     * Callback for saving the state of the activity when placed in the
+     * background.
+     */
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -88,7 +130,7 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	}
 	
     /**
-     * called when activity is restarted
+     * Callback for when activity is restarted.
      */
     @Override
     public void onRestart() {
@@ -98,7 +140,7 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
     }
 
     /**
-     * called when activity is starting
+     * Callback for when activity is starting, starts the flurry serssion.
      */
     @Override
     public void onStart() {
@@ -109,6 +151,9 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
         Log.i(TAG, "onStart");
     }
     
+    /**
+     * Callback for the stopping of the activity, stops the flurry session.
+     */
 	@Override
 	protected void onStop()
 	{
@@ -117,7 +162,7 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
 	}
     
     /**
-     * called when activity resumes
+     * Callback for when activity resumes.
      */
     @Override
     public void onResume() {
@@ -127,7 +172,7 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
     }
     
     /**
-     * called when activity is paused
+     * Callback for when activity is paused.
      */
     @Override
     public void onPause() {
@@ -137,7 +182,7 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
     }
     
     /**
-     * called when activity is destroyed
+     * Callback for when activity is destroyed.
      */
     @Override
     public void onDestroy() {
@@ -148,8 +193,9 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
     }
     
     /**
-     * AsyncTask to Register user
-     * @author brent
+     * GravatarAsyncTask fetches the users gravatar on a background thread.
+     * 
+     * @author brenthronk
      *
      */
     private class GravatarAsyncTask extends AsyncTask<String, Void, Bitmap> {
@@ -165,6 +211,13 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
         }
     }
 
+    /**
+     * LoggedinFragmentAdapter is responsible for mapping the tabs to their
+     * respective fragment.
+     *
+     * @author brenthronk
+     *
+     */
     class LoggedinFragmentAdapter extends FragmentPagerAdapter {
         public LoggedinFragmentAdapter(FragmentManager fm) {
             super(fm);
