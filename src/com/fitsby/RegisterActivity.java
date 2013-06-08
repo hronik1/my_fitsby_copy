@@ -1,18 +1,14 @@
 package com.fitsby;
 
-import dbhandlers.DatabaseHandler;
-import dbhandlers.UserTableHandler;
-import dbtables.User;
 import registration.RegisterClientSideValidation;
+import responses.UserResponse;
 import servercommunication.ServerCommunication;
 import servercommunication.UserCommunication;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,30 +27,71 @@ import com.flurry.android.FlurryAgent;
 import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
-import responses.StatusResponse;
-import responses.UserResponse;
 
+/**
+ * RegisterActivity is the class that users interact with to register with
+ * Fitsby.
+ * 
+ * @author brenthronk
+ *
+ */
 public class RegisterActivity extends KiipFragmentActivity {
 
+	/**
+	 * Tag used in logat messages.
+	 */
 	private final static String TAG = "MainActivity";
 	
+	/**
+	 * Button pressed to register.
+	 */
 	private Button buttonRegister;
 	
+	/**
+	 * EditText to input users first name.
+	 */
 	private EditText firstNameET;
+	/**
+	 * EditText to input users last name.
+	 */
 	private EditText lastNameET;
+	/**
+	 * EditText to input users  email address.
+	 */
 	private EditText emailET;
+	/**
+	 * EditText to input desired password.
+	 */
 	private EditText passwordET;
+	/**
+	 * EditText to input confirmation of desired password.
+	 */
 	private EditText confirmPasswordET;
+	/**
+	 * Clicked to open up terms of service.
+	 */
 	private TextView serviceTV;
+	/**
+	 * Clicked to open up privacy policy.
+	 */
 	private TextView privacyTV;
 	
+	/**
+	 * Validates internet connectivity.
+	 */
 	private ServerCommunication comm;
+	/**
+	 * Stores session information.
+	 */
 	private ApplicationUser mApplicationUser;
 	
+	/**
+	 * Displays ongoing background activity.
+	 */
 	private ProgressDialog mProgressDialog;
 	
 	/**
-	 * called when activity is created
+	 * Called when activity is created, initializes views.
 	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +111,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     
     /**
      * Initialize the contents of the Activity's standard options menu. You should place your menu items in to menu.
-     * This is only called once, the first time the options menu is displayed
+     * This is only called once, the first time the options menu is displayed.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,7 +120,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is restarted
+     * Called when activity is restarted.
      */
     @Override
     public void onRestart() {
@@ -93,7 +130,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     }
 
     /**
-     * called when activity is starting
+     * Called when activity is starting, starts flurry session.
      */
     @Override
     public void onStart() {
@@ -104,6 +141,9 @@ public class RegisterActivity extends KiipFragmentActivity {
         Log.i(TAG, "onStart");
     }
     
+    /**
+     * Called when activity is stopping, stops flurry session.
+     */
 	@Override
 	protected void onStop()
 	{
@@ -113,7 +153,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     
     
     /**
-     * called when activity resumes
+     * Called when activity resumes.
      */
     @Override
     public void onResume() {
@@ -123,7 +163,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is paused
+     * Called when activity is paused.
      */
     @Override
     public void onPause() {
@@ -133,7 +173,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is destroyed
+     * Called when activity is destroyed.
      */
     @Override
     public void onDestroy() {
@@ -144,7 +184,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     }
     
     /**
-     * helper function which initializes the buttons
+     * Connects the buttons the the layout and adds listeners.
      */
     private void initializeButtons() {
     	buttonRegister = (Button)findViewById(R.id.register_button_register);
@@ -156,7 +196,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     }	
     
     /**
-     * pulls information from editTexts and then registers user
+     * Pulls information from editTexts and then registers user.
      */
     private void register() {  
     	final String firstName = firstNameET.getText().toString();
@@ -202,7 +242,7 @@ public class RegisterActivity extends KiipFragmentActivity {
     }
     
     /** 
-     * helper function which initializes the EditTexts
+     * Initializes the EditTexts.
      */
     private void initializeEditTexts() {
     	firstNameET = (EditText)findViewById(R.id.register_first_name_id);
@@ -212,6 +252,9 @@ public class RegisterActivity extends KiipFragmentActivity {
     	confirmPasswordET = (EditText)findViewById(R.id.register_confirm_password_id);
     }
 
+    /**
+     * Connects the TextViews to the layouts and adds listeners.
+     */
     private void initializeTextViews() {
     	serviceTV = (TextView)findViewById(R.id.register_tos_tv);
     	serviceTV.setOnClickListener(new OnClickListener() {
@@ -231,9 +274,11 @@ public class RegisterActivity extends KiipFragmentActivity {
 			}
     	});
     }
+
     /**
-     * AsyncTask to Register user
-     * @author brent
+     * RegisterAsyncTask registers the user on a background thread.
+     * 
+     * @author brenthronk
      *
      */
     private class RegisterAsyncTask extends AsyncTask<String, Void, UserResponse> {
