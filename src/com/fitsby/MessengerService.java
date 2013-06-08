@@ -17,9 +17,23 @@ import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+/**
+ * MessengerService is a service responsible for keeping track of the length of
+ * time and where a user is checked in, as well as publishing updates to
+ * notifications and the checkinfragment.
+ * 
+ * @author brenthronk
+ *
+ */
 public class MessengerService extends Service {
 
+	/**
+	 * Tag used for logcat messages.
+	 */
 	private final static String TAG = "MessengerService";
+	/**
+	 * Id of the notification, used to publish updates to it.
+	 */
 	private final int NOTIFICATION_ID = 1;
 	
 	private NotificationManager mNotificationManager;
@@ -27,17 +41,47 @@ public class MessengerService extends Service {
 	private static Timer mTimer;
 	final Messenger mMessenger = new Messenger(new IncomingHandler());
 	
+	/**
+	 * Passed by client to signify it wants to register.
+	 */
 	public final static int MSG_REGISTER_CLIENT = 1;
+	/**
+	 * Passed by client to signify it wants to unregister.
+	 */
     public static final int MSG_UNREGISTER_CLIENT = 2;
+    /**
+     * Passed to client to signify that it should set the value passed.
+     */
     public static final int MSG_SET_VALUE = 3;
+    /**
+     * Passed by client to signify that this should start the timer.
+     */
     public static final int MSG_START_TIMER = 4;
+    /**
+     * Passed by client to signify that this should start the timer.
+     */
     public static final int MSG_STOP_TIMER = 5;
+    /**
+     * Passed by client to signify that this should set the gym.
+     */
     public static final int MSG_SET_GYM = 6;
+    /**
+     * Key for passing in the gym name.
+     */
     public static final String GYM_NAME_KEY = "gymName";
     
+    /**
+     * Used to keep track of the minutes since checking in.
+     */
     private static int minutes = 0;
+    /**
+     * Used to keep track of the seconds within a minute since checking in.
+     */
     private static int seconds = 0;
     
+    /**
+     * The name of the gym where the user is checked in.
+     */
     private static String gym;
     
     /**
@@ -71,6 +115,9 @@ public class MessengerService extends Service {
     }
     
 
+    /**
+     * Callback for recieving the start command.
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         
@@ -78,20 +125,27 @@ public class MessengerService extends Service {
         return START_REDELIVER_INTENT;
     }
     
+    /**
+     * Callback for the creation of the service.
+     */
     @Override
     public void onCreate() {
         mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     }
     
     /**
-     * method to provide a binder object for clients to use
+     * Callback for client trying to bind to service.
      */
 	@Override
 	public IBinder onBind(Intent arg0) {
 		return mMessenger.getBinder();
 	}
 
-	
+	/**
+	 * This registers a client and stores the gym name.
+	 * 
+	 * @param message	contains client information for registering
+	 */
 	private void registerClient(Message message) {
 		mClient = message.replyTo;
 		try {
@@ -106,7 +160,7 @@ public class MessengerService extends Service {
 	}
 	
 	/**
-	 * starts the timer sending messages to the client
+	 * Starts the timer and starts sending messages to the client.
 	 */
 	private void startTimer() {
 		Log.d(TAG, "startTimer");
@@ -155,7 +209,7 @@ public class MessengerService extends Service {
 	}
 	
 	/**
-	 * stops the timer
+	 * Stops the timer and stops sending updates to client.
 	 */
 	private void stopTimer() {
 		Log.d(TAG, "stopTimer");
@@ -174,8 +228,9 @@ public class MessengerService extends Service {
 	}
 	
 	/**
-	 * sets the gym name
-	 * @param message
+	 * Sets the gym name.
+	 * 
+	 * @param message	message containing the gym name
 	 */
 	private void setGym(Message message) {
 		Bundle data = message.getData();
@@ -189,7 +244,7 @@ public class MessengerService extends Service {
 	}
 	
 	/**
-	 * creates the notification for the placing in the foreground
+	 * Creates the notification for the placing in the foreground.
 	 */
 	private void createForegroundNotification() {
 	    // Create an Intent that will open the main Activity
