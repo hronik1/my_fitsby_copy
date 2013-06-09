@@ -9,32 +9,62 @@ import dbtables.User;
 
 public class ApplicationUser extends Application {
 	
+	/**
+	 * Used as key to store obtain shared preference for user info.
+	 */
 	private static final String PREF_KEY_USER = "prefKeyUser";
+	/**
+	 * Key for id within preference.
+	 */
 	private static final String PREF_KEY_ID = "prefKeyID";
+	/**
+	 * Key for first name in preference.
+	 */
 	private static final String PREF_KEY_FIRST_NAME = "prefKeyFirstName";
+	/**
+	 * Key for last name within preference.
+	 */
 	private static final String PREF_KEY_LAST_NAME = "prefKeyLastName";
+	/**
+	 * Key for email within preference.
+	 */
 	private static final String PREF_KEY_EMAIL = "prefKeyEmail";
+	/**
+	 * Kiip app key.
+	 */
 	private static final String MY_APP_KEY = "38c7edc90b99cfbd0880160ce03a9af2";
+	/**
+	 * Kiip app secret.
+	 */
 	private static final String MY_APP_SECRET = "733d6f4d3738825840d81d7ed0854740";
+	/**
+	 * Kiip moment id
+	 */
 	public static final String MY_MOMENT_ID = "checkin_moment";
+	/**
+	 * Default id, if present in preferences no user is authenticated.
+	 */
 	public static final int DEFAULT_ID = -1;
 	
 	private User mUser;
 	private SharedPreferences mSharedPreferences;
 	
-	
+	/**
+	 * Callback for creation of the application, initializes kiip information,
+	 * as well as shared prefs.
+	 */
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		mSharedPreferences = getSharedPreferences(PREF_KEY_USER,MODE_PRIVATE);
+		mSharedPreferences = getSharedPreferences(PREF_KEY_USER, MODE_PRIVATE);
 		SingletonContext.initializeContext(this);
 	    Kiip kiip = Kiip.init(this, MY_APP_KEY, MY_APP_SECRET);
 	    Kiip.setInstance(kiip);
 	}
 	
 	/**
-	 * reads user data from sharedpreferences, if non existent
-	 * @return the user
+	 * Reads user data from sharedpreferences, if existent.
+	 * @return the user, or null if none authenticated
 	 */
 	public User getUser() {
 		if (mUser == null) {
@@ -48,7 +78,7 @@ public class ApplicationUser extends Application {
 	}
 	
 	/**
-	 * sets user, writing to shared preferences as well
+	 * Sets user, writing to shared preferences as well.
 	 * @param user
 	 */
 	public void setUser(User user) {
@@ -70,6 +100,7 @@ public class ApplicationUser extends Application {
 		}
 	}
 	
+	//TODO cleanup all of this mess below, so not even bothering to comment
 	private boolean isJoin;
 	private boolean isCreate;
 	
