@@ -18,17 +18,29 @@ import constants.TutorialsConstants;
 
 public class TutorialActivity extends KiipFragmentActivity {
 
+	/**
+	 * Adapter from drawable resources to proper pages.
+	 */
     TutorialPagerAdapter mTutorialPagerAdapter;
+    /**
+     * Allows swiping of the pages.
+     */
     ViewPager mViewPager;
     
-
+    /**
+     * True if mefragment started this activity, false otherwise.
+     */
     private static boolean fromMe;
     
+    /**
+     * Drawables corresponding to the pages.
+     */
     private static int[] pageDrawableResources = new int[] {R.drawable.registration_onboard1, R.drawable.registration_onboard2,
     		R.drawable.registration_onboard3, R.drawable.registration_onboard4, R.drawable.registration_onboard5};
 
-    
-    
+    /**
+     * Callback for creation of the activity, initializes the views.
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +53,9 @@ public class TutorialActivity extends KiipFragmentActivity {
         parseBundle(getIntent());
 	}
 
+	/**
+	 * Callback for creation of the options menu.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -48,10 +63,22 @@ public class TutorialActivity extends KiipFragmentActivity {
 		return true;
 	}
 	
+	/**
+	 * Parses the bundle from previous activity.
+	 * 
+	 * @param intent	contains bundle to be parsed.
+	 */
 	private void parseBundle(Intent intent) {
 		fromMe = intent.getBooleanExtra(TutorialsConstants.FROM_ME, false);
 	}
 	
+	/**
+	 * TutorialPagerAdapter is responsible for mapping the drawables to the
+	 * appropriate fragment.
+	 * 
+	 * @author brenthronk
+	 *
+	 */
     public static class TutorialPagerAdapter extends FragmentStatePagerAdapter {
 
         public TutorialPagerAdapter(FragmentManager fm) {
