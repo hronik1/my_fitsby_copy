@@ -8,34 +8,16 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
-import bundlekeys.LeagueDetailBundleKeys;
-
-import com.facebook.FacebookException;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
-import com.fitsby.FriendInviteActivity.UpdateTwitterAsyncTask;
-import com.fitsby.applicationsubclass.ApplicationUser;
-import com.flurry.android.FlurryAgent;
-
-import constants.FlurryConstants;
-
-import dbtables.User;
-
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -44,39 +26,115 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import bundlekeys.LeagueDetailBundleKeys;
 
+import com.facebook.FacebookException;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.WebDialog;
+import com.facebook.widget.WebDialog.OnCompleteListener;
+import com.flurry.android.FlurryAgent;
+
+import constants.FlurryConstants;
+
+/**
+ * ShareCheckinActivity is an activity where users can share their checkin
+ * to various social networks.
+ * 
+ * @author brenthronk
+ *
+ */
 public class ShareCheckinActivity extends KiipFragmentActivity {
 
+	/**
+	 * Tag used for logcat messages.
+	 */
 	private final static String TAG = "ShareCheckinActivity";
+	/**
+	 * Key for the gym name when placed in preferences.
+	 */
 	private final static String GYM_KEY = "gymKey";
-	
-	private ApplicationUser mApplicationUser;
-	private User mUser;
+	/**
+	 * Pressed to share content.
+	 */
 	private Button mShareButton;
+	/**
+	 * The name of the gym where the user is currently checked in to.
+	 */
 	private static String mGymName;
+	/**
+	 * Displays ongoing background progress.
+	 */
 	private ProgressDialog mProgressDialog;
 	
 	//twitter
+	/**
+	 * Lightweight storeage for twitter information.
+	 */
 	private SharedPreferences mSharedPreferences;
+	/**
+	 * Key to get twitter shared preference.
+	 */
     static String PREFERENCE_NAME = "twitter_oauth";
+    /**
+     * Key for twitter oauth token in preference.
+     */
     static final String PREF_KEY_OAUTH_TOKEN = "oauth_token";
+    /**
+     * Key for twitter ouath secret in preference.
+     */
     static final String PREF_KEY_OAUTH_SECRET = "oauth_token_secret";
+    /**
+     * Key for boolean of whether user is logged in or not.
+     */
     static final String PREF_KEY_TWITTER_LOGIN = "isTwitterLogedIn";
-    static final String URL_TWITTER_AUTH = "auth_url";
+    /**
+     * Used as query paramater to twitter to get ouath token.
+     */
     static final String URL_TWITTER_OAUTH_VERIFIER = "oauth_verifier";
-    static final String URL_TWITTER_OAUTH_TOKEN = "oauth_token";
+    /**
+     * Callback url for obtaining a twitter oauth token.
+     */
     static final String TWITTER_CALLBACK_URL = "oauth://t4jsamplecheckin";
+    /**
+     * Helper class for authenticating to twitter.
+     */
     private static Twitter twitter;
+    /**
+     * Token for twitter request.
+     */
     private static RequestToken requestToken;
+    /**
+     * Key for twitter.
+     */
 	private String TWITTER_CONSUMER_KEY;
+	/**
+	 * Secret string for twitter.
+	 */
 	private String TWITTER_CONSUMER_SECRET;
+	/**
+	 * Pressed to login to twitter.
+	 */
 	private Button twitterLoginButton;
+	/**
+	 * Pressed to share to twitter.
+	 */
 	private Button twitterShareButton;
 	
+	/**
+	 * Reference to passed in uri.
+	 */
 	private Uri uri;
 	
 	//facebook
+	/**
+	 * Helper class for facebook lifecycle.
+	 */
 	private UiLifecycleHelper uiHelper;
+	/**
+	 * Callback wrapper for various aspects of the facebook lifecycle.
+	 */
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 	    @Override
 	    public void call(Session session, SessionState state, Exception exception) {
@@ -84,6 +142,10 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
 	    }
 	};
 	
+	/**
+	 * Callback for creation of the activity, initializes view and social
+	 * network handling.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,9 +160,6 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
         mSharedPreferences = getApplicationContext().getSharedPreferences(
                 "MyPref", 0);
         
-        mApplicationUser = (ApplicationUser)getApplicationContext();
-        mUser = mApplicationUser.getUser();
-        
         parseBundle(getIntent());
 
         uri = getIntent().getData();
@@ -110,6 +169,10 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
         new ParseTwitterLoginResponseAsyncTask().execute();
 	}
 	
+	/**
+	 * Callback to save state of app so that it can be restored later, saves
+	 * state for facebook.
+	 */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -117,7 +180,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is starting
+     * Called when activity is starting, starts flurry session.
      */
     @Override
     public void onStart() {
@@ -129,7 +192,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is paused
+     * Callback for pausing of the activity.
      */
     @Override
     public void onPause() {
@@ -139,7 +202,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * called when activity is destroyed
+     * Called when activity is destroyed.
      */
     @Override
     public void onDestroy() {
@@ -149,6 +212,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	
     }
     
+    /**
+     * Callback for stopping of the activity.
+     */
 	@Override
 	protected void onStop()
 	{
@@ -157,7 +223,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
 	}
 	
     /**
-     * called when activity resumes
+     * Called when activity resumes.
      */
     @Override
     public void onResume() {
@@ -171,6 +237,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
         Log.i(TAG, "onResume");
     }
 
+    /**
+     * Called when options menu is created.
+     */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -179,7 +248,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
 	}
 	
     /**
-     * callback for receiving data from starting an activity for a result
+     * Callback for receiving data from starting an activity for a result/
      */
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -189,7 +258,15 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	}
 
     }
-  
+    
+    /**
+     * Callback for changing of the Session state.
+     * 
+     * @param session		facebook session info
+     * @param state			new state of the session
+     * @param exception		reference to exception that occured during change
+     * 						of state, if any
+     */
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, "Logged in...");
@@ -201,7 +278,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
 
     /**
-     * initializes the buttons
+     * Connects buttons to layout, adds listeners.
      */
     private void initializeButtons() {
     	mShareButton = (Button)findViewById(R.id.checkin_share_facebook_shareButton);
@@ -231,7 +308,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * 
+     * Confirms that user is logged in to twitter, if so opens up dialog for
+     * user to input story to publish, otherwise a prompt explaining that they
+     * must first log in.
      */
     private void publishToTwitter() {
     	if (isTwitterLoggedInAlready()) {
@@ -243,6 +322,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     	}
     }
     
+    /**
+     * Opens up a dialog for user to post twitter story.
+     */
     private void showTwitterDialog() {
     	Log.i(TAG, "showTwitterDialog");
 
@@ -283,8 +365,11 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * Function to update status
-     * */
+     * UpdateTwitterAsyncTask posts a story to twitter on a background thread.
+     * 
+     * @author brenthronk
+     *
+     */
     class UpdateTwitterAsyncTask extends AsyncTask<String, String, String> {
      
         /**
@@ -341,8 +426,9 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * parses the incoming bundle
-     * @param intent
+     * Pares the incoming bundle from previous activity.
+     * 
+     * @param intent	contains bundle to be parsed
      */
     private void parseBundle(Intent intent) {
     	Bundle extras = intent.getExtras();
@@ -365,7 +451,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * opens up dialog for users to share their check-in on Facebook
+     * Opens up dialog for users to share their check-in on Facebook.
      */
     private void publishStory() {
         Session session = Session.getActiveSession();
@@ -412,7 +498,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * logins in user if not, logsout if logged in
+     * Logins in user if not, logsout if logged in.
      */
     private void authenticateTwitter() {
     	if (!isTwitterLoggedInAlready()) {
@@ -432,7 +518,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     }
     
     /**
-     * shows AlertDialog
+     * Shows AlertDialog allowing user to confirm that they want to log out.
      */
     private void showTwitterLogoutAlertDialog() {
     	Log.i(TAG, "showTwitterLogoutAlertDialog");
@@ -462,7 +548,7 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
     /**
      * Check user already logged in your application using twitter Login flag is
      * fetched from Shared Preferences
-     * */
+     */
     private boolean isTwitterLoggedInAlready() {
         // return twitter login status from Shared Preferences
         return mSharedPreferences.getBoolean(PREF_KEY_TWITTER_LOGIN, false);
@@ -501,6 +587,13 @@ public class ShareCheckinActivity extends KiipFragmentActivity {
 		}
     }
     
+    /**
+     * ParseTwitterLoginResponseAsyncTask parses the twitter login callback on
+     * a background thread.
+     * 
+     * @author brenthronk
+     *
+     */
     private class ParseTwitterLoginResponseAsyncTask extends AsyncTask<Integer, Void, Void> {
     	
 		protected void onPreExecute() {
