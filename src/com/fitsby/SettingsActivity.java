@@ -5,8 +5,17 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.fitsby.fragments.MeFragment;
 
+/**
+ * SettingsActivity is just a wrapper activity around the MeFragment.
+ * 
+ * @author brenthronk
+ *
+ */
 public class SettingsActivity extends KiipSherlockFragmentActivity {
 
+	/**
+	 * Callback for creation of the Activity, initializes the view.
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
