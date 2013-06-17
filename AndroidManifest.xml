@@ -44,11 +44,11 @@
             android:label="@string/title_activity_landing"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
-            <intent-filter>
+<!--             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
         <activity
             android:name="com.fitsby.RegisterActivity"
@@ -190,6 +190,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/StyledIndicators" >
         </activity>
+        <activity
+            android:name="com.fitsby.AccelerometerActivity"
+            android:label="@string/title_activity_accelerometer" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.fitsby.AccelerometerService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

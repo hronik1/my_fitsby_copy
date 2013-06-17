@@ -1,14 +1,26 @@
 package stepcounter;
 
+/**
+ * NextPowerOfTwo finds is responsible for calculating the next power of 2.
+ * @author brenthronk
+ *
+ */
 public class NextPowerOfTwo {
 
+	/**
+	 * Calculated the next integer greater to or equal to the input that is a
+	 * power of 2.
+	 * 
+	 * Note, errors on negative and large elements will occur.
+	 * 
+	 * @param input		integer in which the next largest power of 2 is desired
+	 * @return			next largest power of 2 than input
+	 */
 	public static int find(int input) {
 		input--;
-		input |= input >> 1;   // Divide by 2^k for consecutive doublings of k up to 32,
-		input |= input >> 2;   // and then or the results.
-		input |= input >> 4;
-		input |= input >> 8;
-		input |= input >> 16;
+		for (int shiftAmount = 1; shiftAmount < Integer.SIZE; shiftAmount *= 2) {
+			input |= input >> shiftAmount; 
+		}
 		input++;  
 		return input;
 	}
