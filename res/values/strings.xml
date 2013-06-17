@@ -251,5 +251,9 @@
     <string name="profile_time_spent_count_tv">0</string>
     <string name="profile_num_workouts_label_tv">Work-outs</string>
     <string name="profile_num_workouts_count_tv">0</string>
+    <string name="title_activity_accelerometer">AccelerometerActivity</string>
+    <string name="accelerometer_start_button">start</string>
+    <string name="accelerometer_stop_button">stop</string>
+    <string name="accelerometer_steps_tv">0</string>
 
 </resources>

@@ -244,6 +244,18 @@
         <meta-data
     		android:name="com.google.android.maps.v2.API_KEY"
     		android:value="AIzaSyDDEwjo1ewFwu7OPG3IYxU_nrf6NNbTN20"/>
+        
+        <activity
+            android:name="com.fitsby.AccelerometerActivity"
+            android:label="@string/title_activity_accelerometer" >
+        </activity>
+
+        <service
+            android:name="com.fitsby.AccelerometerService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+>>>>>>> b25fab6... step counter initial implementation
     </application>
 
 </manifest>
