@@ -20,6 +20,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -190,6 +195,28 @@
             android:screenOrientation="portrait"
             android:theme="@style/StyledIndicators" >
         </activity>
+        
+        <service android:name="com.qualcommlabs.usercontext.service.UserContextService" >
+            <intent-filter>
+                <action android:name="com.fitsby.service.USER_CONTEXT_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.qualcommlabs.usercontext.service.UserContextServiceStartStopReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.qualcomm.denali.contextEngineService.DenaliContextEngineService"
+            android:enabled="true" />
+
     </application>
 
 </manifest>
