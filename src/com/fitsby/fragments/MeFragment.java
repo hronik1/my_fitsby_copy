@@ -10,6 +10,7 @@ import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.fitsby.AddPlacesActivity;
 import com.fitsby.FirstTimeCheckinActivity;
 import com.fitsby.LandingActivity;
 import com.fitsby.LoginActivity;
@@ -80,6 +81,7 @@ public class MeFragment extends SherlockFragment {
 	private TextView facebookTV;
 	private TextView resetPasswordTV;
 	private TextView twitterTV;
+	private TextView addGymTV;
 	
 	private Button logoutButton;
 	private Button submitButton;
@@ -268,6 +270,14 @@ public class MeFragment extends SherlockFragment {
 			}
 		});
 		
+		addGymTV = (TextView)viewer.findViewById(R.id.me_settings_tv_add_gym_link);
+		addGymTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getActivity(), AddPlacesActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 	
 	/**

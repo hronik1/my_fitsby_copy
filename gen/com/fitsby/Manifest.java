@@ -10,5 +10,6 @@ package com.fitsby;
 public final class Manifest {
     public static final class permission {
         public static final String C2D_MESSAGE="com.fitsby.permission.C2D_MESSAGE";
+        public static final String MAPS_RECEIVE="com.fitsby.permission.MAPS_RECEIVE";
     }
 }
