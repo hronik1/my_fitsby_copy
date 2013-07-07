@@ -68,7 +68,7 @@
                 android:id="@+id/me_textview_total_money_earned_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/me_imageview"
+                android:layout_below="@+id/me_framelayout_imageview"
                 android:layout_toRightOf="@+id/me_textview_total_money_earned_prompt"
                 android:layout_alignTop="@+id/me_textview_total_money_earned_prompt"
                 android:textColor="@color/white"                   
@@ -156,11 +156,28 @@
             </TextView>
             
             <TextView
+                android:id="@+id/me_settings_tv_aws_picture_link"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_below="@+id/me_settings_tv_change_picture_link"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/newsfeed_submit_button"
+                android:textColor="@color/white"
+                android:layout_marginTop="3dp"                
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"       
+                android:textSize="17sp"            
+                android:gravity="center"   
+                android:text="@string/me_settings_tv_aws_picture_link_text">
+            </TextView>
+            
+            <TextView
                 android:id="@+id/me_settings_tv_change_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/me_settings_tv_change_picture_link"
+                android:layout_below="@+id/me_settings_tv_aws_picture_link"
                 android:layout_marginTop="10dp"                
                 android:textColor="@color/white"                   
                 android:layout_marginLeft="10dp" 

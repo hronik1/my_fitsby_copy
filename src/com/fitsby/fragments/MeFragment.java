@@ -10,6 +10,9 @@ import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.fitsby.FirstTimeCheckinActivity;
 import com.fitsby.LandingActivity;
 import com.fitsby.LoginActivity;
@@ -18,6 +21,7 @@ import com.fitsby.R;
 import com.fitsby.TutorialActivity;
 import com.fitsby.applicationsubclass.ApplicationUser;
 
+import constants.S3Constants;
 import constants.TutorialsConstants;
 
 
@@ -36,6 +40,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -46,6 +51,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -80,6 +86,7 @@ public class MeFragment extends SherlockFragment {
 	private TextView facebookTV;
 	private TextView resetPasswordTV;
 	private TextView twitterTV;
+	private TextView awsTV;
 	
 	private Button logoutButton;
 	private Button submitButton;
@@ -104,6 +111,10 @@ public class MeFragment extends SherlockFragment {
 	private boolean isBound;
 	final Messenger mMessenger = new Messenger(new IncomingHandler());
 
+	private AmazonS3Client s3Client = new AmazonS3Client(
+			new BasicAWSCredentials(S3Constants.ACCESS_KEY_ID,
+					S3Constants.SECRET_KEY));
+	
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -173,18 +184,10 @@ public class MeFragment extends SherlockFragment {
 		//keep around for potential future profile pic implementation
 	    if (requestCode == PICK_PHOTO_REQUEST) {
 
-	        if (resultCode == parent.RESULT_OK) {
+	        if (resultCode == Activity.RESULT_OK) {
 	        	Uri selectedImage = data.getData();
-	        	try {
-					InputStream fileInputStream = parent.getContentResolver().openInputStream(selectedImage);
-					Bitmap bitmap = BitmapFactory.decodeStream(fileInputStream);
-					//TODO set profile picture to proper size
-					//profileIV.setImageBitmap(bitmap);
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        } else if (resultCode == parent.RESULT_CANCELED) {
+				new S3PutObjectTask().execute(selectedImage);
+	        } else if (resultCode == Activity.RESULT_CANCELED) {
 	    		Toast toast = Toast.makeText(parent, "You did not select a photo",
 	    				Toast.LENGTH_LONG);
 	    		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -265,6 +268,14 @@ public class MeFragment extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				showAlertResetPassword();
+			}
+		});
+		
+		awsTV = (TextView)viewer.findViewById(R.id.me_settings_tv_aws_picture_link);
+		awsTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				changePicture();
 			}
 		});
 		
@@ -826,4 +837,89 @@ public class MeFragment extends SherlockFragment {
         }
     }
 
+	private class S3PutObjectTask extends AsyncTask<Uri, Void, S3TaskResult> {
+
+		ProgressDialog dialog;
+
+		protected void onPreExecute() {
+			dialog = new ProgressDialog(getActivity());
+			dialog.setMessage("uploading pic");
+			dialog.setCancelable(false);
+			dialog.show();
+		}
+
+		protected S3TaskResult doInBackground(Uri... uris) {
+
+			if (uris == null || uris.length != 1) {
+				return null;
+			}
+
+			// The file location of the image selected.
+			Uri selectedImage = uris[0];
+
+			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+			Cursor cursor = getActivity().getContentResolver().query(selectedImage,
+					filePathColumn, null, null, null);
+			cursor.moveToFirst();
+
+			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+			String filePath = cursor.getString(columnIndex);
+			cursor.close();
+
+			S3TaskResult result = new S3TaskResult();
+
+			// Put the image data into S3.
+			try {
+				s3Client.createBucket(S3Constants.getPictureBucket());
+
+				// Content type is determined by file extension.
+				PutObjectRequest por = new PutObjectRequest(
+						S3Constants.getPictureBucket(), S3Constants.PICTURE_NAME,
+						new java.io.File(filePath));
+				s3Client.putObject(por);
+			} catch (Exception exception) {
+
+				result.setErrorMessage(exception.getMessage());
+			}
+
+			return result;
+		}
+
+		protected void onPostExecute(S3TaskResult result) {
+
+			dialog.dismiss();
+
+			if (result.getErrorMessage() != null) {
+				Toast.makeText(getActivity(), result.getErrorMessage(), Toast.LENGTH_SHORT).show();
+//				displayErrorAlert(
+//						S3UploaderActivity.this
+//								.getString(R.string.upload_failure_title),
+//						result.getErrorMessage());
+			} else {
+				Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	private class S3TaskResult {
+		String errorMessage = null;
+		Uri uri = null;
+
+		public String getErrorMessage() {
+			return errorMessage;
+		}
+
+		public void setErrorMessage(String errorMessage) {
+			this.errorMessage = errorMessage;
+		}
+
+		public Uri getUri() {
+			return uri;
+		}
+
+		public void setUri(Uri uri) {
+			this.uri = uri;
+		}
+	}
 }
