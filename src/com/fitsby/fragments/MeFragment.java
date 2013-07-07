@@ -14,6 +14,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 
+import com.fitsby.AddPlacesActivity;
 import com.fitsby.FirstTimeCheckinActivity;
 import com.fitsby.LandingActivity;
 import com.fitsby.LoginActivity;
@@ -84,6 +85,7 @@ public class MeFragment extends Fragment {
 	private TextView facebookTV;
 	private TextView resetPasswordTV;
 	private TextView twitterTV;
+	private TextView addGymTV;
 	
 	private Button logoutButton;
 	private Button submitButton;
@@ -320,6 +322,14 @@ public class MeFragment extends Fragment {
 			}
 		});
 		
+		addGymTV = (TextView)viewer.findViewById(R.id.me_settings_tv_add_gym_link);
+		addGymTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getActivity(), AddPlacesActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 	
 	/**

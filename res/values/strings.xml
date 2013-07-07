@@ -111,6 +111,8 @@
     <string name="me_textview_total_gym_time_prompt_text">Total Gym Minutes: </string>
     <string name="me_settings_checkin_tutorial_button">Check-In Tutorial</string>
     <string name="me_settings_tv_change_picture_link_text">Go to Gravatar.com</string>
+    <string name="me_settings_tv_add_gym_text">Add Gym On Map:</string>
+    <string name="me_settings_tv_add_gym_link_text">Add gym</string>
     <string name="newsfeed_button_submit_text">"     Submit     "</string>
     <string name="newsfeed_et_comment_hint">Post a status or leave a comment here</string>
     <string name="games_duration_prompt_text">"DURATION"</string>
@@ -237,4 +239,6 @@
 	<string name="drawer_close">drawer close</string>
 	<string name="facebook_invite_button">Invite Friends</string>
 	<string name="facebook_share_button">Post to Wall</string>
+    <string name="title_activity_add_places">AddPlacesActivity</string>
+
 </resources>

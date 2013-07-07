@@ -124,6 +124,35 @@
                 android:text="@string/me_textview_total_checkins_text" />
             
 
+			<TextView
+                android:id="@+id/me_settings_tv_add_gym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"                   
+                android:layout_marginTop="20dp"                
+                android:textSize="14sp"
+                android:textStyle="bold"        
+                android:layout_below="@+id/me_textview_total_checkins"                                        
+                android:text="@string/me_settings_tv_add_gym_text" />
+
+            <TextView
+                android:id="@+id/me_settings_tv_add_gym_link"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_below="@+id/me_settings_tv_add_gym"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/newsfeed_submit_button"
+                android:textColor="@color/white"
+                android:layout_marginTop="3dp"                
+                android:layout_marginRight="10dp"                
+                android:layout_marginLeft="10dp"       
+                android:textSize="17sp"            
+                android:gravity="center"   
+                android:text="@string/me_settings_tv_add_gym_link_text">
+            </TextView>
                 
             <TextView
                 android:id="@+id/me_settings_tv_change_picture"
@@ -135,7 +164,7 @@
                 android:layout_marginTop="20dp"                
                 android:textSize="14sp"
                 android:textStyle="bold"        
-                android:layout_below="@+id/me_textview_total_checkins"                                        
+                android:layout_below="@+id/me_settings_tv_add_gym_link"                                        
                 android:text="@string/me_settings_tv_change_picture_text" />
 
             <TextView
