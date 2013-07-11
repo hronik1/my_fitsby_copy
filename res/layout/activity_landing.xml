@@ -64,5 +64,15 @@
         android:gravity="center"
         android:text="@string/landing_login"
         android:textSize="14sp" />
+    
+    <com.facebook.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/landing_button_login"
+      	android:layout_alignRight="@+id/landing_button_login"
+      	android:layout_alignLeft="@+id/landing_button_login"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp" />
 
 </RelativeLayout>
