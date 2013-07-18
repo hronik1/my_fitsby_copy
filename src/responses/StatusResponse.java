@@ -10,6 +10,10 @@ public class StatusResponse {
 	
 	private final static String RESPONSE_SUCCESS = "okay";
 	private final static String RESPONSE_SUCCESS_GOOGLE_PLACES = "OK";
+	private final static String RESPONSE_SUCCESS_FACEBOOK_EXISTS = "exists";
+	private final static String RESPONSE_SUCCESS_FACEBOOK_ADDED = "added facebook uid";
+	private final static String RESPONSE_SUCCESS_FACEBOOK_CREATED = "created";
+	
 	
 	private String status;
 	private String error;
@@ -26,7 +30,8 @@ public class StatusResponse {
 		if (status == null)
 			return false;
 		else
-			return (status.equals(RESPONSE_SUCCESS) || status.equals(RESPONSE_SUCCESS_GOOGLE_PLACES));
+			return (status.equals(RESPONSE_SUCCESS) || status.equals(RESPONSE_SUCCESS_GOOGLE_PLACES) || status.equals(RESPONSE_SUCCESS_FACEBOOK_EXISTS) ||
+					status.equals(RESPONSE_SUCCESS_FACEBOOK_ADDED) || status.equals(RESPONSE_SUCCESS_FACEBOOK_CREATED));
 	}
 	
 	public String getStatus() {

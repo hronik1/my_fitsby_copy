@@ -1,7 +1,17 @@
 package com.fitsby;
 
+import java.util.Arrays;
+
+import responses.FacebookSignupResponse;
+import responses.UserResponse;
+import servercommunication.UserCommunication;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -16,12 +26,15 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
 import com.facebook.Response;
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gcm.GCMRegistrar;
 
 import constants.FlurryConstants;
 import constants.TutorialsConstants;
+import dbtables.User;
 
 /**
  * LandingActivity is the page that users will be taken to when they first
@@ -46,6 +59,10 @@ public class LandingActivity extends KiipFragmentActivity {
 	 */
 	private Button buttonStart;
 	
+	LoginButton authButton;
+	
+	private ApplicationUser mApplicationUser;
+	
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback callback = 
 	    new Session.StatusCallback() {
@@ -69,12 +86,20 @@ public class LandingActivity extends KiipFragmentActivity {
         	startActivity(intent);
         	this.finish();
         }
-        	
+        
+        mApplicationUser = (ApplicationUser)getApplication();
+        
         setContentView(R.layout.activity_landing);
         Log.i(TAG, "onCreate");
         
         initializeButtons();
         
+        authButton = (LoginButton) findViewById(R.id.landing_auth_button);
+        if (authButton != null) {
+        	authButton.setReadPermissions(Arrays.asList("email", "name"));
+        }
+        else
+        	Log.d(TAG, "auth button null");
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
     }
@@ -237,6 +262,9 @@ public class LandingActivity extends KiipFragmentActivity {
             makeMeRequest(session);
         } else {
         	Log.d(TAG, "bad state");
+        	if (exception != null)
+        		Log.d(TAG, exception.toString());
+        	//TODO add logging
         }
     }
     
@@ -250,8 +278,8 @@ public class LandingActivity extends KiipFragmentActivity {
                 // If the response is successful
                 if (session == Session.getActiveSession()) {
                     if (user != null) {
-                    	Log.d(TAG, "user_id:" + user.getId() + " name:" + user.getName());
-                    	//TODO send to server
+                    	String names[] = user.getName().split(" ");
+                    	new FacebookRegisterAsyncTask().execute((String)user.asMap().get("email"), user.getId(), names[0], names[1]);
                     }
                 } else {
                 	Log.d(TAG, "user is null");
@@ -262,6 +290,88 @@ public class LandingActivity extends KiipFragmentActivity {
                 }
             }
         });
+        String NAME = "name";
+        String ID = "id";
+        String EMAIL = "email";
+        String FIELDS = "fields";
+        String REQUEST_FIELDS = TextUtils.join(",", new String[] {ID, NAME, EMAIL});
+
+        Bundle parameters = new Bundle();
+        parameters.putString(FIELDS, REQUEST_FIELDS);
+        request.setParameters(parameters);
         request.executeAsync();
-    } 
+    }
+    
+    /**
+     * RegisterAsyncTask registers the user on a background thread.
+     * 
+     * @author brenthronk
+     *
+     */
+    private class FacebookRegisterAsyncTask extends AsyncTask<String, Void, FacebookSignupResponse> {
+    	
+    	private ProgressDialog mProgressDialog;
+    	private String email;
+    	private String firstName;
+    	private String lastName;
+    	
+    	protected void onPreExecute() {
+			try {
+				mProgressDialog = ProgressDialog.show(LandingActivity.this, "",
+						"...", true, true,
+						new OnCancelListener() {
+					public void onCancel(DialogInterface pd) {
+						FacebookRegisterAsyncTask.this.cancel(true);
+					}
+				});
+			} catch (Exception e) { }
+		}
+		
+        protected FacebookSignupResponse doInBackground(String... params) {
+        	email = params[0];
+        	firstName = params[2];
+        	lastName = params[3];
+        	Log.d(TAG, "first name:" + firstName + " last name: " + lastName);
+        	FacebookSignupResponse response = UserCommunication.signupFacebook(params[0], params[1], params[2], params[3]);
+        	return response;
+        }
+
+        protected void onPostExecute(FacebookSignupResponse response) {
+			try {
+				mProgressDialog.dismiss();
+			} catch (Exception e) { }
+        	
+        	if (response == null ) {
+        		Toast toast = Toast.makeText(getApplicationContext(), "Limited or no internet connectivity", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else if (!response.wasSuccessful()){
+        		Toast toast = Toast.makeText(getApplicationContext(), "Sorry, but something went wrong, please try again.", Toast.LENGTH_LONG);
+        		toast.setGravity(Gravity.CENTER, 0, 0);
+        		toast.show();
+        	} else {
+        		//TODO switch to next page
+        		User user = new User(response.getUserId(), firstName, lastName, email);
+        		mApplicationUser.setUser(user);
+        		Log.v(TAG, "successful registration");
+                try {
+                	GCMRegistrar.checkDevice(getApplicationContext());
+                	GCMRegistrar.checkManifest(getApplicationContext());
+                	final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
+                	if (regId.equals("")) {
+                		GCMRegistrar.register(getApplicationContext(), getString(R.string.gcm_sender_id));
+                		Log.d(TAG, "Just now registered");
+                	} else {
+                		Log.d(TAG, "Already registered");
+                	}
+                } catch (Exception e) {
+                	Log.e(TAG, e.toString());
+                }
+				Intent intent = new Intent(LandingActivity.this, LeagueJoinActivity.class);
+				startActivity(intent);
+        	}
+        	
+        }
+    }
+   
 }
