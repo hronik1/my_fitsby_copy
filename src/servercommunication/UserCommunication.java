@@ -11,6 +11,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import responses.FacebookSignupResponse;
 import responses.StatsResponse;
 import responses.StatusResponse;
 import responses.UserResponse;
@@ -86,6 +87,35 @@ public class UserCommunication {
 			}
 			return jsonToUserResponse(MyHttpClient.parseResponse(serverResponse));
 		} catch (Exception e) {
+			Log.d(TAG, e.toString());
+			return null;
+		}
+	}
+	
+	public static FacebookSignupResponse signupFacebook(String email, String uid, String firstName, String lastName) {
+		MyHttpClient myHttpClient = new MyHttpClient();
+		JSONObject json = new JSONObject();
+        try {
+			json.put("email", email);
+			json.put("uid", uid);
+			json.put("first_name", firstName);
+			json.put("last_name", lastName);
+			String jsonString = json.toString();
+			Log.d(TAG, "fb signup string: " + jsonString);
+	        StringEntity stringEntity = new StringEntity(jsonString);  
+	        
+			ServerResponse serverResponse = myHttpClient.createPostRequest(MyHttpClient.SERVER_URL + "signin_facebook.json", stringEntity);
+			if (serverResponse.exception instanceof IOException) {
+//				UserResponse response = new UserResponse();
+//				response.setError(SingletonContext.getInstance().getContext().getString(R.string.timeout_message));
+//				return response;
+				return null;
+			}
+			return FacebookSignupResponse.jsonToFacebookSignupResponse(MyHttpClient.parseResponse(serverResponse));
+		} catch (JSONException e) {
+			Log.d(TAG, e.toString());
+			return null;
+		} catch (UnsupportedEncodingException e) {
 			Log.d(TAG, e.toString());
 			return null;
 		}
