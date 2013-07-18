@@ -342,6 +342,7 @@ public class LandingActivity extends KiipFragmentActivity {
 		Intent intent = new Intent(LandingActivity.this, LoggedinActivity.class);
 		startActivity(intent);
     }
+
     /**
      * RegisterAsyncTask registers the user on a background thread.
      * 
