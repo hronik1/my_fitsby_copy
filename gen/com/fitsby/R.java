@@ -1845,6 +1845,7 @@ containing a value of this type.
         public static final int invite_friends_directions2=0x7f05006b;
         public static final int invite_twitter_login_button=0x7f050066;
         public static final int invite_twitter_share_button=0x7f050068;
+        public static final int landing_auth_button=0x7f050090;
         public static final int landing_button_login=0x7f05008f;
         public static final int landing_button_start=0x7f05008c;
         public static final int large=0x7f050002;
@@ -1922,7 +1923,6 @@ containing a value of this type.
         public static final int lock_image=0x7f050052;
         public static final int loggedin_indicator=0x7f0500d6;
         public static final int loggedin_pager=0x7f0500d7;
-        public static final int login_button=0x7f050090;
         public static final int login_button_login=0x7f0500db;
         public static final int login_email_id=0x7f0500d9;
         public static final int login_forgot_password=0x7f0500dd;
