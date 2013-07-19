@@ -255,4 +255,5 @@ public class LoggedinActivity extends Activity {
 //          return CONTENT.length;
 //        }
 //    }
+
 }

@@ -318,7 +318,10 @@ public class NewsfeedFragment extends Fragment {
         		spinnerData.clear();
         		spinnerData.addAll(response.getGames());
         		spinnerDataAdapter.notifyDataSetChanged();
-        		new GravatarAsyncTask().execute(user.getEmail());
+        		if (user.getBitmap() == null)
+        			new GravatarAsyncTask().execute(user.getEmail());
+        		else
+        			mImageView.setImageBitmap(user.getBitmap());
         	}
         }
     }
