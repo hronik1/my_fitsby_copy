@@ -1,5 +1,6 @@
 package com.fitsby;
 
+import java.net.MalformedURLException;
 import java.util.Arrays;
 
 import responses.FacebookSignupResponse;
@@ -9,6 +10,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,7 +29,11 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.facebook.widget.ImageRequest;
+import com.facebook.widget.ImageResponse;
+import com.facebook.widget.ImageDownloader;
 import com.facebook.widget.LoginButton;
+import com.facebook.widget.UserSettingsFragment;
 import com.facebook.Response;
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
@@ -62,6 +69,7 @@ public class LandingActivity extends KiipFragmentActivity {
 	LoginButton authButton;
 	
 	private ApplicationUser mApplicationUser;
+	private User mUser;
 	
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback callback = 
@@ -96,7 +104,7 @@ public class LandingActivity extends KiipFragmentActivity {
         
         authButton = (LoginButton) findViewById(R.id.landing_auth_button);
         if (authButton != null) {
-        	authButton.setReadPermissions(Arrays.asList("email", "name"));
+        	authButton.setReadPermissions(Arrays.asList("email"));
         }
         else
         	Log.d(TAG, "auth button null");
@@ -302,6 +310,38 @@ public class LandingActivity extends KiipFragmentActivity {
         request.executeAsync();
     }
     
+    private ImageRequest getImageRequest(final String facebookId) {
+        ImageRequest request = null;
+        try {
+            ImageRequest.Builder requestBuilder = new ImageRequest.Builder(
+                    this,
+                    ImageRequest.getProfilePictureUrl(
+                            facebookId,
+                            getResources().getDimensionPixelSize(R.dimen.com_facebook_usersettingsfragment_profile_picture_width),
+                            getResources().getDimensionPixelSize(R.dimen.com_facebook_usersettingsfragment_profile_picture_height)));
+
+            request = requestBuilder.setCallerTag(this)
+                    .setCallback(
+                            new ImageRequest.Callback() {
+                                @Override
+                                public void onCompleted(ImageResponse response) {
+                                    processImageResponse(facebookId, response);
+                                }
+                            })
+                    .build();
+        } catch (MalformedURLException e) {
+        }
+        return request;
+    }
+    
+    private void processImageResponse(String id, ImageResponse response) {
+        if (response != null) {
+            Bitmap bitmap = response.getBitmap();
+            mUser.setBitmap(bitmap);
+        }
+		Intent intent = new Intent(LandingActivity.this, LoggedinActivity.class);
+		startActivity(intent);
+    }
     /**
      * RegisterAsyncTask registers the user on a background thread.
      * 
@@ -312,6 +352,7 @@ public class LandingActivity extends KiipFragmentActivity {
     	
     	private ProgressDialog mProgressDialog;
     	private String email;
+    	private String facebookId; 
     	private String firstName;
     	private String lastName;
     	
@@ -329,6 +370,7 @@ public class LandingActivity extends KiipFragmentActivity {
 		
         protected FacebookSignupResponse doInBackground(String... params) {
         	email = params[0];
+        	facebookId = params[1];
         	firstName = params[2];
         	lastName = params[3];
         	Log.d(TAG, "first name:" + firstName + " last name: " + lastName);
@@ -351,8 +393,8 @@ public class LandingActivity extends KiipFragmentActivity {
         		toast.show();
         	} else {
         		//TODO switch to next page
-        		User user = new User(response.getUserId(), firstName, lastName, email);
-        		mApplicationUser.setUser(user);
+        		mUser = new User(response.getUserId(), firstName, lastName, email);
+        		mApplicationUser.setUser(mUser);
         		Log.v(TAG, "successful registration");
                 try {
                 	GCMRegistrar.checkDevice(getApplicationContext());
@@ -367,8 +409,13 @@ public class LandingActivity extends KiipFragmentActivity {
                 } catch (Exception e) {
                 	Log.e(TAG, e.toString());
                 }
-				Intent intent = new Intent(LandingActivity.this, LeagueJoinActivity.class);
-				startActivity(intent);
+                ImageRequest request = getImageRequest(facebookId);
+                if (request != null) {
+                	ImageDownloader.downloadAsync(request);
+                } else {
+                	Intent intent = new Intent(LandingActivity.this, LeagueJoinActivity.class);
+                	startActivity(intent);
+                }
         	}
         	
         }

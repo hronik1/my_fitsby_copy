@@ -101,7 +101,15 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         settingsMenuItem = menu.add("Settings");
-        new GravatarAsyncTask().execute(mUser.getEmail());
+        if (mUser.getBitmap() == null) {
+        	Log.d(TAG, "bitmap null");
+        	new GravatarAsyncTask().execute(mUser.getEmail());
+        }
+        else {
+        	Log.d(TAG, "bitmap not null");
+    		settingsMenuItem.setIcon(new BitmapDrawable(mUser.getBitmap()))
+    		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
         return true;
     }
 
@@ -205,9 +213,11 @@ public class LoggedinActivity extends KiipSherlockFragmentActivity {
         }
 
         protected void onPostExecute(Bitmap response) {
-        	if (response != null)
+        	if (response != null) {
         		settingsMenuItem.setIcon(new BitmapDrawable(response))
         		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        		mUser.setBitmap(response);
+        	}
         }
     }
 
