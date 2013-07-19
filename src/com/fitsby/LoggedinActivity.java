@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.MenuItem;
 
 //import com.actionbarsherlock.view.Menu;
 //import com.actionbarsherlock.view.MenuItem;
@@ -57,15 +58,15 @@ public class LoggedinActivity extends Activity {
 	 */
 	private static final String TAG = "LoggedinActivity";
 	
-//	/**
-//	 * Item in actionbar which will contain users photo.
-//	 */
-//	private MenuItem settingsMenuItem;
-//	/**
-//	 * The currently logged in user.
-//	 */
-//	private User mUser;
-//
+	/**
+	 * Item in actionbar which will contain users photo.
+	 */
+	private MenuItem settingsMenuItem;
+	/**
+	 * The currently logged in user.
+	 */
+	private User mUser;
+
 //	/**
 //	 * Callback for the creation of the activity, initializes views.
 //	 */
@@ -73,10 +74,9 @@ public class LoggedinActivity extends Activity {
 //	protected void onCreate(Bundle savedInstanceState) {
 //		super.onCreate(savedInstanceState);
 //		mUser = ((ApplicationUser)getApplicationContext()).getUser();
-//		if (mUser == null || mUser.getID() == ApplicationUser.DEFAULT_ID) {
+//		if (mUser == null) {
 //			// if user gets alert when logged out send them to the landing activity
 //			Intent intent = new Intent(this, LandingActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			startActivity(intent);
 //		}
 //		Log.i(TAG, "onCreate");
