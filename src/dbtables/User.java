@@ -1,11 +1,14 @@
 package dbtables;
 
+import android.graphics.Bitmap;
+
 public class User {
 	
 	private int _id;
 	private String _firstName;
 	private String _lastName;
 	private String _email;
+	private Bitmap mBitmap;
 	
 	public final static String ID_KEY = "userID";
 	/**
@@ -97,6 +100,19 @@ public class User {
 		this._email = email;
 	}
 
-
+	/**
+	 * @return the mBitmap
+	 */
+	public Bitmap getBitmap() {
+		return mBitmap;
+	}
+	
+	/**
+	 * 
+	 * @param bitmap the bitmap to set
+	 */
+	public void setBitmap(Bitmap bitmap) {
+		this.mBitmap = bitmap;
+	}
 }
 

@@ -569,7 +569,6 @@ public class MeFragment extends Fragment {
         		checkinsTV.setText("" + stats.getTotalCheckins());
         		timeTV.setText(" " + stats.getTotalTime() + " minutes");
         		joinTV.append(" " + stats.getJoinedMonth() + "/" + stats.getJoinedDay() + "/" + stats.getJoinedYear());
-        		new GravatarAsyncTask().execute(mUser.getEmail());
         		
         	} else {
         		Toast toast = Toast.makeText(parent, "User statistics may be inaccurate because there doesn't appear to be an internet connection", Toast.LENGTH_LONG);
@@ -577,7 +576,10 @@ public class MeFragment extends Fragment {
         		toast.show();
         		earningsTV.setText(" $0");
         	}
-        	
+        	if (mUser.getBitmap() == null)
+        		new GravatarAsyncTask().execute(mUser.getEmail());
+        	else
+        		profileIV.setImageBitmap(mUser.getBitmap());
         }
     }
     
