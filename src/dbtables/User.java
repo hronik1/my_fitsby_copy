@@ -9,7 +9,8 @@ public class User {
 	private String _lastName;
 	private String _email;
 	private Bitmap mBitmap;
-	
+	private boolean isFbUser;
+
 	public final static String ID_KEY = "userID";
 	/**
 	 * default constructor, creates empty User
@@ -113,6 +114,22 @@ public class User {
 	 */
 	public void setBitmap(Bitmap bitmap) {
 		this.mBitmap = bitmap;
+	}
+	
+	/**
+	 * 
+	 * @return	true if the user is from facebook, false otherwise
+	 */
+	public boolean isFbUser() {
+		return isFbUser;
+	}
+
+	/**
+	 * 
+	 * @param isFbUser	boolean to set as isFbUser
+	 */
+	public void setFbUser(boolean isFbUser) {
+		this.isFbUser = isFbUser;
 	}
 }
 
