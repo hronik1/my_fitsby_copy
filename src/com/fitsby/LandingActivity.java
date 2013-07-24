@@ -394,6 +394,7 @@ public class LandingActivity extends KiipFragmentActivity {
         	} else {
         		//TODO switch to next page
         		mUser = new User(response.getUserId(), firstName, lastName, email);
+        		mUser.setFbUser(true);
         		mApplicationUser.setUser(mUser);
         		Log.v(TAG, "successful registration");
                 try {
