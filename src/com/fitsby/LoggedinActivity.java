@@ -74,9 +74,10 @@ public class LoggedinActivity extends Activity {
 //	protected void onCreate(Bundle savedInstanceState) {
 //		super.onCreate(savedInstanceState);
 //		mUser = ((ApplicationUser)getApplicationContext()).getUser();
-//		if (mUser == null) {
+//		if (mUser == null || mUser.getId() == ApplicationUser.DEFAULT_ID) {
 //			// if user gets alert when logged out send them to the landing activity
 //			Intent intent = new Intent(this, LandingActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			startActivity(intent);
 //		}
 //		Log.i(TAG, "onCreate");

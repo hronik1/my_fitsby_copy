@@ -4,10 +4,13 @@ import me.kiip.sdk.Kiip;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import constants.SingletonContext;
 import dbtables.User;
 
 public class ApplicationUser extends Application {
+	
+	private String TAG = getClass().getName();
 	
 	/**
 	 * Used as key to store obtain shared preference for user info.
@@ -60,6 +63,8 @@ public class ApplicationUser extends Application {
 		SingletonContext.initializeContext(this);
 	    Kiip kiip = Kiip.init(this, MY_APP_KEY, MY_APP_SECRET);
 	    Kiip.setInstance(kiip);
+	    
+	    Log.i(TAG, "onCreate");
 	}
 	
 	/**
@@ -83,7 +88,8 @@ public class ApplicationUser extends Application {
 	 */
 	public void setUser(User user) {
 		mUser = user;
-		if (user != null) {
+		if (user != null && !user.isFbUser()) {
+			Log.d(TAG, "saving user");
 			Editor e = mSharedPreferences.edit();
 			e.putInt(PREF_KEY_ID, user.getID());
 			e.putString(PREF_KEY_FIRST_NAME, user.getFirstName());
@@ -91,6 +97,7 @@ public class ApplicationUser extends Application {
 			e.putString(PREF_KEY_EMAIL, user.getEmail());
 			e.commit();
 		} else {
+			Log.d(TAG, "saving default user");
 			Editor e = mSharedPreferences.edit();
 			e.putInt(PREF_KEY_ID, DEFAULT_ID);
 			e.putString(PREF_KEY_FIRST_NAME, "");
