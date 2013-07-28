@@ -9,6 +9,11 @@ import servercommunication.CheckinCommunication;
 import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.LoginButton;
+
 import com.fitsby.FirstTimeCheckinActivity;
 import com.fitsby.LandingActivity;
 import com.fitsby.LoginActivity;
@@ -85,6 +90,7 @@ public class MeFragment extends Fragment {
 	private Button tutorialButton;
 	private Button checkinTutorialButton;
 	private Button deleteButton;
+	private LoginButton facebookAuthButton;
 	
 	private CheckBox enableNotificationsCB;
 	private SharedPreferences mSharedPreferences;
@@ -103,6 +109,16 @@ public class MeFragment extends Fragment {
 	private boolean isBound;
 	final Messenger mMessenger = new Messenger(new IncomingHandler());
 
+	private UiLifecycleHelper uiHelper;
+	private Session.StatusCallback callback = 
+	    new Session.StatusCallback() {
+	    @Override
+	    public void call(Session session, 
+	            SessionState state, Exception exception) {
+	        onSessionStateChange(session, state, exception);
+	    }
+	};
+	
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -139,12 +155,15 @@ public class MeFragment extends Fragment {
         mSharedPreferences = parent.getSharedPreferences(
                 "EnableNotifications", 0);
 		
+		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
+		mUser = mApplicationUser.getUser();
+		
 	    initializeTextViews(viewer);
 	    initializeButtons(viewer);
 	    initializeEditTexts(viewer);
 	    initializeImageView(viewer);
 	    initializeCheckBox(viewer);
-
+		
 		doBindService();
 		
 	    new StatsAsyncTask().execute(mUser.getID());
@@ -152,6 +171,41 @@ public class MeFragment extends Fragment {
 	    return viewer;
 	}
 	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		uiHelper = new UiLifecycleHelper(getActivity(), callback);
+		uiHelper.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		uiHelper.onDestroy();
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		uiHelper.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		uiHelper.onResume();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		uiHelper.onSaveInstanceState(outState);
+	}
+
 	/**
 	 * callback for when this fragment is attached to a view
 	 */
@@ -160,9 +214,6 @@ public class MeFragment extends Fragment {
 		super.onAttach(activity);
 		Log.i(TAG, "onAttach");
 		parent = activity;
-
-		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
-		mUser = mApplicationUser.getUser();
 
 	}
 	
@@ -192,6 +243,8 @@ public class MeFragment extends Fragment {
 	        
 	        //TODO actually change picture
 	        
+	    } else {
+	    	uiHelper.onActivityResult(requestCode, resultCode, data);
 	    }
 	}
 	
@@ -288,6 +341,13 @@ public class MeFragment extends Fragment {
 				showLogoutAlertDialog();
 			}
 		});
+		
+		facebookAuthButton = (LoginButton) viewer.findViewById(R.id.me_settings_auth_button);
+		facebookAuthButton.setFragment(this);
+		if (mUser.isFbUser()) {
+			facebookAuthButton.setVisibility(View.VISIBLE);
+			logoutButton.setVisibility(View.GONE);
+		}
 		
 		submitButton = (Button)viewer.findViewById(R.id.me_settings_button_submit); 
 		submitButton.setOnClickListener(new OnClickListener() {
@@ -531,6 +591,20 @@ public class MeFragment extends Fragment {
     					dialog.cancel();
     				}
     			}).show();
+    }
+    
+    /** facebook stuff **/
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+    	Log.i(TAG, "onSessionState");
+        if (session != null && session.isClosed()) {
+        	Log.d(TAG, "state is closed");
+        	logout();
+        } else {
+        	Log.d(TAG, "bad state");
+        	if (exception != null)
+        		Log.d(TAG, exception.toString());
+        	//TODO add logging
+        }
     }
     
     /**
