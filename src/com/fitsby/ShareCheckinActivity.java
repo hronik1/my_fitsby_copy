@@ -18,6 +18,7 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -45,7 +46,7 @@ import constants.FlurryConstants;
  * @author brenthronk
  *
  */
-public class ShareCheckinActivity extends KiipFragmentActivity {
+public class ShareCheckinActivity extends ActionBarActivity {
 
 	/**
 	 * Tag used for logcat messages.

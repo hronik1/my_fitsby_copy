@@ -9,7 +9,6 @@ import servercommunication.CheckinCommunication;
 import servercommunication.MyHttpClient;
 import servercommunication.UserCommunication;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.fitsby.FirstTimeCheckinActivity;
 import com.fitsby.LandingActivity;
 import com.fitsby.LoginActivity;
@@ -62,7 +61,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MeFragment extends SherlockFragment {
+public class MeFragment extends Fragment {
 
 
 	private final static String TAG = "MeFragment";

@@ -58,7 +58,7 @@
         <activity
             android:name="com.fitsby.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/StyledIndicators" >
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="com.fitsby.LeagueLandingActivity"
@@ -189,6 +189,14 @@
             android:name="com.fitsby.FirstTimeCheckinActivity"
             android:screenOrientation="portrait"
             android:theme="@style/StyledIndicators" >
+        </activity>
+        <activity
+            android:name="com.fitsby.NewLandingActivity"
+            android:label="@string/title_activity_new_landing" >
+        </activity>
+        <activity
+            android:name="com.fitsby.NewLoggedinActivity"
+            android:label="@string/title_activity_new_logged_in" >
         </activity>
     </application>
 

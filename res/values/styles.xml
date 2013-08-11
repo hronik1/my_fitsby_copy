@@ -2,7 +2,7 @@
 
     <style name="FitsbyTheme" parent="android:Theme.Light" />
     
-    <style name="AppTheme" parent="Theme.Sherlock.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
       	<item name="android:typeface">sans</item> 	
     </style>
 
@@ -22,15 +22,15 @@
         <item name="android:layout_marginRight">10dp</item>
     </style>
     
-    <!-- taking out the fitsby text (logo) in the black action bar -->
+<!--     taking out the fitsby text (logo) in the black action bar
 	<style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
 	    <item name="android:displayOptions">showHome|useLogo</item>
 	    <item name="displayOptions">showHome|useLogo</item>
-	</style>
+	</style> -->
 		
     <style name="StyledIndicators" parent="AppTheme">
-	    <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
-	    <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
+	    <!-- <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item> -->
+	    <!-- <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item> -->
 	            
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
         <item name="vpiLinePageIndicatorStyle">@style/CustomLinePageIndicator</item>
@@ -71,8 +71,8 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">12sp</item>
         <item name="android:divider">@drawable/custom_tab_indicator_divider</item>
-        <item name="android:dividerPadding">10dp</item>
-        <item name="android:showDividers">middle</item>
+        <!-- <item name="android:dividerPadding">10dp</item> -->
+        <!-- <item name="android:showDividers">middle</item> -->
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
         <item name="android:fadingEdge">horizontal</item>

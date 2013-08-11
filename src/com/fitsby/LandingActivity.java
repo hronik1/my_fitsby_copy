@@ -49,7 +49,7 @@ public class LandingActivity extends KiipFragmentActivity {
         super.onCreate(savedInstanceState);
         
         if (((ApplicationUser)getApplicationContext()).getUser().getID() != ApplicationUser.DEFAULT_ID) {
-        	Intent intent = new Intent(this, LoggedinActivity.class);
+        	Intent intent = new Intent(this, NewLoggedinActivity.class);
         	startActivity(intent);
         	this.finish();
         }

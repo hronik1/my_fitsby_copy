@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,7 +33,7 @@ import com.google.android.gcm.GCMRegistrar;
 import constants.FlurryConstants;
 import constants.RememberMeConstants;
 
-public class LoginActivity extends KiipFragmentActivity {
+public class LoginActivity extends ActionBarActivity {
 
 	/**
 	 * Tag used for logcat messages.
@@ -381,7 +382,7 @@ public class LoginActivity extends KiipFragmentActivity {
                 } catch (Exception e) {
                 	Log.e(TAG, e.toString());
                 }
-    			Intent intent = new Intent(LoginActivity.this, LoggedinActivity.class);
+    			Intent intent = new Intent(LoginActivity.this, NewLoggedinActivity.class);
     			startActivity(intent);
         	}
         }

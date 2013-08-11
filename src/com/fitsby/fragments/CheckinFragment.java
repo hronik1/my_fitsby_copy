@@ -30,6 +30,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.provider.Settings;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -49,9 +50,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import bundlekeys.LeagueDetailBundleKeys;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.fitsby.FirstTimeCheckinActivity;
-import com.fitsby.KiipSherlockFragmentActivity;
 import com.fitsby.LoggedinActivity;
 import com.fitsby.MessengerService;
 import com.fitsby.R;
@@ -60,7 +59,7 @@ import com.fitsby.applicationsubclass.ApplicationUser;
 
 import dbtables.User;
 
-public class CheckinFragment extends SherlockFragment {
+public class CheckinFragment extends Fragment {
 
 	private final static String TAG = "CheckinFragment";
 	
@@ -68,7 +67,7 @@ public class CheckinFragment extends SherlockFragment {
 	private final static float UPDATE_MIN_DISTANCE = 0;
 	private final static int DEFAULT_PLACES_RADIUS = 700; //200 meters
 	private final static int MIN_CHECKIN_TIME = 30;
-	private static KiipSherlockFragmentActivity parent;
+	private static Activity parent;
 	
 	private static TextView checkinLocationTV;
 	private static TextView minutesTV;
@@ -154,7 +153,7 @@ public class CheckinFragment extends SherlockFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		parent = (KiipSherlockFragmentActivity)activity;
+		parent = activity;
 
 		mApplicationUser = ((ApplicationUser)parent.getApplicationContext());
 		mUser = mApplicationUser.getUser();
@@ -238,7 +237,7 @@ public class CheckinFragment extends SherlockFragment {
 			return;
 		}
 		
-		mLocationManager = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
+		mLocationManager = (LocationManager) parent.getSystemService(Activity.LOCATION_SERVICE);
 		boolean gpsEnabled = mLocationManager
 		  .isProviderEnabled(LocationManager.GPS_PROVIDER);
 		
@@ -472,7 +471,7 @@ public class CheckinFragment extends SherlockFragment {
 		} else {
 			
 			if (mLocationManager == null)
-				mLocationManager = (LocationManager) parent.getSystemService(LoggedinActivity.LOCATION_SERVICE);
+				mLocationManager = (LocationManager) parent.getSystemService(Activity.LOCATION_SERVICE);
 			boolean gpsEnabled = mLocationManager
 			  .isProviderEnabled(LocationManager.GPS_PROVIDER);
 			if (!gpsEnabled) {
@@ -785,17 +784,18 @@ public class CheckinFragment extends SherlockFragment {
 				}
         		checkinLocationTV.setText("You are currently not checked in at a gym");
         		checkedInIv.setImageDrawable(getResources().getDrawable(R.drawable.red_x_mark));
-        		Kiip.getInstance().saveMoment(ApplicationUser.MY_MOMENT_ID, new Kiip.Callback() {
-        			@Override
-        			public void onFinished(Kiip kiip, Poptart reward) {
-        				parent.onPoptart(reward);
-        			}
-
-        			@Override
-        			public void onFailed(Kiip kiip, Exception exception) {
-        				// handle failure
-        			}
-        		});
+        		//TODO potentially add kiip back in
+//        		Kiip.getInstance().saveMoment(ApplicationUser.MY_MOMENT_ID, new Kiip.Callback() {
+//        			@Override
+//        			public void onFinished(Kiip kiip, Poptart reward) {
+//        				parent.onPoptart(reward);
+//        			}
+//
+//        			@Override
+//        			public void onFailed(Kiip kiip, Exception exception) {
+//        				// handle failure
+//        			}
+//        		});
 
 
         		if (mLocationManager != null && mLocationListener != null) {

@@ -2,6 +2,7 @@ package com.fitsby;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 
 import com.fitsby.fragments.MeFragment;
 
@@ -11,7 +12,7 @@ import com.fitsby.fragments.MeFragment;
  * @author brenthronk
  *
  */
-public class SettingsActivity extends KiipSherlockFragmentActivity {
+public class SettingsActivity extends ActionBarActivity {
 
 	/**
 	 * Callback for creation of the Activity, initializes the view.

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -35,7 +36,7 @@ import constants.FlurryConstants;
  * @author brenthronk
  *
  */
-public class RegisterActivity extends KiipFragmentActivity {
+public class RegisterActivity extends ActionBarActivity {
 
 	/**
 	 * Tag used in logat messages.

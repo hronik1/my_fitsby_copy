@@ -18,6 +18,7 @@ import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,7 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import bundlekeys.CreditCardBundleKeys;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.fitsby.FriendInviteActivity;
 import com.fitsby.LeagueJoinActivity;
 import com.fitsby.R;
@@ -53,7 +53,7 @@ import dbtables.Leader;
 import dbtables.League;
 import dbtables.User;
 
-public class GamesFragment extends SherlockFragment {
+public class GamesFragment extends Fragment {
 
 	private static final String TAG = "GamesActivity";
 

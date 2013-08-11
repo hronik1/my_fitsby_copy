@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,7 +41,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.fitsby.R;
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -50,7 +50,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import dbtables.User;
 
-public class NewsfeedFragment extends SherlockFragment {
+public class NewsfeedFragment extends Fragment {
 
 	private static final String TAG = "NewsfeedActivity";
 	
