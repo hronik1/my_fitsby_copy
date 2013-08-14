@@ -339,7 +339,7 @@ public class LandingActivity extends KiipFragmentActivity {
             Bitmap bitmap = response.getBitmap();
             mUser.setBitmap(bitmap);
         }
-		Intent intent = new Intent(LandingActivity.this, LoggedinActivity.class);
+		Intent intent = new Intent(LandingActivity.this, NewLoggedinActivity.class);
 		startActivity(intent);
     }
 
@@ -415,7 +415,7 @@ public class LandingActivity extends KiipFragmentActivity {
                 if (request != null) {
                 	ImageDownloader.downloadAsync(request);
                 } else {
-                	Intent intent = new Intent(LandingActivity.this, LeagueJoinActivity.class);
+                	Intent intent = new Intent(LandingActivity.this, NewLoggedinActivity.class);
                 	startActivity(intent);
                 }
         	}
