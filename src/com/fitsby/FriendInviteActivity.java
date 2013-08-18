@@ -42,6 +42,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
+import com.facebook.FacebookOperationCanceledException;
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
@@ -78,15 +79,19 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 	/**
 	 * Button will share a fitsby post to facebook.
 	 */
-	private Button shareButton;
+	private Button fbShareButton;
 	/**
-	 * Button which will login to twitter.
+	 * Button will send a fitsby invite to facebook friends.
 	 */
-	private Button twitterLoginButton;
-	/**
-	 * Button which will share to twitter.
-	 */
-	private Button twitterShareButton;
+	private Button fbInviteButton;
+//	/**
+//	 * Button which will login to twitter.
+//	 */
+//	private Button twitterLoginButton;
+//	/**
+//	 * Button which will share to twitter.
+//	 */
+//	private Button twitterShareButton;
 	
 	/**
 	 * Spinner used to show ongoing progress when something is going on in 
@@ -112,27 +117,27 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 	private User mUser;
 	
 	//twitter
-	/**
-	 * SharedPreferences where twitter information will be stored.
-	 */
-	private SharedPreferences mSharedPreferences;
-	/**
-	 * The key into the shared preference to store twitter information.
-	 */
-    static String PREFERENCE_NAME = "twitter_oauth";
-    static final String PREF_KEY_OAUTH_TOKEN = "oauth_token";
-    static final String PREF_KEY_OAUTH_SECRET = "oauth_token_secret";
-    static final String PREF_KEY_TWITTER_LOGIN = "isTwitterLogedIn";
-    static final String URL_TWITTER_AUTH = "auth_url";
-    static final String URL_TWITTER_OAUTH_VERIFIER = "oauth_verifier";
-    static final String URL_TWITTER_OAUTH_TOKEN = "oauth_token";
-    static final String TWITTER_CALLBACK_URL = "oauth://t4jsample";
-    private static Twitter twitter;
-    private static RequestToken requestToken;
-	private String TWITTER_CONSUMER_KEY;
-	private String TWITTER_CONSUMER_SECRET;
-	
-	private Uri uri;
+//	/**
+//	 * SharedPreferences where twitter information will be stored.
+//	 */
+//	private SharedPreferences mSharedPreferences;
+//	/**
+//	 * The key into the shared preference to store twitter information.
+//	 */
+//    static String PREFERENCE_NAME = "twitter_oauth";
+//    static final String PREF_KEY_OAUTH_TOKEN = "oauth_token";
+//    static final String PREF_KEY_OAUTH_SECRET = "oauth_token_secret";
+//    static final String PREF_KEY_TWITTER_LOGIN = "isTwitterLogedIn";
+//    static final String URL_TWITTER_AUTH = "auth_url";
+//    static final String URL_TWITTER_OAUTH_VERIFIER = "oauth_verifier";
+//    static final String URL_TWITTER_OAUTH_TOKEN = "oauth_token";
+//    static final String TWITTER_CALLBACK_URL = "oauth://t4jsample";
+//    private static Twitter twitter;
+//    private static RequestToken requestToken;
+//	private String TWITTER_CONSUMER_KEY;
+//	private String TWITTER_CONSUMER_SECRET;
+//	
+//	private Uri uri;
 	
 	
 	//facebook
@@ -155,17 +160,17 @@ public class FriendInviteActivity extends KiipFragmentActivity {
         uiHelper.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_invite);
         
-    	TWITTER_CONSUMER_KEY = getString(R.string.twitter_consumer_key);
-    	TWITTER_CONSUMER_SECRET = getString(R.string.twitter_consumer_secret);
-        mSharedPreferences = getApplicationContext().getSharedPreferences(
-                "MyPref", 0);
+//    	TWITTER_CONSUMER_KEY = getString(R.string.twitter_consumer_key);
+//    	TWITTER_CONSUMER_SECRET = getString(R.string.twitter_consumer_secret);
+//        mSharedPreferences = getApplicationContext().getSharedPreferences(
+//                "MyPref", 0);
     	
         Log.i(TAG, "onCreate");
         
         mApplicationUser = (ApplicationUser)getApplicationContext();
         mUser = mApplicationUser.getUser();
         parseBundle(getIntent());
-        uri = getIntent().getData();
+//        uri = getIntent().getData();
 
         initializeButtons(); 
         
@@ -309,30 +314,80 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     		}
     	});
     	
-    	shareButton = (Button)findViewById(R.id.facebook_share_button);
-    	shareButton.setOnClickListener(new OnClickListener() {
+    	fbShareButton = (Button)findViewById(R.id.facebook_share_button);
+    	fbShareButton.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
     			publishStory();
     		}
     	});
     	
-    	twitterLoginButton = (Button)findViewById(R.id.invite_twitter_login_button);
-    	twitterLoginButton.setOnClickListener(new OnClickListener() {
-    		public void onClick(View v) {
-    			authenticateTwitter();
-    		}
+    	fbInviteButton = (Button) findViewById(R.id.facebook_invite_button);
+    	fbInviteButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				sendRequestDialog();
+			}
     	});
-    	if (isTwitterLoggedInAlready())
-    		twitterLoginButton.setText("Log Out");
-    	else
-    		twitterLoginButton.setText("Log In");
-    	
-    	twitterShareButton = (Button)findViewById(R.id.invite_twitter_share_button);
-    	twitterShareButton.setOnClickListener(new OnClickListener() {
-    		public void onClick(View v) {
-    			publishToTwitter();
-    		}
-    	});
+    		
+//    	twitterLoginButton = (Button)findViewById(R.id.invite_twitter_login_button);
+//    	twitterLoginButton.setOnClickListener(new OnClickListener() {
+//    		public void onClick(View v) {
+//    			authenticateTwitter();
+//    		}
+//    	});
+//    	if (isTwitterLoggedInAlready())
+//    		twitterLoginButton.setText("Log Out");
+//    	else
+//    		twitterLoginButton.setText("Log In");
+//    	
+//    	twitterShareButton = (Button)findViewById(R.id.invite_twitter_share_button);
+//    	twitterShareButton.setOnClickListener(new OnClickListener() {
+//    		public void onClick(View v) {
+//    			publishToTwitter();
+//    		}
+//    	});
+    }
+    
+    private void sendRequestDialog() {
+        Bundle params = new Bundle();
+        params.putString("message", "Learn how to make your Android apps social");
+
+        WebDialog requestsDialog = (
+            new WebDialog.RequestsDialogBuilder(this,
+                Session.getActiveSession(),
+                params))
+                .setOnCompleteListener(new OnCompleteListener() {
+
+                    @Override
+                    public void onComplete(Bundle values,
+                        FacebookException error) {
+                        if (error != null) {
+                            if (error instanceof FacebookOperationCanceledException) {
+                                Toast.makeText(getApplicationContext(), 
+                                    "Request cancelled", 
+                                    Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), 
+                                    "Network Error", 
+                                    Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            final String requestId = values.getString("request");
+                            if (requestId != null) {
+                                Toast.makeText(getApplicationContext(), 
+                                    "Request sent",  
+                                    Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), 
+                                    "Request cancelled", 
+                                    Toast.LENGTH_SHORT).show();
+                            }
+                        }   
+                    }
+
+                })
+                .build();
+        requestsDialog.show();
     }
     
     /**
@@ -431,181 +486,181 @@ public class FriendInviteActivity extends KiipFragmentActivity {
 
     }
     
-    /**
-     * Logins user to twitter if logged out, or logs out if logged in.
-     */
-    private void authenticateTwitter() {
-    	if (!isTwitterLoggedInAlready()) {
-    		ConfigurationBuilder builder = new ConfigurationBuilder();
-    		builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
-    		builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);    	
-    		Configuration configuration = builder.build();
-
-    		TwitterFactory factory = new TwitterFactory(configuration);
-    		twitter = factory.getInstance();
-
-    		new LoginTwitterAsyncTask().execute();
- 
-    	} else {
-    		showTwitterLogoutAlertDialog();
-    	}
-    	
-    }
-    
-	 /**
-     * Shows a dialog asking user for confirmation that they would like
-     * to log out of Twitter.
-     */
-    private void showTwitterLogoutAlertDialog() {
-    	Log.i(TAG, "showTwitterLogoutAlertDialog");
-
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("Are you sure that you would like to log out of Twitter?")
-    			.setCancelable(false)
-    			.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    		    	    // Clear the shared preferences
-    		    	    Editor e = mSharedPreferences.edit();
-    		    	    e.remove(PREF_KEY_OAUTH_TOKEN);
-    		    	    e.remove(PREF_KEY_OAUTH_SECRET);
-    		    	    e.remove(PREF_KEY_TWITTER_LOGIN);
-    		    	    e.commit();
-    		    	    
-    		    	    twitterLoginButton.setText("Log In");
-    				}
-    			})
-    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					dialog.cancel();
-    				}
-    			}).show();
-    }
-    
-    /**
-     * Verifies whether user is logged in.
-     * 
-     * @return	true if logged in, false otherwise
-     */
-    private boolean isTwitterLoggedInAlready() {
-        // return twitter login status from Shared Preferences
-        return mSharedPreferences.getBoolean(PREF_KEY_TWITTER_LOGIN, false);
-    }
-    
-    /**
-     * Confirms that user is logged in and then publishes their story.
-     */
-    private void publishToTwitter() {
-    	if (isTwitterLoggedInAlready()) {
-    		showTwitterDialog();
-    	} else {
-    		Toast toast = Toast.makeText(this, "You must first log in to Twitter to share", Toast.LENGTH_SHORT);
-    		toast.setGravity(Gravity.CENTER, 0, 0);
-    		toast.show();
-    	}
-    }
-    
-    /**
-     * Opens up dialog allowing user to post to Twitter, assumes that user is
-     * already logged in to twitter.
-     */
-    private void showTwitterDialog() {
-    	Log.i(TAG, "showTwitterDialog");
-
-    	//TODO clean this up
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	
-	  	final EditText input = new EditText(this);
-	  	input.setHint("Enter message here:");
-	  	input.setText("Let's stay motivated to work out using @Fitsby! Download the free app at fitsby.com & let's start a game of gym check-ins!");	  	
-    	builder.setView(input);
-    	
-    	builder.setMessage("Share on Twitter:")
-    			.setCancelable(false)
-    			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					String text = input.getText().toString();
-    					if (text != null && !text.trim().equals("")) {
-    						try {
-    							new UpdateTwitterAsyncTask().execute(text);
-    						} catch (Exception e) {
-    							//TODO make a more better error message
-    							Toast toast = Toast.makeText(FriendInviteActivity.this, e.toString(), Toast.LENGTH_LONG);
-    							toast.setGravity(Gravity.CENTER, 0, 0);
-    							toast.show();
-    						}
-    					} else {
-							Toast toast = Toast.makeText(FriendInviteActivity.this, "Your status can't be empty", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-    					}
-    				}
-    			})
-    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					dialog.cancel();
-    				}
-    			}).show();
-    }
-    
-    /**
-     * UpdateTwitterAsyncTask is the class responsible for posting updates to
-     * Twitter on a background thread.
-     * 
-     * @author brenthronk
-     *
-     */
-    class UpdateTwitterAsyncTask extends AsyncTask<String, String, String> {
-     
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            try {
-            	mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-            			"Updating to Twitter...", true, true,
-            			new OnCancelListener() {
-            		public void onCancel(DialogInterface pd) {
-            			UpdateTwitterAsyncTask.this.cancel(true);
-            		}
-            	});
-            } catch (Exception e) { }
-
-        }
-     
-        protected String doInBackground(String... args) {
-            Log.d("Tweet Text", "> " + args[0]);
-            String status = args[0];
-            try {
-                ConfigurationBuilder builder = new ConfigurationBuilder();
-                builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
-                builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);
-     
-                // Access Token
-                String access_token = mSharedPreferences.getString(PREF_KEY_OAUTH_TOKEN, "");
-                // Access Token Secret
-                String access_token_secret = mSharedPreferences.getString(PREF_KEY_OAUTH_SECRET, "");
-     
-                AccessToken accessToken = new AccessToken(access_token, access_token_secret);
-                Twitter twitter = new TwitterFactory(builder.build()).getInstance(accessToken);
-     
-                // Update status
-                twitter4j.Status response = twitter.updateStatus(status);
-     
-                Log.d("Status", "> " + response.getText());
-            } catch (TwitterException e) {
-                // Error in updating status
-                Log.d("Twitter Update Error", e.getMessage());
-            }
-            return null;
-        }
-     
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog after getting all products
-			try {
-				mProgressDialog.dismiss();
-			} catch (Exception e) { }
-        }
-     
-    }
+//    /**
+//     * Logins user to twitter if logged out, or logs out if logged in.
+//     */
+//    private void authenticateTwitter() {
+//    	if (!isTwitterLoggedInAlready()) {
+//    		ConfigurationBuilder builder = new ConfigurationBuilder();
+//    		builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
+//    		builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);    	
+//    		Configuration configuration = builder.build();
+//
+//    		TwitterFactory factory = new TwitterFactory(configuration);
+//    		twitter = factory.getInstance();
+//
+//    		new LoginTwitterAsyncTask().execute();
+// 
+//    	} else {
+//    		showTwitterLogoutAlertDialog();
+//    	}
+//    	
+//    }
+//    
+//	 /**
+//     * Shows a dialog asking user for confirmation that they would like
+//     * to log out of Twitter.
+//     */
+//    private void showTwitterLogoutAlertDialog() {
+//    	Log.i(TAG, "showTwitterLogoutAlertDialog");
+//
+//    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//    	builder.setMessage("Are you sure that you would like to log out of Twitter?")
+//    			.setCancelable(false)
+//    			.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
+//    				public void onClick(DialogInterface dialog, int id) {
+//    		    	    // Clear the shared preferences
+//    		    	    Editor e = mSharedPreferences.edit();
+//    		    	    e.remove(PREF_KEY_OAUTH_TOKEN);
+//    		    	    e.remove(PREF_KEY_OAUTH_SECRET);
+//    		    	    e.remove(PREF_KEY_TWITTER_LOGIN);
+//    		    	    e.commit();
+//    		    	    
+//    		    	    twitterLoginButton.setText("Log In");
+//    				}
+//    			})
+//    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//    				public void onClick(DialogInterface dialog, int id) {
+//    					dialog.cancel();
+//    				}
+//    			}).show();
+//    }
+//    
+//    /**
+//     * Verifies whether user is logged in.
+//     * 
+//     * @return	true if logged in, false otherwise
+//     */
+//    private boolean isTwitterLoggedInAlready() {
+//        // return twitter login status from Shared Preferences
+//        return mSharedPreferences.getBoolean(PREF_KEY_TWITTER_LOGIN, false);
+//    }
+//    
+//    /**
+//     * Confirms that user is logged in and then publishes their story.
+//     */
+//    private void publishToTwitter() {
+//    	if (isTwitterLoggedInAlready()) {
+//    		showTwitterDialog();
+//    	} else {
+//    		Toast toast = Toast.makeText(this, "You must first log in to Twitter to share", Toast.LENGTH_SHORT);
+//    		toast.setGravity(Gravity.CENTER, 0, 0);
+//    		toast.show();
+//    	}
+//    }
+//    
+//    /**
+//     * Opens up dialog allowing user to post to Twitter, assumes that user is
+//     * already logged in to twitter.
+//     */
+//    private void showTwitterDialog() {
+//    	Log.i(TAG, "showTwitterDialog");
+//
+//    	//TODO clean this up
+//    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//    	
+//	  	final EditText input = new EditText(this);
+//	  	input.setHint("Enter message here:");
+//	  	input.setText("Let's stay motivated to work out using @Fitsby! Download the free app at fitsby.com & let's start a game of gym check-ins!");	  	
+//    	builder.setView(input);
+//    	
+//    	builder.setMessage("Share on Twitter:")
+//    			.setCancelable(false)
+//    			.setPositiveButton("Post", new DialogInterface.OnClickListener() {
+//    				public void onClick(DialogInterface dialog, int id) {
+//    					String text = input.getText().toString();
+//    					if (text != null && !text.trim().equals("")) {
+//    						try {
+//    							new UpdateTwitterAsyncTask().execute(text);
+//    						} catch (Exception e) {
+//    							//TODO make a more better error message
+//    							Toast toast = Toast.makeText(FriendInviteActivity.this, e.toString(), Toast.LENGTH_LONG);
+//    							toast.setGravity(Gravity.CENTER, 0, 0);
+//    							toast.show();
+//    						}
+//    					} else {
+//							Toast toast = Toast.makeText(FriendInviteActivity.this, "Your status can't be empty", Toast.LENGTH_LONG);
+//							toast.setGravity(Gravity.CENTER, 0, 0);
+//							toast.show();
+//    					}
+//    				}
+//    			})
+//    			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//    				public void onClick(DialogInterface dialog, int id) {
+//    					dialog.cancel();
+//    				}
+//    			}).show();
+//    }
+//    
+//    /**
+//     * UpdateTwitterAsyncTask is the class responsible for posting updates to
+//     * Twitter on a background thread.
+//     * 
+//     * @author brenthronk
+//     *
+//     */
+//    class UpdateTwitterAsyncTask extends AsyncTask<String, String, String> {
+//     
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            try {
+//            	mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+//            			"Updating to Twitter...", true, true,
+//            			new OnCancelListener() {
+//            		public void onCancel(DialogInterface pd) {
+//            			UpdateTwitterAsyncTask.this.cancel(true);
+//            		}
+//            	});
+//            } catch (Exception e) { }
+//
+//        }
+//     
+//        protected String doInBackground(String... args) {
+//            Log.d("Tweet Text", "> " + args[0]);
+//            String status = args[0];
+//            try {
+//                ConfigurationBuilder builder = new ConfigurationBuilder();
+//                builder.setOAuthConsumerKey(TWITTER_CONSUMER_KEY);
+//                builder.setOAuthConsumerSecret(TWITTER_CONSUMER_SECRET);
+//     
+//                // Access Token
+//                String access_token = mSharedPreferences.getString(PREF_KEY_OAUTH_TOKEN, "");
+//                // Access Token Secret
+//                String access_token_secret = mSharedPreferences.getString(PREF_KEY_OAUTH_SECRET, "");
+//     
+//                AccessToken accessToken = new AccessToken(access_token, access_token_secret);
+//                Twitter twitter = new TwitterFactory(builder.build()).getInstance(accessToken);
+//     
+//                // Update status
+//                twitter4j.Status response = twitter.updateStatus(status);
+//     
+//                Log.d("Status", "> " + response.getText());
+//            } catch (TwitterException e) {
+//                // Error in updating status
+//                Log.d("Twitter Update Error", e.getMessage());
+//            }
+//            return null;
+//        }
+//     
+//        protected void onPostExecute(String file_url) {
+//            // dismiss the dialog after getting all products
+//			try {
+//				mProgressDialog.dismiss();
+//			} catch (Exception e) { }
+//        }
+//     
+//    }
     
     /**
      * CreatorAsyncTask is responsible for gathering league creator information
@@ -645,7 +700,7 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     			toast.show();
         	}
         		
-        	new ParseTwitterLoginResponseAsyncTask().execute();
+//        	new ParseTwitterLoginResponseAsyncTask().execute();
         }
     }
     
@@ -738,107 +793,107 @@ public class FriendInviteActivity extends KiipFragmentActivity {
     	
     }
     
-    /**
-     * LoginTwitterAsyncTask is responsible for authenticating users to
-     * Twitter on a background thread.
-     * 
-     * @author brenthronk
-     *
-     */
-    private class LoginTwitterAsyncTask extends AsyncTask<Integer, Void, Void> {
-    	
-		protected void onPreExecute() {
-			try {
-				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-						"Connecting to Twitter...", true, true,
-						new OnCancelListener() {
-					public void onCancel(DialogInterface pd) {
-						LoginTwitterAsyncTask.this.cancel(true);
-					}
-				});
-			} catch (Exception e) { }
-		}
-		
-		@Override
-		protected Void doInBackground(Integer... params) {
-	   		try {
-    			requestToken = twitter
-    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
-    		} catch (TwitterException e) {
-    			e.printStackTrace();
-    		}
-			return null;
-		}
-		
-		protected void onPostExecute(Void input) {
-			try {
-				mProgressDialog.dismiss();
-			} catch (Exception e) { }
-			
-			FriendInviteActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-					.parse(requestToken.getAuthenticationURL())));
-		}
-    }
-    
-    /**
-     * ParseTwitterLoginResponseAsyncTask handles the logging in callback
-     * on a background thread, and informs user as to success of failure.
-     * 
-     * @author brenthronk
-     *
-     */
-    private class ParseTwitterLoginResponseAsyncTask extends AsyncTask<Integer, Void, Void> {
-    	
-		protected void onPreExecute() {
-			try {
-				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
-						"Checking if you are logged in to any social networks...", true, true,
-						new OnCancelListener() {
-					public void onCancel(DialogInterface pd) {
-						ParseTwitterLoginResponseAsyncTask.this.cancel(true);
-					}
-				});
-			} catch (Exception e) { }
-		}
-		
-    	protected Void doInBackground(Integer... params) {
-            if (!isTwitterLoggedInAlready()) {
-                
-                if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
-                    // oAuth verifier
-                    String verifier = uri
-                            .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
-         
-                    try {
-                        // Get the access token
-                        AccessToken accessToken = twitter.getOAuthAccessToken(
-                                requestToken, verifier);
-         
-                        // Shared Preferences
-                        Editor e = mSharedPreferences.edit();
-         
-                        // After getting access token, access token secret
-                        // store them in application preferences
-                        e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
-                        e.putString(PREF_KEY_OAUTH_SECRET,
-                                accessToken.getTokenSecret());
-                        // Store login status - true
-                        e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
-                        e.commit(); // save changes
-                        twitterLoginButton.setText("Log Out");
-                    } catch (Exception e) {
-                        // Check log for login errors
-                        Log.e("Twitter Log In Error", "> " + e.getMessage());
-                    }
-                }
-            }
-            return null;
-    	}
-    	
-		protected void onPostExecute(Void input) {
-			try {
-				mProgressDialog.dismiss();
-			} catch (Exception e) { }
-		}
-    }
+//    /**
+//     * LoginTwitterAsyncTask is responsible for authenticating users to
+//     * Twitter on a background thread.
+//     * 
+//     * @author brenthronk
+//     *
+//     */
+//    private class LoginTwitterAsyncTask extends AsyncTask<Integer, Void, Void> {
+//    	
+//		protected void onPreExecute() {
+//			try {
+//				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+//						"Connecting to Twitter...", true, true,
+//						new OnCancelListener() {
+//					public void onCancel(DialogInterface pd) {
+//						LoginTwitterAsyncTask.this.cancel(true);
+//					}
+//				});
+//			} catch (Exception e) { }
+//		}
+//		
+//		@Override
+//		protected Void doInBackground(Integer... params) {
+//	   		try {
+//    			requestToken = twitter
+//    					.getOAuthRequestToken(TWITTER_CALLBACK_URL);
+//    		} catch (TwitterException e) {
+//    			e.printStackTrace();
+//    		}
+//			return null;
+//		}
+//		
+//		protected void onPostExecute(Void input) {
+//			try {
+//				mProgressDialog.dismiss();
+//			} catch (Exception e) { }
+//			
+//			FriendInviteActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+//					.parse(requestToken.getAuthenticationURL())));
+//		}
+//    }
+//    
+//    /**
+//     * ParseTwitterLoginResponseAsyncTask handles the logging in callback
+//     * on a background thread, and informs user as to success of failure.
+//     * 
+//     * @author brenthronk
+//     *
+//     */
+//    private class ParseTwitterLoginResponseAsyncTask extends AsyncTask<Integer, Void, Void> {
+//    	
+//		protected void onPreExecute() {
+//			try {
+//				mProgressDialog = ProgressDialog.show(FriendInviteActivity.this, "",
+//						"Checking if you are logged in to any social networks...", true, true,
+//						new OnCancelListener() {
+//					public void onCancel(DialogInterface pd) {
+//						ParseTwitterLoginResponseAsyncTask.this.cancel(true);
+//					}
+//				});
+//			} catch (Exception e) { }
+//		}
+//		
+//    	protected Void doInBackground(Integer... params) {
+//            if (!isTwitterLoggedInAlready()) {
+//                
+//                if (uri != null && uri.toString().startsWith(TWITTER_CALLBACK_URL)) {
+//                    // oAuth verifier
+//                    String verifier = uri
+//                            .getQueryParameter(URL_TWITTER_OAUTH_VERIFIER);
+//         
+//                    try {
+//                        // Get the access token
+//                        AccessToken accessToken = twitter.getOAuthAccessToken(
+//                                requestToken, verifier);
+//         
+//                        // Shared Preferences
+//                        Editor e = mSharedPreferences.edit();
+//         
+//                        // After getting access token, access token secret
+//                        // store them in application preferences
+//                        e.putString(PREF_KEY_OAUTH_TOKEN, accessToken.getToken());
+//                        e.putString(PREF_KEY_OAUTH_SECRET,
+//                                accessToken.getTokenSecret());
+//                        // Store login status - true
+//                        e.putBoolean(PREF_KEY_TWITTER_LOGIN, true);
+//                        e.commit(); // save changes
+//                        twitterLoginButton.setText("Log Out");
+//                    } catch (Exception e) {
+//                        // Check log for login errors
+//                        Log.e("Twitter Log In Error", "> " + e.getMessage());
+//                    }
+//                }
+//            }
+//            return null;
+//    	}
+//    	
+//		protected void onPostExecute(Void input) {
+//			try {
+//				mProgressDialog.dismiss();
+//			} catch (Exception e) { }
+//		}
+//    }
 }

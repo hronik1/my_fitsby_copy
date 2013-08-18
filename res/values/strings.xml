@@ -235,4 +235,6 @@
     <string name="title_activity_new_logged_in">NewLoggedInActivity</string>
 	<string name="drawer_open">drawer open</string>
 	<string name="drawer_close">drawer close</string>
+	<string name="facebook_invite_button">Invite Friends</string>
+	<string name="facebook_share_button">Post to Wall</string>
 </resources>
