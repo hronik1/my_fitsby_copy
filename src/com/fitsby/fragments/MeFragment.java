@@ -1034,6 +1034,7 @@ public class MeFragment extends Fragment {
 			}
 		}
 	}	
+
 	private class S3TaskResult {
 		String errorMessage = null;
 		Uri uri = null;
