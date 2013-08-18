@@ -2,6 +2,8 @@ package com.fitsby.fragments;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URL;
+import java.util.Date;
 
 import responses.StatsResponse;
 import responses.StatusResponse;
@@ -16,7 +18,9 @@ import com.facebook.widget.LoginButton;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
 import com.fitsby.FirstTimeCheckinActivity;
 import com.fitsby.LandingActivity;
 import com.fitsby.LoginActivity;
@@ -91,6 +95,7 @@ public class MeFragment extends Fragment {
 	private TextView resetPasswordTV;
 	private TextView twitterTV;
 	private TextView awsTV;
+	private TextView awsViewTV;
 	
 	private Button logoutButton;
 	private Button submitButton;
@@ -327,6 +332,14 @@ public class MeFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				changePicture();
+			}
+		});
+		
+		awsViewTV = (TextView) viewer.findViewById(R.id.me_settings_tv_aws_view_picture_link);
+		awsViewTV.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				new S3GeneratePresignedUrlTask().execute();
 			}
 		});
 		
@@ -976,6 +989,51 @@ public class MeFragment extends Fragment {
 		}
 	}
 	
+	private class S3GeneratePresignedUrlTask extends
+		AsyncTask<Void, Void, S3TaskResult> {
+
+		protected S3TaskResult doInBackground(Void... voids) {
+
+			S3TaskResult result = new S3TaskResult();
+
+			try {
+				// Ensure that the image will be treated as such.
+				ResponseHeaderOverrides override = new ResponseHeaderOverrides();
+				override.setContentType("image/jpeg");
+
+				// Generate the presigned URL.
+
+				// Added an hour's worth of milliseconds to the current time.
+				Date expirationDate = new Date(
+						System.currentTimeMillis() + 3600000);
+				GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest(
+						S3Constants.getPictureBucket(), S3Constants.PICTURE_NAME);
+				urlRequest.setExpiration(expirationDate);
+				urlRequest.setResponseHeaders(override);
+
+				URL url = s3Client.generatePresignedUrl(urlRequest);
+
+				result.setUri(Uri.parse(url.toURI().toString()));
+
+			} catch (Exception exception) {
+
+				result.setErrorMessage(exception.getMessage());
+			}
+
+			return result;
+		}
+
+		protected void onPostExecute(S3TaskResult result) {
+
+			if (result.getErrorMessage() != null) {
+				Toast.makeText(getActivity(), result.getErrorMessage(), Toast.LENGTH_SHORT).show();
+			} else if (result.getUri() != null) {
+
+				// Display in Browser.
+				startActivity(new Intent(Intent.ACTION_VIEW, result.getUri()));
+			}
+		}
+	}	
 	private class S3TaskResult {
 		String errorMessage = null;
 		Uri uri = null;

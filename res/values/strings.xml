@@ -238,4 +238,7 @@
 	<string name="drawer_close">drawer close</string>
 	<string name="facebook_invite_button">Invite Friends</string>
 	<string name="facebook_share_button">Post to Wall</string>
+    <string name="me_settings_tv_aws_view_picture_link_text">View pics</string>
+    <string name="browser_failure_title">failed to open in browser</string>
+
 </resources>
