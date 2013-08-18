@@ -24,7 +24,7 @@
         android:textSize="12sp"
         android:text="@string/invite_friends_directions" />
         
-        <com.facebook.widget.LoginButton
+        <!-- <com.facebook.widget.LoginButton
             android:id="@+id/authButton"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
@@ -32,24 +32,32 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="8.5dp"
             android:layout_marginRight="3dp"
-            android:padding="10dp" />
+            android:padding="10dp" /> -->
         <Button
             android:id="@+id/facebook_share_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignTop="@+id/authButton"
-            android:layout_toRightOf="@+id/authButton"
+            android:layout_below="@+id/facebook_text"
             android:layout_alignParentRight="true"
-            android:text="Share"
-            android:layout_marginRight="10dp"    
-            android:layout_marginTop="0.5dp"        
+            android:text="@string/facebook_share_button"
             android:textColor="@color/white"
             android:background="@drawable/facebook_button"
-            android:paddingRight="10dp"    
-            android:textSize="16sp"
-            android:paddingLeft="10dp" />
+			android:layout_margin="8dp"   
+            android:textSize="16sp" />
        
         <Button
+            android:id="@+id/facebook_invite_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/facebook_share_button"
+            android:layout_alignParentRight="true"
+            android:text="@string/facebook_invite_button"
+            android:textColor="@color/white"
+            android:background="@drawable/facebook_button"
+            android:layout_margin="8dp"    
+            android:textSize="16sp" />
+        
+<!--         <Button
             android:id="@+id/invite_twitter_login_button"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -81,7 +89,7 @@
         	android:paddingLeft="8dp" 
             android:layout_marginLeft="4dp"         	
         	android:textSize="16sp"     	          
-            android:text="Share" />
+            android:text="Share" /> -->
 
         <TextView
             android:id="@+id/sms_text"
@@ -134,7 +142,7 @@
         	android:textStyle="bold"            
             android:text="Facebook:" />
 
-        <TextView
+<!--         <TextView
             android:id="@+id/twitter_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -158,7 +166,7 @@
             android:paddingTop="9dp"
             android:paddingLeft="4dp"
             android:paddingBottom="9dp"
-            android:src="@drawable/twitter_bird_white" />
+            android:src="@drawable/twitter_bird_white" /> -->
 
         <ImageView
             android:id="@+id/sms_icon"
