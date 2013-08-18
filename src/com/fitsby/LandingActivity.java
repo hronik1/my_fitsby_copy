@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.crittercism.app.Crittercism;
+import com.facebook.Request;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
+import com.facebook.Response;
 import com.fitsby.applicationsubclass.ApplicationUser;
 import com.flurry.android.FlurryAgent;
 
@@ -40,6 +46,16 @@ public class LandingActivity extends KiipFragmentActivity {
 	 */
 	private Button buttonStart;
 	
+	private UiLifecycleHelper uiHelper;
+	private Session.StatusCallback callback = 
+	    new Session.StatusCallback() {
+	    @Override
+	    public void call(Session session, 
+	            SessionState state, Exception exception) {
+	        onSessionStateChange(session, state, exception);
+	    }
+	};
+	
 	/**
 	 * Callback for when activity is created. If user is logged in will
 	 * redirect to logged in page, otherwise initializes view.
@@ -59,6 +75,8 @@ public class LandingActivity extends KiipFragmentActivity {
         
         initializeButtons();
         
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
     }
 
     /**
@@ -115,6 +133,7 @@ public class LandingActivity extends KiipFragmentActivity {
         super.onResume();
         
         Log.i(TAG, "onResume");
+        uiHelper.onResume();
     }
     
     /**
@@ -125,6 +144,7 @@ public class LandingActivity extends KiipFragmentActivity {
         super.onPause();
        
         Log.i(TAG, "onPause" + (isFinishing() ? " Finishing" : " Not Finishing"));
+        uiHelper.onPause();
     }
     
     /**
@@ -135,9 +155,27 @@ public class LandingActivity extends KiipFragmentActivity {
     	super.onDestroy();
     	
     	Log.i(TAG, "onDestroy");
-    	
+    	uiHelper.onDestroy();
     }
 
+    /**
+     * Callback for getting a result from an Activity started for a result.
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        uiHelper.onActivityResult(requestCode, resultCode, data);
+    }
+    
+    /**
+     * Callback for saving of the state.
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+    }
+    
     /**
      * Connects buttons and adds listeners.
      */
@@ -191,4 +229,39 @@ public class LandingActivity extends KiipFragmentActivity {
     		toast.show();
     	} 
     }
+    
+    /** facebook stuff **/
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (session != null && session.isOpened()) {
+            // Get the user's data.
+            makeMeRequest(session);
+        } else {
+        	Log.d(TAG, "bad state");
+        }
+    }
+    
+    private void makeMeRequest(final Session session) {
+        // Make an API call to get user data and define a 
+        // new callback to handle the response.
+        Request request = Request.newMeRequest(session, 
+                new Request.GraphUserCallback() {
+            @Override
+            public void onCompleted(GraphUser user, Response response) {
+                // If the response is successful
+                if (session == Session.getActiveSession()) {
+                    if (user != null) {
+                    	Log.d(TAG, "user_id:" + user.getId() + " name:" + user.getName());
+                    	//TODO send to server
+                    }
+                } else {
+                	Log.d(TAG, "user is null");
+                }
+                if (response.getError() != null) {
+                    // Handle errors, will do so later.
+                	Log.d(TAG, "response has errors");
+                }
+            }
+        });
+        request.executeAsync();
+    } 
 }
