@@ -1,13 +1,21 @@
 package com.fitsby;
 
+import gravatar.Gravatar;
+import servercommunication.MyHttpClient;
+
+import com.fitsby.applicationsubclass.ApplicationUser;
 import com.fitsby.fragments.CheckinFragment;
 import com.fitsby.fragments.GamesFragment;
 import com.fitsby.fragments.MeFragment;
 import com.fitsby.fragments.NewsfeedFragment;
 
+import dbtables.User;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -55,19 +63,27 @@ public class NewLoggedinActivity extends ActionBarActivity {
 	/**
 	 * Possible fragments to be selected from via the NavigationDrawer.
 	 */
-	private Fragment[] mFragments = {new GamesFragment(), new NewsfeedFragment(), new CheckinFragment(), new MeFragment()};
+	private Fragment[] mFragments = {new GamesFragment(), new NewsfeedFragment(), new CheckinFragment(), new MeFragment(), new ProfileFragment()};
 	
 	/**
 	 * Strings to be displayed in the NavigationDrawer ListView.
 	 */
-	private String[] mDrawerItems = {"games", "newsfeed", "checkin", "settings"};
+	private String[] mDrawerItems = {"games", "newsfeed", "checkin", "settings", "profile"}; //TODO add to strings resources
 	
+	private User mUser;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_loggedin);
 		
 		initializeNavigationDrawer();
+		
+		mUser = ((ApplicationUser)getApplication()).getUser();
+		
+      if (mUser.getBitmap() == null) {
+    	Log.d(TAG, "bitmap null");
+    	new GravatarAsyncTask().execute(mUser.getEmail());
+    }
 		
 		if (null == savedInstanceState)
 			setFragment(0);
@@ -150,6 +166,8 @@ public class NewLoggedinActivity extends ActionBarActivity {
 	 */
 	private void setFragment(int position) {
 		if (position >= 0 && position < mFragments.length) {
+			if (position == 4)
+				((ProfileFragment)mFragments[position]).setProfileId(mUser.getID());
 		    FragmentManager fragmentManager = getSupportFragmentManager();
 		    fragmentManager.beginTransaction()
 		                   .replace(R.id.new_loggedin_content_frame, mFragments[position])
@@ -175,4 +193,23 @@ public class NewLoggedinActivity extends ActionBarActivity {
 		}
 		
 	}
+	
+  /**
+  * GravatarAsyncTask fetches the users gravatar on a background thread.
+  * 
+  * @author brenthronk
+  *
+  */
+ private class GravatarAsyncTask extends AsyncTask<String, Void, Bitmap> {
+     protected Bitmap doInBackground(String... params) {
+     	String gravatarURL = Gravatar.getGravatar(params[0], 80);
+     	return MyHttpClient.getBitmapFromURL(gravatarURL);
+     }
+
+     protected void onPostExecute(Bitmap response) {
+     	if (response != null) {
+     		mUser.setBitmap(response);
+     	}
+     }
+ }
 }
