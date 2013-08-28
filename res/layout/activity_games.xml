@@ -177,8 +177,6 @@
 		        android:id="@+id/input_duration"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_alignLeft="@+id/games_progress_bar"
-		        android:layout_alignBaseline="@+id/games_progress_bar"
 		        android:textColor="@color/white"
 		        android:text="@string/input_duration"
 		        android:textSize="10sp"
@@ -267,7 +265,6 @@
 	     android:id="@+id/bottom_extra_space"
 	   	 android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
-	     android:layout_below="@+id/games_leader_list"
 	     android:layout_alignParentBottom="true"
 	     android:background="@color/light_white">
         	  <Button

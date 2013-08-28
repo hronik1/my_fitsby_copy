@@ -99,4 +99,24 @@
         android:text="@string/list_item_newsfeed_message_text"
         android:textSize="12sp" />
     
+    <ImageButton 
+        android:id="@+id/list_item_newsfeed_like_ib"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/list_item_newsfeed_message"
+        android:layout_alignParentLeft="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/like_but"/>
+    
+    <ImageButton
+        android:id="@+id/list_item_newsfeed_comment_ib"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignBaseline="@+id/list_item_newsfeed_like_ib"
+        android:layout_alignTop="@+id/list_item_newsfeed_like_ib"
+        android:layout_toRightOf="@+id/list_item_newsfeed_like_ib"
+        android:layout_alignBottom="@+id/list_item_newsfeed_like_ib"
+        android:adjustViewBounds="true"
+        android:src="@drawable/comment_but" />"
+    
 </RelativeLayout>

@@ -76,9 +76,9 @@
          android:layout_marginTop="8dp"
          android:fadingEdge="none" 
          android:fastScrollEnabled="false" 
-         android:footerDividersEnabled="false" 
-         android:headerDividersEnabled="false"
-         android:smoothScrollbar="true"/>
+         android:smoothScrollbar="true"
+         android:divider="@android:color/transparent"
+  		android:dividerHeight="10dp"/>
 <!--     <ListView -->
 <!--         android:id="@+id/newsfeed_list_view" -->
 <!--         android:layout_width="fill_parent" -->
