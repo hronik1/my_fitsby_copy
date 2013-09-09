@@ -7,7 +7,7 @@
 
     <Button 
         android:id="@+id/fragment_walking_start_button"
-        android:layout_above="@+id/fragment_walking_tv"
+        android:layout_above="@+id/fragment_walking_stop_button"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="@string/fragment_walking_start_button" />
