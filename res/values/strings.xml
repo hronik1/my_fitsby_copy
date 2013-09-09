@@ -255,5 +255,8 @@
     <string name="accelerometer_start_button">start</string>
     <string name="accelerometer_stop_button">stop</string>
     <string name="accelerometer_steps_tv">0</string>
+    <string name="fragment_walking_start_button">Start Walking</string>
+    <string name="fragment_walking_tv">0</string>
+    <string name="fragment_walking_stop_button">Stop Walking</string>
 
 </resources>

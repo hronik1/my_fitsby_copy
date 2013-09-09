@@ -63,12 +63,12 @@ public class NewLoggedinActivity extends ActionBarActivity {
 	/**
 	 * Possible fragments to be selected from via the NavigationDrawer.
 	 */
-	private Fragment[] mFragments = {new GamesFragment(), new NewsfeedFragment(), new CheckinFragment(), new MeFragment(), new ProfileFragment()};
+	private Fragment[] mFragments = {new GamesFragment(), new NewsfeedFragment(), new CheckinFragment(), new MeFragment(), new ProfileFragment(), new WalkingFragment()};
 	
 	/**
 	 * Strings to be displayed in the NavigationDrawer ListView.
 	 */
-	private String[] mDrawerItems = {"games", "newsfeed", "checkin", "settings", "profile"}; //TODO add to strings resources
+	private String[] mDrawerItems = {"games", "newsfeed", "checkin", "settings", "profile", "walk"}; //TODO add to strings resources
 	
 	private User mUser;
 	@Override
